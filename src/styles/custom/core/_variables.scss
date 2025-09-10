@@ -1,0 +1,67 @@
+
+body {
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  //Theme colors
+  --color-primary: #f47920; /* saffron */
+  --color-secondary: #636466; /* grey */
+
+  --color-accent-green: #4fb848; /* spring-green */
+  --color-accent-red: #7c4548; /* burgundy */
+  --color-accent-olive: #8fa35d; /* moss-green */
+  --color-accent-blue: #446183; /* twilight-blue */
+  --color-accent-peach: #d78e5e; /* dark-peach */
+  --color-accent-oyster: #9c8c6f; /* oyster-green */
+
+  /* Optional Semantic Usage (for clarity) */
+  --color-bg-primary: var(--color-primary);
+  --color-bg-secondary: var(--color-secondary);
+  --color-text-primary: var(--color-black);
+  --color-text-secondary: var(--color-secondary);
+  
+  --font-primary: var(--font-poppins);
+  --font-secondary: var(--font-secondary);
+  --fontThin: 100;
+  --fontLight: 300; 
+  --fontRegular: 400;
+  --fontMedium: 500;
+  --fontSemiBold: 600;
+  --fontBold: 700;
+  --fontBolder: 900;
+
+  --fontSize10: 10px;
+  --fontSize12: 12px;
+  --fontSize13: 13px;
+  --fontSize14: 14px;
+  --fontSize15: 15px;
+  --fontSize16: 16px;
+  --fontSize17: 17px;
+  --fontSize18: 18px;
+  --fontSize19: 19px;
+  --fontSize20: 20px;
+  --fontSize22: 22px;
+  --fontSize24: 24px;
+  --fontSize25: 25px;
+  --fontSize26: 26px;
+  --fontSize28: 28px;
+  --fontSize30: 30px;
+  --fontSize32: 32px;
+  --fontSize34: 34px;
+  --fontSize35: 35px;
+  --fontSize36: 36px;
+  --fontSize38: 38px;
+  --fontSize40: 40px;
+  --fontSize42: 42px;
+  --fontSize44: 44px;
+  --fontSize45: 45px;
+  --fontSize46: 46px;
+  --fontSize50: 50px;
+  --fontSize52: 52px;
+  --fontSize60: 60px;
+  --fontSize68: 68px;
+  --fontSize72: 72px;
+  --fontSize80: 80px;
+  --font-increase: 0;
+  --font-decrease: 0;
+}

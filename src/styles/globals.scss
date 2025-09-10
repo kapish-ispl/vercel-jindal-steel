@@ -1,0 +1,12 @@
+@charset "utf-8";
+@use 'vendors/bootstrap.min';
+/* Begin core files */
+@use 'custom/core/typography' as *;
+@use 'custom/core/variables' as *;
+@use 'custom/core/mixins' as *;
+/* End core files */
+
+/* Begin component files */
+@use 'custom/components/generic/colors';
+@use 'custom/components/generic/sizes';
+/* End component files */

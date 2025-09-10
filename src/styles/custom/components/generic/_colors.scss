@@ -1,0 +1,18 @@
+@use '../../core/variables' as *;
+@use '../../core/mixins' as *;
+
+.clr-primary {
+  color: var(--color-primary) !important;
+}
+.clr-blue {
+    color: var(--color-accent-blue) !important;
+}
+.clr-green {
+    color: var(--color-accent-green) !important;
+}
+.clr-burgundy {
+    color: var(--color-accent-red) !important;
+}
+.clr-oyster {
+    color: var(--color-accent-oyster) !important;
+}

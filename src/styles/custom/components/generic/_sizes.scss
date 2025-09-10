@@ -1,0 +1,140 @@
+@use '../../core/variables' as *;
+@use '../../core/mixins' as *;
+
+
+
+.c-heading-40 {
+    font-weight: var(--fontBold);
+
+    @include font-size(20);
+
+    @include mq('tablet') {
+        @include font-size(24);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(30);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(35);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(40);
+    }
+}
+
+.c-heading-45 {
+    font-weight: var(--fontBold);
+
+    @include font-size(22);
+
+    @include mq('tablet') {
+        @include font-size(28);
+    }
+
+    @include mq('tablet-wide') {
+        @include font-size(32);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(36);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(42);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(45);
+    }
+}
+
+.c-heading-60 {
+    font-weight: var(--fontBold);
+
+    @include font-size(26);
+
+    @include mq('tablet') {
+        @include font-size(34);
+    }
+
+    @include mq('tablet-wide') {
+        @include font-size(40);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(48);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(55);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(60);
+    }
+}
+
+.c-heading-65 {
+    font-weight: var(--fontBold);
+
+    @include font-size(28);
+
+    @include mq('tablet') {
+        @include font-size(38);
+    }
+
+    @include mq('tablet-wide') {
+        @include font-size(45);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(52);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(60);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(65);
+    }
+}
+
+
+.c-content-19 {
+    font-weight: var(--fontRegular);
+
+    @include font-size(14);
+
+    @include mq('tablet') {
+        @include font-size(16);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(18);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(19);
+    }
+}
+.c-content-24 {
+    font-weight: var(--fontRegular);
+
+    @include font-size(16);
+
+    @include mq('tablet') {
+        @include font-size(18);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(20);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(24);
+    }
+}
