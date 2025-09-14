@@ -1,0 +1,22 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+
+.c-footer{
+    &__info{
+        &-content{
+            .head{
+                color: var(--color-black2);
+                font-weight: 700;
+            }
+            +.c-footer__imfo-content{
+                margin-top: 20px;
+                @include mq(tablet-max){
+                    margin-top: 30px;
+                }
+                @include mq(desktop){
+                    margin-top: 45px;
+                }
+            }
+        }
+    }
+}

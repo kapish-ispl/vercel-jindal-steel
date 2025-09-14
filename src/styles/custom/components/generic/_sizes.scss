@@ -102,6 +102,31 @@
         @include font-size(65);
     }
 }
+.c-heading-73 {
+    font-weight: var(--fontBold);
+
+    @include font-size(30);
+
+    @include mq('tablet') {
+        @include font-size(40);
+    }
+
+    @include mq('tablet-wide') {
+        @include font-size(48);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(58);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(65);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(72);
+    }
+}
 
 
 .c-content-19 {
