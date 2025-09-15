@@ -10,5 +10,36 @@
 @use 'custom/components/generic/colors';
 @use 'custom/components/generic/sizes';
 @use 'custom/components/generic/basic';
-@use 'custom/layout/footer'
+@use 'custom/layout/footer';
 /* End component files */
+
+
+
+
+/* --- MAP STYLES --- */
+
+.svg-map {
+    path {
+        fill: #636466;
+        stroke: #fff;
+        stroke-width: 1px;
+    }
+
+    .highlighted {
+        fill: #F47920;
+        stroke: #fff;
+        transition: fill 0.3s ease;
+    }
+
+    .highlighted-state {
+        fill: #F47920;
+        stroke: #fff;
+        transition: fill 0.3s ease;
+
+        &:hover,
+        &:hover path {
+            fill: #f68b3e;
+            transition: fill 0.2s ease-in-out;
+        }
+    }
+}

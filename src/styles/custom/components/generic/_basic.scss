@@ -1,294 +1,367 @@
 @use '../../core/variables' as *;
 @use '../../core/mixins' as *;
 
-.cus-container{
+.cus-container {
     max-width: 1420px;
 }
-.cus-shadow{
+
+.cus-shadow {
     box-shadow: 0px 16px 13.8px 0px #00000040 !important;
 
 }
 
-.bg-gray{
+.bg-gray {
     background: #F7F6F6;
 }
-.lh-75{
-    
-    @include mq(desktop){
+
+.lh-75 {
+
+    @include mq(desktop) {
         line-height: 75px;
     }
-    
+
 }
-.cus-width-sm{
-    @include mq(desktop-wide){
+
+.cus-width-sm {
+    @include mq(desktop-wide) {
         max-width: 487px;
     }
 }
-.cus-width-md{
-    @include mq(desktop-wide){
+
+.cus-width-md {
+    @include mq(desktop-wide) {
         max-width: 507px;
     }
 }
-.gp-xl{
+
+.gp-xl {
     padding: 30px 0px 50px 0px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         padding: 50px 0px 70px 0px;
     }
-    @include mq(desktop){
-    padding: 70px 0px 90px 0px;
+
+    @include mq(desktop) {
+        padding: 70px 0px 90px 0px;
     }
-    @include mq(desktop-wide){
+
+    @include mq(desktop-wide) {
         padding: 90px 0px 100px 0px;
     }
-    @include mq(desktop-wide-max){
+
+    @include mq(desktop-wide-max) {
         padding: 125px 0px 100px 0px;
     }
 
-    
+
 }
-.pb-40{
+
+.pb-40 {
     padding-bottom: 20px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         padding-bottom: 30px;
     }
-    @include mq(desktop){
+
+    @include mq(desktop) {
         padding-bottom: 40px;
     }
 }
-.mt-30{
+
+.mt-30 {
     margin-top: 30px;
 }
-.mb-35{
+
+.mb-35 {
     margin-bottom: 20px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         margin-bottom: 25px;
     }
-    @include mq(desktop){
+
+    @include mq(desktop) {
         margin-bottom: 35px;
     }
 }
-.mb-40{
+
+.mb-40 {
     margin-bottom: 20px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         margin-bottom: 30px;
     }
-    @include mq(desktop){
+
+    @include mq(desktop) {
         margin-bottom: 40px;
     }
 }
-.mb-55{
+
+.mb-55 {
     margin-bottom: 10px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         margin-bottom: 40px;
     }
-    @include mq(desktop-wide){
+
+    @include mq(desktop-wide) {
         margin-bottom: 55px;
     }
-    
+
 }
-.mb-70{
-      margin-bottom: 10px;
-    @include mq(tablet-max){
+
+.mb-70 {
+    margin-bottom: 10px;
+
+    @include mq(tablet-max) {
         margin-bottom: 40px;
     }
-    @include mq(desktop-wide){
+
+    @include mq(desktop-wide) {
         margin-bottom: 60px;
     }
-    @include mq(desktop-wide-max){
+
+    @include mq(desktop-wide-max) {
         margin-bottom: 70px;
     }
-    
+
 }
-.mb-100{
+
+.mb-100 {
     margin-bottom: 40px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         margin-bottom: 60px;
     }
-    @include mq(desktop){
+
+    @include mq(desktop) {
         margin-bottom: 70px;
     }
-    @include mq(desktop-wide){
+
+    @include mq(desktop-wide) {
         margin-bottom: 80px;
     }
-    @include mq(desktop-wide-max){
+
+    @include mq(desktop-wide-max) {
         margin-bottom: 100px;
     }
 }
-.c-homeSection{
-    .media{
+
+.c-homeSection {
+    .media {
         @include flexbox;
         @include justify-content(center);
-        margin-top: 20px;
-        @include mq(tablet-max){
+
+        @include mq(tablet-max) {
             margin-top: 0px;
         }
+
+        margin-top: 20px;
     }
-    &__people{
-        &-video{
+
+    &__people {
+        &-video {
             width: 100%;
             object-fit: cover;
             object-position: center center;
             max-width: 670px;
             height: 577px;
-            
+
         }
-        &.v2{
-            .c-homeSection__people-video{
+
+        &.v2 {
+            .c-homeSection__people-video {
                 max-width: 747px !important;
                 height: 603px !important;
             }
         }
     }
 }
-.commonSection{
+
+.commonSection {
     padding: 30px 0px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         padding: 50px 0px;
     }
-    @include mq(desktop-wide){
+
+    @include mq(desktop-wide) {
         padding: 70px 0px;
     }
 }
-.commonSection-sm{
+
+.commonSection-sm {
     padding: 60px 0px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         padding: 80px 0px;
     }
-    @include mq(desktop){
+
+    @include mq(desktop) {
         padding: 100px 0px;
     }
-    @include mq(desktop-wide){
+
+    @include mq(desktop-wide) {
         padding: 120px 0px;
     }
 }
-.commonSection-md{
+
+.commonSection-md {
     padding: 45px 0px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         padding: 70px 0px;
     }
-    @include mq(desktop){
+
+    @include mq(desktop) {
         padding: 900px 0px;
     }
-    @include mq(desktop-wide){
+
+    @include mq(desktop-wide) {
         padding: 110px 0px;
     }
-    @include mq(desktop-wide-max){
+
+    @include mq(desktop-wide-max) {
         padding: 130px 0px;
     }
 }
-.listView{
-    &__item{
+
+.listView {
+    &__item {
         @include flexbox;
         gap: 5px;
         @include align-items(center);
         padding: 15px 0px;
-            @include mq(tablet-max){
-                padding: 0px;
-            }
-        &-info{
-            .desc{
+
+        @include mq(tablet-max) {
+            padding: 0px;
+        }
+
+        &-info {
+            .desc {
                 width: 100%;
-                @include mq(desktop-wide){
+
+                @include mq(desktop-wide) {
                     max-width: 170px;
                 }
             }
         }
     }
-    &.v2{
-        .listView__item{
-            
-            &-info{
-                .count{
+
+    &.v2 {
+        .listView__item {
+
+            &-info {
+                .count {
                     padding-right: 10px;
 
                 }
-                .desc{
+
+                .desc {
                     max-width: 325px !important;
                 }
             }
         }
     }
 }
-.c-cardView{
-    &__box{
+
+.c-cardView {
+    &__box {
         @include flexbox;
         @include flex-direction(column, vertical);
-        @include mq(tablet-max){
+
+        @include mq(tablet-max) {
             @include flex-direction(row, horizontal);
         }
-        &-item{
+
+        &-item {
             flex: 1;
             padding: 15px 20px;
             background: transparent;
             @include transition(all 0.3s ease-in-out);
-            @include mq(tablet-max){
+
+            @include mq(tablet-max) {
                 padding: 20px 30px;
             }
-            @include mq(desktop-wide){
+
+            @include mq(desktop-wide) {
                 padding: 63px 35px 33px;
             }
-            &:hover{
+
+            &:hover {
                 background: #D9D9D9;
-                 .card__content{
-                     .action-btn{
+
+                .card__content {
+                    .action-btn {
                         opacity: 1;
                         visibility: visible;
                     }
                 }
             }
-            .card__content{
-                &-box{
-                    .label{
+
+            .card__content {
+                &-box {
+                    .label {
                         font-weight: 600;
                     }
-                    
+
                 }
-                .action-btn{
-                        opacity: 0;
-                        visibility: hidden;
-                    }
+
+                .action-btn {
+                    opacity: 0;
+                    visibility: hidden;
+                }
             }
         }
     }
 }
 
-.c-footer{
-    &__info{
-        &-content{
-            .head{
+.c-footer {
+    &__info {
+        &-content {
+            .head {
                 color: var(--color-black2);
                 font-weight: 700;
                 margin-bottom: 8px;
             }
-            .desc{
+
+            .desc {
                 color: var(--color-black2);
             }
-            .footerMenu{
+
+            .footerMenu {
                 padding: 0;
-                &__item{
+
+                &__item {
                     list-style: none;
-                    &-link{
+
+                    &-link {
                         color: var(--color-black2);
                         text-decoration: none;
                         @include font-size(19);
                     }
-                    + .footerMenu__item{
+
+                    +.footerMenu__item {
                         margin-top: 4px;
                     }
                 }
             }
-            p, .u-link{
+
+            p,
+            .u-link {
                 color: var(--color-black2);
             }
-            .u-link{
+
+            .u-link {
                 text-decoration: none;
             }
-            .social__wrapper{
+
+            .social__wrapper {
                 @include flexbox;
                 flex-wrap: wrap;
                 gap: 15px;
                 padding: 0;
-                &--item{
+
+                &--item {
                     list-style: none;
                     background: #939598;
                     @include border-radius(50%);
@@ -299,13 +372,15 @@
                     @include justify-content(center);
                 }
             }
-           
-            + .c-footer__info-content{
+
+            +.c-footer__info-content {
                 margin-top: 20px;
-                @include mq(tablet-max){
+
+                @include mq(tablet-max) {
                     margin-top: 30px;
                 }
-                @include mq(desktop){
+
+                @include mq(desktop) {
                     margin-top: 40px;
                 }
             }
@@ -358,11 +433,11 @@
 
                 .image-container {
                     width: 100%;
-                    height: 100%
-                    video{
+
+                    height: 100% video {
                         max-width: 459px !important;
                     }
-                    
+
                 }
 
                 img {
@@ -380,7 +455,7 @@
                     box-sizing: border-box;
                     animation: fadeIn 0.5s ease;
                     margin-top: 25px; // 20px
-                    
+
 
                     .caption {
                         margin: 0;
@@ -391,15 +466,15 @@
                         @include font-size(14);
 
                         @include mq('tablet') {
-                                @include font-size(16);
+                            @include font-size(16);
                         }
 
                         @include mq('desktop-min') {
-                                @include font-size(18);
+                            @include font-size(18);
                         }
 
                         @include mq('desktop-wide') {
-                                @include font-size(19);
+                            @include font-size(19);
                         }
                     }
                 }
