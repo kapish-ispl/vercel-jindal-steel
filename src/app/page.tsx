@@ -27,12 +27,6 @@ export default function Home() {
             </div>
             <div className="col-lg-6 col-md-12">
               <div className="media">
-                {/* <Image
-                  src='/images/story-image.png'
-                  alt="image"
-                  width={460}
-                  height={577}
-                  className="img-fluid u-img" /> */}
                 <CardSlider />
                 {/* <CardStackSlider /> */}
               </div>
@@ -299,78 +293,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <footer>
-        <div className="c-footer">
-          <div className="container cus-container">
-            <div className="row">
-              <div className="col-lg-4 col-md-6 col-sm-12">
-                <div className="c-footer__info">
-                  <div className="c-footer__info-logo">
-                    <a href="#" className="footer-link" target="_blank">
-                      <Image
-                        src='/logo/footer-logo.svg'
-                        alt="jindal steel logo"
-                        width={268}
-                        height={207}
-                        className="img-fluid u-img" />
-                    </a>
-                  </div>
-                  <div className="c-footer__info-content">
-                    <div className="head c-content-19">Corporate Office</div>
-                    <div className="desc c-content-19">Jindal Centre 12, Bhikaiji Cama Place, New Delhi - 110 066, INDIA (Formerly Jindal Steel & Power Limited)</div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-2 col-md-4 col-sm-12">
-                <div className="c-footer__imfo">
-                  <div className="c-footer__imfo-content">
-                    <div className="head">Our Story</div>
-                    <ul className="footerMenu">
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Overview</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Our Leadership</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Awards & Recognition</a></li>
-                    </ul>
-                  </div>
-                  <div className="c-footer__imfo-content">
-                    <div className="head">Mine to Metal</div>
-                    <ul className="footerMenu">
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Overview</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Mining</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Captive Power</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Steel</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Offerings</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Global Footprint</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-2 col-md-4 col-sm-12">
-                <div className="c-footer__imfo">
-                  <div className="c-footer__imfo-content">
-                    <div className="head">Our Story</div>
-                    <ul className="footerMenu">
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Overview</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Our Leadership</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Awards & Recognition</a></li>
-                    </ul>
-                  </div>
-                  <div className="c-footer__imfo-content">
-                    <div className="head">Mine to Metal</div>
-                    <ul className="footerMenu">
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Overview</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Mining</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Captive Power</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Steel</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Offerings</a></li>
-                      <li className="footerMenu__item"><a href="#" className="footerMenu__item-link" target="_blank">Global Footprint</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }

@@ -7,41 +7,51 @@ import InnerBanner from "@/components/elements/InnerBanner";
 import PageTemplate from "@/components/template/PageTemplate";
 
 
-export async function generateMetadata({ params }: any) {
-  const { slug } = params;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ [key: string]: string | string[] | undefined }>;
+// }) {
+//   const { slug } = await params;
+
+//   if (slug === 'home') {
+//     return {
+//       title: 'JSP',
+//       description: '',
+//     };
+//   }
+
+//   const fetchedInfo = await serverRequest(
+//     {},
+//     `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${slug}`,
+//     CONSTANTS.REQUEST_GET
+//   );
+
+//   const pageData = fetchedInfo?.data;
+
+//   if (!pageData || pageData.length === 0) {
+//     return {
+//       title: 'Page Not Found',
+//       description: 'The requested page could not be found.',
+//     };
+//   }
+
+//   return {
+//     title: pageData.meta_title || pageData.title || 'SISCOL - Steel Infra Solutions Company Ltd.',
+//     description: pageData.meta_description || 'SISCOL - Steel Infra Solutions Company Ltd.',
+//   };
+// }
+
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { slug } = await params;
+
+  console.log(slug, "sdsd")
 
   if (slug === 'home') {
-    return {
-      title: 'JSP',
-      description: '',
-    };
-  }
-
-  const fetchedInfo = await serverRequest(
-    {},
-    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${slug}`,
-    CONSTANTS.REQUEST_GET
-  );
-
-  const pageData = fetchedInfo?.data;
-
-  if (!pageData || pageData.length === 0) {
-    return {
-      title: 'Page Not Found',
-      description: 'The requested page could not be found.',
-    };
-  }
-
-  return {
-    title: pageData.meta_title || pageData.title || 'SISCOL - Steel Infra Solutions Company Ltd.',
-    description: pageData.meta_description || 'SISCOL - Steel Infra Solutions Company Ltd.',
-  };
-}
-
-export default async function Page({ params }: any) {
-  const { slug } = params;
-
-  if (slug === 'home-v2') {
     redirect('/');
   }
 
@@ -56,6 +66,7 @@ export default async function Page({ params }: any) {
   }
 
   const pageData = fetchedInfo.data;
+  console.log(pageData, "fetchedInfo")
 
   return (
     <>
