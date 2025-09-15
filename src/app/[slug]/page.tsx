@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: any) {
 export default async function Page({ params }: any) {
   const { slug } = params;
 
-  if (slug === 'home') {
+  if (slug === 'home-v2') {
     redirect('/');
   }
 
