@@ -5,7 +5,7 @@ const CardSlider = () => {
     const images = [
         {
             src: "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
-            caption: "India Only Syngas Based Coal Classification Plant for Steel Making",
+            caption: "India's Only Syngas Based Coal Classification Plant for Steel Making",
         },
         {
             src: "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",

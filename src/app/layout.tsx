@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "@/styles/globals.scss";
+import Footer from "@/components/template/Footer";
 
 export const poppins = Poppins({
-  subsets: ["latin"],        // Choose subsets you need
-  weight: ["400", "500", "600", "700"], // Select the weights you will use
-  variable: "--font-poppins" // Optional: create a CSS variable
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins"
 });
 
 
@@ -24,7 +25,10 @@ export default function RootLayout({
       <body
         className={`${poppins.variable}`}
       >
-        {children}
+        <main>
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );
