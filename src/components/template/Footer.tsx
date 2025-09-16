@@ -1,5 +1,4 @@
-import React from 'react'
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import React from 'react';
 
 const Footer = () => {
     return (
@@ -8,25 +7,25 @@ const Footer = () => {
                 <div className="c-footer commonSection bg-gray">
                     <div className="container cus-container">
                         <div className="row">
-                            <div className="col-lg-3 col-md-6 col-sm-12">
-                                <div className="c-footer__info">
+                            <div className="col-lg-4 col-md-12 col-sm-12">
+                                <div className="c-footer__info pad_right70 corporate-address">
                                     <div className="c-footer__info-logo">
                                         <a href="#" className="footer-link" target="_blank">
                                             <img
-                                                src='/logo/footer-logo.svg'
+                                                src='/logo/jindal-steel-logo-black.svg'
                                                 alt="jindal steel logo"
-                                                width={268}
-                                                height={207}
+                                                width={170}
+                                                height={76}
                                                 className="img-fluid u-img" />
                                         </a>
                                     </div>
                                     <div className="c-footer__info-content">
                                         <div className="head c-content-19">Corporate Office</div>
-                                        <div className="desc c-content-19 mt-4">Jindal Centre 12, Bhikaiji Cama Place, New Delhi - 110 066, INDIA (Formerly Jindal Steel & Power Limited)</div>
+                                        <div className="desc c-content-19 mt-3">Jindal Centre 12, Bhikaiji Cama Place, New Delhi - 110 066, INDIA <span className='d-md-block d-lg-inline'>(Formerly Jindal Steel & Power Limited)</span></div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-3 col-md-6 col-sm-12">
+                            <div className="col-lg-2 col-md-4 col-sm-12">
                                 <div className="c-footer__info">
                                     <div className="c-footer__info-content">
                                         <div className="head">Our Story</div>
@@ -49,8 +48,8 @@ const Footer = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-3 col-md-6 col-sm-12">
-                                <div className="c-footer__info">
+                            <div className="col-lg-3 col-md-4 col-sm-12">
+                                <div className="c-footer__info pad_left40">
                                     <div className="c-footer__info-content">
                                         <div className="head">Sustainability</div>
                                         <ul className="footerMenu">
@@ -63,14 +62,14 @@ const Footer = () => {
                                     </div>
                                     <div className="c-footer__info-content">
                                         <div className="head">Contact us</div>
-                                        <p className="c-content-19">+91 11 26188340-50, 1800 208 2008</p>
-                                        <p className="c-content-19"><a href="mailto:info[at]jindalsteel[dot]com" className="u-link">info[at]jindalsteel[dot]com</a></p>
+                                        <p className="c-content-19">+91 11 26188340-50, <br/>1800 208 2008</p>
+                                        <p className="c-content-19"><a href="mailto:info@jindalsteel.com" className="u-link">info[at]jindalsteel[dot]com</a></p>
 
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-3 col-md-6 col-sm-12">
-                                <div className="c-footer__info">
+                            <div className="col-lg-3 col-md-4 col-sm-12">
+                                <div className="c-footer__info pad_left40">
                                     <div className="c-footer__info-content">
                                         <div className="head">Other Links</div>
                                         <ul className="footerMenu">
@@ -82,33 +81,6 @@ const Footer = () => {
                                     </div>
                                     <div className="c-footer__info-content">
                                         <div className="head">Connect with us</div>
-                                        <ul className="social__wrapper">
-                                            <li className="social__wrapper--item">
-                                                <a href="#" className="social__wrapper--item-link" target="_blank">
-                                                    <Linkedin size={27} color="#fff" />
-                                                </a>
-                                            </li>
-                                            <li className="social__wrapper--item">
-                                                <a href="#" className="social__wrapper--item-link" target="_blank">
-                                                    <Facebook size={27} color="#fff" />
-                                                </a>
-                                            </li>
-                                            <li className="social__wrapper--item">
-                                                <a href="#" className="social__wrapper--item-link" target="_blank">
-                                                    <Twitter size={27} color="#fff" />
-                                                </a>
-                                            </li>
-                                            <li className="social__wrapper--item">
-                                                <a href="#" className="social__wrapper--item-link" target="_blank">
-                                                    <Youtube size={27} color="#fff" />
-                                                </a>
-                                            </li>
-                                            <li className="social__wrapper--item">
-                                                <a href="#" className="social__wrapper--item-link" target="_blank">
-                                                    <Instagram size={27} color="#fff" />
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>

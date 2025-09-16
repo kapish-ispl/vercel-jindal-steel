@@ -1,5 +1,6 @@
 @use '../../core/variables' as *;
 @use '../../core/mixins' as *;
+@use '../generic/sizes' as *;
 
 .cus-container {
     max-width: 1420px;
@@ -320,7 +321,7 @@
         &-content {
             .head {
                 color: var(--color-black2);
-                font-weight: 700;
+                @extend .c-content-19 !optional;
                 margin-bottom: 8px;
             }
 
@@ -335,9 +336,9 @@
                     list-style: none;
 
                     &-link {
+                        @extend .c-content-19 !optional;
                         color: var(--color-black2);
                         text-decoration: none;
-                        @include font-size(19);
                     }
 
                     +.footerMenu__item {

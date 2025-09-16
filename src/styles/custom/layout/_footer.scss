@@ -1,20 +1,71 @@
 @use '../core/variables' as *;
 @use '../core/mixins' as *;
 
-.c-footer{
-    &__info{
-        &-content{
-            .head{
+.c-footer {
+    &__info {
+        &.pad_right70 {
+            @include mq('tablet') {
+                padding-right: 70px;
+            }
+        }
+
+        &.pad_left40 {
+            @include mq('tablet') {
+                padding-left: 40px;
+            }
+        }
+
+        &-content {
+            .head {
                 color: var(--color-black2);
                 font-weight: 700;
             }
-            +.c-footer__imfo-content{
+
+            .desc {
+                line-height: 1.6;
+            }
+
+            +.c-footer__info-content {
                 margin-top: 20px;
-                @include mq(tablet-max){
+
+                @include mq(tablet-max) {
                     margin-top: 30px;
                 }
-                @include mq(desktop){
+
+                @include mq(desktop) {
                     margin-top: 45px;
+                }
+            }
+        }
+
+        &.corporate-address {
+            margin-bottom: 26px;
+
+            @include mq('tablet') {
+                margin-bottom: 28px;
+            }
+
+            @include mq('desktop-min') {
+                margin-bottom: 32px;
+            }
+
+            @include mq('desktop-wide') {
+                margin-bottom: 40px;
+            }
+
+            .c-footer__info-content {
+                margin-top: 26px;
+
+                @include mq('tablet') {
+                    margin-top: 28px;
+                }
+
+                @include mq('desktop-min') {
+                    margin-top: 32px;
+                }
+
+                @include mq('desktop-wide') {
+                    margin-top: 40px;
                 }
             }
         }
