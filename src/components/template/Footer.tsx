@@ -12,7 +12,7 @@ const Footer = () => {
                                     <div className="c-footer__info-logo">
                                         <a href="#" className="footer-link" target="_blank">
                                             <img
-                                                src='/logo/jindal-steel-logo-black.svg'
+                                                src='/images/logo/jindal-steel-logo-black.svg'
                                                 alt="jindal steel logo"
                                                 width={200}
                                                 height={76}

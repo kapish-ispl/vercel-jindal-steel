@@ -3,7 +3,9 @@
 @use '../generic/sizes' as *;
 
 .cus-container {
-    max-width: 1440px;
+    @include mq(desktop-wide-max) {
+        max-width: 1440px;
+    }
 }
 
 .cus-shadow {
@@ -13,26 +15,6 @@
 
 .bg-gray {
     background: #F7F6F6;
-}
-
-.lh-75 {
-
-    @include mq(desktop) {
-        line-height: 75px;
-    }
-
-}
-
-.cus-width-sm {
-    @include mq(desktop-wide) {
-        max-width: 487px;
-    }
-}
-
-.cus-width-md {
-    @include mq(desktop-wide) {
-        max-width: 507px;
-    }
 }
 
 .gp-xl {
@@ -179,10 +161,10 @@
 }
 
 .commonSection {
-    padding: 30px 0px;
+    padding: 42px 0px;
 
     @include mq(tablet-max) {
-        padding: 50px 0px;
+        padding: 55px 0px;
     }
 
     @include mq(desktop-wide) {

@@ -31,23 +31,23 @@
     @include font-size(22);
 
     @include mq('tablet') {
-        @include font-size(28);
+        @include font-size(24);
     }
 
     @include mq('tablet-wide') {
-        @include font-size(32);
+        @include font-size(28);
     }
 
     @include mq('desktop-min') {
-        @include font-size(36);
+        @include font-size(32);
     }
 
     @include mq('desktop-wide') {
-        @include font-size(42);
+        @include font-size(36);
     }
 
     @include mq('desktop-wide-max') {
-        @include font-size(45);
+        @include font-size(40);
     }
 }
 
@@ -78,53 +78,29 @@
 }
 
 .c-heading-65 {
+    $base-font-65: 60px;
     font-weight: var(--fontBold);
 
-    @include font-size(28);
+    @include font-size(24);
 
     @include mq('tablet') {
-        @include font-size(38);
+        @include font-size(32);
     }
 
     @include mq('tablet-wide') {
-        @include font-size(45);
+        @include font-size(36);
     }
 
     @include mq('desktop-min') {
-        @include font-size(52);
+        @include font-size(44);
     }
 
     @include mq('desktop-wide') {
+        @include font-size(54);
+    }
+
+    @include mq('desktop-wide-max') {
         @include font-size(60);
-    }
-
-    @include mq('desktop-wide-max') {
-        @include font-size(65);
-    }
-}
-.c-heading-73 {
-    font-weight: var(--fontBold);
-
-    @include font-size(30);
-
-    @include mq('tablet') {
-        @include font-size(40);
-    }
-
-    @include mq('tablet-wide') {
-        @include font-size(48);
-    }
-
-    @include mq('desktop-min') {
-        @include font-size(58);
-    }
-
-    @include mq('desktop-wide') {
-        @include font-size(65);
-    }
-
-    @include mq('desktop-wide-max') {
-        @include font-size(72);
     }
 }
 

@@ -1,4 +1,5 @@
 @charset "utf-8";
+@use 'vendors/lucide';
 @use 'vendors/bootstrap.min';
 /* Begin core files */
 @use 'custom/core/typography' as *;
