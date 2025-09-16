@@ -14,7 +14,7 @@ const Footer = () => {
                                             <img
                                                 src='/logo/jindal-steel-logo-black.svg'
                                                 alt="jindal steel logo"
-                                                width={170}
+                                                width={200}
                                                 height={76}
                                                 className="img-fluid u-img" />
                                         </a>
