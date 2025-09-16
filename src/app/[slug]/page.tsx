@@ -49,9 +49,7 @@ export default async function Page({
 }) {
   const { slug } = await params;
 
-  console.log(slug, "sdsd")
-
-  if (slug === 'home') {
+  if (slug === 'home-v2`') {
     redirect('/');
   }
 

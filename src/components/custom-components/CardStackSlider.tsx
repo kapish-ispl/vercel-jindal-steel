@@ -55,13 +55,14 @@ const cardData: Card[] = [
 ];
 
 
-export default function CardStackSlider() {
+export default function CardStackSlider({ props }: any) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
     const autoplayInterval = useRef<NodeJS.Timeout | null>(null);
     const [autoplayDirection, setAutoplayDirection] = useState(1);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
     const inactivityTimer = useRef<NodeJS.Timeout | null>(null);
+    console.log(props, "s;akk")
 
     const resumeAutoplayAfterDelay = () => {
         if (inactivityTimer.current) {
