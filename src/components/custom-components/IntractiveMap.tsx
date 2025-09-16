@@ -21,7 +21,7 @@ type HighlightData = {
 
 const HIGHLIGHT_DATA: HighlightData = {
     IN: {
-        states: ['IN-JH', 'IN-CT', 'IN-OR'],
+        states: ['Jharkhand', 'Chhattisgarh', 'Odisha'],
     },
     AFRICA: {
         states: ['BW', 'MZ', 'ZA'],
@@ -70,7 +70,6 @@ const InteractiveMap: FC = () => {
     };
 
     const handleMapAreaClick = (areaCode: string) => {
-        // If Africa tab is selected, check if clicked area is one of the defined states
         if (selectedArea === 'AFRICA' && HIGHLIGHT_DATA['AFRICA']?.states?.includes(areaCode)) {
             setView('AFRICA');
         } else if (areaCode && areaCode === selectedArea) {
@@ -88,8 +87,8 @@ const InteractiveMap: FC = () => {
     };
 
     return (
-        <div style={{ display: 'flex', height: 'calc(100vh - 150px)', border: '1px solid #ddd', background: '#fff' }}>
-            <div style={{ width: '250px', borderRight: '1px solid #ddd', padding: '1rem', background: '#fdfdfd' }}>
+        <div className='c-mapView' style={{ display: 'flex', height: 'calc(100vh - 150px)' }}>
+            <div className='c-mapView__sidebar'>
                 {view !== 'world' ? (
                     <div>
                         <button
@@ -99,14 +98,13 @@ const InteractiveMap: FC = () => {
                             &larr; Back to World Map
                         </button>
                         <h2>{INTERACTIVE_AREAS.find(a => a.code === view)?.name}</h2>
-                        <p>Showing highlighted regions.</p>
+
                     </div>
                 ) : (
                     <div>
-                        <h2>Select an Area</h2>
                         <ul style={{ listStyle: 'none', padding: 0 }}>
                             {INTERACTIVE_AREAS.map((area) => (
-                                <li
+                                <li className='c-heading-45'
                                     key={area.code}
                                     onClick={() => handleTabClick(area.code)}
                                     style={{
@@ -114,9 +112,9 @@ const InteractiveMap: FC = () => {
                                         padding: '12px',
                                         margin: '4px 0',
                                         borderRadius: '4px',
-                                        backgroundColor: selectedArea === area.code ? '#F47920' : 'transparent',
-                                        border: selectedArea === area.code ? '1px solid #F47920' : '1px solid transparent',
-                                        color: selectedArea === area.code ? '#fff' : '',
+                                        paddingBottom: '20px',
+                                        borderBottom: '1px solid rgba(68, 97, 131, 0.26)',
+                                        color: selectedArea === area.code ? '#F47920' : '#636466',
                                     }}
                                 >
                                     {area.name}
@@ -127,7 +125,7 @@ const InteractiveMap: FC = () => {
                 )}
             </div>
 
-            <div ref={mapRef} style={{ flex: 1, padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className='c-mapView__container' ref={mapRef} style={{ flex: 1, padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <div>
                     {renderMapView()}
                 </div>
@@ -137,3 +135,4 @@ const InteractiveMap: FC = () => {
 }
 
 export default InteractiveMap;
+

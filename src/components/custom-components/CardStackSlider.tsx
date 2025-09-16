@@ -62,7 +62,6 @@ export default function CardStackSlider({ props }: any) {
     const [autoplayDirection, setAutoplayDirection] = useState(1);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
     const inactivityTimer = useRef<NodeJS.Timeout | null>(null);
-    console.log(props, "s;akk")
 
     const resumeAutoplayAfterDelay = () => {
         if (inactivityTimer.current) {
@@ -224,10 +223,10 @@ export default function CardStackSlider({ props }: any) {
                         const absOffset = Math.abs(offset);
 
                         const dynamicStyles: React.CSSProperties = {
-                            '--tx': `${offset * 25}%`,
+                            '--tx': `${offset * 20}%`,
                             '--scale': 1 - absOffset * 0.15,
                             '--tz': `-${absOffset * 100}px`,
-                            '--rotateY': `${offset * -8}deg`,
+                            '--rotateY': `${offset * -4}deg`,
                             '--zIndex': totalCards - absOffset,
                             '--bg-image': card.imageUrl ? `url(${card.imageUrl})` : 'none',
                         } as React.CSSProperties;

@@ -39,6 +39,20 @@
 
 }
 
+.pl-90 {
+    @include mq(tablet-max) {
+        padding-left: 50px;
+    }
+
+    @include mq(desktop-wide) {
+        padding-left: 70px;
+    }
+
+    @include mq(desktop-wide-max) {
+        padding-left: 90px;
+    }
+}
+
 .pb-40 {
     padding-bottom: 20px;
 
@@ -281,6 +295,11 @@
                 }
             }
 
+
+            .action-btn {
+                @include transition(all 0.3s ease-in-out);
+            }
+
             .card__content {
                 &-box {
                     .label {
@@ -293,6 +312,16 @@
                     opacity: 0;
                     visibility: hidden;
                 }
+            }
+        }
+    }
+
+    &:hover {
+        .action-btn {
+            transform: translateX(20px);
+
+            svg {
+                stroke: var(--color-primary) !important;
             }
         }
     }
@@ -599,4 +628,32 @@
     .image-container {
         height: 140px;
     }
+}
+
+.c-mapView {
+    &__sidebar {
+        max-width: 313px;
+        width: 100%;
+        position: relative;
+
+        button {
+            position: absolute;
+            bottom: 50px;
+        }
+
+        h2 {
+            display: none;
+        }
+
+        ul {
+            margin-top: 130px;
+
+        }
+    }
+}
+
+.float-elem {
+    position: absolute;
+    top: 130px;
+
 }

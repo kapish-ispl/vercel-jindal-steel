@@ -83,12 +83,12 @@ const CardSlider = () => {
                                 const absOffset = Math.abs(offset);
                                 const isActive = index === activeIndex;
 
-                                const spread = 60; // Horizontal spread between cards
-                                const depth = 20; // Depth effect for stacking
+                                const spread = 60;
+                                const depth = 20;
 
                                 return (
                                     <motion.div
-                                        key={item.src}
+                                        key={index}
                                         className="card"
                                         onClick={() => handleCardClick(index)}
                                         initial={{ opacity: 0, x: offset > 0 ? 300 : -300 }}
