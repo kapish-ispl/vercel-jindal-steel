@@ -1,0 +1,62 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+@use '../components/generic/sizes' as *;
+
+.c-cardView {
+    cursor: pointer;
+    &__box {
+        &-item {
+            padding: 15px 20px;
+            background: transparent;
+            @include transition(all 0.3s ease-in-out);
+
+            @include mq(tablet-max) {
+                padding: 20px 30px;
+            }
+
+            @include mq(desktop-wide) {
+                padding: 63px 35px 33px;
+            }
+
+            &:hover {
+                background: #D9D9D9;
+
+                .card__content {
+                    .action-btn {
+                        transform: translateX(20px);
+                        opacity: 1;
+                        visibility: visible;
+                         svg {
+                stroke: var(--color-primary) !important;
+            }
+                    }
+                }
+            }
+
+
+            .action-btn {
+                @include transition(all 0.3s ease-in-out);
+            }
+
+            .card__content {
+                &-box {
+                    .label {
+                        font-weight: 600;
+                    }
+
+                }
+
+                .action-btn {
+                    opacity: 0;
+                    visibility: hidden;
+                    a{
+                        color: #446183;
+                    }
+                   
+                }
+            }
+        }
+    }
+
+    
+}
