@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { FC } from "react";
 import Link from "next/link";
+import Slider from "react-slick";
 
 const HomeBanner: FC<{ bannerMedia: any }> = ({ bannerMedia }) => {
 
@@ -68,16 +69,6 @@ const HomeBanner: FC<{ bannerMedia: any }> = ({ bannerMedia }) => {
                     </div>
                 </div>
             }
-            <div className="announcment" id="announcementBlock">
-                <div className="announcment__heading">Announcements</div>
-                <div className="announcment__content"></div>
-                <Marquee speed={50} gradient={false}>
-                    <Link className="announcment__item" href="/airport-terminal" title="SISCOL Powers the Expansion of Delhi International Airport Terminal 1 with 15,000 MT of Structural Steel">SISCOL Powers the Expansion of Delhi International Airport Terminal 1 with 15,000 MT of Structural Steel</Link>
-                    <Link className="announcment__item" href="/upgrade-credit-rating" title="SISCOl's Credit Rating Upgrade">SISCOl's Credit Rating Upgrade</Link>
-                    <Link className="announcment__item" href="/rooftop-solar" title="Powering a Sustainable Future: SISCOL’s Rooftop Solar Initiative">Powering a Sustainable Future: SISCOL’s Rooftop Solar Initiative</Link>
-                    <Link className="announcment__item" href="/hyderabad-plant" title="SISCOL Expands: Hyderabad Plant Now Operational">SISCOL Expands: Hyderabad Plant Now Operational</Link>
-                </Marquee>
-            </div>
         </>
     )
 }
