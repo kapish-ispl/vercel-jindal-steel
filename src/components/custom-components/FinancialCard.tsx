@@ -1,17 +1,10 @@
+import { PostData } from "@/types/post";
 import Link from "next/link";
 import React from "react";
 
-interface PostData {
-    metaInfo: {
-        type: string;
-    };
-    title: string;
-    media: {
-        cdnPath: string;
-    }[];
-}
-interface FinancialCardProps {
+export interface FinancialCardProps {
     postData: PostData[];
+    postTotal?: number;
     type: string;
 }
 
@@ -30,7 +23,7 @@ const FinancialCard: React.FC<FinancialCardProps> = ({ postData, type }) => {
                 <li className="bullet__list-item" key={index}>
                     <Link
                         className="bullet__list-item-link c-content-19 clr-secondry"
-                        href={post?.media?.[0]?.cdnPath || "#"}
+                        href={post?.media?.cdnPath || "#"}
                     >
                         {post?.title}
                     </Link>

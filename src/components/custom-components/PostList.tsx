@@ -5,11 +5,7 @@ import dynamic from "next/dynamic";
 import { GET_POST_ENDPOINT } from "@/config/apiConfig";
 import { serverRequest } from "@/services/getServerSideRender";
 import { CONSTANTS } from "@/config/constant";
-
-interface Post {
-    id: string | number;
-    [key: string]: unknown;
-}
+import { PostData } from "@/types/post";
 
 interface Props {
     slug: string;
@@ -22,7 +18,7 @@ interface Props {
 
 interface ServerResponse {
     code: string;
-    data: Post[];
+    data: PostData[];
     total: number;
 }
 
@@ -34,7 +30,7 @@ const PostList = (props: Props) => {
     const searchParams = useSearchParams();
     const page = parseInt(searchParams.get("page") || "1");
     const category = searchParams.get("category");
-    const [postData, setPostData] = useState<Post[]>([]);
+    const [postData, setPostData] = useState<PostData[]>([]);
     const [postTotal, setPostTotal] = useState<number>(0);
 
     const Limit = Number(props.limit) || 50;
@@ -79,8 +75,6 @@ const PostList = (props: Props) => {
             postData={postData}
             postTotal={postTotal}
             type={props.type}
-            category={props.category}
-            datatabs={props.datatabs}
         />
     ) : null;
 };

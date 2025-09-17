@@ -2,72 +2,127 @@
 @use '../core/mixins' as *;
 
 .c-footer {
-    &__info {
-        &.pad_right70 {
-            @include mq('tablet') {
-                padding-right: 70px;
-            }
-        }
-
-        &.pad_left40 {
-            @include mq('tablet') {
-                padding-left: 40px;
-            }
-        }
-
-        &-content {
-            .head {
-                color: var(--color-black2);
-                font-weight: 700;
-            }
-
-            .desc {
-                line-height: 1.6;
-            }
-
-            +.c-footer__info-content {
-                margin-top: 20px;
-
-                @include mq(tablet-max) {
-                    margin-top: 30px;
-                }
-
-                @include mq(desktop) {
-                    margin-top: 45px;
-                }
-            }
-        }
-
-        &.corporate-address {
-            margin-bottom: 26px;
-
-            @include mq('tablet') {
-                margin-bottom: 28px;
-            }
-
-            @include mq('desktop-min') {
-                margin-bottom: 32px;
-            }
-
-            @include mq('desktop-wide') {
-                margin-bottom: 40px;
-            }
-
-            .c-footer__info-content {
-                margin-top: 26px;
-
-                @include mq('tablet') {
-                    margin-top: 28px;
-                }
-
-                @include mq('desktop-min') {
-                    margin-top: 32px;
-                }
-
-                @include mq('desktop-wide') {
-                    margin-top: 40px;
-                }
-            }
-        }
+  &__info {
+    // Padding variations
+    &.pad_right70 {
+      @include mq('tablet') {
+        padding-right: 70px;
+      }
     }
+
+    &.pad_left40 {
+      @include mq('tablet') {
+        padding-left: 40px;
+      }
+    }
+
+    // Corporate address special case
+    &.corporate-address {
+      margin-bottom: 26px;
+
+      @include mq('tablet') {
+        margin-bottom: 28px;
+      }
+
+      @include mq('desktop-min') {
+        margin-bottom: 32px;
+      }
+
+      @include mq('desktop-wide') {
+        margin-bottom: 40px;
+      }
+
+      .c-footer__info-content {
+        margin-top: 26px;
+
+        @include mq('tablet') {
+          margin-top: 28px;
+        }
+
+        @include mq('desktop-min') {
+          margin-top: 32px;
+        }
+
+        @include mq('desktop-wide') {
+          margin-top: 40px;
+        }
+      }
+    }
+
+    // Unified content block
+    &-content {
+      .head {
+        color: var(--color-black2);
+        font-weight: 700;
+        @extend .c-content-19 !optional;
+        margin-bottom: 8px;
+      }
+
+      .desc {
+        color: var(--color-black2);
+        line-height: 1.6;
+      }
+
+      // spacing for sibling content
+      + .c-footer__info-content {
+        margin-top: 20px;
+
+        @include mq(tablet-max) {
+          margin-top: 30px;
+        }
+
+        @include mq(desktop) {
+          margin-top: 45px;
+        }
+      }
+
+      // Footer menu
+      .footerMenu {
+        padding: 0;
+
+        &__item {
+          list-style: none;
+
+          &-link {
+            @extend .c-content-19 !optional;
+            color: var(--color-black2);
+            text-decoration: none;
+          }
+
+          + .footerMenu__item {
+            margin-top: 4px;
+          }
+        }
+      }
+
+      // Text and links
+      p,
+      .u-link {
+        color: var(--color-black2);
+      }
+
+      .u-link {
+        text-decoration: none;
+      }
+
+      // Social icons
+      .social__wrapper {
+        @include flexbox;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 0;
+
+        &--item {
+          list-style: none;
+          background: #939598;
+          @include border-radius(50%);
+          @include size(40px);
+          min-width: 40px;
+          @include flexbox;
+          @include align-items(center);
+          @include justify-content(center);
+        }
+      }
+    }
+  }
 }

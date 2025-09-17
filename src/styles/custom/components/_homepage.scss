@@ -1,0 +1,89 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+@use '../components/generic/sizes' as *;
+
+.c-homeSection {
+    .media {
+        @include flexbox;
+        @include justify-content(center);
+
+        @include mq(tablet-max) {
+            margin-top: 0px;
+        }
+
+        margin-top: 20px;
+    }
+
+    &__people {
+        &-video {
+            width: 100%;
+            object-fit: cover;
+            object-position: center center;
+            max-width: 670px;
+            height: 577px;
+
+        }
+
+        &.v2 {
+            .c-homeSection__people-video {
+                max-width: 747px !important;
+                height: 603px !important;
+            }
+        }
+    }
+}
+.stocks_wrapper__grid{
+    @include flexbox;
+    @include flex-direction(column, vertical);
+    @include mq(tablet-max){
+        @include flex-direction(row, horizontal);
+        @include justify-content(space-between);
+        @include align-items(center);
+    }
+    .stocks_wrapper_item{
+        &_info{
+            @include flexbox;
+            gap: 10px;
+            &.mb-30{
+                margin-bottom: 10px;
+                @include mq(tablet){
+                    margin-bottom: 20px;
+                }
+                @include mq(tablet-max){
+                    margin-bottom: 30px;
+                }
+               
+            }
+            &_text{
+                color: #F47920;
+            }
+          
+            .stocks_wrapper_item_counter{
+                  margin-right: 10px;
+                color: #F47920;
+                @include mq(tablet-max){
+                    margin-right: 20px;
+                }
+            }
+        }
+        p{
+          color: var(--color-black2);  
+          margin-bottom: 0;
+          font-weight: var(--fontRegular);
+          @include font-size(16);
+          @include mq(tablet){
+            @include font-size(22);
+          }
+          @include mq(desktop-min){
+            @include font-size(26)
+          }
+          @include mq(desktop-wide){
+            @include font-size(30)
+          }
+          @include mq(desktop-wide-max){
+            @include font-size(32)
+          }
+        }
+    }
+    
+}
