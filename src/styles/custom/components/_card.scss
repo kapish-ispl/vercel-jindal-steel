@@ -39,6 +39,7 @@
             }
 
             .card__content {
+                min-height: 270px;
                 &-box {
                     .label {
                         font-weight: 600;
@@ -54,6 +55,39 @@
                     }
                    
                 }
+            }
+        }
+        &.mr-58{
+            @include mq(tablet-max){
+                margin-right: 32px;
+            }
+            @include mq(desktop){
+                margin-right: 40px;
+            }
+            @include mq(desktop-wide){
+                margin-right: 48px;
+            }
+            @include mq(desktop-wide-max){
+                margin-right: 58px;
+            }
+        }
+        &.ml-58{
+                @include mq(tablet-max){
+                margin-left: 32px;
+            }
+            @include mq(desktop){
+                margin-left: 40px;
+            }
+            @include mq(desktop-wide){
+                margin-left: 48px;
+            }
+            @include mq(desktop-wide-max){
+                margin-left: 58px;
+            }
+        }
+        &.mx-15{
+            @include mq(tablet-max){
+                margin: 0px 15px;
             }
         }
     }
