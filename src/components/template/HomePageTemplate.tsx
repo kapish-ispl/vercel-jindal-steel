@@ -10,7 +10,7 @@ const HomePage = ({ data }: any) => {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-12 p-0">
-                            <HomeBanner bannerMedia={data?.media} />
+                            <HomeBanner bannerMedia={data?.media} tagline={data?.customField?.tagline} pageTitle={data?.title} />
                         </div>
                     </div>
                 </div>

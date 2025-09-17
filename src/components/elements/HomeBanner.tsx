@@ -5,8 +5,8 @@ import { FC } from "react";
 import Link from "next/link";
 import Slider from "react-slick";
 
-const HomeBanner: FC<{ bannerMedia: any }> = ({ bannerMedia }) => {
-
+const HomeBanner: FC<{ bannerMedia: any, tagline:any, pageTitle:any }> = ({ bannerMedia, tagline, pageTitle }) => {
+console.log(bannerMedia, tagline, pageTitle)
     // eslint-disable-next-line no-var
     var settings = {
         dots: false,
@@ -46,19 +46,7 @@ const HomeBanner: FC<{ bannerMedia: any }> = ({ bannerMedia }) => {
                                                     objectPosition: "center",
                                                 }}
                                             />
-                                            <div className="banner_overlappingText" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300" data-aos-easing="ease-out">
-                                                <div className="container custom_container">
-                                                    <div className="row">
-                                                        <div className="col-12">
-                                                            <div className="banner__box">
-                                                                <div className="banner__title" dangerouslySetInnerHTML={{ __html: data.title }}></div>
-                                                                <div className="banner__content" dangerouslySetInnerHTML={{ __html: data.description }}></div>
-                                                                {/* <div dangerouslySetInnerHTML={{ __html: data.caption }} /> */}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </>
                                     )
                                 )
@@ -67,6 +55,8 @@ const HomeBanner: FC<{ bannerMedia: any }> = ({ bannerMedia }) => {
                             )}
                         </Slider>
                     </div>
+                    
+                    <div>{tagline !== '' ? tagline : pageTitle }</div>
                 </div>
             }
         </>
