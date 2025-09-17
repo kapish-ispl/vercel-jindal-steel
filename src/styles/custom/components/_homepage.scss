@@ -6,9 +6,13 @@
     .media {
         @include flexbox;
         @include justify-content(center);
+        padding: 0px 20px;
+        overflow: hidden;
 
         @include mq(tablet-max) {
             margin-top: 0px;
+            padding: 0px;
+            overflow: visible;
         }
 
         margin-top: 20px;
@@ -23,8 +27,35 @@
             height: 577px;
 
         }
+        .pad_left96{
+            @include mq(tablet-max){
+                padding-left: 45px;
+            }
+            @include mq(desktop){
+                padding-left: 55px;
+            }
+            @include mq(desktop-wide){
+                padding-left: 70px;
+            }
+            @include mq(desktop-wide-max){
+                padding-left: 96px;
+            }
+        }
 
         &.v2 {
+            .genric__content{
+               &.pad_right80 {
+                @include mq('tablet-max') {
+                    padding-right: 30px;
+                    @include mq(desktop){
+                        padding-right: 50px;
+                    }
+                    @include mq(desktop-wide){
+                        padding-right: 80px;
+                    }
+                }
+            }
+            }
             .c-homeSection__people-video {
                 max-width: 747px !important;
                 height: 603px !important;

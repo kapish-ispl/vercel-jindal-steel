@@ -13,130 +13,275 @@
 //     font-family: sans-serif;
 // }
 
+// // Wrapper for the 3D card visualization
+// .card-stack-visual {
+//     position: relative;
+//     margin: 0 auto;
+//     max-width: 24rem;
+//     height: 450px;
+
+//     // This element sets up the 3D perspective for its children
+//     &__perspective-root {
+//         position: relative;
+//         width: 24rem;
+//         height: 100%;
+//         perspective: 1000px;
+//         transform-style: preserve-3d;
+//     }
+// }
+
+// // Styling for an individual card in the stack
+// .card-item {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+//     cursor: pointer;
+
+//     // Dynamic properties are set by React using CSS variables
+//     // This is the key to connecting dynamic JS values to static CSS
+//     transform:
+//         translateX(var(--tx, 0)) scale(var(--scale, 1)) translateZ(var(--tz, 0)) rotateY(var(--rotateY, 0));
+//     z-index: var(--zIndex, 0);
+
+//     transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1.5);
+
+//     // The background media (video or image)
+//     &__background {
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         width: 100%;
+//         height: 100%;
+//         object-fit: cover;
+//         background-size: cover;
+//         background-position: center;
+//         background-image: var(--bg-image);
+//     }
+
+//     // Semi-transparent overlay on top of the media
+//     &__overlay {
+//         position: absolute;
+//         top: 0;
+//         left: 0;
+//         width: 100%;
+//         height: 100%;
+//         background-color: rgba(255, 255, 255, 0.4);
+//     }
+// }
+
+// // Container for the controls (arrows and text) below the stack
+// .card-controls {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: 100%;
+//     max-width: 30rem;
+//     margin-top: 1.5rem;
+//     min-height: 60px;
+
+//     &__button {
+//         width: 40px;
+//         height: 40px;
+//         border-radius: 50%;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         border: 1px solid #555;
+//         background-color: transparent;
+//         color: #555;
+//         flex-shrink: 0;
+//         cursor: pointer;
+//         transition: background-color 0.2s ease, border-color 0.2s ease;
+
+//         &:hover:not(:disabled) {
+//             background-color: rgba(255, 255, 255, 0.1);
+//             border-color: #888;
+//         }
+
+//         &:disabled {
+//             opacity: 0.3;
+//             cursor: not-allowed;
+//         }
+
+//         svg {
+//             width: 20px;
+//             height: 20px;
+//         }
+//     }
+
+//     &__content-text {
+//         margin: 0 1.5rem;
+//         text-align: center;
+//         flex-grow: 1;
+
+//         p {
+//             font-size: 1.125rem; // fs-5 equivalent
+//             margin: 0;
+//         }
+//     }
+// }
+
+// // Animation for the text fading in
+// .animate-fade-in {
+//     animation: fadeIn 0.5s ease-in-out;
+// }
+
+// @keyframes fadeIn {
+//     from {
+//         opacity: 0;
+//         transform: translateY(10px);
+//     }
+
+//     to {
+//         opacity: 1;
+//         transform: translateY(0);
+//     }
+// }
+
 // Wrapper for the 3D card visualization
 .card-stack-visual {
-    position: relative;
-    margin: 0 auto;
-    max-width: 24rem;
-    height: 450px;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 459px; // desktop size
+  height: clamp(280px, 60vw, 570px); // scales between mobile and desktop
 
-    // This element sets up the 3D perspective for its children
-    &__perspective-root {
-        position: relative;
-        width: 24rem;
-        height: 100%;
-        perspective: 1000px;
-        transform-style: preserve-3d;
-    }
+  &__perspective-root {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
 }
 
 // Styling for an individual card in the stack
 .card-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transform: translateX(var(--tx, 0)) 
+             scale(var(--scale, 1)) 
+             translateZ(var(--tz, 0)) 
+             rotateY(var(--rotateY, 0));
+  z-index: var(--zIndex, 0);
+  transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1.5);
+
+  &__background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    cursor: pointer;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-image: var(--bg-image);
+  }
 
-    // Dynamic properties are set by React using CSS variables
-    // This is the key to connecting dynamic JS values to static CSS
-    transform:
-        translateX(var(--tx, 0)) scale(var(--scale, 1)) translateZ(var(--tz, 0)) rotateY(var(--rotateY, 0));
-    z-index: var(--zIndex, 0);
-
-    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1.5);
-
-    // The background media (video or image)
-    &__background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        background-size: cover;
-        background-position: center;
-        background-image: var(--bg-image);
-    }
-
-    // Semi-transparent overlay on top of the media
-    &__overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.4);
-    }
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
 }
 
-// Container for the controls (arrows and text) below the stack
+// Container for the controls
 .card-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 30rem;
+  margin-top: 1.5rem;
+  min-height: 60px;
+  padding: 0 1rem; // prevent overflow on mobile
+  position: relative;
+
+  &__button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: 30rem;
-    margin-top: 1.5rem;
-    min-height: 60px;
-
-    &__button {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #555;
-        background-color: transparent;
-        color: #555;
-        flex-shrink: 0;
-        cursor: pointer;
-        transition: background-color 0.2s ease, border-color 0.2s ease;
-
-        &:hover:not(:disabled) {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: #888;
-        }
-
-        &:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        svg {
-            width: 20px;
-            height: 20px;
+    border: 1px solid #555;
+    background-color: transparent;
+    color: #555;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    position: absolute;
+    bottom: 15px;
+    @media screen and (min-width: 992px) {
+        position: relative;
+        bottom: unset;
+    }
+    &.left{
+        left: 0;
+        @media screen and (min-width: 992px){
+            left: inherit;
         }
     }
+    &.right{
+        right: 0;
+         @media screen and (min-width: 992px){
+            right: inherit;
+        }
+    }
+
+    &:hover:not(:disabled) {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: #888;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__content-text {
+    margin: 0 1rem;
+    text-align: center;
+    flex-grow: 1;
+
+    p {
+      font-size: clamp(0.9rem, 2.5vw, 1.125rem); // scales text
+      margin: 0;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .card-stack-visual {
+    max-width: 90%;
+    height: clamp(220px, 60vw, 360px);
+  }
+
+  .card-controls {
+    flex-direction: column;
+    gap: 0.75rem;
 
     &__content-text {
-        margin: 0 1.5rem;
-        text-align: center;
-        flex-grow: 1;
-
-        p {
-            font-size: 1.125rem; // fs-5 equivalent
-            margin: 0;
-        }
+      order: -1; // show text above buttons on mobile
     }
-}
-
-// Animation for the text fading in
-.animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  }
 }

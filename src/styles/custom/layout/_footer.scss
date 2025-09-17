@@ -106,11 +106,15 @@
       }
 
       // Social icons
+      .socialMenu{
+        margin-top: 12px;
+      }
       .social__wrapper {
         @include flexbox;
         flex-wrap: wrap;
         gap: 15px;
         padding: 0;
+        margin-bottom: 0;
 
         &--item {
           list-style: none;
@@ -121,6 +125,10 @@
           @include flexbox;
           @include align-items(center);
           @include justify-content(center);
+          @include transition(all 0.4s ease);
+          &:hover{
+            transform: rotate(360deg);
+          }
         }
       }
     }

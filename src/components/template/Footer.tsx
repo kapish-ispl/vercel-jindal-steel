@@ -62,7 +62,7 @@ const Footer = () => {
                                     </div>
                                     <div className="c-footer__info-content">
                                         <div className="head">Contact us</div>
-                                        <p className="c-content-19">+91 11 26188340-50, <br/>1800 208 2008</p>
+                                        <p className="c-content-19">+91 11 26188340-50, <br />1800 208 2008</p>
                                         <p className="c-content-19"><a href="mailto:info@jindalsteel.com" className="u-link">info[at]jindalsteel[dot]com</a></p>
 
                                     </div>
@@ -81,6 +81,52 @@ const Footer = () => {
                                     </div>
                                     <div className="c-footer__info-content">
                                         <div className="head">Connect with us</div>
+                                        <div className="socialMenu">
+                                            <ul className="social__wrapper">
+                                                <li className="social__wrapper--item"><a href='#' className='social__wrapper--item-link'>
+                                                    <img
+                                                        src='/images/icons/linkdin-icon.svg'
+                                                        alt="jindal steel logo"
+                                                        width={41}
+                                                        height={41}
+                                                        className="img-fluid u-img" />
+                                                </a></li>
+                                                <li className="social__wrapper--item"><a href='#' className='social__wrapper--item-link'>
+                                                    <img
+                                                        src='/images/icons/fb-icon.svg'
+                                                        alt="jindal steel logo"
+                                                        width={41}
+                                                        height={41}
+                                                        className="img-fluid u-img" />
+                                                </a></li>
+                                                <li className="social__wrapper--item"><a href='#' className='social__wrapper--item-link'>
+                                                    <img
+                                                        src='/images/icons/twitter-icon.svg'
+                                                        alt="jindal steel logo"
+                                                        width={41}
+                                                        height={41}
+                                                        className="img-fluid u-img" />
+                                                </a></li>
+                                                <li className="social__wrapper--item"><a href='#' className='social__wrapper--item-link'>
+                                                    <img
+                                                        src='/images/icons/youtube.svg'
+                                                        alt="jindal steel logo"
+                                                        width={41}
+                                                        height={41}
+                                                        className="img-fluid u-img" />
+                                                </a></li>
+                                                <li className="social__wrapper--item">
+                                                    <a href='#' className='social__wrapper--item-link'>
+                                                        <img
+                                                            src='/images/icons/insta-icon.svg'
+                                                            alt="jindal steel logo"
+                                                            width={41}
+                                                            height={41}
+                                                            className="img-fluid u-img" />
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

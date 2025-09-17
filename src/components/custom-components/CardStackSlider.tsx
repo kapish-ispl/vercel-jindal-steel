@@ -256,7 +256,7 @@ export default function CardStackSlider({ props }: any) {
             </div>
 
             <div className="card-controls">
-                <button onClick={handlePrev} className="card-controls__button">
+                <button onClick={handlePrev} className="card-controls__button left">
                     {/* <button onClick={handlePrev} className="card-controls__button" disabled={activeIndex === 0}> */}
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
@@ -269,7 +269,7 @@ export default function CardStackSlider({ props }: any) {
                     </p>
                 </div>
 
-                <button onClick={handleNext} className="card-controls__button">
+                <button onClick={handleNext} className="card-controls__button right">
                     {/* <button onClick={handleNext} className="card-controls__button" disabled={activeIndex === cardData.length - 1}> */}
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />

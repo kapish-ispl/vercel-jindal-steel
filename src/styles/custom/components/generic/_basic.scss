@@ -161,7 +161,10 @@
 }
 
 .commonSection-sm {
-    padding: 60px 0px;
+    padding: 40px 0px;
+    @include mq(tablet){
+        padding: 60px 0px;
+    }
 
     @include mq(tablet-max) {
         padding: 80px 0px;
@@ -228,7 +231,7 @@
                 }
 
                 .desc {
-                    max-width: 325px !important;
+                    max-width: 350px !important;
                 }
             }
         }
@@ -236,14 +239,22 @@
 }
 
 .c-mapView {
+    flex-direction: column-reverse;
+    @include mq(desktop){
+        @include flex-direction(row, horizontal);
+        @include justify-content(space-between);
+    }
     &__sidebar {
         max-width: 313px;
         width: 100%;
         position: relative;
 
         button {
-            position: absolute;
-            bottom: 50px;
+            @include mq(desktop){
+                position: absolute;
+                bottom: 50px;
+            }
+           
         }
 
         h2 {
@@ -251,14 +262,45 @@
         }
 
         ul {
-            margin-top: 130px;
+            margin-top: 30px;
+           
+            @include mq(desktop){
+                margin-top: 95px;
+            }
+            li{
+                border-bottom: 1px solid rgba(68, 97, 131, 0.26);
+                &:nth-last-child(1){
+                    border-bottom: unset;
+                }
+            }
+            
 
+        }
+    }
+    &__container{
+        position: relative;
+        top: 30px;
+        @include mq(desktop){
+            top: -70px;
+        }
+        svg{
+            width: 100%;
+            height: auto;
+            @include mq(desktop){
+                width: 972px;
+            }
         }
     }
 }
 
-.float-elem {
-    position: absolute;
-    top: 130px;
+// .float-elem {
+//     position: absolute;
+//     top: 110px;
 
+// }
+.responsive-space-30{
+    margin-top: 30px;
+    @include mq(tablet-max){
+        margin-top: 0;
+    }
 }

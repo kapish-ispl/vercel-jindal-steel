@@ -1,0 +1,16 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+@use '../components/generic/sizes' as *;
+
+.action-btn{
+    @include transition(all 0.3s ease-in-out);
+    >a{
+        color: #446183;
+    }
+    &:hover{
+        transform: translateX(20px);
+            svg {
+                stroke: var(--color-primary) !important;
+            }
+    }
+}

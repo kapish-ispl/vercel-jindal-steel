@@ -87,7 +87,7 @@ const InteractiveMap: FC = () => {
     };
 
     return (
-        <div className='c-mapView' style={{ display: 'flex', height: 'calc(100vh - 150px)' }}>
+        <div className='c-mapView' style={{ display: 'flex' }}>
             <div className='c-mapView__sidebar'>
                 {view !== 'world' ? (
                     <div>
@@ -113,7 +113,6 @@ const InteractiveMap: FC = () => {
                                         margin: '4px 0',
                                         borderRadius: '4px',
                                         paddingBottom: '20px',
-                                        borderBottom: '1px solid rgba(68, 97, 131, 0.26)',
                                         color: selectedArea === area.code ? '#F47920' : '#636466',
                                     }}
                                 >
@@ -125,7 +124,7 @@ const InteractiveMap: FC = () => {
                 )}
             </div>
 
-            <div className='c-mapView__container' ref={mapRef} style={{ flex: 1, padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className='c-mapView__container' ref={mapRef}>
                 <div>
                     {renderMapView()}
                 </div>

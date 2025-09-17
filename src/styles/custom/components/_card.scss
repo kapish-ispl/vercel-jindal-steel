@@ -39,7 +39,10 @@
             }
 
             .card__content {
-                min-height: 270px;
+                @include mq(desktop-wide){
+                    min-height: 270px;
+                }
+                
                 &-box {
                     .label {
                         font-weight: 600;
