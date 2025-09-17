@@ -8,7 +8,7 @@ const AfricaMap: FC = () => {
             className="svg-map"
             height="217.31789"
             id="svg2"
-            data-mapsvg-geoviewbox="-25.360994 37.343521 59.838547 -34.833225"
+            // data-mapsvg-geoviewbox="-25.360994 37.343521 59.838547 -34.833225"
             version="1.1">
             <defs
                 id="defs261" />

@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { FC } from "react";
 import Link from "next/link";
+import Slider from "react-slick";
 
-const HomeBanner: FC<{ bannerMedia: any }> = ({ bannerMedia }) => {
-
+const HomeBanner: FC<{ bannerMedia: any, tagline:any, pageTitle:any }> = ({ bannerMedia, tagline, pageTitle }) => {
+console.log(bannerMedia, tagline, pageTitle)
     // eslint-disable-next-line no-var
     var settings = {
         dots: false,
@@ -45,19 +46,7 @@ const HomeBanner: FC<{ bannerMedia: any }> = ({ bannerMedia }) => {
                                                     objectPosition: "center",
                                                 }}
                                             />
-                                            <div className="banner_overlappingText" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300" data-aos-easing="ease-out">
-                                                <div className="container custom_container">
-                                                    <div className="row">
-                                                        <div className="col-12">
-                                                            <div className="banner__box">
-                                                                <div className="banner__title" dangerouslySetInnerHTML={{ __html: data.title }}></div>
-                                                                <div className="banner__content" dangerouslySetInnerHTML={{ __html: data.description }}></div>
-                                                                {/* <div dangerouslySetInnerHTML={{ __html: data.caption }} /> */}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </>
                                     )
                                 )
@@ -66,18 +55,10 @@ const HomeBanner: FC<{ bannerMedia: any }> = ({ bannerMedia }) => {
                             )}
                         </Slider>
                     </div>
+                    
+                    <div>{tagline !== '' ? tagline : pageTitle }</div>
                 </div>
             }
-            <div className="announcment" id="announcementBlock">
-                <div className="announcment__heading">Announcements</div>
-                <div className="announcment__content"></div>
-                <Marquee speed={50} gradient={false}>
-                    <Link className="announcment__item" href="/airport-terminal" title="SISCOL Powers the Expansion of Delhi International Airport Terminal 1 with 15,000 MT of Structural Steel">SISCOL Powers the Expansion of Delhi International Airport Terminal 1 with 15,000 MT of Structural Steel</Link>
-                    <Link className="announcment__item" href="/upgrade-credit-rating" title="SISCOl's Credit Rating Upgrade">SISCOl's Credit Rating Upgrade</Link>
-                    <Link className="announcment__item" href="/rooftop-solar" title="Powering a Sustainable Future: SISCOL’s Rooftop Solar Initiative">Powering a Sustainable Future: SISCOL’s Rooftop Solar Initiative</Link>
-                    <Link className="announcment__item" href="/hyderabad-plant" title="SISCOL Expands: Hyderabad Plant Now Operational">SISCOL Expands: Hyderabad Plant Now Operational</Link>
-                </Marquee>
-            </div>
         </>
     )
 }
