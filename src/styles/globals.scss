@@ -21,10 +21,24 @@
 
 
 .svg-map {
-    path {
+
+    path,
+    polygon {
         fill: #636466;
         stroke: #fff;
         stroke-width: 1px;
+    }
+
+    .cls-1,
+    .cls-2 {
+        fill: #b3b5b8;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: .25px;
+    }
+
+    .cls-2 {
+        fill-rule: evenodd;
     }
 
     .highlighted {
