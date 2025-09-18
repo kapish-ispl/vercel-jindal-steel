@@ -84,6 +84,7 @@ export default function PostList(props: any) {
     );
     return (
         <>
+            <div>reached here</div>
             <PostComponentRender data={postData} />
         </>
     );
