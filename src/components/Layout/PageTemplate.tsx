@@ -24,11 +24,11 @@ const PageTemplate = ({ data }: any) => {
                     return <Counter to={toValue} />;
                 }
 
-                if (domNode.attribs.id === "splitanimation") {
+                if (domNode.name === "splitanimation") {
                     const props = attributesToProps(domNode.attribs);
                     return <SplitAnimation text={String(props.text)} />;
                 }
-                if (domNode.attribs.id === "bluranimation") {
+                if (domNode.name === "bluranimation") {
                     const props = attributesToProps(domNode.attribs);
                     return <BlurAnimation text={String(props.text)} />;
                 }
