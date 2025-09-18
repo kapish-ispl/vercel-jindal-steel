@@ -8,7 +8,7 @@ const ScrollRevealAnimation = dynamic(() => import('../ScrollReveal'), { ssr: fa
 const Counter = dynamic(() => import('../AnimatedCountUp'), { ssr: false });
 // const CardStackSlider = dynamic(() => import('../CardStackSlider'), { ssr: false });
 const IntractiveMap = dynamic(() => import('../IntractiveMap'), { ssr: false });
-const PostList = dynamic(() => import('@/utils/PostList'));
+const PostList = dynamic(() => import('@/utils/PostList'), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
