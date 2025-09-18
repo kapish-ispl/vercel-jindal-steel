@@ -16,7 +16,7 @@ const PageTemplate = ({ data }: any) => {
             if (domNode instanceof Element && domNode.attribs) {
                 if (domNode.name === "custompost") {
                     const props = attributesToProps(domNode.attribs);
-                    return <div>mayank testing for post</div>>;
+                    return <div>mayank testing for post</div>;
                 }
                 if (domNode.name === "animatedcountup") {
                     const props = attributesToProps(domNode.attribs);
