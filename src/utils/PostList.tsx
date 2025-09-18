@@ -21,6 +21,7 @@ interface Props {
 const DynamicPostComponent = (name: string) => dynamic(() => import(`./${name}`));
 
 export default function PostList(props: any) {
+    console.log('ye post hai', props);
     const contextInfo = useContext(AppContext);
     const searchParams = useSearchParams();
     const pathname = usePathname();
