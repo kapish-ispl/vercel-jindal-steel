@@ -6,7 +6,7 @@ const SplitAnimation = dynamic(() => import('../SplitText'), { ssr: false });
 const BlurAnimation = dynamic(() => import('../BlurText'), { ssr: false });
 const ScrollRevealAnimation = dynamic(() => import('../ScrollReveal'), { ssr: false });
 const Counter = dynamic(() => import('../AnimatedCountUp'), { ssr: false });
-const CardStackSlider = dynamic(() => import('../CardStackSlider'), { ssr: false });
+// const CardStackSlider = dynamic(() => import('../CardStackSlider'), { ssr: false });
 const IntractiveMap = dynamic(() => import('../IntractiveMap'), { ssr: false });
 const PostList = dynamic(() => import('@/utils/PostList'));
 
@@ -36,10 +36,10 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     return <IntractiveMap {...props} />;
                 }
-                if (domNode.name === "cardstackslider") {
-                    const props = attributesToProps(domNode.attribs);
-                    return <CardStackSlider {...props} />;
-                }
+                // if (domNode.name === "cardstackslider") {
+                //     const props = attributesToProps(domNode.attribs);
+                //     return <CardStackSlider {...props} />;
+                // }
             }
 
             return null;
