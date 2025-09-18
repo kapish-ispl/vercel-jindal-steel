@@ -73,6 +73,7 @@ export default async function Home() {
   );
 
   const pageData = fetchedInfo?.data;
+  console.log(pageData);
   if (!pageData) return notFound();
 
   return <HomePage data={pageData} />;
