@@ -105,6 +105,23 @@
 }
 
 
+.c-content-16 {
+    font-weight: var(--fontRegular);
+
+    @include font-size(14);
+
+    @include mq('tablet') {
+        @include font-size(16, 1.6);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(16, 1.6);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(16, 1.6);
+    }
+}
 .c-content-19 {
     font-weight: var(--fontRegular);
 

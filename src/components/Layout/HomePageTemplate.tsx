@@ -1,7 +1,7 @@
 "use client";
 import dynamic from 'next/dynamic';
 const PageTemplate = dynamic(() => import('./PageTemplate'), { ssr: false });
-const HomeBanner = dynamic(() => import('../elements/HomeBanner'), { ssr: false });
+const HomeBanner = dynamic(() => import('../Layout/HomeBanner'), { ssr: false });
 
 const HomePage = ({ data }: any) => {
     return (

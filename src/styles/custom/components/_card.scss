@@ -94,6 +94,55 @@
             }
         }
     }
+    &.v2{
+        cursor: inherit !important;
+        .c-cardView__wrapper{
+            border: 3px solid #BCBCBC;
+            overflow: hidden;
+            &-media{
+                overflow: hidden;
+                display: block;
+                height: 288px;
+                .u-img{
+                    width: 100%;
+                    overflow: hidden;
+                    height: 100%;
+                    @include transition(all 0.3s ease-in-out);
+                }
+
+            }
+            span{
+                display: block;
+            }
+            &-content{
+                padding: 15px;
+                @include mq(tablet-max){
+                    padding: 27px 20px;
+                }
+                .title{
+                    @include font-size(25);
+                    font-weight: var(--fontBold);
+                    color: var(--color-accent-blue);
+                    
+                }
+                .desc{
+                    font-weight: var(--fontLight);
+                    @include font-size(15);
+                    color: var(--color-black);
+                    margin: 20px 0px;
+                    min-height: 46px;
+                }
+                
+            }
+            &:hover{
+                .c-cardView__wrapper-media{
+                    .u-img{
+                        @include transform(scale(1.2));
+                    }
+                }
+            }
+        }
+    }
 
     
 }

@@ -16,8 +16,10 @@
 @use 'custom/components/animation';
 @use 'custom/components/slider';
 @use 'custom/layout/footer';
+@use 'custom/layout/header';
 @use 'custom/components/card';
 @use 'custom/components/button';
+@use 'custom/components/banner';
 /* End component files */
 
 
@@ -59,4 +61,18 @@
             transition: fill 0.2s ease-in-out;
         }
     }
+}
+
+.scroll-reveal {
+  margin: 20px 0;
+}
+
+.scroll-reveal-text {
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.word {
+  display: inline-block;
 }

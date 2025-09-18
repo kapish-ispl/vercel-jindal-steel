@@ -3,8 +3,8 @@ import { notFound, redirect } from "next/navigation";
 import { GET_SPECIFIC_PAGE_ENDPOINT } from "@/config/apiConfig";
 import { CONSTANTS } from "@/config/constant";
 import { serverRequest } from "@/services/getServerSideRender";
-import InnerBanner from "@/components/elements/InnerBanner";
-import PageTemplate from "@/components/template/PageTemplate";
+import PageTemplate from "@/components/Layout/PageTemplate";
+import InnerBanner from "@/components/Layout/InnerBanner";
 
 
 // export async function generateMetadata({

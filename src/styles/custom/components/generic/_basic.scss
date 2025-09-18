@@ -240,6 +240,7 @@
 
 .c-mapView {
     flex-direction: column-reverse;
+    @include flexbox;
     @include mq(desktop){
         @include flex-direction(row, horizontal);
         @include justify-content(space-between);
@@ -247,12 +248,53 @@
     &__sidebar {
         max-width: 313px;
         width: 100%;
-        position: relative;
+        padding: 20px;
+        position: static;
 
         button {
+            padding: 12px 20px;
+            border-color: #ccc;
+            @include border-radius(8px);
+            border: none !important;
+            @include font-size(14);
+            z-index: 999;
+            position: relative;
+            @include transition(all 0.3s ease-in);
+            &::before{
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                background: var(--color-primary);
+                height: 100%;
+                width: 0%;
+                 @include transition(all 0.3s ease-in);
+                  @include border-radius(8px);
+            }
+            &:hover{
+                @include transition(all 0.3s ease-in);
+                &::before{
+                    width: 100%;
+                }
+                span{
+                    color: #fff;
+                }
+            }
+            .content{
+                @include flexbox;
+                @include align-items(center);
+                gap: 8px;
+            }
+            >span{
+                @include font-size(16);
+                position: relative;
+                z-index: 1000;
+            }
             @include mq(desktop){
                 position: absolute;
-                bottom: 50px;
+                top: 50px;
+                right: 200px;
+            
             }
            
         }
@@ -268,7 +310,14 @@
                 margin-top: 95px;
             }
             li{
+                padding: 12px;
+                cursor: pointer;
                 border-bottom: 1px solid rgba(68, 97, 131, 0.26);
+                color: #636466;
+                transition: all 0.2s ease-in-out;
+                &.is-active{
+                    color: #F47920;
+                }
                 &:nth-last-child(1){
                     border-bottom: unset;
                 }
@@ -285,9 +334,61 @@
         }
         svg{
             width: 100%;
+            position: relative;
             height: auto;
             @include mq(desktop){
-                width: 972px;
+                width: 700px;
+            }
+        }
+        .map-points{
+            position: absolute;
+            &.in-jh{
+                    top: 107px;
+                    right: 150px;
+                    @include mq(tablet){
+                        top: 230px;
+                        right: 302px;
+                    }
+                    @include mq(tablet-max){
+                        top: 316px;
+                        right: 409px;
+                    }
+                @include mq(desktop){
+                    top: 235px;
+                    right: 301px;
+                }
+            }
+            &.in-ct{
+                    top: 116px;
+                    right: 165px;
+                    @include mq(tablet){
+                        top: 247px;
+                        right: 330px;
+                    }
+                       @include mq(tablet-max){
+                        top: 336px;
+                        right: 446px;
+                    }
+                 @include mq(desktop){
+                   top: 248px;
+                    right: 330px;
+                }
+            }
+            &.in-od{
+                top: 125px;
+                right: 152px;
+                @include mq(tablet){
+                        top: 265px;
+                        right: 309px;
+                }
+                    @include mq(tablet-max){
+                        top: 365px;
+                        right: 422px;
+                    }
+                 @include mq(desktop){
+                   top: 270px;
+                    right: 312px;
+                }
             }
         }
     }
@@ -303,4 +404,56 @@
     @include mq(tablet-max){
         margin-top: 0;
     }
+}
+
+ul {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 0;
+}
+.c-list__wrapper{
+    &--grid{
+        margin: 0;
+        padding: 0;
+        &-item{
+            list-style: none;
+            @include transition(all 0.3s ease-in);
+            &-link{
+                text-decoration: none;
+            }
+            &:hover{
+                @include transform(translateX(30px));
+                .c-list__wrapper--grid-item-link{
+                    .link-title{
+                        color: var(--color-accent-blue) !important;
+                    }
+                }
+            }
+            + .c-list__wrapper--grid-item{
+                margin-top: 15px;
+               
+            }
+        }
+    }
+
+}
+.cus-size{
+    width: 100%;
+    @include mq(desktop){
+        max-width: 466px;
+        
+    }
+    &.v2{
+          @include mq(desktop){
+            max-width: 528px;
+        
+        }
+    }
+    &.v3{
+          @include mq(desktop){
+            max-width: 480px;
+        
+        }
+    }
+    
 }

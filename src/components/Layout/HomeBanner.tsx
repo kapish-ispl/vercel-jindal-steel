@@ -5,8 +5,8 @@ import { FC } from "react";
 import Link from "next/link";
 import Slider from "react-slick";
 
-const HomeBanner: FC<{ bannerMedia: any, tagline:any, pageTitle:any }> = ({ bannerMedia, tagline, pageTitle }) => {
-console.log(bannerMedia, tagline, pageTitle)
+const HomeBanner: FC<{ bannerMedia: any, tagline: any, pageTitle: any }> = ({ bannerMedia, tagline, pageTitle }) => {
+    console.log(bannerMedia, tagline, pageTitle)
     // eslint-disable-next-line no-var
     var settings = {
         dots: false,
@@ -46,7 +46,7 @@ console.log(bannerMedia, tagline, pageTitle)
                                                     objectPosition: "center",
                                                 }}
                                             />
-                                            
+
                                         </>
                                     )
                                 )
@@ -55,8 +55,14 @@ console.log(bannerMedia, tagline, pageTitle)
                             )}
                         </Slider>
                     </div>
-                    
-                    <div>{tagline !== '' ? tagline : pageTitle }</div>
+                    <div className="container cus-container">
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="banner__title">{tagline !== '' ? tagline : pageTitle}</div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             }
         </>

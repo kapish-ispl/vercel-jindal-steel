@@ -1,7 +1,12 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { ThemeProvider } from '@/components/Layout/ThemeProvider';
+import AppContextProvider from '@/context/AppContext';
 import "@/styles/globals.scss";
-import Footer from "@/components/template/Footer";
+import 'aos/dist/aos.css';
+import Footer from "@/components/Layout/Footer";
+import Header from "@/components/Layout/Header";
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -21,14 +26,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${poppins.variable}`}
       >
-        <main>
-          {children}
-        </main>
-        <Footer />
+        <Suspense fallback={null}>
+          <AppContextProvider>
+            <Header />
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <main>
+                {children}
+              </main>
+              <Footer />
+            </ThemeProvider>
+          </AppContextProvider>
+        </Suspense>
       </body>
     </html>
   );

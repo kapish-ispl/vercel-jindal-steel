@@ -33,11 +33,11 @@ const InnerBanner = ({ label, slug, currentPage, innerBanner }: any) => {
                             <div className="col-12">
                                 <div className="c-inner-banner__content_box">
                                     <h1 className="banner_heading">{label}</h1>
-                                    {/* <div className="breadcumbs">
+                                    <div className="breadcumbs">
                                         <nav aria-label="breadcrumb">
                                             <Breadcrumbs currentPage={currentPage} slug={slug} />
                                         </nav>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
                         </div>

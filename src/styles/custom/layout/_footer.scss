@@ -62,6 +62,13 @@
         color: var(--color-black2);
         line-height: 1.6;
       }
+      p{
+        .u-link{
+          &:hover{
+            color: var(--color-primary);
+          }
+        }
+      }
 
       // spacing for sibling content
       + .c-footer__info-content {
@@ -82,6 +89,11 @@
 
         &__item {
           list-style: none;
+          &:hover{
+            .footerMenu__item-link{
+              color: var(--color-primary);
+            }
+          }
 
           &-link {
             @extend .c-content-19 !optional;

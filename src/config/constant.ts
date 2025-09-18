@@ -14,3 +14,8 @@ export const CONSTANTS = {
   X_AUTHORIZATION_TOKEN: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
   X_NETWORK_GUID: process.env.NEXT_PUBLIC_NETWORK_GUID,
 };
+
+export const IMAGE_PATH = {
+  LOGO: '/images/logo/jindal-steel-logo-black.svg',
+  LOGO_LIGHT: '/images/logo/jindal-steel-logo-white.svg',
+}

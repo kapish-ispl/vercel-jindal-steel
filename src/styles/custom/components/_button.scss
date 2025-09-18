@@ -6,11 +6,15 @@
     @include transition(all 0.3s ease-in-out);
     >a{
         color: #446183;
+        text-decoration: none;
+        .icon{
+            @include font-size(45);
+        }
     }
     &:hover{
         transform: translateX(20px);
-            svg {
-                stroke: var(--color-primary) !important;
+            .icon {
+                color: var(--color-primary) !important;
             }
     }
 }
