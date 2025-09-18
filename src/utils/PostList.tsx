@@ -8,6 +8,10 @@ import { GET_POST_ENDPOINT } from "@/config/apiConfig"; // adjust import
 import dynamic from "next/dynamic";
 
 
+const componentMap: any = {
+    FinancialCard: dynamic(() => import("./FinancialCard")),
+}
+
 export default function PostList(props: any) {
     const contextInfo = useContext(AppContext);
     const searchParams = useSearchParams();
@@ -15,7 +19,7 @@ export default function PostList(props: any) {
     const page = searchParams.get("page");
     const [postData, setPostData] = useState<any>([]);
     const [filteredTag, setFilteredTag] = useState<string | null>(null);
-    
+
     useEffect(() => {
         let slugInfo = props.slug;
         let limit = props.limit !== undefined ? props.limit : 9;
@@ -39,7 +43,7 @@ export default function PostList(props: any) {
                         `${GET_POST_ENDPOINT}?slug=${slugInfo}&limit=${limit}&offset=${offset}`,
                         CONSTANTS.REQUEST_GET
                     );
-                    
+
                     if (taxonomyInfo.code === CONSTANTS.STATUS_SUCCESS) {
                         console.log('data aaya');
                         setPostData(taxonomyInfo.data);
@@ -54,8 +58,8 @@ export default function PostList(props: any) {
         // Only fetch data if the page or slug changes.
         // We'll reset postData and filteredTag to handle new queries cleanly.
         if (page !== filteredTag) {
-          setPostData([]);
-          setFilteredTag(page);
+            setPostData([]);
+            setFilteredTag(page);
         }
 
         getPostData();
@@ -67,9 +71,11 @@ export default function PostList(props: any) {
     //     [props.components]
     // );
 
-    return (
-        <>
-            <div>reached here</div>
-        </>
-    );
+    const PostComponentRender = componentMap[props.components];
+
+    return PostComponentRender ? (
+        <PostComponentRender
+            postData={postData}
+        />
+    ) : <div>Loading...</div>;
 }
