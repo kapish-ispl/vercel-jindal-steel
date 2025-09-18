@@ -338,9 +338,9 @@ const AfricaMap: FC<{ highlightedCountries?: string[] }> = ({ highlightedCountri
                     aria-label="Zimbabwe"
                     id="ZW" />
             </motion.svg>
-            {highlightedCountries.includes('BW') && <AnimatedPin stateId="BW" className='bw' />}
-            {highlightedCountries.includes('MZ') && <AnimatedPin stateId="MZ" className='mz' />}
-            {highlightedCountries.includes('ZA') && <AnimatedPin stateId="ZA"className='za' />}
+            {highlightedCountries.includes('BW') && <AnimatedPin stateId="BW" className="af-bw map-points" />}
+            {highlightedCountries.includes('MZ') && <AnimatedPin stateId="MZ" className="af-mz map-points" />}
+            {highlightedCountries.includes('ZA') && <AnimatedPin stateId="ZA" className="af-za map-points" />}
         </>
     );
 };

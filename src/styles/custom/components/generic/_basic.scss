@@ -390,6 +390,54 @@
                     right: 312px;
                 }
             }
+            &.af-za{
+                top: 125px;
+                right: 152px;
+                @include mq(tablet){
+                        top: 265px;
+                        right: 309px;
+                }
+                    @include mq(tablet-max){
+                        top: 365px;
+                        right: 422px;
+                    }
+                 @include mq(desktop){
+                   top: 270px;
+                    right: 312px;
+                }
+            }
+            &.af-mz{
+                         top: 94px;
+                    right: 128px;
+                    @include mq(tablet){
+                        top: 200px;
+                        right: 260px;
+                    }
+                    @include mq(tablet-max){
+                            top: 293px;
+                            right: 369px;
+                    }
+                @include mq(desktop){
+                    top: 203px;
+                    right: 262px;
+                }
+            }
+            &.af-bw{
+                    top: 109px;
+                    right: 153px;
+                    @include mq(tablet){
+                        top: 231px;
+                        right: 313px;
+                    }
+                    @include mq(tablet-max){
+                            top: 315px;
+                            right: 425px;
+                    }
+                @include mq(desktop){
+                    top: 234px;
+                    right: 313px;
+                }
+            }
         }
     }
 }
