@@ -337,7 +337,7 @@
             position: relative;
             height: auto;
             @include mq(desktop){
-                width: 700px;
+                width: 972px;
             }
         }
         .map-points{
@@ -504,4 +504,18 @@ ul {
         }
     }
     
+}
+.lh-70{
+    line-height: 1.16;
+}
+.mb-45 {
+    margin-bottom: 20px;
+
+    @include mq(tablet-max) {
+        margin-bottom: 35px;
+    }
+
+    @include mq(desktop) {
+        margin-bottom: 45px;
+    }
 }

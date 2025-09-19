@@ -24,7 +24,11 @@
             object-fit: cover;
             object-position: center center;
             max-width: 670px;
-            height: 577px;
+            height: auto;
+            @include mq(desktop-wide){
+                height: 577px;
+            }
+            
 
         }
         .pad_left96{
@@ -57,8 +61,20 @@
             }
             }
             .c-homeSection__people-video {
-                max-width: 747px !important;
-                height: 603px !important;
+                max-width: 799px !important;
+                height: auto;
+                @include mq(desktop-wide){
+                    height: 577px !important;
+                }
+                 &.v2{
+                    max-width: 747px !important;
+                    height: auto;
+                    @include mq(desktop-wide){
+                        height: 603px !important;
+                    }
+                }
+               
+                
             }
         }
     }
