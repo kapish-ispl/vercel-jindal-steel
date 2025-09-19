@@ -43,11 +43,11 @@
     }
 
     @include mq('desktop-wide') {
-        @include font-size(36);
+        @include font-size(38);
     }
 
     @include mq('desktop-wide-max') {
-        @include font-size(40);
+        @include font-size(45);
     }
 }
 
@@ -78,7 +78,6 @@
 }
 
 .c-heading-65 {
-    $base-font-65: 60px;
     font-weight: var(--fontBold);
 
     @include font-size(24);
@@ -88,19 +87,19 @@
     }
 
     @include mq('tablet-wide') {
-        @include font-size(36);
+        @include font-size(42);
     }
 
     @include mq('desktop-min') {
-        @include font-size(44);
+        @include font-size(52);
     }
 
     @include mq('desktop-wide') {
-        @include font-size(54);
+        @include font-size(60);
     }
 
     @include mq('desktop-wide-max') {
-        @include font-size(60);
+        @include font-size(65);
     }
 }
 
@@ -128,15 +127,15 @@
     @include font-size(14);
 
     @include mq('tablet') {
-        @include font-size(16);
+        @include font-size(16, 1.6);
     }
 
     @include mq('desktop-min') {
-        @include font-size(18);
+        @include font-size(18, 1.6);
     }
 
     @include mq('desktop-wide') {
-        @include font-size(19);
+        @include font-size(19, 1.6);
     }
 }
 .c-content-24 {

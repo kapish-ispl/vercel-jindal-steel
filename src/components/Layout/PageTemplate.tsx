@@ -19,7 +19,7 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     return <PostList {...props} />;
                 }
-                if (domNode.name === "animatedcountup") {
+                if (domNode.name == "animatedcountup") {
                     const props = attributesToProps(domNode.attribs);
                     const toValue = props.to ? Number(props.to) : 0;
                     return <Counter to={toValue} />;
@@ -46,6 +46,10 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     return <source {...props} />;
                 }
+                if (domNode instanceof Element && domNode.name?.startsWith("span")) {
+                    const props = attributesToProps(domNode.attribs);
+                    return <span {...props}>{domToReact(domNode.children as DOMNode[])}</span>;
+                }
                 if (domNode instanceof Element && domNode.name?.startsWith("iframe")) {
                     const props = attributesToProps(domNode.attribs);
                     return <iframe {...props}></iframe>;
@@ -56,7 +60,7 @@ const PageTemplate = ({ data }: any) => {
         },
         htmlparser2: {
             lowerCaseTags: false,
-            xmlMode: false,
+            xmlMode: true,
         },
     };
 

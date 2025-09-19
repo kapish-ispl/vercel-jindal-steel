@@ -219,6 +219,19 @@
                 }
             }
         }
+        &-media {
+            img {
+                width: 100%;
+                height: auto;
+
+                @include mq(tablet-max) {
+                    max-width: 100px;
+                }
+                @include mq(desktop-wide-max) {
+                    max-width: 150px;
+                }
+            }
+        }
     }
 
     &.v2 {
@@ -227,7 +240,7 @@
             &-info {
                 .count {
                     padding-right: 10px;
-
+                    display: inline-block;
                 }
 
                 .desc {
@@ -248,7 +261,6 @@
     &__sidebar {
         max-width: 313px;
         width: 100%;
-        padding: 20px;
         position: static;
 
         button {
@@ -307,7 +319,7 @@
             margin-top: 30px;
            
             @include mq(desktop){
-                margin-top: 95px;
+                margin-top: 75px;
             }
             li{
                 padding: 12px;

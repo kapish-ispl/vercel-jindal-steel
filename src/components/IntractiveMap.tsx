@@ -135,6 +135,8 @@ const InteractiveMap: FC = () => {
                         </li>
                     ))}
                 </ul>
+                <div className="action-btn mt-4"><a className="u-btn" href="#"><span className="icon-move-right icon"></span></a>
+				</div>
                 {view !== 'world' && (
                     <div>
                         <button onClick={handleBackButtonClick} className="back-button"><span className='content'>

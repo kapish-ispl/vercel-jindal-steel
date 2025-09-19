@@ -7,6 +7,7 @@
     >a{
         color: #446183;
         text-decoration: none;
+        display: inline-block;
         .icon{
             @include font-size(45);
         }

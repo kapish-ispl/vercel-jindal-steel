@@ -55,7 +55,7 @@
       > li {
         > button {
           display: block;
-          padding: 15px 25px;
+          padding: 15px 20px;
           color: var(--color-black);
           font-weight: var(--fontSemiBold);
           text-transform: uppercase;
@@ -126,9 +126,12 @@
       position: relative;
       @include flexbox();
       > li {
+        &.active .mega-panel {
+          display: block;
+        }
         > a {
           display: block;
-          padding: 20px 25px 25px;
+          padding: 20px 15px 25px;
           color: var(--color-white);
           font-weight: var(--fontSemiBold);
           text-transform: uppercase;
@@ -144,7 +147,7 @@
           }
 
           @include mq('desktop-wide') {
-            padding: 20px 25px 25px;
+            padding: 25px 20px 35px;
               @include font-size(18);
           }
 
@@ -157,7 +160,7 @@
           &:before {
             content: '';
             position: absolute;
-            bottom: 18px;
+            bottom: 32px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
@@ -169,7 +172,7 @@
           &:hover {
             color: var(--color-primary);
             &:before {
-              width: 50%;
+              width: calc(100% - 40px);
             }
           }
         }
