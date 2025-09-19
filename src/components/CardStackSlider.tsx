@@ -15,31 +15,31 @@ const cardData: Card[] = [
     {
         id: 1,
         title: "Paid Search & Shopping",
-        content: "Driving measurable growth through meticulous campaign management.",
+        content: "India’s Only Syngas Based Coal Classification Plant for Steel Making",
         videoUrl: "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
     },
     {
         id: 2,
         title: "Creative & Content",
-        content: "Crafting compelling narratives and visuals that resonate with your audience.",
+        content: "India’s Only Syngas Based Coal Classification Plant for Steel Making",
         videoUrl: "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
     },
     {
         id: 3,
         title: "Marketing Analytics",
-        content: "Leveraging data to uncover insights and inform strategic decisions.",
+        content: "India’s Only Syngas Based Coal Classification Plant for Steel Making",
         videoUrl: "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
     },
     {
         id: 4,
         title: "Paid Social & Influencer",
-        content: "Engaging communities and driving conversions through targeted social campaigns.",
+        content: "India’s Only Syngas Based Coal Classification Plant for Steel Making",
         videoUrl: "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
     },
     {
         id: 5,
         title: "Email Marketing",
-        content: "Building lasting relationships through personalized email campaigns.",
+        content: "India’s Only Syngas Based Coal Classification Plant for Steel Making",
         videoUrl: "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
     },
 ];
