@@ -1,4 +1,4 @@
-const API_URL = 'https://api.jindalsteelpower.com';
+const API_URL = process.env.NEXT_PUBLIC_URL;
 
 export const GET_MENU_ENDPOINT = `${API_URL}/v1/menu/get`;
 export const GET_SPECIFIC_PAGE_ENDPOINT = `${API_URL}/v1/page/get`;
