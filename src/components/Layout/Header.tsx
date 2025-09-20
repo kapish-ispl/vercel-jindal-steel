@@ -116,7 +116,7 @@ const Header = () => {
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     aria-label="Toggle mobile menu"
                   >
-                    ☰
+                  <div className="icon-chart-no-axes-gantt"></div>
                   </button>
 
                   {/* Desktop Menu */}

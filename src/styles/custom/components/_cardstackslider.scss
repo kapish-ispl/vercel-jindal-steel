@@ -150,7 +150,7 @@
   margin: 0 auto;
   width: 100%;
   max-width: 459px; // desktop size
-  height: clamp(280px, 60vw, 570px); // scales between mobile and desktop
+  height: clamp(280px, 80vw, 570px); // scales between mobile and desktop
 
   &__perspective-root {
     position: relative;
@@ -259,6 +259,7 @@
     svg {
       width: 18px;
       height: 18px;
+      fill: #555;
     }
   }
 
@@ -295,7 +296,7 @@
 @media (max-width: 768px) {
   .card-stack-visual {
     max-width: 90%;
-    height: clamp(220px, 60vw, 360px);
+    height: clamp(220px, 80vw, 360px);
   }
 
   .card-controls {
