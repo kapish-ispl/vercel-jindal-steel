@@ -79,12 +79,14 @@ const CardItem = React.memo(function CardItem({
             {card.videoUrl ? (
                 <video
                     ref={videoRef}
-                    src={card.videoUrl}
                     muted
                     playsInline
-                    loop={index === activeIndex} // ✅ Only loop the active video
+                    autoPlay={index === activeIndex}
+                    loop={index === activeIndex}
                     className="card-item__background"
-                />
+                    >
+                    <source src={card.videoUrl} type="video/mp4" />
+                </video>
             ) : (
                 <div className="card-item__background" />
             )}
