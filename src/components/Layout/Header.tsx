@@ -46,7 +46,7 @@ const Header = () => {
 
   const descriptionLoop = [
     {
-      name: "About Us",
+      name: "Our Story",
       desc: "Jindal Steel is one of India’s leading steel manufacturers, with a significant presence in steel, power, mining and infrastructure.",
     },
     {
@@ -161,22 +161,22 @@ const Header = () => {
                                 {menuItem.name}
                               </a>
 
-                              {menuItem.children.length > 0 && activeMenu === menuItem.id && (
+                              {menuItem.children.length > 0 && (
                                 <ul
                                   id={`submenu-${menuItem.id}`}
                                   role="menu"
                                   className="mega-panel"
                                   aria-hidden={activeMenu !== menuItem.id}
                                 >
-                                  <div className="row">
-                                    <div className="col-4">
+                                  <li className="row">
+                                    <li className="col-4">
                                       {aa[0] && (
                                         <p className="c-content-16 clr-black mt-2 pe-5 me-3">
                                           {aa[0].desc}
                                         </p>
                                       )}
-                                    </div>
-                                    <div className="col-6">
+                                    </li>
+                                    <li className="col-6">
                                       <ul className="mega-menu">
                                         {menuItem.children.map((subMenu: any) => (
                                           <li key={subMenu.id} role="none">
@@ -191,8 +191,8 @@ const Header = () => {
                                           </li>
                                         ))}
                                       </ul>
-                                    </div>
-                                  </div>
+                                    </li>
+                                  </li>
                                 </ul>
                               )}
                             </li>
