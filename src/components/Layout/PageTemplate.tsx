@@ -8,6 +8,7 @@ const BlurAnimation = dynamic(() => import('../BlurText'), { ssr: false });
 const ScrollRevealAnimation = dynamic(() => import('../ScrollReveal'), { ssr: false });
 const Counter = dynamic(() => import('../AnimatedCountUp'), { ssr: false });
 const CardStackSlider = dynamic(() => import('../CardStackSlider'), { ssr: false });
+const ScrollAnimation = dynamic(() => import('../ScrollAnimation'), { ssr: false });
 const IntractiveMap = dynamic(() => import('../IntractiveMap'), { ssr: false });
 const PostList = dynamic(() => import('@/utils/PostList'), { ssr: false });
 
@@ -41,8 +42,12 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     return <CardStackSlider {...props} />;
                 }
+                if (domNode.name === "scrollanimation") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <ScrollAnimation {...props} />;
+                }
                 // ✅ Universal fix for self-closing tags
-               if (domNode instanceof Element && domNode.name?.startsWith("source")) {
+                if (domNode instanceof Element && domNode.name?.startsWith("source")) {
                     const props = attributesToProps(domNode.attribs);
                     return <source {...props} />;
                 }
