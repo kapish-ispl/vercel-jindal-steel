@@ -64,7 +64,6 @@ export default async function Page({
   }
 
   const pageData = fetchedInfo.data;
-  console.log(pageData, "fetchedInfo")
 
   return (
     <>
