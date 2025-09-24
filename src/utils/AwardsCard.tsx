@@ -31,10 +31,13 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
     return (
         <>
             <div className="col-md-6 col-sm-12">
-                <input type="search" className="form-control" placeholder="Search" />
+                <div className="input-group">
+                    <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="awards search" />
+                    <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
+                </div>
             </div>
             <div className="col-md-5 col-sm-12">
-                <select className="form-select" aria-label="Default select example">
+                <select className="form-select awards-select" aria-label="Default select example">
                     <option selected>Open this select menu</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
