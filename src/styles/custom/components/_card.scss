@@ -60,6 +60,13 @@
                 }
             }
         }
+        &.v2{
+            .c-cardView__box-item{
+                &:hover{
+                    background-color: transparent !important;
+                }
+            }
+        }
         &.mr-58{
             @include mq(tablet-max){
                 margin-right: 32px;
@@ -93,8 +100,10 @@
                 margin: 0px 15px;
             }
         }
+      
+        
     }
-    &.v2{
+    &.v2, &.v3{
         cursor: inherit !important;
         .c-cardView__wrapper{
             border: 3px solid #BCBCBC;
@@ -143,6 +152,65 @@
             }
         }
     }
+    &.v3{
+        .c-cardView__wrapper{
+            border: unset;
+            margin-bottom: 20px;
+            @include mq(tablet-max){
+                margin-bottom: 30px;
+            }
+            &-media{
+                height: unset;
+                >img{
+                    aspect-ratio: 14/9;
+                    object-fit: cover;
+                    object-position: center center;
+                }
+            }
+            &-content{
+                background: #F4F4F4;
+                @include mq(desktop){
+                    padding: 45px 45px 30px 45px;
+                }
+                .title{
+                     font-weight: var(--fontBold);
 
-    
+                    @include font-size(20);
+
+                    @include mq('tablet') {
+                        @include font-size(24);
+                    }
+
+                    @include mq('desktop-min') {
+                        @include font-size(30);
+                    }
+
+                    @include mq('desktop-wide') {
+                        @include font-size(35);
+                    }
+
+                    @include mq('desktop-wide-max') {
+                        @include font-size(40);
+                    }
+                }
+                .desc{
+                    color: #636466;
+                    margin-bottom: 0;
+                    
+                }
+
+            }
+        }
+    }
+
 }
+  .mr-30{
+            @include mq(desktop){
+                margin-right: 30px;
+            }
+        }
+        .ml-30{
+            @include mq(desktop){
+                margin-left: 30px;
+            }
+        }
