@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 
 const componentMap: any = {
     FinancialCard: dynamic(() => import("./FinancialCard")),
+    AwardsCard: dynamic(() => import("./AwardsCard"))
 }
 
 export default function PostList(props: any) {
@@ -23,8 +24,6 @@ export default function PostList(props: any) {
     useEffect(() => {
         let slugInfo = props.slug;
         let limit = props.limit !== undefined ? props.limit : 9;
-        console.log(props);
-        console.log(pathname);
         if (pathname === '/') {
             slugInfo += `&metaInfo[type_1599485711]=${props.type}`;
             limit = 3;
