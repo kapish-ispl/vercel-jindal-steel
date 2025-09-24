@@ -12,6 +12,7 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "aos": "^2.3.4",
+    "formik": "^2.4.6",
     "framer-motion": "^12.23.12",
     "gsap": "^3.13.0",
     "html-react-parser": "^5.2.6",
@@ -24,7 +25,8 @@
     "react-slick": "^0.31.0",
     "sass": "^1.92.1",
     "slick-carousel": "^1.8.1",
-    "split-type": "^0.3.4"
+    "split-type": "^0.3.4",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
