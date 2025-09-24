@@ -2,13 +2,20 @@
 
 import Image from "next/image";
 import { FC } from "react";
-import Link from "next/link";
 import Slider from "react-slick";
 
-const HomeBanner: FC<{ bannerMedia: any, tagline: any, pageTitle: any }> = ({ bannerMedia, tagline, pageTitle }) => {
-    console.log(bannerMedia, tagline, pageTitle)
-    // eslint-disable-next-line no-var
-    var settings = {
+interface BannerMedia {
+    type: string;
+    cdnPath: string;
+}
+
+interface Props {
+    bannerMedia: BannerMedia[];
+    tagline: string;
+    pageTitle: string;
+}
+const HomeBanner: FC<Props> = ({ bannerMedia, tagline, pageTitle }) => {
+    const settings = {
         dots: false,
         arrows: true,
         infinite: true,
@@ -26,7 +33,7 @@ const HomeBanner: FC<{ bannerMedia: any, tagline: any, pageTitle: any }> = ({ ba
                 <div className="c-banner__wrapper">
                     <div className="c-banner__wrapper__item_desktop slider__arrow">
                         <Slider {...settings} >
-                            {bannerMedia.map((data: any, index: any) => {
+                            {bannerMedia.map((data: BannerMedia, index: number) => {
                                 return (
                                     data.type === "video" ? (
                                         <video key={data.cdnPath} loop={true} muted={true} autoPlay={true} playsInline={true} className={`c-banner__item_desktop`}>
@@ -35,7 +42,7 @@ const HomeBanner: FC<{ bannerMedia: any, tagline: any, pageTitle: any }> = ({ ba
                                     ) : (
                                         <>
                                             <Image
-                                                key={data.cdnPath}
+                                                key={index}
                                                 src={data.cdnPath}
                                                 alt="industry"
                                                 width={1920}

@@ -1,4 +1,3 @@
-import { img } from 'framer-motion/client';
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react'

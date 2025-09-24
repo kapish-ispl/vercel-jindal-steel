@@ -87,6 +87,49 @@
     }
 }
 
+.pagination-container {
+    .pagination {
+        align-items: center;
+
+        .previous {
+            margin-inline-end: 10px;
+
+            svg {
+
+                &:hover {
+                    path {
+                        transition: all ease .3s;
+                        fill: var(--color-primary);
+                    }
+                }
+            }
+        }
+
+        .next {
+            margin-inline-start: 10px;
+
+            svg {
+
+                &:hover {
+                    path {
+                        transition: all ease .3s;
+                        fill: var(--color-primary);
+                    }
+                }
+            }
+        }
+
+        .pages {
+            font-size: 1.2rem;
+            margin-inline: 5px;
+
+            &.active {
+                color: var(--color-primary);
+            }
+        }
+    }
+}
+
 ////////////////
 /* General Styling for scroll container*/
 .scroll-animation-container {
