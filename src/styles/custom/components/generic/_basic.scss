@@ -16,6 +16,18 @@
 .bg-gray {
     background: #F7F6F6;
 }
+.c-innerSection{
+    padding: 30px 0px !important;
+    @include mq(tablet-max){
+        padding: 50px 0px !important;
+    }
+    @include mq(desktop-wide){
+        padding: 70px 0px !important;
+    }
+    @include mq(desktop-wide-max){
+        padding: 70px 90px !important;
+    }
+}
 
 .gp-xl {
     padding: 30px 0px 50px 0px;
@@ -187,7 +199,7 @@
     }
 
     @include mq(desktop) {
-        padding: 900px 0px;
+        padding: 90px 0px;
     }
 
     @include mq(desktop-wide) {
@@ -233,6 +245,18 @@
             }
         }
     }
+    &.v2{
+        .listView__item{
+            gap: 20px;
+            &-info{
+                .desc{
+                    &.mb-10{
+                        margin-bottom: -10px;
+                    }
+                }
+            }
+        }
+    }
 
     &.v2 {
         .listView__item {
@@ -261,6 +285,7 @@
     &__sidebar {
         max-width: 313px;
         width: 100%;
+        padding: 20px;
         position: static;
 
         button {
@@ -319,7 +344,7 @@
             margin-top: 30px;
            
             @include mq(desktop){
-                margin-top: 75px;
+                margin-top: 30px;
             }
             li{
                 padding: 12px;
@@ -341,113 +366,120 @@
     &__container{
         position: relative;
         top: 30px;
+       height: 400px;
         @include mq(desktop){
-            top: -70px;
+            height: 600px;
+        }
+        >div{
+            height: 100%;
         }
         svg{
             width: 100%;
             position: relative;
-            height: auto;
+           height: 100%;
             @include mq(desktop){
                 width: 972px;
+                
             }
         }
         .map-points{
             position: absolute;
             &.in-jh{
-                    top: 107px;
-                    right: 150px;
+                   top: 176px;
+                    right: 148px;
+
                     @include mq(tablet){
-                        top: 230px;
-                        right: 302px;
+                        top: 174px;
+                        right: 311px;
+
                     }
                     @include mq(tablet-max){
-                        top: 316px;
-                        right: 409px;
+                        top: 175px;
+                        right: 430px;
                     }
                 @include mq(desktop){
-                    top: 235px;
-                    right: 301px;
+                    top: 266px;
+                    right: 432px;
                 }
             }
             &.in-ct{
-                    top: 116px;
+                    top: 187px;
                     right: 165px;
                     @include mq(tablet){
-                        top: 247px;
+                        top: 185px;
                         right: 330px;
                     }
                        @include mq(tablet-max){
-                        top: 336px;
-                        right: 446px;
+                        top: 189px;
+                        right: 455px;
                     }
                  @include mq(desktop){
-                   top: 248px;
-                    right: 330px;
+                    top: 50%;
+                    right: 479px;
                 }
             }
             &.in-od{
-                top: 125px;
+                top: 200px;
                 right: 152px;
                 @include mq(tablet){
-                        top: 265px;
-                        right: 309px;
+                    top: 205px;
+                    right: 317px;
                 }
                     @include mq(tablet-max){
-                        top: 365px;
-                        right: 422px;
+                        top: 200px;
+                        right: 434px;
+
                     }
                  @include mq(desktop){
-                   top: 270px;
-                    right: 312px;
+                    top: 309px;
+                    right: 440px;
                 }
             }
             &.af-za{
-                top: 125px;
-                right: 152px;
-                @include mq(tablet){
-                        top: 265px;
-                        right: 309px;
-                }
+                    bottom: 68px;
+                    right: 38%;
+                    @include mq(tablet){
+                        bottom: 67px;
+                        right: 44%;
+                    }
                     @include mq(tablet-max){
-                        top: 365px;
-                        right: 422px;
+                        bottom: 70px;
+                        right: 45%;
                     }
                  @include mq(desktop){
-                   top: 270px;
-                    right: 312px;
+                   bottom: 104px;
+                   right: 44%;
                 }
             }
             &.af-mz{
-                         top: 94px;
-                    right: 128px;
+                    bottom: 20px;
+                    right: 38%;
                     @include mq(tablet){
-                        top: 200px;
-                        right: 260px;
+                        bottom: 29px;
+                        right: 43%;
                     }
                     @include mq(tablet-max){
-                            top: 293px;
-                            right: 369px;
+                        bottom: 27px;
+                        right: 45%;
                     }
+                  
                 @include mq(desktop){
-                    top: 203px;
-                    right: 262px;
+                    right: 44%;
+                    bottom: 33px;
                 }
             }
             &.af-bw{
-                    top: 109px;
-                    right: 153px;
+                    bottom: 109px;
+                    right: 18%;
                     @include mq(tablet){
-                        top: 231px;
-                        right: 313px;
+                        right: 33%;
                     }
-                    @include mq(tablet-max){
-                            top: 315px;
-                            right: 425px;
-                    }
+                  @include mq(tablet-max){
+                        right: 38%;
+                  }
                 @include mq(desktop){
-                    top: 234px;
-                    right: 313px;
+                    right: 33%;
+                    bottom: 163px;
                 }
             }
         }
@@ -515,6 +547,16 @@ ul {
         
         }
     }
+    &.v4{
+        @include mq(desktop){
+            max-width: 545px;
+        }
+    }
+    &.v5{
+        @include mq(desktop){
+            max-width: 448px;
+        }
+    }
     
 }
 .lh-70{
@@ -529,5 +571,11 @@ ul {
 
     @include mq(desktop) {
         margin-bottom: 45px;
+    }
+}
+
+.justify-end{
+    @include mq(desktop){
+        @include justify-content(flex-end);
     }
 }

@@ -7,6 +7,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 
+
 interface PageData {
   title?: string;
   description?: string;
@@ -77,3 +78,4 @@ export default async function Home() {
 
   return <HomePage data={pageData} />;
 }
+
