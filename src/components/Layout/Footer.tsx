@@ -7,7 +7,6 @@ import { AppContext } from '@/context/AppContext';
 const Footer = () => {
     const contextInfo = useContext(AppContext);
     const FOOTER_MAIN_MENU = contextInfo.footerMenu;
-    console.log(FOOTER_MAIN_MENU)
     return (
         <>
             <footer>
@@ -39,7 +38,7 @@ const Footer = () => {
                             </div>
                             <div className="col-lg-3 col-md-4 col-sm-12">
                                 <div className="c-footer__info pad_left40">
-                                        {FOOTER_MAIN_MENU?.length > 0 && <FooterList data={FOOTER_MAIN_MENU.slice(2, 3)} />}
+                                    {FOOTER_MAIN_MENU?.length > 0 && <FooterList data={FOOTER_MAIN_MENU.slice(2, 3)} />}
                                     <div className="c-footer__info-content">
                                         <div className="head">Contact us</div>
                                         <p className="c-content-19">+91 11 26188340-50, <br />1800 208 2008</p>
@@ -50,7 +49,7 @@ const Footer = () => {
                             </div>
                             <div className="col-lg-3 col-md-4 col-sm-12">
                                 <div className="c-footer__info pad_left40">
-                                     {FOOTER_MAIN_MENU?.length > 0 && <FooterList data={FOOTER_MAIN_MENU.slice(3, 4)} />}
+                                    {FOOTER_MAIN_MENU?.length > 0 && <FooterList data={FOOTER_MAIN_MENU.slice(3, 4)} />}
                                     <div className="c-footer__info-content">
                                         <div className="head">Connect with us</div>
                                         <div className="socialMenu">

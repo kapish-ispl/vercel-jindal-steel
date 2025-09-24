@@ -32,12 +32,11 @@ export default function PostList(props: any) {
         }
 
         const getPostData = async () => {
-            console.log("Fetching data for slug:", slugInfo, "with limit:", limit);
             if (props.slug !== "") {
                 if (props.slug === "product" && contextInfo.productData?.length > 0) {
                     setPostData(contextInfo.productData);
                 } else {
-                    const offset = page !== null ? (Number(page) - 1) * 9 : 0;
+                    const offset = page !== null ? (Number(page) - 1) * limit : 0;
                     const taxonomyInfo = await serverRequest(
                         {},
                         `${GET_POST_ENDPOINT}?slug=${slugInfo}&limit=${limit}&offset=${offset}`,
