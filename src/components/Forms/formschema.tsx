@@ -66,6 +66,16 @@ export interface IJobApplicationSchema {
   experience_details?: IExperienceDetail[];
 }
 
+export interface IQueryFormSchema {
+  fullName: string;
+  email: string;
+  mobile: string;
+  country: string;
+  city: string;
+  message: string;
+  privacyPolicy: boolean;
+}
+
 
 // --- Type-Safe Schemas ---
 
@@ -195,3 +205,33 @@ export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup
         .min(1, "At least one experience detail is required"),
   }),
 });
+
+export const QueryFormSchema: Yup.ObjectSchema<IQueryFormSchema> = Yup.object({
+  fullName: Yup.string()
+    .trim()
+    .min(2, 'Name is too short')
+    .required('Full Name is required'),
+  company: Yup.string().trim(),
+  email: Yup.string()
+    .trim()
+    .email('Please enter a valid email address')
+    .required('Email is required'),
+  mobile: Yup.string()
+    .trim()
+    .matches(phoneRegExp, 'Please enter a valid 10-digit mobile number')
+    .required('Mobile number is required'),
+  country: Yup.string()
+    .trim()
+    .required('Country is required'),
+  city: Yup.string()
+    .trim()
+    .required('City is required'),
+  message: Yup.string()
+    .trim()
+    .required('Message is required'),
+  inquiryType: Yup.string()
+    .oneOf(['sales', 'billing', 'support', ''], 'Please select a valid inquiry type'),
+  privacyPolicy: Yup.boolean()
+    .oneOf([true], 'You must accept the privacy policy to continue')
+    .required(),
+})
