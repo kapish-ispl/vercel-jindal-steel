@@ -306,7 +306,7 @@ const WorldMap: FC<{
                         }}
                         onMouseEnter={() => onHover?.(code)}
                         onMouseLeave={() => onHover?.(null)}
-                        whileHover={{ scale: isHighlighted ? 1.05 : 1 }}
+                        whileHover={{ scale: isHighlighted ? 1.05 : 1, cursor: isHighlighted ? 'pointer' : 'default' }}
                         whileTap={{ scale: isHighlighted ? 0.95 : 1 }}
                     />
                 );
