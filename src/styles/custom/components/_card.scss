@@ -108,15 +108,17 @@
         .c-cardView__wrapper{
             border: 3px solid #BCBCBC;
             overflow: hidden;
+            height: 100%;
+            @include transition(all 0.3s ease-in-out);
             &-media{
                 overflow: hidden;
                 display: block;
-                height: 288px;
                 .u-img{
                     width: 100%;
                     overflow: hidden;
                     height: 100%;
                     @include transition(all 0.3s ease-in-out);
+                    aspect-ratio: 5/4;
                 }
 
             }
@@ -144,11 +146,12 @@
                 
             }
             &:hover{
-                .c-cardView__wrapper-media{
-                    .u-img{
-                        @include transform(scale(1.2));
-                    }
-                }
+                // .c-cardView__wrapper-media{
+                //     .u-img{
+                //         @include transform(scale(1.2));
+                //     }
+                // }
+               box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
             }
         }
     }

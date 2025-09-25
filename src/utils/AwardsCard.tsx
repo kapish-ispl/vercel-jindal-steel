@@ -30,21 +30,25 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
 
     return (
         <>
-            <div className="col-md-6 col-sm-12">
-                <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="awards search" />
-                    <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
+            <div className="c-filterView mb-4">
+                <div className="row">
+                    <div className="col-md-6 col-sm-12">
+                        <div className="input-group">
+                            <input type="text" className="form-control" placeholder="Search our Awards" aria-label="Search" aria-describedby="awards search" />
+                            <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
+                        </div>
+                    </div>
+                    <div className="col-md-5 col-sm-12">
+                        <select className="form-select awards-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div className="col-1"><button type='button' className='btn btn-primary'>Reset</button></div>
                 </div>
             </div>
-            <div className="col-md-5 col-sm-12">
-                <select className="form-select awards-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-            </div>
-            <div className="col-1"><button type='button' className='btn btn-primary'>Reset</button></div>
             {postData && postData.length > 0 && postData.map((post, index) => (
                 <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
                     <div className="c-cardView__wrapper">
@@ -57,9 +61,9 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
                         </a>
                         <span className="c-cardView__wrapper-content">
                             <span className="title">{post.title}</span>
-                            <span className="desc">
+                            {/* <span className="desc">
                                 Recognised by ABP News at the HR &amp; Leadership Awards 2015.
-                            </span>
+                            </span> */}
                         </span>
                     </div>
                 </div>
