@@ -11,6 +11,7 @@ const CardStackSlider = dynamic(() => import('../CardStackSlider'), { ssr: false
 const ScrollAnimation = dynamic(() => import('../ScrollAnimation'), { ssr: false });
 const IntractiveMap = dynamic(() => import('../IntractiveMap'), { ssr: false });
 const PostList = dynamic(() => import('@/utils/PostList'), { ssr: false });
+const CustomForm = dynamic(() => import('@/utils/CustomForm'), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -45,6 +46,10 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "scrollanimation") {
                     const props = attributesToProps(domNode.attribs);
                     return <ScrollAnimation {...props} />;
+                }
+                if (domNode.name === "customform") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <CustomForm {...props} pageTitle={String(props.title)} component={String(props.component)} />;
                 }
                 // ✅ Universal fix for self-closing tags
                 if (domNode instanceof Element && domNode.name?.startsWith("source")) {

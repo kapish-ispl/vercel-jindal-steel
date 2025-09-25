@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
@@ -12,27 +12,26 @@ import { useRouter } from 'next/router';
 import { CONSTANTS } from '@/config/constant';
 
 interface FormValues {
-    fullName: string;
+    Product: string;
+    full_Name: string;
     company: string;
     email: string;
     mobile: string;
     country: string;
     city: string;
     message: string;
-    inquiryType: 'sales' | 'billing' | 'support' | '';
-    privacyPolicy: boolean;
+    inquiry_Type: 'sales' | 'billing' | 'support' | '';
+    privacy_Policy: boolean;
     captcha: string;
 }
 
-const QueryForm = () => {
+const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
     const mobileRef = useRef<HTMLInputElement | null>(null);
     const [actualCaptcha, setActualCaptcha] = useState<string>('');
     const [reloadCaptcha, setReloadCaptcha] = useState<boolean>(false);
     const [captchaKey, setCaptchaKey] = useState<number>(0);
     const [submitMessage, setSubmitMessage] = useState<string | null>(null);
     // const router = useRouter();
-
-
 
     useEffect(() => {
         if (reloadCaptcha) {
@@ -41,15 +40,16 @@ const QueryForm = () => {
     }, [reloadCaptcha])
 
     const initialValues: FormValues = {
-        fullName: '',
+        full_Name: '',
         company: '',
         email: '',
         mobile: '',
         country: '',
         city: '',
         message: '',
-        inquiryType: '',
-        privacyPolicy: false,
+        inquiry_Type: '',
+        privacy_Policy: false,
+        Product: pageTitle,
         captcha: '',
     };
     const ExtendedSchema = QueryFormSchema.shape({
@@ -107,11 +107,11 @@ const QueryForm = () => {
                 {({ errors, touched, isSubmitting, values }) => (
                     <Form noValidate>
                         <Field
-                            name="fullName"
+                            name="full_Name"
                             label="Full Name*"
                             as={FormField}
-                            error={errors.fullName}
-                            touched={touched.fullName}
+                            error={errors.full_Name}
+                            touched={touched.full_Name}
                             onKeyDown={restrictSpecialChar}
                         />
                         <Field
@@ -176,15 +176,15 @@ const QueryForm = () => {
                             {inquiryOptions.map((type) => (
                                 <Field
                                     key={type}
-                                    name="inquiryType"
+                                    name="inquiry_Type"
                                     type="radio"
                                     value={type}
                                     label={type.charAt(0).toUpperCase() + type.slice(1)}
                                     as={FormField}
-                                    checked={values.inquiryType === type}
+                                    checked={values.inquiry_Type === type}
                                 />
                             ))}
-                            <ErrorMessage name="inquiryType" component="p" className="form_grider_wrap_helper" />
+                            <ErrorMessage name="inquiry_Type" component="p" className="form_grider_wrap_helper" />
                         </div>
 
                         <div className="form_captcha_wrap">
@@ -209,14 +209,14 @@ const QueryForm = () => {
                         <div className="form_checkbox_wrap">
                             <Field
                                 type="checkbox"
-                                name="privacyPolicy"
+                                name="privacy_Policy"
                                 id="privacyPolicy"
                                 className="form_checkbox_field"
                             />
                             <label htmlFor="privacyPolicy" className="form_checkbox_label">
                                 I have read and understood the Privacy Policy.
                             </label>
-                            <ErrorMessage name="privacyPolicy" component="p" className="form_grider_wrap_helper" />
+                            <ErrorMessage name="privacy_Policy" component="p" className="form_grider_wrap_helper" />
                         </div>
 
                         <button type="submit" className="form_submit_button" disabled={isSubmitting}>
@@ -229,4 +229,4 @@ const QueryForm = () => {
     );
 };
 
-export default QueryForm;
+export default ProductForm;

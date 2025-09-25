@@ -67,13 +67,13 @@ export interface IJobApplicationSchema {
 }
 
 export interface IQueryFormSchema {
-  fullName: string;
+  full_Name: string;
   email: string;
   mobile: string;
   country: string;
   city: string;
   message: string;
-  privacyPolicy: boolean;
+  privacy_Policy: boolean;
 }
 
 
@@ -207,7 +207,7 @@ export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup
 });
 
 export const QueryFormSchema: Yup.ObjectSchema<IQueryFormSchema> = Yup.object({
-  fullName: Yup.string()
+  full_Name: Yup.string()
     .trim()
     .min(2, 'Name is too short')
     .required('Full Name is required'),
@@ -229,9 +229,10 @@ export const QueryFormSchema: Yup.ObjectSchema<IQueryFormSchema> = Yup.object({
   message: Yup.string()
     .trim()
     .required('Message is required'),
-  inquiryType: Yup.string()
-    .oneOf(['sales', 'billing', 'support', ''], 'Please select a valid inquiry type'),
-  privacyPolicy: Yup.boolean()
+  // inquiry_Type: Yup.string()
+  //   .oneOf(['sales', 'billing', 'support', ''], 'Please select a valid inquiry type'),
+  inquiry_Type: Yup.string(),
+  privacy_Policy: Yup.boolean()
     .oneOf([true], 'You must accept the privacy policy to continue')
     .required(),
 })
