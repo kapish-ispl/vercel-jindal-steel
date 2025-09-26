@@ -120,8 +120,23 @@
         line-height: 1.6;
     }
 }
+// pagination css  //
 
 .pagination-container {
+    margin: 30px 0px;
+    &.mt-80{
+        @include mq(tablet-max){
+            margin: 50px 0px 0px 0px;
+        }
+        @include mq(desktop){
+            margin: 60px 0px 0px 0px;
+        }
+        @include mq(desktop-wide){
+            margin: 80px 0px 0px 0px;
+        }
+    }
+
+    
     .pagination {
         align-items: center;
 

@@ -34,14 +34,14 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
     return (
         <>
             <div className="c-filterView mb-4">
-                <div className="row">
-                    <div className="col-md-6 col-sm-12">
+                <div className="row align-items-center">
+                    <div className="col-md-7 col-sm-12">
                         <div className="input-group">
                             <input type="text" className="form-control" placeholder="Search our Awards" aria-label="Search" aria-describedby="awards search" />
                             <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
                         </div>
                     </div>
-                    <div className="col-md-5 col-sm-12">
+                    <div className="col-md-4 col-sm-12">
                         <select className="form-select awards-select" aria-label="Default select example">
                             <option selected>Open this select menu</option>
                             <option value="1">One</option>
@@ -49,30 +49,32 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
                             <option value="3">Three</option>
                         </select>
                     </div>
-                    <div className="col-1"><button type='button' className='btn btn-primary'>Reset</button></div>
+                    <div className="col-1"><button type='button' className='u-btn'>Reset</button></div>
                 </div>
             </div>
             {postData && postData.length > 0 && postData.map((post, index) => (
                 <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
                     <div className="c-cardView__wrapper">
-                        <a className="c-cardView__wrapper-media cursor-pointer" href="#">
-                            <img
-                                alt={post.title}
-                                className="img-fluid u-img"
-                                src={post.media?.[0]?.cdnPath || 'https://placehold.co/600x400/eee/ccc?text=Award'}
-                            />
-                        </a>
-                        <span className="c-cardView__wrapper-content">
-                            <span className="title">{post.title}</span>
-                            {/* <span className="desc">
+                        <a className="cursor-pointer" href="#">
+                            <span className="c-cardView__wrapper-media">
+                                <img
+                                    alt={post.title}
+                                    className="img-fluid u-img"
+                                    src={post.media?.[0]?.cdnPath || 'https://placehold.co/600x400/eee/ccc?text=Award'}
+                                />
+                            </span>
+                            <span className="c-cardView__wrapper-content">
+                                <span className="title">{post.title}</span>
+                                {/* <span className="desc">
                                 Recognised by ABP News at the HR &amp; Leadership Awards 2015.
                             </span> */}
-                        </span>
+                            </span>
+                        </a>
                     </div>
                 </div>
             ))}
             {pageCount > 1 && (
-                <div className="pagination-container my-4 d-flex justify-content-center">
+                <div className="pagination-container mt-80 d-flex justify-content-center">
                     <ReactPaginate
                         previousLabel={
                             <svg width="44" height="27" viewBox="0 0 44 27" fill="none" xmlns="http://www.w3.org/2000/svg">

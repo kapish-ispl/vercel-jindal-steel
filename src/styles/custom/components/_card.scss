@@ -26,8 +26,8 @@
                         transform: translateX(20px);
                         opacity: 1;
                         visibility: visible;
-                         svg {
-                stroke: var(--color-primary) !important;
+                         .icon {
+                color: var(--color-primary) !important;
             }
                     }
                 }
@@ -65,6 +65,13 @@
                 &:hover{
                     background-color: transparent !important;
                 }
+                .card__media{
+                    margin-bottom: 30px !important;
+                }
+                .action-btn{
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                }
             }
         }
         &.mr-58{
@@ -95,6 +102,21 @@
                 margin-left: 58px;
             }
         }
+        &.mr-45{
+            @include mq(tablet-max){
+                margin-right: 25px;
+            }
+            @include mq(desktop){
+                margin-right: 30px;
+            }
+            @include mq(desktop-wide){
+                margin-right: 38px;
+            }
+            @include mq(desktop-wide-max){
+                margin-right: 45px !important;
+            }
+            
+        }
         &.mx-15{
             @include mq(tablet-max){
                 margin: 0px 15px;
@@ -110,9 +132,13 @@
             overflow: hidden;
             height: 100%;
             @include transition(all 0.3s ease-in-out);
+            a{
+                text-decoration: none;
+            }
             &-media{
                 overflow: hidden;
                 display: block;
+                
                 .u-img{
                     width: 100%;
                     overflow: hidden;
@@ -155,6 +181,7 @@
             }
         }
     }
+   
     &.v3{
         .c-cardView__wrapper{
             border: unset;
