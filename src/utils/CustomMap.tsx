@@ -6,6 +6,7 @@ import IndiaMap from '@/components/maps/IndiaMap';
 import AfricaMap from '@/components/maps/AfricaMap';
 import OmanMap from '@/components/maps/OmanMap';
 import CzechiaMap from '@/components/maps/CzechiaMap';
+import AustraliaMap from "@/components/maps/AustraliaMap";
 
 const CustomMap = (props: any) => {
     const [openTab, setOpenTab] = useState(0);
@@ -18,6 +19,7 @@ const CustomMap = (props: any) => {
         { code: 'AFRICA', name: 'africa' },
         { code: 'OMAN', name: 'oman' },
         { code: 'CZECHIA', name: 'czechia' },
+        { code: 'AU', name: 'australia' },
     ] as const;
 
 
@@ -30,6 +32,7 @@ const CustomMap = (props: any) => {
         },
         OMAN: { states: ['OMAN'] },
         CZECHIA: { states: ['CZECHIA'] },
+        AU: { states: ['AU'] },
     };
     const finalTabData = tabData.filter((items: any) => items.props !== undefined && items.props.label != 'world').map((tabItem: any) => tabItem.props);
 
@@ -42,6 +45,8 @@ const CustomMap = (props: any) => {
             selectedArea = "oman";
         } else if (["BW", "MZ", "ZA"].includes(areaCode)) {
             selectedArea = "africa";
+        } else if (areaCode === "AU") {
+            selectedArea = "australia";
         } else {
             selectedArea = "czechia";
         }
@@ -91,6 +96,8 @@ const CustomMap = (props: any) => {
                 return <OmanMap key="oman-map" />;
             case 'czechia':
                 return <CzechiaMap key="czechia-map" />;
+            case 'australia':
+                return <AustraliaMap key="australia-map" />;
             default:
                 return null;
         }
