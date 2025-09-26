@@ -9,7 +9,6 @@ const ScrollRevealAnimation = dynamic(() => import('../ScrollReveal'), { ssr: fa
 const Counter = dynamic(() => import('../AnimatedCountUp'), { ssr: false });
 const CardStackSlider = dynamic(() => import('../CardStackSlider'), { ssr: false });
 const ScrollAnimation = dynamic(() => import('../ScrollAnimation'), { ssr: false });
-const IntractiveMap = dynamic(() => import('../IntractiveMap'), { ssr: false });
 const PostList = dynamic(() => import('@/utils/PostList'), { ssr: false });
 const CustomForm = dynamic(() => import('@/utils/CustomForm'), { ssr: false });
 const CustomMap = dynamic(() => import('@/utils/CustomMap'), { ssr: false });
@@ -36,10 +35,6 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     return <BlurAnimation text={String(props.text)} />;
                 }
-                if (domNode.name === "interactivemap") {
-                    const props = attributesToProps(domNode.attribs);
-                    return <IntractiveMap {...props} />;
-                }
                 if (domNode.name === "cardstackslider") {
                     const props = attributesToProps(domNode.attribs);
                     return <CardStackSlider {...props} />;
@@ -65,8 +60,6 @@ const PageTemplate = ({ data }: any) => {
                                             const toValue = childProps.to ? Number(childProps.to) : 0;
                                             return <Counter to={toValue} />;
                                         }
-
-                                        //  You can add more custom child tags here if needed
                                     }
                                 },
                             })}
