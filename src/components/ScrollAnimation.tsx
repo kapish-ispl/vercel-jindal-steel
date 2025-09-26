@@ -17,8 +17,8 @@ interface Panel {
 const panelsData: Panel[] = [
     {
         id: 1,
-        img: "https://images.unsplash.com/photo-1757778281735-f26d15bff432?q=80&w=1170&auto=format&fit=crop",
-        heading: "Explore Worlds",
+        img: "https://d2lptvt2jijg6f.cloudfront.net/124/1758871476_Rectangle91.png",
+        heading: "Coal",
     },
     {
         id: 2,
@@ -30,11 +30,7 @@ const panelsData: Panel[] = [
         img: "https://images.unsplash.com/photo-1756726270255-9689c64a49d1?q=80&w=1410&auto=format&fit=crop",
         heading: "Find Yourself",
     },
-    {
-        id: 4,
-        img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1800&q=80",
-        heading: "Create Anew",
-    },
+
 ];
 
 const ScrollAnimation: React.FC = () => {
@@ -114,47 +110,35 @@ const ScrollAnimation: React.FC = () => {
                         <div className="parallax-container">
                             <img src={panel.img} alt={panel.heading} className="parallax-img" />
                         </div>
-                        <div className="scrollable_box_content">
-                            <div className="container cus-conatiner">
-                                <div className="row">
-                                    <div className="col-12">
 
+                        <div className="container cus-container h-100">
+                            <div className="row h-100">
+                                <div className="col-12 h-100">
+                                    <div className="scrollable_box_content h-100">
                                         <div className="scrollable_box_content_head">
-                                            <h2 className={`pannel-heading heading-${panel.id}`}>{panel.heading}</h2>
+                                            <h2 className={`pannel-heading c-heading-65 clr-green heading-${panel.id}`}>{panel.heading}</h2>
                                         </div>
 
                                         <div className="scrollable_box_content_bottom row list_view v3">
-                                            <div className="col-12 md:col-3 list_view_container" >
+                                            <div className="col-12 col-lg-3 list_view_container" >
                                                 <div className="list_view_info">
                                                     <div className="list_view_content">
-                                                        <div className="list_view_content_title"><span>3.6</span> <span> MTPA</span></div>
-                                                        <span className="list_view_content_desc">Steel Production Capacity</span></div>
+                                                        <span className="list_view_content_desc">Domestic Operations</span></div>
+                                                    <div className="list_view_content_title c-heading-40 clr-primary"><span>15.7</span> <span> MTPA</span></div>
+
                                                 </div>
                                             </div>
 
-                                            <div className="col-12 md:col-3 list_view_container" >
+                                            <div className="col-12 col-lg-3 list_view_container" >
                                                 <div className="list_view_info">
                                                     <div className="list_view_content">
-                                                        <div className="list_view_content_title"><span>1.32</span> <span> MTPA</span></div>
-                                                        <span className="list_view_content_desc">Direct Reduced Iron Plant (DRI)</span></div>
+                                                        <span className="list_view_content_desc">International Operations </span></div>
+                                                    <div className="list_view_content_title c-heading-40 clr-primary"><span>7.4</span> <span> MTPA</span></div>
+
                                                 </div>
                                             </div>
 
-                                            <div className="col-12 md:col-3 list_view_container">
-                                                <div className="list_view_info">
-                                                    <div className="list_view_content">
-                                                        <div className="list_view_content_title"><span>1</span> <span> MTPA</span></div>
-                                                        <span className="list_view_content_desc">Plate Mill</span></div>
-                                                </div>
-                                            </div>
 
-                                            <div className="col-12 md:col-3 list_view_container">
-                                                <div className="list_view_info">
-                                                    <div className="list_view_content">
-                                                        <div className="list_view_content_title"><span>1</span> <span> MTPA</span></div>
-                                                        <span className="list_view_content_desc">Rail Mill</span></div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
