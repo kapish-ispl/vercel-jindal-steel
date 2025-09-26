@@ -24,6 +24,24 @@
 /* End component files */
 
 
+.svg-map:has(#ZA:hover) #ZA,
+.svg-map:has(#ZA:hover) #BW,
+.svg-map:has(#ZA:hover) #MZ {
+    fill: var(--color-accent-blue);
+}
+
+.svg-map:has(#MZ:hover) #ZA,
+.svg-map:has(#MZ:hover) #BW,
+.svg-map:has(#MZ:hover) #MZ {
+    fill: var(--color-accent-blue);
+}
+
+.svg-map:has(#BW:hover) #ZA,
+.svg-map:has(#BW:hover) #BW,
+.svg-map:has(#BW:hover) #MZ {
+    fill: var(--color-accent-blue);
+}
+
 .svg-map {
 
     path,
@@ -46,9 +64,13 @@
     }
 
     .highlighted {
-        fill: #F47920;
+        fill: var(--color-primary);
         stroke: #fff;
         transition: fill 0.3s ease;
+
+        &:hover {
+            fill: var(--color-accent-blue);
+        }
     }
 
     .highlighted-state {
@@ -61,6 +83,16 @@
             fill: #f68b3e;
             transition: fill 0.2s ease-in-out;
         }
+    }
+}
+
+.tabbing_wrap_content_item {
+    &.active {
+        display: block;
+    }
+
+    &.hidden {
+        display: none;
     }
 }
 

@@ -12,6 +12,7 @@ const ScrollAnimation = dynamic(() => import('../ScrollAnimation'), { ssr: false
 const IntractiveMap = dynamic(() => import('../IntractiveMap'), { ssr: false });
 const PostList = dynamic(() => import('@/utils/PostList'), { ssr: false });
 const CustomForm = dynamic(() => import('@/utils/CustomForm'), { ssr: false });
+const CustomMap = dynamic(() => import('@/utils/CustomMap'), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -50,6 +51,27 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "customform") {
                     const props = attributesToProps(domNode.attribs);
                     return <CustomForm {...props} pageTitle={String(props.title)} component={String(props.component)} />;
+                }
+                if (domNode.name === "custommap") {
+                    const props = attributesToProps(domNode.attribs);
+                    return (
+                        <CustomMap
+                            {...props}
+                            data={domToReact(domNode.children as DOMNode[], {
+                                replace: (childNode) => {
+                                    if (childNode instanceof Element) {
+                                        if (childNode.name === "animatedcountup") {
+                                            const childProps = attributesToProps(childNode.attribs);
+                                            const toValue = childProps.to ? Number(childProps.to) : 0;
+                                            return <Counter to={toValue} />;
+                                        }
+
+                                        //  You can add more custom child tags here if needed
+                                    }
+                                },
+                            })}
+                        />
+                    );
                 }
                 // ✅ Universal fix for self-closing tags
                 if (domNode instanceof Element && domNode.name?.startsWith("source")) {
