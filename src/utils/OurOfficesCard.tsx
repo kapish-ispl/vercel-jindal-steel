@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate'
-interface MediaItem {
-    cdnPath: string;
-}
+
 interface Post {
     title: string;
     content: string;
-    media?: MediaItem[];
+    metaInfo?: {
+        telephone: string;
+        email: string;
+        fax: string;
+    };
 }
 
 interface OurOfficesCardProps {
@@ -29,7 +31,6 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
         window.location.href = newUrl;
     };
 
-    console.log(postData, "postData")
     return (
         <>
             <div className="c-filterView mb-4">
@@ -56,10 +57,25 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
                     <div className="c-cardView__wrapper">
                         <span className="c-cardView__wrapper-content">
                             <span className="title c-heading-40 clr-blue">{post?.title}</span>
-                            <span className="desc c-content-19"></span>{post?.content}<span className="info__wrapper">
-                                <span className="info__wrapper-icon"> <i className="icon-phone-call"></i> </span>
-                                <span className="info__wrapper-detail c-content-19">+91 9923001951</span>
-                            </span>
+                            <span className="desc c-content-19">{post?.content}</span>
+                            {post?.metaInfo?.telephone && (
+                                <span className="info__wrapper">
+                                    <span className="info__wrapper-icon"> <i className="icon-phone-call"></i> </span>
+                                    <span className="info__wrapper-detail c-content-19">{post?.metaInfo?.telephone}</span>
+                                </span>
+                            )}
+                            {post?.metaInfo?.fax && (
+                                <span className="info__wrapper">
+                                    <span className="info__wrapper-icon"> <i className="icon-printer"></i></span>
+                                    <span className="info__wrapper-detail c-content-19">{post?.metaInfo?.fax}</span>
+                                </span>
+                            )}
+                            {post?.metaInfo?.email && (
+                                <span className="info__wrapper">
+                                    <span className="info__wrapper-icon"> <i className="icon-mail"></i> </span>
+                                    <span className="info__wrapper-detail c-content-19">{post?.metaInfo?.email}</span>
+                                </span>
+                            )}
                         </span>
                     </div>
                 </div>
