@@ -28,6 +28,7 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
         window.location.href = newUrl;
     };
 
+    console.log(postData, "postData")
     return (
         <>
             <div className="c-filterView mb-4">

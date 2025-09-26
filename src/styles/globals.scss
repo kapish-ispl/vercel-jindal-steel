@@ -173,17 +173,14 @@
 
     .panels-container {
         position: relative;
-        height: 100vh;
+        height: calc(100dvh - 98px);
 
         .panel {
             position: absolute;
             top: 0;
             left: 0;
-            height: 100vh;
+            height: 100dvh;
             width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             overflow: hidden;
             color: white;
             will-change: transform, opacity;
@@ -225,11 +222,8 @@
             }
 
             .pannel-heading {
-                font-size: clamp(2rem, 8vw, 6rem);
                 z-index: 2;
-                text-align: center;
-                padding: 0 1rem;
-                font-weight: 800;
+                position: relative;
                 text-shadow: 0px 2px 15px rgba(0, 0, 0, 0.4);
                 will-change: transform, opacity;
             }

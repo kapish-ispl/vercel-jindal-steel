@@ -93,7 +93,6 @@ const ScrollAnimation: React.FC = () => {
                         "<0.2"
                     );
 
-                // Fade out panels except the last one
                 if (i < panelsData.length - 1) {
                     timeline.current!.to(
                         panelSelector,
@@ -115,7 +114,52 @@ const ScrollAnimation: React.FC = () => {
                         <div className="parallax-container">
                             <img src={panel.img} alt={panel.heading} className="parallax-img" />
                         </div>
-                        <h2 className={`pannel-heading heading-${panel.id}`}>{panel.heading}</h2>
+                        <div className="scrollable_box_content">
+                            <div className="container cus-conatiner">
+                                <div className="row">
+                                    <div className="col-12">
+
+                                        <div className="scrollable_box_content_head">
+                                            <h2 className={`pannel-heading heading-${panel.id}`}>{panel.heading}</h2>
+                                        </div>
+
+                                        <div className="scrollable_box_content_bottom row list_view v3">
+                                            <div className="col-12 md:col-3 list_view_container" >
+                                                <div className="list_view_info">
+                                                    <div className="list_view_content">
+                                                        <div className="list_view_content_title"><span>3.6</span> <span> MTPA</span></div>
+                                                        <span className="list_view_content_desc">Steel Production Capacity</span></div>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-12 md:col-3 list_view_container" >
+                                                <div className="list_view_info">
+                                                    <div className="list_view_content">
+                                                        <div className="list_view_content_title"><span>1.32</span> <span> MTPA</span></div>
+                                                        <span className="list_view_content_desc">Direct Reduced Iron Plant (DRI)</span></div>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-12 md:col-3 list_view_container">
+                                                <div className="list_view_info">
+                                                    <div className="list_view_content">
+                                                        <div className="list_view_content_title"><span>1</span> <span> MTPA</span></div>
+                                                        <span className="list_view_content_desc">Plate Mill</span></div>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-12 md:col-3 list_view_container">
+                                                <div className="list_view_info">
+                                                    <div className="list_view_content">
+                                                        <div className="list_view_content_title"><span>1</span> <span> MTPA</span></div>
+                                                        <span className="list_view_content_desc">Rail Mill</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </section>
                 ))}
             </div>
