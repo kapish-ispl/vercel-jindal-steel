@@ -11,6 +11,7 @@ import dynamic from "next/dynamic";
 const componentMap: any = {
     FinancialCard: dynamic(() => import("./FinancialCard")),
     AwardsCard: dynamic(() => import("./AwardsCard")),
+    OurOfficesCard: dynamic(() => import("./OurOfficesCard")),
 }
 
 export default function PostList(props: any) {
