@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import ReactPaginate from 'react-paginate'
 
@@ -22,13 +23,13 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
     const pathname = window.location.pathname;
     const currentPage = Number(searchParams.get("page") || 1);
     const pageCount = Math.ceil(totalPost / itemsPerPage);
-
+    const router = useRouter();
 
     const handlePageClick = ({ selected }: { selected: number }) => {
         const newParams = new URLSearchParams(window.location.search);
         newParams.set('page', `${selected + 1}`);
         const newUrl = `${pathname}?${newParams.toString()}`;
-        window.location.href = newUrl;
+        router.push(newUrl, { scroll: false });
     };
 
     return (
