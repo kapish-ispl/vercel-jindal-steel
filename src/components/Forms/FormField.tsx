@@ -1,17 +1,21 @@
+import { useField } from 'formik';
 import React, { forwardRef } from 'react';
 
 interface FormFieldProps extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
-    label: string;
+    label?: string;
     name: string;
-    type?: 'text' | 'email' | 'tel' | 'password' | 'number' | 'date' | 'textarea' | 'radio';
+    type?: 'text' | 'email' | 'tel' | 'password' | 'number' | 'date' | 'textarea' | 'radio' | 'checkbox';
     error?: string;
     touched?: boolean;
+    rows?: number;
+    ref?: React.RefObject<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldProps>(
     ({ type = 'text', label, name, error, touched, ...rest }, ref) => {
 
         const hasError = touched && !!error;
+        const [field, meta] = useField({ name, type, ...rest });
 
         const containerClassName = `form_grider_wrap ${hasError ? "hasError" : ""}`;
 
@@ -21,11 +25,11 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
                 <div className="form_radio_wrap">
                     <input
                         id={uniqueId}
-                        name={name}
+                        {...rest}
+                        {...field}
                         type="radio"
                         className="form_radio_field"
                         ref={ref as React.Ref<HTMLInputElement>}
-                        {...rest}
                     />
                     <label htmlFor={uniqueId} className="form_radio_label">
                         {label}
@@ -42,7 +46,8 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
                 {type === 'textarea' ? (
                     <textarea
                         id={name}
-                        name={name}
+                        placeholder={label}
+                        {...field}
                         className="form_grider_wrap_field"
                         ref={ref as React.Ref<HTMLTextAreaElement>}
                         {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
@@ -50,7 +55,8 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
                 ) : (
                     <input
                         id={name}
-                        name={name}
+                        {...field}
+                        placeholder={label}
                         type={type}
                         className="form_grider_wrap_field"
                         ref={ref as React.Ref<HTMLInputElement>}

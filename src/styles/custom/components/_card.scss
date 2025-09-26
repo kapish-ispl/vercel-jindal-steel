@@ -103,7 +103,7 @@
       
         
     }
-    &.v2, &.v3{
+    &.v2, &.v3, &.v4{
         cursor: inherit !important;
         .c-cardView__wrapper{
             border: 3px solid #BCBCBC;
@@ -159,8 +159,11 @@
         .c-cardView__wrapper{
             border: unset;
             margin-bottom: 20px;
+            height: calc(100% - 20px);
+            background: #F4F4F4;
             @include mq(tablet-max){
                 margin-bottom: 30px;
+                height: calc(100% - 30px);
             }
             &-media{
                 height: unset;
@@ -202,6 +205,47 @@
                     
                 }
 
+            }
+        }
+    }
+    &.v4{
+        .c-cardView__wrapper{
+            border: 1px solid #bcbcbc;
+            margin-bottom: 20px;
+            padding: 15px;
+            @include mq(tablet-max){
+                padding: 20px 25px;
+            }
+             @include mq(desktop){
+                    padding: 44px 44px 25px 44px;
+                }
+            &-content{
+               padding: 0;
+               .desc{
+                color: #636466;
+               }
+                .info__wrapper{
+                    @include flexbox;
+                    @include align-items(center);
+                    padding-top: 25px;
+                    &-icon{
+                        width: 50px;
+                        height: 50px;
+                        min-width: 50px;
+                        @include border-radius(50%);
+                        border: 1px solid #CC9167;
+                        @include flexbox;
+                        @include align-items(center);
+                        @include justify-content(center);
+                        >i{
+                            @include font-size(25);
+                            color: #CC9167;
+                        }
+                    }
+                    &-detail{
+                        padding-left: 15px;
+                    }
+                }
             }
         }
     }
