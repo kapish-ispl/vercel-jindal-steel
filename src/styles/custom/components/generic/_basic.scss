@@ -28,7 +28,18 @@
         padding: 90px 0px !important;
     }
 }
-
+.pb-80{
+    padding-bottom: 30px !important;
+    @include mq(tablet){
+        padding-bottom: 50px !important;
+    }
+    @include mq(desktop){
+        padding-bottom: 60px !important;
+    }
+    @include mq(desktop-wide){
+        padding-bottom: 80px !important;
+    }
+}
 .gp-xl {
     padding: 30px 0px 50px 0px;
 
@@ -626,14 +637,18 @@ ul {
             }
         }
         &-text{
-             background: #E9E9E9 !important;
+             background: #E9E9E9 !important; 
              border: none !important;
-             padding-right: 20px;
+             padding: 0 20px;
+             @include mq(desktop){
+                padding: 10px 20px;
+             }
              .icon-search{
                 @include font-size(30);
                 color: #636466;
              }
         }
+        
         
     }
     .form-select{
@@ -658,6 +673,15 @@ ul {
                     padding: 18px 38px;
                 }
             }
+        }
+        .u-btn{
+            @include flexbox;
+            @include align-items(center);
+            @include justify-content(center);
+            background: var(--color-primary);
+            color: #fff;
+            padding: 12px 15px;
+            @include border-radius(8px);
         }
 }
 .custom__top-space-xl{
@@ -705,4 +729,38 @@ ul {
   color: #6c757d;
   margin: 0 8px;
   font-size: 20px;
+}
+
+.detail__wrapper{
+    .genric__info{
+        @include flexbox;
+        @include align-items(center);
+       &-icon{
+                        width: 50px;
+                        height: 50px;
+                        min-width: 50px;
+                        @include border-radius(50%);
+                        border: 1px solid #CC9167;
+                        @include flexbox;
+                        @include align-items(center);
+                        @include justify-content(center);
+                        >i{
+                            @include font-size(25);
+                            color: #CC9167;
+                        }
+             }
+         &-detail{
+                padding-left: 15px;
+                color: #636466;
+                &:hover{
+                    color: var(--color-primary);
+                }
+                }
+        + .genric__info{
+            margin-top: 15px;
+            @include mq(tablet-max){
+                margin-top: 25px;
+            }
+        }
+    }
 }

@@ -170,6 +170,12 @@
     
 }
 .genric__content{
+    &.cus-width{
+        max-width: 360px;
+        >p{
+            font-weight: 300 !important;
+        }
+    }
     
         .font-bold{
             font-weight: bold !important;
