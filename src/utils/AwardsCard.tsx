@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import ReactPaginate from 'react-paginate'
 interface MediaItem {
@@ -19,13 +20,14 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
     const pathname = window.location.pathname;
     const currentPage = Number(searchParams.get("page") || 1);
     const pageCount = Math.ceil(totalPost / itemsPerPage);
+    const router = useRouter();
 
 
     const handlePageClick = ({ selected }: { selected: number }) => {
         const newParams = new URLSearchParams(window.location.search);
         newParams.set('page', `${selected + 1}`);
         const newUrl = `${pathname}?${newParams.toString()}`;
-        window.location.href = newUrl;
+        router.push(newUrl, { scroll: false });
     };
 
     console.log(postData, "postData")
