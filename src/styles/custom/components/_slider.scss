@@ -221,3 +221,29 @@
         height: 140px;
     }
 }
+
+.slick-slider{
+    .custom-arrow{
+        &.prev{
+            position: absolute;
+            left: 0;
+            top: 30px;
+            display: none;
+            @include mq(tablet-max){
+                left: -50px;
+                display: block;
+            }
+        }
+        &.next{
+            position: absolute;
+            right: 0px;
+            top: 30px;
+            display: none;
+            @include transform(rotate(180deg));
+            @include mq(tablet-max){
+                right: -50px;
+                display: block;
+            }
+        }
+    }
+}
