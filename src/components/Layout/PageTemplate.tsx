@@ -12,6 +12,7 @@ const ScrollAnimation = dynamic(() => import('../ScrollAnimation'), { ssr: false
 const PostList = dynamic(() => import('@/utils/PostList'), { ssr: false });
 const CustomForm = dynamic(() => import('@/utils/CustomForm'), { ssr: false });
 const CustomMap = dynamic(() => import('@/utils/CustomMap'), { ssr: false });
+const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -41,11 +42,15 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "scrollanimation") {
                     const props = attributesToProps(domNode.attribs);
-                    return <ScrollAnimation {...props} />;
+                    return <ScrollAnimation {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
                 if (domNode.name === "customform") {
                     const props = attributesToProps(domNode.attribs);
                     return <CustomForm {...props} pageTitle={String(props.title)} component={String(props.component)} />;
+                }
+                if (domNode.name === "custommapindia") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <CustomMapIndia {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
                 if (domNode.name === "custommap") {
                     const props = attributesToProps(domNode.attribs);

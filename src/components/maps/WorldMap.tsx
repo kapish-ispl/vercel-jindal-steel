@@ -20,7 +20,7 @@ const WorldMap: FC<{
     const cmsCountries = finalTabData.flatMap(
         (item: any) => HIGHLIGHT_DATA[item.label] ?? []
     );
-    console.log(cmsCountries, "cmsCountries")
+
     const effectiveHighlighted = highlightedCountries.filter((code) =>
         cmsCountries.includes(code)
     );

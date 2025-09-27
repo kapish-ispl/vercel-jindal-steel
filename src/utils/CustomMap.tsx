@@ -89,7 +89,7 @@ const CustomMap = (props: any) => {
             case 'world':
                 return <WorldMap key="world-map" onAreaClick={handleMapAreaClick} highlightedCountries={finalInteractiveCountries} finalTabData={finalTabData} />;
             case 'india':
-                return <IndiaMap key="india-map" />;
+                return <IndiaMap key="india-map" highlightedStates={HIGHLIGHT_DATA.IN.states} />;
             case 'africa':
                 return <AfricaMap key="africa-map" />;
             case 'oman':
