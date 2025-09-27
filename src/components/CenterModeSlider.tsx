@@ -2,8 +2,12 @@
 import React from "react";
 import Slider from "react-slick";
 
+interface ArrowProps {
+    onClick?: () => void;
+}
+
 // Custom Arrow Components
-const NextArrow = (props: any) => {
+const NextArrow = (props: ArrowProps) => {
     const { onClick } = props;
     return (
         <div className="custom-arrow next cursor-pointer" onClick={onClick}>
@@ -15,7 +19,7 @@ const NextArrow = (props: any) => {
     );
 };
 
-const PrevArrow = (props: any) => {
+const PrevArrow = (props: ArrowProps) => {
     const { onClick } = props;
     return (
         <div className="custom-arrow prev cursor-pointer" onClick={onClick}>
@@ -27,13 +31,14 @@ const PrevArrow = (props: any) => {
     );
 };
 
-const CenterModeSlider = ({ data }: { data: React.ReactNode[] }) => {
-    const filteredSlides = data?.filter((item: any) => item?.props !== undefined);
+const CenterModeSlider = (props: any) => {
+    const { data, itemstoshow, } = props;
+    const filteredSlides = data?.filter((items: any) => items.props !== undefined);;
 
     const settings = {
         centerMode: true,
         infinite: true,
-        slidesToShow: 3,
+        slidesToShow: Number(itemstoshow) || 3,
         centerPadding: "0",
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
@@ -50,13 +55,32 @@ const CenterModeSlider = ({ data }: { data: React.ReactNode[] }) => {
     };
 
     return (
-        <Slider {...settings} className="centermode-slider">
-            {filteredSlides?.map((item: any, index: number) => (
-                <div key={index} className="slide-item">
-                    {item.props.children}
-                </div>
-            ))}
-        </Slider>
+
+        <>
+            {
+                filteredSlides.length > 1 ?
+                    <>
+                        <Slider {...settings} className="centermode-slider">
+                            {filteredSlides?.map((item: any, index: number) => (
+                                <div key={index} className={`slide-item ${item?.props?.className}}`}>
+                                    {item.props.children}
+                                </div>
+                            ))}
+                        </Slider>
+                    </> :
+                    <>
+                        <div className="row">
+                            {filteredSlides?.map((info: any) => (
+                                <div className="col-12" key={info.key}>
+                                    <div className={info.props.className} style={{ height: "100%" }}>
+                                        {info.props.children}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+            }
+        </>
     );
 };
 
