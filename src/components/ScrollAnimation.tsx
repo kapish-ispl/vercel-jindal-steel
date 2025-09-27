@@ -32,7 +32,10 @@ const panelsData: Panel[] = [
     },
 ];
 
-const ScrollAnimation: React.FC = (props: any, data: any) => {
+const ScrollAnimation: React.FC = (props: any) => {
+
+    const { data: bannerData } = props;
+    console.log(bannerData)
     const main = useRef<HTMLDivElement | null>(null);
     const timeline = useRef<gsap.core.Timeline | null>(null);
 

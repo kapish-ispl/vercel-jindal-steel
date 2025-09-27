@@ -43,6 +43,11 @@ const IndiaMap: FC<{ highlightedStates?: string[], onAreaClick?: (stateId: strin
 
         .cls-3 {
           fill: #f47920;
+          transition:all ease .3s;
+        }
+        .cls-3:hover {
+          fill: var(--color-accent-blue);
+          cursor: pointer;
         }
 
         .cls-2 {
