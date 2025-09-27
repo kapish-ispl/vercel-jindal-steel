@@ -279,6 +279,33 @@
             }
         }
     }
+    &.fixCard{
+        .c-cardView__box{
+            &-item{
+                .card__content{
+                    min-height: auto !important;
+                    &-desc{
+                        @include mq(tablet-max){
+                            padding-right: 30px;
+                        }
+                        @include mq(desktop){
+                            padding-right: 45px;
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+    &.card-ratio{
+        .c-cardView__wrapper{
+            &-media{
+                .u-img{
+                    aspect-ratio: 14/9 !important;
+                }
+            }
+        }
+    }
 
 }
   .mr-30{

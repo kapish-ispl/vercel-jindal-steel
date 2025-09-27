@@ -19,6 +19,15 @@
 .bg-gray2{
     background: #ededed;
 }
+.bg-gray3{
+    background: #eee;
+}
+.bg-gray4{
+    background: #F6F4F4;
+}
+.bg-gray5{
+    background: #E6E6E6;
+}
 .c-innerSection{
     padding: 30px 0px !important;
     @include mq(tablet-max){
@@ -120,7 +129,7 @@
 }
 
 .mb-55 {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     @include mq(tablet-max) {
         margin-bottom: 40px;

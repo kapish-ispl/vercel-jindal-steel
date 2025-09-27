@@ -305,6 +305,29 @@
         padding: 10px;
         transform: scale(.7);
         opacity: 0.5;
+        h5{
+            text-align: center;
+            font-weight: bold;
+            @include font-size(22);
+            color: #446183;
+            margin-bottom: 25px;
+            @include mq(tablet){
+                @include font-size(26);
+            }
+            @include mq(tablet-max){
+                @include font-size(28);
+                margin-bottom: 35px;
+            }
+            @include mq(desktop){
+                @include font-size(30);
+                margin-bottom: 45px;
+            }
+            @include mq(desktop-wide){
+                @include font-size(32);
+                
+            }
+        }
+      
 
         p {
             opacity: 0;
@@ -317,10 +340,38 @@
         z-index: 2;
         transform: scale(1);
         transition: transform 0.4s ease;
+         img{
+            box-shadow: 0px 16px 13.8px 0px #00000040 !important;
+            
+        }
 
         p {
             opacity: 1;
             visibility: visible;
+            margin-top: 25px;
+            text-align: center;
+            font-weight: var(--fontRegular);
+
+            @include font-size(14);
+
+            @include mq('tablet') {
+                @include font-size(16, 1.6);
+            }
+             @include mq(tablet-max){
+                margin-top: 40px;
+            }
+            @include mq('desktop-min') {
+                @include font-size(18, 1.6);
+            }
+            @include mq(desktop){
+                margin-top: 50px;
+            }
+
+            @include mq('desktop-wide') {
+                @include font-size(19, 1.6);
+            }
+           
+            
         }
     }
 
@@ -341,10 +392,20 @@
         &.next {
             right: 10px;
             transform: rotateY(180deg);
+            top: 50%;
+            
+            @include mq(desktop-wide){
+                right: -40px;
+            }
         }
 
         &.prev {
             left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            @include mq(desktop-wide){
+                left: -40px;
+            }
         }
     }
 }

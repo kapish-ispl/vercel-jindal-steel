@@ -2,6 +2,27 @@
 @use '../../core/mixins' as *;
 
 
+.c-heading-30 {
+    font-weight: var(--fontMedium);
+
+    @include font-size(18);
+
+    @include mq('tablet') {
+        @include font-size(20);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(24);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(27);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(30);
+    }
+}
 
 .c-heading-40 {
     font-weight: var(--fontBold);
