@@ -42,7 +42,22 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "scrollanimation") {
                     const props = attributesToProps(domNode.attribs);
-                    return <ScrollAnimation {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                    return (
+                        <ScrollAnimation
+                            {...props}
+                            data={domToReact(domNode.children as DOMNode[], {
+                                replace: (childNode) => {
+                                    if (childNode instanceof Element) {
+                                        if (childNode.name === "animatedcountup") {
+                                            const childProps = attributesToProps(childNode.attribs);
+                                            const toValue = childProps.to ? Number(childProps.to) : 0;
+                                            return <Counter to={toValue} />;
+                                        }
+                                    }
+                                },
+                            })}
+                        />
+                    );
                 }
                 if (domNode.name === "customform") {
                     const props = attributesToProps(domNode.attribs);
