@@ -5,6 +5,8 @@ import { ThemeProvider } from '@/components/Layout/ThemeProvider';
 import AppContextProvider from '@/context/AppContext';
 import "@/styles/globals.scss";
 import 'aos/dist/aos.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
 

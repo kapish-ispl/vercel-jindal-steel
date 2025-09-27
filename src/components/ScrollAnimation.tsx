@@ -1,17 +1,18 @@
 "use client";
 
-import React, { useRef, useLayoutEffect, useMemo } from "react";
+import React, { useRef, useMemo, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import SplitType from "split-type";
+import { useDeviceType } from "@/hooks/useDeviceType";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 interface Panel {
     id: number;
     img: string;
-    mobimg?: string;
+    mobImg?: string;
     heading: string;
     children?: React.ReactNode;
 }
@@ -20,6 +21,7 @@ const ScrollAnimation = (props: any) => {
     const main = useRef<HTMLDivElement | null>(null);
     const timeline = useRef<gsap.core.Timeline | null>(null);
     const { data: bannerData } = props;
+    const device = useDeviceType();
 
     const panelsData: Panel[] = useMemo(() => {
         if (!bannerData) return [];
@@ -29,13 +31,12 @@ const ScrollAnimation = (props: any) => {
                 id: index + 1,
                 heading: item.props?.heading,
                 img: item.props?.imgsrc,
-                mobImg: item.props?.imgsrc,
+                mobImg: item.props?.mobimgsrc,
                 children: item.props?.children,
             }));
     }, [bannerData]);
 
-    console.log(panelsData, "panelsData")
-    useLayoutEffect(() => {
+    useEffect(() => {
         const ctx = gsap.context(() => {
             const dots = gsap.utils.toArray<HTMLElement>(".dot");
             const setActiveDot = (index: number) => {
@@ -142,7 +143,7 @@ const ScrollAnimation = (props: any) => {
                     <section key={panel.id} className={`panel panel-${panel.id}`}>
                         <div className="parallax-container">
                             <img
-                                src={panel.img}
+                                src={device === "desktop" ? panel.img : panel.mobImg}
                                 alt={panel.heading}
                                 className="parallax-img"
                             />

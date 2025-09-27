@@ -38,18 +38,18 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
                 <div className="row align-items-center gy-2">
                     <div className="col-md-6 col-sm-12">
                         <div className="input-group">
-                            <input type="text" className="form-control" placeholder="Search our Awards" aria-label="Search" aria-describedby="awards search" />
+                            <input type="text" className="form-control" placeholder="Search our Offices" aria-label="Search" aria-describedby="awards search" />
                             <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
                         </div>
                     </div>
-                    <div className="col-md-5 col-sm-12">
+                    {/* <div className="col-md-5 col-sm-12">
                         <select className="form-select awards-select" aria-label="Default select example">
                             <option selected>Open this select menu</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
-                    </div>
+                    </div> */}
                     <div className="col-1"><button type='button' className='btn u-btn'>Reset</button></div>
                 </div>
             </div>
