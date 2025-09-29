@@ -44,6 +44,9 @@
     @include mq('desktop-wide-max') {
         @include font-size(40);
     }
+    &.sm_lh {
+        line-height: 1.2 !important;
+    }
 }
 
 .c-heading-45 {
@@ -121,6 +124,10 @@
 
     @include mq('desktop-wide-max') {
         @include font-size(65);
+    }
+
+    &.sm_lh {
+        line-height: 1.2 !important;
     }
 }
 
