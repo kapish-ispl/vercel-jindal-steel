@@ -32,6 +32,11 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
         router.push(newUrl, { scroll: false });
     };
 
+    const myOptions = [
+        { label: "Apple", value: "apple" },
+        { label: "Banana", value: "banana" },
+        { label: "Cherry", value: "cherry" },
+    ];
     return (
         <>
             <div className="c-filterView ">
@@ -43,12 +48,11 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
                         </div>
                     </div>
                     {/* <div className="col-md-5 col-sm-12">
-                        <select className="form-select awards-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                        const myOptions = [
+        { label: "Apple", value: "apple" },
+        { label: "Banana", value: "banana" },
+        { label: "Cherry", value: "cherry" },
+    ];
                     </div> */}
                     <div className="col-1"><button type='button' className='btn u-btn'>Reset</button></div>
                 </div>

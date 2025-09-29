@@ -1,3 +1,4 @@
+import CustomSelect from "@/components/CustomSelect";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -23,7 +24,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
     const currentPage = Number(searchParams.get("page") || 1);
     const pageCount = Math.ceil(totalPost / itemsPerPage);
     const router = useRouter();
-    console.log(postData, "postData")
 
 
     const handlePageClick = ({ selected }: { selected: number }) => {
@@ -32,6 +32,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
         const newUrl = `${pathname}?${newParams.toString()}`;
         router.push(newUrl, { scroll: false });
     };
+
+    const myOptions = [
+        { label: "Apple", value: "apple" },
+        { label: "Banana", value: "banana" },
+        { label: "Cherry", value: "cherry" },
+    ];
     return (
         <>
             <div className="c-filterView mb-4">
@@ -43,12 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
                         </div>
                     </div>
                     <div className="col-md-4 col-sm-12">
-                        <select className="form-select awards-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                        <CustomSelect options={myOptions} placeholder="Select Option" />
                     </div>
                     <div className="col-1"><button type='button' className='u-btn'>Reset</button></div>
                 </div>

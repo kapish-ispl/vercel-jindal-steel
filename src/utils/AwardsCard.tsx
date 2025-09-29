@@ -1,3 +1,4 @@
+import CustomSelect from '@/components/CustomSelect';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import ReactPaginate from 'react-paginate'
@@ -29,6 +30,11 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
         const newUrl = `${pathname}?${newParams.toString()}`;
         router.push(newUrl, { scroll: false });
     };
+    const myOptions = [
+        { label: "Apple", value: "apple" },
+        { label: "Banana", value: "banana" },
+        { label: "Cherry", value: "cherry" },
+    ];
 
     return (
         <>
@@ -41,12 +47,7 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
                         </div>
                     </div>
                     <div className="col-md-4 col-sm-12">
-                        <select className="form-select awards-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
+                        <CustomSelect options={myOptions} placeholder="Select Option" />
                     </div>
                     <div className="col-1"><button type='button' className='u-btn'>Reset</button></div>
                 </div>
