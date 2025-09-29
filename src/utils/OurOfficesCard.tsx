@@ -39,8 +39,8 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
     ];
     return (
         <>
-            <div className="c-filterView ">
-                <div className="row align-items-center gy-2">
+            <div className="c-filterView">
+                <div className="row gy-2">
                     <div className="col-md-6 col-sm-12">
                         <div className="input-group">
                             <input type="text" className="form-control" placeholder="Search our Offices" aria-label="Search" aria-describedby="awards search" />
