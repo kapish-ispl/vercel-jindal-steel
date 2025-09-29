@@ -434,6 +434,14 @@
             }
         }
     }
+    &.hoverEffect{
+        .c-cardView__wrapper{
+            @include transition(all 0.3s ease);
+            &:hover{
+                @include transform(translateY(-15px));
+            }
+        }
+    }
 
 }
 
