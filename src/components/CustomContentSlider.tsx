@@ -46,22 +46,23 @@ const PrevArrow = (props: ArrowProps) => {
 };
 
 const CustomContentSlider = (props: any,) => {
-    console.log(props)
-    const { itemstoshow, data, showdots } = props;
+    const { itemstoshow, data, showdots, centermode, showarrow } = props;
     const finalData = data.filter((items: any) => items.props !== undefined);
     const itemCount = finalData.length;
     const slidesToShow = Number(itemstoshow) || 4;
-    const dots = showdots === 'yes' ? true : false;
+    const centerMode = centermode === 'yes' ? true : false;
 
 
     const settings = {
-        arrows: itemCount > slidesToShow,
-        dots: dots ? itemCount > slidesToShow : false,
+        arrows: showarrow === "yes" && itemCount > slidesToShow,
+        dots: showdots === "yes" && itemCount > slidesToShow,
         autoplay: itemCount > slidesToShow,
         autoplaySpeed: 2000,
         infinite: itemCount > slidesToShow,
         slidesToShow: slidesToShow,
         slidesToScroll: 1,
+        centerMode: centerMode,
+        centerPadding: "0",
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
         responsive: [

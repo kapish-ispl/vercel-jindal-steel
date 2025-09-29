@@ -14,6 +14,7 @@ const componentMap: any = {
     OurOfficesCard: dynamic(() => import("./OurOfficesCard")),
     ProductCard: dynamic(() => import("./ProductCard")),
     CenterModeSlider: dynamic(() => import("./CenterModeSlider")),
+    ProductSlider: dynamic(() => import("./ProductSlider")),
 }
 
 export default function PostList(props: any) {
