@@ -13,6 +13,7 @@ const componentMap: any = {
     AwardsCard: dynamic(() => import("./AwardsCard")),
     OurOfficesCard: dynamic(() => import("./OurOfficesCard")),
     ProductCard: dynamic(() => import("./ProductCard")),
+    CenterModeSlider: dynamic(() => import("./CenterModeSlider")),
 }
 
 export default function PostList(props: any) {
@@ -23,6 +24,7 @@ export default function PostList(props: any) {
     const [postData, setPostData] = useState<any>([]);
     const [totalPost, setTotalPost] = useState<any>(0);
     const [filteredTag, setFilteredTag] = useState<string | null>(null);
+
 
     useEffect(() => {
         let slugInfo = props.slug;
@@ -71,10 +73,11 @@ export default function PostList(props: any) {
     //     () => dynamic(() => import(`./${props.components}`)),
     //     [props.components]
     // );
-
+    console.log(props);
+    console.log(postData);
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (
-        <PostComponentRender postData={postData} totalPost={totalPost} itemsPerPage={props.limit} />
+        <PostComponentRender postData={postData} totalPost={totalPost} itemsPerPage={props.limit} itemstoshow={props.itemstoshow} isproduct={props.isproduct} />
     ) : <div>Loading...</div>;
 }

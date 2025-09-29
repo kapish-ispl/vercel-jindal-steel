@@ -13,7 +13,7 @@ const PostList = dynamic(() => import('@/utils/PostList'), { ssr: false });
 const CustomForm = dynamic(() => import('@/utils/CustomForm'), { ssr: false });
 const CustomMap = dynamic(() => import('@/utils/CustomMap'), { ssr: false });
 const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: false });
-const CenterModeSlider = dynamic(() => import('../CenterModeSlider'), { ssr: false });
+// const CenterModeSlider = dynamic(() => import('../../utils/CenterModeSlider'), { ssr: false });
 const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
@@ -88,10 +88,10 @@ const PageTemplate = ({ data }: any) => {
                         />
                     );
                 }
-                if (domNode.name === "centermodeslider") {
-                    const props = attributesToProps(domNode.attribs);
-                    return <CenterModeSlider {...props} data={domToReact(domNode.children as DOMNode[])} />;
-                }
+                // if (domNode.name === "centermodeslider") {
+                //     const props = attributesToProps(domNode.attribs);
+                //     return <CenterModeSlider {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                // }
                 if (domNode.name === "customcontentslider") {
                     const props = attributesToProps(domNode.attribs);
                     return <CustomContentSlider {...props} data={domToReact(domNode.children as DOMNode[])} />;
