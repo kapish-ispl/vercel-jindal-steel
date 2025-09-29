@@ -22,16 +22,16 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
         if (type === 'radio') {
             const uniqueId = `${name}-${rest.value}`;
             return (
-                <div className="form_radio_wrap">
+                <div className="form_radio_wrap form-check">
                     <input
                         id={uniqueId}
                         {...rest}
                         {...field}
                         type="radio"
-                        className="form_radio_field"
+                        className="form_radio_field form-check-input"
                         ref={ref as React.Ref<HTMLInputElement>}
                     />
-                    <label htmlFor={uniqueId} className="form_radio_label">
+                    <label htmlFor={uniqueId} className="form_radio_label form-check-label">
                         {label}
                     </label>
                 </div>

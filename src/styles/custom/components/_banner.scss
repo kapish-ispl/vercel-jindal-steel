@@ -28,6 +28,9 @@
     &__media {
         @include size(100%);
         position: relative;
+        img, video{
+           box-shadow: 0px 4px 4px 0px #00000040 !important;
+        }
 
     }
 

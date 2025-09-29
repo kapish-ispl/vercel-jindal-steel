@@ -127,10 +127,13 @@
         .form_captcha_wrap {
             @include flexbox;
             margin-top: 20px;
-            @include align-items(center);
 
             @include mq(tablet-max) {
                 margin-top: 30px;
+            }
+            .captcha-relod-btn{
+                color: #949494 !important;
+                margin: 10px 0px;
             }
 
             .form_grider_wrap {

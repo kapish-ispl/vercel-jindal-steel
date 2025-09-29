@@ -200,14 +200,14 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                 />
                             </div>
                             <div className="col-lg-12">
-                                <div className="form_checkbox_wrap">
+                                <div className="form_checkbox_wrap form-check">
                                     <FormField
                                         type="checkbox"
                                         name="privacy_Policy"
                                         id="privacyPolicy"
-                                        className="form_checkbox_field"
+                                        className="form_checkbox_field form-check-input"
                                     />
-                                    <label htmlFor="privacyPolicy" className="form_checkbox_label">
+                                    <label htmlFor="privacyPolicy" className="form_checkbox_label form-check-label">
                                         I have read and understood the Privacy Policy.
                                     </label>
                                     <ErrorMessage name="privacy_Policy" component="p" className="form_grider_wrap_helper" />
@@ -219,7 +219,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                         key={captchaKey}
                                         numberOfCharacters={6}
                                         backgroundColor="#c2c2c2"
-                                        fontColor="black"
+                                        fontColor="#333"
                                         onChange={setActualCaptcha}
                                         setReloadCaptcha={setReloadCaptcha}
                                     />
@@ -234,10 +234,11 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                 </div>
                             </div>
 
-
-                            <button type="submit" className="form_submit_button" disabled={isSubmitting}>
-                                {isSubmitting ? 'Submitting...' : 'Submit'}
-                            </button>
+                            <div className="col-12">
+                                <button type="submit" className="form_submit_button" disabled={isSubmitting}>
+                                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                                </button>
+                            </div>
                         </div>
                     </Form>
                 )}

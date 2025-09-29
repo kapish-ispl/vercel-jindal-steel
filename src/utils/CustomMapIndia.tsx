@@ -60,7 +60,7 @@ const CustomMapIndia = (props: any) => {
 
     return (
         <>
-            <div className='c-mapView'>
+            <div className='c-mapView v2'>
                 <div className='c-mapView__sidebar'>
                     <ul className="c-mapView__tabs">
                         {interactiveStates.length > 0 &&

@@ -117,6 +117,7 @@ export const Captcha = ({
                     onClick={reloadCaptcha}
                     type="button"
                     tabIndex={4}
+                    className='captcha-relod-btn c-content-19'
                     style={{ cursor: 'pointer', color: reloadColor, background: 'none', border: 'none', padding: 0 }}
                 >
                     {reloadText}

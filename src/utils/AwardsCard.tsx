@@ -39,7 +39,7 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
     return (
         <>
             <div className="c-filterView mb-4">
-                <div className="row">
+                <div className="row gy-2">
                     <div className="col-md-7 col-sm-12">
                         <div className="input-group">
                             <input type="text" className="form-control" placeholder="Search our Awards" aria-label="Search" aria-describedby="awards search" />

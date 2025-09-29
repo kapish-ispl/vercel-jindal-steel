@@ -310,10 +310,14 @@
         .c-cardView__wrapper{
             border: 1px solid #000;
             position: relative;
+            overflow: hidden;
+            @include transition(all 0.3s ease-in-out);
             &-media{
                 padding-top: 25px;
                 position: relative;
                 z-index: 9;
+                overflow: hidden;
+                @include transition(all 0.3s ease-in-out);
                 @include mq(tablet-max){
                     padding-top: 35px;
                 }
@@ -326,6 +330,13 @@
                     object-position: center center;
                 }
             }
+            // &:hover{
+            //     .c-cardView__wrapper-media{
+            //       .u-img{
+            //           @include transform(scale(1.2));
+            //      }
+            //     }
+            // }
             &-content{
                 position: relative;
                 z-index: 9;

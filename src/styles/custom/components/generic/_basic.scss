@@ -590,6 +590,22 @@
             }
         }
     }
+    &.v2{
+        .c-mapView__sidebar{
+            max-width: 100%;
+            @include mq(desktop){
+                width: 45%;
+                max-width: unset;
+            }
+
+        }
+        .c-mapView__container{
+            @include mq(desktop){
+                width: calc(100% - 45%);
+                max-width: unset;
+            }
+        }
+    }
 }
 
 // .float-elem {
@@ -837,6 +853,7 @@ ul {
         font-size: 18px;
         border-radius: 3px;
         border: none !important;
+        height: 100%;
     }
 }
 
