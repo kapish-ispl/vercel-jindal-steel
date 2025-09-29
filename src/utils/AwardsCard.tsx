@@ -31,15 +31,15 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
         router.push(newUrl, { scroll: false });
     };
     const myOptions = [
-        { label: "Apple", value: "apple" },
-        { label: "Banana", value: "banana" },
-        { label: "Cherry", value: "cherry" },
+        { label: "2025", value: "2025" },
+        { label: "2024", value: "2024" },
+        { label: "2023", value: "2023" },
     ];
 
     return (
         <>
             <div className="c-filterView mb-4">
-                <div className="row align-items-center">
+                <div className="row">
                     <div className="col-md-7 col-sm-12">
                         <div className="input-group">
                             <input type="text" className="form-control" placeholder="Search our Awards" aria-label="Search" aria-describedby="awards search" />
@@ -47,7 +47,7 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
                         </div>
                     </div>
                     <div className="col-md-4 col-sm-12">
-                        <CustomSelect options={myOptions} placeholder="Select Option" />
+                        <CustomSelect options={myOptions} placeholder="Select Year" />
                     </div>
                     <div className="col-1"><button type='button' className='u-btn'>Reset</button></div>
                 </div>

@@ -53,11 +53,10 @@ export default function CustomSelect({
     };
 
     return (
-        <div ref={wrapperRef} className="dropdown d-inline-block w-100">
-
+        <div ref={wrapperRef} className="dropdown d-inline-block w-100 cus-select">
             <motion.button
                 type="button"
-                className="btn btn-light d-flex justify-content-between align-items-center w-100"
+                className="d-flex justify-content-between align-items-center w-100"
                 onClick={() => setIsOpen((prev) => !prev)}
                 aria-expanded={isOpen}
                 layout

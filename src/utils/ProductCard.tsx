@@ -33,11 +33,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
         router.push(newUrl, { scroll: false });
     };
 
-    const myOptions = [
-        { label: "Apple", value: "apple" },
-        { label: "Banana", value: "banana" },
-        { label: "Cherry", value: "cherry" },
-    ];
     return (
         <>
             <div className="c-filterView mb-4">
@@ -47,9 +42,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
                             <input type="text" className="form-control" placeholder="Search our Awards" aria-label="Search" aria-describedby="awards search" />
                             <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
                         </div>
-                    </div>
-                    <div className="col-md-4 col-sm-12">
-                        <CustomSelect options={myOptions} placeholder="Select Option" />
                     </div>
                     <div className="col-1"><button type='button' className='u-btn'>Reset</button></div>
                 </div>

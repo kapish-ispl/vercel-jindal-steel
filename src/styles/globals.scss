@@ -183,9 +183,6 @@
     }
 }
 
-.awards-select {
-    --bs-form-select-bg-img: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2222%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%205h20%22%2F%3E%3Cpath%20fill%3D%22%23636466%22%20d%3D%22M6%2012h12%22%2F%3E%3Cpath%20d%3D%22M9%2019h6%22%2F%3E%3C%2Fsvg%3E")
-}
 
 ////////////////
 /* General Styling for scroll container*/
@@ -305,29 +302,34 @@
         padding: 10px;
         transform: scale(.7);
         opacity: 0.5;
-        h5{
+
+        h5 {
             text-align: center;
             font-weight: bold;
             @include font-size(22);
             color: #446183;
             margin-bottom: 25px;
-            @include mq(tablet){
+
+            @include mq(tablet) {
                 @include font-size(26);
             }
-            @include mq(tablet-max){
+
+            @include mq(tablet-max) {
                 @include font-size(28);
                 margin-bottom: 35px;
             }
-            @include mq(desktop){
+
+            @include mq(desktop) {
                 @include font-size(30);
                 margin-bottom: 45px;
             }
-            @include mq(desktop-wide){
+
+            @include mq(desktop-wide) {
                 @include font-size(32);
-                
+
             }
         }
-      
+
 
         p {
             opacity: 0;
@@ -340,9 +342,10 @@
         z-index: 2;
         transform: scale(1);
         transition: transform 0.4s ease;
-         img{
+
+        img {
             box-shadow: 0px 16px 13.8px 0px #00000040 !important;
-            
+
         }
 
         p {
@@ -357,21 +360,24 @@
             @include mq('tablet') {
                 @include font-size(16, 1.6);
             }
-             @include mq(tablet-max){
+
+            @include mq(tablet-max) {
                 margin-top: 40px;
             }
+
             @include mq('desktop-min') {
                 @include font-size(18, 1.6);
             }
-            @include mq(desktop){
+
+            @include mq(desktop) {
                 margin-top: 50px;
             }
 
             @include mq('desktop-wide') {
                 @include font-size(19, 1.6);
             }
-           
-            
+
+
         }
     }
 
@@ -393,8 +399,8 @@
             right: 10px;
             transform: rotateY(180deg);
             top: 50%;
-            
-            @include mq(desktop-wide){
+
+            @include mq(desktop-wide) {
                 right: -40px;
             }
         }
@@ -403,7 +409,8 @@
             left: 10px;
             top: 50%;
             transform: translateY(-50%);
-            @include mq(desktop-wide){
+
+            @include mq(desktop-wide) {
                 left: -40px;
             }
         }
