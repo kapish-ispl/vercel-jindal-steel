@@ -36,18 +36,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
     return (
         <>
             <div className="c-filterView mb-4">
-                <div className="row align-items-center">
-                    <div className="col-md-7 col-sm-12">
+                <div className="row gy-2">
+                    <div className="col-md-10 col-12">
                         <div className="input-group">
-                            <input type="text" className="form-control" placeholder="Search our Awards" aria-label="Search" aria-describedby="awards search" />
+                            <input type="text" className="form-control" placeholder="Search our Products" aria-label="Search" aria-describedby="awards search" />
                             <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
                         </div>
                     </div>
-                    <div className="col-1"><button type='button' className='u-btn'>Reset</button></div>
+                    <div className="col-12 col-md-2"><button type='button' className='u-btn action_btn'>Reset</button></div>
                 </div>
             </div>
             {postData && postData.length > 0 && postData.map((post, index) => (
-                <div className="col-lg-4" key={index}>
+                <div className="col-lg-4 col-md-6 col-12" key={index}>
                     <div className="c-cardView__wrapper">
                         <Link className="cursor-pointer" href="#">
                             <span className="c-cardView__wrapper-media">

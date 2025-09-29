@@ -51,6 +51,19 @@
             color: var(--color-white);
             text-transform: capitalize;
             font-weight: 700;
+            @include font-size(35);
+            @include mq('tablet-wide') {
+                @include font-size(55);
+            }
+              @include mq('desktop-min') {
+                @include font-size(60);
+            }
+             @include mq('desktop-wide') {
+                @include font-size(70);
+            }
+              @include mq('desktop-wide-max') {
+                @include font-size(80);
+            }
         }
     }
 

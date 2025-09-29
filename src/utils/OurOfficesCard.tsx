@@ -41,7 +41,7 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
         <>
             <div className="c-filterView">
                 <div className="row gy-2">
-                    <div className="col-md-6 col-sm-12">
+                    <div className="col-md-10 col-12">
                         <div className="input-group">
                             <input type="text" className="form-control" placeholder="Search our Offices" aria-label="Search" aria-describedby="awards search" />
                             <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
@@ -54,7 +54,7 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
         { label: "Cherry", value: "cherry" },
     ];
                     </div> */}
-                    <div className="col-1"><button type='button' className='btn u-btn'>Reset</button></div>
+                    <div className="col-12 col-md-2"><button type='button' className='btn u-btn action_btn'>Reset</button></div>
                 </div>
             </div>
             {postData && postData.length > 0 && postData.map((post, index) => (
