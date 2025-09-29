@@ -39,8 +39,8 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
     ];
     return (
         <>
-            <div className="c-filterView ">
-                <div className="row align-items-center gy-2">
+            <div className="c-filterView">
+                <div className="row gy-2">
                     <div className="col-md-6 col-sm-12">
                         <div className="input-group">
                             <input type="text" className="form-control" placeholder="Search our Offices" aria-label="Search" aria-describedby="awards search" />
@@ -86,7 +86,7 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
                 </div>
             ))}
             {pageCount > 1 && (
-                <div className="pagination-container my-4 d-flex justify-content-center">
+                <div className="pagination-container d-flex justify-content-center">
                     <ReactPaginate
                         previousLabel={
                             <svg width="44" height="27" viewBox="0 0 44 27" fill="none" xmlns="http://www.w3.org/2000/svg">
