@@ -120,9 +120,9 @@ const IndiaMap: FC<{ highlightedStates?: string[], onAreaClick?: (stateId: strin
           );
         })}
       </motion.svg>
-      {highlightedStates.includes('Jharkhand') && <AnimatedPin stateId="Jharkhand" className="in-jh map-points" />}
+      {/* {highlightedStates.includes('Jharkhand') && <AnimatedPin stateId="Jharkhand" className="in-jh map-points" />}
       {highlightedStates.includes('Chhattisgarh') && <AnimatedPin stateId="Chhattisgarh" className="in-ct map-points" />}
-      {highlightedStates.includes('Odisha') && <AnimatedPin stateId="Odisha" className="in-od map-points" />}
+      {highlightedStates.includes('Odisha') && <AnimatedPin stateId="Odisha" className="in-od map-points" />} */}
     </>
 
   );
