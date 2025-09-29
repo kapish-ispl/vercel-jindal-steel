@@ -50,8 +50,8 @@ const Header = () => {
       desc: "Jindal Steel is one of India’s leading steel manufacturers, with a significant presence in steel, power, mining and infrastructure.",
     },
     {
-      name: "Businesses",
-      desc: "Each of Jindal Steel & Power's (JSP) businesses...",
+      name: "Mine to Metal",
+      desc: "Each of Jindal Steel's businesses is committed to driving innovation and excellence to deliver sustainable solutions, while simultaneously focusing on nation-building and community empowerment.",
     },
     {
       name: "People",
@@ -79,9 +79,8 @@ const Header = () => {
     <>
       {HEADER_MAIN_MENU && HEADER_MAIN_MENU.length > 0 && (
         <header
-          className={`c-header ${
-            stickyHeader ? "header-sticky" : ""
-          } ${scrollDirection === "down" ? "hide" : "show"}`}
+          className={`c-header ${stickyHeader ? "header-sticky" : ""
+            } ${scrollDirection === "down" ? "hide" : "show"}`}
         >
           <div className="container cus-container">
             <div className="row">
@@ -116,7 +115,7 @@ const Header = () => {
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     aria-label="Toggle mobile menu"
                   >
-                  <div className="icon-chart-no-axes-gantt"></div>
+                    <div className="icon-chart-no-axes-gantt"></div>
                   </button>
 
                   {/* Desktop Menu */}
@@ -132,9 +131,8 @@ const Header = () => {
                           return (
                             <li
                               key={menuItem.id}
-                              className={`c-header__menu-list ${
-                                activeMenu === menuItem.id ? "active" : ""
-                              }`}
+                              className={`c-header__menu-list ${activeMenu === menuItem.id ? "active" : ""
+                                }`}
                               role="none"
                               onMouseEnter={() => setActiveMenu(menuItem.id)}
                               onMouseLeave={() => setActiveMenu(null)}
@@ -170,11 +168,11 @@ const Header = () => {
                                 >
                                   <li className="row">
                                     <li className="col-4">
-                                      {aa[0] && (
+                                      {aa.length > 0 && aa.map((item: any, index: number) => (
                                         <p className="c-content-16 clr-black mt-2 pe-5 me-3">
-                                          {aa[0].desc}
+                                          {item.desc}
                                         </p>
-                                      )}
+                                      ))}
                                     </li>
                                     <li className="col-6">
                                       <ul className="mega-menu">
