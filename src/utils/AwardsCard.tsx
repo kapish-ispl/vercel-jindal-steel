@@ -40,7 +40,7 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
         <>
             <div className="c-filterView mb-4">
                 <div className="row gy-2">
-                    <div className="col-md-7 col-sm-12">
+                    <div className="col-md-6 col-sm-12">
                         <div className="input-group">
                             <input type="text" className="form-control" placeholder="Search our Awards" aria-label="Search" aria-describedby="awards search" />
                             <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
@@ -49,7 +49,7 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
                     <div className="col-md-4 col-sm-12">
                         <CustomSelect options={myOptions} placeholder="Select Year" />
                     </div>
-                    <div className="col-1"><button type='button' className='u-btn'>Reset</button></div>
+                    <div className="col-12 col-md-2"><button type='button' className='u-btn action_btn'>Reset</button></div>
                 </div>
             </div>
             {postData && postData.length > 0 && postData.map((post, index) => (

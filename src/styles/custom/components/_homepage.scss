@@ -25,246 +25,313 @@
             object-position: center center;
             max-width: 670px;
             height: auto;
-            @include mq(desktop-wide){
+
+            @include mq(desktop-wide) {
                 height: 577px;
             }
-            &.v2{
-                @include mq(desktop-wide){
+
+            &.v2 {
+                @include mq(desktop-wide) {
                     max-width: 705px;
                     height: 546px;
                 }
             }
-            
+
 
         }
-        .pad_left96{
-            @include mq(tablet-max){
+
+        .pad_left96 {
+            @include mq(tablet-max) {
                 padding-left: 45px;
             }
-            @include mq(desktop){
+
+            @include mq(desktop) {
                 padding-left: 55px;
             }
-            @include mq(desktop-wide){
+
+            @include mq(desktop-wide) {
                 padding-left: 70px;
             }
-            @include mq(desktop-wide-max){
+
+            @include mq(desktop-wide-max) {
                 padding-left: 96px;
             }
         }
-         .pad_left140{
-            @include mq(tablet-max){
+
+        .pad_left140 {
+            @include mq(tablet-max) {
                 padding-left: 60px;
             }
-            @include mq(desktop){
+
+            @include mq(desktop) {
                 padding-left: 80px;
             }
-            @include mq(desktop-wide){
+
+            @include mq(desktop-wide) {
                 padding-left: 100px;
             }
-            @include mq(desktop-wide-max){
+
+            @include mq(desktop-wide-max) {
                 padding-left: 140px;
             }
         }
-        .pad_right96{
-            @include mq(tablet-max){
+
+        .pad_right96 {
+            @include mq(tablet-max) {
                 padding-right: 45px;
             }
-            @include mq(desktop){
+
+            @include mq(desktop) {
                 padding-right: 55px;
             }
-            @include mq(desktop-wide){
+
+            @include mq(desktop-wide) {
                 padding-right: 70px;
             }
-            @include mq(desktop-wide-max){
+
+            @include mq(desktop-wide-max) {
                 padding-right: 96px;
             }
         }
-       
+
 
         &.v2 {
-            .genric__content{
-               &.pad_right80 {
-                @include mq('tablet-max') {
-                    padding-right: 30px;
-                    @include mq(desktop){
-                        padding-right: 50px;
-                    }
-                    @include mq(desktop-wide){
-                        padding-right: 80px;
+            .genric__content {
+                &.pad_right80 {
+                    @include mq('tablet-max') {
+                        padding-right: 30px;
+
+                        @include mq(desktop) {
+                            padding-right: 50px;
+                        }
+
+                        @include mq(desktop-wide) {
+                            padding-right: 80px;
+                        }
                     }
                 }
             }
-            }
+
             .c-homeSection__people-video {
                 max-width: 799px !important;
                 height: auto;
-                @include mq(desktop-wide){
+
+                @include mq(desktop-wide) {
                     height: 577px !important;
                 }
-                 &.v2{
+
+                &.v2 {
                     max-width: 747px !important;
                     height: auto;
-                    @include mq(desktop-wide){
+
+                    @include mq(desktop-wide) {
                         height: 603px !important;
                     }
                 }
-               
-                
+
+
             }
         }
     }
 }
-.stocks_wrapper__grid{
+
+.stocks_wrapper__grid {
     @include flexbox;
     @include flex-direction(column, vertical);
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         @include flex-direction(row, horizontal);
         @include justify-content(space-between);
         @include align-items(center);
     }
-    .stocks_wrapper_item{
-        &_info{
+
+    .stocks_wrapper_item {
+        &_info {
             @include flexbox;
             gap: 10px;
-            &.mb-30{
+
+            &.mb-30 {
                 margin-bottom: 10px;
-                @include mq(tablet){
+
+                @include mq(tablet) {
                     margin-bottom: 20px;
                 }
-                @include mq(tablet-max){
+
+                @include mq(tablet-max) {
                     margin-bottom: 30px;
                 }
-               
+
             }
-            &_text{
+
+            &_text {
                 color: #F47920;
             }
-          
-            .stocks_wrapper_item_counter{
-                  margin-right: 10px;
+
+            .stocks_wrapper_item_counter {
+                margin-right: 10px;
                 color: #F47920;
-                @include mq(tablet-max){
+
+                @include mq(tablet-max) {
                     margin-right: 20px;
                 }
             }
         }
-        p{
-          color: var(--color-black2);  
-          margin-bottom: 0;
-          font-weight: var(--fontRegular);
-          @include font-size(16);
-          @include mq(tablet){
-            @include font-size(22);
-          }
-          @include mq(desktop-min){
-            @include font-size(26)
-          }
-          @include mq(desktop-wide){
-            @include font-size(30)
-          }
-          @include mq(desktop-wide-max){
-            @include font-size(32)
-          }
+
+        p {
+            color: var(--color-black2);
+            margin-bottom: 0;
+            font-weight: var(--fontRegular);
+            @include font-size(16);
+
+            @include mq(tablet) {
+                @include font-size(22);
+            }
+
+            @include mq(desktop-min) {
+                @include font-size(26)
+            }
+
+            @include mq(desktop-wide) {
+                @include font-size(30)
+            }
+
+            @include mq(desktop-wide-max) {
+                @include font-size(32)
+            }
         }
     }
-    
+
 }
-.genric__content{
-    &.cus-width{
+
+.genric__content {
+    &.cus-width {
         max-width: 360px;
-        >p{
+
+        >p {
             font-weight: 300 !important;
         }
     }
-    
-        .font-bold{
-            font-weight: bold !important;
-        }
-    
+
+    .font-bold {
+        font-weight: bold !important;
+    }
+
 }
-.hw{
-    >div{
-        &.cus-size{
+
+.hw {
+    >div {
+        &.cus-size {
             max-width: 100%;
-            @include mq(desktop){
+
+            @include mq(desktop) {
                 max-width: 355px;
             }
-            &.v2{
-                @include mq(tablet-max){
+
+            &.v2 {
+                @include mq(tablet-max) {
                     max-width: 600px;
                 }
-                @include mq(desktop-wide){
+
+                @include mq(desktop-wide) {
                     max-width: 705px;
                 }
             }
         }
     }
 }
-.c-legacy__wrapper{
+
+.c-legacy__wrapper {
     padding-top: 35px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         padding-top: 45px;
     }
-    @include mq(desktop){
+
+    @include mq(desktop) {
         padding-top: 60px;
     }
-    @include mq(desktop-wide){
+
+    @include mq(desktop-wide) {
         padding-top: 75px;
     }
-    &-item{
-        &-wrap{
-            .legacy__container{
+
+    &-item {
+        &-wrap {
+
+            .legacy__container {
                 position: relative;
                 margin-top: 30px;
-              
-                @include mq(desktop){
+
+                @include mq(desktop) {
                     margin-top: 50px;
                 }
-                @include mq(desktop-wide){
+
+                @include mq(desktop-wide) {
                     margin-top: 65px;
                 }
-                @include mq(desktop-wide-max){
+
+                @include mq(desktop-wide-max) {
                     margin-top: 80px;
                 }
-                &-wrap{
+
+                &-wrap {
                     height: 100%;
+                    padding-top: 40px;
                 }
-                &-img{
+
+                &-img {
                     height: auto;
-                    @include mq(desktop-wide){
-                        height: 540px;
+
+                    @include mq(tablet) {
+                        max-width: 280px;
                     }
-                    .u-img{
-                        height: 100%;
-                        object-fit: cover;
+
+                    @include mq(tablet-max) {
+                        max-width: 350px;
+                    }
+
+                    @include mq(desktop-min) {
+                        max-width: 400px;
+                    }
+
+                    @include mq(desktop-wide) {
+                        max-width: 480px;
                     }
                 }
-                &-content{
+
+                &-content {
                     padding: 25px 0px;
-                    background: #E6E6E6;
+                    background: var(--color-grey);
                     position: relative;
-                    @include mq(tablet-max){
+
+                    @include mq(tablet-max) {
                         padding: 35px 0px;
                     }
-                    @include mq(desktop){
+
+                    @include mq(desktop) {
                         padding: 47px 0px;
                     }
-                    @include mq(desktop-wide){
+
+                    @include mq(desktop-wide) {
                         padding: 57px 0px;
                     }
-                    &::before, &::after{
+
+                    &::before,
+                    &::after {
                         content: "";
                         position: absolute;
-                        background: #E6E6E6;
+                        background: var(--color-grey);
                         top: 0;
                         width: 100%;
                         height: 100%;
-                        
+
                     }
-                    &::before{
+
+                    &::before {
                         left: -100%;
                     }
-                    &::after{
+
+                    &::after {
                         right: -100%;
                     }
 
@@ -272,112 +339,160 @@
                 }
             }
         }
-       .info__box{
-                position: relative;
-                z-index: 99;
-                .desc{
-                    color: var(--color-secondary);
-                    font-weight: var(--fontMedium);
-                    @include font-size(18);
-                    margin-bottom: 0;
-                    @include mq(tablet){
-                        @include font-size(22);
-                    }
-                    @include mq(tablet-max){
-                        @include font-size(26);
-                    }
-                    + .desc{
-                        margin-top: 10px;
-                    }
-                   
+
+        .info__box {
+            position: relative;
+            z-index: 99;
+
+            .desc {
+                color: var(--color-secondary);
+                font-weight: var(--fontMedium);
+                @include font-size(18);
+                margin-bottom: 0;
+
+                @include mq(tablet) {
+                    @include font-size(22);
                 }
+
+                @include mq(tablet-max) {
+                    @include font-size(26);
+                }
+
+                +.desc {
+                    margin-top: 10px;
+                }
+
             }
-        
+        }
+
     }
-    
+
 
 }
-.c-highlight{
-            padding-top: 40px;
-            @include mq(tablet){
-                padding-top: 55px;
-            }
-            @include mq(tablet-max){
-                padding-top: 75px;
-            }
-            @include mq(desktop){
-                padding-top: 100px;
-            }
-            @include mq(desktop-wide){
-                padding-top: 120px;
-            }
-            @include mq(desktop-wide-max){
-                padding-top: 135px;
-            }
-            &__media{
-                
-                .u-img{
-                    width: 100%;
-                }
-            }
-            &__content{
-                padding: 50px 0px;
-                @include mq(tablet){
-                    padding: 70px 0px;
-                }
-                @include mq(tablet-max){
-                    padding: 0px;
-                }
-                &-wrap{
-                    .message{
-                        position: relative;
-                        margin: 30px 0px;
-                        @include mq(tablet){
-                            margin: 40px 0px;
-                        }
-                        @include mq(tablet-max){
-                            margin: 50px 0px;
-                        }
-                        @include mq(desktop){
-                            margin: 60px 0px;
-                        }
-                        @include mq(desktop-wide){
-                            margin: 70px 0px;
-                        }
-                       &::before,
-                        &::after {
-                        content: "";
-                        position: absolute;
-                        width: 22px;
-                        height: 50px;
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        background-image: url("/images/icons/right-blockquote.svg");
-                        @include mq(tablet){
-                            width: 35px;
-                        }
-                        @include mq(desktop){
-                            width: 50px;
-                        }
-                        }
 
-                        &::before{
-                            left: 0;
-                            top: -55px;
-                            @include transform(rotate(180deg));
-                            
-                            @include mq(desktop){
-                                top: -65px;
-                            }
-                        }
-                        &::after{
-                            right: 0;
-                            bottom: -20px;
-                        }
-                        h3{
-                            font-weight: var(--fontMedium) !important;
-                        }
+.c-highlight {
+    padding-top: 40px;
+
+    @include mq(tablet) {
+        padding-top: 55px;
+    }
+
+    @include mq(tablet-max) {
+        padding-top: 75px;
+    }
+
+    @include mq(desktop) {
+        padding-top: 100px;
+    }
+
+    @include mq(desktop-wide) {
+        padding-top: 120px;
+    }
+
+    @include mq(desktop-wide-max) {
+        padding-top: 135px;
+    }
+
+    &__media {
+
+        .u-img {
+            width: 100%;
+        }
+    }
+
+    &__content {
+        padding: 50px 0px;
+        background-color: var(--color-grey);
+        position: relative;
+
+        &-wrap {
+            position: relative;
+            z-index: 10;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            height: 100%;
+            background-color: var(--color-grey);
+            width: calc(100vw + 100%);
+
+        }
+
+        @include mq(tablet) {
+            padding: 70px 0px;
+            background-color: transparent;
+
+            &:before {
+                display: none;
+            }
+        }
+
+        @include mq(tablet-max) {
+            padding: 0px;
+        }
+
+        &-wrap {
+            .message {
+                position: relative;
+                margin: 30px 0px;
+
+                @include mq(tablet) {
+                    margin: 40px 0px;
+                }
+
+                @include mq(tablet-max) {
+                    margin: 50px 0px;
+                }
+
+                @include mq(desktop) {
+                    margin: 60px 0px;
+                }
+
+                @include mq(desktop-wide) {
+                    margin: 70px 0px;
+                }
+
+                &::before,
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 22px;
+                    height: 50px;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-image: url("/images/icons/right-blockquote.svg");
+
+                    @include mq(tablet) {
+                        width: 35px;
                     }
+
+                    @include mq(desktop) {
+                        width: 50px;
+                    }
+                }
+
+                &::before {
+                    left: 0;
+                    top: -55px;
+                    @include transform(rotate(180deg));
+
+                    @include mq(desktop) {
+                        top: -65px;
+                    }
+                }
+
+                &::after {
+                    right: 0;
+                    bottom: -20px;
+                }
+
+                h3 {
+                    font-weight: var(--fontMedium) !important;
                 }
             }
         }
+    }
+}

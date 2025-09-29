@@ -30,7 +30,7 @@
 }
 
 .bg-gray5 {
-    background: #E6E6E6;
+    background: var(--color-grey);
 }
 
 .c-innerSection {
@@ -155,14 +155,14 @@
 }
 
 .mb-70 {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 
     @include mq(tablet-max) {
-        margin-bottom: 40px;
+        margin-bottom: 45px;
     }
 
     @include mq(desktop-wide) {
-        margin-bottom: 60px;
+        margin-bottom: 55px;
     }
 
     @include mq(desktop-wide-max) {
@@ -732,6 +732,7 @@ ul {
 
             @include mq('tablet') {
                 @include font-size(18);
+                height: 55px;
             }
 
             @include mq('desktop-min') {
@@ -775,8 +776,9 @@ ul {
             }
 
             .icon-search {
-                @include font-size(30);
+                @include font-size(20);
                 color: #636466;
+                cursor: pointer;
             }
         }
 
@@ -801,6 +803,7 @@ ul {
 
             @include mq('tablet') {
                 @include font-size(18);
+                height: 55px;
             }
 
             @include mq('desktop-min') {
@@ -810,7 +813,7 @@ ul {
 
             @include mq(desktop) {
                 height: 70px;
-                padding: 18px 38px;
+                padding: 18px 20px 18px 38px;
             }
 
 
@@ -854,6 +857,19 @@ ul {
         border-radius: 3px;
         border: none !important;
         height: 100%;
+
+        &.action_btn {
+            width: 100%;
+            @include font-size(16, 1.6);
+
+            @include mq('desktop-min') {
+                @include font-size(18, 1.6);
+            }
+
+            @include mq('desktop-wide') {
+                @include font-size(20, 1.6);
+            }
+        }
     }
 }
 

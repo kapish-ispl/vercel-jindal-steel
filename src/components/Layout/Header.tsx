@@ -93,6 +93,7 @@ const Header = () => {
                         <Image
                           src={IMAGE_PATH.LOGO}
                           alt="Jindal Steel"
+                          className="img-fluid"
                           priority
                           width={170}
                           height={80}
@@ -101,8 +102,9 @@ const Header = () => {
                         <Image
                           src={IMAGE_PATH.LOGO_LIGHT}
                           alt="Jindal Steel"
-                          width={170}
-                          height={80}
+                          className="img-fluid"
+                          width={190}
+                          height={86}
                           priority
                         />
                       )}
@@ -115,7 +117,7 @@ const Header = () => {
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     aria-label="Toggle mobile menu"
                   >
-                    <div className="icon-chart-no-axes-gantt"></div>
+                    <div className="icon-menu"></div>
                   </button>
 
                   {/* Desktop Menu */}
@@ -211,21 +213,29 @@ const Header = () => {
                         <ul className="accordion-menu">
                           {HEADER_MAIN_MENU.map((menuItem: any, idx: number) => (
                             <li key={menuItem.id} className="accordion-item">
-                              <button
+                              <Link
                                 className="accordion-header"
-                                onClick={() => toggleAccordion(idx)}
+                                href={menuItem.link}
+                                prefetch={false}
+                                target={menuItem.type === "external" ? "_blank" : "_self"}
+                                onClick={() => setMobileMenuOpen(false)}
                               >
                                 {menuItem.name}
-                                {menuItem.children.length > 0 && (
-                                  <span>{openAccordion === idx ? "−" : "+"}</span>
-                                )}
-                              </button>
+                              </Link>
+                              {menuItem.children.length > 0 && (
+                                <span onClick={() => toggleAccordion(idx)}>{openAccordion === idx ? "−" : "+"}</span>
+                              )}
                               {openAccordion === idx &&
                                 menuItem.children.length > 0 && (
                                   <ul className="accordion-content">
                                     {menuItem.children.map((subMenu: any) => (
                                       <li key={subMenu.id}>
-                                        <Link href={subMenu.link}>{subMenu.name}</Link>
+                                        <Link
+                                          prefetch={false}
+                                          href={subMenu.link}
+                                          onClick={() => setMobileMenuOpen(false)}>
+                                          {subMenu.name}
+                                        </Link>
                                       </li>
                                     ))}
                                   </ul>
