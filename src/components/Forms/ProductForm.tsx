@@ -218,7 +218,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                     <Captcha
                                         key={captchaKey}
                                         numberOfCharacters={6}
-                                        backgroundColor="white"
+                                        backgroundColor="#c2c2c2"
                                         fontColor="black"
                                         onChange={setActualCaptcha}
                                         setReloadCaptcha={setReloadCaptcha}

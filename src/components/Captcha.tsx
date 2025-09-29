@@ -106,16 +106,18 @@ export const Captcha = ({
 
     return (
         <>
-            <canvas ref={canvasRef} className="d-flex align-self-start" style={{ minWidth: "130px" }} />
-            <div className='captcha-container'>
-                <button
-                    onClick={reloadCaptcha}
-                    type="button"
-                    tabIndex={4}
-                    style={{ cursor: 'pointer', color: reloadColor, background: 'none', border: 'none', padding: 0 }}
-                >
-                    {reloadText}
-                </button>
+            <div className="captcha__wrapper">
+                <canvas ref={canvasRef} className="d-flex align-self-start" style={{ minWidth: "130px" }} />
+                <div className='captcha-container'>
+                    <button
+                        onClick={reloadCaptcha}
+                        type="button"
+                        tabIndex={4}
+                        style={{ cursor: 'pointer', color: reloadColor, background: 'none', border: 'none', padding: 0 }}
+                    >
+                        {reloadText}
+                    </button>
+                </div>
             </div>
         </>
     );
