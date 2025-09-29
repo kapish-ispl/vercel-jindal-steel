@@ -62,6 +62,9 @@
         }
         &.v2{
             .c-cardView__box-item{
+                .card__content__title{
+                    min-height: 194px;
+                }
                 &:hover{
                     background-color: transparent !important;
                 }
@@ -125,7 +128,7 @@
       
         
     }
-    &.v2, &.v3, &.v4{
+    &.v2{
         cursor: inherit !important;
         .c-cardView__wrapper{
             border: 3px solid #BCBCBC;
@@ -370,13 +373,14 @@
     }
 
 }
+
   .mr-30{
             @include mq(desktop){
                 margin-right: 30px;
             }
-        }
-        .ml-30{
+    }
+    .ml-30{
             @include mq(desktop){
                 margin-left: 30px;
             }
-        }
+    }
