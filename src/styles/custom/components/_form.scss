@@ -2,107 +2,148 @@
 @use '../core/mixins' as *;
 @use '../components/generic/sizes' as *;
 
-.c-form__wrapper{
-    .form_container{
+.c-form__wrapper {
+    .form_container {
         .form_grider_wrap {
             @include flexbox;
             @include flex-direction(column, vertical);
             margin-bottom: 20px;
-            @include mq(tablet-max){
+
+            @include mq(tablet-max) {
                 margin-bottom: 30px;
             }
+
             &.hasError {
-                .form_grider_wrap_field{
-                     -webkit-box-shadow: inset 6px 6px 16px 1px rgba(237, 67, 55,0.5); 
-                box-shadow: inset 6px 6px 16px 1px rgba(237, 67, 55,0.5);
-                border: 1px solid rgb(237, 67, 55);
+                .form_grider_wrap_field {
+                    -webkit-box-shadow: inset 6px 6px 16px 1px rgba(237, 67, 55, 0.5);
+                    box-shadow: inset 6px 6px 16px 1px rgba(237, 67, 55, 0.5);
+                    border: 1px solid rgb(237, 67, 55);
+                }
+
+                .form_grider_wrap_helper {
+                    color: rgb(237, 67, 55);
                 }
             }
-         
-            &_label{
+
+            &_label {
                 display: none;
             }
-            &_field{
+
+
+            &_field {
                 height: 60px;
-                -webkit-box-shadow: inset 6px 6px 16px 1px rgba(0,0,0,0.25); 
-                box-shadow: inset 6px 6px 16px 1px rgba(0,0,0,0.25);
-                padding: 20px  25px;
+                -webkit-box-shadow: inset 6px 6px 16px 1px rgba(0, 0, 0, 0.25);
+                box-shadow: inset 6px 6px 16px 1px rgba(0, 0, 0, 0.25);
+                padding: 20px 25px;
                 border: unset;
-                @include mq(tablet-max){
+                color: #949494;
+                @include font-size(18);
+                font-weight: var(--fontRegular);
+
+                @include mq(tablet) {
+                    @include font-size(20);
+                }
+
+                @include mq(tablet-max) {
+                    height: 70px;
+                    padding: 25px 31px 23px;
+                    @include font-size(24);
+                }
+
+                @include mq(desktop) {
+                    height: 88px;
+                    @include font-size(26);
+                }
+
+                @include mq(tablet-max) {
                     height: 70px;
                     padding: 25px 31px 23px;
                 }
-                @include mq(desktop){
+
+                @include mq(desktop) {
                     height: 88px;
                 }
-                &:focus-visible{
+
+                &:focus-visible {
                     outline: none;
                     border: none !important;
                 }
-                &::placeholder{
+
+                &::placeholder {
                     color: #949494;
                     @include font-size(18);
                     font-weight: var(--fontRegular);
-                    @include mq(tablet){
+
+                    @include mq(tablet) {
                         @include font-size(20);
                     }
-                    @include mq(tablet-max){
+
+                    @include mq(tablet-max) {
                         @include font-size(24);
                     }
-                    @include mq(desktop){
+
+                    @include mq(desktop) {
                         @include font-size(26);
                     }
                 }
             }
-            &_helper{
-                margin: 5px 0px; 
+
+            &_helper {
+                margin: 5px 0px;
             }
         }
-        .form_checkbox_wrap{
+
+        .form_checkbox_wrap {
             @include flexbox;
             @include align-items(center);
             margin-top: 30px;
+
             .form_grider_wrap {
                 margin-bottom: 0px;
-                
+
             }
-            .form_checkbox_label{
-                    padding-left: 30px;
-                    color: var(--color-black);
-                    font-weight: var(--fontRegular);
 
-                    @include font-size(14);
+            .form_checkbox_label {
+                padding-left: 30px;
+                color: var(--color-black);
+                font-weight: var(--fontRegular);
 
-                    @include mq('tablet') {
-                        @include font-size(16, 1.6);
-                    }
+                @include font-size(14);
 
-                    @include mq('desktop-min') {
-                        @include font-size(18, 1.6);
-                    }
-
-                    @include mq('desktop-wide') {
-                        @include font-size(19, 1.6);
-                    }
+                @include mq('tablet') {
+                    @include font-size(16, 1.6);
                 }
+
+                @include mq('desktop-min') {
+                    @include font-size(18, 1.6);
+                }
+
+                @include mq('desktop-wide') {
+                    @include font-size(19, 1.6);
+                }
+            }
         }
-        .form_captcha_wrap{
+
+        .form_captcha_wrap {
             @include flexbox;
             margin-top: 20px;
             @include align-items(center);
-            @include mq(tablet-max){
+
+            @include mq(tablet-max) {
                 margin-top: 30px;
             }
+
             .form_grider_wrap {
-                &_field{
-                     @include mq(desktop){
-                    height: 79px;
+                &_field {
+                    @include mq(desktop) {
+                        height: 79px;
+                    }
                 }
-                }
-               
+
             }
         }
-        .form_submit_button{
+
+        .form_submit_button {
             max-width: 196px;
             padding: 15px;
             background: #636466;
@@ -110,53 +151,63 @@
             text-transform: uppercase;
             border: none;
             @include font-size(20);
-            @include mq(tablet-max){
+
+            @include mq(tablet-max) {
                 padding: 19px 30px;
                 @include font-size(24);
             }
-            @include mq(desktop){
+
+            @include mq(desktop) {
                 @include font-size(26);
             }
-            @include mq(desktop-wide){
+
+            @include mq(desktop-wide) {
                 @include font-size(28);
             }
-            @include mq(desktop-wide-max){
+
+            @include mq(desktop-wide-max) {
                 @include font-size(30);
             }
         }
     }
 }
-   .inputFeild{
-                -webkit-box-shadow: inset 6px 6px 16px 1px rgba(0,0,0,0.25); 
-                box-shadow: inset 6px 6px 16px 1px rgba(0,0,0,0.25);
-                padding: 20px  25px;
-                border: unset;
-                 @include mq(tablet-max){
-                    padding: 25px 31px 23px;
-                 }
-                 .form_group_label{
-                    color: #949494;
-                    @include font-size(22);
-                    font-weight: var(--fontRegular);
-                    margin-bottom: 15px;
-                    @include mq(tablet-max){
-                        @include font-size(24);
-                    }
-                    @include mq(desktop){
-                        @include font-size(26);
-                    }
 
-                 }
-                 .form_radio_wrap{
-                    .form_radio_label{
-                        padding-left: 20px;
-                         color: #949494;
-                        @include font-size(22);
-                        font-weight: var(--fontRegular);
-                        
-                     
+.inputFeild {
+    -webkit-box-shadow: inset 6px 6px 16px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 6px 6px 16px 1px rgba(0, 0, 0, 0.25);
+    padding: 20px 25px;
+    border: unset;
 
-                    }
-                   
-                 }
-            }
+    @include mq(tablet-max) {
+        padding: 25px 31px 23px;
+    }
+
+    .form_group_label {
+        color: #949494;
+        @include font-size(22);
+        font-weight: var(--fontRegular);
+        margin-bottom: 15px;
+
+        @include mq(tablet-max) {
+            @include font-size(24);
+        }
+
+        @include mq(desktop) {
+            @include font-size(26);
+        }
+
+    }
+
+    .form_radio_wrap {
+        .form_radio_label {
+            padding-left: 20px;
+            color: #949494;
+            @include font-size(22);
+            font-weight: var(--fontRegular);
+
+
+
+        }
+
+    }
+}

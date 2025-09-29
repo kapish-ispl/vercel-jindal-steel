@@ -1,20 +1,53 @@
-import { PostData } from "@/types/post";
 import Link from "next/link";
 import React from "react";
 
-const FinancialCard: React.FC<any> = (props: any) => {
+interface MediaItem {
+    cdnPath: string;
+    type?: string;
+}
+
+interface Post {
+    title: string;
+    media?: MediaItem[];
+}
+
+interface FinancialCardProps {
+    postData: Post[];
+    totalPost: number;
+    itemsPerPage?: number;
+}
+
+const FinancialCard: React.FC<FinancialCardProps> = ({ postData }) => {
+    console.log(postData, "postData");
+
     return (
         <ul className="bullet__list">
-            {props.postData && props.postData.length > 0 && props.postData.map((post: any, index: number) => (
-                <li className="bullet__list-item" key={index}>
-                    <Link
-                        className="bullet__list-item-link c-content-19 clr-secondry"
-                        href={post?.media?.cdnPath || "#"}
-                    >
-                        {post?.title}
-                    </Link>
-                </li>
-            ))}
+            {postData?.length > 0 &&
+                postData.map((post, index) => {
+                    let href = "#";
+
+                    if (post.media && post.media.length > 0) {
+                        const attachment = post.media.find(
+                            (item) => item.type === "attachment"
+                        );
+                        if (attachment) {
+                            href = attachment.cdnPath;
+                        } else {
+                            href = '#';
+                        }
+                    }
+
+                    return (
+                        <li className="bullet__list-item" key={index}>
+                            <Link
+                                className="bullet__list-item-link c-content-19 clr-secondry"
+                                href={href}
+                            >
+                                {post.title}
+                            </Link>
+                        </li>
+                    );
+                })}
         </ul>
     );
 };

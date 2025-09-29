@@ -12,6 +12,7 @@ const componentMap: any = {
     FinancialCard: dynamic(() => import("./FinancialCard")),
     AwardsCard: dynamic(() => import("./AwardsCard")),
     OurOfficesCard: dynamic(() => import("./OurOfficesCard")),
+    ProductCard: dynamic(() => import("./ProductCard")),
 }
 
 export default function PostList(props: any) {

@@ -9,6 +9,8 @@ interface CaptchaProps {
     charMap?: CharMap;
     reloadText?: string;
     reloadColor?: string;
+    height?: number;
+    padding?: number;
     onChange?: (value: string) => void;
     setReloadCaptcha: (value: boolean) => void;
 }
@@ -60,34 +62,38 @@ export const Captcha = ({
     reloadColor = 'black',
     onChange,
     setReloadCaptcha,
+    height = 79,
+    padding = 15,
 }: CaptchaProps) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const drawCaptcha = (text: string) => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
         if (!ctx) return;
-
         const length = text.length;
-        const height = 50;
-        const width = length * 20;
+        const charWidth = 20;
 
-        canvas.width = width + 10;
+        canvas.width = length * charWidth + padding * 2;
+        // canvas.height = height + padding * 2;
         canvas.height = height;
-        ctx.fillStyle = backgroundColor;
-        ctx.fillRect(0, 0, width, height);
 
-        ctx.textBaseline = 'middle';
-        ctx.font = 'italic 20px Monospace';
+        // Draw background
+        ctx.fillStyle = backgroundColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.textBaseline = "middle";
+        ctx.font = "italic 20px Monospace";
         ctx.fillStyle = fontColor;
 
         for (let i = 0; i < length; i++) {
-            const x = 20 * i + 10;
-            const y = Math.floor(Math.random() * 10) + 15;
+            const x = charWidth * i + padding;
+            const y = Math.floor(Math.random() * 10) + canvas.height / 2;
             ctx.fillText(text[i], x, y);
         }
     };
+
 
     const reloadCaptcha = () => {
         const newCaptcha = generateCaptcha(numberOfCharacters, charMap);
@@ -97,7 +103,6 @@ export const Captcha = ({
 
     useEffect(() => {
         reloadCaptcha();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [numberOfCharacters, charMap]);
 
     useEffect(() => {
@@ -106,18 +111,16 @@ export const Captcha = ({
 
     return (
         <>
-            <div className="captcha__wrapper">
+            <div className='captcha-container me-3'>
                 <canvas ref={canvasRef} className="d-flex align-self-start" />
-                <div className='captcha-container'>
-                    <button
-                        onClick={reloadCaptcha}
-                        type="button"
-                        tabIndex={4}
-                        style={{ cursor: 'pointer', color: reloadColor, background: 'none', border: 'none', padding: 0 }}
-                    >
-                        {reloadText}
-                    </button>
-                </div>
+                <button
+                    onClick={reloadCaptcha}
+                    type="button"
+                    tabIndex={4}
+                    style={{ cursor: 'pointer', color: reloadColor, background: 'none', border: 'none', padding: 0 }}
+                >
+                    {reloadText}
+                </button>
             </div>
         </>
     );
