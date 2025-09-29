@@ -32,13 +32,10 @@ const PrevArrow = (props: ArrowProps) => {
 };
 
 const CenterModeSlider = ({ postData, itemstoshow, isproduct }: any) => {
-    console.log('mayank');
     // const { postData, data, itemstoshow, isproduct } = props;
     // const filteredSlides = data?.filter((items: any) => items.props !== undefined) || [];
     const sliderRef = useRef<Slider>(null);
     const [activeIndex, setActiveIndex] = useState(0);
-
-    console.log(postData, 'dskjvnskj');
 
     const settings = {
         centerMode: true,
@@ -107,8 +104,10 @@ const CenterModeSlider = ({ postData, itemstoshow, isproduct }: any) => {
                                     {
                                         <div className="slider_wrapper">
                                             <h5>{item.title}</h5>
-                                            <img alt="slider1" className="img-fluid u-img"
+                                            <div className="ratio ratio-4x3">
+                                                <img alt={item.title} className="img-fluid u-img"
                                                 src={item.media[0].cdnPath} />
+                                            </div>
                                             <p>{item.content}</p>
                                         </div>
                                     }
