@@ -46,7 +46,7 @@ const InnerBanner = ({ label, slug, currentPage, innerBanner }: Props) => {
             )}
 
             <div className="c-inner-banner__content">
-                <div className="container custom_container">
+                <div className="container cus-container">
                     <div className="row">
                         <div className="col-12">
                             <div className="c-inner-banner__content_box">

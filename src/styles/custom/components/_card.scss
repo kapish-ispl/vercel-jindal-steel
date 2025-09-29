@@ -184,6 +184,60 @@
             }
         }
     }
+
+     &.v4, &.v3{
+        cursor: inherit !important;
+        .c-cardView__wrapper{
+            border: 3px solid #BCBCBC;
+            overflow: hidden;
+            height: 100%;
+            @include transition(all 0.3s ease-in-out);
+            a{
+                text-decoration: none;
+            }
+            &-media{
+                overflow: hidden;
+                display: block;
+                
+                .u-img{
+                    width: 100%;
+                    overflow: hidden;
+                    height: 100%;
+                    @include transition(all 0.3s ease-in-out);
+                    aspect-ratio: 5/4;
+                }
+
+            }
+            span{
+                display: block;
+            }
+            &-content{
+                padding: 15px;
+                @include mq(tablet-max){
+                    padding: 27px 20px;
+                }
+                .title{
+                    color: var(--color-accent-blue);
+                    
+                }
+                .desc{
+                    font-weight: var(--fontLight);
+                    color: var(--color-black);
+                    margin: 20px 0px;
+                    min-height: 46px;
+                }
+                
+            }
+            &:hover{
+                // .c-cardView__wrapper-media{
+                //     .u-img{
+                //         @include transform(scale(1.2));
+                //     }
+                // }
+               box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+            }
+        }
+    }
    
     &.v3{
         .c-cardView__wrapper{
@@ -194,6 +248,12 @@
             @include mq(tablet-max){
                 margin-bottom: 30px;
                 height: calc(100% - 30px);
+            }
+             a{
+                text-decoration: none;
+            }
+             span{
+                display: block;
             }
             &-media{
                 height: unset;
@@ -249,6 +309,9 @@
              @include mq(desktop){
                     padding: 44px 44px 25px 44px;
                 }
+                 span{
+                display: block;
+            }
             &-content{
                padding: 0;
                .desc{
