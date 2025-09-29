@@ -306,6 +306,57 @@
             }
         }
     }
+    &.product-card{
+        .c-cardView__wrapper{
+            border: 1px solid #000;
+            position: relative;
+            &-media{
+                padding-top: 25px;
+                position: relative;
+                z-index: 9;
+                @include mq(tablet-max){
+                    padding-top: 35px;
+                }
+                @include mq(desktop){
+                    padding-top: 50px;
+                }
+                .u-img{
+                    aspect-ratio: 3/2;
+                    object-fit: cover;
+                    object-position: center center;
+                }
+            }
+            &-content{
+                position: relative;
+                z-index: 9;
+                .title{
+                    color: #636466;
+                    @include font-size(22);
+                    @include mq(tablet){
+                         @include font-size(24);
+                    }
+                    @include mq(tablet-max){
+                         @include font-size(26);
+                    }
+                    @include mq(desktop){
+                         @include font-size(28);
+                    }
+                    @include mq(desktop-wide){
+                         @include font-size(30);
+                    }
+                }
+            }
+            &-shape{
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 238px;
+                background: #efefef; /* light grey */
+                clip-path: polygon(0 0, 100% 90px, 100% 100%, 0% 100%);
+            }
+        }
+    }
 
 }
   .mr-30{

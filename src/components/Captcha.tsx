@@ -70,7 +70,7 @@ export const Captcha = ({
         if (!ctx) return;
 
         const length = text.length;
-        const height = 40;
+        const height = 50;
         const width = length * 20;
 
         canvas.width = width + 10;
@@ -107,7 +107,7 @@ export const Captcha = ({
     return (
         <>
             <div className="captcha__wrapper">
-                <canvas ref={canvasRef} className="d-flex align-self-start" style={{ minWidth: "130px" }} />
+                <canvas ref={canvasRef} className="d-flex align-self-start" />
                 <div className='captcha-container'>
                     <button
                         onClick={reloadCaptcha}
