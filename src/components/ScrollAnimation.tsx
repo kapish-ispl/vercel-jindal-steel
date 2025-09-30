@@ -1,13 +1,11 @@
 "use client";
-
-import React, { useRef, useMemo, useEffect } from "react";
-import { gsap } from "gsap";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import SplitType from "split-type";
+import { SplitText } from "gsap/SplitText";
 import { useDeviceType } from "@/hooks/useDeviceType";
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 interface Panel {
     id: number;
@@ -18,10 +16,20 @@ interface Panel {
 }
 
 const ScrollAnimation = (props: any) => {
-    const main = useRef<HTMLDivElement | null>(null);
-    const timeline = useRef<gsap.core.Timeline | null>(null);
-    const { data: bannerData } = props;
+    const { data: bannerData, className } = props;
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [showDots, setShowDots] = useState(false);
     const device = useDeviceType();
+
+    const headingRefs = useRef<HTMLHeadingElement[]>([]);
+    headingRefs.current = [];
+
+    const addToRefs = (el: HTMLHeadingElement | null) => {
+        if (el && !headingRefs.current.includes(el)) {
+            headingRefs.current.push(el);
+        }
+    };
 
     const panelsData: Panel[] = useMemo(() => {
         if (!bannerData) return [];
@@ -35,153 +43,98 @@ const ScrollAnimation = (props: any) => {
                 children: item.props?.children,
             }));
     }, [bannerData]);
+    const dataLength = panelsData.length;
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            const dots = gsap.utils.toArray<HTMLElement>(".dot");
-            const setActiveDot = (index: number) => {
-                dots.forEach((d) => d.classList.remove("active"));
-                if (dots[index]) dots[index].classList.add("active");
-            };
+        const sections = gsap.utils.toArray<HTMLElement>(".panel");
 
-            // hide nav dots initially
-            gsap.set(".nav-dots", { autoAlpha: 0 });
-            setActiveDot(0);
+        ScrollTrigger.getAll().forEach((t) => t.kill());
 
-            // timeline pinned to panels-container
-            timeline.current = gsap.timeline({
+        // Main vertical scroll
+        gsap.to(sections, {
+            yPercent: -100 * (dataLength - 1),
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                pin: true,
+                snap: 1 / (dataLength - 1),
+                end: () => "+=" + containerRef.current!.offsetHeight,
+                scrub: 1,
+                onEnter: () => setShowDots(true),
+                onLeave: () => setShowDots(false),
+                onEnterBack: () => setShowDots(true),
+                onLeaveBack: () => setShowDots(false),
+            },
+        });
+
+        // SplitText animation for each heading
+        headingRefs.current.forEach((heading) => {
+            const split = new SplitText(heading, { type: "words,chars" });
+
+            gsap.from(split.chars, {
                 scrollTrigger: {
-                    trigger: ".panels-container",
-                    start: "top top",
-                    pin: true,
-                    scrub: true,
-                    snap: {
-                        snapTo: 1 / (panelsData.length - 1),
-                        duration: { min: 0.2, max: 0.6 },
-                        ease: "power1.inOut",
-                    },
-                    end: () => "+=" + panelsData.length * window.innerHeight,
-                    onEnter: () => gsap.to(".nav-dots", { autoAlpha: 1, duration: 0.3 }),
-                    onLeave: () => gsap.to(".nav-dots", { autoAlpha: 0, duration: 0.3 }),
-                    onEnterBack: () => gsap.to(".nav-dots", { autoAlpha: 1, duration: 0.3 }),
-                    onLeaveBack: () => gsap.to(".nav-dots", { autoAlpha: 0, duration: 0.3 }),
-                    onUpdate: (self) => {
-                        const idx = Math.round(self.progress * (panelsData.length - 1));
-                        setActiveDot(idx);
-                    },
+                    trigger: heading,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
                 },
+                duration: 0.6,
+                opacity: 0,
+                y: 40,
+                stagger: 0.05,
+                ease: "power3.out",
             });
-
-            panelsData.forEach((panel, i) => {
-                const panelSelector = `.panel-${panel.id}`;
-                const headingSelector = `.heading-${panel.id}`;
-                const step = i;
-
-                timeline.current!
-                    .fromTo(
-                        `${panelSelector} .parallax-img`,
-                        { scale: 1, y: 0 }, // start
-                        { scale: 1.15, y: -20, ease: "power1.inOut", duration: 1 },
-                        step
-                    )
-                    .fromTo(
-                        new SplitType(headingSelector, { types: "chars" }).chars,
-                        { y: 80, opacity: 0 }, // start
-                        {
-                            y: 0,
-                            opacity: 1,
-                            stagger: 0.05,
-                            ease: "power2.out",
-                            duration: 0.6,
-                        },
-                        step + 0.2
-                    );
-            });
-
-            const containerEl = document.querySelector(
-                ".panels-container"
-            ) as HTMLElement | null;
-            if (containerEl) {
-                dots.forEach((dot, idx) => {
-                    const clickHandler = () => {
-                        const containerTop =
-                            containerEl.getBoundingClientRect().top + window.pageYOffset;
-                        const targetY = containerTop + idx * window.innerHeight;
-                        gsap.to(window, {
-                            duration: 0.8,
-                            ease: "power2.inOut",
-                            scrollTo: targetY,
-                        });
-                    };
-                    dot.addEventListener("click", clickHandler);
-                    (dot as any).__gsapClickHandler = clickHandler;
-                });
-            }
-        }, main);
-
-        // ensure ScrollTrigger recalculates on resize
-        const onResize = () => {
-            ScrollTrigger.refresh();
-        };
-        window.addEventListener("resize", onResize);
-
-        return () => {
-            const dots = document.querySelectorAll(".dot");
-            dots.forEach((dot) => {
-                const h = (dot as any).__gsapClickHandler;
-                if (h) dot.removeEventListener("click", h);
-            });
-            window.removeEventListener("resize", onResize);
-            ctx.revert();
-        };
-    }, [panelsData]);
+        });
+    }, [dataLength]);
 
     return (
-        <div ref={main} className="scroll-animation-container">
-            <div className="panels-container">
-                {panelsData.map((panel) => (
-                    <section key={panel.id} className={`panel panel-${panel.id}`}>
-                        <div className="parallax-container">
-                            <img
-                                src={device === "desktop" ? panel.img : panel.mobImg}
-                                alt={panel.heading}
-                                className="parallax-img"
-                            />
-                        </div>
-
-                        <div className="container cus-container h-100">
-                            <div className="row h-100">
-                                <div className="col-12 h-100">
-                                    <div className="scrollable_box_content h-100">
-                                        <div className="scrollable_box_content_head">
-                                            <h2
-                                                className={`pannel-heading c-heading-65 clr-green heading-${panel.id}`}
-                                            >
-                                                {panel.heading}
-                                            </h2>
+        <>
+            <section className={`generic_hr_scroll hidden xl:block ${className ?? ""}`}>
+                <div style={{ position: "relative" }}>
+                    <div ref={containerRef} className="container_jj">
+                        {panelsData.length > 0 &&
+                            panelsData.map((item, index) => (
+                                <section key={index} className="panel red">
+                                    <div className="slide-content">
+                                        <div
+                                            className="generic_hr_scroll_section relative scrollable_box v4"
+                                            style={{
+                                                backgroundImage: `url(${device === "desktop" ? item.img : item.mobImg
+                                                    })`,
+                                            }}
+                                        >
+                                            <div className="container z-20 scrollable_box_container">
+                                                <div className="row h-full">
+                                                    <div className="col-12 h-full">
+                                                        <div className="scrollable_box_content h-full flex flex-col justify-between pt-28 pb-20">
+                                                            <div className="scrollable_box_content_head">
+                                                                <h2
+                                                                    ref={addToRefs}
+                                                                    className={`pannel-heading c-heading-65 clr-green heading-${item.id}`}
+                                                                >
+                                                                    {item.heading}
+                                                                </h2>
+                                                            </div>
+                                                            {item.children}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        {panel.children}
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                ))}
-            </div>
-
-            {
-                panelsData.length > 1 && (
-                    <nav className="nav-dots">
-                        <ul>
-                            {panelsData.map((_, i) => (
-                                <li key={i} className="dot"></li>
+                                </section>
                             ))}
-                        </ul>
-                    </nav>
-                )
+                    </div>
 
-            }
-        </div>
+                    {showDots && (
+                        <div className="dots">
+                            {Array.from({ length: dataLength }).map((_, idx) => (
+                                <span key={idx} className={activeIndex === idx ? "active" : ""} />
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </section>
+        </>
     );
 };
 

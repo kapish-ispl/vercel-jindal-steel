@@ -74,8 +74,6 @@ export default function PostList(props: any) {
     //     () => dynamic(() => import(`./${props.components}`)),
     //     [props.components]
     // );
-    console.log(props);
-    console.log(postData);
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (

@@ -171,7 +171,7 @@ const Header = () => {
                                   <li className="row">
                                     <li className="col-4">
                                       {aa.length > 0 && aa.map((item: any, index: number) => (
-                                        <p className="c-content-16 clr-black mt-2 pe-5 me-3">
+                                        <p className="c-content-16 clr-black mt-2 pe-5 me-3" key={index}>
                                           {item.desc}
                                         </p>
                                       ))}

@@ -187,7 +187,6 @@
 ////////////////
 /* General Styling for scroll container*/
 .scroll-animation-container {
-
     .panels-container {
         position: relative;
         height: 100dvh;
@@ -296,6 +295,7 @@
     }
 }
 
+
 .centermode-slider {
     .slide-item {
         transition: transform 0.4s ease;
@@ -337,7 +337,7 @@
         }
     }
 
-    .slick-center .slide-item {
+    .swiper-slide-active .slide-item {
         opacity: 1;
         z-index: 2;
         transform: scale(1);
@@ -413,6 +413,12 @@
             @include mq(desktop-wide) {
                 left: -40px;
             }
+        }
+    }
+
+    &.nav-disabled {
+        .custom-arrow {
+            display: none;
         }
     }
 }
