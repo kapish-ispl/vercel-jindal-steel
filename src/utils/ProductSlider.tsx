@@ -87,6 +87,11 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ postData }) => {
         slidesToShow: 5,
         arrows: false,
         centerPadding: "0",
+        beforeChange: (current, next) => {
+            console.log("category breakpoint fired", window.innerWidth);
+            sliderRef.current?.slickGoTo(next);
+            setActiveIndex(next);
+        },
         responsive: [
             {
                 breakpoint: 768,
@@ -94,12 +99,15 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ postData }) => {
                     slidesToShow: 3,
                 },
             },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 1,
+                },
+            },
         ],
-        beforeChange: (_: number, next: number) => {
-            sliderRef.current?.slickGoTo(next);
-            setActiveIndex(next);
-        },
     };
+
 
     return (
         <div className="slider-wrapper">

@@ -32,6 +32,9 @@
 .bg-gray5 {
     background: var(--color-grey);
 }
+.bg-gry6{
+    background: #eee;
+}
 
 .c-innerSection {
     padding: 30px 0px !important;
@@ -46,6 +49,21 @@
 
     @include mq(desktop-wide-max) {
         padding: 90px 0px !important;
+    }
+}
+.c-pt75{
+    padding: 25px 0px !important;
+    @include mq(tablet){
+        padding: 35px 0px !important;
+    }
+    @include mq(tablet-max){
+        padding: 45px 0px !important;
+    }
+    @include mq(desktop){
+        padding: 65px 0px !important;
+    }
+    @include mq(desktop-wide){
+        padding: 75px 0px !important;
     }
 }
 

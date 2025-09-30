@@ -247,3 +247,29 @@
         }
     }
 }
+.category-slider{
+    margin-bottom: 40px;
+    @include mq(desktop){
+        margin-bottom: 60px;
+    }
+    
+    @include mq(desktop-wide){
+        margin-bottom: 80px !important;
+    }
+
+    >div>.slick-track{
+        @include flexbox;
+        @include align-items(center);
+        .slick-slide.slick-active{
+            text-align: center;
+            >div>div>div{
+                color: rgba(99, 100, 102, 0.8);
+            }
+            &:nth-child(2){
+                >div>div>div{
+                color: rgba(99, 100, 102, 0.6);
+            }
+            }
+        }
+    }
+}
