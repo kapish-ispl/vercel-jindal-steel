@@ -1,131 +1,169 @@
 "use client";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import { EmblaOptionsType } from "embla-carousel";
+import Autoplay from "embla-carousel-autoplay";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
-import React, { useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
-
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
-interface ModularSliderProps {
-    data: any; // Array of React elements or objects with props
-    itemstoshow?: number | string;
-    showdots?: "yes" | "no";
-    centermode?: "yes" | "no";
-    showarrow?: "yes" | "no";
-    autoplay?: "yes" | "no";
+// --- Type Definitions ---
+interface ResponsiveOptions {
+    slidesPerView: number;
+    arrows: boolean;
+    dots: boolean;
+    autoplay: boolean;
+    loop: boolean;
+    centerMode: boolean;
 }
 
-const ModularSlider: React.FC<ModularSliderProps> = ({
+interface ResponsiveSettings {
+    [key: string]: Partial<ResponsiveOptions>;
+}
+
+interface CustomContentSliderProps {
+    data: any;
+    responsive?: ResponsiveSettings;
+    showdots?: 'yes' | 'no';
+    showarrows?: 'yes' | 'no';
+    autoplay?: 'yes' | 'no';
+    loop?: 'yes' | 'no';
+    centermode?: 'yes' | 'no';
+    itemstoshow?: number;
+}
+
+// --- Component Configuration ---
+const BREAKPOINTS = {
+    mobile: 0,
+    tablet: 767,
+    laptop: 991,
+    desktop: 1200,
+};
+
+const DEFAULT_RESPONSIVE_SETTINGS: ResponsiveSettings = {
+    mobile: { slidesPerView: 1, arrows: false, dots: false, autoplay: true, loop: true, centerMode: false },
+    tablet: { slidesPerView: 2, arrows: false, dots: false, autoplay: true, loop: true, centerMode: false },
+    laptop: { slidesPerView: 3, arrows: false, dots: false, autoplay: true, loop: true, centerMode: false },
+    desktop: { slidesPerView: 4, arrows: true, dots: false, autoplay: true, loop: true, centerMode: false },
+};
+
+// --- The Component ---
+const CustomContentSlider: React.FC<CustomContentSliderProps> = ({
     data,
-    itemstoshow = 3,
-    showdots = "yes",
-    centermode = "no",
-    showarrow = "yes",
-    autoplay = "no",
+    responsive = DEFAULT_RESPONSIVE_SETTINGS,
+    showdots = 'no',
+    showarrows = 'yes',
+    autoplay = 'yes',
+    loop = 'yes',
+    centermode = 'no',
+    itemstoshow = 4,
 }) => {
-    const finalData = data.filter((item: any) => item.props !== undefined);
-    const slidesToShow = Number(itemstoshow);
-    const isCenterMode = centermode === "yes";
-    const enableArrows = showarrow === "yes" && finalData.length > slidesToShow;
-    const enablePagination = showdots === "yes" && finalData.length > slidesToShow;
-    const enableLoop = finalData.length > slidesToShow;
-    const enableAutoplay = autoplay === "yes" && enableLoop;
+    // const slides = React.Children.toArray(children);
+    const slides = data?.filter((item: any) => item.props !== undefined);
+    const itemCount = slides.length;
 
-    const prevRef = useRef<HTMLDivElement | null>(null);
-    const nextRef = useRef<HTMLDivElement | null>(null);
-    const swiperRef = useRef<SwiperType | null>(null);
-    const [navDisabled, setNavDisabled] = useState(!enableArrows);
+    const activeBreakpoint = useBreakpoint(BREAKPOINTS);
+    const slidesPerView = useMemo(() => {
+        switch (activeBreakpoint) {
+            case 'mobile':
+                return 1; // Always show 1 on mobile
+            case 'tablet':
+                return 2; // Always show 2 on tablet
+            case 'laptop':
+                return 3; // Always show 3 on laptop
+            default:
+                return itemstoshow; // Use the prop value for desktop
+        }
+    }, [activeBreakpoint, itemstoshow]);
+    const settings = { ...DEFAULT_RESPONSIVE_SETTINGS.desktop, ...responsive[activeBreakpoint] };
 
-    if (finalData.length === 0) return null;
+    // Determine if the slider features should be active
+    const isSliderActive = itemCount > slidesPerView || 1;
 
-    // Single item fallback
-    if (finalData.length === 1) {
+    const emblaOptions: EmblaOptionsType = {
+        loop: isSliderActive && loop === 'yes',
+        align: centermode === 'yes' ? "center" : "start",
+    };
+
+    const plugins = useMemo(() => {
+        if (isSliderActive && autoplay === 'yes') {
+            return [Autoplay()];
+        }
+        return [];
+    }, [isSliderActive, autoplay]);
+
+    const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions, plugins);
+
+
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+    const [canScrollPrev, setCanScrollPrev] = useState(false);
+    const [canScrollNext, setCanScrollNext] = useState(false);
+
+    const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+    const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+    const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi]);
+
+    useEffect(() => {
+        if (!emblaApi) return;
+        const onUpdate = () => {
+            setScrollSnaps(emblaApi.scrollSnapList());
+            setActiveIndex(emblaApi.selectedScrollSnap());
+            setCanScrollPrev(emblaApi.canScrollPrev());
+            setCanScrollNext(emblaApi.canScrollNext());
+        };
+        emblaApi.on("select", onUpdate);
+        emblaApi.on("reInit", onUpdate);
+        onUpdate(); // Initial setup
+        return () => { emblaApi.off("select", onUpdate).off("reInit", onUpdate) };
+    }, [emblaApi]);
+
+    if (!isSliderActive) {
         return (
             <div className="row">
-                {finalData.map((item: any, idx: number) => (
-                    <div className="col-12" key={idx}>
-                        <div className={item.props.className || "slider_wrapper"}>
-                            {item.props.children}
-                        </div>
+                {slides.map((slide: any, index: number) => (
+                    <div className="col-12" key={index}>
+                        {slide}
                     </div>
                 ))}
             </div>
         );
     }
 
-
     return (
-        <div
-            className={`slider-wrapper centermode-slider position-relative ${navDisabled ? "nav-disabled" : ""}`}>
-            {/* Custom Arrows */}
-            {enableArrows && (
+        <div className={`custom-content-slider ${settings.centerMode ? "is-center-mode" : ""}`}>
+            {showarrows === 'yes' && itemCount > itemstoshow && settings.arrows && (
                 <>
-                    <div ref={prevRef} className="custom-arrow prev cursor-pointer">
-                        <svg
-                            width="45"
-                            height="28"
-                            viewBox="0 0 45 28"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M15.7916 27.4435C15.0277 28.1857 13.789 28.1853 13.0249 27.4435L0.573056 15.3442C-0.191016 14.6017 -0.191016 13.3983 0.573057 12.6558L13.0249 0.556541C13.789 -0.185334 15.0277 -0.18571 15.7916 0.556541C16.5554 1.29879 16.5551 2.50238 15.7916 3.24486L6.67957 12.0989L45 12.0989L45 15.9011L6.67957 15.9011L15.7916 24.7551C16.5551 25.4976 16.5554 26.7012 15.7916 27.4435Z"
-                                fill="#446183"
-                            />
-                        </svg>
+                    <div className="custom-arrow prev" onClick={scrollPrev}>
+                        <svg width="45" height="28" viewBox="0 0 45 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.7916 27.4435C15.0277 28.1857 13.789 28.1853 13.0249 27.4435L0.573056 15.3442C-0.191016 14.6017 -0.191016 13.3983 0.573057 12.6558L13.0249 0.556541C13.789 -0.185334 15.0277 -0.18571 15.7916 0.556541C16.5554 1.29879 16.5551 2.50238 15.7916 3.24486L6.67957 12.0989L45 12.0989L45 15.9011L6.67957 15.9011L15.7916 24.7551C16.5551 25.4976 16.5554 26.7012 15.7916 27.4435Z" fill="#446183" /></svg>
                     </div>
-                    <div ref={nextRef} className="custom-arrow next cursor-pointer">
-                        <svg
-                            width="45"
-                            height="28"
-                            viewBox="0 0 45 28"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="M15.7916 27.4435C15.0277 28.1857 13.789 28.1853 13.0249 27.4435L0.573056 15.3442C-0.191016 14.6017 -0.191016 13.3983 0.573057 12.6558L13.0249 0.556541C13.789 -0.185334 15.0277 -0.18571 15.7916 0.556541C16.5554 1.29879 16.5551 2.50238 15.7916 3.24486L6.67957 12.0989L45 12.0989L45 15.9011L6.67957 15.9011L15.7916 24.7551C16.5551 25.4976 16.5554 26.7012 15.7916 27.4435Z"
-                                fill="#446183"
-                            />
-                        </svg>
+                    <div className="custom-arrow next" onClick={scrollNext}>
+                        <svg width="45" height="28" viewBox="0 0 45 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path transform="scale(-1, 1) translate(-45, 0)" d="M15.7916 27.4435C15.0277 28.1857 13.789 28.1853 13.0249 27.4435L0.573056 15.3442C-0.191016 14.6017 -0.191016 13.3983 0.573057 12.6558L13.0249 0.556541C13.789 -0.185334 15.0277 -0.18571 15.7916 0.556541C16.5554 1.29879 16.5551 2.50238 15.7916 3.24486L6.67957 12.0989L45 12.0989L45 15.9011L6.67957 15.9011L15.7916 24.7551C16.5551 25.4976 16.5554 26.7012 15.7916 27.4435Z" fill="#446183" /></svg>
                     </div>
                 </>
             )}
 
-            <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                slidesPerView={slidesToShow}
-                spaceBetween={16}
-                loop={enableLoop}
-                centeredSlides={isCenterMode}
-                autoplay={enableAutoplay ? { delay: 2000, disableOnInteraction: false } : false}
-                navigation={enableArrows ? { prevEl: prevRef.current, nextEl: nextRef.current } : false}
-                pagination={enablePagination ? { clickable: true } : false}
-                onSwiper={(swiper) => {
-                    swiperRef.current = swiper;
-                }}
-                onBreakpoint={(swiper) => {
-                    const navEnabled =
-                        typeof swiper.params.navigation !== "boolean" &&
-                        swiper.params.navigation &&
-                        (swiper.params.navigation as any).enabled !== false;
-                    setNavDisabled(!navEnabled);
-                }}
-                breakpoints={{
-                    0: { slidesPerView: 1, centeredSlides: true, navigation: { enabled: false } },
-                    768: { slidesPerView: slidesToShow },
-                }}
-            >
-                {finalData.map((item: any, index: number) => (
-                    <SwiperSlide key={index} className={item.props.className || ""}>
-                        <div className="slider_wrapper">{item.props.children}</div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+            <div className="embla-content-slider" ref={emblaRef} style={{ '--slides-per-view': slidesPerView } as React.CSSProperties}>
+                <div className="embla-content-slider__container">
+                    {slides.map((child: any, index: number) => (
+                        <div className="embla-content-slider__slide" key={index}>
+                            {child}
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {showdots === 'yes' && settings.dots && (
+                <div className="embla-content-slider__dots">
+                    {scrollSnaps.map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => scrollTo(index)}
+                            className={`embla-content-slider__dot ${index === activeIndex ? "is-selected" : ""}`}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
 
-export default ModularSlider;
+export default CustomContentSlider;

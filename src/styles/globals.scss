@@ -296,129 +296,137 @@
 }
 
 
-.centermode-slider {
-    .slide-item {
-        transition: transform 0.4s ease;
-        padding: 10px;
-        transform: scale(.7);
-        opacity: 0.5;
+/* --- Combined & Cleaned Centered Slider Styles --- */
+// .centermode-slider {
+//     position: relative;
 
-        h5 {
-            text-align: center;
-            font-weight: bold;
-            @include font-size(22);
-            color: #446183;
-            margin-bottom: 25px;
+//     /* --- Base Embla Carousel Structure --- */
+//     .embla-center-mode {
+//         overflow: hidden;
+//     }
 
-            @include mq(tablet) {
-                @include font-size(26);
-            }
+//     .embla-center-mode__container {
+//         display: flex;
+//         margin-left: -16px;
+//         /* Adjust based on slide padding */
+//     }
 
-            @include mq(tablet-max) {
-                @include font-size(28);
-                margin-bottom: 35px;
-            }
+//     .embla-center-mode__slide {
+//         position: relative;
+//         /* Dynamically sets slide width from the React component */
+//         flex: 0 0 calc(100% / var(--slides-per-view, 1));
+//         padding-left: 16px;
+//         /* Creates space between slides */
+//     }
 
-            @include mq(desktop) {
-                @include font-size(30);
-                margin-bottom: 45px;
-            }
+//     /* --- Slide Item Styling (Inactive State) --- */
+//     .slide-item {
+//         transition: transform 0.4s ease, opacity 0.4s ease;
+//         padding: 10px;
+//         transform: scale(0.7);
+//         opacity: 0.5;
 
-            @include mq(desktop-wide) {
-                @include font-size(32);
+//         h5 {
+//             text-align: center;
+//             font-weight: bold;
+//             color: #446183;
+//             margin-bottom: 25px;
+//             @include font-size(22);
 
-            }
-        }
+//             @include mq(tablet) {
+//                 @include font-size(26);
+//             }
 
+//             @include mq(tablet-max) {
+//                 @include font-size(28);
+//                 margin-bottom: 35px;
+//             }
 
-        p {
-            opacity: 0;
-            visibility: hidden;
-        }
-    }
+//             @include mq(desktop) {
+//                 @include font-size(30);
+//                 margin-bottom: 45px;
+//             }
 
-    .swiper-slide-active .slide-item {
-        opacity: 1;
-        z-index: 2;
-        transform: scale(1);
-        transition: transform 0.4s ease;
+//             @include mq(desktop-wide) {
+//                 @include font-size(32);
+//             }
+//         }
 
-        img {
-            box-shadow: 0px 16px 13.8px 0px #00000040 !important;
+//         p {
+//             opacity: 0;
+//             visibility: hidden;
+//             transition: opacity 0.4s ease;
+//         }
+//     }
 
-        }
+//     /* --- Active Slide Styling --- */
+//     .embla-center-mode__slide.is-active .slide-item {
+//         opacity: 1;
+//         z-index: 2;
+//         transform: scale(1);
 
-        p {
-            opacity: 1;
-            visibility: visible;
-            margin-top: 25px;
-            text-align: center;
-            font-weight: var(--fontRegular);
+//         img {
+//             box-shadow: 0px 16px 13.8px 0px #00000040 !important;
+//         }
 
-            @include font-size(14);
+//         p {
+//             opacity: 1;
+//             visibility: visible;
+//             margin-top: 25px;
+//             text-align: center;
+//             font-weight: var(--fontRegular);
+//             @include font-size(14);
 
-            @include mq('tablet') {
-                @include font-size(16, 1.6);
-            }
+//             @include mq("tablet") {
+//                 @include font-size(16, 1.6);
+//             }
 
-            @include mq(tablet-max) {
-                margin-top: 40px;
-            }
+//             @include mq(tablet-max) {
+//                 margin-top: 40px;
+//             }
 
-            @include mq('desktop-min') {
-                @include font-size(18, 1.6);
-            }
+//             @include mq("desktop-min") {
+//                 @include font-size(18, 1.6);
+//             }
 
-            @include mq(desktop) {
-                margin-top: 50px;
-            }
+//             @include mq(desktop) {
+//                 margin-top: 50px;
+//             }
 
-            @include mq('desktop-wide') {
-                @include font-size(19, 1.6);
-            }
+//             @include mq("desktop-wide") {
+//                 @include font-size(19, 1.6);
+//             }
+//         }
+//     }
 
+//     /* --- Custom Arrow Styles --- */
+//     .custom-arrow {
+//         position: absolute;
+//         top: 50%;
+//         transform: translateY(-50%);
+//         z-index: 5;
+//         width: 40px;
+//         height: 40px;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         cursor: pointer;
 
-        }
-    }
+//         &.next {
+//             right: 10px;
 
-    .custom-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 5;
-        color: #fff;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
+//             /* The SVG path is already transformed in the JSX, so no rotation is needed here */
+//             @include mq(desktop-wide) {
+//                 right: -40px;
+//             }
+//         }
 
-        &.next {
-            right: 10px;
-            transform: rotateY(180deg);
-            top: 50%;
+//         &.prev {
+//             left: 10px;
 
-            @include mq(desktop-wide) {
-                right: -40px;
-            }
-        }
-
-        &.prev {
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-
-            @include mq(desktop-wide) {
-                left: -40px;
-            }
-        }
-    }
-
-    &.nav-disabled {
-        .custom-arrow {
-            display: none;
-        }
-    }
-}
+//             @include mq(desktop-wide) {
+//                 left: -40px;
+//             }
+//         }
+//     }
+// }
