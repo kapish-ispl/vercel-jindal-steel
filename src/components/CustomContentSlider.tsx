@@ -1,131 +1,131 @@
 "use client";
-import React from "react";
-import Slider from "react-slick";
 
-interface ArrowProps {
-    onClick?: () => void;
+import React, { useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+interface ModularSliderProps {
+    data: any; // Array of React elements or objects with props
+    itemstoshow?: number | string;
+    showdots?: "yes" | "no";
+    centermode?: "yes" | "no";
+    showarrow?: "yes" | "no";
+    autoplay?: "yes" | "no";
 }
 
-const NextArrow = (props: ArrowProps) => {
-    const { onClick } = props;
-    return (
-        <div className="custom-arrow next cursor-pointer" onClick={onClick}>
-            <svg width="44" height="27" viewBox="0 0 44 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clipPath="url(#clip0_96_665)">
-                    <path d="M4.31047 11.3799L42.2305 11.3799C43.2005 11.3799 43.9805 12.1599 43.9805 13.1299C43.9805 14.0999 43.2005 14.8799 42.2305 14.8799L4.31047 14.8799C3.34047 14.8799 2.56047 14.0999 2.56047 13.1299C2.56047 12.1599 3.34047 11.3799 4.31047 11.3799Z" fill="#626466" />
-                    <path d="M13.8496 -0.000244294C14.2996 -0.000244254 14.7496 0.169756 15.0896 0.509756C15.7696 1.18976 15.7696 2.29976 15.0896 2.97976L4.94961 13.1198L15.0896 23.2698C15.7696 23.9498 15.7696 25.0598 15.0896 25.7398C14.4096 26.4198 13.2996 26.4198 12.6196 25.7398L-0.000389859 13.1198L12.6196 0.499756C12.9596 0.159755 13.4096 -0.0102446 13.8596 -0.0102445L13.8496 -0.000244294Z" fill="#626466" />
-                </g>
-                <defs>
-                    <clipPath id="clip0_96_665">
-                        <rect width="43.98" height="26.26" fill="white" transform="translate(43.9805 26.2598) rotate(-180)" />
-                    </clipPath>
-                </defs>
-            </svg>
-        </div>
-    );
-};
+const ModularSlider: React.FC<ModularSliderProps> = ({
+    data,
+    itemstoshow = 3,
+    showdots = "yes",
+    centermode = "no",
+    showarrow = "yes",
+    autoplay = "no",
+}) => {
+    const finalData = data.filter((item: any) => item.props !== undefined);
+    const slidesToShow = Number(itemstoshow);
+    const isCenterMode = centermode === "yes";
+    const enableArrows = showarrow === "yes" && finalData.length > slidesToShow;
+    const enablePagination = showdots === "yes" && finalData.length > slidesToShow;
+    const enableLoop = finalData.length > slidesToShow;
+    const enableAutoplay = autoplay === "yes" && enableLoop;
 
-const PrevArrow = (props: ArrowProps) => {
-    const { onClick } = props;
-    return (
-        <div className="custom-arrow prev cursor-pointer" onClick={onClick}>
-            <svg width="44" height="27" viewBox="0 0 44 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_96_665)">
-                    <path d="M4.31047 11.3799L42.2305 11.3799C43.2005 11.3799 43.9805 12.1599 43.9805 13.1299C43.9805 14.0999 43.2005 14.8799 42.2305 14.8799L4.31047 14.8799C3.34047 14.8799 2.56047 14.0999 2.56047 13.1299C2.56047 12.1599 3.34047 11.3799 4.31047 11.3799Z" fill="#626466" />
-                    <path d="M13.8496 -0.000244294C14.2996 -0.000244254 14.7496 0.169756 15.0896 0.509756C15.7696 1.18976 15.7696 2.29976 15.0896 2.97976L4.94961 13.1198L15.0896 23.2698C15.7696 23.9498 15.7696 25.0598 15.0896 25.7398C14.4096 26.4198 13.2996 26.4198 12.6196 25.7398L-0.000389859 13.1198L12.6196 0.499756C12.9596 0.159755 13.4096 -0.0102446 13.8596 -0.0102445L13.8496 -0.000244294Z" fill="#626466" />
-                </g>
-                <defs>
-                    <clipPath id="clip0_96_665">
-                        <rect width="43.98" height="26.26" fill="white" transform="translate(43.9805 26.2598) rotate(-180)" />
-                    </clipPath>
-                </defs>
-            </svg>
+    const prevRef = useRef<HTMLDivElement | null>(null);
+    const nextRef = useRef<HTMLDivElement | null>(null);
+    const swiperRef = useRef<SwiperType | null>(null);
+    const [navDisabled, setNavDisabled] = useState(!enableArrows);
 
-        </div>
-    );
-};
+    if (finalData.length === 0) return null;
 
-const CustomContentSlider = (props: any,) => {
-    const { itemstoshow, data, showdots, centermode, showarrow } = props;
-    const finalData = data.filter((items: any) => items.props !== undefined);
-    const itemCount = finalData.length;
-    const slidesToShow = Number(itemstoshow) || 4;
-    const centerMode = centermode === 'yes' ? true : false;
-
-
-    const settings = {
-        arrows: showarrow === "yes" && itemCount > slidesToShow,
-        dots: showdots === "yes" && itemCount > slidesToShow,
-        autoplay: itemCount > slidesToShow,
-        autoplaySpeed: 2000,
-        infinite: itemCount > slidesToShow,
-        slidesToShow: slidesToShow,
-        slidesToScroll: 1,
-        centerMode: centerMode,
-        centerPadding: "0",
-        nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />,
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: slidesToShow < 2 ? slidesToShow : 3,
-                    slidesToScroll: slidesToShow < 2 ? slidesToShow : 3,
-                    arrows: true,
-                },
-            },
-            {
-                breakpoint: 991,
-                settings: {
-                    slidesToShow: slidesToShow <= 1 ? slidesToShow : 2,
-                    slidesToScroll: slidesToShow <= 1 ? slidesToShow : 2,
-                    arrows: true,
-                },
-            },
-            {
-                breakpoint: 767,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    arrows: true,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: true,
-                },
-            },
-        ],
-    };
-
-    return (
-        <>
-            {itemCount > 1 ? (
-                <div>
-                    <Slider {...settings}>
-                        {finalData.map((info: any) => (
-                            <div className={info.props.className} key={info.key}>
-                                {info.props.children}
-                            </div>
-                        ))}
-                    </Slider>
-                </div>
-            ) : (
-                <div className="row">
-                    {finalData.map((info: any) => (
-                        <div className="col-12" key={info.key}>
-                            <div className={info.props.className} style={{ height: "100%" }}>
-                                {info.props.children}
-                            </div>
+    // Single item fallback
+    if (finalData.length === 1) {
+        return (
+            <div className="row">
+                {finalData.map((item: any, idx: number) => (
+                    <div className="col-12" key={idx}>
+                        <div className={item.props.className || "slider_wrapper"}>
+                            {item.props.children}
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
+
+    return (
+        <div
+            className={`slider-wrapper centermode-slider position-relative ${navDisabled ? "nav-disabled" : ""}`}>
+            {/* Custom Arrows */}
+            {enableArrows && (
+                <>
+                    <div ref={prevRef} className="custom-arrow prev cursor-pointer">
+                        <svg
+                            width="45"
+                            height="28"
+                            viewBox="0 0 45 28"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M15.7916 27.4435C15.0277 28.1857 13.789 28.1853 13.0249 27.4435L0.573056 15.3442C-0.191016 14.6017 -0.191016 13.3983 0.573057 12.6558L13.0249 0.556541C13.789 -0.185334 15.0277 -0.18571 15.7916 0.556541C16.5554 1.29879 16.5551 2.50238 15.7916 3.24486L6.67957 12.0989L45 12.0989L45 15.9011L6.67957 15.9011L15.7916 24.7551C16.5551 25.4976 16.5554 26.7012 15.7916 27.4435Z"
+                                fill="#446183"
+                            />
+                        </svg>
+                    </div>
+                    <div ref={nextRef} className="custom-arrow next cursor-pointer">
+                        <svg
+                            width="45"
+                            height="28"
+                            viewBox="0 0 45 28"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M15.7916 27.4435C15.0277 28.1857 13.789 28.1853 13.0249 27.4435L0.573056 15.3442C-0.191016 14.6017 -0.191016 13.3983 0.573057 12.6558L13.0249 0.556541C13.789 -0.185334 15.0277 -0.18571 15.7916 0.556541C16.5554 1.29879 16.5551 2.50238 15.7916 3.24486L6.67957 12.0989L45 12.0989L45 15.9011L6.67957 15.9011L15.7916 24.7551C16.5551 25.4976 16.5554 26.7012 15.7916 27.4435Z"
+                                fill="#446183"
+                            />
+                        </svg>
+                    </div>
+                </>
             )}
-        </>
+
+            <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                slidesPerView={slidesToShow}
+                spaceBetween={16}
+                loop={enableLoop}
+                centeredSlides={isCenterMode}
+                autoplay={enableAutoplay ? { delay: 2000, disableOnInteraction: false } : false}
+                navigation={enableArrows ? { prevEl: prevRef.current, nextEl: nextRef.current } : false}
+                pagination={enablePagination ? { clickable: true } : false}
+                onSwiper={(swiper) => {
+                    swiperRef.current = swiper;
+                }}
+                onBreakpoint={(swiper) => {
+                    const navEnabled =
+                        typeof swiper.params.navigation !== "boolean" &&
+                        swiper.params.navigation &&
+                        (swiper.params.navigation as any).enabled !== false;
+                    setNavDisabled(!navEnabled);
+                }}
+                breakpoints={{
+                    0: { slidesPerView: 1, centeredSlides: true, navigation: { enabled: false } },
+                    768: { slidesPerView: slidesToShow },
+                }}
+            >
+                {finalData.map((item: any, index: number) => (
+                    <SwiperSlide key={index} className={item.props.className || ""}>
+                        <div className="slider_wrapper">{item.props.children}</div>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        </div>
     );
 };
 
-export default CustomContentSlider;
+export default ModularSlider;
