@@ -115,7 +115,7 @@ const CenterModeSlider: React.FC<CenterModeSliderProps> = ({
             </div>
             {postData[activeIndex] && (
                 <div className="text-center mt-5">
-                    <p className="w-75 m-auto">{postData[activeIndex].content}</p>
+                    <p className="center-mode-activeContent m-auto">{postData[activeIndex].content}</p>
                 </div>
             )}
         </div>

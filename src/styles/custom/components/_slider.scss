@@ -431,8 +431,7 @@ Common styles for navigation elements.
 --- */
 .custom-arrow {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 180px;
     z-index: 5;
     width: 40px;
     height: 40px;
@@ -517,10 +516,21 @@ Common styles for navigation elements.
                 @include mq(desktop-wide-max){
                     margin-bottom: 80px;
                 }
+                .embla__slide--category{
+                    >div{
+                        color: rgba(99, 100, 102, 0.8);
+                    }
+                }
             }
         }
     }
 }
 .centermode-slider{
     position: relative;
+}
+.center-mode-activeContent{
+    width: 100%;
+    @include mq(tablet-max){
+        width: 75%;
+    }
 }
