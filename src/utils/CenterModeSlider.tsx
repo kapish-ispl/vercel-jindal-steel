@@ -107,12 +107,17 @@ const CenterModeSlider: React.FC<CenterModeSliderProps> = ({
                                 <div className="ratio ratio-4x3">
                                     <img alt={item.title} className="img-fluid u-img" src={item.media[0]?.cdnPath ?? ""} />
                                 </div>
-                                <p>{item.content}</p>
+                                {/* <p>{item.content}</p> */}
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
+            {postData[activeIndex] && (
+                <div className="text-center mt-5">
+                    <p className="w-75 m-auto">{postData[activeIndex].content}</p>
+                </div>
+            )}
         </div>
     );
 };
