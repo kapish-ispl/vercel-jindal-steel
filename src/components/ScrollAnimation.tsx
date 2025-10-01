@@ -52,6 +52,8 @@ const ScrollAnimation = (props: any) => {
 
         gsap.set(".nav-dots", { autoAlpha: 0 });
         setActiveDot(0);
+        gsap.set(".panel", { autoAlpha: 0 });
+        gsap.set(".panel-1", { autoAlpha: 1 });
 
         timeline.current = gsap.timeline({
             scrollTrigger: {
@@ -80,8 +82,7 @@ const ScrollAnimation = (props: any) => {
             const split = new SplitType(headingEl as HTMLElement, { types: "chars" });
             splitInstances.push(split);
 
-            timeline.current!.set(panelSelector, { zIndex: 5 }, i - 0.1);
-
+            // Parallax animation for the current panel
             timeline.current!.fromTo(
                 `${panelSelector} .parallax-img`,
                 { scale: 1.15, yPercent: -5 },
@@ -89,12 +90,30 @@ const ScrollAnimation = (props: any) => {
                 i
             );
 
+            // --- MODIFICATION FOR SMOOTH FADE ---
+            // Animate the visibility with a duration and ease for a cross-fade effect.
             if (i > 0) {
-                timeline.current!.from(panelSelector, { opacity: 0, duration: 0.25 }, i);
+                const prevPanelSelector = `.panel-${panelsData[i - 1].id}`;
+                const transitionDuration = 0.4; // Adjust this value for faster/slower fades
+                const transitionEase = "power1.inOut";
+
+                // At the start of this panel's section (time 'i'), fade OUT the previous one.
+                timeline.current!.to(prevPanelSelector, {
+                    autoAlpha: 0,
+                    duration: transitionDuration,
+                    ease: transitionEase
+                }, i);
+
+                // And at the same time, fade IN the current one.
+                timeline.current!.to(panelSelector, {
+                    autoAlpha: 1,
+                    duration: transitionDuration,
+                    ease: transitionEase
+                }, i);
             }
+            // --- END MODIFICATION ---
 
-            timeline.current!.set(panelSelector, { zIndex: 1 }, i + 1);
-
+            // Text animation for the current panel
             timeline.current!.from(split.chars, {
                 y: 50,
                 opacity: 0,
