@@ -430,3 +430,31 @@
 //         }
 //     }
 // }
+.custom-slider{
+    &.is-center-mode{
+        .embla--category{
+            .embla__container{
+                @include align-items(center);
+                margin-bottom: 30px;
+                @include mq(tablet){
+                    margin-bottom: 40px;
+                }
+                @include mq(tablet-max){
+                    margin-bottom: 50px;
+                }
+                @include mq(desktop){
+                    margin-bottom: 60px;
+                }
+                @include mq(desktop-wide){
+                    margin-bottom: 70px;
+                }
+                @include mq(desktop-wide-max){
+                    margin-bottom: 80px;
+                }
+            }
+        }
+    }
+}
+.ratio-9x16{
+     --bs-aspect-ratio: 133.3333%;
+}
