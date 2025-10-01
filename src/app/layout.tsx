@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
+import SmoothScrollProvider from "@/components/Layout/SmoothScrollProvider";
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -34,18 +35,20 @@ export default function RootLayout({
       >
         <Suspense fallback={null}>
           <AppContextProvider>
-            <Header />
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <main>
-                {children}
-              </main>
-              <Footer />
-            </ThemeProvider>
+            <SmoothScrollProvider>
+              <Header />
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <main>
+                  {children}
+                </main>
+                <Footer />
+              </ThemeProvider>
+            </SmoothScrollProvider>
           </AppContextProvider>
         </Suspense>
       </body>
