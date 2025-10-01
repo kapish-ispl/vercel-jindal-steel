@@ -60,8 +60,10 @@ const ScrollAnimation = (props: any) => {
                 trigger: ".panels-container",
                 start: "top top",
                 pin: true,
-                scrub: 1,
-                end: () => `+=${(panelsData.length - 1) * 100}%`,
+                scrub: 3,
+
+                markers: true,
+                end: () => `+=${(panelsData.length - 1.5) * 100}%`,
                 onEnter: () => gsap.to(".nav-dots", { autoAlpha: 1, duration: 0.3 }),
                 onLeave: () => gsap.to(".nav-dots", { autoAlpha: 0, duration: 0.3 }),
                 onEnterBack: () => gsap.to(".nav-dots", { autoAlpha: 1, duration: 0.3 }),
@@ -82,11 +84,10 @@ const ScrollAnimation = (props: any) => {
             const split = new SplitType(headingEl as HTMLElement, { types: "chars" });
             splitInstances.push(split);
 
-            // Parallax animation for the current panel
             timeline.current!.fromTo(
                 `${panelSelector} .parallax-img`,
-                { scale: 1.15, yPercent: -5 },
-                { scale: 1, yPercent: 5, ease: "none" },
+                { scale: 1.15, },
+                { scale: 1, ease: "back.inOut" },
                 i
             );
 
