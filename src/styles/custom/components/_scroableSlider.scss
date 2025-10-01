@@ -2,28 +2,32 @@
 @use '../core/mixins' as *;
 @use '../components/generic/sizes' as *;
 
-.scrollable_box_content{
+.scrollable_box_content {
     padding: 60px 0px;
     @include flexbox;
     @include flex-direction(column, vertical);
     @include justify-content(space-between);
     position: relative;
     z-index: 20;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         padding: 80px 0px;
     }
-    @include mq(desktop){
+
+    @include mq(desktop) {
         padding: 100px 0px;
     }
-    @include mq(desktop-wide){
+
+    @include mq(desktop-wide) {
         padding: 120px 0px;
     }
-    
-    &_bottom{
-        .list_view_info{
+
+    &_bottom {
+        .list_view_info {
             @include flexbox;
             @include flex-direction(column, vertical);
-            .list_view_content_desc{
+
+            .list_view_content_desc {
                 font-weight: var(--fontRegular);
 
                 @include font-size(16);
@@ -40,6 +44,7 @@
                     @include font-size(24);
                 }
             }
+
             // .list_view_content_title{
 
             // }
@@ -64,21 +69,25 @@
             overflow: hidden;
             color: white;
             will-change: transform, opacity;
+            z-index: 1;
 
-            &.panel-1 {
-                z-index: 4;
-            }
+            // &.panel-1 {
+            //     z-index: 4;
+            // }
 
-            &.panel-2 {
-                z-index: 3;
-            }
+            // &.panel-2 {
+            //     z-index: 3;
+            // }
 
-            &.panel-3 {
+            // &.panel-3 {
+            //     z-index: 2;
+            // }
+
+            // &.panel-4 {
+            //     z-index: 1;
+            // }
+            &:first-child {
                 z-index: 2;
-            }
-
-            &.panel-4 {
-                z-index: 1;
             }
 
 

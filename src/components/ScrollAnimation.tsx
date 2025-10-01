@@ -1,11 +1,14 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
-import { useDeviceType } from "@/hooks/useDeviceType";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+import React, { useRef, useMemo } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import SplitType from "split-type";
+import { useDeviceType } from "@/hooks/useDeviceType";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 interface Panel {
     id: number;
@@ -16,20 +19,10 @@ interface Panel {
 }
 
 const ScrollAnimation = (props: any) => {
-    const { data: bannerData, className } = props;
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [showDots, setShowDots] = useState(false);
+    const main = useRef<HTMLDivElement | null>(null);
+    const timeline = useRef<gsap.core.Timeline | null>(null);
+    const { data: bannerData } = props;
     const device = useDeviceType();
-
-    const headingRefs = useRef<HTMLHeadingElement[]>([]);
-    headingRefs.current = [];
-
-    const addToRefs = (el: HTMLHeadingElement | null) => {
-        if (el && !headingRefs.current.includes(el)) {
-            headingRefs.current.push(el);
-        }
-    };
 
     const panelsData: Panel[] = useMemo(() => {
         if (!bannerData) return [];
@@ -43,98 +36,149 @@ const ScrollAnimation = (props: any) => {
                 children: item.props?.children,
             }));
     }, [bannerData]);
-    const dataLength = panelsData.length;
 
-    useEffect(() => {
-        const sections = gsap.utils.toArray<HTMLElement>(".panel");
+    useGSAP(() => {
+        if (!panelsData || panelsData.length === 0) {
+            return;
+        }
 
-        ScrollTrigger.getAll().forEach((t) => t.kill());
+        const dots = gsap.utils.toArray<HTMLElement>(".dot");
+        const splitInstances: SplitType[] = [];
 
-        // Main vertical scroll
-        gsap.to(sections, {
-            yPercent: -100 * (dataLength - 1),
-            ease: "none",
+        const setActiveDot = (index: number) => {
+            dots.forEach((d) => d.classList.remove("active"));
+            if (dots[index]) dots[index].classList.add("active");
+        };
+
+        gsap.set(".nav-dots", { autoAlpha: 0 });
+        setActiveDot(0);
+
+        timeline.current = gsap.timeline({
             scrollTrigger: {
-                trigger: containerRef.current,
+                trigger: ".panels-container",
+                start: "top top",
                 pin: true,
-                snap: 1 / (dataLength - 1),
-                end: () => "+=" + containerRef.current!.offsetHeight,
                 scrub: 1,
-                onEnter: () => setShowDots(true),
-                onLeave: () => setShowDots(false),
-                onEnterBack: () => setShowDots(true),
-                onLeaveBack: () => setShowDots(false),
+                end: () => `+=${(panelsData.length - 1) * 100}%`,
+                onEnter: () => gsap.to(".nav-dots", { autoAlpha: 1, duration: 0.3 }),
+                onLeave: () => gsap.to(".nav-dots", { autoAlpha: 0, duration: 0.3 }),
+                onEnterBack: () => gsap.to(".nav-dots", { autoAlpha: 1, duration: 0.3 }),
+                onLeaveBack: () => gsap.to(".nav-dots", { autoAlpha: 0, duration: 0.3 }),
+                onUpdate: (self) => {
+                    const idx = Math.round(self.progress * (panelsData.length - 1));
+                    setActiveDot(idx);
+                },
+                invalidateOnRefresh: true,
             },
         });
 
-        // SplitText animation for each heading
-        headingRefs.current.forEach((heading) => {
-            const split = new SplitText(heading, { type: "words,chars" });
+        panelsData.forEach((panel, i) => {
+            const panelSelector = `.panel-${panel.id}`;
+            const headingEl = main.current?.querySelector(`.heading-${panel.id}`);
+            if (!headingEl) return;
 
-            gsap.from(split.chars, {
-                scrollTrigger: {
-                    trigger: heading,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse",
-                },
-                duration: 0.6,
+            const split = new SplitType(headingEl as HTMLElement, { types: "chars" });
+            splitInstances.push(split);
+
+            timeline.current!.set(panelSelector, { zIndex: 5 }, i - 0.1);
+
+            timeline.current!.fromTo(
+                `${panelSelector} .parallax-img`,
+                { scale: 1.15, yPercent: -5 },
+                { scale: 1, yPercent: 5, ease: "none" },
+                i
+            );
+
+            if (i > 0) {
+                timeline.current!.from(panelSelector, { opacity: 0, duration: 0.25 }, i);
+            }
+
+            timeline.current!.set(panelSelector, { zIndex: 1 }, i + 1);
+
+            timeline.current!.from(split.chars, {
+                y: 50,
                 opacity: 0,
-                y: 40,
                 stagger: 0.05,
-                ease: "power3.out",
-            });
+                ease: "power2.inOut",
+            }, i);
         });
-    }, [dataLength]);
+
+        const containerEl = main.current?.querySelector(".panels-container") as HTMLElement | null;
+        if (containerEl) {
+            dots.forEach((dot, idx) => {
+                const clickHandler = () => {
+                    const containerTop = containerEl.getBoundingClientRect().top + window.scrollY;
+                    const targetY = containerTop + idx * window.innerHeight;
+                    gsap.to(window, {
+                        duration: 0.8,
+                        ease: "power2.inOut",
+                        scrollTo: targetY,
+                    });
+                };
+                dot.addEventListener("click", clickHandler);
+                (dot as any).__gsapClickHandler = clickHandler;
+            });
+        }
+
+        const refreshTimeout = setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 200);
+
+        return () => {
+            clearTimeout(refreshTimeout);
+            splitInstances.forEach(split => split.revert());
+            dots.forEach((dot) => {
+                const handler = (dot as any).__gsapClickHandler;
+                if (handler) {
+                    dot.removeEventListener("click", handler);
+                }
+            });
+        };
+
+    }, { scope: main, dependencies: [panelsData] });
 
     return (
-        <>
-            <section className={`generic_hr_scroll hidden xl:block ${className ?? ""}`}>
-                <div style={{ position: "relative" }}>
-                    <div ref={containerRef} className="container_jj">
-                        {panelsData.length > 0 &&
-                            panelsData.map((item, index) => (
-                                <section key={index} className="panel red">
-                                    <div className="slide-content">
-                                        <div
-                                            className="generic_hr_scroll_section relative scrollable_box v4"
-                                            style={{
-                                                backgroundImage: `url(${device === "desktop" ? item.img : item.mobImg
-                                                    })`,
-                                            }}
-                                        >
-                                            <div className="container z-20 scrollable_box_container">
-                                                <div className="row h-full">
-                                                    <div className="col-12 h-full">
-                                                        <div className="scrollable_box_content h-full flex flex-col justify-between pt-28 pb-20">
-                                                            <div className="scrollable_box_content_head">
-                                                                <h2
-                                                                    ref={addToRefs}
-                                                                    className={`pannel-heading c-heading-65 clr-green heading-${item.id}`}
-                                                                >
-                                                                    {item.heading}
-                                                                </h2>
-                                                            </div>
-                                                            {item.children}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-                            ))}
-                    </div>
-
-                    {showDots && (
-                        <div className="dots">
-                            {Array.from({ length: dataLength }).map((_, idx) => (
-                                <span key={idx} className={activeIndex === idx ? "active" : ""} />
-                            ))}
+        <div ref={main} className="scroll-animation-container">
+            <div className="panels-container">
+                {panelsData.map((panel) => (
+                    <section key={panel.id} className={`panel panel-${panel.id}`}>
+                        <div className="parallax-container">
+                            <img
+                                src={device === "desktop" ? panel.img : panel.mobImg}
+                                alt={panel.heading}
+                                className="parallax-img"
+                            />
                         </div>
-                    )}
-                </div>
-            </section>
-        </>
+                        <div className="container cus-container h-100">
+                            <div className="row h-100">
+                                <div className="col-12 h-100">
+                                    <div className="scrollable_box_content h-100">
+                                        <div className="scrollable_box_content_head">
+                                            <h2
+                                                className={`pannel-heading c-heading-65 clr-green heading-${panel.id}`}
+                                            >
+                                                {panel.heading}
+                                            </h2>
+                                        </div>
+                                        {panel.children}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                ))}
+            </div>
+
+            {panelsData.length > 1 && (
+                <nav className="nav-dots">
+                    <ul>
+                        {panelsData.map((_, i) => (
+                            <li key={i} className="dot"></li>
+                        ))}
+                    </ul>
+                </nav>
+            )}
+        </div>
     );
 };
 
