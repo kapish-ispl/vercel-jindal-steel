@@ -46,3 +46,114 @@
         }
     }
 }
+
+
+/* General Styling for scroll container*/
+.scroll-animation-container {
+    .panels-container {
+        position: relative;
+        height: 100dvh;
+
+        .panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            // height: calc(100dvh - 98px);
+            height: 100dvh;
+            width: 100vw;
+            overflow: hidden;
+            color: white;
+            will-change: transform, opacity;
+
+            &.panel-1 {
+                z-index: 4;
+            }
+
+            &.panel-2 {
+                z-index: 3;
+            }
+
+            &.panel-3 {
+                z-index: 2;
+            }
+
+            &.panel-4 {
+                z-index: 1;
+            }
+
+
+            .parallax-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(2, 2, 2, 0.6);
+                    z-index: 9;
+                }
+            }
+
+            .parallax-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+                will-change: transform;
+            }
+
+            .pannel-heading {
+                z-index: 2;
+                position: relative;
+                will-change: transform, opacity;
+            }
+        }
+    }
+
+    .nav-dots {
+        position: fixed;
+        top: 50%;
+        right: 2rem;
+        transform: translateY(-50%);
+        z-index: 100;
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; // Space between dots
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+
+            &:hover {
+                transform: scale(1.4);
+                background-color: rgba(255, 255, 255, 0.8);
+            }
+
+            // Active state for the current panel's dot
+            &.active {
+                transform: scale(1.8);
+                background-color: white;
+            }
+        }
+    }
+}

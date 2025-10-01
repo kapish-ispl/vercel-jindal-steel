@@ -1,0 +1,95 @@
+.svg-map {
+
+    path,
+    polygon {
+        fill: #636466;
+        stroke: #fff;
+        stroke-width: 1px;
+    }
+
+    .cls-1,
+    .cls-2 {
+        fill: #b3b5b8;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        stroke-width: .25px;
+    }
+
+    .cls-2 {
+        fill-rule: evenodd;
+    }
+
+    .highlighted {
+        fill: var(--color-primary);
+        stroke: #fff;
+        transition: fill 0.3s ease;
+
+        &:hover {
+            fill: var(--color-accent-blue);
+        }
+    }
+
+    .highlighted-state {
+        fill: #F47920;
+        stroke: #fff;
+        transition: fill 0.3s ease;
+
+        &:hover,
+        &:hover path {
+            fill: #f68b3e;
+            transition: fill 0.2s ease-in-out;
+        }
+    }
+}
+
+.svg-map:has(#ZA:hover) #ZA,
+.svg-map:has(#ZA:hover) #BW,
+.svg-map:has(#ZA:hover) #MZ {
+    fill: var(--color-accent-blue);
+}
+
+.svg-map:has(#MZ:hover) #ZA,
+.svg-map:has(#MZ:hover) #BW,
+.svg-map:has(#MZ:hover) #MZ {
+    fill: var(--color-accent-blue);
+}
+
+.svg-map:has(#BW:hover) #ZA,
+.svg-map:has(#BW:hover) #BW,
+.svg-map:has(#BW:hover) #MZ {
+    fill: var(--color-accent-blue);
+}
+
+.tabbing_wrap_content_item {
+    &.active {
+        display: block;
+    }
+
+    &.hidden {
+        display: none;
+    }
+}
+
+.scroll-reveal {
+    margin: 20px 0;
+}
+
+.scroll-reveal-text {
+    font-size: clamp(1.6rem, 4vw, 3rem);
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.word {
+    display: inline-block;
+}
+
+.c-homeSection {
+    .c-heading-65 {
+        line-height: 1.2;
+    }
+
+    .c-content-19 {
+        line-height: 1.6;
+    }
+}

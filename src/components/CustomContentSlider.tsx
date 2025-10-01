@@ -35,7 +35,7 @@ const BREAKPOINTS = {
     mobile: 0,
     tablet: 767,
     laptop: 991,
-    desktop: 1200,
+    desktop: 1400,
 };
 
 const DEFAULT_RESPONSIVE_SETTINGS: ResponsiveSettings = {

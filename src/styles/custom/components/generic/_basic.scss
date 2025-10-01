@@ -289,24 +289,358 @@
     }
 }
 
+// .listView {
+//     &__item {
+//         @include flexbox;
+//         gap: 5px;
+//         @include align-items(center);
+//         padding: 15px 0px;
+
+//         @include mq(tablet-max) {
+//             padding: 0px;
+//         }
+
+//         &-info {
+//             .desc {
+//                 width: 100%;
+
+//                 @include mq(desktop-wide) {
+//                     max-width: 170px;
+//                 }
+//             }
+//         }
+
+//         &-media {
+//             img {
+//                 width: 100%;
+//                 height: auto;
+
+//                 @include mq(tablet-max) {
+//                     max-width: 100px;
+//                 }
+
+//                 @include mq(desktop-wide-max) {
+//                     max-width: 150px;
+//                 }
+//             }
+//         }
+//     }
+
+//     &.v2 {
+//         .listView__item {
+//             gap: 20px;
+
+//             &-info {
+//                 .desc {
+//                     &.mb-10 {
+//                         margin-bottom: -10px;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+
+//     &.v2 {
+//         .listView__item {
+
+//             &-info {
+//                 .count {
+//                     padding-right: 10px;
+//                     display: inline-block;
+//                 }
+
+//                 .desc {
+//                     max-width: 350px !important;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+// .c-mapView {
+//     flex-direction: column-reverse;
+//     @include flexbox;
+
+//     @include mq(desktop) {
+//         @include flex-direction(row, horizontal);
+//         @include justify-content(space-between);
+//     }
+
+//     &__sidebar {
+//         max-width: 313px;
+//         width: 100%;
+//         padding: 20px;
+//         position: static;
+
+//         button {
+//             padding: 12px 20px;
+//             border-color: #ccc;
+//             @include border-radius(8px);
+//             border: none !important;
+//             @include font-size(14);
+//             z-index: 999;
+//             position: relative;
+//             @include transition(all 0.3s ease-in);
+
+//             &::before {
+//                 content: "";
+//                 position: absolute;
+//                 left: 0;
+//                 top: 0;
+//                 background: var(--color-primary);
+//                 height: 100%;
+//                 width: 0%;
+//                 @include transition(all 0.3s ease-in);
+//                 @include border-radius(8px);
+//             }
+
+//             &:hover {
+//                 @include transition(all 0.3s ease-in);
+
+//                 &::before {
+//                     width: 100%;
+//                 }
+
+//                 span {
+//                     color: #fff;
+//                 }
+//             }
+
+//             .content {
+//                 @include flexbox;
+//                 @include align-items(center);
+//                 gap: 8px;
+//             }
+
+//             >span {
+//                 @include font-size(16);
+//                 position: relative;
+//                 z-index: 1000;
+//             }
+
+//             @include mq(desktop) {
+//                 position: absolute;
+//                 top: 50px;
+//                 right: 200px;
+
+//             }
+
+//         }
+
+//         h2 {
+//             display: none;
+//         }
+
+//         ul {
+//             margin-top: 30px;
+
+//             @include mq(desktop) {
+//                 margin-top: 30px;
+//             }
+
+//             li {
+//                 padding: 12px;
+//                 cursor: pointer;
+//                 border-bottom: 1px solid rgba(68, 97, 131, 0.26);
+//                 color: #636466;
+//                 transition: all 0.2s ease-in-out;
+
+//                 &.is-active {
+//                     color: #F47920;
+//                 }
+
+//                 &:nth-last-child(1) {
+//                     border-bottom: unset;
+//                 }
+//             }
+
+
+//         }
+//     }
+
+//     &__container {
+//         position: relative;
+//         top: 30px;
+//         height: 400px;
+
+//         @include mq(desktop) {
+//             height: 600px;
+//         }
+
+//         >div {
+//             height: 100%;
+//         }
+
+//         svg {
+//             width: 100%;
+//             position: relative;
+//             height: 100%;
+
+//             @include mq(desktop) {
+//                 width: 972px;
+
+//             }
+//         }
+
+//         .map-points {
+//             position: absolute;
+
+//             &.in-jh {
+//                 top: 176px;
+//                 right: 148px;
+
+//                 @include mq(tablet) {
+//                     top: 174px;
+//                     right: 311px;
+
+//                 }
+
+//                 @include mq(tablet-max) {
+//                     top: 175px;
+//                     right: 430px;
+//                 }
+
+//                 @include mq(desktop) {
+//                     top: 266px;
+//                     right: 432px;
+//                 }
+//             }
+
+//             &.in-ct {
+//                 top: 187px;
+//                 right: 165px;
+
+//                 @include mq(tablet) {
+//                     top: 185px;
+//                     right: 330px;
+//                 }
+
+//                 @include mq(tablet-max) {
+//                     top: 189px;
+//                     right: 455px;
+//                 }
+
+//                 @include mq(desktop) {
+//                     top: 50%;
+//                     right: 479px;
+//                 }
+//             }
+
+//             &.in-od {
+//                 top: 200px;
+//                 right: 152px;
+
+//                 @include mq(tablet) {
+//                     top: 205px;
+//                     right: 317px;
+//                 }
+
+//                 @include mq(tablet-max) {
+//                     top: 200px;
+//                     right: 434px;
+
+//                 }
+
+//                 @include mq(desktop) {
+//                     top: 309px;
+//                     right: 440px;
+//                 }
+//             }
+
+//             &.af-za {
+//                 bottom: 68px;
+//                 right: 38%;
+
+//                 @include mq(tablet) {
+//                     bottom: 67px;
+//                     right: 44%;
+//                 }
+
+//                 @include mq(tablet-max) {
+//                     bottom: 70px;
+//                     right: 45%;
+//                 }
+
+//                 @include mq(desktop) {
+//                     bottom: 104px;
+//                     right: 44%;
+//                 }
+//             }
+
+//             &.af-mz {
+//                 bottom: 20px;
+//                 right: 38%;
+
+//                 @include mq(tablet) {
+//                     bottom: 29px;
+//                     right: 43%;
+//                 }
+
+//                 @include mq(tablet-max) {
+//                     bottom: 27px;
+//                     right: 45%;
+//                 }
+
+//                 @include mq(desktop) {
+//                     right: 44%;
+//                     bottom: 33px;
+//                 }
+//             }
+
+//             &.af-bw {
+//                 bottom: 109px;
+//                 right: 18%;
+
+//                 @include mq(tablet) {
+//                     right: 33%;
+//                 }
+
+//                 @include mq(tablet-max) {
+//                     right: 38%;
+//                 }
+
+//                 @include mq(desktop) {
+//                     right: 33%;
+//                     bottom: 163px;
+//                 }
+//             }
+//         }
+//     }
+//     &.v2{
+//         .c-mapView__sidebar{
+//             max-width: 100%;
+//             @include mq(desktop){
+//                 width: 45%;
+//                 max-width: unset;
+//             }
+
+//         }
+//         .c-mapView__container{
+//             @include mq(desktop){
+//                 width: calc(100% - 45%);
+//                 max-width: unset;
+//             }
+//         }
+//     }
+// }
+
 .listView {
     &__item {
         @include flexbox;
         gap: 5px;
-        @include align-items(center);
-        padding: 15px 0px;
+        @include align-items(flex-start);
+        margin-bottom: 15px;
 
-        @include mq(tablet-max) {
-            padding: 0px;
+        @include mq(desktop-min) {
+            margin-bottom: 0px;
         }
 
         &-info {
+            //max-width: calc(100% - 150px);
+            flex: 1;
+            
             .desc {
                 width: 100%;
-
-                @include mq(desktop-wide) {
-                    max-width: 170px;
-                }
             }
         }
 
@@ -314,29 +648,20 @@
             img {
                 width: 100%;
                 height: auto;
-
-                @include mq(tablet-max) {
-                    max-width: 100px;
-                }
-
-                @include mq(desktop-wide-max) {
-                    max-width: 150px;
-                }
+                max-width: 90px;
+                margin-right: 10px;
             }
-        }
-    }
-
-    &.v2 {
-        .listView__item {
-            gap: 20px;
-
-            &-info {
-                .desc {
-                    &.mb-10 {
-                        margin-bottom: -10px;
-                    }
-                }
-            }
+            // &.withIcon{
+            //     padding: 0px 10px 0px 15px;
+            //     @include mq(tablet-max){
+            //         padding: 0px 10px 0px 0px;
+            //     }
+            //     img{
+            //         @include size(96px);
+            //         min-width: 96px;
+            //         max-width: 96px
+            //     }
+            // }
         }
     }
 
@@ -367,29 +692,40 @@
     }
 
     &__sidebar {
-        max-width: 313px;
+        
         width: 100%;
-        padding: 20px;
+        padding: 20px 0;
         position: static;
+
+        @include mq(desktop) {
+            width: 350px;
+        }
 
         button {
             padding: 12px 20px;
-            border-color: #ccc;
+            //border-color: #ccc;
             @include border-radius(8px);
             border: none !important;
             @include font-size(14);
             z-index: 999;
             position: relative;
+            background-color: transparent;
+            cursor: pointer;
+            color: var(--color-secondary);
             @include transition(all 0.3s ease-in);
 
-            &::before {
-                content: "";
-                position: absolute;
-                left: 0;
-                top: 0;
-                background: var(--color-primary);
-                height: 100%;
-                width: 0%;
+            // &::before{
+            //     content: "";
+            //     position: absolute;
+            //     left: 0;
+            //     top: 0;
+            //     background: var(--color-primary);
+            //     height: 100%;
+            //     width: 0%;
+            //      @include transition(all 0.3s ease-in);
+            //       @include border-radius(8px);
+            // }
+            &:hover {
                 @include transition(all 0.3s ease-in);
                 @include border-radius(8px);
             }
@@ -402,7 +738,7 @@
                 }
 
                 span {
-                    color: #fff;
+                    color: var(--color-primary);
                 }
             }
 
@@ -433,24 +769,39 @@
 
         ul {
             margin-top: 30px;
-
-            @include mq(desktop) {
-                margin-top: 30px;
+            @include mq(tablet) {
+                @include flexbox();
+                flex-wrap: wrap;
             }
 
             li {
-                padding: 12px;
+                padding: 12px 0;
                 cursor: pointer;
                 border-bottom: 1px solid rgba(68, 97, 131, 0.26);
                 color: #636466;
                 transition: all 0.2s ease-in-out;
 
+                @include mq(tablet) {
+                    width: 50%;
+                }
+
+                @include mq(desktop) {
+                    width: 100%;
+                }
+
+                &:hover {
+                    color: var(--color-primary);
+                }
+
                 &.is-active {
-                    color: #F47920;
+                    color: var(--color-primary);
                 }
 
                 &:nth-last-child(1) {
                     border-bottom: unset;
+                    @include mq(tablet) {
+                        border-bottom: 1px solid rgba(68, 97, 131, 0.26);
+                    }
                 }
             }
 
@@ -477,13 +828,19 @@
             height: 100%;
 
             @include mq(desktop) {
-                width: 972px;
+                width: 900px;
 
             }
         }
 
         .map-points {
             position: absolute;
+
+            .icon-map-pin {
+                font-size: 1.5rem;
+                color: var(--color-black);
+                display: none;
+            }
 
             &.in-jh {
                 top: 176px;
@@ -588,11 +945,23 @@
             }
 
             &.af-bw {
-                bottom: 109px;
-                right: 18%;
+                bottom: 130px;
+                left: 200px;
+
+                @include mq(phone-wide) {
+                    bottom: 109px;
+                    left: 290px;
+                }
+                @include mq(phablet) {
+                    left: 290px;
+                }
+
+                @include mq(tablet-small) {
+                    left: 290px;
+                }
 
                 @include mq(tablet) {
-                    right: 33%;
+                    left: 380px;
                 }
 
                 @include mq(tablet-max) {
@@ -600,25 +969,23 @@
                 }
 
                 @include mq(desktop) {
-                    right: 33%;
                     bottom: 163px;
                 }
             }
-        }
-    }
-    &.v2{
-        .c-mapView__sidebar{
-            max-width: 100%;
-            @include mq(desktop){
-                width: 45%;
-                max-width: unset;
+
+            &.om-so {
+                left: 515px;
+                top: 25px;
             }
 
-        }
-        .c-mapView__container{
-            @include mq(desktop){
-                width: calc(100% - 45%);
-                max-width: unset;
+            &.om-du {
+                left: 585px;
+                top: 355px;
+            }
+
+            &.ch-os {
+                left: 580px;
+                top: 220px;
             }
         }
     }
@@ -1191,3 +1558,65 @@ ul {
         }
     }
 }
+
+
+.pagination-container {
+    margin: 30px 0px;
+
+    &.mt-80 {
+        @include mq(tablet-max) {
+            margin: 50px 0px 0px 0px;
+        }
+
+        @include mq(desktop) {
+            margin: 60px 0px 0px 0px;
+        }
+
+        @include mq(desktop-wide) {
+            margin: 80px 0px 0px 0px;
+        }
+    }
+
+
+    .pagination {
+        align-items: center;
+
+        .previous {
+            margin-inline-end: 10px;
+
+            svg {
+
+                &:hover {
+                    path {
+                        transition: all ease .3s;
+                        fill: var(--color-primary);
+                    }
+                }
+            }
+        }
+
+        .next {
+            margin-inline-start: 10px;
+
+            svg {
+
+                &:hover {
+                    path {
+                        transition: all ease .3s;
+                        fill: var(--color-primary);
+                    }
+                }
+            }
+        }
+
+        .pages {
+            font-size: 1.2rem;
+            margin-inline: 5px;
+
+            &.active {
+                color: var(--color-primary);
+            }
+        }
+    }
+}
+
