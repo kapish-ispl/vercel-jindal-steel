@@ -20,7 +20,7 @@ interface StickyCardsProps {
     stickyCardsData: CardData[];
 }
 
-const CustomStickyCards = ({ data }:any) => {
+const CustomStickyCards = ({ data }) => {
     const container = useRef<HTMLDivElement | null>(null);
 
     // ✅ Keep your filtering logic intact
@@ -62,9 +62,9 @@ const CustomStickyCards = ({ data }:any) => {
                         end: "top top",
                         onUpdate: (self) => {
                             const progress = self.progress;
-                            const scale = 1 - progress * 0.25;
-                            const rotation = (index % 2 === 0 ? 5 : -5) * progress;
-                            const afterOpacity = progress;
+                            const scale = 1 - progress * 0.75;
+                            const rotation = (index % 2 === 0 ? 0 : 0) * progress;
+                            const afterOpacity = progress * 50;
 
                             gsap.set(card, {
                                 scale,
@@ -81,7 +81,8 @@ const CustomStickyCards = ({ data }:any) => {
 
     return (
         <div ref={container} className="sticky-cards">
-            {panelsData.map((cardData:any, index:number) => {
+            {panelsData.map((cardData, index) => {
+                console.log(cardData)
                 return (
                     <div className="sticky-card" key={index} style={{ backgroundImage: `url(${cardData.img})` }}>
                         <div className="sticky-card-content">
