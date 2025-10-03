@@ -20,7 +20,7 @@ interface StickyCardsProps {
     stickyCardsData: CardData[];
 }
 
-const CustomStickyCards = ({ data }) => {
+const CustomStickyCards = ({ data }:any) => {
     const container = useRef<HTMLDivElement | null>(null);
 
     // ✅ Keep your filtering logic intact
@@ -81,7 +81,7 @@ const CustomStickyCards = ({ data }) => {
 
     return (
         <div ref={container} className="sticky-cards">
-            {panelsData.map((cardData, index) => {
+            {panelsData.map((cardData:any, index:number) => {
                 console.log(cardData)
                 return (
                     <div className="sticky-card" key={index} style={{ backgroundImage: `url(${cardData.img})` }}>
