@@ -132,6 +132,22 @@
 .mt-30 {
     margin-top: 30px;
 }
+.mt-80{
+    margin-top: 30px;
+    @include mq(tablet){
+        margin-top: 40px;
+    }
+    @include mq(tablet-max){
+        margin-top: 50px;
+    }
+    @include mq(desktop){
+        margin-top: 70px;
+    }
+    @include mq(desktop-wide){
+        margin-top: 80px;
+    }
+    
+}
 
 .mb-35 {
     margin-bottom: 20px;

@@ -13,6 +13,7 @@ const CustomForm = dynamic(() => import('@/utils/CustomForm'), { ssr: false });
 const CustomMap = dynamic(() => import('@/utils/CustomMap'), { ssr: false });
 const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: false });
 const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ssr: false });
+const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr: false });
 
 
 
@@ -94,7 +95,21 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "customstickycard") {
                     const props = attributesToProps(domNode.attribs);
-                    return <CustomStickyCard {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                    console.log('aaya');
+                    return <CustomStickyCard
+                        {...props}
+                        data={domToReact(domNode.children as DOMNode[], {
+                            replace: (childNode) => {
+                                if (childNode instanceof Element) {
+                                    if (childNode.name === "animatedcountup") {
+                                        const childProps = attributesToProps(childNode.attribs);
+                                        const toValue = childProps.to ? Number(childProps.to) : 0;
+                                        return <Counter to={toValue} />;
+                                    }
+                                }
+                            },
+                        })}
+                    />;
                 }
                 // ✅ Universal fix for self-closing tags
                 if (domNode instanceof Element && domNode.name?.startsWith("source")) {

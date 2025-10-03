@@ -308,3 +308,43 @@
     }
   }
 }
+.sticky-card{
+  padding: 60px 0px !important;
+  background-size: cover !important;
+  @include mq(tablet-max) {
+        padding: 80px 0px !important;
+    }
+
+    @include mq(desktop) {
+        padding: 100px 0px !important;
+    }
+
+    @include mq(desktop-wide) {
+        padding: 120px 0px !important;
+    }
+
+  &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(2, 2, 2, 0.6);
+                    z-index: 9;
+                }
+}
+.sticky-card-content{
+  position: relative;
+  z-index: 99;
+}
+.sticky-card-content-wrapper{
+  @include justify-content(space-between);
+  .sticky-card-header{
+    color: #4fb848;
+
+  }
+}
+.list_view_content_desc{
+  color: #fff !important;
+}
