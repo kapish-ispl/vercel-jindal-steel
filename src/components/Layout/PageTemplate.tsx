@@ -13,7 +13,7 @@ const CustomForm = dynamic(() => import('@/utils/CustomForm'), { ssr: false });
 const CustomMap = dynamic(() => import('@/utils/CustomMap'), { ssr: false });
 const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: false });
 const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ssr: false });
-const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr: false });
+
 
 
 const PageTemplate = ({ data }: any) => {
