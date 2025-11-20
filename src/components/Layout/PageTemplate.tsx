@@ -16,6 +16,7 @@ const CustomWorldMap = dynamic(() => import('@/utils/CustomWorldMap'), { ssr: fa
 const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: false });
 const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ssr: false });
 const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr: false });
+const CustomSilder = dynamic(() => import('@/utils/CustomSilder'), { ssr: false });
 
 
 
@@ -115,6 +116,10 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "customcontentslider") {
                     const props = attributesToProps(domNode.attribs);
                     return <CustomContentSlider {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                }
+                if (domNode.name === "customslider") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <CustomSilder {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
                 if (domNode.name === "customstickycard") {
                     const props = attributesToProps(domNode.attribs);
