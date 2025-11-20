@@ -162,6 +162,19 @@
         @include font-size(19, 1.6);
     }
 }
+.c-content-20 {
+    font-weight: var(--fontRegular);
+
+    @include font-size(17, 1.6);
+
+    @include mq('desktop-min') {
+        @include font-size(19, 1.6);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(20, 1.6);
+    }
+}
 .c-content-24 {
     font-weight: var(--fontRegular);
 
@@ -186,4 +199,38 @@
 
 .font-medium {
     font-weight: var(--fontMedium);
+}
+
+.lh_1-5 {
+    line-height: 1.5 !important;
+}
+.ft_light {
+    font-weight: var(--fontLight) !important;
+}
+.ft_regular {
+    font-weight: var(--fontRegular) !important;
+}
+.ft_medium {
+    font-weight: var(--fontMedium) !important;
+}
+.font-medium {
+    font-weight: var(--fontMedium) !important;
+}
+.ft_bold {
+    font-weight: var(--fontBold) !important;
+}
+.ft_semiBold {
+    font-weight: var(--fontSemiBold) !important;
+}
+.ft_extraLight{
+    font-weight: var(--fontExtralight) !important;
+}
+.lh_1-3 {
+    line-height: 1.3 !important;
+}
+.lh_1-2{
+    line-height: 1.2 !important;
+}
+.lh_1-6{
+    line-height: 1.6 !important;
 }

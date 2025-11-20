@@ -2,6 +2,7 @@
 import React from 'react';
 import parse, { HTMLReactParserOptions, Element, attributesToProps, domToReact, DOMNode } from 'html-react-parser';
 import dynamic from 'next/dynamic';
+import CustomSliderCategory from '@/utils/CustomSliderCategory';
 
 const SplitAnimation = dynamic(() => import('../SplitText'), { ssr: false });
 const BlurAnimation = dynamic(() => import('../BlurText'), { ssr: false });
@@ -15,6 +16,8 @@ const CustomWorldMap = dynamic(() => import('@/utils/CustomWorldMap'), { ssr: fa
 const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: false });
 const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ssr: false });
 const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr: false });
+
+
 
 
 
@@ -130,6 +133,20 @@ const PageTemplate = ({ data }: any) => {
                             },
                         })}
                     />;
+                }
+                if (domNode.name === "customslidercategory") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <CustomSliderCategory {...props} data={domToReact(domNode.children as DOMNode[], {
+                        replace: (childNode) => {
+                            if (childNode instanceof Element) {
+                                if (childNode.name === "animatedcountup") {
+                                    const childProps = attributesToProps(childNode.attribs);
+                                    const toValue = childProps.to ? Number(childProps.to) : 0;
+                                    return <Counter to={toValue} />;
+                                }
+                            }
+                        },
+                    })} />;
                 }
                 // ✅ Universal fix for self-closing tags
                 if (domNode instanceof Element && domNode.name?.startsWith("source")) {
