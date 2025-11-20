@@ -25,6 +25,8 @@
 @use 'custom/components/map';
 @use 'custom/components/stikyCard.scss';
 @use 'custom/components/buildingbox';
+@use 'custom/components/hightlight';
+@use 'custom/components/sector';
 /* End component files */
 
 .ratio-9x16 {
@@ -45,3 +47,422 @@
 //     font-size: 4rem;
 //     color: #fff;
 // }
+
+/* section fills viewport */
+.zoomSection {
+  position: relative;
+  width: 100%;
+  height: initial;
+  overflow: hidden;
+
+  .nextSection {
+    position: absolute;
+    bottom: 50px;
+  }
+
+  // @include mq(tablet) {
+  //   height: 350px;
+  // }
+
+  // @include mq(tablet-max) {
+  //   height: 500px;
+  // }
+
+  // @include mq(desktop) {
+  //   height: calc(100vh - 100px);
+  // }
+}
+
+/* container for absolute children */
+.zoomInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  @include mq(desktop) {
+    min-height: 100vh;
+  }
+  
+}
+
+/* IMAGE: absolute on the left, starts at 50% width */
+.zoomImageWrapper {
+  top: 0;
+  right: 0;
+
+  overflow: hidden;
+  will-change: width, transform;
+  z-index: 1;
+
+  @include mq(tablet-max) {
+    position: absolute;
+    width: calc(100% / 12 * 8);
+  }
+
+  video {
+    border: 1px solid var(--color-tertiary);
+  }
+}
+
+/* image covers wrapper */
+.zoomImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* CONTENT: absolute on the right, covers right 50% */
+.zoomContent {
+
+  top: 0;
+  left: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  /* keep content above image initially */
+  box-sizing: border-box;
+  padding-top: 50px;
+
+  @include mq(tablet-max) {
+    position: absolute;
+    width: calc(100% / 12 * 4);
+    padding-right: 50px;
+  }
+}
+
+/* card-like inner to make text readable */
+.contentInner {
+  max-width: 450px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  padding: 36px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+
+/* typography */
+.zoomTitle {
+  font-size: 36px;
+  margin: 0 0 12px 0;
+  line-height: 1.05;
+}
+
+.zoomText {
+  font-size: 17px;
+  margin: 0;
+  color: #e6e6e6;
+}
+
+/* responsiveness: stack on smaller screens */
+@media (max-width: 768px) {
+  .zoomImageWrapper {
+    position: relative;
+    width: 100%;
+    height: 55%;
+  }
+
+  .zoomContent {
+    position: relative;
+    width: 100%;
+    height: 45%;
+    padding: 18px;
+    align-items: flex-start;
+  }
+
+  .contentInner {
+    width: 100%;
+    padding: 18px;
+    border-radius: 8px;
+  }
+
+  .zoomTitle {
+    font-size: 24px;
+  }
+
+  .zoomText {
+    font-size: 15px;
+  }
+}
+
+.main-slider {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  /* Crucial for positioning children */
+  overflow: hidden;
+
+  .panel {
+    /* Stack all panels */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Fill the container */
+    overflow: hidden;
+
+    /* Ensure image fills the panel */
+    // img {
+    //   width: 100%;
+    //   height: 100%;
+    //   object-fit: cover;
+    //   display: block;
+    // }
+  }
+}
+
+.c-twoColumnContainer {
+  &__image {
+    @include flexbox;
+    position: sticky;
+    top: 20px;
+    @include justify-content(center);
+    margin-top: 25px;
+
+    @include mq(tablet) {
+      margin-top: 0px;
+    }
+
+    &.withIcon {
+      @include justify-content(flex-end);
+      padding-right: 30px;
+
+    }
+  }
+
+  &__content {
+    margin-top: 25px;
+
+    @include mq(tablet-max) {
+      margin-top: 35px;
+    }
+
+    @include mq(desktop) {
+      margin-top: 45px;
+    }
+  }
+
+  &__wrapper {
+    position: sticky;
+    top: 20px;
+
+    .c-twoColumnContainer__image {
+      position: unset;
+    }
+  }
+
+  &__rs {
+    margin-top: 60px;
+
+    @include mq(tablet-max) {
+      margin-top: 0px;
+    }
+
+    &-item {
+      &-content {
+        .title {
+          margin: 20px 0px;
+
+          @include mq(tablet-max) {
+            margin: 30px 0px;
+          }
+
+          @include mq(desktop) {
+            margin: 35px 0px;
+          }
+        }
+      }
+
+      +.c-twoColumnContainer__rs-item {
+        margin-top: 60px;
+
+        @include mq(tablet-max) {
+          margin-top: 80px;
+        }
+
+        @include mq(desktop) {
+          margin-top: 100px;
+        }
+
+        @include mq(desktop-wide) {
+          margin-top: 120px;
+        }
+      }
+    }
+  }
+}
+
+.header_scroll_up {
+  .c-twoColumnContainer {
+    &__image {
+      top: 110px;
+
+    }
+
+    &__wrapper {
+      top: 110px;
+
+      .c-twoColumnContainer__image {
+        top: unset !important;
+      }
+    }
+
+  }
+
+  .sticky {
+    top: 110px;
+  }
+}
+
+.sticky {
+  position: sticky;
+  top: 20px;
+  margin-top: 25px;
+
+  @include mq(tablet) {
+    margin-top: 0px;
+  }
+}
+.zoom-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+  //transform: scale(1.5); /* start zoomed-in */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.text-mask {
+  height: 100vh;
+  width: 100%;
+  @include flexbox;
+  justify-content: center;
+  align-items: center;
+  mix-blend-mode: screen;
+  background: #fff;
+  @include flex-direction(column, vertical);
+}
+
+.text-mask .header-text {
+  color: var(--color-black);
+}
+
+.text-highlighter {
+  font-size: 8vw;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+}
+
+
+
+
+.scrollingIcons {
+  overflow: hidden;
+  width: 100%;
+  padding: 20px 0;
+  margin-top: 150px;
+}
+
+.scrollingIcons__container {
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+
+}
+
+.scrollingIcons__content,
+.cloned-items {
+  display: flex;
+  gap: 24px;
+}
+
+.scrollingIcons__item {
+  color: #fff;
+  font-size: 18px;
+  padding: 0 2px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  @include flexbox;
+  @include align-items(flex-end);
+
+  &.pb-10 {
+    padding-bottom: 10px;
+  }
+}
+
+.c-twoColumnContainer {
+  .c-twoColumnContainer__image {
+    &.no-sticky {
+      position: static !important;
+      height: 100%;
+      @include flexbox;
+      @include align-items(flex-end);
+    }
+    &.no-height{
+      height: inherit !important;
+    }
+  }
+
+  .withBoder {
+    border-bottom: 2px solid #446183 !important;
+  }
+}
+
+.tabbing_wrap {
+  &.v1 {
+    ul {
+      @include flexbox;
+      @include justify-content(center);
+      margin-bottom: 20px;
+    }
+    .tabbing_wrap {
+      &_item {
+        background: transparent;
+        outline: none;
+        border: none;
+      }
+    }
+  }
+}
+
+.horizontalScroll-item {
+  padding-bottom: 100px;
+}
+
+.c-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(247,246,246,0.9);
+  display: none;
+  z-index: 9999;
+
+  &.active {
+    display: block;
+  }
+}
+
+.environmental_section {
+  .media {
+    @include flexbox;
+    @include justify-content(flex-end);
+    img {
+      width: 100%;
+    }
+  }
+}

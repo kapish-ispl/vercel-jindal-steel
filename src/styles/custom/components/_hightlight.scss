@@ -1,0 +1,79 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+@use '../components/generic/sizes' as *;
+
+.c-highlighting{
+    border-left: 1px solid #333;
+    padding-left: 40px;
+    margin-bottom: 30px;
+    height: calc(100% - 30px);
+    position: relative;
+    @include mq(tablet){
+        margin-bottom: 40px;
+        height: calc(100% - 40px);
+    }
+    @include mq(tablet-max){
+        margin-bottom: 50px;
+        height: calc(100% - 50px);
+    }
+    @include mq(desktop){
+        margin-bottom: 70px;
+        height: calc(100% - 70px);
+    }
+    &.border-orng{
+        border-color: var(--color-primary);
+    }
+    &.border-green{
+        border-color: var(--color-accent-olive);
+    }
+    &.border-red{
+        border-color: var(--color-accent-red);
+    }
+    &.border-blue{
+        border-color: var(--color-accent-blue);
+    }
+    &__top{
+        @include flexbox;
+        @include align-items(flex-end);
+        gap: 30px;
+        margin-bottom: 35px;
+        
+        &-label{
+            @include font-size(28);
+            font-weight: var(--fontMedium);
+            text-transform: uppercase;
+            line-height: 1 !important;
+            @include mq(tablet){
+                 @include font-size(32);
+            }
+            @include mq(tablet-max){
+                 @include font-size(36);
+            }
+        }
+    }
+    &__bottom{
+        flex: 1;
+        @include flexbox;
+        flex-direction: column;
+
+        p{  
+            flex: 1;
+            min-height: 220px;
+            max-width: 541px;
+            margin-bottom: 50px;
+            @include mq(tablet-max){
+                min-height: 250px;
+            }
+         
+        }
+        .action-btn {
+            position: absolute;
+            bottom: -19px;
+            &:hover{
+                .icon{
+                    color: inherit !important;
+                }
+            }
+        }
+    }
+}

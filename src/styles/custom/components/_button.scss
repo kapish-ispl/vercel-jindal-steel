@@ -18,4 +18,133 @@
                 color: var(--color-primary) !important;
             }
     }
+        &.sector-btn,
+    &.slider-btn {
+        @include flexbox;
+        @include align-items(center);
+        @include justify-content(center);
+        margin-bottom: 50px;
+
+        @include mq(tablet-max) {
+            margin-bottom: 80px
+        }
+
+        @include mq(desktop) {
+            margin-bottom: 100px;
+        }
+
+        @include mq(desktop-wide) {
+            margin-bottom: 120px;
+        }
+
+        @include mq(desktop-wide-max) {
+            margin-bottom: 145px;
+        }
+
+        .u-btn {
+            @include flexbox;
+            @include align-items(center);
+            @include justify-content(center);
+            gap: 30px;
+            padding: 10px 15px;
+
+            @include mq(tablet) {
+                padding: 12px 18px;
+            }
+
+            @include mq(tablet-max) {
+                padding: 12px 25px;
+            }
+
+            @include mq(desktop) {
+                padding: 12px 33px;
+            }
+
+            &.withBorder {
+                border: 1px solid #636466;
+            }
+
+            .btn-label {
+                @include font-size(20);
+                color: #636466 !important;
+                font-weight: var(--fontLight);
+
+                @include mq(tablet) {
+                    @include font-size(22);
+                }
+
+                @include mq(tablet-max) {
+                    @include font-size(24);
+                }
+            }
+        }
+
+        &:hover {
+            transform: inherit;
+
+            .icon {
+                color: var(--color-primary) !important;
+            }
+        }
+    }
+
+    &.slider-btn {
+        display: inline-block !important;
+        margin-bottom: 0px !important;
+        position: absolute;
+        bottom: 20px;
+        right: 60px;
+
+        @include mq(tablet-max) {
+            right: unset;
+        }
+
+        @include mq(desktop) {
+            bottom: 50px;
+        }
+
+        .u-btn {
+            border: 1px solid #4FB848 !important;
+            padding: 11px 19px !important;
+            cursor: pointer;
+
+            .btn-label {
+                @include font-size(16 !important);
+            }
+
+            .icon {
+                line-height: inherit !important;
+            }
+
+        }
+    }
+}
+.u-btn {
+    &.hover-effect2 {
+        @include transition(all 0.3s ease-in);
+        position: relative;
+
+        &:before {
+            @include transition(all 0.3s ease-in);
+            width: 0%;
+            height: 100%;
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--color-primary);
+            z-index: -1;
+        }
+
+        &:hover {
+            &:before {
+                width: 100%;
+            }
+
+            .icon,
+            .btn-label {
+                color: #fff !important;
+            }
+        }
+    }
 }

@@ -23,6 +23,27 @@
         @include font-size(30);
     }
 }
+.c-heading-36 {
+    font-weight: var(--fontMedium);
+
+    @include font-size(20);
+
+    @include mq('tablet') {
+        @include font-size(24);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(28);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(32);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(36);
+    }
+}
 
 .c-heading-40 {
     font-weight: var(--fontBold);
@@ -130,6 +151,44 @@
         line-height: 1.2 !important;
     }
 }
+.c-heading-80 {
+    font-weight: var(--fontLight);
+
+    @include font-size(28);
+
+    @include mq('tablet') {
+        @include font-size(36);
+    }
+
+    @include mq('tablet-wide') {
+        @include font-size(48);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(58);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(68);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(80);
+    }
+
+    &.sm_lh {
+        line-height: 1.2 !important;
+    }
+    &.ft_SemiBold {
+        font-weight: var(--fontSemiBold) !important;
+    }
+    &.ft_light {
+        font-weight: var(--fontLight);
+    }
+     &.lh-normal{
+        line-height: 1;
+    }
+}
 
 
 .c-content-16 {
@@ -192,6 +251,41 @@
         @include font-size(24);
     }
 }
+.c-content-32 {
+    font-weight: var(--fontRegular);
+
+    @include font-size(20);
+
+    @include mq('tablet') {
+        @include font-size(24);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(28);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(32);
+    }
+
+    &.ft_bold {
+        font-weight: var(--fontBold);
+    }
+    .ft_SemiBold {
+        font-weight: var(--fontSemiBold) !important;
+    }
+    &.pad_right68{
+        @include mq(tablet-max){
+            padding-right: 20px;
+        }
+        @include mq(desktop){
+            padding-right: 40px;
+        }
+        @include mq(desktop-wide){
+            padding-right: 68px;
+        }
+    }
+}
 
 .lh_1-8 {
     line-height: 1.8 !important;
@@ -234,3 +328,36 @@
 .lh_1-6{
     line-height: 1.6 !important;
 }
+
+.c-heading-48 {
+    font-weight: var(--fontBold);
+
+    @include font-size(22);
+
+    @include mq('tablet') {
+        @include font-size(24);
+    }
+
+    @include mq('tablet-wide') {
+        @include font-size(28);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(32);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(38);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(48);
+    }
+    &.sm_lh {
+        line-height: 1.2 !important;
+    }
+    
+}
+.cus-width940{
+        max-width: 940px;
+    }
