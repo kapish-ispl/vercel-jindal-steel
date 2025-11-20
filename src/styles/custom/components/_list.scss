@@ -1,0 +1,121 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+@use '../components/generic/sizes' as *;
+
+
+.listView {
+    &__item {
+        @include flexbox;
+        gap: 5px;
+        @include align-items(flex-start);
+        margin-bottom: 15px;
+
+        @include mq(desktop-min) {
+            margin-bottom: 0px;
+        }
+
+        &-info {
+            //max-width: calc(100% - 150px);
+            flex: 1;
+
+            .desc {
+                width: 100%;
+            }
+        }
+
+        &-media {
+            img {
+                width: 100%;
+                height: auto;
+                max-width: 90px;
+                margin-right: 10px;
+            }
+
+            // &.withIcon{
+            //     padding: 0px 10px 0px 15px;
+            //     @include mq(tablet-max){
+            //         padding: 0px 10px 0px 0px;
+            //     }
+            //     img{
+            //         @include size(96px);
+            //         min-width: 96px;
+            //         max-width: 96px
+            //     }
+            // }
+        }
+    }
+
+    &.v2 {
+        .listView__item {
+
+            &-info {
+                .count {
+                    padding-right: 10px;
+                    display: inline-block;
+                }
+
+                .desc {
+                    max-width: 350px !important;
+                }
+            }
+        }
+    }
+
+    &.v3 {
+        margin-top: 25px;
+        @include flexbox;
+        @include flex-direction(row, horizontal);
+        flex-wrap: wrap;
+        gap: 20px;
+
+        @include mq(tablet) {
+            gap: 25px;
+        }
+
+        @include mq(tablet-max) {
+            @include flex-direction(column, vertical);
+            gap: 30px;
+            margin-top: 0px;
+        }
+
+        @include mq(desktop) {
+            gap: 40px;
+        }
+
+        @include mq(desktop-wide) {
+            gap: 60px;
+        }
+
+        .listView__item {
+            gap: 25px;
+            @include align-items(center);
+
+            @include mq(tablet) {
+                width: calc(100% / 2 - 25px);
+            }
+
+            @include mq(tablet-max) {
+                width: auto
+            }
+        }
+    }
+    &.v4{
+        @include flexbox;
+        @include flex-direction(column, vertical);
+        gap: 20px;
+        @include mq(tablet-max){
+            @include flex-direction(row, horizontal);
+            gap: unset;
+        }
+        .listView__item{
+            @include flex-direction(column, vertical);
+            flex: 1;
+            .listView__item-media{
+                margin-bottom: 10px;
+                img{
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

@@ -17,6 +17,7 @@ const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: fa
 const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ssr: false });
 const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr: false });
 const CustomSilder = dynamic(() => import('@/utils/CustomSilder'), { ssr: false });
+const Tabs = dynamic(() => import("@/utils/Tabs"), { ssr: false });
 
 
 
@@ -152,6 +153,10 @@ const PageTemplate = ({ data }: any) => {
                             }
                         },
                     })} />;
+                }
+                if (domNode.name === "customtabs") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <Tabs {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
                 // ✅ Universal fix for self-closing tags
                 if (domNode instanceof Element && domNode.name?.startsWith("source")) {
