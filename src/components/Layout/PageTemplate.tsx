@@ -11,6 +11,7 @@ const ScrollAnimation = dynamic(() => import('../ScrollAnimation'), { ssr: false
 const PostList = dynamic(() => import('@/utils/PostList'), { ssr: false });
 const CustomForm = dynamic(() => import('@/utils/CustomForm'), { ssr: false });
 const CustomMap = dynamic(() => import('@/utils/CustomMap'), { ssr: false });
+const CustomWorldMap = dynamic(() => import('@/utils/CustomWorldMap'), { ssr: false });
 const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: false });
 const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ssr: false });
 const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr: false });
@@ -74,6 +75,25 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     return (
                         <CustomMap
+                            {...props}
+                            data={domToReact(domNode.children as DOMNode[], {
+                                replace: (childNode) => {
+                                    if (childNode instanceof Element) {
+                                        if (childNode.name === "animatedcountup") {
+                                            const childProps = attributesToProps(childNode.attribs);
+                                            const toValue = childProps.to ? Number(childProps.to) : 0;
+                                            return <Counter to={toValue} />;
+                                        }
+                                    }
+                                },
+                            })}
+                        />
+                    );
+                }
+                if (domNode.name === "customworldmap") {
+                    const props = attributesToProps(domNode.attribs);
+                    return (
+                        <CustomWorldMap
                             {...props}
                             data={domToReact(domNode.children as DOMNode[], {
                                 replace: (childNode) => {
