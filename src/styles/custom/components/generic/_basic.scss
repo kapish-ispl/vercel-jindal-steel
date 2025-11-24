@@ -1269,6 +1269,9 @@ ul {
                 @include font-size(20, 1.6);
             }
         }
+        &.bg-blue{
+            background-color: var(--color-accent-blue) !important;
+        }
     }
 }
 
@@ -1755,6 +1758,15 @@ ul {
             }
             @include mq(desktop-wide-max){
                 padding-bottom: 126px;
+            }
+        }
+        &.v-4{
+            padding-bottom: 50px;
+            @include mq(tablet-max){
+                padding-bottom: 70px;
+            }
+            @include mq(desktop){
+                padding-bottom: 90px;
             }
         }
     }
