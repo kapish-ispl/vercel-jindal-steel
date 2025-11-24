@@ -251,6 +251,23 @@
         @include font-size(24);
     }
 }
+.c-content-25 {
+    font-weight: var(--fontRegular);
+
+    @include font-size(17);
+
+    @include mq('tablet') {
+        @include font-size(19);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(21);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(25);
+    }
+}
 .c-content-32 {
     font-weight: var(--fontRegular);
 

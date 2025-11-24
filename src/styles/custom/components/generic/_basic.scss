@@ -1637,7 +1637,7 @@ ul {
 }
 
 .clr-gray {
-    color: var(--color-secondary);
+    color: var(--color-secondary) !important;
 }
 .generic_spacer_container {
     padding-top: 50px;
@@ -1745,5 +1745,23 @@ ul {
             }
 
         }
+        &.v-3{
+            padding-bottom: 50px;
+            @include mq(tablet-max){
+                padding-bottom: 70px;
+            }
+              @include mq(desktop-wide) {
+                padding-bottom: 90px;
+            }
+            @include mq(desktop-wide-max){
+                padding-bottom: 126px;
+            }
+        }
     }
+}
+.genric__content{
+    .u-link{
+        text-decoration: none;
+        color: var(--color-accent-blue);
+    }    
 }

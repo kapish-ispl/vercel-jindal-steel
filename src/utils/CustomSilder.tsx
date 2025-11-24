@@ -4,7 +4,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
 
-const CustomSlider = ({ cls, customcls, items, data, arrows, dots }: any) => {
+const CustomSlider = ({ cls, customcls, items, data, arrows, dots, bluearrow }: any) => {
 
     const parsedItems: any = React.useMemo(() => {
         try {
@@ -54,30 +54,30 @@ const CustomSlider = ({ cls, customcls, items, data, arrows, dots }: any) => {
     }, [emblaApi, onSelect]);
 
     useEffect(() => {
-    if (!emblaApi) return;
+        if (!emblaApi) return;
 
-    const play = () => {
-      emblaApi.scrollNext();
-    };
+        const play = () => {
+            emblaApi.scrollNext();
+        };
 
-    autoplayInterval.current = setInterval(play, 3000); // ⏱ change 3000ms to your preferred speed
+        autoplayInterval.current = setInterval(play, 3000); // ⏱ change 3000ms to your preferred speed
 
-    // Pause on hover
-    const emblaRoot = emblaApi.rootNode();
-    const handleMouseEnter = () => clearInterval(autoplayInterval.current!);
-    const handleMouseLeave = () => {
-      autoplayInterval.current = setInterval(play, 3000);
-    };
+        // Pause on hover
+        const emblaRoot = emblaApi.rootNode();
+        const handleMouseEnter = () => clearInterval(autoplayInterval.current!);
+        const handleMouseLeave = () => {
+            autoplayInterval.current = setInterval(play, 3000);
+        };
 
-    emblaRoot.addEventListener("mouseenter", handleMouseEnter);
-    emblaRoot.addEventListener("mouseleave", handleMouseLeave);
+        emblaRoot.addEventListener("mouseenter", handleMouseEnter);
+        emblaRoot.addEventListener("mouseleave", handleMouseLeave);
 
-    return () => {
-      clearInterval(autoplayInterval.current!);
-      emblaRoot.removeEventListener("mouseenter", handleMouseEnter);
-      emblaRoot.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, [emblaApi]);
+        return () => {
+            clearInterval(autoplayInterval.current!);
+            emblaRoot.removeEventListener("mouseenter", handleMouseEnter);
+            emblaRoot.removeEventListener("mouseleave", handleMouseLeave);
+        };
+    }, [emblaApi]);
 
     // ✅ Navigation
     const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
@@ -105,14 +105,15 @@ const CustomSlider = ({ cls, customcls, items, data, arrows, dots }: any) => {
                         onClick={scrollPrev}
                         aria-label="Previous Slide"
                     >
-                        <img src="https://docs.jindalsteel.in/document/124/1761379695_Arrow1Stroke1.png" alt="Previous" />
+                        <img src={bluearrow == true ? 'url' : "https://docs.jindalsteel.in/document/124/1763981729_Group58.png"} alt="Next" />
                     </button>
                     <button
                         className="c-embla__arrow c-embla__arrow--next"
                         onClick={scrollNext}
                         aria-label="Next Slide"
                     >
-                        <img src="https://docs.jindalsteel.in/document/124/1761379695_Arrow1Stroke1.png" alt="Next" />
+
+                        <img src={bluearrow == true ? 'url' : "https://docs.jindalsteel.in/document/124/1763981729_Group58.png"} alt="Previous" />
                     </button>
                     {/* <button onClick={scrollPrev} className="c-embla__button">
                         ◀
@@ -134,7 +135,7 @@ const CustomSlider = ({ cls, customcls, items, data, arrows, dots }: any) => {
                                 onClick={() => emblaApi && emblaApi.scrollTo(i)}
                             />
                         ))}
-                    </div>                    
+                    </div>
                 </div>
             )}
 

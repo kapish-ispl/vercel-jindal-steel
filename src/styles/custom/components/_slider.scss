@@ -1123,3 +1123,17 @@ Common styles for navigation elements.
     }
 
 }
+.cus-embla-arrow{
+    .c-embla__buttons{
+        top: 50% !important;
+        >button{
+        border: none !important;
+        border-radius: unset;
+        &.c-embla__arrow--next{
+            right: 0px !important;
+        }
+        }
+       
+       
+    }
+}

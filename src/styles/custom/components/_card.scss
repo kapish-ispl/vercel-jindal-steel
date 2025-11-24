@@ -245,7 +245,7 @@
     }
 
     &.v4,
-    &.v3 {
+    &.v3,&.v6 {
         cursor: inherit !important;
 
         .c-cardView__wrapper {
@@ -493,6 +493,49 @@
         }
        } 
     }
+    &.v6{
+        .c-cardView__wrapper{
+            border: none !important;
+            background-color: #F4F4F4;
+            &-content{
+                position: relative;
+                @include mq(tablet-max){
+                    padding: 76px 49px 48px 43px;
+                }
+                // .action-btn{
+                //     position: absolute;
+                //     bottom: 0px;
+                    
+                // }
+                &.v2{
+                    padding: 25px;
+                    @include mq(tablet-max){
+                        padding: 45px 49px 56px 43px;
+                    }
+                    .title{
+                        min-height: 98px;
+                    }
+                }
+                &.v3{
+                    padding: 25px;
+                    @include mq(tablet-max){
+                        padding: 38px 33px 56px 43px;
+                    }
+                }
+            }
+        }
+    }
+    &.v7{
+        .c-cardView__box{
+            background-color: #eee;
+            margin: 0px 15px;
+            .action-btn{
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+   
 
     &.fixCard {
         padding-bottom: 0px;
