@@ -4,7 +4,7 @@ import React, { useEffect, useState, useCallback, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
 
-const CustomSlider = ({ cls, customcls, items, data, arrows, dots, bluearrow }: any) => {
+const CustomSlider = ({ cls, customcls, items, data, arrows, dots, bluearrow, children }: any) => {
 
     const parsedItems: any = React.useMemo(() => {
         try {
@@ -18,7 +18,7 @@ const CustomSlider = ({ cls, customcls, items, data, arrows, dots, bluearrow }: 
             return [1, 1, 1];
         }
     }, [items]);
-    const filteredItems = data?.filter((item: any) => item.props != undefined);
+    const filteredItems = data?.filter((item: any) => item.props != undefined) || children;
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start', slidesToScroll: 1, });
     const [slidesToShow, setSlidesToShow] = useState(parsedItems[0]);
     const [selectedIndex, setSelectedIndex] = useState(0);

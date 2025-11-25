@@ -15,6 +15,7 @@ const componentMap: any = {
     ProductCard: dynamic(() => import("./ProductCard")),
     CenterModeSlider: dynamic(() => import("./CenterModeSlider")),
     ProductSlider: dynamic(() => import("./ProductSlider")),
+    ResourceSection: dynamic(() => import("./ResourceSection")),
 }
 
 export default function PostList(props: any) {
@@ -69,14 +70,10 @@ export default function PostList(props: any) {
         getPostData();
 
     }, [props.slug, page, filteredTag, pathname]); // Corrected dependency array
-
-    // const PostComponentRender: any = useMemo(
-    //     () => dynamic(() => import(`./${props.components}`)),
-    //     [props.components]
-    // );
+    console.log(props);
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (
-        <PostComponentRender postData={postData} totalPost={totalPost} itemsPerPage={props.limit} itemstoshow={props.itemstoshow} isproduct={props.isproduct} />
+        <PostComponentRender postData={postData} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={props.limit} itemstoshow={props.itemstoshow} isproduct={props.isproduct} />
     ) : <div>Loading...</div>;
 }
