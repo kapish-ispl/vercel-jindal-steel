@@ -89,7 +89,7 @@ const CustomSlider = ({ cls, customcls, items, data, arrows, dots, bluearrow, ch
                 <div
                     className={`c-embla__container ${cls ? cls : ""}`}
                 >
-                    {filteredItems?.map((item: any, index: number) => (
+                    {filteredItems.length > 0 && filteredItems?.map((item: any, index: number) => (
                         <div className="c-embla__slide" style={{ flex: `0 0 calc(100% / ${slidesToShow})` }} key={index}>
                             {item}
                         </div>
