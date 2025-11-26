@@ -18,7 +18,6 @@ interface FinancialCardProps {
 }
 
 const FinancialCard: React.FC<FinancialCardProps> = ({ postData }) => {
-    console.log(postData, "postData");
 
     return (
         <ul className="bullet__list">

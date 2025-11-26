@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export interface Option {
     label: string;
@@ -12,6 +13,8 @@ interface CustomSelectProps {
     onChange?: (value: string) => void;
     placeholder?: string;
     icon?: ReactNode;
+    searchable?: boolean;
+    selectRef?: React.RefObject<{ clearValue: () => void } | null>;
 }
 
 export default function CustomSelect({
@@ -19,37 +22,67 @@ export default function CustomSelect({
     onChange,
     placeholder = "Select an option",
     icon,
+    searchable = false,
+    selectRef,
 }: CustomSelectProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState<Option | null>(null);
-    const wrapperRef = useRef<HTMLDivElement>(null);
+    const [search, setSearch] = useState("");
 
-    // Close on outside click
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
+
+    if (selectRef) {
+        selectRef.current = {
+            clearValue() {
+                setSelected(null);
+                setSearch("");
+                onChange?.("");
+            },
+        };
+    }
+
+    const filteredOptions = searchable
+        ? options.filter((opt) =>
+            opt.label.toLowerCase().includes(search.toLowerCase())
+        )
+        : options;
+
     useEffect(() => {
-        function handleClickOutside(e: MouseEvent) {
-            if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        if (isOpen) setSearch("");
+    }, [isOpen]);
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get("type");
+
+        if (type) {
+            const match = options.find((o) => o.value === type);
+            if (match) setSelected(match);
+        }
+    }, [options]);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
                 setIsOpen(false);
             }
-        }
+        };
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-
-    // Close on ESC key
-    useEffect(() => {
-        function handleEsc(e: KeyboardEvent) {
-            if (e.key === "Escape") {
-                setIsOpen(false);
-            }
-        }
-        document.addEventListener("keydown", handleEsc);
-        return () => document.removeEventListener("keydown", handleEsc);
     }, []);
 
     const handleSelect = (option: Option) => {
         setSelected(option);
         setIsOpen(false);
         onChange?.(option.value);
+
+        const params = new URLSearchParams(window.location.search);
+        params.set("type", option.value);
+
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        router.push(newUrl, { scroll: false });
     };
 
     return (
@@ -57,13 +90,26 @@ export default function CustomSelect({
             <motion.button
                 type="button"
                 className="d-flex justify-content-between align-items-center w-100"
-                onClick={() => setIsOpen((prev) => !prev)}
-                aria-expanded={isOpen}
-                layout
+                onClick={() => setIsOpen(!isOpen)}
             >
-                <span>{selected ? selected.label : placeholder}</span>
+                <span className="flex-grow-1 text-start">
+                    {searchable && isOpen ? (
+                        <input
+                            type="text"
+                            className="form-control border-0 p-0 m-0 shadow-none"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            placeholder="Search..."
+                            autoFocus
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    ) : selected ? (
+                        selected.label
+                    ) : (
+                        placeholder
+                    )}
+                </span>
 
-                {/* Icon Animation */}
                 <AnimatePresence mode="wait" initial={false}>
                     <motion.span
                         key={isOpen ? "open" : "closed"}
@@ -71,15 +117,8 @@ export default function CustomSelect({
                         initial={{ opacity: 0, scaleY: 0.6 }}
                         animate={{ opacity: 1, scaleY: 1 }}
                         exit={{ opacity: 0, scaleY: 0.6 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
                     >
-                        {isOpen ? (
-                            <i className="icon-minus"></i>
-                        ) : icon ? (
-                            icon
-                        ) : (
-                            <i className="icon-list-filter"></i>
-                        )}
+                        {isOpen ? <i className="icon-minus" /> : icon || <i className="icon-list-filter" />}
                     </motion.span>
                 </AnimatePresence>
             </motion.button>
@@ -92,19 +131,22 @@ export default function CustomSelect({
                         animate={{ opacity: 1, scaleY: 1 }}
                         exit={{ opacity: 0, scaleY: 0 }}
                         style={{ transformOrigin: "top" }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
                     >
-                        {options.map((opt) => (
-                            <li key={opt.value}>
-                                <button
-                                    type="button"
-                                    className="dropdown-item"
-                                    onClick={() => handleSelect(opt)}
-                                >
-                                    {opt.label}
-                                </button>
-                            </li>
-                        ))}
+                        {filteredOptions.length > 0 ? (
+                            filteredOptions.map((opt) => (
+                                <li key={opt.value}>
+                                    <button
+                                        type="button"
+                                        className="dropdown-item"
+                                        onClick={() => handleSelect(opt)}
+                                    >
+                                        {opt.label}
+                                    </button>
+                                </li>
+                            ))
+                        ) : (
+                            <li className="px-3 py-2 text-muted small">No results found</li>
+                        )}
                     </motion.ul>
                 )}
             </AnimatePresence>
