@@ -16,6 +16,7 @@ const componentMap: any = {
     CenterModeSlider: dynamic(() => import("./CenterModeSlider")),
     ProductSlider: dynamic(() => import("./ProductSlider")),
     ResourceSection: dynamic(() => import("./ResourceSection")),
+    ImageTextSlider: dynamic(() => import("./ImageTextSlider")),
 }
 
 export default function PostList(props: any) {
@@ -69,8 +70,8 @@ export default function PostList(props: any) {
 
         getPostData();
 
-    }, [props.slug, page, filteredTag, pathname]); // Corrected dependency array
-    console.log(props);
+    }, [props.slug, page, filteredTag, pathname]);
+    console.log(postData, props.slug, "sdj")
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (
