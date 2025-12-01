@@ -8,13 +8,13 @@ import ReactPaginate from 'react-paginate';
 const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug }: any) => {
     const searchParams = new URLSearchParams(window.location.search);
     const pathname = window.location.pathname;
-    const currentPage = Number(searchParams.get("page") || 1);
+    const currentPage = Number(searchParams.get(`${compSlug}-page` || "page") || 1);
     const pageCount = Math.ceil(totalPost / itemsPerPage);
     const router = useRouter();
 
     const handlePageClick = ({ selected }: { selected: number }) => {
         const newParams = new URLSearchParams(window.location.search);
-        newParams.set('page', `${selected + 1}`);
+        newParams.set(`${compSlug}-page`, `${selected + 1}`);
         const newUrl = `${pathname}?${newParams.toString()}`;
         router.push(newUrl, { scroll: false });
     };
@@ -25,7 +25,6 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
         router.push(window.location.pathname, { scroll: false });
     };
 
-    console.log(postData)
     return (
         <>
             <div className="c-filterView mb-5">
@@ -34,7 +33,7 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
                         compSlug === 'conference-call' &&
                         <>
                             <div className={`col-md-10 col-sm-12`}>
-                                <CustomSelect options={yearOptions} placeholder="2025-26" selectRef={selectRef} />
+                                <CustomSelect options={yearOptions} placeholder="2025-26" paramKey='conference-call-year' selectRef={selectRef} />
                             </div>
                             <div className="col-12 col-md-2"><button type='button' className='u-btn bg-blue action_btn' onClick={handleClear}>CLEAR</button></div>
 
@@ -44,10 +43,10 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
                         compSlug === 'investor-documents' &&
                         <>
                             <div className={`col-md-5 col-sm-12`}>
-                                <CustomSelect options={invDocOptions} placeholder="Select Earning Presentation" searchable={true} selectRef={selectRef} />
+                                <CustomSelect options={invDocOptions} placeholder="Select Earning Presentation" paramKey="investor-documents-type" searchable={true} selectRef={selectRef} />
                             </div>
                             <div className={`col-md-5 col-sm-12`}>
-                                <CustomSelect options={yearOptions} placeholder="Select Year" selectRef={selectRef} />
+                                <CustomSelect options={yearOptions} placeholder="Select Year" paramKey="investor-documents-year" selectRef={selectRef} />
                             </div>
                             <div className="col-12 col-md-2"><button type='button' className='u-btn bg-blue action_btn' onClick={handleClear}>CLEAR</button></div>
 
@@ -59,7 +58,7 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
             <div className="c-cardView v7 fixSpace">
                 <div className="row">
                     {
-                        postData.length > 0 && postData.map((post: any, index: number) => {
+                        postData.length > 0 ? postData.map((post: any, index: number) => {
                             return (
                                 <div className="col-12 col-md-6 col-lg-4" key={index}>
 
@@ -90,9 +89,13 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
                                     }
                                 </div>
                             )
-                        })
+                        }) :
+                            <>
+                                No Data found
+                            </>
+                        // {return <>No Data found</>}
                     }
-                    {pageCount > 1 && compSlug === 'investor-documents' && (
+                    {pageCount > 1 && (
                         <div className="pagination-container mt-80 d-flex justify-content-center">
                             <ReactPaginate
                                 previousLabel={

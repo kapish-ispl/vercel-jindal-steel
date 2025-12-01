@@ -14,6 +14,7 @@ interface CustomSelectProps {
     placeholder?: string;
     icon?: ReactNode;
     searchable?: boolean;
+    paramKey?: string
     selectRef?: React.RefObject<{ clearValue: () => void } | null>;
 }
 
@@ -23,6 +24,7 @@ export default function CustomSelect({
     placeholder = "Select an option",
     icon,
     searchable = false,
+    paramKey = 'type',
     selectRef,
 }: CustomSelectProps) {
     const [isOpen, setIsOpen] = useState(false);
@@ -54,13 +56,13 @@ export default function CustomSelect({
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        const type = params.get("type");
+        const type = params.get(paramKey);
 
         if (type) {
             const match = options.find((o) => o.value === type);
             if (match) setSelected(match);
         }
-    }, [options]);
+    }, [options, paramKey]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -79,7 +81,7 @@ export default function CustomSelect({
         onChange?.(option.value);
 
         const params = new URLSearchParams(window.location.search);
-        params.set("type", option.value);
+        params.set(paramKey, option.value);
 
         const newUrl = `${window.location.pathname}?${params.toString()}`;
         router.push(newUrl, { scroll: false });

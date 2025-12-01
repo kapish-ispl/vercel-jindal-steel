@@ -6,6 +6,7 @@ import { serverRequest } from "@/services/getServerSideRender";
 import { CONSTANTS } from "@/config/constant";
 import { GET_POST_ENDPOINT } from "@/config/apiConfig";
 import dynamic from "next/dynamic";
+import { yearOptions } from "@/constants/GenericFilter";
 
 
 const componentMap: any = {
@@ -32,18 +33,39 @@ export default function PostList(props: any) {
     const type = searchParams.get('type');
     const [filteredTag, setFilteredTag] = useState<string | null>(null);
 
-    console.log(type)
+    const metaKeys: any = {
+        "investor-documents": {
+            year: { key: "year_1599486125" },
+            type: { key: "type_1599485711" }
+        },
+
+        "conference-call": {
+            year: {
+                key: "conference_year_1734948827",
+                default: yearOptions[0].value
+            }
+        },
+
+        "policies-reports": {
+            type: { key: "type_1599634707" }
+        }
+    };
+
     useEffect(() => {
         let slugInfo = props.slug;
+        const yearParam = searchParams.get(`${props.slug}-year`);
+        const typeParam = searchParams.get(`${props.slug}-type`);
+        const pageParam = searchParams.get(`${props.slug}-page`);
+
+        const activePage = pageParam ?? page ?? 1;
+
+
         let limit = props.limit !== undefined ? props.limit : 9;
 
         if (pathname === '/') {
             slugInfo += `&metaInfo[type_1599485711]=${props.type}`;
             limit = 3;
         }
-        // if (props.slug === 'policies-reports') {
-        //     slugInfo += `&metaInfo[type_1599634707]=${props.type}`;
-        // }
 
         if (props.slug === 'policies-reports') {
             if (type) {
@@ -51,7 +73,26 @@ export default function PostList(props: any) {
             }
         }
 
-        console.log(props.slug)
+        if (metaKeys[props.slug]) {
+            const map = metaKeys[props.slug];
+
+            // Handle Year
+            if (map.year) {
+                const selectedYear = yearParam || map.year.default;
+                if (selectedYear) {
+                    slugInfo += `&metaInfo[${map.year.key}]=${selectedYear}`;
+                }
+            }
+
+            // Handle Type
+            if (map.type) {
+                const selectedType = typeParam || map.type.default;
+                if (selectedType) {
+                    slugInfo += `&metaInfo[${map.type.key}]=${selectedType}`;
+                }
+            }
+        }
+
         const getPostData = async () => {
             setLoading(true);
 
@@ -60,7 +101,8 @@ export default function PostList(props: any) {
                     if (props.slug === "product" && contextInfo.productData?.length > 0) {
                         setPostData(contextInfo.productData);
                     } else {
-                        const offset = page !== null ? (Number(page) - 1) * limit : 0;
+                        // const offset = pageParam !== null ? (Number(pageParam) - 1) * limit : 0;
+                        const offset = (Number(activePage) - 1) * limit;
 
                         const taxonomyInfo = await serverRequest(
                             {},
@@ -92,7 +134,7 @@ export default function PostList(props: any) {
 
         getPostData();
 
-    }, [props.slug, page, filteredTag, pathname, type]);
+    }, [props.slug, page, filteredTag, pathname, type, searchParams, 'metaKeys', 'props.limit']);
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (
