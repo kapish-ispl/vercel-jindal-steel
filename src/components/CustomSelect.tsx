@@ -98,7 +98,7 @@ export default function CustomSelect({
                     {searchable && isOpen ? (
                         <input
                             type="text"
-                            className="form-control border-0 p-0 m-0 shadow-none"
+                            className="form-control border-0 m-0 shadow-none"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder="Search..."

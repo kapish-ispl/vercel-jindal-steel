@@ -543,7 +543,15 @@
             }
         }
     }
-   
+
+   .c-audio__wrap{
+    padding: 30px 30px 30px 27px;
+    border-radius: inherit;
+    background-color: #F2F3F4;
+    audio{
+        width: 100%;
+    }
+   }
 
     &.fixCard {
         padding-bottom: 0px;
@@ -565,6 +573,24 @@
                     }
                 }
             }
+        }
+    }
+    .performance-link{
+        @include flexbox;
+        padding: 30px 25px;
+        background: #F4F4F4;
+        color: var(--color-secondary);
+        @include justify-content(space-between);
+        height: calc(100% - 20px);
+        margin-bottom: 20px;
+        text-decoration: none;
+        @include mq(tablet-max){
+            padding: 50px 27px;
+            margin-bottom: 35px;
+            height: calc(100% - 35px);
+        }
+        .title{
+            max-width: 250px;
         }
     }
 

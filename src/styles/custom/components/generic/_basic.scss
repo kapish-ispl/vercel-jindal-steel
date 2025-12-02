@@ -1192,6 +1192,7 @@ ul {
         padding: 0;
 
 
+
         button {
             border: none;
             padding: 15px;
@@ -1217,12 +1218,22 @@ ul {
 
 
         }
+        span{
+            .form-control{
+                background: #d9d9d9;
+                
+            }
+        }
 
         .dropdown-menu {
             background: #d9d9d9;
             border-radius: 0px;
             border: unset;
-            padding-block: 0;
+            padding-bottom: 0;
+           &.show{
+             max-height: 350px;
+            overflow-y: scroll;
+           }
 
             .dropdown-item {
                 transition: all ease .3s;

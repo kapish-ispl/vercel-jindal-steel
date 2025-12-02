@@ -67,22 +67,24 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
                                             <div className='hw mb-40'>
                                                 <div className="c-heading-40 clr-blue">{post.title}</div>
                                             </div>
+                                            <div className='c-audio__wrap'>
+                                                <audio src={post.media[0].cdnPath} controls></audio>
 
-                                            <audio src={post.media[0].cdnPath} controls></audio>
+                                            </div>
                                         </>
                                     }
                                     {
                                         compSlug === 'investor-documents' && <>
-                                            <Link href={post.media[0].cdnPath}>
-                                                <div className="title">{post.title}</div>
-                                                <img src="/images/icons/down-arrow.svg" alt="icon download" />
+                                            <Link href={post.media[0].cdnPath} className='performance-link'>
+                                                <div className="title c-content-19 ft_bold">{post.title}</div>
+                                                <img src="/images/icons/down-arrow.svg" alt="icon download" className='u-img img-fluid' />
                                             </Link>
                                         </>
                                     }
                                     {
                                         compSlug === 'subsidiary-financials' && <>
-                                            <Link href={post.metaInfo.external_link}>
-                                                <div className="title">{post.title}</div>
+                                            <Link href={post.metaInfo.external_link} className='performance-link'>
+                                                <div className="title c-content-19 ft_bold">{post.title}</div>
                                                 <img src="/images/icons/down-arrow.svg" alt="icon download" />
                                             </Link>
                                         </>
