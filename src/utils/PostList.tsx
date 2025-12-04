@@ -20,6 +20,7 @@ const componentMap: any = {
     ImageTextSlider: dynamic(() => import("./ImageTextSlider")),
     FilterCards: dynamic(() => import("./FilterCards")),
     PerformanceCard: dynamic(() => import("./PerformanceCard")),
+    LeadershipCard: dynamic(() => import("./LeadershipCard"))
 }
 
 export default function PostList(props: any) {
@@ -127,14 +128,14 @@ export default function PostList(props: any) {
                 setLoading(false);
             }
         };
-        if (page !== filteredTag) {
-            setPostData([]);
-            setFilteredTag(page);
-        }
+        // if (page !== filteredTag) {
+        //     setPostData([]);
+        //     setFilteredTag(page);
+        // }
 
         getPostData();
 
-    }, [props.slug, page, filteredTag, pathname, type, searchParams, 'metaKeys', 'props.limit']);
+    }, [props.slug, page, pathname, type, searchParams, metaKeys]);
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (
