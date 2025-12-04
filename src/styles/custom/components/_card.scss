@@ -543,6 +543,26 @@
             }
         }
     }
+    &.v8{
+        .c-cardView__box{
+            &-item{
+                .card__content{
+                    min-height: inherit !important;
+                    &__title{
+                        min-height: inherit !important;
+                    }
+                }
+            }
+        }
+    }
+    &.card-fixes{
+        .c-cardView__wrapper{
+            &-content{
+                padding: 54px 49px 54px 43px;
+                
+            }
+        }
+    }
 
    .c-audio__wrap{
     padding: 30px 30px 30px 27px;
