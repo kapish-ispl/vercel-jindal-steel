@@ -54,14 +54,16 @@ const Footer = () => {
                                         <div className="head">Connect with us</div>
                                         <div className="socialMenu">
                                             <ul className="social__wrapper">
-                                                <li className="social__wrapper--item"><a href='#' className='social__wrapper--item-link'>
+                                                <li className="social__wrapper--item active"><a href='#' className='social__wrapper--item-link'>
                                                     <img
                                                         src='/images/icons/linkdin-icon.svg'
                                                         alt="jindal steel logo"
                                                         width={41}
                                                         height={41}
                                                         className="img-fluid u-img" />
-                                                </a></li>
+                                                </a>
+
+                                                </li>
                                                 <li className="social__wrapper--item"><a href='#' className='social__wrapper--item-link'>
                                                     <img
                                                         src='/images/icons/fb-icon.svg'

@@ -370,3 +370,32 @@
 //     }
 //   }
 // }
+
+// Social icons
+.socialMenu {
+  margin-top: 12px;
+}
+
+.social__wrapper {
+  @include flexbox;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 0;
+  margin-bottom: 0;
+
+  &--item {
+    list-style: none;
+    background: #939598;
+    @include border-radius(50%);
+    @include size(30px);
+    min-width: 30px;
+    @include flexbox;
+    @include align-items(center);
+    @include justify-content(center);
+    @include transition(all 0.4s ease);
+
+    &:hover {
+      transform: rotate(360deg);
+    }
+  }
+}

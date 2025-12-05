@@ -1,0 +1,22 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+@use '../components/generic/sizes' as *;
+
+.tabbing_wrap {
+  &.v1 {
+    ul {
+      @include flexbox;
+      @include justify-content(center);
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tabbing_wrap {
+      &_item {
+        background: transparent;
+        outline: none;
+        border: none;
+      }
+    }
+  }
+}

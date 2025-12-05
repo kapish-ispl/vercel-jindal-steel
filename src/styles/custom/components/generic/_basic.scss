@@ -1488,3 +1488,36 @@ ul {
         color: var(--color-accent-blue);
     }    
 }
+.c-footer__info-content{
+    .social__wrapper{
+        &--item{
+            position: relative;
+            z-index: 9;
+            .dropdown__menu{
+                position: absolute;
+                bottom: -110px;
+                right: -34px;
+                background: #ffffff96;
+                z-index: 9;
+                display: none;
+                &.show{
+                    display: block;
+                }
+                &-item{
+                    padding: 10px 12px;
+                    .dropdown-link{
+                        text-decoration: none;
+                        color: var(--color-secondary);
+                        @include font-size(18);
+                    }
+                }
+            }   
+            &.active{
+                &:hover{
+                    transform: rotate(0deg) !important;
+                }
+            }
+        }
+    }
+
+}
