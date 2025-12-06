@@ -1,7 +1,14 @@
+import { decryptResponse } from '@/components/decryption';
 import { CONSTANTS } from '@/config/constant';
 import { KEYS } from '@/config/key';
 
-export async function serverRequest(request: any, url: string, methodName: string): Promise<any> {
+export async function serverRequest(request: any, url: string, methodName: string, requestType: 'client' | 'server' = 'client'): Promise<any> {
+  let baseUrl = '';
+  if (requestType == 'server') {
+    baseUrl = 'http://localhost:3000';
+  } else {
+    baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  }
   try {
     const requestHeaders = await getHeader(url, request);
     let response: Response;
@@ -26,8 +33,22 @@ export async function serverRequest(request: any, url: string, methodName: strin
     if (json?.errors?.length > 0 && json.errors[0]?.message) {
       console.warn('API Error:', json.errors[0].message);
     }
-
-    return json;
+    if (json && json.code == 'SUC200') {
+      const data = decryptResponse(json.data);
+      // const res = await fetch(`${baseUrl}/api/decrypt`, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({
+      //     responseFromApi: json.data,
+      //   }),
+      // });
+      //const data = await res.json();
+      return {
+        ...json,
+        data: data
+      };
+    }
+    //return json;
   } catch (error) {
     console.error('Fetch error:', error);
     return {

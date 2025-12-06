@@ -135,7 +135,7 @@ export default function PostList(props: any) {
 
         getPostData();
 
-    }, [props.slug, page, pathname, type, searchParams, metaKeys]);
+    }, [props.slug, page, pathname, type, searchParams]);
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (
