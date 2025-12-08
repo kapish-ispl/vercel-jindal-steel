@@ -735,12 +735,14 @@ Common styles for navigation elements.
 
 .c-embla__dots-wrap {
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     right: 50%;
      @include transform(translateY(-50%));
     @include flexbox;
     gap: 15px;
- 
+    @include mq(tablet-max){
+        bottom: 40px;
+    }
         .c-embla__dots{
       flex-direction: row;
     }

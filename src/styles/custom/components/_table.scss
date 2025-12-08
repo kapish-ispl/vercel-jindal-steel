@@ -65,4 +65,15 @@
             margin-top: 50px;
         }
     }
+    &.v2{
+        +.c-table__view{
+            margin-top: 50px;
+            @include mq(tablet-max){
+                margin-top: 70px;
+            }
+            @include mq(desktop){
+                margin-top: 90px;
+            }
+        }
+    }
 }
