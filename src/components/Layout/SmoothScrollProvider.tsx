@@ -19,6 +19,14 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,  // mouse wheel smooth
       smoothTouch: true,  // touch / mobile smooth
+      prevent: (target: EventTarget | null) => {
+        try {
+          const el = target as Element | null;
+          return !!el?.closest?.("[data-lenis-ignore]");
+        } catch {
+          return false;
+        }
+      },
     });
 
     // RAF loop to update Lenis and GSAP ScrollTrigger

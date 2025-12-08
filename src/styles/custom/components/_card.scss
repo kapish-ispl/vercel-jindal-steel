@@ -245,7 +245,8 @@
     }
 
     &.v4,
-    &.v3,&.v6 {
+    &.v3,
+    &.v6 {
         cursor: inherit !important;
 
         .c-cardView__wrapper {
@@ -434,144 +435,173 @@
             }
         }
     }
-    &.v5{
-       .c-cardView__wrapper{
-        @include transition(all 0.3s ease-in-out);
-        margin-bottom: 20px;
-        height: calc(100% - 20px);
-        a {
+
+    &.v5 {
+        .c-cardView__wrapper {
+            @include transition(all 0.3s ease-in-out);
+            margin-bottom: 20px;
+            height: calc(100% - 20px);
+
+            a {
                 text-decoration: none;
             }
-        span{
-            display: block;
-        }
-        &-content{
-            padding: 15px 20px 15px 0px;
-            @include mq(tablet){
-                padding: 20px 25px 20px 0px;
+
+            span {
+                display: block;
             }
-            @include mq(tablet-max){
-                padding: 30px 40px 30px 0px;
-            }
-            @include mq(desktop){
-                padding: 35px 45px 30px 0px;
-            }
-            @include mq(desktop-wide){
-                padding: 50px 60px 30px 0px;
-            }
-            @include mq(desktop-wide-max){
-                padding: 55px 85px 30px 0px;
-            }
-            .desc {
-                color: #000;
-                min-height: 110px;
-                @include mq(tablet-max){
-                    min-height: 130px;
+
+            &-content {
+                padding: 15px 20px 15px 0px;
+
+                @include mq(tablet) {
+                    padding: 20px 25px 20px 0px;
                 }
-                @include mq(desktop){
-                    min-height: 145px;
+
+                @include mq(tablet-max) {
+                    padding: 30px 40px 30px 0px;
                 }
-                
-            }
-            .action-btn{
-                    .icon{
+
+                @include mq(desktop) {
+                    padding: 35px 45px 30px 0px;
+                }
+
+                @include mq(desktop-wide) {
+                    padding: 50px 60px 30px 0px;
+                }
+
+                @include mq(desktop-wide-max) {
+                    padding: 55px 85px 30px 0px;
+                }
+
+                .desc {
+                    color: #000;
+                    min-height: 110px;
+
+                    @include mq(tablet-max) {
+                        min-height: 130px;
+                    }
+
+                    @include mq(desktop) {
+                        min-height: 145px;
+                    }
+
+                }
+
+                .action-btn {
+                    .icon {
                         @include font-size(45);
                         color: #626466;
                     }
                 }
-        }
-        &:hover{
-            .c-cardView__wrapper-content{
-                .action-btn{
-                     transform: translateX(20px);
-                    .icon{
-                        color: var(--color-primary);
-                        
+            }
+
+            &:hover {
+                .c-cardView__wrapper-content {
+                    .action-btn {
+                        transform: translateX(20px);
+
+                        .icon {
+                            color: var(--color-primary);
+
+                        }
                     }
                 }
             }
         }
-       } 
     }
-    &.v6{
-        .c-cardView__wrapper{
+
+    &.v6 {
+        .c-cardView__wrapper {
             border: none !important;
             background-color: #F4F4F4;
-            &-content{
+
+            &-content {
                 position: relative;
-                @include mq(tablet-max){
+
+                @include mq(tablet-max) {
                     padding: 76px 49px 48px 43px;
                 }
+
                 // .action-btn{
                 //     position: absolute;
                 //     bottom: 0px;
-                    
+
                 // }
-                &.v2{
+                &.v2 {
                     padding: 25px;
-                    @include mq(tablet-max){
+
+                    @include mq(tablet-max) {
                         padding: 45px 49px 56px 43px;
                     }
-                    .title{
+
+                    .title {
                         min-height: 98px;
                     }
                 }
-                &.v3{
+
+                &.v3 {
                     padding: 25px;
-                    @include mq(tablet-max){
+
+                    @include mq(tablet-max) {
                         padding: 38px 33px 56px 43px;
                     }
                 }
             }
         }
     }
-    &.v7{
-        .c-cardView__box{
+
+    &.v7 {
+        .c-cardView__box {
             background-color: #eee;
             margin: 0px 15px;
-            
-            
-            .action-btn{
+
+
+            .action-btn {
                 opacity: 1;
                 visibility: visible;
             }
         }
-        &.fixSpace{
-            .c-cardView__box{
+
+        &.fixSpace {
+            .c-cardView__box {
                 margin: 0px 0px 30px 0px;
                 height: calc(100% - 30px);
             }
         }
     }
-    &.v8{
-        .c-cardView__box{
-            &-item{
-                .card__content{
+
+    &.v8 {
+        .c-cardView__box {
+            &-item {
+                .card__content {
                     min-height: inherit !important;
-                    &__title{
+
+                    &__title {
                         min-height: inherit !important;
                     }
                 }
             }
         }
     }
-    &.card-fixes{
-        .c-cardView__wrapper{
-            &-content{
+
+    &.card-fixes {
+        .c-cardView__wrapper {
+            &-content {
                 padding: 54px 49px 54px 43px;
-                
+
             }
         }
     }
 
-   .c-audio__wrap{
-    padding: 30px 30px 30px 27px;
-    border-radius: inherit;
-    background-color: #F2F3F4;
-    audio{
-        width: 100%;
+    .c-audio__wrap {
+        padding: 30px 30px 30px 27px;
+        border-radius: inherit;
+        background-color: #F2F3F4;
+
+        audio {
+            width: 100%;
+        }
     }
-   }
 
     &.fixCard {
         padding-bottom: 0px;
@@ -595,7 +625,8 @@
             }
         }
     }
-    .performance-link{
+
+    .performance-link {
         @include flexbox;
         padding: 30px 25px;
         background: #F4F4F4;
@@ -604,12 +635,14 @@
         height: calc(100% - 20px);
         margin-bottom: 20px;
         text-decoration: none;
-        @include mq(tablet-max){
+
+        @include mq(tablet-max) {
             padding: 50px 27px;
             margin-bottom: 35px;
             height: calc(100% - 35px);
         }
-        .title{
+
+        .title {
             max-width: 250px;
         }
     }
@@ -730,220 +763,299 @@
         margin-left: 30px;
     }
 }
+
 .c-cardBox__wrapper {
-       &.v1,
-        &.v2,
-        &.v3 {
-            background-color: var(--color-white);
-            position: relative;
-            overflow: hidden;
+
+    &.v1,
+    &.v2,
+    &.v3 {
+        background-color: var(--color-white);
+        position: relative;
+        overflow: hidden;
+        display: block;
+        @include transition(all 0.3s ease-in-out);
+        text-decoration: none;
+        box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0);
+        margin-bottom: 30px;
+
+        .c-cardBox__wrapper {
+            &-top {
+                position: relative;
+                display: block;
+                width: 100%;
+
+                .title {
+                    position: absolute;
+                    bottom: 20px;
+                    padding: 0 20px;
+                    width: 100%;
+                    display: block;
+                    left: 0;
+                    @include transition(all 0.3s ease-in-out);
+                }
+            }
+
+            &-bottom {
+                display: block;
+                @include transition(all 0.3s ease-in-out);
+
+                .content {
+                    color: var(--color-secondary);
+                    padding-bottom: 20px;
+                    display: block;
+                    margin-top: 20px;
+                    @include transition(all 0.3s ease-in-out);
+
+                    .title {
+                        display: block;
+                    }
+                }
+
+                .action-btn {
+                    display: none;
+                }
+            }
+        }
+
+        .ratio {
             display: block;
+            /* make span act like a block */
+            position: relative;
+            width: 100%;
             @include transition(all 0.3s ease-in-out);
-            text-decoration: none;
-            box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0);
-            margin-bottom: 30px;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        }
+
+        &:hover {
+            box-shadow: 0 2px 2px 2px rgba(0, 0, 0, .15);
 
             .c-cardBox__wrapper {
                 &-top {
-                    position: relative;
-                    display: block;
-                    width: 100%;
                     .title {
-                        position: absolute;
-                        bottom: 20px;
-                        padding: 0 20px;
-                        width: 100%;
-                        display: block;
-                        left: 0;
-                        @include transition(all 0.3s ease-in-out);
+                        padding: 0 40px;
                     }
                 }
 
                 &-bottom {
-                    display: block;
-                    @include transition(all 0.3s ease-in-out);
-                    
-                    .content {
-                        color: var(--color-secondary);
-                        padding-bottom: 20px;
-                        display: block;
-                        margin-top: 20px;
-                        @include transition(all 0.3s ease-in-out);
-                        .title{
-                            display: block;
-                        }
-                    }
-
-                    .action-btn {
-                        display: none;
-                    }
-                }
-            }
-
-            .ratio {
-                display: block;
-                /* make span act like a block */
-                position: relative;
-                width: 100%;
-                @include transition(all 0.3s ease-in-out);
-                overflow: hidden;
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                }
-            }
-
-            &:hover {
-                box-shadow: 0 2px 2px 2px rgba(0, 0, 0, .15);
-
-                .c-cardBox__wrapper {
-                    &-top {
-                        .title {
-                            padding: 0 40px;
-                        }
-                    }
-
-                    &-bottom {
-                        width: calc(100% - 50px);
-                        margin-left: 25px;
-                        margin-right: 25px;
-                    }
-                }
-
-                .ratio {
                     width: calc(100% - 50px);
                     margin-left: 25px;
-                    margin-top: 25px;
                     margin-right: 25px;
                 }
             }
 
-            &.min-height500 {
-                .c-cardBox__wrapper-bottom {
-                    @include mq(tablet) {
-                        min-height: 350px;
-                        max-height: 350px;
-                    }
-
-                    @include mq(desktop-wide) {
-                        min-height: 280px;
-                        max-height: 280px;
-                    }
-                    
-                    overflow: hidden;
-                }
+            .ratio {
+                width: calc(100% - 50px);
+                margin-left: 25px;
+                margin-top: 25px;
+                margin-right: 25px;
             }
         }
 
-        &.v2 {
-            margin-bottom: 30px;
-            overflow: hidden;
-            height: calc(100% - 30px);
-            .c-cardBox__wrapper-top{
-                overflow: hidden;
-                .media{
-                    overflow: hidden;
-                    img{
-                        @include transition(all 0.3s ease-in-out);
-                    }
-                }
-                .title{
-                    text-transform: uppercase;
-                    
-                }
-
-            }
-            .c-cardBox__wrapper-bottom{
-                @include transition(all 0.3s ease-in-out);
-                height: 100%;
-                 .title{
-                    text-transform: uppercase;
-                    padding-top: 20px;
-                    display: block;
-                }
-                .content{
-                    margin: 0px;
-                    padding: 20px 0px;
-                }
-            }
-
-            &:hover {
-                .c-cardBox__wrapper-top{
-                    .media{
-                        img{
-                            transform: scale(1.25);
-                        }
-                    }
-                }
-                .c-cardBox__wrapper-bottom{
-                    width: unset;
-                    margin-left: unset;
-                    margin-right: unset;
-                    padding: 0px 20px;
-                }
-
-                .ratio {
-                    width: 100%;
-                    margin-left: 0px;
-                    margin-right: 0px;
-                }
-            }
-        }
-        &.v3 {
-            box-shadow: 2px 2px 4px 2px #0000001a !important;
-            height: calc(100% - 30px);
-            .c-cardBox__wrapper-top{
-                padding: 20px 40px;
-            }
+        &.min-height500 {
             .c-cardBox__wrapper-bottom {
-                border-top: 2px solid var(--color-accent-peach);
-                padding: 31px 40px;
+                @include mq(tablet) {
+                    min-height: 350px;
+                    max-height: 350px;
+                }
 
-                .content {
-                    display: block;
-                    margin: 0;
-                    padding: 0;
-                    .label{
-                        display: block;
+                @include mq(desktop-wide) {
+                    min-height: 280px;
+                    max-height: 280px;
+                }
+
+                overflow: hidden;
+            }
+        }
+    }
+
+    &.v2 {
+        margin-bottom: 30px;
+        overflow: hidden;
+        height: calc(100% - 30px);
+
+        .c-cardBox__wrapper-top {
+            overflow: hidden;
+
+            .media {
+                overflow: hidden;
+
+                img {
+                    @include transition(all 0.3s ease-in-out);
+                }
+            }
+
+            .title {
+                text-transform: uppercase;
+
+            }
+
+        }
+
+        .c-cardBox__wrapper-bottom {
+            @include transition(all 0.3s ease-in-out);
+            height: 100%;
+
+            .title {
+                text-transform: uppercase;
+                padding-top: 20px;
+                display: block;
+            }
+
+            .content {
+                margin: 0px;
+                padding: 20px 0px;
+            }
+        }
+
+        &:hover {
+            .c-cardBox__wrapper-top {
+                .media {
+                    img {
+                        transform: scale(1.25);
                     }
                 }
             }
 
-            &:hover {
-                box-shadow: inherit;
+            .c-cardBox__wrapper-bottom {
+                width: unset;
+                margin-left: unset;
+                margin-right: unset;
+                padding: 0px 20px;
+            }
 
-                .c-cardBox__wrapper {
-                    &-top {
-                        .title {
-                            padding: inherit;
-                        }
-                    }
+            .ratio {
+                width: 100%;
+                margin-left: 0px;
+                margin-right: 0px;
+            }
+        }
+    }
 
-                    &-bottom {
-                        width: inherit;
-                        margin-left: inherit;
-                        margin-right: inherit;
+    &.v3 {
+        box-shadow: 2px 2px 4px 2px #0000001a !important;
+        height: calc(100% - 30px);
+
+        .c-cardBox__wrapper-top {
+            padding: 20px 40px;
+        }
+
+        .c-cardBox__wrapper-bottom {
+            border-top: 2px solid var(--color-accent-peach);
+            padding: 31px 40px;
+
+            .content {
+                display: block;
+                margin: 0;
+                padding: 0;
+
+                .label {
+                    display: block;
+                }
+            }
+        }
+
+        &:hover {
+            box-shadow: inherit;
+
+            .c-cardBox__wrapper {
+                &-top {
+                    .title {
+                        padding: inherit;
                     }
                 }
 
-                .ratio {
+                &-bottom {
                     width: inherit;
                     margin-left: inherit;
                     margin-right: inherit;
                 }
             }
-        }
-        &.onhover{
-            &:hover{
-                .c-cardBox__wrapper-bottom{
-                    background-color: #e4e4e4;
-                }
 
+            .ratio {
+                width: inherit;
+                margin-left: inherit;
+                margin-right: inherit;
             }
         }
+    }
+
+    &.onhover {
+        &:hover {
+            .c-cardBox__wrapper-bottom {
+                background-color: #e4e4e4;
+            }
+
+        }
+    }
+}
+
+
+.c-card {
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+    height: calc(100% - 30px);
+
+    &__content {
+        padding: 18px 23px;
+        @include flexbox;
+        @include align-items(center);
+        @include justify-content(space-between);
+
+        .title {
+            color: #414042;
+        }
+
+        .label {
+            padding: 5px 0px;
+            color: #414042;
+        }
+    }
+
+    &.d2 {
+        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+        cursor: pointer;
+        @include transition(all 0.3s ease-in-out);
+
+        .c-card {
+            &__media {
+                border-radius: 22px;
+                overflow: hidden;
+            }
+
+            &__content {
+                padding: 18px 0px;
+
+                .title,
+                .label {
+                    @include transition(all 0.3s ease-in-out);
+                }
+            }
+        }
+
+        &:hover {
+            .c-card {
+                &__content {
+
+                    .title,
+                    .label {
+                        color: var(--color-primary);
+                    }
+
+                    .label {
+                        text-decoration: underline;
+                    }
+
+                }
+            }
+        }
+    }
 }

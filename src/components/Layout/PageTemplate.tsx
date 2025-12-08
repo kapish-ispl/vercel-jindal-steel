@@ -18,6 +18,7 @@ const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ss
 const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr: false });
 const CustomSilder = dynamic(() => import('@/utils/CustomSilder'), { ssr: false });
 const Tabs = dynamic(() => import("@/utils/Tabs"), { ssr: false });
+const ReadMoreModal = dynamic(() => import("@/utils/ReadMoreModal"), { ssr: false });
 
 
 
@@ -48,6 +49,10 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "cardstackslider") {
                     const props = attributesToProps(domNode.attribs);
                     return <CardStackSlider {...props} />;
+                }
+                if (domNode.name === "customreadmoremodal") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <ReadMoreModal {...props} data={domToReact(domNode.children as DOMNode[])}  />;
                 }
                 if (domNode.name === "scrollanimation") {
                     const props = attributesToProps(domNode.attribs);

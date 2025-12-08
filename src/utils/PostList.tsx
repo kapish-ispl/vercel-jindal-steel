@@ -20,7 +20,8 @@ const componentMap: any = {
     ImageTextSlider: dynamic(() => import("./ImageTextSlider")),
     FilterCards: dynamic(() => import("./FilterCards")),
     PerformanceCard: dynamic(() => import("./PerformanceCard")),
-    LeadershipCard: dynamic(() => import("./LeadershipCard"))
+    LeadershipCard: dynamic(() => import("./LeadershipCard")),
+    LeadershipCardV2: dynamic(() => import("./LeadershipCardV2"))
 }
 
 export default function PostList(props: any) {
@@ -139,6 +140,6 @@ export default function PostList(props: any) {
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (
-        <PostComponentRender postData={postData} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={props.limit} itemstoshow={props.itemstoshow} isproduct={props.isproduct} loading={loading} />
+        <PostComponentRender postData={postData} title={props.title != "" ? props.title : ''} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={props.limit} itemstoshow={props.itemstoshow} isproduct={props.isproduct} loading={loading} />
     ) : <div>Loading...</div>;
 }

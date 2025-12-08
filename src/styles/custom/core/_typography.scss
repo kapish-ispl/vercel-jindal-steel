@@ -31,36 +31,36 @@
 .font_increase_1 {
   --font-increase: 1;
 }
- 
+
 .font_increase_2 {
   --font-increase: 2;
 }
- 
+
 .font_increase_3 {
   --font-increase: 3;
 }
- 
+
 .font_increase_4 {
   --font-increase: 4;
 }
- 
+
 // Font decrease classes (4 levels)
 .font_decrease_1 {
   --font-decrease: 1;
 }
- 
+
 .font_decrease_2 {
   --font-decrease: 2;
 }
- 
+
 .font_decrease_3 {
   --font-decrease: 3;
 }
- 
+
 .font_decrease_4 {
   --font-decrease: 4;
 }
- 
+
 // Reset class
 .font_reset {
   --font-increase: 0;
@@ -79,5 +79,13 @@ body {
 
   * {
     @extend .scrollBar-smallWidth;
+  }
+
+  &.modal-open {
+    overflow: hidden;
+
+    main {
+      z-index: 120;
+    }
   }
 }
