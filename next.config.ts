@@ -34,6 +34,11 @@ const nextConfig: NextConfig = {
         hostname: "d2lptvt2jijg6f.cloudfront.net",//foundation need to remove
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "docs.jindalsteel.in",
+        pathname: "/**",
+      },
     ],
   },
 };

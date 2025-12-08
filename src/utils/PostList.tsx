@@ -12,6 +12,7 @@ import { yearOptions } from "@/constants/GenericFilter";
 const componentMap: any = {
     FinancialCard: dynamic(() => import("./FinancialCard")),
     AwardsCard: dynamic(() => import("./AwardsCard")),
+    AwardsCardV2: dynamic(() => import("./AwardsCardV2")),
     OurOfficesCard: dynamic(() => import("./OurOfficesCard")),
     ProductCard: dynamic(() => import("./ProductCard")),
     CenterModeSlider: dynamic(() => import("./CenterModeSlider")),
