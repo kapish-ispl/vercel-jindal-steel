@@ -6,6 +6,7 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import Pagination from '@/components/Pagination';
 import parse from 'html-react-parser'
 import { formatDate } from '@/components/formatDate';
+import CustomSelect from '@/components/CustomSelect';
 interface MediaItem {
     cdnPath: string;
 }
@@ -56,8 +57,22 @@ const AwardsCardV2 : FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage 
         setModalData(null);
     }
 
+    const myOptions = [
+        { label: "2025", value: "2025" },
+        { label: "2024", value: "2024" },
+        { label: "2023", value: "2023" },
+    ];
+
     return (
         <>
+            <div className="c-filterView justify-content-end mb-4">
+                <div className="row gy-2">
+                    <div className="col-md-4 col-sm-12">
+                        <CustomSelect options={myOptions} placeholder="Select Year" />
+                    </div>
+                    <div className="col-12 col-md-2"><button type='button' className='u-btn action_btn'>Reset</button></div>
+                </div>
+            </div>
             <div className='row'>
                 {postData && postData.length > 0 && postData.map((post: any, index: number) => {
                     const { monthYear: newDateMonth } = formatDate(post?.postingDate);
@@ -67,12 +82,16 @@ const AwardsCardV2 : FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage 
                             <button className="c-cardBox__wrapper v3" onClick={() => handleModal(post)}>
                                 <span className="c-cardBox__wrapper-top">
                                     <span className="media ratio ratio-4x3">
-                                        <Image
-                                            alt="Jindal image"
-                                            className="img-fluid u-img"
-                                            src={post.media[0].cdnPath}
-                                            width={450}
-                                            height={350} />
+                                        {post?.media[0]?.cdnPath &&
+                                            <Image
+                                                alt="Jindal image"
+                                                className="img-fluid u-img"
+                                                src={post?.media[0]?.cdnPath}
+                                                width={450}
+                                                height={350} 
+                                            />
+                                        }
+                                        
                                     </span>
                                 </span>
                                 <span className="c-cardBox__wrapper-bottom">

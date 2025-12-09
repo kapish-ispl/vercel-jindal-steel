@@ -2,11 +2,28 @@
 import React, { useState } from 'react'
 import { createPortal } from 'react-dom';
 import parse from "html-react-parser";
+import Pagination from '@/components/Pagination';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-const LeadershipCardV2 = ({ postData, title }: any) => {
+const LeadershipCardV2 = ({ postData, totalPost, itemsPerPage, title }: any) => {
+    console.log(totalPost, itemsPerPage)
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+    const pageCount = Math.ceil(totalPost / itemsPerPage);
+    const currentPage = Number(searchParams.get("page") || 1);
     const [contentToggler, setContentToggler] = useState(false);
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [modalData, setModalData] = useState<any>(null);
+
+
+    const handlePageClick = ({ selected }: { selected: any }) => {
+
+        const newParams = new URLSearchParams(searchParams?.toString() || '');
+        newParams.set('page', `${selected + 1}`);
+        const newUrl = `${pathname}?${newParams.toString()}`;
+        router.push(newUrl, { scroll: false });
+    };
 
     const hanndleModal = (item: any) => {
         document.body.classList.add("modal-open");
@@ -80,6 +97,10 @@ const LeadershipCardV2 = ({ postData, title }: any) => {
                     })
                 }
             </div>
+
+            {totalPost > itemsPerPage &&
+                <Pagination pageCount={pageCount} handlePageClick={handlePageClick} currentPage={currentPage} />
+            }
 
 
             {modalData != null &&

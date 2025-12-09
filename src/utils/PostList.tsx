@@ -141,6 +141,6 @@ export default function PostList(props: any) {
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (
-        <PostComponentRender postData={postData} title={props.title != "" ? props.title : ''} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={props.limit} itemstoshow={props.itemstoshow} isproduct={props.isproduct} loading={loading} />
+        <PostComponentRender postData={postData} title={props.title != "" ? props.title : ''} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={props.limit || 9} itemstoshow={props.itemstoshow} isproduct={props.isproduct} loading={loading} />
     ) : <div>Loading...</div>;
 }

@@ -1,0 +1,230 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+@use '../components/generic/sizes' as *;
+
+/* Wrapper: centers the modal */
+.c-modal__wrapper {
+  position: fixed;
+  inset: 0;
+  /* top:0 right:0 bottom:0 left:0 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.98);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+
+}
+
+/* Show / hide */
+.c-modal__wrapper.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+/* Dark overlay */
+.c-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+/* Modal box */
+.c-modal__box {
+  position: relative;
+  background: #F7F6F6;
+  //   width: min(720px, 100% - 32px);
+  //   max-height: calc(100vh - 80px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
+  overflow-y: auto;
+  max-height: 719px;
+  width: 100%;
+  height: calc(100vh - 80px);
+  overflow-x: hidden;
+}
+
+
+/* Close button (X in top-right) */
+.c-modal__box--close {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 999px;
+  //   border: none;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-modal__box--close::before,
+.c-modal__box--close::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  background: var(--color-grey4);
+  border-radius: 999px;
+}
+
+.c-modal__box--close::before {
+  transform: rotate(45deg);
+}
+
+.c-modal__box--close::after {
+  transform: rotate(-45deg);
+}
+
+.c-modal__box--close:hover {
+  background: #e2e8f0;
+
+}
+
+/* Content layout */
+.c-modal__header {
+  margin-bottom: 12px;
+}
+
+.c-modal__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.c-modal__body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.c-modal__body p+p {
+  margin-top: 10px;
+}
+
+.c-modal__footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Primary button like in the design (green “Okay”) */
+.c-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.c-btn--primary {
+  background: #00a651;
+  color: #ffffff;
+}
+
+.c-btn--primary:hover {
+  background: #009046;
+}
+
+/* Mobile tweaks */
+@media (max-width: 576px) {
+  .c-modal__box {
+    width: calc(100% - 24px);
+    padding: 20px 16px 18px;
+    border-radius: 6px;
+  }
+
+  .c-modal__title {
+    font-size: 18px;
+  }
+}
+
+.c-modal__box {
+
+  // @include flexbox;
+  // @include flex-direction(column, vertical);
+  // @include mq(tablet-max){
+  //     @include flex-direction(row, horizontal);
+  // }
+  &.v2 {
+    .col-lg-5 {
+      @include mq(tablet-max) {
+        height: 100%;
+      }
+    }
+  }
+
+  &-ls {
+    height: 100%;
+
+    // @include mq(tablet-max){
+    //     width: 555px;
+    // }
+    .media {
+      max-height: 640px;
+      height: 100%;
+
+      @include mq(tablet-max) {
+        max-height: inherit;
+
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+    }
+  }
+
+  &-rs {
+    // @include mq(tablet-max){
+    //     width: calc(100% - 555px);
+    // }
+    padding: 30px 20px;
+
+    @include mq(tablet-max) {
+      padding: 40px 30px 40px 20px;
+    }
+    .c-modal__box-body{
+      .c-modal__box_highlights{
+        border-left: 2px solid var(--color-accent-peach);
+        padding-left: 20px;
+        // position: relative;
+        // &::before{
+        //   content: "";
+        //   position: absolute;
+        //   left: 0;
+        //   top: 50%;
+        //   background: var(--color-accent-peach);
+        //   height: 2px;
+        //   width: 60px;
+        // }
+      }
+    }
+    .c-modal__box-header {
+      &.c-withBorder {
+        border-bottom: 1px solid var(--color-grey4);
+        padding-bottom: 25px;
+        margin-bottom: 30px;
+
+        @include mq(tablet-max) {
+          padding-bottom: 30px;
+          margin-bottom: 33px;
+        }
+      }
+    }
+  }
+}
