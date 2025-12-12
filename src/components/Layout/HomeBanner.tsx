@@ -65,7 +65,15 @@ const HomeBanner: FC<Props> = ({ bannerMedia, tagline, pageTitle }) => {
                     <div className="container cus-container">
                         <div className="row">
                             <div className="col-12">
-                                <div className="banner__title">{tagline !== '' ? tagline : pageTitle}</div>
+                                <h1 className="banner__title">
+                                    {tagline != undefined ?
+                                        <div
+                                            dangerouslySetInnerHTML={{ __html: tagline }}
+                                        />
+                                        :
+                                        pageTitle
+                                    }
+                                </h1>
                             </div>
                         </div>
                     </div>

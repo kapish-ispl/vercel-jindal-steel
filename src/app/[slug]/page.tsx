@@ -7,40 +7,64 @@ import PageTemplate from "@/components/Layout/PageTemplate";
 import InnerBanner from "@/components/Layout/InnerBanner";
 
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: Promise<{ [key: string]: string | string[] | undefined }>;
-// }) {
-//   const { slug } = await params;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { slug } = await params;
 
-//   if (slug === 'home') {
-//     return {
-//       title: 'JSP',
-//       description: '',
-//     };
-//   }
+  const fetchedInfo = await serverRequest(
+    {},
+    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${slug}`,
+    CONSTANTS.REQUEST_GET
+  );
 
-//   const fetchedInfo = await serverRequest(
-//     {},
-//     `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${slug}`,
-//     CONSTANTS.REQUEST_GET
-//   );
+  const pageData = fetchedInfo?.data;
 
-//   const pageData = fetchedInfo?.data;
+  if (!pageData || pageData.length === 0) {
+    return {
+      title: 'Page Not Found',
+      description: 'The requested page could not be found.',
+    };
+  }
 
-//   if (!pageData || pageData.length === 0) {
-//     return {
-//       title: 'Page Not Found',
-//       description: 'The requested page could not be found.',
-//     };
-//   }
+  const metaTitle = pageData.meta_title != "" ? `${pageData.meta_title} | Jindal Steel` : `${pageData.title} | Jindal Steel`;
+  const metaDescription =
+    pageData.meta_description || pageData.description ||
+    "Jindal Steel and Power Limited (JSPL) is a leading Indian steel and energy company, known for its innovative solutions and commitment to sustainability.";
+  const metaKeywords =
+    pageData.meta_keyword ||
+    "Jindal Steel, JSPL, Steel Manufacturing, Energy Solutions, Sustainable Steel, Indian Steel Industry, Steel Products, Power Generation, Infrastructure Development";
+  const metaImage = "https://www.jindalsteel.com/images/logo/meta.jpg";
+  const siteUrl = "https://www.jindalsteel.com/";
 
-//   return {
-//     title: pageData.meta_title || pageData.title || 'SISCOL - Steel Infra Solutions Company Ltd.',
-//     description: pageData.meta_description || 'SISCOL - Steel Infra Solutions Company Ltd.',
-//   };
-// }
+  return {
+    title: metaTitle,
+    description: metaDescription,
+    keywords: metaKeywords,
+    openGraph: {
+      title: metaTitle,
+      description: metaDescription,
+      url: siteUrl,
+      type: "website",
+      images: [
+        {
+          url: metaImage,
+          width: 800,
+          height: 600,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@InsphereSoln",
+      title: metaTitle,
+      description: metaDescription,
+      images: [metaImage],
+    },
+  };
+}
 
 export default async function Page({
   params,
@@ -72,6 +96,7 @@ export default async function Page({
           <div className="col-12 p-0">
             <InnerBanner
               label={pageData.title}
+              tagline={pageData?.customField?.tagline}
               slug={pageData.slug}
               currentPage={pageData}
               innerBanner={pageData.media}
