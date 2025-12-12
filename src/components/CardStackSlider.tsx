@@ -10,36 +10,38 @@ type Card = {
   imageUrl?: string;
 };
 
+
+
 const cardData: Card[] = [
   {
     id: 1,
     title: "Paid Search & Shopping",
     content:
-      "India’s Only Syngas Based Coal Classification Plant for Steel Making",
+      "India's Only SynGas-based Coal Gasification Plant for Steel Making",
     videoUrl:
-      "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
+      "https://docs.jindalsteel.in/document/124/1765533013_CoalGasificationPlant.mp4",
   },
   {
     id: 2,
     title: "Creative & Content",
     content:
-      "India’s Only Syngas Based Coal Classification Plant for Steel Making",
+      "India's Only Producer of the Widest Plates in Coil Form",
     videoUrl:
-      "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
+      "https://docs.jindalsteel.in/document/124/1765176612_WidestPlatesinCoil.mp4",
   },
   {
     id: 3,
     title: "Marketing Analytics",
     content:
-      "India’s Only Syngas Based Coal Classification Plant for Steel Making",
+      "India’s Only Private Player In Rail Manufacturing",
     videoUrl:
-      "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
+      "https://docs.jindalsteel.in/document/124/1765532941_RailManufacturing.mp4",
   },
   {
     id: 4,
     title: "Paid Social & Influencer",
     content:
-      "India’s Only Syngas Based Coal Classification Plant for Steel Making",
+      "India’s First Largest Blast Furnace - 4.25 MTPA",
     videoUrl:
       "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
   },
@@ -47,7 +49,7 @@ const cardData: Card[] = [
     id: 5,
     title: "Email Marketing",
     content:
-      "India’s Only Syngas Based Coal Classification Plant for Steel Making",
+      "India’s Only Private Player Producing Fabricated Steel Structures",
     videoUrl:
       "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
   },
