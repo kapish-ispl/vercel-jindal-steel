@@ -662,22 +662,22 @@
             border: 1px solid #000;
             position: relative;
             overflow: hidden;
-            @include transition(all 0.3s ease-in-out);
+            @include transition(all 0.5s ease-in-out);
 
             &-media {
-                padding-top: 25px;
+                // padding-top: 25px;
                 position: relative;
                 z-index: 9;
                 overflow: hidden;
-                @include transition(all 0.3s ease-in-out);
+                @include transition(all 0.5s ease-in-out);
 
-                @include mq(tablet-max) {
-                    padding-top: 35px;
-                }
+                // @include mq(tablet-max) {
+                //     padding-top: 35px;
+                // }
 
-                @include mq(desktop) {
-                    padding-top: 50px;
-                }
+                // @include mq(desktop) {
+                //     padding-top: 50px;
+                // }
 
                 .u-img {
                     aspect-ratio: 3/2;
@@ -686,13 +686,13 @@
                 }
             }
 
-            // &:hover{
-            //     .c-cardView__wrapper-media{
-            //       .u-img{
-            //           @include transform(scale(1.2));
-            //      }
-            //     }
-            // }
+            &:hover{
+                .c-cardView__wrapper-media{
+                  .u-img{
+                      @include transform(scale(1.2));
+                 }
+                }
+            }
             &-content {
                 position: relative;
                 z-index: 9;
@@ -705,17 +705,17 @@
                         @include font-size(24);
                     }
 
-                    @include mq(tablet-max) {
-                        @include font-size(26);
-                    }
+                    // @include mq(tablet-max) {
+                    //     @include font-size(26);
+                    // }
 
-                    @include mq(desktop) {
-                        @include font-size(28);
-                    }
+                    // @include mq(desktop) {
+                    //     @include font-size(28);
+                    // }
 
-                    @include mq(desktop-wide) {
-                        @include font-size(30);
-                    }
+                    // @include mq(desktop-wide) {
+                    //     @include font-size(30);
+                    // }
                 }
             }
 
@@ -943,15 +943,19 @@
     }
 
     &.v3 {
+        background: green;
         box-shadow: 2px 2px 4px 2px #0000001a !important;
         height: calc(100% - 30px);
 
         .c-cardBox__wrapper-top {
             padding: 20px 40px;
+            border-bottom: 2px solid var(--color-accent-peach);
+            height: 308px;
+            background-color: red;
         }
 
         .c-cardBox__wrapper-bottom {
-            border-top: 2px solid var(--color-accent-peach);
+            // border-top: 2px solid var(--color-accent-peach);
             padding: 31px 40px;
 
             .content {

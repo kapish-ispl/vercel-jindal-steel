@@ -2,7 +2,15 @@
 @use '../core/mixins' as *;
 
 .c-footer {
+  padding: 40px 0;
   &__info {
+    margin-top: 20px;
+     @include mq(tablet-max) {
+      margin-top: 0px;
+    }
+     &-logo {
+      margin-bottom: 20px;
+    }
     // Padding variations
     &.pad_right70 {
       @include mq('tablet') {
@@ -51,8 +59,14 @@
 
     // Unified content block
     &-content {
+      margin-bottom: 20px;
+
+        @include mq('desktop-min') {
+        @include flexbox;
+        @include flex-direction(column, vertical);
+      }
       .head {
-        color: var(--color-black2);
+        color: var(--color-secondary);
         font-weight: 700;
         @include font-size(14);
 
@@ -71,7 +85,7 @@
       }
 
       .desc {
-        color: var(--color-black2);
+        color: var(--color-secondary);
         line-height: 1.6;
       }
       p{
@@ -83,24 +97,37 @@
       }
 
       // spacing for sibling content
-      + .c-footer__info-content {
-        margin-top: 20px;
+      // + .c-footer__info-content {
+      //   margin-top: 20px;
 
-        @include mq(tablet-max) {
-          margin-top: 30px;
-        }
+      //   @include mq(tablet-max) {
+      //     margin-top: 30px;
+      //   }
 
-        @include mq(desktop) {
-          margin-top: 45px;
-        }
-      }
+      //   @include mq(desktop) {
+      //     margin-top: 45px;
+      //   }
+      // }
 
       // Footer menu
       .footerMenu {
         padding: 0;
+        @include flexbox;
+        flex-wrap: wrap;
+        @include flex-direction(column, vertical);
 
         &__item {
           list-style: none;
+          margin: 5px 0;
+
+           @include mq(tablet-max) {
+            padding: 5px 0px;
+            margin: 5px 0px;
+          }
+           svg {
+            margin-right: 10px;
+            margin-top: -1px;
+          }
           &:hover{
             .footerMenu__item-link{
               color: var(--color-primary);
@@ -108,7 +135,7 @@
           }
 
           &-link {
-            color: var(--color-black2);
+            color: var(--color-secondary);
             text-decoration: none;
             @include font-size(14);
 
@@ -134,7 +161,10 @@
       // Text and links
       p,
       .u-link {
-        color: var(--color-black2);
+        color: var(--color-secondary);
+      }
+      p{
+        color: var(--color-secondary);
       }
 
       .u-link {
@@ -156,8 +186,8 @@
           list-style: none;
           background: #939598;
           @include border-radius(50%);
-          @include size(40px);
-          min-width: 40px;
+          @include size(30px);
+          min-width: 30px;
           @include flexbox;
           @include align-items(center);
           @include justify-content(center);

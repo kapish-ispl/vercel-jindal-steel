@@ -98,9 +98,9 @@ const LeadershipCardV2 = ({ postData, totalPost, itemsPerPage, title }: any) => 
                 }
             </div>
 
-            {totalPost > itemsPerPage &&
+            {/* {totalPost > itemsPerPage &&
                 <Pagination pageCount={pageCount} handlePageClick={handlePageClick} currentPage={currentPage} />
-            }
+            } */}
 
 
             {modalData != null &&
