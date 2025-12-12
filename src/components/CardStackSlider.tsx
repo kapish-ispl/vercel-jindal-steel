@@ -4,72 +4,64 @@ import React, { useEffect, useRef, useState } from "react";
 
 type Card = {
   id: number;
-  title: string;
   content: string;
-  videoUrl?: string;
-  imageUrl?: string;
+  videourl?: string;
+  imageurl?: string;
+  totalCards?: number
 };
 
-
-
-const cardData: Card[] = [
-  {
-    id: 1,
-    title: "Paid Search & Shopping",
-    content:
-      "India's Only SynGas-based Coal Gasification Plant for Steel Making",
-    videoUrl:
-      "https://docs.jindalsteel.in/document/124/1765533013_CoalGasificationPlant.mp4",
-  },
-  {
-    id: 2,
-    title: "Creative & Content",
-    content:
-      "India's Only Producer of the Widest Plates in Coil Form",
-    videoUrl:
-      "https://docs.jindalsteel.in/document/124/1765176612_WidestPlatesinCoil.mp4",
-  },
-  {
-    id: 3,
-    title: "Marketing Analytics",
-    content:
-      "India’s Only Private Player In Rail Manufacturing",
-    videoUrl:
-      "https://docs.jindalsteel.in/document/124/1765532941_RailManufacturing.mp4",
-  },
-  {
-    id: 4,
-    title: "Paid Social & Influencer",
-    content:
-      "India’s First Largest Blast Furnace - 4.25 MTPA",
-    videoUrl:
-      "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
-  },
-  {
-    id: 5,
-    title: "Email Marketing",
-    content:
-      "India’s Only Private Player Producing Fabricated Steel Structures",
-    videoUrl:
-      "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
-  },
-];
-
-// ✅ CardItem (always keeps <video> mounted for Safari)
+// const cardData: Card[] = [
+//   {
+//     id: 1,
+//     content:
+//       "India's Only SynGas-based Coal Gasification Plant for Steel Making",
+//     videourl:
+//       "https://docs.jindalsteel.in/document/124/1765533013_CoalGasificationPlant.mp4",
+//   },
+//   {
+//     id: 2,
+//     content:
+//       "India's Only Producer of the Widest Plates in Coil Form",
+//     videourl:
+//       "https://docs.jindalsteel.in/document/124/1765176612_WidestPlatesinCoil.mp4",
+//   },
+//   {
+//     id: 3,
+//     content:
+//       "India’s Only Private Player In Rail Manufacturing",
+//     videourl:
+//       "https://docs.jindalsteel.in/document/124/1765532941_RailManufacturing.mp4",
+//   },
+//   {
+//     id: 4,
+//     content:
+//       "India’s First Largest Blast Furnace - 4.25 MTPA",
+//     videourl:
+//       "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
+//   },
+//   {
+//     id: 5,
+//     content:
+//       "India’s Only Private Player Producing Fabricated Steel Structures",
+//     videourl:
+//       "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
+//   },
+// ];
 const CardItem = React.memo(function CardItem({
   card,
   index,
   activeIndex,
   onClick,
+  totalCards,
   videoRef,
 }: {
   card: Card;
   index: number;
   activeIndex: number;
+  totalCards: number;
   onClick: () => void;
   videoRef: (el: HTMLVideoElement | null) => void;
 }) {
-  const totalCards = cardData.length;
   let offset = index - activeIndex;
   if (offset > totalCards / 2) offset -= totalCards;
   else if (offset < -totalCards / 2) offset += totalCards;
@@ -82,12 +74,12 @@ const CardItem = React.memo(function CardItem({
     "--tz": `-${absOffset * 100}px`,
     "--rotateY": `${offset * -4}deg`,
     "--zIndex": totalCards - absOffset,
-    "--bg-image": card.imageUrl ? `url(${card.imageUrl})` : "none",
+    "--bg-image": card.imageurl ? `url(${card.imageurl})` : "none",
   } as React.CSSProperties;
 
   return (
     <div className="card-item" style={dynamicStyles} onClick={onClick}>
-      {card.videoUrl ? (
+      {card.videourl ? (
         <video
           ref={videoRef}
           muted
@@ -96,7 +88,7 @@ const CardItem = React.memo(function CardItem({
           loop
           className="card-item__background"
         >
-          <source src={card.videoUrl} type="video/mp4" />
+          <source src={card.videourl} type="video/mp4" />
         </video>
       ) : (
         <div className="card-item__background" />
@@ -106,7 +98,17 @@ const CardItem = React.memo(function CardItem({
   );
 });
 
-export default function CardStackSlider() {
+export default function CardStackSlider({ data }: any) {
+
+  const cardData = data
+    .filter((items: any) => items.props !== undefined)
+    .map((cardItem: any, index: number) => ({
+      id: index + 1,
+      ...cardItem.props
+    }));
+  const totalCards = cardData.length;
+
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -120,6 +122,7 @@ export default function CardStackSlider() {
       setIsPaused(false);
     }, 4000);
   };
+
 
   useEffect(() => {
     videoRefs.current = videoRefs.current.slice(0, cardData.length);
@@ -207,9 +210,10 @@ export default function CardStackSlider() {
         onMouseLeave={handleMouseLeave}
       >
         <div className="card-stack-visual__perspective-root">
-          {cardData.map((card, i) => (
+          {cardData.map((card: any, i: number) => (
             <CardItem
               key={card.id}
+              totalCards={totalCards}
               card={card}
               index={i}
               activeIndex={activeIndex}
