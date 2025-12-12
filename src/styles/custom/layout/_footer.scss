@@ -74,13 +74,13 @@
             @include font-size(16, 1.6);
         }
 
-        @include mq('desktop-min') {
-            @include font-size(18, 1.6);
-        }
+        // @include mq('desktop-min') {
+        //     @include font-size(18, 1.6);
+        // }
 
-        @include mq('desktop-wide') {
-            @include font-size(19, 1.6);
-        }
+        // @include mq('desktop-wide') {
+        //     @include font-size(19, 1.6);
+        // }
         margin-bottom: 8px;
       }
 
@@ -143,13 +143,13 @@
                 @include font-size(16, 1.6);
             }
 
-            @include mq('desktop-min') {
-                @include font-size(18, 1.6);
-            }
+            // @include mq('desktop-min') {
+            //     @include font-size(18, 1.6);
+            // }
 
-            @include mq('desktop-wide') {
-                @include font-size(19, 1.6);
-            }
+            // @include mq('desktop-wide') {
+            //     @include font-size(19, 1.6);
+            // }
           }
 
           + .footerMenu__item {

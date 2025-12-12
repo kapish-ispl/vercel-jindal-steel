@@ -26,8 +26,8 @@ const Footer = () => {
                                         </a>
                                     </div>
                                     <div className="c-footer__info-content">
-                                        <div className="head c-content-19">Corporate Office</div>
-                                        <div className="desc c-content-19 mt-3">Jindal Centre 12, Bhikaiji Cama Place, New Delhi - 110 066, INDIA <span className='d-md-block d-lg-inline'>(Formerly Jindal Steel & Power Limited)</span></div>
+                                        <div className="head c-content-16">Corporate Office</div>
+                                        <div className="desc c-content-16 mt-3">Jindal Centre 12, Bhikaiji Cama Place, New Delhi - 110 066, INDIA <span className='d-md-block d-lg-inline'>(Formerly Jindal Steel & Power Limited)</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -41,8 +41,8 @@ const Footer = () => {
                                     {FOOTER_MAIN_MENU?.length > 0 && <FooterList data={FOOTER_MAIN_MENU.slice(2, 3)} />}
                                     <div className="c-footer__info-content">
                                         <div className="head">Contact us</div>
-                                        <p className="c-content-19">+91 11 26188340-50, <br />1800 208 2008</p>
-                                        <p className="c-content-19"><a href="mailto:info@jindalsteel.com" className="u-link">info[at]jindalsteel[dot]com</a></p>
+                                        <p className="c-content-16">+91 11 26188340-50, <br />1800 208 2008</p>
+                                        <p className="c-content-16"><a href="mailto:info@jindalsteel.com" className="u-link">info[at]jindalsteel[dot]com</a></p>
 
                                     </div>
                                 </div>
