@@ -48,11 +48,11 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "cardstackslider") {
                     const props = attributesToProps(domNode.attribs);
-                    return <CardStackSlider {...props} />;
+                    return <CardStackSlider {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
                 if (domNode.name === "customreadmoremodal") {
                     const props = attributesToProps(domNode.attribs);
-                    return <ReadMoreModal {...props} data={domToReact(domNode.children as DOMNode[])}  />;
+                    return <ReadMoreModal {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
                 if (domNode.name === "scrollanimation") {
                     const props = attributesToProps(domNode.attribs);
