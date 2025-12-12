@@ -21,7 +21,7 @@ interface AwardsCardProps {
     itemsPerPage?: any;
 }
 
-const AwardsCardV2 : FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage }) => {
+const AwardsCardV2: FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage }) => {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -67,7 +67,7 @@ const AwardsCardV2 : FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage 
         <>
             <div className="c-filterView justify-content-end mb-4">
                 <div className="row gy-2">
-                    <div className="col-md-4 col-sm-12">
+                    <div className="col-md-10 col-sm-12">
                         <CustomSelect options={myOptions} placeholder="Select Year" />
                     </div>
                     <div className="col-12 col-md-2"><button type='button' className='u-btn action_btn'>Reset</button></div>
@@ -88,10 +88,10 @@ const AwardsCardV2 : FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage 
                                                 className="img-fluid u-img"
                                                 src={post?.media[0]?.cdnPath}
                                                 width={450}
-                                                height={350} 
+                                                height={350}
                                             />
                                         }
-                                        
+
                                     </span>
                                 </span>
                                 <span className="c-cardBox__wrapper-bottom">

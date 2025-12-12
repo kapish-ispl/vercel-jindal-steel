@@ -46,7 +46,7 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
                             <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
                         </div>
                     </div>
-                    <div className="col-md-4 col-sm-12">
+                    <div className="col-md-10 col-sm-12">
                         <CustomSelect options={myOptions} placeholder="Select Year" />
                     </div>
                     <div className="col-12 col-md-2"><button type='button' className='u-btn action_btn'>Reset</button></div>
