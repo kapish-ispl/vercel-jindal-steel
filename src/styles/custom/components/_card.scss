@@ -943,15 +943,15 @@
     }
 
     &.v3 {
-        background: green;
+        @include flexbox;
+        @include flex-direction(column, vertical);
         box-shadow: 2px 2px 4px 2px #0000001a !important;
         height: calc(100% - 30px);
-
         .c-cardBox__wrapper-top {
             padding: 20px 40px;
             border-bottom: 2px solid var(--color-accent-peach);
-            height: 308px;
-            background-color: red;
+            // height: 320px;
+            
         }
 
         .c-cardBox__wrapper-bottom {
