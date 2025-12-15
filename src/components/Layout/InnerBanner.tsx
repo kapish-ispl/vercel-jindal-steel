@@ -9,11 +9,12 @@ interface InnerBannerItem {
 interface Props {
     label: string;
     slug: string;
+    tagline:string;
     currentPage: string[];
     innerBanner: InnerBannerItem[];
 }
 
-const InnerBanner = ({ label, slug, currentPage, innerBanner }: Props) => {
+const InnerBanner = ({ label, tagline, slug, currentPage, innerBanner }: Props) => {
     return (
         <div
             className={`c-inner-banner ${innerBanner.length > 0 ? "" : "without-banner"
@@ -50,7 +51,15 @@ const InnerBanner = ({ label, slug, currentPage, innerBanner }: Props) => {
                     <div className="row">
                         <div className="col-12">
                             <div className="c-inner-banner__content_box">
-                                <h1 className="banner__title">{label}</h1>
+                                <h1 className="banner__title">
+                                    {tagline != undefined ?
+                                        <div
+                                            dangerouslySetInnerHTML={{ __html: tagline }}
+                                        />
+                                        :
+                                        label
+                                    }
+                                </h1>
                                 <div className="breadcumbs">
                                     <nav aria-label="breadcrumb">
                                         <Breadcrumbs currentPage={currentPage} slug={slug} />
