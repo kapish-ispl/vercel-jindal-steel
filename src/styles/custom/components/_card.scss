@@ -1064,4 +1064,13 @@
             }
         }
     }
+    &.d3{
+        box-shadow: unset;
+        .c-card__wrapper{
+            padding: 30px 45px 37px 45px;
+            .icon{
+                padding-right: 5px;
+            }
+        }
+    }
 }
