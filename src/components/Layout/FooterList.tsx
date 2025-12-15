@@ -58,7 +58,7 @@ const FooterList: FC<{ data: menuTypo[]; cls?: string }> = ({ data, cls }) => {
 
 
                     <div className="c-footer__info-content" key={item.id}>
-                        <div className="head">{item.name}:</div>
+                        <div className="head">{item.name}</div>
                         {item.children.length > 0 && (
                             <ul className="footerMenu">
                                 {item.children.map((item) => (

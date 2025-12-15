@@ -5,7 +5,7 @@
 .action-btn{
     @include transition(all 0.3s ease-in-out);
     >a{
-        color: #446183;
+        color: var(--color-accent-green);
         text-decoration: none;
         display: inline-block;
         .icon{
