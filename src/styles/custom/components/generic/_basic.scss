@@ -8,6 +8,10 @@
     }
 }
 
+main{
+  overflow: hidden;
+}
+
 .cus-shadow {
     box-shadow: 0px 16px 13.8px 0px #00000040 !important;
 
@@ -272,6 +276,23 @@
 
     @include mq(desktop-wide-max) {
         padding-left: 85px;
+    }
+}
+.pad_right80 {
+    @include mq(tablet-max) {
+        padding-right: 35px;
+    }
+
+    @include mq(desktop) {
+        padding-right: 45px;
+    }
+
+    @include mq(desktop-wide) {
+        padding-right: 60px;
+    }
+
+    @include mq(desktop-wide-max) {
+        padding-right: 80px;
     }
 }
 
@@ -1574,6 +1595,19 @@ ul {
         padding-right: 55px;
     }
 }
+.pl-50 {
+    @include mq(tablet-max) {
+        padding-left: 30px;
+    }
+
+    @include mq(desktop) {
+        padding-left: 40px;
+    }
+
+    @include mq(desktop-wide) {
+        padding-left: 50px;
+    }
+}
 
 .c-heading-80 {
     span {
@@ -1691,4 +1725,52 @@ ul {
       transform: scale(1.2);
     }
   }
+}
+.fix-width-1190{
+    max-width: 1190px;
+}
+.genric__content{
+    .list__view{
+        list-style: disc;
+        padding-left: 26px;
+        &-item{
+            font-weight: var(--fontRegular);
+            margin-bottom: 8px;
+
+            @include font-size(16, 1.4);
+
+            @include mq('desktop-min') {
+                @include font-size(18, 1.4);
+            }
+
+            @include mq('desktop-wide') {
+                @include font-size(19, 1.4);
+            }
+        }
+    }
+}
+.fix-width-500{
+    max-width: 500px;
+}
+.action-btn{
+    >.u-btn{
+        @include flexbox;
+        @include align-items(center);
+        .label{
+            padding-right: 20px;
+            @include font-size(17);
+
+            @include mq('tablet') {
+                @include font-size(19);
+            }
+
+            @include mq('desktop-min') {
+                @include font-size(21);
+            }
+
+            @include mq('desktop-wide') {
+                @include font-size(25);
+            }
+        }
+    }
 }
