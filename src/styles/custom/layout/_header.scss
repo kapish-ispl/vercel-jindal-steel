@@ -431,15 +431,15 @@
           &:before {
             content: '';
             position: absolute;
-            bottom: 25px;
+            bottom: 22px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 2px;
             background-color: var(--color-primary);
             transition: width 0.3s ease;
-            @include mq(tablet-max){
-              bottom: 32px;
+           @include mq('desktop-wide') {
+                bottom: 32px;
             }
           }
         }
