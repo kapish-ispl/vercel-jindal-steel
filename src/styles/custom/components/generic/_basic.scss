@@ -1774,3 +1774,17 @@ ul {
         }
     }
 }
+.line-clamp-3 {
+    @include line-clamp(3);
+}
+
+.line-clamp-4 {
+    @include line-clamp(4);
+}
+
+.line-clamp-5 {
+    @include line-clamp(5);
+}
+.line-clamp-6 {
+    @include line-clamp(6);
+}

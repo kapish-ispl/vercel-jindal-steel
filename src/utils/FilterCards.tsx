@@ -81,19 +81,22 @@ const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug 
                                     <div className="col-12 col-md-6 col-lg-4" key={index}>
                                         <div className="c-cardView__box">
                                             <div className="c-cardView__box-item">
-                                                <div className="card__media mb-40">
-                                                    <img alt="icon" className="img-fluid u-img"
-                                                        src="https://docs.jindalsteel.in/document/124/1763976839___2.png" /></div>
+                                                <div className="card__media mb-4">
+                                                    <img alt="icon" className="img-fluid u-img" height={80} width={80}
+                                                        src="https://docs.jindalsteel.in/document/124/1763976839___2.png" />
+                                                    <div className="label c-content-20 ft_bold">{newDate !== "" ? newDate : ""}</div>
+                                                </div>
+
 
                                                 <div className="card__content">
                                                     <div className="card__content__title">
-                                                        <div className="c-heading-40 mb-40 clr-blue">{post.metaInfo && post.metaInfo.type ? post.metaInfo.type : post.metaInfo && post.metaInfo.category !== "" ? post.metaInfo.category : 'Press Release'} </div>
+                                                        <div className="c-content-24 ft_semiBold mb-3 clr-blue">{post.metaInfo && post.metaInfo.type ? post.metaInfo.type : post.metaInfo && post.metaInfo.category !== "" ? post.metaInfo.category : 'Press Release'} </div>
                                                     </div>
 
                                                     <div className="card__content-box">
-                                                        <div className="label">{newDate !== "" ? newDate : ""}</div>
 
-                                                        <div className="desc">{post.title}</div>
+
+                                                        <div className="desc line-clamp-6">{post.title}</div>
                                                     </div>
 
                                                     <div className="action-btn mt-30"><Link className="u-btn" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}><span className="icon-move-right icon"></span></Link></div>
