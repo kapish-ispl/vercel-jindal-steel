@@ -1,4 +1,4 @@
-import { monthNames } from '@/config/config';
+import { MONTH_NAMES } from '@/config/config';
 
 export const formatDate = (inputDate: string) => {
   const defaultResult = {
@@ -37,7 +37,7 @@ export const formatDate = (inputDate: string) => {
   }
 
   const year = date.getFullYear();
-  const month = monthNames[date.getMonth()];
+  const month = MONTH_NAMES[date.getMonth()];
   const day = date.getDate();
   const suffix = getDaySuffix(day);
 

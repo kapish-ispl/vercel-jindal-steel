@@ -1,7 +1,7 @@
 "use client";
 import React, { FC, useState } from 'react';
 import Image from 'next/image';
-import { monthNames } from "@/config/config";
+import { MONTH_NAMES } from "@/config/config";
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import Pagination from '@/components/Pagination';
 import parse from 'html-react-parser'

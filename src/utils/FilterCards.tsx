@@ -1,6 +1,6 @@
 'use client'
 import CustomSelect from '@/components/CustomSelect'
-import { monthNames } from '@/config/config';
+import { MONTH_NAMES } from '@/config/config';
 import { corporateGovOptions, yearOptions } from '@/constants/GenericFilter';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -72,7 +72,7 @@ const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug 
                                 }
 
                                 year = date.getFullYear();
-                                month = monthNames[date.getMonth()];
+                                month = MONTH_NAMES[date.getMonth()];
                                 day = date.getDate();
                                 newDate = `${day} ${month} ${year}`;
                             }
@@ -84,7 +84,7 @@ const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug 
                                                 <div className="card__media mb-4">
                                                     <img alt="icon" className="img-fluid u-img" height={80} width={80}
                                                         src="https://docs.jindalsteel.in/document/124/1763976839___2.png" />
-                                                    <div className="label c-content-20 ft_bold">{newDate !== "" ? newDate : ""}</div>
+                                                    <div className="label c-content-18 ft_semiBold">{newDate !== "" ? newDate : ""}</div>
                                                 </div>
 
 
@@ -94,13 +94,10 @@ const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug 
                                                     </div>
 
                                                     <div className="card__content-box">
-
-
-                                                        <div className="desc line-clamp-6">{post.title}</div>
+                                                        <div className="desc line-clamp-4">{post.title}</div>
                                                     </div>
-
-                                                    <div className="action-btn mt-30"><Link className="u-btn" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}><span className="icon-move-right icon"></span></Link></div>
                                                 </div>
+                                                <div className="action-btn c-cardView__box-item--action"><Link className="u-btn" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}><span className="icon-move-right icon"></span></Link></div>
                                             </div>
                                         </div>
                                     </div>

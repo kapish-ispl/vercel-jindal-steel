@@ -1,5 +1,5 @@
 
-import { monthNames } from "@/config/config";
+import { MONTH_NAMES } from "@/config/config";
 import Link from "next/link";
 import CustomSilder from "./CustomSilder";
 import React from "react";
@@ -33,7 +33,7 @@ const ResourceSection = ({ postData, compSlug }: any) => {
                             }
 
                             year = date.getFullYear();
-                            month = monthNames[date.getMonth()];
+                            month = MONTH_NAMES[date.getMonth()];
                             day = date.getDate();
                             newDate = `${day} ${month} ${year}`;
                         }

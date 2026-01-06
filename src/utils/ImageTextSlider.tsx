@@ -1,6 +1,6 @@
 import React from 'react'
 import CustomSilder from './CustomSilder';
-import { monthNames } from "@/config/config";
+import { MONTH_NAMES } from "@/config/config";
 import Link from 'next/link';
 
 const ImageTextSlider = ({ postData }: any) => {
@@ -30,7 +30,7 @@ const ImageTextSlider = ({ postData }: any) => {
                         }
 
                         year = date.getFullYear();
-                        month = monthNames[date.getMonth()];
+                        month = MONTH_NAMES[date.getMonth()];
                         day = date.getDate();
                         newDate = `${day} ${month} ${year}`;
                     }

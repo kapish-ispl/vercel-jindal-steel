@@ -76,18 +76,10 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
                                         </>
                                     }
                                     {
-                                        compSlug === 'investor-documents' && <>
-                                            <Link href={post.media[0].cdnPath} className='performance-link'>
-                                                <div className="title c-content-19 ft_bold">{post.title}</div>
-                                                <img src="/images/icons/down-arrow.svg" alt="icon download" className='u-img img-fluid' />
-                                            </Link>
-                                        </>
-                                    }
-                                    {
-                                        compSlug === 'subsidiary-financials' && <>
-                                            <Link href={post.metaInfo.external_link} className='performance-link'>
-                                                <div className="title c-content-19 ft_bold">{post.title}</div>
-                                                <img src="/images/icons/down-arrow.svg" alt="icon download" />
+                                        (compSlug === 'investor-documents' || compSlug === 'subsidiary-financials') && <>
+                                            <Link href={compSlug === 'investor-documents' ? post.media[0].cdnPath : post.metaInfo.external_link} className='performance-link'>
+                                                <div className="title c-content-19 ft_regular">{post.title}</div>
+                                                <span className="icon-move-down icon"></span>
                                             </Link>
                                         </>
                                     }
