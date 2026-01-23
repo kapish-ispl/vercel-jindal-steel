@@ -17,6 +17,7 @@ const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: fa
 const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ssr: false });
 const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr: false });
 const CustomSilder = dynamic(() => import('@/utils/CustomSilder'), { ssr: false });
+const CardSwipeSlider = dynamic(() => import("@/utils/CardSwipeSlider"), { ssr: false });
 const Tabs = dynamic(() => import("@/utils/Tabs"), { ssr: false });
 const ReadMoreModal = dynamic(() => import("@/utils/ReadMoreModal"), { ssr: false });
 
@@ -41,6 +42,9 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "splitanimation") {
                     const props = attributesToProps(domNode.attribs);
                     return <SplitAnimation text={String(props.text)} />;
+                }
+                if(domNode.name === "cardswipeslider") {
+                    return <CardSwipeSlider />
                 }
                 if (domNode.name === "bluranimation") {
                     const props = attributesToProps(domNode.attribs);

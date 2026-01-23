@@ -3,6 +3,7 @@ import HomePage from "@/components/Layout/HomePageTemplate";
 import { GET_SPECIFIC_PAGE_ENDPOINT } from "@/config/apiConfig";
 import { CONSTANTS } from "@/config/constant";
 import { serverRequest } from "@/services/getServerSideRender";
+import CardSwipeSlider from "@/utils/CardSwipeSlider";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 

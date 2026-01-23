@@ -1,0 +1,169 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+@use '../components/generic/sizes' as *; 
+
+// .demo-slider {
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-shrink: 10;
+//   min-height: 0;
+// }
+// .swiper-material {
+//   height: 300px;
+//   width: calc(100% - 32px);
+//   max-width: 800px;
+// }
+// .demo-material-image {
+//   position: absolute;
+//   left: 0%;
+//   top: 0;
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+//   display: block;
+//   border-radius: var(--swiper-material-slide-border-radius);
+// }
+// .demo-material-label {
+//   position: absolute;
+//   font-size: 24px;
+//   color: #fff;
+//   left: 0;
+//   bottom: 0;
+//   width: 100%;
+//   height: 50%;
+//   box-sizing: border-box;
+//   padding: 24px;
+//   display: flex;
+//   flex-direction: column;
+//   font-weight: 500;
+//   justify-content: flex-end;
+//   align-items: center;
+//   white-space: nowrap;
+//   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+//   background-image: linear-gradient(
+//     to bottom,
+//     rgba(0, 0, 0, 0),
+//     rgba(0, 0, 0, 0.2) 50%
+//   );
+// }
+.swiper-material-wrapper{
+    @include border-radius(8px !important);
+    @include box-shadow(0px 8px 8px rgba(0, 0, 0, 0.1));
+    &.border-radius-20{
+        @include border-radius(20px !important);
+    }
+}
+.demo-slider {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+  background-color: #fff;
+}
+
+.swiper-material {
+  display: flex;
+  gap: 8px; /* Spacing between the cards */
+  width: 100%;
+  max-width: 900px;
+  height: 370px;
+  padding-bottom: 40px !important;
+  @include mq(tablet-max){
+    height: 480px;
+    padding-bottom: 50px !important;  
+  }
+@include mq(desktop-wide-max) {
+    max-width: 1440px;
+    padding-bottom: 110px !important;
+    height: 550px;
+}
+}
+
+.material-slide {
+  position: relative;
+  flex: 0.15; /* Thin width for inactive cards */
+  height: 100%;
+  border-radius: 5px; /* As requested */
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);  
+  cursor: pointer;
+}
+
+/* The Large Active Card */
+.material-slide.is-active {
+  flex: 3; /* Expands the active card */
+}
+
+.demo-material-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+//   filter: grayscale(100%);
+  display: block;
+}
+.swiper-slide-active {
+  .demo-material-image {
+    filter: grayscale(100%); 
+    transition: filter 0.6s ease; 
+  }
+}
+
+.demo-material-label {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: sans-serif;
+  @include font-size(24);
+  font-weight: var(--fontLight);
+  @include mq(tablet-max){
+    @include font-size(28);
+  }
+  @include mq(desktop){
+    @include font-size(32);
+    padding: 32px;
+  }
+  
+  /* Only show text on the active/large slide */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+.material-slide.is-active .demo-material-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Overlay to darken image slightly for text readability */
+.material-slide.is-active::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%);
+  pointer-events: none;
+}
+.swiper-pagination{
+    &.swiper-pagination-clickable {
+        &.swiper-pagination-bullets{
+            .swiper-pagination-bullet{
+                width: 16px;
+                height: 16px;
+                min-width: 16px;
+                border: 2px solid rgba(79, 184, 72, 1);
+                @include border-radius(50%);
+                background-color: var(--color-white);
+                &.swiper-pagination-bullet-active{
+                    background: var(--color-primary);
+                    border-color: var(--color-primary) ;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+

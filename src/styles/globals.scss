@@ -1,6 +1,7 @@
 @charset "utf-8";
 @use 'vendors/lucide';
 @use 'vendors/bootstrap.min';
+@use 'vendors/effect-material';
 /* Begin core files */
 @use 'custom/core/typography' as *;
 @use 'custom/core/variables' as *;
@@ -31,6 +32,7 @@
 @use "custom/components/table";
 @use "custom/components/tab";
 @use "custom/components/modal";
+@use 'custom/components/cardswipesider'; 
 /* End component files */
 
 .ratio-9x16 {
