@@ -40,14 +40,13 @@
         
         &-label{
             @include font-size(28);
-            font-weight: var(--fontMedium);
-            text-transform: uppercase;
+            font-weight: var(--fontMedium);  
             line-height: 1 !important;
             @include mq(tablet){
                  @include font-size(32);
             }
             @include mq(tablet-max){
-                 @include font-size(36);
+                 @include font-size(32);
             }
         }
     }
@@ -65,10 +64,16 @@
                 min-height: 250px;
             }
             &.min-height-50 {
-                min-height: 50px !important; 
+                min-height: 0px; 
+                 @include mq(tablet-max){
+                 min-height: 50px;
+                }
             }
-            &.min-height-155 {
-                min-height: 155px !important;   
+            &.min-height-155 { 
+                min-height: 0px;
+                 @include mq(tablet-max){
+                 min-height: 155px;
+                }   
             }
         }
         .action-btn {
