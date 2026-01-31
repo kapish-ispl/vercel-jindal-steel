@@ -94,7 +94,7 @@ const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug 
                                                     </div>
 
                                                     <div className="card__content-box">
-                                                        <div className="desc line-clamp-4">{post.title}</div>
+                                                        <div className="desc c-content-19 ft_light clr-gray line-clamp-4">{post.title}</div>
                                                     </div>
                                                 </div>
                                                 <div className="action-btn c-cardView__box-item--action"><Link className="u-btn" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}><span className="icon-move-right icon"></span></Link></div>

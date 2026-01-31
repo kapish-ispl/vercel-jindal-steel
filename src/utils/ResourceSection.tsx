@@ -53,7 +53,7 @@ const ResourceSection = ({ postData, compSlug }: any) => {
                                                 </div>
 
                                                 <div className="card__content-box">
-                                                    <div className="desc line-clamp-4">{post.title}</div>
+                                                    <div className="desc c-content-19 ft_light clr-gray line-clamp-4">{post.title}</div>
                                                 </div>
 
                                                 
@@ -71,7 +71,7 @@ const ResourceSection = ({ postData, compSlug }: any) => {
                                         </a>
                                         <span className="c-cardView__wrapper-content v3">
                                             <span className="c-content-24 ft_semiBold mb-3 clr-blue">{newDate !== "" ? newDate : ""}</span>
-                                            <span className="desc c-content-19 clr-gray">{post.title}</span>
+                                            <span className="desc c-content-19 ft_light clr-gray line-clamp-4">{post.title}</span>
                                         </span>
                                     </div>
                                 }
