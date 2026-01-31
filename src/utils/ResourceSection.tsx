@@ -70,8 +70,8 @@ const ResourceSection = ({ postData, compSlug }: any) => {
                                             <img alt="card title" className="img-fluid u-img" src={post.media[0].cdnPath} />
                                         </a>
                                         <span className="c-cardView__wrapper-content v3">
-                                            <span className="title clr-blue c-content-25 ft_bold">{post.title}</span>
-                                            <span className="desc c-content-19 clr-gray">{post.content || ''}</span>
+                                            <span className="c-content-24 ft_semiBold mb-3 clr-blue">{newDate !== "" ? newDate : ""}</span>
+                                            <span className="desc c-content-19 clr-gray">{post.title}</span>
                                         </span>
                                     </div>
                                 }
