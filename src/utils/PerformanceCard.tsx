@@ -66,7 +66,7 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
                                         compSlug === 'conference-call' && <>
                                             <div className='c-audio__container mb-4'>
                                                 <div className='hw mb-40'>
-                                                    <div className="c-heading-40 clr-blue">{post.title}</div>
+                                                    <div className="c-heading-30 clr-blue ft_semiBold">{post.title}</div>
                                                 </div>
                                                 <div className='c-audio__wrap'>
                                                     <audio src={post.media[0].cdnPath} controls></audio>
