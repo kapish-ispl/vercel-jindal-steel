@@ -101,11 +101,11 @@ const CustomSlider = ({ cls, customcls, items, data, arrows, dots, bluearrow, ch
             {(arrows == 'true' && filteredItems.length > slidesToShow) &&
                 <div className="c-embla__buttons">
                     <button
-                        className="c-embla__arrow c-embla__arrow--prev"
+                        className="c-embla__arrow c-embla__arrow--prev norotate"
                         onClick={scrollPrev}
                         aria-label="Previous Slide"
                     >
-                        <img src={bluearrow == true ? 'url' : "https://docs.jindalsteel.in/document/124/1763981729_Group58.png"} alt="Next" />
+                        <img src={bluearrow == true ? 'url' : "https://docs.jindalsteel.in/document/124/1769843887_previous-arrow.png"} alt="Previous" />
                     </button>
                     <button
                         className="c-embla__arrow c-embla__arrow--next"
@@ -113,7 +113,7 @@ const CustomSlider = ({ cls, customcls, items, data, arrows, dots, bluearrow, ch
                         aria-label="Next Slide"
                     >
 
-                        <img src={bluearrow == true ? 'url' : "https://docs.jindalsteel.in/document/124/1763981729_Group58.png"} alt="Previous" />
+                        <img src={bluearrow == true ? 'url' : "https://docs.jindalsteel.in/document/124/1769843887_next-arrow.png"} alt="Next" />
                     </button>
                     {/* <button onClick={scrollPrev} className="c-embla__button">
                         ◀

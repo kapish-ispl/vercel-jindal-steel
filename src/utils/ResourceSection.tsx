@@ -8,8 +8,8 @@ const ResourceSection = ({ postData, compSlug }: any) => {
     console.log(postData, compSlug)
     return (
         <>
-            <div className="col-12 position-relative c-cardView v7 c-verticalSlider cus-embla-arrow">
-                <CustomSilder arrows="true" cls="mb-5" customcls="buttons_absolute" items="[3,2,1]">
+            <div className="col-12 position-relative c-cardView v7 fixSpace  c-verticalSlider cus-embla-arrow">
+                <CustomSilder arrows="true" cls="mb-0" customcls="buttons_absolute" items="[3,2,1]">
                     {postData && postData.length > 0 && postData.map((post: any, index: any) => {
 
                         let dataLink = "#";
@@ -41,23 +41,24 @@ const ResourceSection = ({ postData, compSlug }: any) => {
                         return (
                             <React.Fragment key={index}>
                                 {compSlug === 'policies-reports' &&
-                                    <div className="c-cardView__box">
+                                    <div className="c-cardView__box sliderbox">
                                         <div className="c-cardView__box-item">
-                                            <div className="card__media mb-40"><img alt="icon" className="img-fluid u-img" src="https://docs.jindalsteel.in/document/124/1763976839___2.png" /></div>
+                                            <div className="card__media mb-4"><img alt="icon" className="img-fluid u-img" height={80} width={80} src="https://docs.jindalsteel.in/document/124/1763976839___2.png" />
+                                            <div className="label c-content-18 ft_semiBold">{newDate !== "" ? newDate : ""}</div>
+                                            </div>
 
                                             <div className="card__content">
                                                 <div className="card__content__title">
-                                                    <div className="c-heading-40 mb-40 clr-blue">{post.metaInfo && post.metaInfo.type ? post.metaInfo.type : post.metaInfo && post.metaInfo.category !== "" ? post.metaInfo.category : 'Press Release'} </div>
+                                                    <div className="c-content-24 ft_semiBold mb-3 clr-blue">{post.metaInfo && post.metaInfo.type ? post.metaInfo.type : post.metaInfo && post.metaInfo.category !== "" ? post.metaInfo.category : 'Press Release'} </div>
                                                 </div>
 
                                                 <div className="card__content-box">
-                                                    <div className="label">{newDate !== "" ? newDate : ""}</div>
-
-                                                    <div className="desc">{post.title}</div>
+                                                    <div className="desc line-clamp-4">{post.title}</div>
                                                 </div>
 
-                                                <div className="action-btn mt-30"><Link className="u-btn" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}><span className="icon-move-right icon"></span></Link></div>
+                                                
                                             </div>
+                                            <div className="action-btn c-cardView__box-item--action"><Link className="u-btn" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}><span className="icon-move-right icon"></span></Link></div>
                                         </div>
                                     </div>
                                 }
