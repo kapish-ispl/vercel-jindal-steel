@@ -79,7 +79,7 @@ const AwardsCardV2: FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage }
 
                     return (
                         <div className="col-12 col-md-6 col-lg-4" key={index}>
-                            <button className="c-cardBox__wrapper v3" onClick={() => handleModal(post)}>
+                            <button className="c-cardBox__wrapper v3 w-100" onClick={() => handleModal(post)}>
                                 <span className="c-cardBox__wrapper-top">
                                     <span className="media ratio ratio-4x3">
                                         {post?.media[0]?.cdnPath &&
