@@ -692,6 +692,9 @@
         .title {
             max-width: 250px;
         }
+        &.radiusShape-5{
+            @include border-radius(5px); 
+        }
     }
 
     &.card-ratio {

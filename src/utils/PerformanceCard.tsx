@@ -110,7 +110,7 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
                                     }
                                     {
                                         (compSlug === 'investor-documents' || compSlug === 'subsidiary-financials') && <>
-                                            <Link href={compSlug === 'investor-documents' ? post.media[0].cdnPath : post.metaInfo.external_link} className='performance-link'>
+                                            <Link href={compSlug === 'investor-documents' ? post.media[0].cdnPath : post.metaInfo.external_link} className='performance-link radiusShape-5'>
                                                 <div className="title c-content-19 ft_regular">{post.title}</div>
                                                 <span className="icon-move-down icon arrowremove">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="52" viewBox="0 0 70 52" fill="none"><path d="M8.5 43H4C2.34315 43 1 41.6569 1 40V4C1 2.34315 2.34315 1 4 1H56C57.6569 1 59 2.34315 59 4V7.5" stroke="#636466" stroke-width="2"></path><rect x="11" y="10" width="58" height="41" rx="3" stroke="#636466" stroke-width="2"></rect><path d="M21.5 21.5H59" stroke="#636466" stroke-width="2"></path><path d="M21.5 30H59" stroke="#636466" stroke-width="2"></path><path d="M21.5 38.5H59" stroke="#636466" stroke-width="2"></path></svg>
