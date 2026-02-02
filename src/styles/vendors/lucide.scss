@@ -4069,6 +4069,10 @@
     content: "\e490";
 }
 
+.icon-move-down.arrowremove::before {
+    display: none;
+}
+
 .icon-move-horizontal::before {
     content: "\e1c6";
 }
