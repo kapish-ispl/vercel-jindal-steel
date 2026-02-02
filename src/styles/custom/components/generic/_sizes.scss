@@ -98,6 +98,32 @@
     }
 }
 
+.c-heading-50 {
+    font-weight: var(--fontBold); 
+
+    @include font-size(26);
+
+    @include mq('tablet') {
+        @include font-size(29);
+    }
+
+    @include mq('tablet-wide') {
+        @include font-size(34);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(40);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(50);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(50); 
+    }
+}
+
 .c-heading-60 {
     font-weight: var(--fontBold);
 
