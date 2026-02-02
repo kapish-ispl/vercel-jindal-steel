@@ -131,7 +131,7 @@ const AwardsCardV2: FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage }
             </div>
 
             {modalData != null &&
-                <div className={`c-modal__wrapper v2 ${contentToggler ? 'show' : ''}`}>
+                <div className={`c-modal__wrapper v2 mt-0 ${contentToggler ? 'show' : ''}`}>
                     <div className="c-modal__overlay" onClick={() => handleModalClose}></div>
                     <div className="container cus-container position-relative">
                         <div className="c-modal__box v2">
