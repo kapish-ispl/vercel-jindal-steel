@@ -106,7 +106,7 @@ const CustomWorldMap = (props: any) => {
 
     return (
         <>
-            <h3 className="c-heading-65 clr-green lh-75 float-elem" onClick={() => {
+            <h3 className="c-heading-60  clr-olive lh-75 float-elem" onClick={() => {
                 setView('world');
                 const getWorldInfo = tabData.filter((item: any) => item.props !== undefined && item.props.label == 'world');
                 setOpenTab(getWorldInfo[0].key);
