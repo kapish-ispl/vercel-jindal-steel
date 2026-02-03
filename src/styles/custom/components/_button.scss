@@ -18,6 +18,22 @@
                 color: var(--color-primary) !important;
             }
     }
+
+    & .leftarrow{
+        color: var(--color-accent-green);
+        text-decoration: none;
+        display: inline-block;
+        .icon{
+            @include font-size(45); 
+        }
+    }
+    &:hover{
+        transform: translateX(20px);
+            .icon {
+                color: var(--color-primary) !important;
+            }
+    }
+
         &.sector-btn,
     &.slider-btn {
         @include flexbox;
