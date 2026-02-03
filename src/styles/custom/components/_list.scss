@@ -118,4 +118,28 @@
             }
         }
     }
+     &__wrapper{
+        @include flexbox;
+        @include flex-direction(column, vertical);
+        @include justify-content(center);
+        @include align-items(center);
+        &-content{
+            .title,p{
+                text-align: center;
+            }
+            p{
+                max-width: 400px;
+            }
+            .title{
+                margin: 15px 0px;
+                @include mq(tablet){
+                    margin: 20px 0px;
+                }
+                @include mq(tablet-max){
+                    margin: 25px 0px;
+                }
+            }
+           
+        }
+    }
 }
