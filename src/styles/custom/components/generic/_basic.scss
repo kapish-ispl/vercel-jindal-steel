@@ -1905,3 +1905,47 @@ ul.arrowbulletList {
         }
     }
 }
+
+.bg-blue {
+    background: var(--color-accent-blue); 
+}
+
+.c-key__wrapper {
+    @include flexbox;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+
+    @include mq(tablet-max) {
+        @include flex-direction(column, vertical);
+        margin-top: 0px;
+    }
+
+    &__item {
+        background: var(--color-white);
+        padding: 20px 25px;
+        width: 100%;
+
+        @include mq(tablet-max) {
+            padding: 20px 32px 30px 32px;
+        }
+
+        @include mq(desktop) {
+            padding: 20px 65px 32px 32px;
+        }
+
+        .title {
+            margin-bottom: 10px;
+        }
+
+        .u-btn {
+            text-decoration: none;
+        }
+
+        .desc {
+            .label {
+                padding-right: 5px;
+            }
+        }
+    }
+}

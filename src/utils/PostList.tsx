@@ -42,6 +42,10 @@ export default function PostList(props: any) {
             type: { key: "type_1599485711" }
         },
 
+        "environmental-compliance": {
+            type: { key: "type_1699180101" }
+        },
+
         "conference-call": {
             year: {
                 key: "conference_year_1734948827",
