@@ -86,50 +86,53 @@ const AwardsCardV2: FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage }
 
     return (
         <>
-            <div className="c-filterView justify-content-end mb-4">
-                <div className="row gy-2">
-                    <div className="col-md-10 col-sm-12">
-                        <CustomSelect options={myOptions} placeholder="Select Year" />
+           <div className='col-12'>
+                <div className="c-filterView justify-content-end mb-4">
+                    <div className="row gy-2">
+                        <div className="col-md-10 col-sm-12">
+                            <CustomSelect options={myOptions} placeholder="Select Year" />
+                        </div>
+                        <div className="col-12 col-md-2"><button type='button' className='u-btn bg-blue action_btn'>Reset</button></div>
                     </div>
-                    <div className="col-12 col-md-2"><button type='button' className='u-btn action_btn'>Reset</button></div>
                 </div>
             </div>
-            <div className='row'>
-                {postData && postData.length > 0 && postData.map((post: any, index: number) => {
-                    const { monthYear: newDateMonth } = formatDate(post?.postingDate);
+            <div className='col-12'>
+                <div className='row'>
+                    {postData && postData.length > 0 && postData.map((post: any, index: number) => {
+                        const { monthYear: newDateMonth } = formatDate(post?.postingDate);
 
-                    return (
-                        <div className="col-12 col-md-6 col-lg-4" key={index}>
-                            <button className="c-cardBox__wrapper v3 w-100" onClick={() => handleModal(post)}>
-                                <span className="c-cardBox__wrapper-top">
-                                    <span className="media ratio ratio-4x3">
-                                        {post?.media[0]?.cdnPath &&
-                                            <Image
-                                                alt="Jindal image"
-                                                className="img-fluid u-img"
-                                                src={post?.media[0]?.cdnPath}
-                                                width={450}
-                                                height={350}
-                                            />
-                                        }
+                        return (
+                            <div className="col-12 col-md-6 col-lg-4" key={index}>
+                                <button className="c-cardBox__wrapper v3 w-100" onClick={() => handleModal(post)}>
+                                    <span className="c-cardBox__wrapper-top">
+                                        <span className="media ratio ratio-4x3">
+                                            {post?.media[0]?.cdnPath &&
+                                                <Image
+                                                    alt="Jindal image"
+                                                    className="img-fluid u-img"
+                                                    src={post?.media[0]?.cdnPath}
+                                                    width={450}
+                                                    height={350}
+                                                />
+                                            }
 
+                                        </span>
                                     </span>
-                                </span>
-                                <span className="c-cardBox__wrapper-bottom">
-                                    <span className="content">
-                                        <span className="label c-content-16 clr-gray ft_regular">{newDateMonth !== "" ? newDateMonth : ""}</span>
-                                        <span className="c-content-20 ft_regular">{post.title}</span>
+                                    <span className="c-cardBox__wrapper-bottom">
+                                        <span className="content">
+                                            <span className="label c-content-16 clr-gray ft_regular">{newDateMonth !== "" ? newDateMonth : ""}</span>
+                                            <span className="c-content-20 ft_regular">{post.title}</span>
+                                        </span>
                                     </span>
-                                </span>
-                            </button>
-                        </div>
-                    )
-                })}
-                {totalPost > itemsPerPage &&
-                    <Pagination pageCount={pageCount} handlePageClick={handlePageClick} currentPage={currentPage} />
-                }
+                                </button>
+                            </div>
+                        )
+                    })}
+                    {totalPost > itemsPerPage &&
+                        <Pagination pageCount={pageCount} handlePageClick={handlePageClick} currentPage={currentPage} />
+                    }
+                </div>
             </div>
-
             {modalData != null &&
                 <div className={`c-modal__wrapper v2 mt-0 ${contentToggler ? 'show' : ''}`}>
                     <div className="c-modal__overlay" onClick={() => handleModalClose}></div>
