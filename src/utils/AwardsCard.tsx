@@ -44,7 +44,7 @@ const AwardsCard: React.FC<AwardsCardProps> = ({ postData, itemsPerPage = 9, tot
                     <div className="col-md-10 col-sm-12">
                         <CustomSelect options={myOptions} placeholder="Select Year" />
                     </div>
-                    <div className="col-12 col-md-2"><button type='button' className='u-btn action_btn'>Reset</button></div>
+                    <div className="col-12 col-md-2"><button type='button' className='u-btn bg-blue action_btn'>Reset</button></div>
                 </div>
             </div>
             {postData && postData.length > 0 && postData.map((post, index) => (
