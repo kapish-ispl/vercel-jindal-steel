@@ -1130,3 +1130,281 @@
         }
     }
 }
+
+
+
+.c-bento__card {
+    &__wrapper {
+        position: relative;
+        box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.1);
+        @include border-radius(8px);
+        overflow: hidden;
+
+        &_content {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            padding: 46px 33px;
+            z-index: 9;
+
+            .c-divider {
+                height: 1px;
+                background-color: var(--color-white);
+                opacity: 0.5;
+                margin: 20px 0px;
+            }
+        }
+
+        &_media {
+            .u-img {
+                width: 100%;
+            }
+        }
+
+        &.with-gradient {
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+                // background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgb(0 0 0 / 31%) 100%);
+                background: linear-gradient(181deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+                border-radius: 8px;
+                z-index: 1;
+            }
+        }
+
+        &.v2 {
+            background: var(--color-grey2);
+            padding: 48px 27px;
+
+            .c-bento__card__wrapper_content {
+                position: unset;
+                margin-bottom: 30px;
+                padding: 0;
+
+            }
+
+            .c-bento__card__wrapper_media {
+                >img {
+                    width: 100%;
+                }
+            }
+        }
+
+        &.v3 {
+            box-shadow: unset;
+            @include flexbox;
+            @include flex-direction(column, vertical);
+            gap: 20px;
+           
+
+            .c-bento__card__wrapper_item {
+                position: relative;
+                box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.1);
+                flex: 1;
+                height: calc(100% - 25px);
+                @include border-radius(8px);
+                overflow: hidden;
+              
+
+                // &:nth-child(2) {
+                //     flex: 0 0 30%;
+                // }
+
+                // +.c-bento__card__wrapper_item {
+                //     margin-top: 20px;
+                // }
+
+                .c-bento__card__wrapper_content {
+                    padding: 20px;
+                }
+            }
+            .c-bento__card__wrapper_media{
+                height: 100%;
+                img{
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        &.link {
+            display: flex;
+            flex-direction: column;
+             .c-bento__card__wrapper_content {
+                     display: flex;
+                     flex-direction: column;
+            }
+        }
+        
+        
+    }
+
+    &.v2 {
+        @include flexbox;
+        gap: 22px;
+
+        .c-bento__card__wrapper {
+            flex: 1 1 0%;
+            @include transition(all 0.3s ease-in-out);
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 457px;
+            box-shadow: unset;
+
+            &:hover {
+                flex: 0 0 50%;
+
+                .c-bento__card__wrapper_content {
+                    @include transform(translateX(0px));
+                }
+            }
+
+            &_media {
+                height: 100%;
+                position: relative;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    // background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0 0 0 / 31%) 100%);
+                    background: linear-gradient(181deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+                    z-index: 1;
+
+                }
+
+                .u-img {
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center center;
+                }
+            }
+
+            &_content {
+                @include transform(translateX(-500px));
+                @include transition(all 0.3s ease-in-out);
+
+                .action-btn {
+                    .u-link {
+                        @include flexbox;
+                        @include align-items(center);
+                        gap: 15px;
+                    }
+                }
+            }
+        }
+
+        // .c-embla__viewport{
+        //     .c-embla__container{
+        //         width: calc(100% + 20px);
+
+        //     }
+        // }
+        .c-embla {
+            &__buttons {
+                button {
+                    border-radius: inherit;
+                    border: none !important;
+                }
+
+                .c-embla__arrow--prev {
+                    left: -50px;
+                    top: 50%;
+                    bottom: unset;
+                }
+
+                .c-embla__arrow--next {
+                    top: 50%;
+                    bottom: unset;
+                    right: -50px;
+                }
+            }
+
+            .c-embla__dots-wrap {
+                top: inherit;
+                right: 50%;
+                bottom: 0px;
+                @include transform(translate(50%, 50%));
+
+                .c-embla__dots {
+                    @include flex-direction(row, horizontal);
+                }
+            }
+        }
+    }
+
+    
+
+    &.onhoverEffect {
+        .c-bento__card__wrapper {
+            box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.1);
+
+            &_media {
+                .u-img {
+                    filter: grayscale(100%);
+                    transition: all 0.3s ease-in-out;
+                }
+            }
+
+            &:hover {
+                .c-bento__card__wrapper_media {
+                    .u-img {
+                        filter: grayscale(0%);
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+
+
+.fixBento-card{
+    .c-bento__card{
+        height: 100%;
+        max-height: 450px;
+        &__wrapper{
+            height: 100%;
+            &_media{
+                height: 100%;
+                >img{
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        &.maxHeight550{
+            height: 100%;
+            max-height: 550px;
+        }
+    }
+    .c-bento__card__wrapper{
+        &.v3{
+            @media screen and (min-width: 576px) and (max-width: 1024px) {
+                flex-direction: row;
+                gap: 10px;
+                width: 100%;
+            }
+           
+        }
+         &_item{
+                + .c-bento__card__wrapper_item{
+                    margin-top: 0px;
+                }
+            }
+        
+    }
+
+}
