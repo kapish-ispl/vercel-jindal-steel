@@ -2,13 +2,10 @@
 
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
-import SwiperCore from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperClass } from 'swiper';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import type { CSSProperties } from 'react';
 import Link from 'next/link';
-
 
 const CardSwipeSlider = () => {
     const [pluginReady, setPluginReady] = useState(false);
@@ -16,7 +13,6 @@ const CardSwipeSlider = () => {
     useEffect(() => {
         // 👇 wait until window.Swiper exists
         if ((window as any).Swiper && (window as any).EffectMaterial) {
-            SwiperCore.use([(window as any).EffectMaterial]);
             setPluginReady(true);
         }
     }, []);
@@ -71,7 +67,6 @@ const CardSwipeSlider = () => {
                 <span className="demo-material-label swiper-material-animate-opacity">Speedfloor</span>
             </Link>
         </div>
-        
     ];
 
     return (
@@ -79,11 +74,10 @@ const CardSwipeSlider = () => {
             <Script
                 src="/swiper-effects/effect-material.min.js"
                 strategy="afterInteractive"
-                onLoad={() => {
+                onReady={() => {
                     // expose plugin if it attaches globally
                     setTimeout(() => {
                         if ((window as any).EffectMaterial) {
-                            SwiperCore.use([(window as any).EffectMaterial]);
                             setPluginReady(true);
                         }
                     }, 0);
@@ -91,16 +85,16 @@ const CardSwipeSlider = () => {
             />
             {pluginReady && (
                 <Swiper
-                    modules={[Navigation, Pagination, Autoplay]}
+                    modules={[Navigation, Pagination, Autoplay, (window as any).EffectMaterial]}
                     effect="material"
                     grabCursor
                     slidesPerView={1}
                     breakpoints={{
                         640: {
-                        slidesPerView: 2,
+                            slidesPerView: 2,
                         },
                         1024: {
-                        slidesPerView: 3,
+                            slidesPerView: 3,
                         },
                     }}
                     spaceBetween={16}
@@ -110,7 +104,7 @@ const CardSwipeSlider = () => {
                     onBeforeInit={(swiper: SwiperClass) => {
                         // inject paid params (TS-safe)
                         //const spv = swiper.params.slidesPerView as number;
-                        let ratio = 0.65;
+                        const ratio = 0.65;
                         (swiper.params as any).materialEffect = {
                             slideSplitRatio: ratio,
                         };
