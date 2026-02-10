@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
                             <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
                         </div>
                     </div>
-                    <div className="col-12 col-md-2"><button type='button' className='u-btn action_btn'>Reset</button></div>
+                    <div className="col-12 col-md-2"><button type='button' className='u-btn bg-blue action_btn'>Reset</button></div>
                 </div>
             </div>
             {postData && postData.length > 0 && postData.map((post, index) => (
@@ -53,8 +53,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
                             <span className="c-cardView__wrapper-media">
                                 <img alt={post?.title} className="img-fluid u-img" src={post?.media?.[0]?.cdnPath} />
                             </span>
-                            <span className="c-cardView__wrapper-content">
-                                <span className="title ft_medium">{post?.title}</span>
+                            <span className="c-cardView__wrapper-content pall-20">
+                                <span className="title ft_regular">{post?.title}</span>
                             </span> <span className="c-cardView__wrapper-shape"></span>
                         </Link>
                     </div>

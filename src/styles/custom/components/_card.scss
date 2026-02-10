@@ -231,7 +231,12 @@
                     margin: 20px 0px;
                     min-height: 46px;
                 }
-
+                &.pall-20{
+                    padding: 15px;
+                    @include mq(tablet-max) {
+                       padding: 20px;
+                    }
+                }
             }
 
             &:hover {

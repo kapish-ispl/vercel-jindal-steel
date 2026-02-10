@@ -457,3 +457,59 @@
     }
   }
 }
+
+.custom_grid_wrap {
+  @include flexbox;
+  @include justify-content(flex-end);
+
+  @media (min-width: 1920px) {
+    .custom_grid_4 {
+      width: calc(var(--widthMedia1920) / 12 * 4 - 30px);
+      padding: 0 15px;
+    }
+
+    .custom_grid_5 {
+      width: calc(var(--widthMedia1920) / 12 * 5 - 60px);
+      padding: 0 15px;
+    }
+
+    .custom_grid_6 {
+      width: calc(var(--widthMedia1920) / 12 * 6 - 60px);
+      padding: 0 15px;
+    }
+
+    .custom_grid_7 {
+      width: calc(var(--widthMedia1920) / 12 * 7 - 30px);
+      padding: 0 15px;
+    }
+
+    .custom_grid_8 {
+      width: calc(var(--widthMedia1920) / 12 * 8 - 30px);
+      padding: 0 15px;
+    }
+  }
+ .custom_grid_6 {
+    width: 100%;
+
+    @include mq(tablet) {
+        width: calc(700px / 12 * 6);
+    }
+
+    @include mq(tablet-max) {
+        width: calc(920px / 12 * 6);
+    }
+
+    @include mq(desktop-min) {
+        width: calc(1100px / 12 * 6);
+    }
+
+    @include mq(desktop-wide) {
+        width: calc(1280px / 12 * 6);
+    }
+
+    @include mq(desktop-wide-max) {
+        width: calc(1536px / 12 * 6 - 30px);
+        padding: 0 15px;
+    }
+}
+}
