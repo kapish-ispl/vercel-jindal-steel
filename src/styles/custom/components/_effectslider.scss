@@ -1,0 +1,108 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+@use '../components/generic/sizes' as *;
+
+.swiper-carousel {
+  padding-bottom: 32px;
+  max-width: 1500px;
+  position: relative;
+margin: 0 auto;
+max-width: 100%;
+overflow: hidden;
+  .swiper-slide {
+    width: 692px;
+    
+    
+    // Slide background to match main background
+    background: #ffffff;
+    max-width: calc(100% - 48px);  
+    overflow: hidden;
+    
+  }
+  .swiper-slide, .slide-img-wrap {
+    border-radius: 8px;
+  }
+  .swiper-slide {
+    position: relative;
+
+  }
+  .swiper-carousel-animate-opacity {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+      &::before{
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        left: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba(38, 38, 38, 0) 35%, #1d1d1d 100%);
+        overflow: hidden;
+    }
+  }
+  .swiper-pagination-bullets {
+    bottom: 0;
+  }
+  .slide-img-wrap {
+     height: 400px;
+     border-radius: 8px;
+      position: relative;
+      @include mq(desktop){
+        height: 464px;
+    }
+  }
+  .slide-img-wrap  img {
+    width: 100%;
+    height:100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 8px;
+   
+  
+  }
+  .slide-content {
+    position: relative;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 0 0 8px 8px;
+    z-index: 9;
+    padding-top:15px;
+    display: none;
+    h2 {
+      margin: 0;
+      font-weight: var(--fontSemiBold) !important;
+      @include font-size(18);
+      line-height: 1.1;
+      color: #446183;
+      text-align: center;
+      @include mq(tablet-max){
+        @include font-size(24);
+      }
+      @include mq(desktop){
+        @include font-size(28);
+      }
+    }
+    p {
+      margin: 8px 0 0;
+      font-size: 14px;
+      font-weight: 500;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+  }
+ 
+ 
+ 
+}
+
+  .swiper-slide-active {
+    z-index: 13 !important;
+    .slide-content {
+      display: block;
+    }
+  }

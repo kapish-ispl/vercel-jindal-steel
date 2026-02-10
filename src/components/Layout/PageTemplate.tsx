@@ -20,6 +20,7 @@ const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr
 const CustomSilder = dynamic(() => import('@/utils/CustomSilder'), { ssr: false });
 const CardSwipeSlider = dynamic(() => import("@/utils/CardSwipeSlider"), { ssr: false });
 const Tabs = dynamic(() => import("@/utils/Tabs"), { ssr: false });
+const CustomCarouselSlider = dynamic(() => import("@/utils/CustomCarouselSlider"), { ssr: false });
 const ReadMoreModal = dynamic(() => import("@/utils/ReadMoreModal"), { ssr: false });
 
 
@@ -54,6 +55,11 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "cardstackslider") {
                     const props = attributesToProps(domNode.attribs);
                     return <CardStackSlider {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                }
+
+                if (domNode.name === "customcarouselslider") {
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CustomCarouselSlider data={Array.isArray(children) ? children : [children]} />
                 }
                 
                 if (domNode.name === "customreadmoremodal") {
