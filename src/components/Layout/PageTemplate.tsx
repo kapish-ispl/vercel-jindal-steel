@@ -22,6 +22,7 @@ const CardSwipeSlider = dynamic(() => import("@/utils/CardSwipeSlider"), { ssr: 
 const Tabs = dynamic(() => import("@/utils/Tabs"), { ssr: false });
 const CustomCarouselSlider = dynamic(() => import("@/utils/CustomCarouselSlider"), { ssr: false });
 const ReadMoreModal = dynamic(() => import("@/utils/ReadMoreModal"), { ssr: false });
+const PodcastSlider = dynamic(() => import("@/utils/PodcastSlider"), { ssr: false });
 
 
 
@@ -134,6 +135,10 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "customcontentslider") {
                     const props = attributesToProps(domNode.attribs);
                     return <CustomContentSlider {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                }
+                if (domNode.name === "podcastslider") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <PodcastSlider {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
                 if (domNode.name === "customslider") {
                     const props = attributesToProps(domNode.attribs);
