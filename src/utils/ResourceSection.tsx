@@ -42,24 +42,26 @@ const ResourceSection = ({ postData, compSlug }: any) => {
                             <React.Fragment key={index}>
                                 {compSlug === 'policies-reports' &&
                                     <div className="c-cardView__box sliderbox">
-                                        <div className="c-cardView__box-item">
+                                        <Link className="c-cardView__box-item d-block text-decoration-none" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}>
+                                        
                                             <div className="card__media mb-4"><img alt="icon" className="img-fluid u-img" height={80} width={80} src="https://docs.jindalsteel.in/document/124/1763976839___2.png" />
-                                            <div className="label c-content-18 ft_semiBold">{newDate !== "" ? newDate : ""}</div>
+                                            <div className="label c-content-18 clr-gray ft_semiBold">{newDate !== "" ? newDate : ""}</div>
                                             </div>
 
-                                            <div className="card__content">
+                                            <div className="card__content mb-3">
                                                 <div className="card__content__title">
                                                     <div className="c-content-24 ft_semiBold mb-3 clr-blue">{post.metaInfo && post.metaInfo.type ? post.metaInfo.type : post.metaInfo && post.metaInfo.category !== "" ? post.metaInfo.category : 'Press Release'} </div>
                                                 </div>
 
-                                                <div className="card__content-box">
-                                                    <div className="desc c-content-19 ft_light clr-gray line-clamp-4">{post.title}</div>
+                                                <div className="card__content-box ">
+                                                    <div className="desc c-content-19 ft_light clr-gray line-clamp-2">{post.title}</div>
                                                 </div>
 
                                                 
                                             </div>
-                                            <div className="action-btn c-cardView__box-item--action"><Link className="u-btn" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}><span className="icon-move-right icon"></span></Link></div>
-                                        </div>
+                                           <div className="action-btn c-cardView__box-item--action"><span className="leftarrow"><span className="icon-move-right icon"></span></span></div>
+                                            
+                                        </Link>
                                     </div>
                                 }
                                 {
