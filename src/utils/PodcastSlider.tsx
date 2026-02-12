@@ -147,7 +147,7 @@ const PodcastSlider = (props: PodcastSliderProps) => {
             </div>
             {/* YouTube Modal Portal */}
             {isModalOpen && createPortal(
-                <div className={`c-modal active`} data-lenis-ignore>
+                <div className={`c-modal bgtransparent active`} data-lenis-ignore>
                     <div className="podcast-slider__modal-content">
                         {selectedVideoId && (
                             <div className="podcast-slider__video-wrapper">
@@ -161,7 +161,7 @@ const PodcastSlider = (props: PodcastSliderProps) => {
                                 ></iframe>
                             </div>
                         )}
-                        <button className="modle-cls-btn" onClick={closeModal}>
+                        <button className="modle-cls-btn podcastclose" onClick={closeModal}>
                             <div className="close-btn">
                                 <X color="#fff" />
                             </div>
