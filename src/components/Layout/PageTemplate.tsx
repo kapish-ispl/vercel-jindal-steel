@@ -23,7 +23,7 @@ const Tabs = dynamic(() => import("@/utils/Tabs"), { ssr: false });
 const CustomCarouselSlider = dynamic(() => import("@/utils/CustomCarouselSlider"), { ssr: false });
 const ReadMoreModal = dynamic(() => import("@/utils/ReadMoreModal"), { ssr: false });
 const PodcastSlider = dynamic(() => import("@/utils/PodcastSlider"), { ssr: false });
-
+const ReadMore = dynamic(() => import("@/utils/ReadMore"), { ssr: false });
 
 
 
@@ -62,6 +62,13 @@ const PageTemplate = ({ data }: any) => {
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomCarouselSlider data={Array.isArray(children) ? children : [children]} />
                 }
+
+                 if (domNode.name === "customreadmore") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <ReadMore {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                }
+
+               
                 
                 if (domNode.name === "customreadmoremodal") {
                     const props = attributesToProps(domNode.attribs);
