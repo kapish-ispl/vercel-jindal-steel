@@ -24,6 +24,7 @@ const CustomCarouselSlider = dynamic(() => import("@/utils/CustomCarouselSlider"
 const ReadMoreModal = dynamic(() => import("@/utils/ReadMoreModal"), { ssr: false });
 const PodcastSlider = dynamic(() => import("@/utils/PodcastSlider"), { ssr: false });
 const ReadMore = dynamic(() => import("@/utils/ReadMore"), { ssr: false });
+const GallerySlider = dynamic(() => import("@/utils/GallerySlider"), { ssr: false });
 
 
 
@@ -46,12 +47,16 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     return <SplitAnimation text={String(props.text)} />;
                 }
-                if(domNode.name === "cardswipeslider") {
+                if (domNode.name === "cardswipeslider") {
                     return <CardSwipeSlider />
                 }
                 if (domNode.name === "bluranimation") {
                     const props = attributesToProps(domNode.attribs);
                     return <BlurAnimation text={String(props.text)} />;
+                }
+                if (domNode.name === "galleryslider") {
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <GallerySlider data={Array.isArray(children) ? children : [children]} />;
                 }
                 if (domNode.name === "cardstackslider") {
                     const props = attributesToProps(domNode.attribs);
@@ -63,13 +68,13 @@ const PageTemplate = ({ data }: any) => {
                     return <CustomCarouselSlider data={Array.isArray(children) ? children : [children]} />
                 }
 
-                 if (domNode.name === "customreadmore") {
+                if (domNode.name === "customreadmore") {
                     const props = attributesToProps(domNode.attribs);
                     return <ReadMore {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
 
-               
-                
+
+
                 if (domNode.name === "customreadmoremodal") {
                     const props = attributesToProps(domNode.attribs);
                     return <ReadMoreModal {...props} data={domToReact(domNode.children as DOMNode[])} />;
