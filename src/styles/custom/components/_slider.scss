@@ -497,29 +497,35 @@ Common styles for navigation elements.
 }
 
 ///////////////////////-------------//////
-.custom-slider{
-    &.is-center-mode{
-        .embla--category{
-            .embla__container{
+.custom-slider {
+    &.is-center-mode {
+        .embla--category {
+            .embla__container {
                 @include align-items(center);
                 margin-bottom: 30px;
-                @include mq(tablet){
+
+                @include mq(tablet) {
                     margin-bottom: 40px;
                 }
-                @include mq(tablet-max){
+
+                @include mq(tablet-max) {
                     margin-bottom: 50px;
                 }
-                @include mq(desktop){
+
+                @include mq(desktop) {
                     margin-bottom: 60px;
                 }
-                @include mq(desktop-wide){
+
+                @include mq(desktop-wide) {
                     margin-bottom: 70px;
                 }
-                @include mq(desktop-wide-max){
+
+                @include mq(desktop-wide-max) {
                     margin-bottom: 80px;
                 }
-                .embla__slide--category{
-                    >div{
+
+                .embla__slide--category {
+                    >div {
                         color: rgba(99, 100, 102, 0.8);
                     }
                 }
@@ -527,23 +533,29 @@ Common styles for navigation elements.
         }
     }
 }
-.centermode-slider{
+
+.centermode-slider {
     position: relative;
 }
-.center-mode-activeContent{
+
+.center-mode-activeContent {
     width: 100%;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         width: 75%;
     }
 }
+
 .c-embla {
     position: static;
     width: 100%;
     overflow: hidden;
+
     &.buttons_absolute {
         .c-embla__buttons {
             position: absolute;
-            top: 20px;
+            top: 50%;
+            @include transform(translateY(-50%));
             width: 100%;
         }
     }
@@ -588,18 +600,21 @@ Common styles for navigation elements.
         background: transparent !important;
         position: absolute;
 
+
+
         &.c-embla__arrow--prev {
-            left: -20px;
-            top: 33%;
+            left: 20px;
+
             transform: translateX(-50%) rotate(180deg);
-            &.norotate{
+
+            &.norotate {
                 transform: translateX(-50%) rotate(0deg);
             }
         }
 
         &.c-embla__arrow--next {
-            right: -20px;
-            top: 33%;
+            right: 20px;
+
             transform: translateX(50%);
         }
     }
@@ -723,9 +738,9 @@ Common styles for navigation elements.
                 &-ls {
                     .hw {
                         &.withBoder {
-                             border-bottom: 5px solid #F47920;
-                             transform: scale(1.05);
-                             padding-left: 30px;
+                            border-bottom: 5px solid #F47920;
+                            transform: scale(1.05);
+                            padding-left: 30px;
                         }
                     }
                 }
@@ -739,17 +754,19 @@ Common styles for navigation elements.
     position: absolute;
     bottom: 20px;
     left: 0%;
-     @include transform(translateY(-50%));
+    @include transform(translateY(-50%));
     @include flexbox;
     justify-content: center;
     align-items: center;
     width: 100%;
     gap: 15px;
-    @include mq(tablet-max){
+
+    @include mq(tablet-max) {
         bottom: 40px;
     }
-        .c-embla__dots{
-      flex-direction: row;
+
+    .c-embla__dots {
+        flex-direction: row;
     }
 
     button {
@@ -844,7 +861,8 @@ Common styles for navigation elements.
                         opacity: 0;
                         margin: 0;
                     }
-                    &.withBorder{
+
+                    &.withBorder {
                         border-bottom: 2px solid #ffffffbf;
                         padding-bottom: 15px;
                         min-width: 250px;
@@ -1115,17 +1133,20 @@ Common styles for navigation elements.
     }
 
 }
-.c-slider__arrow{
-    .c-embla__dots-wrap{
+
+.c-slider__arrow {
+    .c-embla__dots-wrap {
         top: unset;
         transform: unset;
         width: 100%;
         @include justify-content(center);
-        .c-embla__dots{
+
+        .c-embla__dots {
             flex-direction: row;
         }
     }
 }
+
 .gap-50 {
     gap: 25px;
 
@@ -1134,27 +1155,32 @@ Common styles for navigation elements.
     }
 
 }
-.cus-embla-arrow{
-    .c-embla__buttons{
+
+.cus-embla-arrow {
+    .c-embla__buttons {
         top: 42% !important;
-        >button{
-        border: none !important;
-        border-radius: unset;
-        &.c-embla__arrow--next{
-            right: 0px !important;
+
+        >button {
+            border: none !important;
+            border-radius: unset;
+
+            &.c-embla__arrow--next {
+                right: 0px !important;
+            }
         }
-        }
-       
-       
+
+
     }
 }
 
-.c-verticalSlider{
-    .c-verticalSlider__item{
+.c-verticalSlider {
+    .c-verticalSlider__item {
         position: relative;
-        &.withBoder{
+
+        &.withBoder {
             position: relative;
-            &::after{
+
+            &::after {
                 content: "";
                 position: absolute;
                 bottom: 0;
@@ -1162,32 +1188,36 @@ Common styles for navigation elements.
                 height: 2px;
                 background-color: #e4e4e4;
                 left: 0;
-                @include mq(tablet-max){
+
+                @include mq(tablet-max) {
                     width: 60%;
                     left: 40%;
                 }
 
             }
-            .c-verticalSlider__item-rs{
+
+            .c-verticalSlider__item-rs {
                 padding-bottom: 30px;
-                @include mq(tablet-max){
+
+                @include mq(tablet-max) {
                     padding-bottom: 40px;
                 }
-                @include mq(desktop){
+
+                @include mq(desktop) {
                     padding-bottom: 50px;
                 }
-               
+
             }
         }
     }
-    &.fullHeight{
-        .c-verticalSlider__item{
+
+    &.fullHeight {
+        .c-verticalSlider__item {
             height: 100%;
         }
     }
 }
-.fix-width_590{
+
+.fix-width_590 {
     max-width: 590px;
 }
-
-

@@ -22,7 +22,8 @@ const componentMap: any = {
     FilterCards: dynamic(() => import("./FilterCards")),
     PerformanceCard: dynamic(() => import("./PerformanceCard")),
     LeadershipCard: dynamic(() => import("./LeadershipCard")),
-    LeadershipCardV2: dynamic(() => import("./LeadershipCardV2"))
+    LeadershipCardV2: dynamic(() => import("./LeadershipCardV2")),
+    PodcastSlider: dynamic(() => import("./PodcastSlider"))
 }
 
 export default function PostList(props: any) {

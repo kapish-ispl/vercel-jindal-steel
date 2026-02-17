@@ -158,7 +158,8 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "customslider") {
                     const props = attributesToProps(domNode.attribs);
-                    return <CustomSilder {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CustomSilder {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
                 if (domNode.name === "stackslider") {
                     const props = attributesToProps(domNode.attribs);
