@@ -27,6 +27,7 @@ const ReadMore = dynamic(() => import("@/utils/ReadMore"), { ssr: false });
 const CustomZoomScrollEffectV2 = dynamic(() => import('@/utils/CustomZoomScrollEffectV2'), { ssr: false });
 const GallerySlider = dynamic(() => import("@/utils/GallerySlider"), { ssr: false });
 const StackSlider = dynamic(() => import("@/utils/StackSlider"), { ssr: false });
+const CategorySlider = dynamic(() => import("@/utils/CategorySlider"), { ssr: false });
 
 
 
@@ -170,6 +171,11 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomHorizontalScroll {...props} data={Array.isArray(children) ? children : [children]} />;
+                }
+                if (domNode.name === "categoryslider") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CategorySlider />;
                 }
                 if (domNode.name === "customstickycard") {
                     const props = attributesToProps(domNode.attribs);
