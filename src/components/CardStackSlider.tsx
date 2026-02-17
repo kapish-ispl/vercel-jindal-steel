@@ -203,7 +203,7 @@ export default function CardStackSlider({ data }: any) {
   }, [activeIndex]);
 
   return (
-    <div className="card-stack-slider-container">
+    <div className="card-stack-slider-container w-100">
       <div
         className="card-stack-visual"
         onMouseEnter={handleMouseEnter}
@@ -226,7 +226,7 @@ export default function CardStackSlider({ data }: any) {
         </div>
       </div>
 
-      <div className="card-controls">
+      <div className="card-controls margin-auto">
         <button onClick={handlePrev} className="card-controls__button left">
           <svg
             xmlns="http://www.w3.org/2000/svg"
