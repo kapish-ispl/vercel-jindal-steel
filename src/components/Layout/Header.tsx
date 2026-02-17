@@ -2,14 +2,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AppContext } from "@/context/AppContext";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { IMAGE_PATH } from "@/config/constant";
 import RecursiveMenu from "./RecursiveMenu";
 
 const Header = () => {
   const contextInfo = useContext(AppContext);
+  const menuRef = useRef<HTMLDivElement>(null);
   const HEADER_MAIN_MENU = contextInfo.headerMenu;
-  
+  const [isMegaActive, setIsMegaActive] = useState<boolean>(false);
   const [stickyHeader, setStickyHeader] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<"up" | "down" | null>(
     null
@@ -80,8 +81,8 @@ const Header = () => {
   return (
     <>
       {HEADER_MAIN_MENU && HEADER_MAIN_MENU.length > 0 && (
-        <header
-          className={`c-header ${stickyHeader ? "header-sticky" : ""
+        <header ref={menuRef}
+          className={`c-header ${isMegaActive ? "mega-menu--active" : ""} ${stickyHeader ? "header-sticky" : ""
             } ${scrollDirection === "down" ? "hide" : "show"}`}
         >
           <div className="container cus-container">
@@ -101,6 +102,16 @@ const Header = () => {
                           height={80}
                         />
                       ) : (
+                        isMegaActive ?
+                        <Image
+                          src={IMAGE_PATH.LOGO}
+                          alt="Jindal Steel"
+                          className="img-fluid"
+                          priority
+                          width={190}
+                          height={86}
+                        />
+                        :
                         <Image
                           src={IMAGE_PATH.LOGO_LIGHT}
                           alt="Jindal Steel"
@@ -208,6 +219,7 @@ const Header = () => {
                     <nav className="c-header__menu" role="navigation" aria-label="Main menu">
                       <ul className="flex menu_wrap" role="menubar">
                         {HEADER_MAIN_MENU.map((menuItem: any) => {
+                          const aa = descriptionLoop.filter((i) => i.name.toLowerCase() === menuItem.name.toLowerCase());
                           return (
                             <li
                               key={menuItem.id}
@@ -217,8 +229,12 @@ const Header = () => {
                               onMouseEnter={() => {
                                 setActiveMenu(menuItem.id);
                                 setThirdLevelMenu(null);
+                                setIsMegaActive(true)
                               }}
-                              onMouseLeave={() => setActiveMenu(null)}
+                              onMouseLeave={() => {
+                                setIsMegaActive(false);
+                                setActiveMenu(null);
+                              }}
                             >
                               <a
                                 href={menuItem.link}
@@ -235,8 +251,14 @@ const Header = () => {
                                   menuItem.children.length > 0 ? `submenu-${menuItem.id}` : undefined
                                 }
                                 tabIndex={0}
-                                onFocus={() => setActiveMenu(menuItem.id)}
-                                onBlur={() => setActiveMenu(null)}
+                                onFocus={() => {
+                                  setActiveMenu(menuItem.id);
+                                  setIsMegaActive(true);
+                                }}
+                                onBlur={() => {
+                                  setActiveMenu(null);
+                                  setIsMegaActive(false);
+                              }}
                               >
                                 {menuItem.name}
                               </a>
@@ -251,19 +273,30 @@ const Header = () => {
                                   <li role="none">
                                     <div className="container cus-container">
                                       <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-4">
+                                          <div className="row">
+                                              <div className="mega-menu">
+                                                <h3 className="mega-menu-title mx-0">{menuItem.name}</h3>
+                                                {aa.length > 0 &&
+                                                  aa.map((item: any, index: number) => (
+                                                    <p
+                                                      className="mega-menu__description my-4"
+                                                      key={index}
+                                                    >
+                                                      {item.desc}
+                                                    </p>
+                                                  ))}
+                                              </div>
+                                          </div>
+                                        </div>
+                                        <div className="col-4">
                                           <div className={`mega-menu ${menuItem.name.split(" ").join("_").toLowerCase()}`}>
-                                            <h3 className="mega-menu-title">{menuItem.name}</h3>
                                             <RecursiveMenu items={menuItem.children} isThirdMenu={false} setThirdLevelMenu={setThirdLevelMenu} />
                                           </div>
                                         </div>
-                                        <div className="col-6 p-0">
+                                        <div className="col-4 p-0">
                                           <div className={`mega-menu__inner`}>
                                             {thirdLevelMenu != null && <RecursiveMenu items={thirdLevelMenu} isThirdMenu={true} />
-                                              // <div className="mega-menu__inner_image">
-                                              //   <img src="https://docs.jindalsteel.in/document/124/1762172377_Rectangle587.jpg" alt="menu image" className="img-fluid" />
-                                              // </div>
-
                                             }
                                           </div>
 

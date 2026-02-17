@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Footer from "@/components/Layout/Footer";
-import Header2 from "@/components/Layout/Header2";
+import Header from "@/components/Layout/Header";
 import SmoothScrollProvider from "@/components/Layout/SmoothScrollProvider";
 
 export const poppins = Poppins({
@@ -39,7 +39,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <AppContextProvider>
             <SmoothScrollProvider>
-              <Header2 />
+              <Header />
               <ThemeProvider
                 attribute="class"
                 defaultTheme="system"
