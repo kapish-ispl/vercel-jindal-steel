@@ -12,7 +12,6 @@ interface CustomCarouselSliderProps {
 interface SlideProps {
     mediasrc: string;
     title?: string;
-    des?: string;
 }
 
 const CustomCarouselSlider: React.FC<CustomCarouselSliderProps> = ({ data }) => {
@@ -31,7 +30,6 @@ const CustomCarouselSlider: React.FC<CustomCarouselSliderProps> = ({ data }) => 
                 id: index + 1,
                 img: child.props.mediasrc,
                 title: child.props.title,
-                des: child.props.des,
             }));
     }, [data]);
 
@@ -41,7 +39,7 @@ const CustomCarouselSlider: React.FC<CustomCarouselSliderProps> = ({ data }) => 
             effect="carousel"
             carouselEffect={{
                 opacityStep: 0.33,
-                scaleStep: 0.1,
+                scaleStep: 0.2,
                 sideSlides: 2,
             }}
             centeredSlides
@@ -51,7 +49,7 @@ const CustomCarouselSlider: React.FC<CustomCarouselSliderProps> = ({ data }) => 
             loop
             loopAdditionalSlides={1}
             autoplay={{
-                delay: 12000,
+                delay: 3000,
                 disableOnInteraction: false,
             }}
             navigation
@@ -60,11 +58,10 @@ const CustomCarouselSlider: React.FC<CustomCarouselSliderProps> = ({ data }) => 
         >
             {slides.map((slide, index) => (
                 <SwiperSlide key={index}>
-                    <div>
-                        <div className="slide-img-wrap swiper-carousel-animate-opacity"><img  src={slide.img} alt={slide.title} /></div>
+                    <div className="swiper-carousel-animate-opacity">
+                        <img src={slide.img} alt={slide.title} />
                         <div className="slide-content">
                             <h2>{slide.title}</h2>
-                            <p className="c-content-20 w-100 text-center lh_1-4 ft_light clr-gray">{slide.des}</p> 
                         </div>
                     </div>
                 </SwiperSlide>

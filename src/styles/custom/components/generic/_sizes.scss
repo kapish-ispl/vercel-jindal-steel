@@ -508,6 +508,45 @@
     }
 }
 
+.c-heading-90 {
+    font-weight: var(--fontSemiBold);
+
+    @include font-size(36);
+
+    @include mq('tablet') {
+        @include font-size(46);
+    }
+
+    @include mq('tablet-wide') {
+        @include font-size(56);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(65);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(75);
+    }
+
+    @include mq('desktop-wide-max') {
+        @include font-size(90);
+    }
+
+    &.sm_lh {
+        line-height: 1.2 !important;
+    }
+    &.ft_SemiBold {
+        font-weight: var(--fontSemiBold) !important;
+    }
+    &.ft_light {
+        font-weight: var(--fontLight);
+    }
+     &.lh-normal{
+        line-height: 1;
+    }
+}
+
 .cus-width940 {
     max-width: 940px;
 }

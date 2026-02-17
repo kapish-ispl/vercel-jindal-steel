@@ -24,8 +24,9 @@ const CustomCarouselSlider = dynamic(() => import("@/utils/CustomCarouselSlider"
 const ReadMoreModal = dynamic(() => import("@/utils/ReadMoreModal"), { ssr: false });
 const PodcastSlider = dynamic(() => import("@/utils/PodcastSlider"), { ssr: false });
 const ReadMore = dynamic(() => import("@/utils/ReadMore"), { ssr: false });
+const CustomZoomScrollEffectV2 = dynamic(() => import('@/utils/CustomZoomScrollEffectV2'), { ssr: false });
 const GallerySlider = dynamic(() => import("@/utils/GallerySlider"), { ssr: false });
-
+const StackSlider = dynamic(() => import("@/utils/StackSlider"), { ssr: false });
 
 
 
@@ -72,7 +73,10 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     return <ReadMore {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
-
+                if (domNode.name === "customzoomscrolleffectv2") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <CustomZoomScrollEffectV2 {...props} videourl={String(props.videourl)} />;
+                }
 
 
                 if (domNode.name === "customreadmoremodal") {
@@ -155,6 +159,11 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "customslider") {
                     const props = attributesToProps(domNode.attribs);
                     return <CustomSilder {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                }
+                if (domNode.name === "stackslider") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <StackSlider {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
                 if (domNode.name === "customhorizontalscroll") {
                     const props = attributesToProps(domNode.attribs);
