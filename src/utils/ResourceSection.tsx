@@ -9,7 +9,7 @@ const ResourceSection = ({ postData, compSlug }: any) => {
     return (
         <>
             <div className="col-12 position-relative c-cardView v7 fixSpace  c-verticalSlider cus-embla-arrow">
-                <CustomSilder arrows="true" cls="mb-0" customcls="buttons_absolute" items="[3,2,1]">
+                <CustomSilder arrows="true" cls="mb-0" customcls="buttons_absolute" items="[3,3,2,1]">
                     {postData && postData.length > 0 && postData.map((post: any, index: any) => {
 
                         let dataLink = "#";
