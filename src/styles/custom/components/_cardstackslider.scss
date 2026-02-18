@@ -161,6 +161,10 @@
   }
 }
 
+.height-612 .card-stack-visual {
+   height: clamp(280px, 80vw, 612px);
+}
+
 // Styling for an individual card in the stack
 .card-item {
   position: absolute;
@@ -312,6 +316,11 @@
       order: -1; // show text above buttons on mobile
     }
   }
+
+  .height-612 .card-stack-visual {
+   height: clamp(220px, 102vw, 523px);
+  }
+
 }
 .sticky-card{
   padding: 60px 0px !important;
