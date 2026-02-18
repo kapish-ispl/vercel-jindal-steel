@@ -103,23 +103,23 @@ const Header = () => {
                         />
                       ) : (
                         isMegaActive ?
-                        <Image
-                          src={IMAGE_PATH.LOGO}
-                          alt="Jindal Steel"
-                          className="img-fluid"
-                          priority
-                          width={190}
-                          height={86}
-                        />
-                        :
-                        <Image
-                          src={IMAGE_PATH.LOGO_LIGHT}
-                          alt="Jindal Steel"
-                          className="img-fluid"
-                          width={190}
-                          height={86}
-                          priority
-                        />
+                          <Image
+                            src={IMAGE_PATH.LOGO}
+                            alt="Jindal Steel"
+                            className="img-fluid"
+                            priority
+                            width={190}
+                            height={86}
+                          />
+                          :
+                          <Image
+                            src={IMAGE_PATH.LOGO_LIGHT}
+                            alt="Jindal Steel"
+                            className="img-fluid"
+                            width={190}
+                            height={86}
+                            priority
+                          />
                       )}
                     </Link>
                   </div>
@@ -258,7 +258,7 @@ const Header = () => {
                                 onBlur={() => {
                                   setActiveMenu(null);
                                   setIsMegaActive(false);
-                              }}
+                                }}
                               >
                                 {menuItem.name}
                               </a>
@@ -271,22 +271,22 @@ const Header = () => {
                                   aria-hidden={activeMenu !== menuItem.id}
                                 >
                                   <li role="none">
-                                    <div className="container cus-container">
+                                    <div className="container cus-container py-5">
                                       <div className="row">
                                         <div className="col-4">
                                           <div className="row">
-                                              <div className="mega-menu">
-                                                <h3 className="mega-menu-title mx-0">{menuItem.name}</h3>
-                                                {aa.length > 0 &&
-                                                  aa.map((item: any, index: number) => (
-                                                    <p
-                                                      className="mega-menu__description my-4"
-                                                      key={index}
-                                                    >
-                                                      {item.desc}
-                                                    </p>
-                                                  ))}
-                                              </div>
+                                            <div className="mega-menu">
+                                              <h3 className="mega-menu-title">{menuItem.name}</h3>
+                                              {aa.length > 0 &&
+                                                aa.map((item: any, index: number) => (
+                                                  <p
+                                                    className="mega-menu__description"
+                                                    key={index}
+                                                  >
+                                                    {item.desc}
+                                                  </p>
+                                                ))}
+                                            </div>
                                           </div>
                                         </div>
                                         <div className="col-4">
