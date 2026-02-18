@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
+import parse from "html-react-parser";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Play, X } from "lucide-react";
@@ -130,9 +131,9 @@ const PodcastSlider = (props: PodcastSliderProps) => {
                         </h3>
 
                         <div className="genric__content js-sync-content">
-                            <p className="c-content-19 clr-secondry">
-                                {displayItem?.content}
-                            </p>
+                          <p className="c-content-19  ft_light" data-aos="fade-up" data-aos-duration="1200">
+                                {displayItem?.content && parse(displayItem?.content)}  
+                           </p>
                         </div>
                     </div>
                 </div>
