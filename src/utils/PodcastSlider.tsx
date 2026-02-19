@@ -122,7 +122,7 @@ const PodcastSlider = (props: PodcastSliderProps) => {
     }, { dependencies: [displayItem], scope: containerRef });
 
     return (
-        <div className="row align-items-center mb-100" ref={containerRef}>
+        <div className="row mb-100" ref={containerRef}>
             <div className="col-lg-6">
                 <div className="c-podcast__wrapper-content pr-77">
                     <div className="hw">
