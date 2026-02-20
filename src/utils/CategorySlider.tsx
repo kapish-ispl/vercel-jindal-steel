@@ -10,31 +10,24 @@ const SLIDE_DURATION = 5000; // 5 seconds
 const STATIC_SLIDES = [
     {
         id: 0,
-        category: "INDIA",
-        title: "A Truly Global Workforce",
-        desc: "Our people work across India, Africa, the Middle East, Australia, and other global markets, forming a diverse and skilled workforce united by shared values. This global presence strengthens collaboration, knowledge exchange, and organisational resilience across geographies.",
-        image: "https://d2lptvt2jijg6f.cloudfront.net/document/126/1768991508_Rectangle618.png",
+        category: "Jindal Learning",
+        title: "Jindal Learning Academy",
+        desc: "Designed to shape future-ready professionals, the Jindal Learning Academy is our enterprise-wide learning framework across all levels. It offers structured, role-specific programs focused on managerial excellence, functional skills, leadership development, digital proficiency, compliance, and cultural alignment. ",
+        image: "https://docs.jindalsteel.in/document/124/1765949919_Rectangle92.png",
     },
     {
         id: 1,
-        category: "AFRICA",
-        title: "A Truly Global Workforce",
-        desc: "Our people work across India, Africa, the Middle East, Australia, and other global markets, forming a diverse and skilled workforce united by shared values. This global presence strengthens collaboration, knowledge exchange, and organisational resilience across geographies.",
-        image: "https://d2lptvt2jijg6f.cloudfront.net/document/126/1769078878_51efca8000a5678e3f0d29c39d5803393939c089.png",
+        category: "Dakshata",
+        title: "Dakshata",
+        desc: "Dakshata is our enterprise-wide skilling movement focused on enabling excellence at every level, from entry gate to leadership. It’s our way of turning competency into a shared responsibility.",
+        image: "https://docs.jindalsteel.in/document/124/1765949919_Rectangle96.png",
     },
     {
         id: 2,
-        category: "MIDDLE EAST",
-        title: "Strategic Partnerships",
-        desc: "Building resilient infrastructures in the Middle East through collaboration and technology.",
-        image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=1000",
-    },
-    {
-        id: 3,
-        category: "AUSTRALIA",
-        title: "Leading Sustainability",
-        desc: "Setting new standards for environmental excellence in our Australian operations.",
-        image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=1000",
+        category: "Higher Education",
+        title: "Higher Education Support",
+        desc: "We believe steel is forged stronger through knowledge. That’s why we actively invest in higher education and professional advancement, not just for our Jindalites but for their families too. Because when one learns, many rise.",
+        image: "https://docs.jindalsteel.in/document/124/1765949919_Rectangle98.png",
     }
 ];
 
@@ -64,13 +57,14 @@ export default function CategorySlider() {
     };
 
     return (
-        <div className="global-slider-wrapper">
+        <div className="global-slider-wrapper  c-pt75">
             <div
                 className="background-blur"
                 style={{ backgroundImage: `url(${STATIC_SLIDES[selectedIndex].image})` }}
             />
 
             <div className="container cus-container">
+               
                 <div className="category-nav">
                     {STATIC_SLIDES.map((item, index) => (
                         <div
