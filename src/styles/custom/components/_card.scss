@@ -1507,3 +1507,65 @@
         }
     }
 }
+
+
+
+.c-cardWrap {
+    &.v1 {
+        border: 1px solid transparent;
+        padding: 28px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border-bottom-color: var(--color-primary);
+        @include transition(all 0.5s ease-in-out);
+        min-height: 250px;
+        background-color: var(--color-white);
+        @include flexbox;
+        @include flex-direction(column,vertical);
+        @include justify-content(center);
+
+        .c-cardWrap {
+            &__icon {
+                @include transition(all 0.5s ease-in-out);
+            }
+            &__content {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                @include transition(all 0.5s ease-in-out);
+                background-color: var(--color-white);
+                top: 0;
+                padding: 0 20px;
+                @include flexbox;
+                @include flex-direction(column,vertical);
+                @include justify-content(center);
+                @include align-items(center);
+                transform: translateY(120%);
+
+
+                &--title {
+                    margin-top: 30px;
+                    color: var(--color-accent-blue);
+                }
+                &.plr-40 {
+                    padding: 0 40px;
+                }
+            }
+            
+        }
+
+        &:hover {
+            border-color: var(--color-primary);
+            .c-cardWrap {
+                &__icon {
+                    transform: translateY(-120%);
+                }
+                &__content {
+                    transform: translateY(0%);
+                }
+            }
+        }
+    }
+}
