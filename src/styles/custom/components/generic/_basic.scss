@@ -2086,6 +2086,28 @@ ul.arrowbulletList {
             }
         }
     }
+    &.v2{
+       @include flex-direction(column, vertical);
+       @include mq(tablet-max) {
+        @include flex-direction(row, horizontal);
+        flex-wrap: wrap;
+        
+       }
+        .c-key__wrapper__item{
+              @include mq(desktop){
+                padding: 67px 31px 25px 32px;
+                width: 49%;
+                }
+                &.p-20{
+                padding: 20px;
+                 @include mq(desktop){
+                  padding: 20px;
+              }
+            }
+        }
+   
+       
+    }
 }
 
 .keyArea {
