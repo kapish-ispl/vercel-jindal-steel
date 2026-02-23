@@ -1177,6 +1177,19 @@ ul {
             margin-top: 45px;
         }
     }
+    &.withradius {
+        @include border-radius(100px);
+        padding: 10px 20px;
+        border: 2px solid rgb(204, 204, 204);
+
+        & .genric__label-icon {
+            border-left: 2px solid rgb(204, 204, 204);
+
+        }
+    }
+    &.bg-white {
+        background: #fff;
+    }
 }
 
 .c-keyFocus__wrapper {
