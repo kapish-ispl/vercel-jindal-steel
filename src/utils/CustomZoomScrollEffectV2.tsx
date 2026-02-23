@@ -9,8 +9,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface CustomZoomScrollEffectProps {
     videourl: string;
+    content?: string;
 }
-const CustomZoomScrollEffectV2: FC<CustomZoomScrollEffectProps> = ({ videourl }) => {
+const CustomZoomScrollEffectV2: FC<CustomZoomScrollEffectProps> = ({ videourl, content }) => {
 
     const sectionRef = useRef<HTMLDivElement | null>(null);
     const imageWrapperRef = useRef<HTMLDivElement | null>(null);
@@ -148,7 +149,7 @@ const CustomZoomScrollEffectV2: FC<CustomZoomScrollEffectProps> = ({ videourl })
                         </video>
                         {/* Overlay text - fades in after animation */}
                         <div ref={overlayTextRef} className="zoomOverlayTextV2">
-                            <div className="c-heading-60 ft_light clr-white">Celebrations That Connect Us</div>
+                            <div className="c-heading-60 ft_light clr-white">{content}</div>
                         </div>
                     </div>
                 </div>
