@@ -554,9 +554,18 @@ Common styles for navigation elements.
     &.buttons_absolute {
         .c-embla__buttons {
             position: absolute;
-            top: 50%;
-            @include transform(translateY(-50%));
-            width: 100%;
+            top: 100% !important;
+           
+            width: 60px;
+            left:50%;
+            margin-left: -30px;
+             @include mq(tablet-max) {
+                 top: 42% !important;
+                 @include transform(translateY(-50%));
+                  width: 100%;
+                  left:0;
+                  margin-left: 11px;
+             }
         }
     }
 
@@ -647,19 +656,18 @@ Common styles for navigation elements.
 }
 
 .c-embla__dot {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 2px solid var(--color-accent-green);
-    background: var(--color-white);
+    width: 12px;
+    height: 12px;
+    @include border-radius(7px);  
+    border:none;
+    background: #B7B7B7;
     cursor: pointer;
     transition: all 0.3s ease;
 
 }
 
 .c-embla__dot.is-selected {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
+   background: #636466;
 }
 
 
@@ -1168,7 +1176,7 @@ Common styles for navigation elements.
 
 .cus-embla-arrow {
     .c-embla__buttons {
-        top: 42% !important;
+       
 
         >button {
             border: none !important;
@@ -1177,11 +1185,11 @@ Common styles for navigation elements.
             height: 30px;
 
             &.c-embla__arrow--prev {
-                left:7px !important;
+                left:-3px !important;
             }
 
             &.c-embla__arrow--next {
-                right:-9px !important;
+                right:0px !important;
             }
         }
 

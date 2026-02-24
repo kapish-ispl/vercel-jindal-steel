@@ -148,7 +148,7 @@ export default function CustomSlider({
     }, [emblaApi, canScroll]);
 
     return (
-        <div className={`c-embla ${customcls || ""}`} style={{ position: "relative" }}>
+        <div className={`c-embla ${customcls || ""}`}>
             <div className="c-embla__viewport" ref={emblaRef}>
                 <div className={`c-embla__container ${cls || ""}`}>
                     {filteredItems?.map((item, index) => (
