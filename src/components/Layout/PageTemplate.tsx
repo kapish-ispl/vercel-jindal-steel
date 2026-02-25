@@ -28,6 +28,7 @@ const CustomZoomScrollEffectV2 = dynamic(() => import('@/utils/CustomZoomScrollE
 const GallerySlider = dynamic(() => import("@/utils/GallerySlider"), { ssr: false });
 const StackSlider = dynamic(() => import("@/utils/StackSlider"), { ssr: false });
 const CategorySlider = dynamic(() => import("@/utils/CategorySlider"), { ssr: false });
+const CustomContentSliders = dynamic(() => import("@/utils/CustomContentSliders"), { ssr: false });
 
 
 
@@ -63,6 +64,10 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "cardstackslider") {
                     const props = attributesToProps(domNode.attribs);
                     return <CardStackSlider {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                }
+                if (domNode.name == "customcontentsliders") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <CustomContentSliders {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
 
                 if (domNode.name === "customcarouselslider") {
