@@ -2526,6 +2526,19 @@ ul.arrowbulletList {
                            background-color: red;
                        }
                    }
+                   .action-btn{
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    padding: 30px 20px 10px 20px;
+                    
+                    .u-btn{
+                        .icon{
+                            @include font-size(45);
+                            color: var(--color-accent-green);
+                        }
+                    }
+                   }
    
               
                }
@@ -2553,15 +2566,30 @@ ul.arrowbulletList {
    
        }
 .c-embla__viewport{
+   
     .c-embla__slide{
         >div{
-            height: 100%;
+            @include mq(tablet-max){
+                height: 100%;
+
+            }
             .c-cardWrapper__item{
-                height: calc(100% - 30px);
+                @include mq(tablet-max){
+                    height: calc(100% - 30px);
+
+                }
             }
         }
     }
 }
+ .c-embla__buttons{
+         .c-embla__arrow--prev{
+                left: -20px !important; 
+            }
+            .c-embla__arrow--next{
+                right: -20px !important;
+            }
+    }
 
 
 }
