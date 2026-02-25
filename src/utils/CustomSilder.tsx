@@ -14,6 +14,7 @@ interface CustomSliderProps {
     customcls?: string;
     items?: number[] | string;
     data?: ReactNode[];
+    bluearrow?: boolean | string;
     arrows?: boolean | string;
     dots?: boolean | string;
     children?: ReactNode;
@@ -25,6 +26,7 @@ export default function CustomSlider({
     items,
     data,
     arrows = false,
+    bluearrow = false,
     dots = false,
     children,
 }: CustomSliderProps) {
@@ -146,7 +148,7 @@ export default function CustomSlider({
     }, [emblaApi, canScroll]);
 
     return (
-        <div className={`c-embla ${customcls || ""}`} style={{ position: "relative" }}>
+        <div className={`c-embla ${customcls || ""}`}>
             <div className="c-embla__viewport" ref={emblaRef}>
                 <div className={`c-embla__container ${cls || ""}`}>
                     {filteredItems?.map((item, index) => (
@@ -171,15 +173,15 @@ export default function CustomSlider({
                         onClick={scrollPrev}
                         aria-label="Previous Slide"
                     >
-                        <img src="https://docs.jindalsteel.in/document/124/1761379695_Arrow1Stroke1.png" alt="Previous" />
+                       <img className="u-img" src={bluearrow == true ? 'url' : "https://docs.jindalsteel.in/document/124/1771396856_pre-arrow-gray.png"} alt="Previous" />
                     </button>
 
                     <button
-                        className="c-embla__arrow c-embla__arrow--next"
+                        className="c-embla__arrow c-embla__arrow--next notransform"
                         onClick={scrollNext}
                         aria-label="Next Slide"
                     >
-                        <img src="https://docs.jindalsteel.in/document/124/1761379695_Arrow1Stroke1.png" alt="Next" />
+                        <img className="u-img" src={bluearrow == true ? 'url' : "https://docs.jindalsteel.in/document/124/1771396856_next-arrow-gray.png"} alt="Next" />
                     </button>
                 </div>
             )}

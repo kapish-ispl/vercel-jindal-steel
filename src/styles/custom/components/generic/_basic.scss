@@ -1177,6 +1177,19 @@ ul {
             margin-top: 45px;
         }
     }
+    &.withradius {
+        @include border-radius(100px);
+        padding: 10px 20px;
+        border: 2px solid rgb(204, 204, 204);
+
+        & .genric__label-icon {
+            border-left: 2px solid rgb(204, 204, 204);
+
+        }
+    }
+    &.bg-white {
+        background: #fff;
+    }
 }
 
 .c-keyFocus__wrapper {
@@ -2086,6 +2099,28 @@ ul.arrowbulletList {
             }
         }
     }
+    &.v2{
+       @include flex-direction(column, vertical);
+       @include mq(tablet-max) {
+        @include flex-direction(row, horizontal);
+        flex-wrap: wrap;
+        
+       }
+        .c-key__wrapper__item{
+              @include mq(desktop){
+                padding: 67px 31px 25px 32px;
+                width: 49%;
+                }
+                &.p-20{
+                padding: 20px;
+                 @include mq(desktop){
+                  padding: 20px;
+              }
+            }
+        }
+   
+       
+    }
 }
 
 .keyArea {
@@ -2216,4 +2251,13 @@ ul.arrowbulletList {
 
 .overflow-hidden {
     overflow: hidden;
+}
+
+.custom_grid_item {
+    height: 100%;
+    width: 100%;
+    img{
+        width: 100%;
+        height: 100%;
+    }
 }

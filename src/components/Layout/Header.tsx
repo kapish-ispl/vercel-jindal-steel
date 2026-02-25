@@ -54,19 +54,19 @@ const Header = () => {
     },
     {
       name: "Mine to Metal",
-      desc: "Each of Jindal Steel's businesses is committed to driving innovation and excellence to deliver sustainable solutions, while simultaneously focusing on nation-building and community empowerment.",
+      desc: "Jindal Steel's integrated business is committed to driving innovation and excellence to deliver sustainable solutions, while simultaneously focusing on nation-building and community empowerment.",
     },
     {
       name: "People",
-      desc: "At Jindal Steel and Power (JSP), the people are the heart...",
+      desc: "At Jindal Steel, the people are the heart and soul of the institution, leading its success and shaping its mission.",
     },
     {
-      name: "Investor & Media",
-      desc: "JSP upholds a steadfast commitment to delivering value...",
+      name: "Investor",
+      desc: "Jindal Steel upholds a steadfast commitment to delivering sustainable value for all stakeholders. Its remarkable track record of financial discipline attests to its continuous pursuit of excellence as a world-class organisation.",
     },
     {
-      name: "Sustainability",
-      desc: "JSP’s sustainability initiatives are rooted in a deep commitment...",
+      name: "SustainAbility",
+      desc: "At Jindal Steel, the company's sustainability initiatives are rooted in a deep commitment to forging a greener future through responsible practices and eco-conscious innovation.",
     },
     {
       name: "Community",
