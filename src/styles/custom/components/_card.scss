@@ -1212,6 +1212,141 @@
 
          
     }
+    &.d5{
+    @include flexbox;
+    @include flex-direction(column, vertical);
+    @include box-shadow(none);
+    height: auto;
+    margin-bottom: 0px;
+    width: 100%;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    @include mq(tablet) {
+        @include flex-direction(row, horizontal);
+    }
+
+    @include mq(desktop) {
+        margin-top: 30px;
+    }
+
+    .c-card__wrapper  {
+        min-height: 250px;
+        max-height: 380px;
+        padding: 20px 25px;
+        background-color: var(--color-white);
+        margin-bottom: 6px;
+        width: 100%;
+        @include transition(all 0.3s ease-in-out);
+
+        @include mq(tablet) {
+            width: calc(100% / 2 - 8px);
+            min-height: 300px;
+        }
+
+        @include mq(tablet-max) {
+            padding: 35px;
+            width: calc(100% / 3 - 8px);
+            height: 469px;
+            min-height: 469px;
+            max-height: 469px;
+        }
+
+        @include mq(desktop) {
+            padding: 75px 58px 75px 46px;
+        }
+
+        &.bg-blue {
+            background: var(--color-accent-blue);
+        }
+
+        &.bg-peach {
+            background: var(--color-accent-peach);
+        }
+
+        &.bg-oyster-green {
+            background: #9C8C6F;
+        }
+
+        &.bg-olive {
+            background: var(--color-accent-olive);
+        }
+
+        &.border-blue {
+            border: 1px solid var(--color-accent-blue);
+
+            &:hover {
+                background-color: var(--color-accent-blue);
+            }
+        }
+
+        &.border-orange {
+            border: 1px solid #D78E5E;
+
+            &:hover {
+                background-color: #D78E5E;
+            }
+        }
+
+        &.border-oyster {
+            border: 1px solid #9C8C6F;
+
+            &:hover {
+                background-color: #9C8C6F;
+            }
+        }
+
+        &.border-green {
+            border: 1px solid #8FA35D;
+
+            &:hover {
+                background-color: #8FA35D;
+            }
+        }
+
+        &:hover {
+            background: var(--color-accent-blue);
+
+            .c-card__wrapper-content {
+
+                .title,
+                .desc {
+                    color: var(--color-white);
+                }
+            }
+
+        }
+
+        .c-card__wrapper-content {
+            .title {
+                color: var(--color-secondary);
+                font-weight: var(--fontSemiBold);
+                @include font-size(24);
+
+                @include mq(tablet) {
+                    @include font-size(28);
+                }
+
+                @include mq(tablet-max) {
+                    @include font-size(32);
+                }
+            }
+
+            .desc {
+                padding: 30px 0px;
+                color: var(--color-secondary);
+                font-weight: var(--fontLight);
+                @include font-size(22);
+
+                @include mq(tablet-max) {
+                    padding: 50px 0px;
+                    @include font-size(24);
+                }
+            }
+        }
+
+    }
+    }
 }
 
 
