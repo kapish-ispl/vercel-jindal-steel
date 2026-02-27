@@ -664,3 +664,39 @@
     }
   }
 }
+
+
+.c-pagelink {
+  & .c-embla__container{
+     margin-bottom: 20px !important;
+  }
+  & .c-embla__buttons {
+      width:90px !important;
+      position: absolute !important;
+      left:50% !important;
+      margin-left: -45px !important;
+      display: none;
+      gap:0;
+      & button.c-embla__arrow--prev {
+        left:20 !important;
+         @include mq(tablet-max) {
+            left:-10px !important;
+         }
+      }
+      & button.c-embla__arrow--next {
+        right:0 !important;
+         @include mq(tablet-max) {
+            right:-32px !important;
+         }
+      }
+      @include mq(tablet-max) {
+        display: flex;
+        position: absolute !important;
+        top:50% !important;
+        width: 100% !important;
+        left:0% !important;
+        margin-left: 0px !important;
+        margin-top:1px;
+      }
+  }
+}
