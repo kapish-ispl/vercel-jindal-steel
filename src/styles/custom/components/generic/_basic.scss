@@ -1942,7 +1942,7 @@ ul {
     @include line-clamp(6);
 }
 
-.c-highlight__card {
+.c-highlight__card { 
     @include flexbox;
     gap: 40px;
     @include flex-direction(column, vertical);
@@ -2021,6 +2021,16 @@ ul {
     &.c-full_width {
         .c-highlight__card-item {
             flex: 1;
+        }
+    }
+    &.v3{
+        flex-wrap: wrap;
+        & .c-highlight__card-item{
+            width: 100%;
+            @include mq(tablet-small) {
+             width: calc(50% - 20px);
+             flex: auto;
+            }
         }
     }
 }
@@ -2593,133 +2603,7 @@ ul.arrowbulletList {
 
 
 }
-.c-home_leadership {
-    padding-top: 40px;
-    position: relative;
-    z-index: 20;
-    border-top: 1px solid rgba(0, 0, 0, 0.25);
 
-    @include mq(tablet) {
-        padding: 60px 0 0 0;
-    }
-
-    @include mq(tablet-max) {
-        padding: 80px 0 0 0;
-    }
-
-    @include mq(desktop) {
-        padding: 100px 0 0 0;
-    }
-
-    &__content {
-        margin-bottom: 35px;
-
-        // >title {
-        //     @include mq(desktop) {
-        //         font-size: 44px !important;
-        //     }
-        // }
-
-       
-
-        &_container {
-            @include flexbox;
-            @include flex-direction(column, vertical);
-            @include justify-content(center);
-            @include align-items(center);
-        }
-
-
-      
-    }
-
-    &__image {
-        @include flexbox;
-        @include justify-content(flex-end);
-        height: 100%;
-
-        img {
-            width: 100%;
-            object-position: bottom;
-            object-fit: contain;
-            height: 100%;
-        }
-    }
-
-    &__name {
-        margin-top: 40px;
-        position: relative;
-        display: inline-flex;
-        @include flex-direction(column, vertical);
-
-        @include mq(tablet-max) {
-            margin-bottom: 50px;
-        }
-
-        h4 {
-            margin-bottom: 0;
-            
-        }
-
-       
-        .cus-btn{
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid;
-    overflow: hidden;
-    border-radius: .375rem;
-    border-width: 2px;
-    text-align: center;
-    font-size: .875rem !important;
-    line-height: 1.25rem;
-    line-height: 1.5;
-    padding: 10px 30px; 
-    text-decoration: none;
-    &.v1{
-    background-color: var(--color-white) !important;
-    color: var(--color-primary) !important;
-    border-color: var(--color-primary) !important;
-    position: relative;
-    &::before{
-        position: absolute;
-        content: "";
-        width: 0;
-        height: 100%;
-        z-index: 0;
-        transition: all 0.5s ease-in-out;
-        background-color: var(--color-primary) !important;
-        left: 0;
-        top: 0;
-        color: var(--color-primary) !important;
-    }
-   
-    &.orange--bordered{
-    border-color: var(--color-primary) !important;
-    background-color: var(--color-white) !important;
-    
-    }
-    .label{
-        position: relative;
-        z-index: 9;
-    }
-}
-    &:hover{
-        color: var(--color-white) !important;
-        &.v1{
-            color: var(--color-white) !important;
-            &::before{
-                width: 100%;
-                
-                z-index: 1;
-            }
-        }
-    }
-   
-}
-    }
-}
 .c-home_vision {
     background-image: url('/images/girl-image.jpg');
     background-size: cover;
@@ -2989,6 +2873,135 @@ ul.arrowbulletList {
 
 
 }
+
+.c-home_leadership {
+    padding-top: 40px;
+    position: relative;
+    z-index: 20;
+     margin-top: 40px;
+    @include mq(tablet) {
+        padding: 60px 0 0 0;
+    }
+
+    @include mq(tablet-max) {
+        padding: 80px 0 0 0;
+        margin-top:0px;
+    }
+
+    @include mq(desktop) {
+        padding: 80px 0 0 0;
+    }
+
+    &__content {
+        margin-bottom: 35px;
+
+        // >title {
+        //     @include mq(desktop) {
+        //         font-size: 44px !important;
+        //     }
+        // }
+
+       
+
+        &_container {
+            @include flexbox;
+            @include flex-direction(column, vertical);
+            @include justify-content(center);
+            @include align-items(center);
+        }
+
+
+      
+    }
+
+    &__image {
+        @include flexbox;
+        @include justify-content(flex-end);
+        height: 100%;
+
+        img {
+            width: 100%;
+            object-position: bottom;
+            object-fit: contain;
+            height: 100%;
+        }
+    }
+
+    &__name {
+        margin-top: 40px;
+        position: relative;
+        display: inline-flex;
+        @include flex-direction(column, vertical);
+
+        @include mq(tablet-max) {
+            margin-bottom: 50px;
+        }
+
+        h4 {
+            margin-bottom: 0;
+            
+        }
+
+       
+        .cus-btn{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid;
+    overflow: hidden;
+    border-radius: .375rem;
+    border-width: 2px;
+    text-align: center;
+    font-size: .875rem !important;
+    line-height: 1.25rem;
+    line-height: 1.5;
+    padding: 10px 30px; 
+    text-decoration: none;
+    &.v1{
+    background-color: var(--color-white) !important;
+    color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    position: relative;
+    &::before{
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 100%;
+        z-index: 0;
+        transition: all 0.5s ease-in-out;
+        background-color: var(--color-primary) !important;
+        left: 0;
+        top: 0;
+        color: var(--color-primary) !important;
+    }
+   
+    &.orange--bordered{
+    border-color: var(--color-primary) !important;
+    background-color: var(--color-white) !important;
+    
+    }
+    .label{
+        position: relative;
+        z-index: 9;
+    }
+}
+    &:hover{
+        color: var(--color-white) !important;
+        &.v1{
+            color: var(--color-white) !important;
+            &::before{
+                width: 100%;
+                
+                z-index: 1;
+            }
+        }
+    }
+   
+}
+    }
+}
+
 .c-vision__slider {
     >div {
         height: 100%;
@@ -3088,5 +3101,8 @@ ul.arrowbulletList {
   transform: scale(1.03);
   @include box-shadow(0 0 20px rgba(15, 15, 15, 0.5));
  
+}
+.cursor-pointer {
+    cursor: pointer;
 }
 

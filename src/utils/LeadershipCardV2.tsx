@@ -48,7 +48,7 @@ const LeadershipCardV2 = ({ postData, totalPost, itemsPerPage, title }: any) => 
                         return (
                             <React.Fragment key={index}>
                                 <div className="col-12 col-md-6 col-lg-3" onClick={() => hanndleModal(item)}>
-                                    <div className="c-card cursor-pointer">
+                                    <div className="c-card cursor-pointer holographic-card">
                                         <div className="c-card__media ratio ratio-1x1"><img alt="card media" className="img-fluid u-img"
                                             src={finalImg} />
                                         </div>
@@ -76,7 +76,7 @@ const LeadershipCardV2 = ({ postData, totalPost, itemsPerPage, title }: any) => 
                         return (
                             <React.Fragment key={index}>
                                 <div className="col-12 col-md-6 col-lg-3" onClick={() => hanndleModal(item)}>
-                                    <div className="c-card cursor-pointer">
+                                    <div className="c-card cursor-pointer holographic-card ">
                                         <div className="c-card__media ratio ratio-1x1"><img alt="card media" className="img-fluid u-img"
                                             src={finalImg} />
                                         </div>
