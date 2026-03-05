@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
 import FormField from './FormField';
+import FormSelect from './FormSelect';
+import FormDatePicker from './FormDatePicker';
 import { restrictDigits, restrictEmailChars, restrictSpecialChar, validateMobile, handleCopyPaste } from './FormFunc';
 import { Captcha } from '../Captcha';
 import { QueryFormSchema } from './formschema';
@@ -21,6 +23,8 @@ interface FormValues {
     city: string;
     message: string;
     inquiry_Type: 'sales' | 'billing' | 'support' | '';
+    preferred_date: string | null;
+    subject: string;
     privacy_Policy: boolean;
     captcha: string;
 }
@@ -48,11 +52,15 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
         city: '',
         message: '',
         inquiry_Type: '',
+        preferred_date: null,
+        subject: '',
         privacy_Policy: false,
         Product: pageTitle,
         captcha: '',
     };
     const ExtendedSchema = QueryFormSchema.shape({
+        subject: Yup.string().required('Subject is required'),
+        preferred_date: Yup.date().nullable().required('Preferred date is required'),
         captcha: Yup.string()
             .required('Captcha is required')
             .test(
@@ -173,21 +181,40 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                 />
                             </div>
                             <div className="col-lg-6 col-md-12">
-                                <div role="group" aria-labelledby="inquiry-type-heading" className="form_group_wrap inputFeild">
-                                    <p id="inquiry-type-heading" className="form_group_label">What can we help you with?</p>
-                                    {inquiryOptions.map((type) => (
-                                        <FormField
-                                            key={type}
-                                            name="inquiry_Type"
-                                            type="radio"
-                                            value={type}
-                                            label={type.charAt(0).toUpperCase() + type.slice(1)}
-
-                                            checked={values.inquiry_Type === type}
-                                        />
-                                    ))}
-                                    <ErrorMessage name="inquiry_Type" component="p" className="form_grider_wrap_helper" />
-                                </div>
+                                <FormSelect
+                                    name="inquiry_Type"
+                                    label="What can we help you with?*"
+                                    placeholder="Select Inquiry Type"
+                                    options={inquiryOptions.map(type => ({
+                                        label: type.charAt(0).toUpperCase() + type.slice(1),
+                                        value: type
+                                    }))}
+                                    error={errors.inquiry_Type}
+                                    touched={touched.inquiry_Type}
+                                />
+                            </div>
+                            <div className="col-lg-6 col-md-12">
+                                <FormSelect
+                                    name="subject"
+                                    label="Subject*"
+                                    placeholder="Select Subject"
+                                    options={[
+                                        { label: 'General Inquiry', value: 'general' },
+                                        { label: 'Technical Support', value: 'tech' },
+                                        { label: 'Sales Question', value: 'sales' },
+                                    ]}
+                                    error={errors.subject}
+                                    touched={touched.subject}
+                                />
+                            </div>
+                            <div className="col-lg-6 col-md-12">
+                                <FormDatePicker
+                                    name="preferred_date"
+                                    label="Preferred Date*"
+                                    placeholder="Select Preferred Date"
+                                    error={errors.preferred_date}
+                                    touched={touched.preferred_date}
+                                />
                             </div>
                             <div className="col-lg-6 col-md-12">
                                 <FormField
