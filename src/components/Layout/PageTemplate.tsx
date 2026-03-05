@@ -51,7 +51,7 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     return <SplitAnimation text={String(props.text)} />;
                 }
-                if (domNode.name === "productform") {
+                if (domNode.name === "jobform") {
                     const props = attributesToProps(domNode.attribs);
                     return <JobForm />;
                 }

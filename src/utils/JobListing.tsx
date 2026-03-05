@@ -1,10 +1,12 @@
 "use client";
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState, useEffect } from 'react';
 import CustomSelect from '@/components/CustomSelect';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { AppContext } from '@/context/AppContext';
 import Link from 'next/link';
 import Pagination from '@/components/Pagination';
+import CareerModal from '@/components/CareerModal';
+import RecruitmentDisclaimerModal from '@/components/RecruitmentDisclaimerModal';
 
 const JobListing = ({ postData, totalPost, itemsPerPage }: any) => {
     const router = useRouter();
@@ -14,6 +16,13 @@ const JobListing = ({ postData, totalPost, itemsPerPage }: any) => {
     const departmentRef = useRef<{ clearValue: (push?: boolean) => void } | null>(null);
     const locationRef = useRef<{ clearValue: (push?: boolean) => void } | null>(null);
     const contextInfo = useContext(AppContext);
+    const [modalData, setModalData] = useState(null);
+    const [modalState, setModalState] = useState(false);
+    const [showDisclaimer, setShowDisclaimer] = useState(false);
+
+    useEffect(() => {
+        setShowDisclaimer(true);
+    }, []);
 
     const handlePageClick = ({ selected }: { selected: any }) => {
         const newParams = new URLSearchParams(searchParams.toString());
@@ -107,9 +116,19 @@ const JobListing = ({ postData, totalPost, itemsPerPage }: any) => {
         contextInfo.setJobLocation(item.metaInfo.location);
         contextInfo.setJobRole(item.metaInfo.role);
     };
+    const handleReadMore = (item: any) => {
+        setModalData(item);
+        setModalState(true);
+    };
 
+    const modalClose = () => {
+        setModalData(null);
+        setModalState(false);
+    };
     return (
         <>
+            <RecruitmentDisclaimerModal isOpen={showDisclaimer} onClose={() => setShowDisclaimer(false)} />
+            {modalData !== null && <CareerModal open={modalState} closeModal={modalClose} data={modalData} />}
             <div className="c-filterView mb-4">
                 <div className="row gy-2">
                     <div className="col-md-10 col-sm-12">
@@ -163,8 +182,8 @@ const JobListing = ({ postData, totalPost, itemsPerPage }: any) => {
                                                 <div className="c-content-20 clr-gray lh_1-4 mb-3">{item.metaInfo.description !== "" ? item.metaInfo.description : ""}</div>
 
                                                 <div className="action-btn">
-                                                    <Link className="u-btn clr-white" href={`/test-page`} onClick={() => redirectToJobPage(item)}>Apply Now</Link>
-                                                    <button className="u-btn withBorder" type="button">
+                                                    <Link className="u-btn clr-white" href={`/job-application-v2`} onClick={() => redirectToJobPage(item)}>Apply Now</Link>
+                                                    <button className="u-btn withBorder" onClick={() => handleReadMore(item)} type="button">
                                                         <span className="clr-olive">Know More</span>
                                                     </button>
                                                 </div>

@@ -62,7 +62,7 @@ export const Captcha = ({
     reloadColor = 'black',
     onChange,
     setReloadCaptcha,
-    height = 79,
+    height = 55,
     padding = 15,
 }: CaptchaProps) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -112,16 +112,19 @@ export const Captcha = ({
     return (
         <>
             <div className='captcha-container me-3'>
-                <canvas ref={canvasRef} className="d-flex align-self-start" />
-                <button
-                    onClick={reloadCaptcha}
-                    type="button"
-                    tabIndex={4}
-                    className='captcha-relod-btn c-content-19'
-                    style={{ cursor: 'pointer', color: reloadColor, background: 'none', border: 'none', padding: 0 }}
-                >
-                    {reloadText}
-                </button>
+                <div className="d-flex align-items-center gap-2">
+                    <canvas ref={canvasRef} className="d-flex align-self-start" />
+                    <button
+                        onClick={reloadCaptcha}
+                        type="button"
+                        tabIndex={4}
+                        className='captcha-relod-btn c-content-19'
+                        style={{ cursor: 'pointer', color: reloadColor, background: 'none', border: 'none', padding: 0 }}
+                        title="Reload Captcha"
+                    >
+                        <i className="icon-refresh-cw" style={{ fontSize: '20px' }} />
+                    </button>
+                </div>
             </div>
         </>
     );

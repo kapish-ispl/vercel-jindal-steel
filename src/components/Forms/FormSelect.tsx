@@ -84,7 +84,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
             {showLabel && <label htmlFor={name} className="form_grider_wrap_label">
                 {label}
             </label>}
-            <div className="dropdown d-inline-block w-100 cus-select">
+            <div className="dropdown d-inline-block w-100 cus-select" data-lenis-ignore>
                 <motion.button
                     type="button"
                     className="form_grider_wrap_field d-flex justify-content-between align-items-center w-100"

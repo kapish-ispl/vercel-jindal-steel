@@ -14,6 +14,8 @@ import FormSelect from "./FormSelect";
 import FormDatePicker from "./FormDatePicker";
 import { useRouter } from "next/navigation";
 import { postUploadFileResponse, postAPIResponse } from "@/services/apiRequests";
+import FormMultiSelect from "./FormMultiSelect";
+
 
 const JobForm = () => {
     const contextInfo = useContext(AppContext);
@@ -58,7 +60,16 @@ const JobForm = () => {
         { value: "15", label: "15+" },
     ];
 
+    const keySkillsOptions = [
+        { value: "React", label: "React" },
+        { value: "Node.js", label: "Node.js" },
+        { value: "TypeScript", label: "TypeScript" },
+        { value: "Next.js", label: "Next.js" },
+        { value: "SASS", label: "SASS" },
+    ];
+
     const educationLabels = [
+
         "10th",
         "12th",
         "Graduation",
@@ -107,6 +118,7 @@ const JobForm = () => {
         address: "",
         country_of_residence: "India",
         city_name: "",
+        key_skills: [],
         resume_id: "",
         user_captcha_input: "",
         education_details: [
@@ -355,7 +367,7 @@ const JobForm = () => {
                                 </div>
 
                                 <div className="col-12 col-md-4">
-                                    <FormSelect
+                                    <FormMultiSelect
                                         label="Select Gender*"
                                         name="gender"
                                         options={contextInfo.genderOptions || []}
@@ -364,7 +376,7 @@ const JobForm = () => {
                                 </div>
 
                                 <div className="col-12 col-md-4">
-                                    <FormSelect
+                                    <FormMultiSelect
                                         label="Experience (Years)*"
                                         name="total_experience"
                                         options={experienceOptions}
@@ -624,13 +636,11 @@ const JobForm = () => {
                                                                         />
                                                                     </div>
                                                                     <div className="col-12 col-md-4">
-                                                                        <FormSelect
+                                                                        <FormMultiSelect
                                                                             label="Currently Employed*"
                                                                             name={`experience_details.${index}.is_current_employment`}
                                                                             options={currentEmploymentOptions}
                                                                             placeholder="Currently Employed"
-                                                                            error={getIn(errors, `experience_details.${index}.is_current_employment`)}
-                                                                            touched={getIn(touched, `experience_details.${index}.is_current_employment`)}
                                                                         />
                                                                     </div>
                                                                 </div>
@@ -674,7 +684,7 @@ const JobForm = () => {
                                 <div
                                     className={`col-12 ${selectedCountryIndia ? selectedStateOther ? "col-md-4" : "col-md-6" : "col-md-6"}`}
                                 >
-                                    <FormSelect
+                                    <FormMultiSelect
                                         label="Select Country*"
                                         name="country_name"
                                         options={contextInfo.countryOptions || []}
@@ -686,7 +696,7 @@ const JobForm = () => {
                                     <div
                                         className={`col-12 ${selectedStateOther ? "col-md-4" : "col-md-6"}`}
                                     >
-                                        <FormSelect
+                                        <FormMultiSelect
                                             label="Select State*"
                                             name="state_name"
                                             options={contextInfo.statesOptions || []}
@@ -729,7 +739,7 @@ const JobForm = () => {
                                     />
                                 </div>
                                 <div className="col-12 col-md-4">
-                                    <FormSelect
+                                    <FormMultiSelect
                                         label="Nationality*"
                                         name="nationality"
                                         options={contextInfo.nationalityOptions || []}

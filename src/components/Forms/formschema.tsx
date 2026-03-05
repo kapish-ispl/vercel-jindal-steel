@@ -59,6 +59,7 @@ export interface IJobApplicationSchema {
   alternate_mobile_number?: string;
   address: string;
   city_name: string;
+  key_skills: string | string[];
   resume_id: string;
   user_captcha_input: string;
   education_details: IEducationDetail[];
@@ -125,6 +126,12 @@ export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup
     .trim(),
   address: Yup.string().required("Enter your Address").trim(),
   city_name: Yup.string().required("Enter your City Name").trim(),
+  key_skills: Yup.lazy((value) => {
+    if (Array.isArray(value)) {
+      return Yup.array().of(Yup.string()).min(1, "Select at least one skill").required("Select key skills");
+    }
+    return Yup.string().required("Select key skills").trim();
+  }) as any,
   resume_id: Yup.string().required("Please upload your resume").trim(),
   user_captcha_input: Yup.string().required("Captcha is required").trim(),
   education_details: Yup.array()
