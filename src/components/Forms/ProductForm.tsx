@@ -24,6 +24,7 @@ interface FormValues {
     message: string;
     inquiry_Type: 'sales' | 'billing' | 'support' | '';
     preferred_date: string | null;
+    alternate_email?: string;
     subject: string;
     privacy_Policy: boolean;
     captcha: string;
@@ -47,6 +48,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
         full_Name: '',
         company: '',
         email: '',
+        alternate_email: '',
         mobile: '',
         country: '',
         city: '',
@@ -61,6 +63,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
     const ExtendedSchema = QueryFormSchema.shape({
         subject: Yup.string().required('Subject is required'),
         preferred_date: Yup.date().nullable().required('Preferred date is required'),
+        inquiry_Type: Yup.string().required('Please select an option'),
         captcha: Yup.string()
             .required('Captcha is required')
             .test(
@@ -147,14 +150,13 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                 </div>
                                 <div className="col-xl-4 col-lg-6 col-md-12">
                                     <FormField
-                                        name="email"
+                                        name="alternate_email"
                                         label="Alternate Email*"
                                         type="email"
-                                        error={errors.email}
-                                        touched={touched.email}
+                                        error={errors.alternate_email}
+                                        touched={touched.alternate_email}
                                         onKeyDown={restrictEmailChars}
                                     />
-
                                 </div>
                                 {/* <div className="col-lg-6 col-md-12">
 
@@ -205,8 +207,8 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                 <div className="col-lg-6 col-md-12">
                                     <FormDatePicker
                                         name="preferred_date"
-                                        label="Preferred Date*"
-                                        placeholder="Select Preferred Date"
+                                        label="Secondary Preferred Date"
+                                        placeholder="Select Secondary Date"
                                         error={errors.preferred_date}
                                         touched={touched.preferred_date}
                                     />
