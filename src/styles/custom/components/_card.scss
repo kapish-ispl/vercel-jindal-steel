@@ -1817,35 +1817,34 @@
             padding: 40px;
         }
 
-    }
-}
+        .action-btn {
+            @include flexbox;
+            gap: 10px;
+            margin-top: 30px;
 
-.action-btn {
-    @include flexbox;
-    gap: 10px;
-    margin-top: 30px;
+            .u-btn {
+                padding: 10px 20px;
+                @include flexbox;
+                @include justify-content(center);
+                @include align-items(center);
+                @include font-size(16);
+                font-weight: 400;
+                text-transform: uppercase;
+                background-color: #4FB848;
+                @include border-radius(5px);
+                width: 100%;
+                max-width: 190px;
+                border: unset;
 
-    .u-btn {
-        padding: 10px 20px;
-        @include flexbox;
-        @include justify-content(center);
-        @include align-items(center);
-        @include font-size(16);
-        font-weight: 400;
-        text-transform: uppercase;
-        background-color: #4FB848;
-        @include border-radius(5px);
-        width: 100%;
-        max-width: 190px;
-        border: unset;
+                &.withBorder {
+                    border: 1px solid #4FB848;
+                    background-color: var(--color-white);
 
-        &.withBorder {
-            border: 1px solid #4FB848;
-            background-color: var(--color-white);
+                }
+
+
+            }
 
         }
-
-
     }
-
 }
