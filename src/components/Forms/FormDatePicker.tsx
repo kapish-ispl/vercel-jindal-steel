@@ -20,10 +20,11 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
     touched,
     ...props
 }) => {
-    const [field] = useField(name);
-    const { setFieldValue } = useFormikContext();
+    const [field, meta] = useField(name);
+    const { setFieldValue, setFieldTouched } = useFormikContext();
 
-    const hasError = touched && !!error;
+    const hasError = (touched || meta.touched) && (error || meta.error);
+    const displayError = error || meta.error;
     const containerClassName = `form_grider_wrap ${hasError ? "hasError" : ""}`;
 
     return (
@@ -37,13 +38,17 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
                     {...field}
                     id={name}
                     selected={(field.value && new Date(field.value)) || null}
-                    onChange={(val: Date | null) => setFieldValue(name, val)}
+                    onChange={(val: Date | null) => {
+                        setFieldValue(name, val);
+                        setFieldTouched(name, true);
+                    }}
+                    onBlur={() => setFieldTouched(name, true, true)}
                     placeholderText={placeholder || label}
                     className="form_grider_wrap_field w-100"
                     autoComplete="off"
                 />
             </div>
-            {hasError && <p className="form_grider_wrap_helper">{error}</p>}
+            {hasError && <p className="form_grider_wrap_helper">{displayError}</p>}
         </div>
     );
 };

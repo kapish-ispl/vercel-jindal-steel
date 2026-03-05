@@ -32,7 +32,8 @@ const FormSelect: React.FC<FormSelectProps> = ({
     const [search, setSearch] = useState("");
     const wrapperRef = useRef<HTMLDivElement>(null);
 
-    const hasError = touched && !!error;
+    const hasError = (touched || meta.touched) && (error || meta.error);
+    const displayError = error || meta.error;
     const selectedOption = options.find(opt => opt.value === field.value);
 
     const filteredOptions = searchable
@@ -48,15 +49,19 @@ const FormSelect: React.FC<FormSelectProps> = ({
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
-                setIsOpen(false);
+                if (isOpen) {
+                    setIsOpen(false);
+                    helpers.setTouched(true);
+                }
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    }, [isOpen]);
 
     const handleSelect = (option: Option) => {
         helpers.setValue(option.value);
+        helpers.setTouched(true);
         setIsOpen(false);
     };
 
@@ -71,7 +76,10 @@ const FormSelect: React.FC<FormSelectProps> = ({
                 <motion.button
                     type="button"
                     className="form_grider_wrap_field d-flex justify-content-between align-items-center w-100"
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => {
+                        setIsOpen(!isOpen);
+                        if (isOpen) helpers.setTouched(true);
+                    }}
                     style={{ textAlign: 'left', background: 'transparent' }}
                 >
                     <span className="flex-grow-1 text-start">
@@ -134,7 +142,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
                     )}
                 </AnimatePresence>
             </div>
-            {hasError && <p className="form_grider_wrap_helper">{error}</p>}
+            {hasError && <p className="form_grider_wrap_helper">{displayError}</p>}
         </div>
     );
 };
