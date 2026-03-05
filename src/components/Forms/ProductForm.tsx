@@ -105,7 +105,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
     const inquiryOptions = ['sales', 'billing', 'support'];
 
     return (
-        <div className="form_container">
+        <div className="form_container c-form">
             <Formik
                 initialValues={initialValues}
                 validationSchema={ExtendedSchema}
@@ -113,159 +113,160 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
             >
                 {({ errors, touched, isSubmitting, values }) => (
                     <Form noValidate>
-                        <div className="row">
+                        <div className="container cus-container">
+                            <div className="row">
 
-                            <div className="col-lg-6 col-md-12">
-                                <FormField
-                                    name="full_Name"
-                                    label="Full Name*"
-                                    error={errors.full_Name}
-                                    touched={touched.full_Name}
-                                    onKeyDown={restrictSpecialChar}
-                                />
-                            </div>
-                            <div className="col-lg-6 col-md-12">
-                                <FormField
-                                    name="company"
-                                    label="Company"
-                                    error={errors.company}
-                                    touched={touched.company}
-                                />
-
-                            </div>
-                            <div className="col-lg-6 col-md-12">
-                                <FormField
-                                    name="email"
-                                    label="Email*"
-                                    type="email"
-                                    error={errors.email}
-                                    touched={touched.email}
-                                    onKeyDown={restrictEmailChars}
-                                />
-
-                            </div>
-                            <div className="col-lg-6 col-md-12">
-
-                                <FormField
-                                    name="mobile"
-                                    label="Mobile*"
-                                    type="tel"
-                                    error={errors.mobile}
-                                    touched={touched.mobile}
-                                    maxLength={10}
-                                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                                        restrictDigits(e);
-                                        validateMobile(e, mobileRef);
-                                    }}
-                                    onPaste={handleCopyPaste}
-                                    ref={mobileRef}
-                                />
-                            </div>
-                            <div className="col-lg-6 col-md-12">
-
-                                <FormField
-                                    name="country"
-                                    label="Country*"
-                                    error={errors.country}
-                                    touched={touched.country}
-                                    onKeyDown={restrictSpecialChar}
-                                />
-                            </div>
-                            <div className="col-lg-6 col-md-12">
-                                <FormField
-                                    name="city"
-                                    label="City*"
-                                    error={errors.city}
-                                    touched={touched.city}
-                                    onKeyDown={restrictSpecialChar}
-                                />
-                            </div>
-                            <div className="col-lg-6 col-md-12">
-                                <FormSelect
-                                    name="inquiry_Type"
-                                    label="What can we help you with?*"
-                                    placeholder="Select Inquiry Type"
-                                    options={inquiryOptions.map(type => ({
-                                        label: type.charAt(0).toUpperCase() + type.slice(1),
-                                        value: type
-                                    }))}
-                                    error={errors.inquiry_Type}
-                                    touched={touched.inquiry_Type}
-                                />
-                            </div>
-                            <div className="col-lg-6 col-md-12">
-                                <FormSelect
-                                    name="subject"
-                                    label="Subject*"
-                                    placeholder="Select Subject"
-                                    options={[
-                                        { label: 'General Inquiry', value: 'general' },
-                                        { label: 'Technical Support', value: 'tech' },
-                                        { label: 'Sales Question', value: 'sales' },
-                                    ]}
-                                    error={errors.subject}
-                                    touched={touched.subject}
-                                />
-                            </div>
-                            <div className="col-lg-6 col-md-12">
-                                <FormDatePicker
-                                    name="preferred_date"
-                                    label="Preferred Date*"
-                                    placeholder="Select Preferred Date"
-                                    error={errors.preferred_date}
-                                    touched={touched.preferred_date}
-                                />
-                            </div>
-                            <div className="col-lg-6 col-md-12">
-                                <FormField
-                                    name="message"
-                                    label="Message*"
-                                    type="textarea"
-                                    error={errors.message}
-                                    touched={touched.message}
-                                    rows={4}
-                                />
-                            </div>
-                            <div className="col-lg-12">
-                                <div className="form_checkbox_wrap form-check">
+                                <div className="col-xl-4 col-lg-6 col-md-12">
                                     <FormField
-                                        type="checkbox"
-                                        name="privacy_Policy"
-                                        id="privacyPolicy"
-                                        className="form_checkbox_field form-check-input"
-                                    />
-                                    <label htmlFor="privacyPolicy" className="form_checkbox_label form-check-label">
-                                        I have read and understood the Privacy Policy.
-                                    </label>
-                                    <ErrorMessage name="privacy_Policy" component="p" className="form_grider_wrap_helper" />
-                                </div>
-                            </div>
-                            <div className="col-lg-12">
-                                <div className="form_captcha_wrap">
-                                    <Captcha
-                                        key={captchaKey}
-                                        numberOfCharacters={6}
-                                        backgroundColor="#c2c2c2"
-                                        fontColor="#333"
-                                        onChange={setActualCaptcha}
-                                        setReloadCaptcha={setReloadCaptcha}
-                                    />
-                                    <FormField
-                                        name="captcha"
-                                        label="Enter CAPTCHA"
-
-                                        error={errors.captcha}
-                                        touched={touched.captcha}
-                                        autoComplete="off"
+                                        name="full_Name"
+                                        label="Full Name*"
+                                        error={errors.full_Name}
+                                        touched={touched.full_Name}
+                                        onKeyDown={restrictSpecialChar}
                                     />
                                 </div>
+                                <div className="col-xl-4 col-lg-6 col-md-12">
+                                    <FormDatePicker
+                                        name="preferred_date"
+                                        label="Preferred Date*"
+                                        placeholder="Select Preferred Date"
+                                        error={errors.preferred_date}
+                                        touched={touched.preferred_date}
+                                    />
+                                </div>
+                                <div className="col-xl-4 col-lg-6 col-md-12">
+                                    <FormField
+                                        name="email"
+                                        label="Email*"
+                                        type="email"
+                                        error={errors.email}
+                                        touched={touched.email}
+                                        onKeyDown={restrictEmailChars}
+                                    />
+
+                                </div>
+                                <div className="col-lg-6 col-md-12">
+                                    <FormField
+                                        name="email"
+                                        label="Email*"
+                                        type="email"
+                                        error={errors.email}
+                                        touched={touched.email}
+                                        onKeyDown={restrictEmailChars}
+                                    />
+
+                                </div>
+                                <div className="col-lg-6 col-md-12">
+
+                                    <FormField
+                                        name="mobile"
+                                        label="Mobile*"
+                                        type="tel"
+                                        error={errors.mobile}
+                                        touched={touched.mobile}
+                                        maxLength={10}
+                                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                                            restrictDigits(e);
+                                            validateMobile(e, mobileRef);
+                                        }}
+                                        onPaste={handleCopyPaste}
+                                        ref={mobileRef}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-md-12">
+
+                                    <FormField
+                                        name="country"
+                                        label="Country*"
+                                        error={errors.country}
+                                        touched={touched.country}
+                                        onKeyDown={restrictSpecialChar}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-md-12">
+                                    <FormField
+                                        name="city"
+                                        label="City*"
+                                        error={errors.city}
+                                        touched={touched.city}
+                                        onKeyDown={restrictSpecialChar}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-md-12">
+                                    <FormSelect
+                                        name="inquiry_Type"
+                                        label="What can we help you with?*"
+                                        placeholder="Select Inquiry Type"
+                                        options={inquiryOptions.map(type => ({
+                                            label: type.charAt(0).toUpperCase() + type.slice(1),
+                                            value: type
+                                        }))}
+                                        error={errors.inquiry_Type}
+                                        touched={touched.inquiry_Type}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-md-12">
+                                    <FormSelect
+                                        name="subject"
+                                        label="Subject*"
+                                        placeholder="Select Subject"
+                                        options={[
+                                            { label: 'General Inquiry', value: 'general' },
+                                            { label: 'Technical Support', value: 'tech' },
+                                            { label: 'Sales Question', value: 'sales' },
+                                        ]}
+                                        error={errors.subject}
+                                        touched={touched.subject}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-md-12">
+                                    <FormDatePicker
+                                        name="preferred_date"
+                                        label="Preferred Date*"
+                                        placeholder="Select Preferred Date"
+                                        error={errors.preferred_date}
+                                        touched={touched.preferred_date}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-md-12">
+                                    <FormField
+                                        name="message"
+                                        label="Message*"
+                                        type="textarea"
+                                        error={errors.message}
+                                        touched={touched.message}
+                                        rows={4}
+                                    />
+                                </div>
+
+                                <div className="col-lg-6">
+                                    <div className="form_captcha_wrap">
+                                        <Captcha
+                                            key={captchaKey}
+                                            numberOfCharacters={6}
+                                            backgroundColor="#c2c2c2"
+                                            fontColor="#333"
+                                            onChange={setActualCaptcha}
+                                            setReloadCaptcha={setReloadCaptcha}
+                                        />
+                                        <FormField
+                                            name="captcha"
+                                            label="Enter CAPTCHA"
+
+                                            error={errors.captcha}
+                                            touched={touched.captcha}
+                                            autoComplete="off"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="col-12">
+                                    <button type="submit" className="form_submit_button" disabled={isSubmitting}>
+                                        {isSubmitting ? 'Submitting...' : 'Submit'}
+                                    </button>
+                                </div>
                             </div>
 
-                            <div className="col-12">
-                                <button type="submit" className="form_submit_button" disabled={isSubmitting}>
-                                    {isSubmitting ? 'Submitting...' : 'Submit'}
-                                </button>
-                            </div>
                         </div>
                     </Form>
                 )}
