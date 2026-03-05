@@ -102,7 +102,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
         }
     };
 
-    const inquiryOptions = ['sales', 'billing', 'support'];
+    const inquiryOptions = ['Male', 'Female', 'Not Disclosed'];
 
     return (
         <div className="form_container c-form">
@@ -129,7 +129,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                     <FormDatePicker
                                         name="preferred_date"
                                         label="Preferred Date*"
-                                        placeholder="Select Preferred Date"
+                                        placeholder="DOB"
                                         error={errors.preferred_date}
                                         touched={touched.preferred_date}
                                     />
@@ -145,10 +145,10 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                     />
 
                                 </div>
-                                <div className="col-lg-6 col-md-12">
+                                <div className="col-xl-4 col-lg-6 col-md-12">
                                     <FormField
                                         name="email"
-                                        label="Email*"
+                                        label="Alternate Email*"
                                         type="email"
                                         error={errors.email}
                                         touched={touched.email}
@@ -156,7 +156,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                     />
 
                                 </div>
-                                <div className="col-lg-6 col-md-12">
+                                {/* <div className="col-lg-6 col-md-12">
 
                                     <FormField
                                         name="mobile"
@@ -172,31 +172,14 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                         onPaste={handleCopyPaste}
                                         ref={mobileRef}
                                     />
-                                </div>
-                                <div className="col-lg-6 col-md-12">
+                                </div> */}
 
-                                    <FormField
-                                        name="country"
-                                        label="Country*"
-                                        error={errors.country}
-                                        touched={touched.country}
-                                        onKeyDown={restrictSpecialChar}
-                                    />
-                                </div>
-                                <div className="col-lg-6 col-md-12">
-                                    <FormField
-                                        name="city"
-                                        label="City*"
-                                        error={errors.city}
-                                        touched={touched.city}
-                                        onKeyDown={restrictSpecialChar}
-                                    />
-                                </div>
-                                <div className="col-lg-6 col-md-12">
+
+                                <div className="col-xl-4 col-lg-6 col-md-12">
                                     <FormSelect
                                         name="inquiry_Type"
                                         label="What can we help you with?*"
-                                        placeholder="Select Inquiry Type"
+                                        placeholder="Select Gender"
                                         options={inquiryOptions.map(type => ({
                                             label: type.charAt(0).toUpperCase() + type.slice(1),
                                             value: type
@@ -205,7 +188,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                         touched={touched.inquiry_Type}
                                     />
                                 </div>
-                                <div className="col-lg-6 col-md-12">
+                                <div className="col-xl-4 col-lg-6 col-md-12">
                                     <FormSelect
                                         name="subject"
                                         label="Subject*"

@@ -257,6 +257,12 @@
                 color: rgb(237, 67, 55);
                 margin: 8px 0px;
             }
+            .form_grider_wrap_field{
+                border: 1px solid rgb(237, 67, 55);
+                &::placeholder{
+                    color: rgb(237, 67, 55);
+                }
+            }
         }
     }
     .form_submit_button{
