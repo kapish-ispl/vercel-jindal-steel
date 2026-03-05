@@ -15,7 +15,7 @@ interface CustomSelectProps {
     icon?: ReactNode;
     searchable?: boolean;
     paramKey?: string
-    selectRef?: React.RefObject<{ clearValue: () => void } | null>;
+    selectRef?: React.RefObject<{ clearValue: (push?: boolean) => void } | null>;
 }
 
 export default function CustomSelect({
@@ -36,10 +36,17 @@ export default function CustomSelect({
 
     if (selectRef) {
         selectRef.current = {
-            clearValue() {
+            clearValue(push = true) {
                 setSelected(null);
                 setSearch("");
                 onChange?.("");
+
+                if (push) {
+                    const params = new URLSearchParams(window.location.search);
+                    params.delete(paramKey);
+                    const newUrl = `${window.location.pathname}?${params.toString()}`;
+                    router.push(newUrl, { scroll: false });
+                }
             },
         };
     }

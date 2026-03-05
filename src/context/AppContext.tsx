@@ -2,16 +2,18 @@
 
 import { serverRequest } from "@/services/getServerSideRender";
 import { useSearchParams, useParams } from "next/navigation";
-import { GET_MENU_ENDPOINT, GET_POST_ENDPOINT } from "@/config/apiConfig";
+import { GET_JOB_ENDPOINT, GET_MENU_ENDPOINT, GET_POST_ENDPOINT } from "@/config/apiConfig";
 import { ReactNode, createContext, useState, useEffect, Dispatch, SetStateAction } from "react";
 import { CONSTANTS } from "@/config/constant";
 import AOS from "aos";
 
+type Option = { label: string; value: string };
+
 type contextType = {
-    headerMenu: never[];
-    footerMenu: never[];
-    footerBottomMenu: never[];
-    productData: never[];
+    headerMenu: any[];
+    footerMenu: any[];
+    footerBottomMenu: any[];
+    productData: any[];
     menuType: string;
     isLoading: boolean;
     audioState: boolean;
@@ -22,14 +24,14 @@ type contextType = {
     setIsLoading: Dispatch<SetStateAction<boolean>>;
     setAudioState: Dispatch<SetStateAction<boolean>>;
     setMenuType: Dispatch<SetStateAction<string>>;
+    genderOptions: Option[];
+    nationalityOptions: Option[];
+    degreeOptions: Option[];
+    countryOptions: Option[];
+    statesOptions: Option[];
+    departmentOptions: Option[];
+    locationOptions: Option[];
 };
-
-declare global {
-    interface Window {
-        responsiveVoice: any;
-    }
-}
-
 
 export const AppContext = createContext<contextType>({
     headerMenu: [],
@@ -45,7 +47,14 @@ export const AppContext = createContext<contextType>({
     routerMedia: "",
     setIsLoading: () => { },
     setAudioState: () => { },
-    setMenuType: () => { }
+    setMenuType: () => { },
+    genderOptions: [],
+    nationalityOptions: [],
+    degreeOptions: [],
+    countryOptions: [],
+    statesOptions: [],
+    departmentOptions: [],
+    locationOptions: [],
 });
 
 const AppContextProvider = ({ children }: { children: ReactNode }) => {
@@ -60,6 +69,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
     const [headerMenu, setHeaderMenu] = useState([]);
     const [footerMenu, setFooterMenu] = useState([]);
+    const [mastersData, setMastersData] = useState<any>([]);
     const [footerBottomMenu, setFooterBottomMenu] = useState([]);
     const [productData, setProductData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -74,6 +84,14 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const [audioObject, setAudioObject] = useState<any>([]);
     const [menuType, setMenuType] = useState("page");
 
+    // Master data options state
+    const [genderOptions, setGenderOptions] = useState<Option[]>([]);
+    const [nationalityOptions, setNationalityOptions] = useState<Option[]>([]);
+    const [degreeOptions, setDegreeOptions] = useState<Option[]>([]);
+    const [countryOptions, setCountryOptions] = useState<Option[]>([]);
+    const [statesOptions, setStatesOptions] = useState<Option[]>([]);
+    const [departmentOptions, setDepartmentOptions] = useState<Option[]>([]);
+    const [locationOptions, setLocationOptions] = useState<Option[]>([]);
 
     useEffect(() => {
         AOS.init({
@@ -83,7 +101,6 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     useEffect(() => {
-        //Fetch data from API
         const perRequiredRequest = async () => {
             const getHeaderMenu = await serverRequest(
                 {},
@@ -106,7 +123,71 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
             setProductData(getProducts);
         };
         perRequiredRequest();
+
+        const getPostData = async () => {
+            const taxonomyInfo = await serverRequest({}, `${GET_JOB_ENDPOINT}`, CONSTANTS.REQUEST_GET);
+            if (taxonomyInfo !== undefined) {
+                setMastersData(taxonomyInfo);
+            }
+        };
+
+        getPostData();
     }, []);
+
+    useEffect(() => {
+        if (mastersData && mastersData.code == 'SUC200' && mastersData.data) {
+            const data = mastersData.data;
+
+            if (data.gender) {
+                setGenderOptions(Object.keys(data.gender).map(key => ({
+                    value: key,
+                    label: data.gender[key]
+                })));
+            }
+
+            if (data.nationality) {
+                setNationalityOptions(Object.keys(data.nationality).map(key => ({
+                    value: key,
+                    label: data.nationality[key]
+                })));
+            }
+
+            if (data.degree) {
+                setDegreeOptions(Object.keys(data.degree).map(key => ({
+                    value: key,
+                    label: data.degree[key]
+                })));
+            }
+
+            if (data.country) {
+                setCountryOptions(Object.keys(data.country).map(key => ({
+                    value: key,
+                    label: data.country[key]
+                })));
+            }
+
+            if (data.states) {
+                setStatesOptions(Object.keys(data.states).map(key => ({
+                    value: key,
+                    label: data.states[key]
+                })));
+            }
+
+            if (data.department) {
+                setDepartmentOptions(Object.keys(data.department).map(key => ({
+                    value: key,
+                    label: data.department[key]
+                })));
+            }
+
+            if (data.location) {
+                setLocationOptions(Object.keys(data.location).map(key => ({
+                    value: key,
+                    label: data.location[key]
+                })));
+            }
+        }
+    }, [mastersData]);
 
     useEffect(() => {
         const links = document.querySelectorAll("a");
@@ -123,22 +204,17 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
             if (playVoice) {
                 utterance.voice = playVoice;
             }
-            // if(voices.length > 0) {
-            //     setAudioObject(voices);
-            // }
             speechSynthesis.speak(utterance);
         };
 
         const initializeSpeechSynthesis = () => {
-            const voices = window.speechSynthesis.getVoices();
-            voices.find(voice => voice.name == 'Tessa' || voice.name == 'Google UK English Female');
+            window.speechSynthesis.getVoices();
         }
         initializeSpeechSynthesis();
+
         const handleMouseEnter = (event: any) => {
             if (window.speechSynthesis && audioState) {
                 speakText(event.currentTarget.innerText);
-            } else {
-                console.error("speechSynthesis is not available");
             }
         };
 
@@ -197,8 +273,42 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
         };
     }, [audioState, slug, selectedText, audioObject]);
 
+    const values = {
+        headerMenu,
+        footerMenu,
+        fontSize,
+        setFontSize,
+        footerBottomMenu,
+        jobPostId,
+        setJobPostId,
+        jobCode,
+        setJobCode,
+        jobTitle,
+        jobLocation,
+        jobRole,
+        setJobTitle,
+        setJobLocation,
+        setJobRole,
+        isLoading,
+        setIsLoading,
+        productData,
+        menuType,
+        setMenuType,
+        routerPage,
+        routerPageSize,
+        routerFilter,
+        routerMedia,
+        audioState,
+        setAudioState,
+        genderOptions,
+        nationalityOptions,
+        degreeOptions,
+        countryOptions,
+        statesOptions,
+        departmentOptions,
+        locationOptions
+    };
 
-    const values = { headerMenu, footerMenu, fontSize, setFontSize, footerBottomMenu, jobPostId, setJobPostId, jobCode, setJobCode, jobTitle, jobLocation, jobRole, setJobTitle, setJobLocation, setJobRole, isLoading, setIsLoading, productData, menuType, setMenuType, routerPage, routerPageSize, routerFilter, routerMedia, audioState, setAudioState };
     return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 };
 
