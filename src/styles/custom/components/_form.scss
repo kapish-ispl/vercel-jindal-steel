@@ -222,7 +222,7 @@
                 box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .15);
                 font-size: 1.125rem;
                 line-height: 1.5;
-                height: 62px;
+                height: 55px;
                 width: 100%;
                 border-radius: .375rem;
                 border-width: 1px;
@@ -251,6 +251,12 @@
         }
         .cus-select{
             background: var(--color-white);
+             @include border-radius(.375rem);
+           
+        }
+        textarea{
+            height: auto !important;
+            padding-top: 10px;
         }
         &.hasError{
             .form_grider_wrap_helper{
