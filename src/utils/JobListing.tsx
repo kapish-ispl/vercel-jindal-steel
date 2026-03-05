@@ -1,11 +1,12 @@
 "use client";
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import CustomSelect from '@/components/CustomSelect';
 import { useRouter } from 'next/navigation';
-import { departmentOptions, locationOptions } from '@/constants/GenericFilter';
+import { AppContext } from '@/context/AppContext';
 
 const JobListing = () => {
     const router = useRouter();
+    const { departmentOptions, locationOptions } = useContext(AppContext);
     const departmentRef = useRef<{ clearValue: (push?: boolean) => void } | null>(null);
     const locationRef = useRef<{ clearValue: (push?: boolean) => void } | null>(null);
 
