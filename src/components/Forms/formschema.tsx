@@ -146,31 +146,36 @@ export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup
     )
     .required("Education details are required")
     .min(1, "At least one education detail is required"),
-  experience_details: Yup.array().of(
-    Yup.object({
-      organization_name: Yup.string().required("Enter your Organization Name").trim(),
-      designation: Yup.string().required("Enter your Designation").trim(),
-      joining_date: Yup.date()
-        .nullable()
-        .max(new Date(), "Joining date cannot be in the future")
-        .required("Enter your Joining Date"),
-      relieving_date: Yup.date()
-        .nullable()
-        .required("Relieving Date is required")
-        .test(
-          "is-greater",
-          "Relieving Date must be after Joining Date",
-          function (value) {
-            const { joining_date } = this.parent;
-            if (!value || !joining_date) return true;
-            return value > joining_date;
-          }
-        ),
-      job_profile: Yup.string().required("Enter your Job Profile").trim(),
-      is_current_employment: Yup.string().required("Select your current Employment").trim(),
-    })
-  ).required("Experience details are required"),
-});
+  experience_details: Yup.lazy((value, { parent }) => {
+    if (parent?.total_experience === "0") {
+      return Yup.array().notRequired();
+    }
+    return Yup.array().of(
+      Yup.object({
+        organization_name: Yup.string().required("Enter your Organization Name").trim(),
+        designation: Yup.string().required("Enter your Designation").trim(),
+        joining_date: Yup.date()
+          .nullable()
+          .max(new Date(), "Joining date cannot be in the future")
+          .required("Enter your Joining Date"),
+        relieving_date: Yup.date()
+          .nullable()
+          .required("Relieving Date is required")
+          .test(
+            "is-greater",
+            "Relieving Date must be after Joining Date",
+            function (value) {
+              const { joining_date } = this.parent as any;
+              if (!value || !joining_date) return true;
+              return value > joining_date;
+            }
+          ),
+        job_profile: Yup.string().required("Enter your Job Profile").trim(),
+        is_current_employment: Yup.string().required("Select your current Employment").trim(),
+      })
+    ).required("Experience details are required");
+  }),
+}) as any;
 
 export const QueryFormSchema: Yup.ObjectSchema<IQueryFormSchema> = Yup.object({
   full_Name: Yup.string()

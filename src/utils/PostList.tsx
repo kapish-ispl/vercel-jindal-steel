@@ -23,7 +23,8 @@ const componentMap: any = {
     PerformanceCard: dynamic(() => import("./PerformanceCard")),
     LeadershipCard: dynamic(() => import("./LeadershipCard")),
     LeadershipCardV2: dynamic(() => import("./LeadershipCardV2")),
-    PodcastSlider: dynamic(() => import("./PodcastSlider"))
+    PodcastSlider: dynamic(() => import("./PodcastSlider")),
+    JobListing: dynamic(() => import("./JobListing"))
 }
 
 export default function PostList(props: any) {
@@ -56,6 +57,15 @@ export default function PostList(props: any) {
 
         "policies-reports": {
             type: { key: "type_1599634707" }
+        },
+
+        "career-v2": {
+            department: { key: "department" },
+            location: { key: "location" }
+        },
+        "career": {
+            department: { key: "department" },
+            location: { key: "location" }
         }
     };
 
@@ -63,6 +73,8 @@ export default function PostList(props: any) {
         let slugInfo = props.slug;
         const yearParam = searchParams.get(`${props.slug}-year`);
         const typeParam = searchParams.get(`${props.slug}-type`);
+        const deptParam = searchParams.get("department");
+        const locParam = searchParams.get("location");
         const pageParam = searchParams.get(`${props.slug}-page`);
 
         const activePage = pageParam ?? page ?? 1;
@@ -73,6 +85,10 @@ export default function PostList(props: any) {
         if (pathname === '/') {
             slugInfo += `&metaInfo[type_1599485711]=${props.type}`;
             limit = 3;
+        }
+
+        if (props.slug === 'career' || props.slug === 'career-v2') {
+            limit = 1000;
         }
 
         if (props.slug === 'policies-reports') {
@@ -97,6 +113,22 @@ export default function PostList(props: any) {
                 const selectedType = typeParam || map.type.default;
                 if (selectedType) {
                     slugInfo += `&metaInfo[${map.type.key}]=${selectedType}`;
+                }
+            }
+
+            // Handle Department
+            if (map.department) {
+                const selectedDept = deptParam || map.department.default;
+                if (selectedDept) {
+                    slugInfo += `&metaInfo[${map.department.key}]=${selectedDept}`;
+                }
+            }
+
+            // Handle Location
+            if (map.location) {
+                const selectedLoc = locParam || map.location.default;
+                if (selectedLoc) {
+                    slugInfo += `&metaInfo[${map.location.key}]=${selectedLoc}`;
                 }
             }
         }

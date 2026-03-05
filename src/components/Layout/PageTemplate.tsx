@@ -29,7 +29,6 @@ const GallerySlider = dynamic(() => import("@/utils/GallerySlider"), { ssr: fals
 const StackSlider = dynamic(() => import("@/utils/StackSlider"), { ssr: false });
 const CategorySlider = dynamic(() => import("@/utils/CategorySlider"), { ssr: false });
 const CustomContentSliders = dynamic(() => import("@/utils/CustomContentSliders"), { ssr: false });
-const JobListing = dynamic(() => import("@/utils/JobListing"), { ssr: false });
 const JobForm = dynamic(() => import("@/components/Forms/JobForm"), { ssr: false });
 
 
@@ -55,10 +54,6 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "productform") {
                     const props = attributesToProps(domNode.attribs);
                     return <JobForm />;
-                }
-                if (domNode.name === "joblisting") {
-                    const props = attributesToProps(domNode.attribs);
-                    return <JobListing {...props} />;
                 }
                 if (domNode.name === "cardswipeslider") {
                     return <CardSwipeSlider />

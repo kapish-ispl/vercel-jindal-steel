@@ -9,6 +9,7 @@ interface FormDatePickerProps {
     placeholder?: string;
     error?: string;
     touched?: boolean;
+    showLabel?: boolean;
     [key: string]: any;
 }
 
@@ -18,6 +19,7 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
     placeholder,
     error,
     touched,
+    showLabel = false,
     ...props
 }) => {
     const [field, meta] = useField(name);
@@ -29,9 +31,9 @@ const FormDatePicker: React.FC<FormDatePickerProps> = ({
 
     return (
         <div className={containerClassName}>
-            <label htmlFor={name} className="form_grider_wrap_label">
+            {showLabel && <label htmlFor={name} className="form_grider_wrap_label">
                 {label}
-            </label>
+            </label>}
             <div className="datepicker_wrapper w-100">
                 <DatePicker
                     {...props}

@@ -13,6 +13,7 @@ import FormField from "./FormField";
 import FormSelect from "./FormSelect";
 import FormDatePicker from "./FormDatePicker";
 import { useRouter } from "next/navigation";
+import { postUploadFileResponse, postAPIResponse } from "@/services/apiRequests";
 
 const JobForm = () => {
     const contextInfo = useContext(AppContext);
@@ -28,6 +29,15 @@ const JobForm = () => {
     const [actualCaptcha, setActualCaptcha] = useState<string>('');
     const [reloadCaptcha, setReloadCaptcha] = useState<boolean>(false);
     const [captchaKey, setCaptchaKey] = useState<number>(0);
+
+    const [isRedirecting, setIsRedirecting] = useState(false);
+
+    useEffect(() => {
+        if (!contextInfo.jobPostId || !contextInfo.jobCode || !contextInfo.jobTitle) {
+            setIsRedirecting(true);
+            router.push("/career-v2");
+        }
+    }, [contextInfo.jobPostId, contextInfo.jobCode, contextInfo.jobTitle, router]);
 
     const experienceOptions = [
         { value: "0", label: "Fresher" },
@@ -98,16 +108,8 @@ const JobForm = () => {
         country_of_residence: "India",
         city_name: "",
         resume_id: "",
-        captcha: "",
+        user_captcha_input: "",
         education_details: [
-            {
-                degree_name: "",
-                course_name: "",
-                institute_name: "",
-                university_name: "",
-                passing_year: "",
-                percentage: "",
-            },
             {
                 degree_name: "",
                 course_name: "",
@@ -130,11 +132,13 @@ const JobForm = () => {
     };
 
     const handleSubmitData = async (data: any) => {
-        const response = await serverRequest(data, POST_JOB_ENDPOINT, CONSTANTS.REQUEST_POST);
+        const response = await postAPIResponse(POST_JOB_ENDPOINT, data);
         if (response?.code == "SUC200") {
-            router.push("/thanks");
+            // router.push("/thanks");
         } else {
-            setSubmitSuccess(true);
+            setSubmitSuccess(false);
+            setSubmitMsg(true);
+            setAlertMsg(response?.message || "Something went wrong while submitting the form.");
             contextInfo.setIsLoading(false);
         }
     };
@@ -151,28 +155,34 @@ const JobForm = () => {
             <Formik
                 initialValues={initialValues}
                 validationSchema={JobApplicationSchema}
+                enableReinitialize={true}
                 onSubmit={(values, action) => {
-                    if (values.total_experience == "15") {
-                        values.total_experience = values.other_experience;
-                    } else if (values.total_experience == "0") {
-                        delete values["experience_details"][0];
+                    const formValues = { ...values };
+
+                    if (formValues.total_experience == "15") {
+                        formValues.total_experience = formValues.other_experience;
+                    } else if (formValues.total_experience == "0") {
+                        formValues.experience_details = [];
                     }
+
                     const {
                         current_openings,
                         location,
                         other_experience,
-                        captcha,
+                        user_captcha_input,
                         job_code,
                         ...submittedValue
-                    } = values;
-                    const { experience_details, ...valuesWithOutExperience } =
-                        submittedValue;
-                    const submittedData =
-                        Object.keys(values["experience_details"]).length == 0
-                            ? valuesWithOutExperience
-                            : submittedValue;
+                    } = formValues;
 
-                    if (validateCaptcha(captcha, actualCaptcha)) {
+                    const submittedData = formValues.total_experience === "0"
+                        ? { ...submittedValue, experience_details: [] }
+                        : submittedValue;
+
+                    console.log("Form Submitted. Values processed:", formValues);
+                    console.log("Final data to be sent:", submittedData);
+
+                    if (validateCaptcha(user_captcha_input, actualCaptcha)) {
+                        console.log("Captcha validated successfully.");
                         setReloadCaptcha(prev => !prev);
                         contextInfo.setIsLoading(true);
                         handleSubmitData(submittedData);
@@ -211,7 +221,6 @@ const JobForm = () => {
                     };
 
                     const handleExperienceChange = (selectedValue: any) => {
-                        setFieldValue("total_experience", selectedValue.value);
                         selectedValue.value == "0"
                             ? setShowExpericeFields(false)
                             : setShowExpericeFields(true);
@@ -221,36 +230,28 @@ const JobForm = () => {
                     };
 
                     const handleCountryChange = (selectedValue: any) => {
-                        setFieldValue("country_name", selectedValue.value);
                         selectedValue.value == "India"
                             ? setSelectedCountryIndia(true)
                             : setSelectedCountryIndia(false);
                     };
 
                     const handleStateChange = (selectedValue: any) => {
-                        setFieldValue("state_name", selectedValue.value);
                         selectedValue.value == "Others"
                             ? setSelectedStateOther(true)
                             : setSelectedStateOther(false);
                     };
 
                     const handleFileChange = (selectedFile: any) => {
-                        const fileData = selectedFile.currentTarget.files[0];
-                        if (!fileData) return;
+                        let fileData = selectedFile.currentTarget.files[0];
                         const getFileUploadInfo = async () => {
-                            const formData = new FormData();
-                            formData.append("file", fileData);
-                            try {
-                                const res = await fetch(GET_FILE_UPLOAD_ENDPOINT, {
-                                    method: "POST",
-                                    body: formData,
-                                });
-                                const json = await res.json();
-                                if (json?.data?.media?.orig) {
-                                    setFieldValue("resume_id", json.data.media.orig);
-                                }
-                            } catch (err) {
-                                console.error("File upload error:", err);
+                            const response = await postUploadFileResponse(
+                                `${GET_FILE_UPLOAD_ENDPOINT}`,
+                                fileData
+                            );
+                            if (response && response.code === 'SUC200' && response.data?.media?.orig) {
+                                setFieldValue("resume_id", response.data.media.orig);
+                            } else {
+                                console.error("File upload failed:", response);
                             }
                         };
                         getFileUploadInfo();
@@ -267,6 +268,8 @@ const JobForm = () => {
                                         error={errors.current_openings}
                                         touched={touched.current_openings}
                                         autoComplete="off"
+                                        readOnly={true}
+                                        showLabel={true}
                                     />
                                 </div>
                                 <div className="col-12 col-md-4">
@@ -276,6 +279,8 @@ const JobForm = () => {
                                         error={errors.job_code}
                                         touched={touched.job_code}
                                         autoComplete="off"
+                                        readOnly={true}
+                                        showLabel={true}
                                     />
                                 </div>
                                 <div className="col-12 col-md-4">
@@ -285,10 +290,12 @@ const JobForm = () => {
                                         error={errors.location}
                                         touched={touched.location}
                                         autoComplete="off"
+                                        readOnly={true}
+                                        showLabel={true}
                                     />
                                 </div>
                             </div>
-
+                            <div className="c-divider">&nbsp;</div>
                             {/* ------ Personal Details ------ */}
                             <div className="row">
                                 <div className="col-12">
@@ -297,7 +304,6 @@ const JobForm = () => {
                                     </h3>
                                 </div>
                             </div>
-
                             <div className="row form_grider v1">
                                 <div className="col-12 col-md-4">
                                     <FormField
@@ -354,8 +360,6 @@ const JobForm = () => {
                                         name="gender"
                                         options={contextInfo.genderOptions || []}
                                         placeholder="Select Gender"
-                                        error={errors.gender}
-                                        touched={touched.gender}
                                     />
                                 </div>
 
@@ -365,8 +369,6 @@ const JobForm = () => {
                                         name="total_experience"
                                         options={experienceOptions}
                                         placeholder="Select Experience in Year"
-                                        error={errors.total_experience}
-                                        touched={touched.total_experience}
                                         onChange={handleExperienceChange}
                                     />
                                 </div>
@@ -398,7 +400,7 @@ const JobForm = () => {
                                     </div>
                                 )}
                             </div>
-
+                            <div className="c-divider">&nbsp;</div>
                             {/* ------ Educational Details ------ */}
                             <div className="row">
                                 <div className="col-12">
@@ -407,7 +409,6 @@ const JobForm = () => {
                                     </h3>
                                 </div>
                             </div>
-
                             <div className="row form_grider v1">
                                 <FieldArray
                                     name="education_details"
@@ -420,7 +421,7 @@ const JobForm = () => {
                                                     <div key={index}>
                                                         <div className="row">
                                                             <div className="col-12">
-                                                                <div className="flex-col md:flex-row md:items-center md:justify-between filter_withBtn">
+                                                                <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-md-between filter_withBtn">
                                                                     <p className="cus_text24 mb-4 mt-4">
                                                                         {educationLabels[index] || "Others"}
                                                                     </p>
@@ -533,6 +534,7 @@ const JobForm = () => {
                             {/* ------ Employment Details ------ */}
                             {showExpericeFields && (
                                 <>
+                                    <div className="c-divider">&nbsp;</div>
                                     <div className="row">
                                         <div className="col-12">
                                             <h3 className="cus_text30 text-orange withborder">
@@ -551,7 +553,7 @@ const JobForm = () => {
                                                             <div key={index}>
                                                                 {index > 0 && (
                                                                     <div className="row">
-                                                                        <div className="col-12 flex justify-end">
+                                                                        <div className="col-12 d-flex justify-content-end">
                                                                             <button
                                                                                 type="button"
                                                                                 className="cus_btn2 mb-4 mt-4 no_zIndex orange"
@@ -634,7 +636,7 @@ const JobForm = () => {
                                                                 </div>
                                                             </div>
                                                         ))}
-                                                        <div className="flex">
+                                                        <div className="d-flex">
                                                             <button
                                                                 type="button"
                                                                 className="cus_btn2 no_zIndex orange"
@@ -659,7 +661,7 @@ const JobForm = () => {
                                     </div>
                                 </>
                             )}
-
+                            <div className="c-divider">&nbsp;</div>
                             {/* ------ Contact & Address ------ */}
                             <div className="row">
                                 <div className="col-12">
@@ -677,8 +679,6 @@ const JobForm = () => {
                                         name="country_name"
                                         options={contextInfo.countryOptions || []}
                                         placeholder="Select Country"
-                                        error={errors.country_name}
-                                        touched={touched.country_name}
                                         onChange={handleCountryChange}
                                     />
                                 </div>
@@ -691,8 +691,6 @@ const JobForm = () => {
                                             name="state_name"
                                             options={contextInfo.statesOptions || []}
                                             placeholder="Select State"
-                                            error={errors.state_name}
-                                            touched={touched.state_name}
                                             onChange={handleStateChange}
                                         />
                                     </div>
@@ -736,8 +734,6 @@ const JobForm = () => {
                                         name="nationality"
                                         options={contextInfo.nationalityOptions || []}
                                         placeholder="Select Nationality"
-                                        error={errors.nationality}
-                                        touched={touched.nationality}
                                     />
                                 </div>
                                 <div className="col-12 col-md-4">
@@ -828,9 +824,9 @@ const JobForm = () => {
                                         />
                                         <FormField
                                             label="Enter Captcha*"
-                                            name="captcha"
-                                            error={errors.captcha}
-                                            touched={touched.captcha}
+                                            name="user_captcha_input"
+                                            error={errors.user_captcha_input}
+                                            touched={touched.user_captcha_input}
                                             maxLength={6}
                                             autoComplete="off"
                                         />

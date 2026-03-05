@@ -10,10 +10,11 @@ interface FormFieldProps extends React.InputHTMLAttributes<HTMLInputElement | HT
     rows?: number;
     maxLength?: number;
     autoComplete?: string;
+    showLabel?: boolean;
 }
 
 const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldProps>(
-    ({ type = 'text', label, name, error, touched, maxLength, autoComplete, ...rest }, ref) => {
+    ({ type = 'text', label, name, error, touched, maxLength, autoComplete, showLabel = false, ...rest }, ref) => {
 
         const [field, meta] = useField({ name, type: type === 'textarea' ? 'text' : type });
         const hasError = (touched || meta.touched) && (error || meta.error);
@@ -42,9 +43,9 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
 
         return (
             <div className={containerClassName}>
-                <label htmlFor={name} className="form_grider_wrap_label">
+                {showLabel && <label htmlFor={name} className="form_grider_wrap_label">
                     {label}
-                </label>
+                </label>}
                 {type === 'textarea' ? (
                     <textarea
                         id={name}
