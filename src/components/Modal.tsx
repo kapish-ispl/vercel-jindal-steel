@@ -26,15 +26,15 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
     if (!isOpen || !mounted) return null;
 
     return createPortal(
-        <div className="custom_modal_overlay" onClick={onClose}>
-            <div className="custom_modal_container" onClick={(e) => e.stopPropagation()} data-lenis-ignore>
-                <div className="custom_modal_header">
-                    <h2 className="custom_modal_title">{title}</h2>
-                    <button onClick={onClose} className="custom_modal_close_btn">
+        <div className="c-modal-v2" onClick={onClose}>
+            <div className="c-modal-v2__container" onClick={(e) => e.stopPropagation()} data-lenis-ignore>
+                <div className="c-modal-v2__header">
+                    <h2 className="c-modal-v2__title">{title}</h2>
+                    <button onClick={onClose} className="c-modal-v2__close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div className="custom_modal_content">
+                <div className="c-modal-v2__body">
                     {children}
                 </div>
             </div>

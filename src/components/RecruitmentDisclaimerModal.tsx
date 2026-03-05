@@ -13,7 +13,7 @@ const RecruitmentDisclaimerModal: FC<RecruitmentDisclaimerModalProps> = ({ isOpe
             onClose={onClose}
             title="Recruitment Disclaimer"
         >
-            <div className="modal_disclaimer_content">
+            <div className="c-modal-v2__body-content">
                 <h4>Public Notice – Fake Job Offers</h4>
                 <p>
                     We, Jindal Steel and its group companies, have observed fraudulent individuals issuing fake job offers in our name and asking applicants to pay processing fees or deposit money via email or phone calls.
@@ -27,6 +27,9 @@ const RecruitmentDisclaimerModal: FC<RecruitmentDisclaimerModalProps> = ({ isOpe
                 <p>
                     If you receive any interview call or job offer claiming to be from us, <strong>verify it only through our official website (<a href="https://www.jindalsteel.com" target="_blank" rel="noopener noreferrer" className="modal_disclaimer_link">www.jindalsteel.com</a>)</strong> or directly with our HR department.
                 </p>
+                <div className="c-modal-v2__footer">
+                    <button className="btn-primary-green" onClick={onClose} type="button">Okay</button>
+                </div>
             </div>
         </Modal>
     );

@@ -2,39 +2,46 @@
 @use '../core/mixins' as *;
 @use '../components/generic/sizes' as *;
 
-.action-btn{
+.action-btn {
     @include transition(all 0.3s ease-in-out);
-    >a{
+
+    >a {
         color: var(--color-accent-green);
         text-decoration: none;
         display: inline-block;
-        .icon{
+
+        .icon {
             @include font-size(45);
         }
     }
-    &:hover{
+
+    &:hover {
         transform: translateX(20px);
-            .icon {
-                color: var(--color-primary) !important;
-            }
+
+        .icon {
+            color: var(--color-primary) !important;
+        }
     }
 
-    & .leftarrow{
+    & .leftarrow {
         color: var(--color-accent-green);
         text-decoration: none;
         display: inline-block;
-        .icon{
-            @include font-size(45); 
+
+        .icon {
+            @include font-size(45);
         }
     }
-    &:hover{
+
+    &:hover {
         transform: translateX(20px);
-            .icon {
-                color: var(--color-primary) !important;
-            }
+
+        .icon {
+            color: var(--color-primary) !important;
+        }
     }
 
-        &.sector-btn,
+    &.sector-btn,
     &.slider-btn {
         @include flexbox;
         @include align-items(center);
@@ -135,6 +142,7 @@
         }
     }
 }
+
 .u-btn {
     &.hover-effect2 {
         @include transition(all 0.3s ease-in);
@@ -162,5 +170,50 @@
                 color: #fff !important;
             }
         }
+    }
+}
+
+.btn-primary-green {
+    padding: 10px 22px;
+    @include flexbox;
+    @include justify-content(center);
+    @include align-items(center);
+    @include font-size(16);
+    font-weight: 400;
+    text-transform: uppercase;
+    background-color: #4FB848;
+    @include border-radius(5px);
+    // width: 100%;
+    min-width: 120px;
+    border: unset;
+    color: #fff !important;
+    transition: background-color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: darken(#4FB848, 5%);
+    }
+}
+
+.btn-outline-green {
+    padding: 10px 22px;
+    @include flexbox;
+    @include justify-content(center);
+    @include align-items(center);
+    @include font-size(16);
+    font-weight: 400;
+    text-transform: uppercase;
+    background-color: transparent;
+    border: 1px solid #4FB848;
+    @include border-radius(5px);
+    // width: 100%;
+    min-width: 120px;
+    color: #4FB848 !important;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #4FB848;
+        color: #fff !important;
     }
 }

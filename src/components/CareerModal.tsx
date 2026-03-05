@@ -120,7 +120,7 @@ const CareerModal: FC<{ open: any; closeModal?: any; data: any }> = ({ data, ope
                     )}
                 </div>
 
-                <div className="modal_disclaimer_content mt-5 border-top pt-4">
+                <div className="c-modal-v2__body-content mt-5 border-top pt-4">
                     <h4>Public Notice – Fake Job Offers</h4>
                     <p>
                         We, Jindal Steel and its group companies, have observed fraudulent individuals issuing fake job offers in our name and asking applicants to pay processing fees or deposit money via email or phone calls.
@@ -136,10 +136,8 @@ const CareerModal: FC<{ open: any; closeModal?: any; data: any }> = ({ data, ope
                     </p>
                 </div>
 
-                <div className="d-flex justify-content-center mb-4">
-                    <div className="action-btn">
-                        <Link className="u-btn clr-white" href={`/job-application-v2`} onClick={() => redirectToJobPage(data)}>Apply Now</Link>
-                    </div>
+                <div className="c-modal-v2__footer">
+                    <Link className="btn-primary-green" href={`/job-application-v2`} onClick={() => redirectToJobPage(data)}>Apply Now</Link>
                 </div>
             </div>
         </Modal>
