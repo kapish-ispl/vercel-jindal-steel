@@ -21,6 +21,9 @@ export interface IFormSchema {
 // Interface for the education details array
 export interface IEducationDetail {
   degree_name: string;
+  course_name?: string;
+  institute_name?: string;
+  university_name?: string;
   passing_year: string;
   percentage: string;
 }
@@ -37,33 +40,29 @@ export interface IExperienceDetail {
 
 // Interface for the main job application form
 export interface IJobApplicationSchema {
-  isTalentForm: boolean;
-  current_openings?: string;
-  skills?: string;
-  department?: string;
-  other_department?: string;
-  location?: string;
+  current_openings: string;
+  job_code: string;
+  location: string;
   name: string;
   dob: Date | null;
+  email: string;
+  alternate_email?: string;
   gender: string;
   total_experience: string;
-  other_experience?: string;
   notice_period?: string;
   nationality: string;
   country_name: string;
   state_name: string;
-  other_state_name?: string;
   pincode: string;
   std_code: string;
   mobile_number: string;
   alternate_mobile_number?: string;
-  email: string;
   address: string;
   city_name: string;
   resume_id: string;
   user_captcha_input: string;
   education_details: IEducationDetail[];
-  experience_details?: IExperienceDetail[];
+  experience_details: IExperienceDetail[];
 }
 
 export interface IQueryFormSchema {
@@ -94,55 +93,27 @@ export const FormSchema: Yup.ObjectSchema<IFormSchema> = Yup.object({
 
 // Schema for the detailed job application
 export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup.object({
-  isTalentForm: Yup.boolean().required(), // Added for clarity
-  current_openings: Yup.string().when("isTalentForm", {
-    is: false, // More direct and type-safe than using a function
-    then: (schema) => schema.required("Select Current Openings").trim(),
-  }),
-  skills: Yup.string().when("isTalentForm", {
-    is: true,
-    then: (schema) => schema.required("Enter Sub function or Specialty").trim(),
-  }),
-  department: Yup.string().when("isTalentForm", {
-    is: true,
-    then: (schema) => schema.required("Select Department"),
-  }),
-  other_department: Yup.string().when("department", {
-    is: "Others",
-    then: (schema) => schema.required("Enter Other Department").trim(),
-  }),
-  location: Yup.string().when("isTalentForm", {
-    is: false,
-    then: (schema) => schema.required("Select Location"),
-  }),
-  name: Yup.string().required("Enter your Name"),
+  current_openings: Yup.string().required("Enter Job Position").trim(),
+  job_code: Yup.string().required("Enter Job Code").trim(),
+  location: Yup.string().required("Enter Job Location").trim(),
+  name: Yup.string().required("Enter your Name").trim(),
   dob: Yup.date()
-    .nullable() // Allow null as an initial value
+    .nullable()
     .max(new Date(new Date().setFullYear(new Date().getFullYear() - 18)), "You must be at least 18 years old")
     .required("Enter your Date of Birth"),
+  email: Yup.string().email("Invalid email format").required("Enter your Email Id").trim(),
+  alternate_email: Yup.string().email("Invalid email format").trim(),
   gender: Yup.string().required("Select your Gender").trim(),
   total_experience: Yup.string().required("Select your Experience").trim(),
-  other_experience: Yup.string().when("total_experience", {
-    is: "15+", // Assuming '15' means 15+
-    then: (schema) => schema.required("Please specify your experience").trim(),
-  }),
-  notice_period: Yup.string().when("total_experience", {
-    is: (val: string) => val !== "0", // Check if experience is not "Fresher"
-    then: (schema) => schema.required("Select your Notice Period").trim(),
-  }),
+  notice_period: Yup.string().trim(),
   nationality: Yup.string().required("Select your Nationality").trim(),
   country_name: Yup.string().required("Select your Country Name").trim(),
   state_name: Yup.string().required("Enter your State Name").trim(),
-  other_state_name: Yup.string().when("state_name", {
-    is: "Others",
-    then: (schema) => schema.required("Enter your Other State Name").trim(),
-  }),
   pincode: Yup.string()
     .matches(pincodeRegExp, "Enter a valid Pincode")
     .required("Enter your Pincode")
     .trim(),
   std_code: Yup.string()
-    .matches(/^\+\d{1,4}$/, "Enter a valid Country Code (e.g., +91)")
     .required("Enter your Country Code")
     .trim(),
   mobile_number: Yup.string()
@@ -152,7 +123,6 @@ export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup
   alternate_mobile_number: Yup.string()
     .matches(phoneRegExp, "Enter a valid 10-digit Mobile Number")
     .trim(),
-  email: Yup.string().email("Invalid email format").required("Enter your Email Id").trim(),
   address: Yup.string().required("Enter your Address").trim(),
   city_name: Yup.string().required("Enter your City Name").trim(),
   resume_id: Yup.string().required("Please upload your resume").trim(),
@@ -161,6 +131,9 @@ export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup
     .of(
       Yup.object({
         degree_name: Yup.string().required("Enter your Board/Degree Name").trim(),
+        course_name: Yup.string().trim(),
+        institute_name: Yup.string().trim(),
+        university_name: Yup.string().trim(),
         passing_year: Yup.string()
           .matches(yearRegExp, "Enter a valid Passing Year")
           .required("Enter your Passing Year")
@@ -171,39 +144,32 @@ export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup
           .trim(),
       })
     )
-    .default([]) // This ensures the field is never undefined, fixing the type error
-    .min(1, "At least one education detail is required"), // Added for robustness
-  experience_details: Yup.array().when("total_experience", {
-    is: (val: string) => val !== "0",
-    then: (schema) =>
-      schema.of(
-        Yup.object({
-          organization_name: Yup.string().required("Enter your Organization Name").trim(),
-          designation: Yup.string().required("Enter your Designation").trim(),
-          joining_date: Yup.date()
-            .nullable()
-            .max(new Date(), "Joining date cannot be in the future")
-            .required("Enter your Joining Date"),
-          relieving_date: Yup.date()
-            .nullable()
-            .required("Relieving Date is required")
-            // Use a fully type-safe custom test
-            .test(
-              "is-greater",
-              "Relieving Date must be after Joining Date",
-              function (value) {
-                // `this.parent` is now correctly typed as IExperienceDetail
-                const { joining_date } = this.parent as IExperienceDetail;
-                if (!value || !joining_date) return true;
-                return value > joining_date;
-              }
-            ),
-          job_profile: Yup.string().required("Enter your Job Profile").trim(),
-          is_current_employment: Yup.string().required("Select your current Employment").trim(),
-        })
-      )
-        .min(1, "At least one experience detail is required"),
-  }),
+    .required("Education details are required")
+    .min(1, "At least one education detail is required"),
+  experience_details: Yup.array().of(
+    Yup.object({
+      organization_name: Yup.string().required("Enter your Organization Name").trim(),
+      designation: Yup.string().required("Enter your Designation").trim(),
+      joining_date: Yup.date()
+        .nullable()
+        .max(new Date(), "Joining date cannot be in the future")
+        .required("Enter your Joining Date"),
+      relieving_date: Yup.date()
+        .nullable()
+        .required("Relieving Date is required")
+        .test(
+          "is-greater",
+          "Relieving Date must be after Joining Date",
+          function (value) {
+            const { joining_date } = this.parent;
+            if (!value || !joining_date) return true;
+            return value > joining_date;
+          }
+        ),
+      job_profile: Yup.string().required("Enter your Job Profile").trim(),
+      is_current_employment: Yup.string().required("Select your current Employment").trim(),
+    })
+  ).required("Experience details are required"),
 });
 
 export const QueryFormSchema: Yup.ObjectSchema<IQueryFormSchema> = Yup.object({

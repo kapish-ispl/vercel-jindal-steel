@@ -15,6 +15,7 @@ interface FormSelectProps {
     searchable?: boolean;
     error?: string;
     touched?: boolean;
+    onChange?: (option: Option) => void;
 }
 
 const FormSelect: React.FC<FormSelectProps> = ({
@@ -25,6 +26,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
     searchable = false,
     error,
     touched,
+    onChange,
     ...props
 }) => {
     const [field, meta, helpers] = useField(name);
@@ -63,6 +65,7 @@ const FormSelect: React.FC<FormSelectProps> = ({
         helpers.setValue(option.value);
         helpers.setTouched(true);
         setIsOpen(false);
+        if (onChange) onChange(option);
     };
 
     const containerClassName = `form_grider_wrap ${hasError ? "hasError" : ""}`;

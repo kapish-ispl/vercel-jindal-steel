@@ -8,14 +8,16 @@ interface FormFieldProps extends React.InputHTMLAttributes<HTMLInputElement | HT
     error?: string;
     touched?: boolean;
     rows?: number;
-    ref?: React.RefObject<HTMLInputElement | HTMLTextAreaElement>;
+    maxLength?: number;
+    autoComplete?: string;
 }
 
 const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldProps>(
-    ({ type = 'text', label, name, error, touched, ...rest }, ref) => {
+    ({ type = 'text', label, name, error, touched, maxLength, autoComplete, ...rest }, ref) => {
 
-        const hasError = touched && !!error;
-        const [field, meta] = useField({ name, type, ...rest });
+        const [field, meta] = useField({ name, type: type === 'textarea' ? 'text' : type });
+        const hasError = (touched || meta.touched) && (error || meta.error);
+        const displayError = error || meta.error;
 
         const containerClassName = `form_grider_wrap ${hasError ? "hasError" : ""}`;
 
@@ -46,24 +48,28 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
                 {type === 'textarea' ? (
                     <textarea
                         id={name}
-                        placeholder={label}
                         {...field}
+                        {...rest}
+                        placeholder={label}
                         className="form_grider_wrap_field"
+                        maxLength={maxLength}
+                        autoComplete={autoComplete}
                         ref={ref as React.Ref<HTMLTextAreaElement>}
-                        {...(rest as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
                     />
                 ) : (
                     <input
                         id={name}
                         {...field}
+                        {...rest}
                         placeholder={label}
                         type={type}
                         className="form_grider_wrap_field"
+                        maxLength={maxLength}
+                        autoComplete={autoComplete}
                         ref={ref as React.Ref<HTMLInputElement>}
-                        {...(rest as React.InputHTMLAttributes<HTMLInputElement>)}
                     />
                 )}
-                {hasError && <p className="form_grider_wrap_helper">{error}</p>}
+                {hasError && <p className="form_grider_wrap_helper">{displayError}</p>}
             </div>
         );
     }

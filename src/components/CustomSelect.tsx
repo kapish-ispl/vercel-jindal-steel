@@ -135,11 +135,18 @@ export default function CustomSelect({
             <AnimatePresence>
                 {isOpen && (
                     <motion.ul
-                        className="dropdown-menu show w-100 mt-1"
+                        className="dropdown-menu show w-100 mt-1 shadow"
                         initial={{ opacity: 0, scaleY: 0 }}
                         animate={{ opacity: 1, scaleY: 1 }}
                         exit={{ opacity: 0, scaleY: 0 }}
-                        style={{ transformOrigin: "top" }}
+                        style={{
+                            transformOrigin: "top",
+                            maxHeight: "300px",
+                            overflowY: "auto",
+                            display: "block",
+                            zIndex: 1050
+                        }}
+                        onWheel={(e) => e.stopPropagation()}
                     >
                         {filteredOptions.length > 0 ? (
                             filteredOptions.map((opt) => (

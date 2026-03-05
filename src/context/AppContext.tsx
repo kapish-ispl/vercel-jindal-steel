@@ -24,6 +24,16 @@ type contextType = {
     setIsLoading: Dispatch<SetStateAction<boolean>>;
     setAudioState: Dispatch<SetStateAction<boolean>>;
     setMenuType: Dispatch<SetStateAction<string>>;
+    jobPostId: string;
+    setJobPostId: Dispatch<SetStateAction<string>>;
+    jobTitle: string;
+    setJobTitle: Dispatch<SetStateAction<string>>;
+    jobLocation: string;
+    setJobLocation: Dispatch<SetStateAction<string>>;
+    jobRole: string;
+    setJobRole: Dispatch<SetStateAction<string>>;
+    jobCode: string;
+    setJobCode: Dispatch<SetStateAction<string>>;
     genderOptions: Option[];
     nationalityOptions: Option[];
     degreeOptions: Option[];
@@ -48,6 +58,16 @@ export const AppContext = createContext<contextType>({
     setIsLoading: () => { },
     setAudioState: () => { },
     setMenuType: () => { },
+    jobPostId: "",
+    setJobPostId: () => { },
+    jobTitle: "",
+    setJobTitle: () => { },
+    jobLocation: "",
+    setJobLocation: () => { },
+    jobRole: "",
+    setJobRole: () => { },
+    jobCode: "",
+    setJobCode: () => { },
     genderOptions: [],
     nationalityOptions: [],
     degreeOptions: [],

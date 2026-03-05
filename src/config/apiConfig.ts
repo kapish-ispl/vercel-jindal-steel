@@ -9,3 +9,5 @@ export const HEADER_MENU_ENDPOINT = `header-main-menu`;
 export const FOOTER_MENU_ENDPOINT = `footer-bottom-menu`;
 export const FOOTER_CONTENT_BLOCK_ENDPOINT = `footerv2`;
 export const POST_FORM_ENDPOINT = `${API_URL}/v1/form/save`;
+export const POST_JOB_ENDPOINT = `${API_URL}/v1/job/post`;
+export const GET_FILE_UPLOAD_ENDPOINT = `${API_URL}/v1/upload-file/upload`;
