@@ -29,6 +29,7 @@ const GallerySlider = dynamic(() => import("@/utils/GallerySlider"), { ssr: fals
 const StackSlider = dynamic(() => import("@/utils/StackSlider"), { ssr: false });
 const CategorySlider = dynamic(() => import("@/utils/CategorySlider"), { ssr: false });
 const CustomContentSliders = dynamic(() => import("@/utils/CustomContentSliders"), { ssr: false });
+const ProductForm = dynamic(() => import("@/components/Forms/ProductForm"), { ssr: false });
 
 
 
@@ -49,6 +50,10 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "splitanimation") {
                     const props = attributesToProps(domNode.attribs);
                     return <SplitAnimation text={String(props.text)} />;
+                }
+                if (domNode.name === "productform") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <ProductForm pageTitle={String(props.pageTitle)} />;
                 }
                 if (domNode.name === "cardswipeslider") {
                     return <CardSwipeSlider />
