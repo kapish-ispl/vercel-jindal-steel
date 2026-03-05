@@ -292,4 +292,27 @@
         line-height: 1.5;
     }
     }
+   .cus_btn2{
+            padding: 10px 15px;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            @include border-radius(8px);
+            max-width: 150px;
+            width: 100%;
+            border: none;
+            max-width: 150px;
+            margin: 10px 0px;
+        }
+        .button_wrap{
+           .cus_btn2{
+            max-width: 250px;
+           } 
+        }
+        .form_captcha_wrap{
+            @include flexbox;
+            @include flex-direction(column, vertical);
+            @include mq(tablet){
+                @include flex-direction(row, horizontal);
+            }
+        }
 }

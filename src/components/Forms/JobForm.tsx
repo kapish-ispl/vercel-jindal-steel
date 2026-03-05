@@ -420,7 +420,7 @@ const JobForm = () => {
                                                     <div key={index}>
                                                         <div className="row">
                                                             <div className="col-12">
-                                                                <div className="flex flex-col md:flex-row md:items-center md:justify-between filter_withBtn">
+                                                                <div className="flex-col md:flex-row md:items-center md:justify-between filter_withBtn">
                                                                     <p className="cus_text24 mb-4 mt-4">
                                                                         {educationLabels[index] || "Others"}
                                                                     </p>
@@ -505,7 +505,7 @@ const JobForm = () => {
                                                     </div>
                                                 ))}
                                                 {canAddMore && (
-                                                    <div className="flex">
+                                                    <div className="d-flex">
                                                         <button
                                                             type="button"
                                                             className="cus_btn2 no_zIndex orange"
@@ -858,7 +858,7 @@ const JobForm = () => {
 
                             <div className="row">
                                 <div className="col-12">
-                                    <div className="button_wrap flex">
+                                    <div className="button_wrap d-flex">
                                         <button
                                             type="submit"
                                             className="cus_btn2 no_zIndex orange"
