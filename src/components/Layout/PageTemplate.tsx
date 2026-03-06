@@ -30,6 +30,7 @@ const StackSlider = dynamic(() => import("@/utils/StackSlider"), { ssr: false })
 const CategorySlider = dynamic(() => import("@/utils/CategorySlider"), { ssr: false });
 const CustomContentSliders = dynamic(() => import("@/utils/CustomContentSliders"), { ssr: false });
 const JobForm = dynamic(() => import("@/components/Forms/JobForm"), { ssr: false });
+const VerticalCarousel = dynamic(() => import("@/utils/VerticalCarousel"), { ssr: false });
 
 
 
@@ -69,6 +70,10 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "cardstackslider") {
                     const props = attributesToProps(domNode.attribs);
                     return <CardStackSlider {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                }
+                if (domNode.name === "verticalcarousel") {
+                    const props = attributesToProps(domNode.attribs);
+                    return <VerticalCarousel {...props} data={domToReact(domNode.children as DOMNode[])} />;
                 }
                 if (domNode.name == "customcontentsliders") {
                     const props = attributesToProps(domNode.attribs);
