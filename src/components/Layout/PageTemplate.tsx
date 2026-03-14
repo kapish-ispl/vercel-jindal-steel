@@ -31,7 +31,7 @@ const CategorySlider = dynamic(() => import("@/utils/CategorySlider"), { ssr: fa
 const CustomContentSliders = dynamic(() => import("@/utils/CustomContentSliders"), { ssr: false });
 const JobForm = dynamic(() => import("@/components/Forms/JobForm"), { ssr: false });
 const VerticalCarousel = dynamic(() => import("@/utils/VerticalCarousel"), { ssr: false });
-
+const CustomWheelSection = dynamic(() => import("@/utils/CustomWheelSection"), { ssr: false });
 
 
 const PageTemplate = ({ data }: any) => {
@@ -187,6 +187,15 @@ const PageTemplate = ({ data }: any) => {
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomHorizontalScroll {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
+
+                if (domNode.name === "customwheelsection") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CustomWheelSection {...props}>
+                        {children}
+                    </CustomWheelSection>;
+                }
+             
                 if (domNode.name === "categoryslider") {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);

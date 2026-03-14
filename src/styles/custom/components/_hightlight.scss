@@ -20,6 +20,13 @@
         margin-bottom: 70px;
         height: calc(100% - 70px);
     }
+    &.border-none {
+        border-color: var(--color-accent-peach);
+        @include mq(tablet){
+            border-left:none;
+            padding-left: 0px;
+        }
+    }
     &.border-orng{
         border-color: var(--color-primary);
     }
@@ -31,6 +38,9 @@
     }
     &.border-blue{
         border-color: var(--color-accent-blue);
+    }
+    &.border-peach{
+        border-color: var(--color-accent-peach);
     }
     &__top{
         @include flexbox;
@@ -75,6 +85,12 @@
                  min-height: 155px;
                 }   
             }
+            &.min-height-0 { 
+                min-height: 0px;
+                 @include mq(tablet-max){
+                 min-height: 0px;
+                }   
+            }
         }
         .action-btn {
             position: absolute;
@@ -84,6 +100,16 @@
                     color: inherit !important;
                 }
             }
+            &.bottom-0 {
+                bottom:0;
+            }
         }
+
+        &.min-height-140 {
+                min-height: 130px; 
+                 @include mq(tablet-max){
+                 min-height: 140px;
+                }
+            }
     }
 }
