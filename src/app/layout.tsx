@@ -47,8 +47,7 @@ export default function RootLayout({
                 disableTransitionOnChange
               >
                 <main>
-                  {children} 
-                  
+                  {children}
                 </main>
                 <Footer />
               </ThemeProvider>

@@ -168,6 +168,18 @@
 
 }
 
+.mb-30 {
+    margin-bottom: 25px;
+
+    @include mq(tablet-max) {
+        margin-bottom: 28px;
+    }
+
+    @include mq(desktop-wide) {
+        margin-bottom: 30px;
+    }
+}
+
 .mb-35 {
     margin-bottom: 20px;
 
@@ -3237,9 +3249,9 @@ ul.arrowbulletList {
         
     }
     &.withbgimg {
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
     }
     & .container {
         position: relative;

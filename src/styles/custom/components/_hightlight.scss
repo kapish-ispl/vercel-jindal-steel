@@ -113,3 +113,152 @@
             }
     }
 }
+
+.c-datahighlight {
+     position: relative;
+     padding: 45px 0px;
+
+    @include mq(tablet-max) {
+        padding: 70px 0px;
+    }
+
+    @include mq(desktop) {
+        padding: 90px 0px;
+    }
+
+    @include mq(desktop-wide) {
+          padding: 120px 0px;
+    }
+
+    @include mq(desktop-wide-max) {
+          padding: 150px 0px;
+    }
+    &:before {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.24) 25%, rgba(0, 0, 0, 0.24) 75%, rgba(0, 0, 0, 0.4) 100%);
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+    }
+    &.withbgimg {
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    & .container {
+        position: relative;
+        z-index: 2;
+    }
+  
+}
+
+.c-timelineContent {
+    width: 100%;
+    position: relative;
+    padding-left:15px;
+    &__item {
+        min-height: 103px;
+        padding-top:30px;
+
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding-left:30px;
+        &:after {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background-color: var(--color-accent-olive);
+            left: 0;
+            top: 0;
+            z-index:1;
+             @include mq(tablet-max) {
+                left:50%;
+                transform: translateX(-50%);
+             }
+        }
+        &:before {
+            content: "";
+            width: 30px;
+            height: 30px;
+            z-index: 2;
+            background:url('https://docs.jindalsteel.in/document/124/1773655720_dots.png') no-repeat center center  !important;
+            background-size: 30px 30px !important;
+            position: absolute;
+            top:50%;
+            transform: translateY(-50%);
+            left: -15px;
+            @include mq(tablet-max) {
+                width: 40px;
+                height: 40px;
+                background-size: 40px 40px !important;
+                left:50%;
+                margin-left:-20px;
+            }
+        }
+        >div{
+            flex: 1;
+        }
+        & .head {
+            margin-bottom: 10px;
+            @include mq(tablet-max) {
+                margin-bottom: 0px;
+                text-align: right;
+                padding-right:64px;
+                max-width: 40%;
+            }
+        }
+        & .content {
+             @include mq(tablet-max) {
+                text-align: left;
+                padding-left:64px;
+                max-width: 40%;
+            }
+        }
+
+        @include mq(tablet-max) {
+            min-height: 143px;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding-left: 0px;
+            padding-top: 0px;
+        }
+         @include mq(desktop) {
+             min-height: 153px;
+         }
+    }
+     @include mq(tablet-max) {
+        &:after {
+            content: "";
+            top:0;
+            left:50%;
+            margin-left:-1px;
+            width: 20px;
+            height: 52px;
+            position: absolute;
+            z-index: 2;
+            background: rgb(247, 246, 246);
+             @include mq(desktop) {
+                 height: 56px;
+             }
+        }
+        &:before {
+            content: "";
+            bottom:0;
+            left:50%;
+            margin-left:-1px;
+            width: 20px;
+            height: 56px;
+            
+            position: absolute;
+            z-index: 2;
+            background: rgb(247, 246, 246);
+        }
+     }
+}

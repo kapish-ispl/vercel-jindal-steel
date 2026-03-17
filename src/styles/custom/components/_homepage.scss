@@ -238,6 +238,23 @@
             }
         }
     }
+    &.withborder {
+        border-top:1px solid;
+        padding-top:16px;
+        @include mq(tablet-max) {
+            padding-top:20px;
+        }
+       
+    }
+     &.border-orange {
+            border-color: var(--color-primary);
+        }
+        &.border-olive {
+            border-color: var(--color-accent-olive);
+        }
+        &.border-blue{
+            border-color: var(--color-accent-blue);
+        }
 }
 
 .c-legacy__wrapper {
