@@ -3526,3 +3526,13 @@ ul.arrowbulletList {
     max-width: 1050px;
     width: 100%;
 }
+
+.width-700 {
+    max-width: 700px;
+    width: 100%;
+}
+
+.contentBorder {
+    border-bottom: 1px solid var(--color-white);
+    padding: 10px 0px;
+}

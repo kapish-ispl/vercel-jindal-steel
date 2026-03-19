@@ -84,6 +84,10 @@
 
 .c-tabWrapper {
     .accordion__media {
+        @include border-radius(8px);
+        overflow: hidden;
+        position: relative;
+
         &::before {
             content: "";
             position: absolute;
@@ -93,6 +97,10 @@
             height: 100%;
             background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.6) 100%);
 
+        }
+
+        img {
+            @include border-radius(8px);
         }
     }
 }
