@@ -32,7 +32,7 @@ const CustomContentSliders = dynamic(() => import("@/utils/CustomContentSliders"
 const JobForm = dynamic(() => import("@/components/Forms/JobForm"), { ssr: false });
 const VerticalCarousel = dynamic(() => import("@/utils/VerticalCarousel"), { ssr: false });
 const CustomWheelSection = dynamic(() => import("@/utils/CustomWheelSection"), { ssr: false });
-
+const CircleSlider = dynamic(() => import("@/utils/CircleSlider"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -194,6 +194,14 @@ const PageTemplate = ({ data }: any) => {
                     return <CustomWheelSection {...props}>
                         {children}
                     </CustomWheelSection>;
+                }
+
+                if (domNode.name === "circleslider") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CircleSlider {...props}>
+                        {children}
+                    </CircleSlider>;
                 }
              
                 if (domNode.name === "categoryslider") {
