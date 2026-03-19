@@ -33,6 +33,7 @@ const JobForm = dynamic(() => import("@/components/Forms/JobForm"), { ssr: false
 const VerticalCarousel = dynamic(() => import("@/utils/VerticalCarousel"), { ssr: false });
 const CustomWheelSection = dynamic(() => import("@/utils/CustomWheelSection"), { ssr: false });
 const CircleSlider = dynamic(() => import("@/utils/CircleSlider"), { ssr: false });
+const CustomAccordions = dynamic(() => import("@/utils/CustomAccordions"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -74,6 +75,11 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "verticalcarousel") {
                     const props = attributesToProps(domNode.attribs);
                     return <VerticalCarousel {...props} data={domToReact(domNode.children as DOMNode[])} />;
+                }
+                if (domNode.name === "customaccordions") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CustomAccordions {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
                 if (domNode.name == "customcontentsliders") {
                     const props = attributesToProps(domNode.attribs);
@@ -203,7 +209,7 @@ const PageTemplate = ({ data }: any) => {
                         {children}
                     </CircleSlider>;
                 }
-             
+
                 if (domNode.name === "categoryslider") {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
