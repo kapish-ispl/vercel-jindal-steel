@@ -2,285 +2,6 @@
 @use '../core/mixins' as *;
 @use '../components/generic/sizes' as *;
 
-// .carousel-wrapper {
-//     width: 100%;
-//     position: relative;
-
-//     .carousel-with-buttons {
-//         @include flex-center;
-//         width: 100%;
-//         position: relative;
-
-//         .carousel-container {
-//             position: relative;
-//             width: 100%;
-//             max-width: 700px;
-//             height: 700px;
-//             overflow: visible;
-//             margin: 0 20px;
-//             perspective: 1000px;
-
-//             .card {
-//                 position: absolute;
-//                 top: 0;
-//                 left: 25%;
-//                 transform: translateX(-50%);
-//                 width: 100%;
-//                 max-width: 459px;
-//                 height: auto;
-//                 cursor: pointer;
-//                 display: flex;
-//                 flex-direction: column;
-//                 align-items: center;
-//                 overflow: hidden;
-//                 @include transition(transform, box-shadow);
-//                 border: none !important;
-
-//                 &:hover {
-//                     @include box-shadow(0 1rem 3rem rgba(0, 0, 0, 0.175));
-//                     transform: translateX(-50%) scale(1.02);
-
-//                     img {
-//                         transform: scale(1.05);
-//                     }
-//                 }
-
-//                 .image-container {
-//                     width: 100%;
-
-//                     height: 100% video {
-//                         max-width: 459px !important;
-//                     }
-
-//                 }
-
-//                 img {
-//                     width: 100%;
-//                     height: 100%;
-//                     object-fit: cover;
-//                     @include transition(transform);
-//                 }
-
-//                 .caption-container {
-//                     @include flex-center;
-//                     width: 100%;
-//                     padding: 16px; // 16px
-//                     min-height: 70px;
-//                     box-sizing: border-box;
-//                     animation: fadeIn 0.5s ease;
-//                     margin-top: 25px; // 20px
-
-
-//                     .caption {
-//                         margin: 0;
-//                         font-weight: 500;
-//                         color: var(--color-secondary);
-//                         line-height: 1.5;
-//                         text-align: center;
-//                         @include font-size(14);
-
-//                         @include mq('tablet') {
-//                             @include font-size(16);
-//                         }
-
-//                         @include mq('desktop-min') {
-//                             @include font-size(18);
-//                         }
-
-//                         @include mq('desktop-wide') {
-//                             @include font-size(19);
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-
-//         /* Navigation buttons */
-//         .nav-button {
-//             position: absolute;
-//             bottom: 50px;
-//             border: none;
-//             @include flex-center;
-//             cursor: pointer;
-//             z-index: 200;
-//             @include box-shadow(0 0.125rem 0.25rem rgba(0, 0, 0, 0.075));
-//             @include transition(all);
-//             flex-shrink: 0;
-//             height: 40px;
-//             @include border-radius(8px);
-
-//             &.left {
-//                 left: 135px;
-//             }
-
-//             &.right {
-//                 right: 0px;
-//             }
-
-//             &:hover {
-//                 background: #495057;
-//                 @include box-shadow(0 0.5rem 1rem rgba(0, 0, 0, 0.15));
-//                 transform: scale(1.1);
-
-//                 svg {
-//                     color: #fff;
-//                 }
-//             }
-
-//             svg {
-//                 width: 28px;
-//                 height: 28px;
-//                 color: #495057;
-//             }
-//         }
-//     }
-
-//     /* Dots container */
-//     .dots-container {
-//         display: flex;
-//         justify-content: center;
-//         gap: 16px; // 16px
-//         margin-top: 16px;
-
-//         .dot {
-//             width: 12px;
-//             height: 12px;
-//             border-radius: 50%;
-//             background: #dee2e6;
-//             border: none;
-//             cursor: pointer;
-//             @include transition(all);
-
-//             &.active {
-//                 background: #495057;
-//                 transform: scale(1.3);
-//             }
-
-//             &:hover {
-//                 background: #adb5bd;
-//             }
-//         }
-//     }
-// }
-
-/* Responsive adjustments */
-// @media (max-width: 800px) {
-//     .carousel-wrapper {
-//         padding: 20px 15px;
-//         max-width: 90%;
-//     }
-
-//     .carousel-container {
-//         max-width: 500px;
-//         height: 340px;
-//         margin: 0 15px;
-//     }
-
-//     .card {
-//         width: 220px;
-//     }
-
-//     .image-container {
-//         height: 160px;
-//     }
-
-//     .caption-container {
-//         padding: 12px;
-//         min-height: 60px;
-//     }
-
-//     .carousel-wrapper .carousel-with-buttons .carousel-container .card .caption-container .caption {
-//         font-size: 13px;
-//     }
-
-//     .nav-button {
-//         width: 40px;
-//         height: 40px;
-//     }
-
-//     .nav-button svg {
-//         width: 22px;
-//         height: 22px;
-//     }
-
-//     .carousel-wrapper .carousel-header h2 {
-//         font-size: 1.5rem;
-//     }
-// }
-
-// @media (max-width: 550px) {
-//     .carousel-container {
-//         max-width: 350px;
-//     }
-
-//     .card {
-//         width: 180px;
-//     }
-
-//     .image-container {
-//         height: 140px;
-//     }
-// }
-
-// .slick-slider{
-//     .custom-arrow{
-//         &.prev{
-//             position: absolute;
-//             left: 0;
-//             top: 30px;
-//             display: none;
-//             @include mq(tablet-max){
-//                 left: -50px;
-//                 display: block;
-//             }
-//         }
-//         &.next{
-//             position: absolute;
-//             right: 0px;
-//             top: 30px;
-//             display: none;
-//             @include transform(rotate(180deg));
-//             @include mq(tablet-max){
-//                 right: -50px;
-//                 display: block;
-//             }
-//         }
-//     }
-// }
-// .category-slider{
-//     margin-bottom: 40px;
-//     @include mq(desktop){
-//         margin-bottom: 60px;
-//     }
-
-//     @include mq(desktop-wide){
-//         margin-bottom: 80px !important;
-//     }
-
-//     >div>.slick-track{
-//         @include flexbox;
-//         @include align-items(center);
-//         .slick-slide.slick-active{
-//             text-align: center;
-//             >div>div>div{
-//                 color: rgba(99, 100, 102, 0.8);
-//             }
-//             &:nth-child(2){
-//                 >div>div>div{
-//                 color: rgba(99, 100, 102, 0.6);
-//             }
-//             }
-//         }
-//     }
-// }
-
-
-/* ---
-============================================
-SECTION 1: STRUCTURAL STYLES
-Base layout for each unique slider component.
-============================================
---- */
 
 /* --- Styles for ProductSlider & CenterModeSlider --- */
 .custom-slider {
@@ -328,13 +49,7 @@ Base layout for each unique slider component.
 
 
 
-/* ---
-============================================
-SECTION 2: REUSABLE VISUAL EFFECT
-Add the ".is-center-mode" class to any slider's wrapper 
-div to enable the scaling and opacity effect.
-============================================
---- */
+
 
 .is-center-mode {
 
@@ -436,7 +151,7 @@ Common styles for navigation elements.
     @include transform(translateY(-50%));
     z-index: 5;
     width: 30px;
-    height: 30px;  
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -555,17 +270,18 @@ Common styles for navigation elements.
         .c-embla__buttons {
             position: absolute;
             top: 100% !important;
-           
+
             width: 60px;
-            left:50%;
+            left: 50%;
             margin-left: -30px;
-             @include mq(tablet-max) {
-                 top: 42% !important;
-                 @include transform(translateY(-50%));
-                  width: 100%;
-                  left:0;
-                  margin-left: 11px;
-             }
+
+            @include mq(tablet-max) {
+                top: 42% !important;
+                @include transform(translateY(-50%));
+                width: 100%;
+                left: 0;
+                margin-left: 11px;
+            }
         }
     }
 
@@ -610,13 +326,14 @@ Common styles for navigation elements.
 
 
         &.c-embla__arrow--prev {
-            left: 3px; 
+            left: 3px;
 
             transform: translateX(-50%) rotate(180deg);
 
             &.norotate {
                 transform: translateX(-50%) rotate(0deg);
             }
+
             & .u-img {
                 width: 12px;
                 height: 23px;
@@ -627,10 +344,12 @@ Common styles for navigation elements.
             right: 20px;
 
             transform: translateX(50%);
+
             &.notransform {
                 transform: none;
                 transform: rotate(180deg);
             }
+
             & .u-img {
                 width: 12px;
                 height: 23px;
@@ -658,8 +377,8 @@ Common styles for navigation elements.
 .c-embla__dot {
     width: 12px;
     height: 12px;
-    @include border-radius(7px);  
-    border:none;
+    @include border-radius(7px);
+    border: none;
     background: #B7B7B7;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -667,7 +386,7 @@ Common styles for navigation elements.
 }
 
 .c-embla__dot.is-selected {
-   background: #636466;
+    background: #636466;
 }
 
 
@@ -1176,7 +895,7 @@ Common styles for navigation elements.
 
 .cus-embla-arrow {
     .c-embla__buttons {
-       
+
 
         >button {
             border: none !important;
@@ -1185,11 +904,11 @@ Common styles for navigation elements.
             height: 30px;
 
             &.c-embla__arrow--prev {
-                left:-3px !important;
+                left: -3px !important;
             }
 
             &.c-embla__arrow--next {
-                right:0px !important;
+                right: 0px !important;
             }
         }
 
@@ -1244,4 +963,37 @@ Common styles for navigation elements.
 
 .fix-width_590 {
     max-width: 590px;
+}
+
+.genricSlider-dots {
+    .c-embla {
+        &.buttons_absolute {
+            @include mq(desktop) {
+
+                .c-embla__buttons {
+                    top: -135px !important;
+                    left: unset;
+                    right: 0px;
+                    margin-left: inherit;
+                    width: 104px !important;
+
+                    .c-embla__arrow {
+                        width: 44px;
+                        height: 44px;
+                        border: 1px solid #636466 !important;
+                        @include border-radius(50%);
+                        min-width: 44px;
+                        @include flexbox;
+                        @include align-items(center);
+                        @include justify-content(center);
+
+                        &--prev {
+                            left: 0 !important;
+                            right: 40px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

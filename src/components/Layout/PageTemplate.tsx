@@ -34,6 +34,7 @@ const VerticalCarousel = dynamic(() => import("@/utils/VerticalCarousel"), { ssr
 const CustomWheelSection = dynamic(() => import("@/utils/CustomWheelSection"), { ssr: false });
 const CircleSlider = dynamic(() => import("@/utils/CircleSlider"), { ssr: false });
 const CustomAccordions = dynamic(() => import("@/utils/CustomAccordions"), { ssr: false });
+const TimelineSlider = dynamic(() => import("@/utils/TimelineSlider"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -188,6 +189,11 @@ const PageTemplate = ({ data }: any) => {
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <StackSlider {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
+                if (domNode.name === "timelineslider") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <TimelineSlider {...props} data={Array.isArray(children) ? children : [children]} />;
+                }
                 if (domNode.name === "customhorizontalscroll") {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
@@ -235,7 +241,7 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "customslidercategory") {
                     const props = attributesToProps(domNode.attribs);
-                    return <CustomSliderCategory {...props} data={domToReact(domNode.children as DOMNode[], {
+                    const children = domToReact(domNode.children as DOMNode[], {
                         replace: (childNode) => {
                             if (childNode instanceof Element) {
                                 if (childNode.name === "animatedcountup") {
@@ -245,7 +251,8 @@ const PageTemplate = ({ data }: any) => {
                                 }
                             }
                         },
-                    })} />;
+                    });
+                    return <CustomSliderCategory {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
                 if (domNode.name === "customtabs") {
                     const props = attributesToProps(domNode.attribs);
