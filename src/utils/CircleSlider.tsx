@@ -13,14 +13,10 @@ export default function CircleSlider({ children }: CircleSliderProps) {
   const descRef = useRef<HTMLDivElement>(null);
 
   const [active, setActive] = useState(0);
+  const [data, setData] = useState<string[]>([]);
 
-  const data = [
-    "Responsible sourcing of raw materials aligned with operational efficiency and compliance standards.",
-    "Efficient production ensuring sustainability.",
-    "Recover valuable materials to minimize waste.",
-    "Reuse resources to promote circular economy.",
-    "Continuous monitoring and optimization."
-  ];
+  // ✅ persistent rotation (IMPORTANT)
+  const rotationRef = useRef(0);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -35,7 +31,15 @@ export default function CircleSlider({ children }: CircleSliderProps) {
 
     let resizeObserver: ResizeObserver;
 
-    /* 🔵 POSITION ITEMS (SAFE) */
+    /* ✅ Extract CMS data */
+    const extractedData: string[] = [];
+    items.forEach((item) => {
+      const desc = item.getAttribute("data-desc") || "";
+      extractedData.push(desc);
+    });
+    setData(extractedData);
+
+    /* 🔵 Position items in circle */
     const positionItems = () => {
       const size = container.offsetWidth;
       if (!size) return;
@@ -53,24 +57,35 @@ export default function CircleSlider({ children }: CircleSliderProps) {
       });
     };
 
-    /* 🔄 ROTATE */
-    const rotateTo = (index: number) => {
+    /* 🔄 Rotation logic (FIXED) */
+    const rotateTo = (
+      index: number,
+      direction: "next" | "prev" | "direct" = "direct"
+    ) => {
       setActive(index);
 
       items.forEach((item) => item.classList.remove("active"));
 
-      const angle = -(360 / total) * index;
+      const step = 360 / total;
+
+      if (direction === "next") {
+        rotationRef.current -= step; // clockwise
+      } else if (direction === "prev") {
+        rotationRef.current += step; // anticlockwise
+      } else {
+        rotationRef.current = -(step * index); // initial/direct
+      }
 
       gsap.to(circle, {
-        rotation: angle,
+        rotation: rotationRef.current,
         duration: 0.6,
         ease: "power3.inOut",
 
         onUpdate: () => {
-          const currentRotation = gsap.getProperty(circle, "rotation");
+          const rot = gsap.getProperty(circle, "rotation");
 
           items.forEach((item) => {
-            gsap.set(item, { rotation: -Number(currentRotation) });
+            gsap.set(item, { rotation: -Number(rot) });
           });
         },
 
@@ -86,40 +101,41 @@ export default function CircleSlider({ children }: CircleSliderProps) {
       });
     };
 
-    /* ✅ INIT FIX (no refresh issue) */
+    /* ✅ Init */
     requestAnimationFrame(() => {
       setTimeout(() => {
         positionItems();
-        rotateTo(0);
+        rotateTo(0, "direct");
       }, 100);
     });
 
-    /* ✅ ResizeObserver (fully responsive) */
+    /* ✅ Resize */
     resizeObserver = new ResizeObserver(() => {
       positionItems();
     });
     resizeObserver.observe(container);
 
-    /* 🖱 CLICK */
+    /* 🖱 Click */
     items.forEach((item, index) => {
-      item.addEventListener("click", () => rotateTo(index));
+      item.addEventListener("click", () => rotateTo(index, "direct"));
     });
 
-    /* 🔥 AUTOPLAY */
+    /* 🔥 Autoplay (always clockwise) */
     let autoPlay = setInterval(() => {
       setActive((prev) => {
         const next = (prev + 1) % total;
-        rotateTo(next);
+        rotateTo(next, "next");
         return next;
       });
     }, 8000);
 
     const stop = () => clearInterval(autoPlay);
+
     const start = () => {
       autoPlay = setInterval(() => {
         setActive((prev) => {
           const next = (prev + 1) % total;
-          rotateTo(next);
+          rotateTo(next, "next");
           return next;
         });
       }, 8000);
@@ -128,14 +144,14 @@ export default function CircleSlider({ children }: CircleSliderProps) {
     container.addEventListener("mouseenter", stop);
     container.addEventListener("mouseleave", start);
 
-    /* 🔘 GLOBAL BUTTON SUPPORT */
+    /* 🔘 Buttons */
     let prevBtn: HTMLElement | null = null;
     let nextBtn: HTMLElement | null = null;
 
     const handleNext = () => {
       setActive((prev) => {
         const next = (prev + 1) % total;
-        rotateTo(next);
+        rotateTo(next, "next");
         return next;
       });
     };
@@ -143,7 +159,7 @@ export default function CircleSlider({ children }: CircleSliderProps) {
     const handlePrev = () => {
       setActive((prev) => {
         const next = (prev - 1 + total) % total;
-        rotateTo(next);
+        rotateTo(next, "prev");
         return next;
       });
     };
@@ -168,7 +184,7 @@ export default function CircleSlider({ children }: CircleSliderProps) {
       setTimeout(() => clearInterval(interval), 5000);
     }
 
-    /* 🧹 CLEANUP */
+    /* 🧹 Cleanup */
     return () => {
       resizeObserver.disconnect();
       clearInterval(autoPlay);
@@ -194,7 +210,7 @@ export default function CircleSlider({ children }: CircleSliderProps) {
           className="center-content c-content-24 clr-gray ft_light lh_1-6"
           ref={descRef}
         >
-          {data[active]}
+          {data[active] || ""}
         </div>
       </div>
     </div>
