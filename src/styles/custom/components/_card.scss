@@ -1875,6 +1875,11 @@
 .adjustable__card {
     @include flexbox;
     gap: 20px;
+    @include flex-direction(column, vertical);
+
+    @include mq(tablet-max) {
+        @include flex-direction(row, horizontal);
+    }
 
     .c-embla__container {
         display: flex;
@@ -1955,6 +1960,47 @@
 
         @include mq(tablet-max) {
             padding: 32px;
+        }
+    }
+}
+
+.c-viewBox {
+    background-color: var(--color-white);
+    padding: 16px;
+    @include border-radius(8px);
+    margin-bottom: 10px;
+    height: calc(100% - 10px);
+
+    @include mq(tablet) {
+        padding: 22px;
+    }
+
+    @include mq(tablet-max) {
+        padding: 26px;
+        margin-bottom: 0px;
+    }
+
+    @include mq(desktop-wide) {
+        padding: 32px;
+    }
+
+    &__btn {
+        &-link {
+            background-color: var(--color-accent-green);
+            max-width: 196px;
+            width: 100%;
+            @include flexbox;
+            @include align-items(center);
+            @include justify-content(space-between);
+            padding: 8px 12px;
+            @include border-radius(8px);
+            border: 1px solid var(--color-accent-green);
+            text-decoration: none;
+
+            span {
+                @include font-size(16);
+                font-weight: var(--fontMedium);
+            }
         }
     }
 }

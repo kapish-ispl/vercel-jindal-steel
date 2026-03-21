@@ -58,6 +58,7 @@ const BentoSyncReveal = ({ data }: { data: any }) => {
     const container = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
+        ScrollTrigger.normalizeScroll(true);
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: container.current,
@@ -65,6 +66,9 @@ const BentoSyncReveal = ({ data }: { data: any }) => {
                 end: `+=${SLIDE_DATA.length * 100}%`, // Scroll length
                 scrub: true,
                 pin: true,
+                invalidateOnRefresh: true,
+                refreshPriority: 0,
+
             }
         });
 

@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,36 +11,48 @@ const CustomCircleAnimation = () => {
     const leftCircle = useRef(null);
     const rightCircle = useRef(null);
     const centerContent = useRef(null);
+    // New refs for the text inside circles
+    const leftText = useRef(null);
+    const rightText = useRef(null);
 
-    useEffect(() => {
+    useGSAP(() => {
+        ScrollTrigger.normalizeScroll(true);
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: sectionRef.current,
                     start: "top top",
-                    end: "+=150%", // Adjust this to make the scroll faster or slower
+                    end: "+=150%",
                     scrub: 1,
                     pin: true,
                     anticipatePin: 1,
+                    pinSpacing: true,
+                    invalidateOnRefresh: true,
+
                 }
             });
 
             tl.to(leftCircle.current, {
-                xPercent: 50, // Move toward center
-                backgroundColor: "#d58b61", // The orange merge color
+                xPercent: 50,
+                backgroundColor: "#D78E5E",
                 duration: 2
             }, 0)
                 .to(rightCircle.current, {
-                    xPercent: -50, // Move toward center
-                    backgroundColor: "#d58b61",
-                    opacity: 0, // Fade out the secondary circle
+                    xPercent: -50,
+                    backgroundColor: "#D78E5E",
+                    opacity: 0,
                     duration: 2
+                }, 0)
+                // ADDED: Fade out the circle text as they move
+                .to([leftText.current, rightText.current], {
+                    opacity: 0,
+                    duration: 1 // Fades out halfway through the merge
                 }, 0)
                 .to(centerContent.current, {
                     opacity: 1,
                     scale: 1,
                     duration: 1
-                }, "-=0.5"); // Start appearing just before circles fully merge
+                }, "-=0.5");
 
         }, sectionRef);
 
@@ -48,27 +61,22 @@ const CustomCircleAnimation = () => {
 
     return (
         <section className="esg-integration-wrapper" ref={sectionRef}>
-
             <div className="circles-container" ref={containerRef}>
-                {/* Left Circle (RISE) */}
                 <div className="circle rise-circle" ref={leftCircle}>
-                    <div className="circle-text">
-                        <span>R.I.</span>
-                        <span>S.E</span>
+                    <div className="circle-text c-heading-60 ft_SemiBold lh_1-6" ref={leftText}>
+                        <span>R.I.S.E</span>
                     </div>
                 </div>
 
-                {/* Right Circle (ESG) */}
                 <div className="circle esg-circle" ref={rightCircle}>
-                    <div className="circle-text">
+                    <div className="circle-text c-heading-60 ft_SemiBold lh_1-6" ref={rightText}>
                         <span>E.S.G.</span>
                     </div>
                 </div>
 
-                {/* Overlaid content that appears on merge */}
                 <div className="merged-content" ref={centerContent}>
-                    <h3>R.I. S.E</h3>
-                    <p>Integrated Sustainable Performance</p>
+                    <h3 className='c-heading-60 ft_SemiBold lh_1-6'>R.I. S.E</h3>
+                    <p className='c-content-24 ft_mediun lh_1-6'>Integrated Sustainable Performance</p>
                 </div>
             </div>
         </section>

@@ -108,17 +108,42 @@
         }
 
         &.stat-box {
-            background: #d68a5d;
-            color: white;
+            background: var(--color-tertiary);
+            color: var(--color-secondary);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            text-align: center;
+            text-align: left;
             padding: 20px;
 
+            @include mq(desktop-wide) {
+                padding: 32px
+            }
+
             h4 {
-                font-size: 3rem;
-                margin: 0;
+                @include font-size(20);
+                font-weight: var(--fontMedium);
+                margin-bottom: 10px;
+
+                @include mq(desktop-wide) {
+                    margin-bottom: 16px;
+                    @include font-size(24);
+                }
+            }
+
+            p {
+                @include font-size(16);
+                line-height: 1.6;
+                margin: 0px;
+                font-weight: var(--fontLight);
+
+                @include mq(desktop) {
+                    @include font-size(18);
+                }
+
+                @include mq(desktop-wide) {
+                    @include font-size(20);
+                }
             }
         }
     }
@@ -126,18 +151,20 @@
 
 // Variables
 $circle-size-desktop: 25vw; // Responsive size for desktop
-$circle-size-mobile: 60vw; // Responsive size for mobile
+$circle-size-mobile: 50vw; // Responsive size for mobile
+$circle-size-tablet: 40vw; // Responsive size for tablet
 $rise-color: #3b5271;
 $esg-color: #8ba870;
 
 .esg-integration-wrapper {
-    height: 70vh;
+    height: 90vh !important;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    z-index: 9 !important;
     padding: 0 5%;
     // min-height: 500px;
 
@@ -177,20 +204,19 @@ $esg-color: #8ba870;
 
             .circle-text {
                 text-align: center;
-                font-weight: bold;
-                font-size: clamp(1rem, 2.5vw, 2rem);
+
             }
         }
 
         .rise-circle {
             background-color: $rise-color;
-            left: 10%; // Starting point relative to container width
+            left: 12%; // Starting point relative to container width
             z-index: 2;
         }
 
         .esg-circle {
             background-color: $esg-color;
-            right: 10%; // Starting point relative to container width
+            right: 8%; // Starting point relative to container width
             z-index: 1;
         }
 
@@ -202,20 +228,24 @@ $esg-color: #8ba870;
             opacity: 0;
             transform: scale(0.8);
             pointer-events: none;
+            padding: 20px;
 
-            h3 {
-                font-size: clamp(1.2rem, 3vw, 2rem);
+            h3,
+            p {
+
                 margin: 0;
             }
 
             p {
-                font-size: clamp(0.7rem, 1.2vw, 1rem);
+                max-width: 353px;
             }
+
+
         }
     }
 
     // Mobile Adjustments
-    @media (max-width: 768px) {
+    @media (max-width: 576px) {
         .circles-container {
             height: $circle-size-mobile;
 
@@ -225,11 +255,49 @@ $esg-color: #8ba870;
             }
 
             .rise-circle {
-                left: 5%;
+                left: -9%;
             }
 
             .esg-circle {
-                right: 5%;
+                right: -4%;
+            }
+        }
+    }
+
+    @media screen and (min-width: 577px) and (max-width: 768px) {
+        .circles-container {
+            height: $circle-size-mobile;
+
+            .circle {
+                width: $circle-size-mobile;
+                height: $circle-size-mobile;
+            }
+
+            .rise-circle {
+                left: -12%;
+            }
+
+            .esg-circle {
+                right: -10%;
+            }
+        }
+    }
+
+    @media screen and (min-width: 767px) and (max-width: 1024px) {
+        .circles-container {
+            height: $circle-size-tablet;
+
+            .circle {
+                width: $circle-size-tablet;
+                height: $circle-size-tablet;
+            }
+
+            .rise-circle {
+                left: 1%;
+            }
+
+            .esg-circle {
+                right: -8%;
             }
         }
     }
