@@ -35,6 +35,8 @@ const CustomWheelSection = dynamic(() => import("@/utils/CustomWheelSection"), {
 const CircleSlider = dynamic(() => import("@/utils/CircleSlider"), { ssr: false });
 const CustomAccordions = dynamic(() => import("@/utils/CustomAccordions"), { ssr: false });
 const TimelineSlider = dynamic(() => import("@/utils/TimelineSlider"), { ssr: false });
+const CustomCircleAnimation = dynamic(() => import("@/utils/CustomCircleAnimation"), { ssr: false });
+const BentoSyncReveal = dynamic(() => import("@/utils/BentoSyncReveal"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -61,6 +63,10 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "cardswipeslider") {
                     return <CardSwipeSlider />
                 }
+                if (domNode.name === "customcircleanimation") {
+                    return <CustomCircleAnimation />
+                }
+
                 if (domNode.name === "bluranimation") {
                     const props = attributesToProps(domNode.attribs);
                     return <BlurAnimation text={String(props.text)} />;
@@ -99,6 +105,10 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "customzoomscrolleffectv2") {
                     const props = attributesToProps(domNode.attribs);
                     return <CustomZoomScrollEffectV2 {...props} videourl={String(props.videourl)} />;
+                }
+                if (domNode.name === "bentosyncreveal") {
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <BentoSyncReveal data={Array.isArray(children) ? children : [children]} />;
                 }
 
 

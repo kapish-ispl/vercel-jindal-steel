@@ -11,12 +11,12 @@ const BentoSyncReveal = ({ data }: { data: any }) => {
     const SLIDE_DATA = [
         {
             id: 1,
-            mainImg: "https://picsum.photos/1920/1080?random=0",
-            title: "Structured Safety Monitoring",
-            desc: "Defined reporting and review systems across sites.",
-            stat: "11 Million",
-            statDesc: "Safe Man-hours Achieved",
-            gallery: ["https://picsum.photos/1920/1080?random=1", "https://picsum.photos/1920/1080?random=2", "https://picsum.photos/1920/1080?random=3"]
+            mainImg: "https://docs.jindalsteel.in/document/124/1774037370_25f62f5b64ae854414658c24b29c63f04a783410.png",
+            title: "Responsible Governance",
+            desc: "Oversight and accountability embedded across operations.",
+            stat: "Focus",
+            statDesc: "Board oversight, enterprise risk integration, regulatory compliance and policy governance.",
+            gallery: ["https://docs.jindalsteel.in/document/124/1774037370_01e1f9c1f7b0fa3c12c31340d07844a003a4abd5.png", "https://docs.jindalsteel.in/document/124/1774037370_cfbeedf25f9d7338384a57424c529f3814dffa93.png", "https://docs.jindalsteel.in/document/124/1774037370_772796c4f1c4bb6e7a2fdd302c2f5811cd65ccd7.png"]
         },
         {
             id: 2,
