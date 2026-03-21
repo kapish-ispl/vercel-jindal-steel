@@ -126,18 +126,18 @@ const TimelineSlider = ({ children, data }: TimelineSliderProps) => {
         </div>
 
         <div className="chain-control">
-          <button onClick={handlePrev} disabled={index === 0}>
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-              <rect x="0.5" y="0.5" width="43" height="43" rx="21.5" fill="white" stroke="#636466" />
-              <path d="M25.2227 27.1094L20.1113 21.998L25.2227 16.8867L23.5391 15.2031L16.7442 21.998L23.5391 28.7929L25.2227 27.1094Z" fill="#636466" />
+          <button className='prev' onClick={handlePrev} disabled={index === 0}>
+            <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.5105 19.3984L12.3992 14.2871L17.5105 9.17573L15.827 7.49219L9.0321 14.2871L15.827 21.082L17.5105 19.3984Z" fill="#636466" />
             </svg>
+
           </button>
 
-          <button onClick={handleNext} disabled={index === timelineData.length - 1}>
-            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-              <rect x="43.5" y="0.5" width="43" height="43" rx="21.5" transform="rotate(180 43.5 0.5)" fill="white" stroke="#636466" />
-              <path d="M18.7793 27.1126L23.8887 22.0032L18.7793 16.8938L20.4622 15.2109L27.2545 22.0032L20.4622 28.7955L18.7793 27.1126Z" fill="#636466" />
+          <button className='next' onClick={handleNext} disabled={index === timelineData.length - 1}>
+            <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.5105 19.3984L12.3992 14.2871L17.5105 9.17573L15.827 7.49219L9.0321 14.2871L15.827 21.082L17.5105 19.3984Z" fill="#636466" />
             </svg>
+
           </button>
         </div>
       </div>

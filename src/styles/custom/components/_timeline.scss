@@ -88,6 +88,16 @@
                 cursor: pointer;
                 border: 0.99px solid #636466;
                 @include border-radius(50%);
+                @include flexbox;
+                @include align-items(center);
+                @include justify-content(center);
+
+                &.next {
+                    svg {
+
+                        @include transform(rotate(180deg));
+                    }
+                }
 
                 &:disabled {
                     opacity: 0.3;
