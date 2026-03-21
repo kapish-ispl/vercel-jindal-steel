@@ -1,153 +1,148 @@
 "use client";
 
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  useMemo,
-  ReactNode,
-} from "react";
-import useEmblaCarousel from "embla-carousel-react";
-// Import your arrow icons (using Lucide or your custom IMG URLs)
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useState, useRef, useEffect, ReactNode, ReactElement } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+
+interface TimelineItem {
+  title: string;
+  desc: string;
+}
 
 interface TimelineSliderProps {
-  cls?: string;
-  customcls?: string;
-  items?: number[] | string;
-  data?: ReactNode[];
   children?: ReactNode;
-  containerWidth?: string;
-  bluearrow?: boolean; // logic for arrow color
+  data?: string | TimelineItem[]; // Allow data as a JSON string from CMS
 }
 
-export default function TimelineSlider({
-  cls,
-  customcls,
-  items,
-  data,
-  children,
-  containerWidth = "1440px",
-  bluearrow = false,
-}: TimelineSliderProps) {
+const DOT_SIZE = 32;
+const GAP = 400;
 
-  const parsedItems = useMemo<number[]>(() => {
-    try {
-      if (typeof items === "string") return JSON.parse(items);
-      if (Array.isArray(items)) return items;
-      return [1, 1, 1, 1];
-    } catch { return [1, 1, 1, 1]; }
-  }, [items]);
+const TimelineSlider = ({ children, data }: TimelineSliderProps) => {
+  const [index, setIndex] = useState(0);
 
-  const filteredItems: ReactNode[] = useMemo(() => {
-    return (
-      data?.filter((item) => item !== null && typeof item !== "string") ||
-      React.Children.toArray(children).filter(Boolean)
-    );
-  }, [data, children]);
+  // 1. Robust Data Parsing (Handles CMS JSON string OR Children)
+  const timelineData = React.useMemo(() => {
+    const results: { title: string; desc: string }[] = [];
 
-  const [slidesToShow, setSlidesToShow] = useState(parsedItems[0]);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
-    align: "center",
-    slidesToScroll: 1,
-  });
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    // Get the number directly from the API and pass it to the setter
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const w = window.innerWidth;
-      if (w <= 768) setSlidesToShow(parsedItems[3]);
-      else if (w <= 1024) setSlidesToShow(parsedItems[2]);
-      else if (w <= 1200) setSlidesToShow(parsedItems[1]);
-      else setSlidesToShow(parsedItems[0]);
+    const searchData = (children: ReactNode) => {
+      React.Children.forEach(children, (child) => {
+        if (React.isValidElement(child)) {
+          const p = child.props as any;
+          // If this element has a title, it's a slide!
+          if (p.title) {
+            results.push({
+              title: p.title,
+              desc: p.desc || ""
+            });
+          }
+          // Even if it's a slide, look inside it for more slides (fixes nesting)
+          if (p.children) {
+            searchData(p.children);
+          }
+        }
+      });
     };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [parsedItems]);
 
-  useEffect(() => {
-    if (emblaApi) {
-      emblaApi.reInit();
-      setSelectedIndex(emblaApi.selectedScrollSnap());
-      emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap()));
+    searchData(children);
+    return results;
+  }, [children]);
+
+  const containerRef = useRef<HTMLElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLDivElement>(null);
+  const dotsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useGSAP(() => {
+    if (!cardRef.current || !timelineRef.current || timelineData.length === 0) return;
+
+    const cardRect = cardRef.current.getBoundingClientRect();
+    const timelineRect = timelineRef.current.getBoundingClientRect();
+    const center = (cardRect.left + cardRect.width / 2) - timelineRect.left;
+
+    dotsRef.current.forEach((dot, i) => {
+      if (!dot) return;
+      const offset = (i - index) * GAP;
+      const x = center - DOT_SIZE / 2 + offset;
+
+      gsap.to(dot, {
+        x: x,
+        duration: 0.6,
+        ease: "power3.out"
+      });
+    });
+
+    gsap.fromTo([titleRef.current, descRef.current],
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.4, stagger: 0.1, ease: "power2.out" }
+    );
+
+  }, { dependencies: [index, timelineData], scope: containerRef });
+
+  const handleNext = () => {
+    if (index < timelineData.length - 1) {
+      gsap.to([titleRef.current, descRef.current], {
+        y: -15, opacity: 0, duration: 0.2, onComplete: () => setIndex(index + 1)
+      });
     }
-  }, [emblaApi, filteredItems, slidesToShow]);
+  };
 
-  const progressWidth = filteredItems.length > 1
-    ? (selectedIndex / (filteredItems.length - 1)) * 100
-    : 100;
+  const handlePrev = () => {
+    if (index > 0) {
+      gsap.to([titleRef.current, descRef.current], {
+        y: -15, opacity: 0, duration: 0.2, onComplete: () => setIndex(index - 1)
+      });
+    }
+  };
+
+  if (timelineData.length === 0) return null;
 
   return (
-    <div className={`timeline-wrapper ${customcls || ""}`}>
-
-      {/* FLUID PROGRESS LINE */}
-      <div className="timeline-fluid-line-container">
-        <div className="bg-gray-line" />
-        <div className="container-sync" style={{ maxWidth: containerWidth }}>
-          <div className="line-filled" style={{ width: `${progressWidth}%` }} />
-        </div>
+    <section className="tilinesection" ref={containerRef}>
+      <div className="timeline" ref={timelineRef}>
+        {timelineData.map((_, i) => (
+          <div
+            key={i}
+            ref={(el) => { dotsRef.current[i] = el; }}
+            className={`dot ${i === index ? 'active' : ''}`}
+            onClick={() => {
+              if (i !== index) {
+                gsap.to([titleRef.current, descRef.current], {
+                  y: -15, opacity: 0, duration: 0.2, onComplete: () => setIndex(i)
+                });
+              }
+            }}
+          />
+        ))}
       </div>
 
-      <div className="timeline-main-container" style={{ maxWidth: containerWidth }}>
-        <div className="embla-viewport" ref={emblaRef} style={{ overflow: "hidden" }}>
-          <div className={`embla-container ${cls || ""}`} style={{ display: "flex" }}>
-            {filteredItems.map((item, index) => (
-              <div
-                key={index}
-                className="embla-slide"
-                style={{ flex: `0 0 ${100 / (slidesToShow || 1)}%`, minWidth: 0 }}
-              >
-                <div className="slide-content-buffer">
-                  {/* 1. DOT INSIDE BUFFER */}
-                  <div className="dot-section">
-                    <button
-                      className={`timeline-dot ${index === selectedIndex ? "is-active" : ""}`}
-                      onClick={() => emblaApi?.scrollTo(index)}
-                    >
-                      <div className="inner-dot" />
-                    </button>
-                  </div>
-                  <div className="c-timeline__container">
-                    {/* 2. CMS CONTENT */}
-                    <div className="cms-content-wrapper">
-                      {item}
-                    </div>
+      <div className="card" ref={cardRef}>
+        <h2 className='c-content-32 clr-gray ft_medium' ref={titleRef}>
+          {timelineData[index].title}
+        </h2>
+        <div className='c-content-20 lh_1-6 clr-gray ft_light' ref={descRef}>
+          {timelineData[index].desc}
+        </div>
 
-                    {/* 3. ARROWS INSIDE BUFFER */}
-                    <div className="slide-navigation">
-                      <button
-                        className="slide-nav-btn prev"
-                        onClick={() => emblaApi?.scrollPrev()}
-                        disabled={!emblaApi?.canScrollPrev()}
-                      >
-                        <ChevronLeft size={24} color={bluearrow ? "#0046ad" : "#666"} />
-                      </button>
+        <div className="chain-control">
+          <button onClick={handlePrev} disabled={index === 0}>
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <rect x="0.5" y="0.5" width="43" height="43" rx="21.5" fill="white" stroke="#636466" />
+              <path d="M25.2227 27.1094L20.1113 21.998L25.2227 16.8867L23.5391 15.2031L16.7442 21.998L23.5391 28.7929L25.2227 27.1094Z" fill="#636466" />
+            </svg>
+          </button>
 
-                      <button
-                        className="slide-nav-btn next"
-                        onClick={() => emblaApi?.scrollNext()}
-                        disabled={!emblaApi?.canScrollNext()}
-                      >
-                        <ChevronRight size={24} color={bluearrow ? "#0046ad" : "#666"} />
-                      </button>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <button onClick={handleNext} disabled={index === timelineData.length - 1}>
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <rect x="43.5" y="0.5" width="43" height="43" rx="21.5" transform="rotate(180 43.5 0.5)" fill="white" stroke="#636466" />
+              <path d="M18.7793 27.1126L23.8887 22.0032L18.7793 16.8938L20.4622 15.2109L27.2545 22.0032L20.4622 28.7955L18.7793 27.1126Z" fill="#636466" />
+            </svg>
+          </button>
         </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
+
+export default TimelineSlider;

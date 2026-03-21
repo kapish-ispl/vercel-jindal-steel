@@ -202,7 +202,7 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "timelineslider") {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
-                    return <TimelineSlider {...props} data={Array.isArray(children) ? children : [children]} />;
+                    return <TimelineSlider {...props}>{children}</TimelineSlider>;
                 }
                 if (domNode.name === "customhorizontalscroll") {
                     const props = attributesToProps(domNode.attribs);
