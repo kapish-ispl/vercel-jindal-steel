@@ -1871,3 +1871,90 @@
         }
     }
 }
+
+.adjustable__card {
+    @include flexbox;
+    gap: 20px;
+
+    .c-embla__container {
+        display: flex;
+    }
+
+    .c-embla__slide {
+        flex: 1;
+        // transition: all 0.5s ease;
+        overflow: hidden;
+        white-space: unset;
+
+        @include mq(tablet) {
+            padding: 0px 10px;
+        }
+
+
+        // &:hover {
+        //     flex: 0 0 50% !important;
+        // }
+
+
+    }
+
+    &-items {
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        cursor: pointer;
+        @include transition(all .5s ease-in-out);
+        height: 100%;
+
+        &:hover {
+            flex: 0 0 50%;
+
+            .adjustable__card-content {
+                @include transform(translateX(0px));
+            }
+        }
+
+    }
+
+    &-media {
+        height: 400px;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: 1;
+        }
+
+        @include mq(tablet-max) {
+            height: 520px;
+        }
+
+        img {
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            @include border-radius(8px);
+            width: 100%;
+        }
+    }
+
+    &-content {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 2;
+        padding: 20px;
+        @include transform(translateX(-500px));
+        @include transition(all .9s ease-in-out);
+
+        @include mq(tablet-max) {
+            padding: 32px;
+        }
+    }
+}

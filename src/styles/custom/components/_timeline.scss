@@ -1,0 +1,172 @@
+@use "../core/mixins" as *;
+@use "../core/variables" as *;
+@use "../core/typography" as *;
+
+.timeline-wrapper {
+    position: relative;
+    width: 100%;
+
+    .timeline-fluid-line-container {
+        // position: absolute;
+        // top: 116px;
+        // left: 0;
+        width: 100%;
+        height: 2px;
+        z-index: 1;
+
+        .bg-gray-line {
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-secondary);
+        }
+
+        .container-sync {
+            top: -2px;
+            height: 100%;
+            position: relative;
+
+            // .line-filled {
+            //     height: 100%;
+            //     background-color: var(--color-accent-peach);
+            //     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            // }
+        }
+    }
+}
+
+.timeline-main-container {
+    top: -16px;
+    position: relative;
+    z-index: 2; // Sits above the background line
+
+    .embla-slide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: opacity 0.3s ease;
+
+        // Optional: dim inactive slides
+        // &:not(.is-selected) {
+        //     // opacity: 0.5; 
+        // }
+    }
+
+    /* --- The Slide Content Buffer (Dot + Card) --- */
+    .slide-content-buffer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .dot-section {
+            height: 32px;
+            margin-bottom: 30px; // Space between the dot and the floating card
+            display: flex;
+            align-items: center;
+
+            .timeline-dot {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: #d1d5db; // Default gray dot
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                position: relative;
+                z-index: 10;
+
+                @include mq(tablet-max) {
+                    height: 32px;
+                    width: 32px;
+                }
+
+                &.is-active {
+                    background-color: var(--color-accent-peach);
+                }
+
+                // .inner-dot {
+                //     // Only if you want a nested circle effect
+                // }
+            }
+        }
+
+        /* --- The Floating Card UI --- */
+        .c-timeline__container {
+            background: #f9f9f9;
+            border: 1px solid #63646640;
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+            max-width: 456px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            @include mq(tablet-max) {
+                padding: 32px;
+            }
+
+            .cms-content-wrapper {
+                margin-bottom: 20px;
+
+                @include mq(tablet-max) {
+                    margin-bottom: 32px;
+                }
+
+                // Targeting the title within your CMS div
+                .timeline__card-title {
+                    font-size: 24px;
+                    color: #333;
+                    font-weight: 500;
+                    margin-bottom: 12px;
+                }
+
+                p,
+                div {
+                    color: #666;
+                    line-height: 1.6;
+                }
+            }
+
+            /* --- Navigation Buttons --- */
+            .slide-navigation {
+                display: flex;
+                gap: 12px;
+                margin-top: auto;
+
+                .slide-nav-btn {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    border: 1px solid #dddddd;
+                    background: white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+
+                    &:hover:not(:disabled) {
+                        border-color: #c88e6a;
+                        background-color: #fffaf7;
+                    }
+
+                    &:disabled {
+                        opacity: 0.3;
+                        cursor: not-allowed;
+                    }
+
+                    svg {
+                        width: 18px;
+                        height: 18px;
+                    }
+                }
+            }
+        }
+    }
+}
