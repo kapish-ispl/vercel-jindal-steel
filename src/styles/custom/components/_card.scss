@@ -1917,6 +1917,30 @@
             .adjustable__card-content {
                 @include transform(translateX(0px));
             }
+
+            .text-float {
+                transform: translateX(-100%);
+
+            }
+
+            .adjustable__card-items-floatText {
+                transform: translateX(0%);
+            }
+        }
+
+        .text-float {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            z-index: 9;
+            @include transition(all .9s ease-in-out);
+            transform: translateX(0%);
+
+            @include mq(tablet-max) {
+                padding: 32px;
+            }
         }
 
     }
@@ -1924,6 +1948,20 @@
     &-media {
         height: 400px;
         position: relative;
+
+        .adjustable__card-items-floatText {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            z-index: 9;
+            transform: translateX(-100%);
+            @include transition(all .9s ease-in-out);
+
+            @include mq(tablet-max) {
+                padding: 32px;
+            }
+        }
 
         &::before {
             content: "";
