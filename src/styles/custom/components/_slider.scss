@@ -997,3 +997,197 @@ Common styles for navigation elements.
         }
     }
 }
+
+$white: #ffffff;
+$transition-speed: 0.7s;
+
+.nu-carousel {
+    width: 100%;
+    overflow: hidden;
+    padding-top: 30px;
+
+    @include mq(desktop) {
+        padding-top: 0px;
+    }
+
+    &__container {
+        display: flex;
+        height: 400px;
+        gap: 16px;
+        align-items: stretch;
+        transition: transform 0.5s ease-in-out;
+
+        @include mq(desktop) {
+            height: 520px;
+        }
+    }
+
+    &__item {
+        position: relative;
+        flex: 1;
+        @include border-radius(8px);
+        overflow: hidden;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: flex #{$transition-speed} cubic-bezier(0.25, 1, 0.5, 1),
+        opacity 0.4s ease,
+        transform 0.5s ease;
+
+        // --- MOBILE LOGIC (1 Item) ---
+        @media (max-width: 1024px) {
+            flex: 0 0 100%; // Each item takes full width
+            opacity: 1;
+
+            &:not(.is-active) {
+                display: none; // Hide others to show exactly 1
+            }
+        }
+
+        // // --- TABLET LOGIC (2 Items) ---
+        // @media (min-width: 601px) and (max-width: 1024px) {
+        //     flex: 0 0 calc(50% - 8px); // Force 2 items in the row
+        //     opacity: 1;
+        //     // &.is-active {
+        //     //     flex: 0 0 calc(70% - 8px); // Expand active slightly more than half
+        //     // }
+
+        //     // Simple logic: hide items that are too far from the active one
+        //     // This ensures only ~2 items are ever visible in the viewport
+        //     display: none;
+
+        //     &.is-active,
+        //     &.is-active+div,
+        //     div:has(+ .is-active) {
+        //         display: block;
+        //     }
+        // }
+
+        // --- DESKTOP LOGIC (4 Items) ---
+        @media (min-width: 1025px) {
+            &.is-active {
+                flex: 3;
+                opacity: 1;
+                cursor: default;
+
+                .nu-carousel__content {
+                    opacity: 1;
+                    transform: translateY(0);
+                    transition-delay: 0.3s;
+                }
+            }
+        }
+
+        &:hover:not(.is-active) {
+            opacity: 0.85;
+        }
+    }
+
+    &__image-wrapper {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.4) 100%);
+
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        z-index: 2;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        color: $white;
+        pointer-events: none;
+
+        @include mq(desktop) {
+            padding: 32px;
+        }
+
+        .is-active & {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+    }
+
+    &__controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 32px;
+        gap: 24px;
+    }
+
+    &__indicators {
+        display: flex;
+        gap: 8px;
+    }
+
+    &__track {
+        width: 25px;
+        height: 4px;
+        background: var(--color-tertiary);
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    &__fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background: var(--color-primary);
+    }
+
+    &__pause {
+        background: none;
+        border: 1px solid #ccc;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+        cursor: pointer;
+        color: #666;
+        font-size: 12px;
+        display: none;
+
+        &:hover {
+            background: var(--color-tertiary);
+        }
+    }
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

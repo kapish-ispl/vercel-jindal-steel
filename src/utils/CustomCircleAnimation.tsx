@@ -1,82 +1,82 @@
+'use client';
+
 import React, { useRef } from 'react';
-import { gsap } from 'gsap';
+import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CustomCircleAnimation = () => {
-    const sectionRef = useRef(null);
-    const containerRef = useRef(null);
-    const leftCircle = useRef(null);
-    const rightCircle = useRef(null);
-    const centerContent = useRef(null);
-    // New refs for the text inside circles
-    const leftText = useRef(null);
-    const rightText = useRef(null);
+    const sectionRef = useRef<HTMLElement>(null);
+    const blueRef = useRef<HTMLDivElement>(null);
+    const greenRef = useRef<HTMLDivElement>(null);
+    const orangeRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        ScrollTrigger.normalizeScroll(true);
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top top",
-                    end: "+=150%",
-                    scrub: 1,
-                    pin: true,
-                    anticipatePin: 1,
-                    pinSpacing: true,
-                    invalidateOnRefresh: true,
+        if (!sectionRef.current || !blueRef.current || !greenRef.current || !orangeRef.current) return;
 
-                }
-            });
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "center center",
+                end: "+=4000", // Massively stretched distance to map the entire experience slowly
+                pin: true,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+                scrub: 1,
+            }
+        });
 
-            tl.to(leftCircle.current, {
-                xPercent: 50,
-                backgroundColor: "#D78E5E",
-                duration: 2
-            }, 0)
-                .to(rightCircle.current, {
-                    xPercent: -50,
-                    backgroundColor: "#D78E5E",
-                    opacity: 0,
-                    duration: 2
-                }, 0)
-                // ADDED: Fade out the circle text as they move
-                .to([leftText.current, rightText.current], {
-                    opacity: 0,
-                    duration: 1 // Fades out halfway through the merge
-                }, 0)
-                .to(centerContent.current, {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 1
-                }, "-=0.5");
+        // Initialize Base Z-indexes
+        gsap.set(blueRef.current, { zIndex: 1 });
+        gsap.set(greenRef.current, { zIndex: 2 });
+        gsap.set(orangeRef.current, { scale: 1, opacity: 0, zIndex: 5 });
 
-        }, sectionRef);
+        // Phase 1: Swap positions.
+        tl.fromTo(blueRef.current, { xPercent: -55 }, { xPercent: 55, duration: 2, ease: 'none' }, 0)
+            .fromTo(greenRef.current, { xPercent: 55 }, { xPercent: -55, duration: 2, ease: 'none' }, 0);
 
-        return () => ctx.revert();
-    }, []);
+        // Pause visually swapped at the edges reduced to absolute minimum (just enough to prevent jarring snapping)
+        tl.to({}, { duration: 0.1 });
+
+        // Explicit zIndex flip locked into the timeline map
+        tl.fromTo(blueRef.current, { zIndex: 1 }, { zIndex: 3, duration: 0.01, ease: 'none' }, "+=0");
+
+        // Phase 2: Translate both perfectly back into the center
+        tl.fromTo(blueRef.current, { xPercent: 55 }, { xPercent: 0, duration: 2, ease: 'none' }, "+=0")
+            .fromTo(greenRef.current, { xPercent: -55 }, { xPercent: 0, duration: 2, ease: 'none' }, "<");
+
+        // Pause totally overlapping reduced to absolute minimum
+        tl.to({}, { duration: 0.1 });
+
+        // Phase 3: Morph to Orange!
+        tl.fromTo(orangeRef.current, { opacity: 0 }, { opacity: 1, duration: 1, ease: "none" }, "+=0");
+
+        // ERADICATED FINAL DEAD ZONE! The timeline physically concludes the exact instant the orange opacity locks 1.
+        // It immediately unpins, and instantly un-merges the millisecond you reverse-scroll without any physical "stuck" latency!
+
+    }, { scope: sectionRef });
 
     return (
-        <section className="esg-integration-wrapper" ref={sectionRef}>
-            <div className="circles-container" ref={containerRef}>
-                <div className="circle rise-circle" ref={leftCircle}>
-                    <div className="circle-text c-heading-60 ft_SemiBold lh_1-6" ref={leftText}>
-                        <span>R.I.S.E</span>
-                    </div>
-                </div>
+        <section ref={sectionRef} className="rise-esg-section commonSection-lg">
+            <div className="container cus-container">
 
-                <div className="circle esg-circle" ref={rightCircle}>
-                    <div className="circle-text c-heading-60 ft_SemiBold lh_1-6" ref={rightText}>
-                        <span>E.S.G.</span>
+                <div className="row">
+                    <div className="col-12">
+                        <div className="rise-esg-circles-wrapper">
+                            <div ref={blueRef} className="rise-esg-circle circle-blue">
+                                <span className="circle-text">R.I.S.E</span>
+                            </div>
+                            <div ref={greenRef} className="rise-esg-circle circle-green">
+                                <span className="circle-text">E.S.G.</span>
+                            </div>
+                            <div ref={orangeRef} className="rise-esg-circle circle-orange">
+                                <span className="circle-text mb-40">R.I.S.E</span>
+                                <span className="circle-subtext c-content-24 clr-white lh_1-6 ft_medium">Integrated Sustainable<br />Performance</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div className="merged-content" ref={centerContent}>
-                    <h3 className='c-heading-60 ft_SemiBold lh_1-6'>R.I. S.E</h3>
-                    <p className='c-content-24 ft_mediun lh_1-6'>Integrated Sustainable Performance</p>
                 </div>
             </div>
         </section>

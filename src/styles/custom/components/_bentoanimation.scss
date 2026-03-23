@@ -149,156 +149,298 @@
     }
 }
 
-// Variables
-$circle-size-desktop: 25vw; // Responsive size for desktop
-$circle-size-mobile: 50vw; // Responsive size for mobile
-$circle-size-tablet: 40vw; // Responsive size for tablet
-$rise-color: #3b5271;
-$esg-color: #8ba870;
+// // Variables
+// $circle-size-desktop: 25vw; // Responsive size for desktop
+// $circle-size-mobile: 50vw; // Responsive size for mobile
+// $circle-size-tablet: 40vw; // Responsive size for tablet
+// $rise-color: #3b5271;
+// $esg-color: #8ba870;
 
-.esg-integration-wrapper {
-    height: 90vh !important;
-    width: 100%;
+// .esg-integration-wrapper {
+//     height: 90vh !important;
+//     width: 100%;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     overflow: hidden;
+//     z-index: 9 !important;
+//     padding: 0 5%;
+//     // min-height: 500px;
+
+//     .content-header {
+//         text-align: center;
+//         max-width: 800px;
+//         margin-bottom: 5vh; // Spacing based on viewport height
+
+//         h1 {
+//             font-size: clamp(1.5rem, 4vw, 2.5rem); // Fluid typography
+//             margin-bottom: 1rem;
+//         }
+
+//         p {
+//             font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+//             color: #666;
+//         }
+//     }
+
+//     .circles-container {
+//         position: relative;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         width: 100%;
+//         height: $circle-size-desktop;
+
+//         .circle {
+//             width: $circle-size-desktop;
+//             height: $circle-size-desktop;
+//             border-radius: 50%;
+//             display: flex;
+//             align-items: center;
+//             justify-content: center;
+//             color: white;
+//             position: absolute;
+
+//             .circle-text {
+//                 text-align: center;
+
+//             }
+//         }
+
+//         .rise-circle {
+//             background-color: $rise-color;
+//             left: 12%; // Starting point relative to container width
+//             z-index: 2;
+//         }
+
+//         .esg-circle {
+//             background-color: $esg-color;
+//             right: 8%; // Starting point relative to container width
+//             z-index: 1;
+//         }
+
+//         .merged-content {
+//             position: absolute;
+//             z-index: 3;
+//             text-align: center;
+//             color: white;
+//             opacity: 0;
+//             transform: scale(0.8);
+//             pointer-events: none;
+//             padding: 20px;
+
+//             h3,
+//             p {
+
+//                 margin: 0;
+//             }
+
+//             p {
+//                 max-width: 353px;
+//             }
+
+
+//         }
+//     }
+
+//     // Mobile Adjustments
+//     @media (max-width: 576px) {
+//         .circles-container {
+//             height: $circle-size-mobile;
+
+//             .circle {
+//                 width: $circle-size-mobile;
+//                 height: $circle-size-mobile;
+//             }
+
+//             .rise-circle {
+//                 left: -9%;
+//             }
+
+//             .esg-circle {
+//                 right: -4%;
+//             }
+//         }
+//     }
+
+//     @media screen and (min-width: 577px) and (max-width: 768px) {
+//         .circles-container {
+//             height: $circle-size-mobile;
+
+//             .circle {
+//                 width: $circle-size-mobile;
+//                 height: $circle-size-mobile;
+//             }
+
+//             .rise-circle {
+//                 left: -12%;
+//             }
+
+//             .esg-circle {
+//                 right: -10%;
+//             }
+//         }
+//     }
+
+//     @media screen and (min-width: 767px) and (max-width: 1024px) {
+//         .circles-container {
+//             height: $circle-size-tablet;
+
+//             .circle {
+//                 width: $circle-size-tablet;
+//                 height: $circle-size-tablet;
+//             }
+
+//             .rise-circle {
+//                 left: 1%;
+//             }
+
+//             .esg-circle {
+//                 right: -8%;
+//             }
+//         }
+//     }
+// }
+
+/* ---------------------------------------------------- */
+/*  Rise x ESG Section Styles                          */
+/* ---------------------------------------------------- */
+
+.rise-esg-section {
+    min-height: 100vh; // Forces the section to fundamentally envelop native massive viewport heights!
     display: flex;
     flex-direction: column;
+    justify-content: center; // Mechanically force the circles perfectly vertically into the core axis!
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    z-index: 9 !important;
-    padding: 0 5%;
-    // min-height: 500px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: #f4f4f4;
 
-    .content-header {
-        text-align: center;
-        max-width: 800px;
-        margin-bottom: 5vh; // Spacing based on viewport height
-
-        h1 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem); // Fluid typography
-            margin-bottom: 1rem;
-        }
-
-        p {
-            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-            color: #666;
-        }
-    }
-
-    .circles-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .rise-esg-text {
         width: 100%;
-        height: $circle-size-desktop;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+    }
 
-        .circle {
-            width: $circle-size-desktop;
-            height: $circle-size-desktop;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            position: absolute;
+    h2 {
+        font-size: clamp(32px, 4vw, 55px);
+        font-weight: 600;
+        color: #636466;
+        line-height: 1.2;
+    }
 
-            .circle-text {
-                text-align: center;
+    p {
+        font-size: clamp(18px, 2vw, 24px);
+        color: #636466;
+        line-height: 1.5;
+        font-weight: 300;
+        margin-top: 15px; // Standard normalized gap
+    }
 
-            }
+    @media (max-height: 850px) and (min-width: 992px) {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
+
+.rise-esg-circles-wrapper {
+    position: relative;
+    padding-top: 20px;
+    height: 480px;
+    width: 100%;
+
+    // Ultrawide scale-up padding bounds!
+    @media (min-width: 1800px) {
+        height: 600px;
+    }
+
+    @media (max-width: 991px) {
+        height: 380px;
+    }
+
+    // Vertical safeguard for short widescreen laptop displays to prevent bounds clipping!
+    @media (max-height: 850px) and (min-width: 992px) {
+        height: 380px;
+    }
+
+    @media (max-width: 575px) {
+        height: 200px; // Squeezed cleanly for the 160px tiny variant
+    }
+
+    .rise-esg-circle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 456px;
+        height: 456px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 44px;
+        font-weight: 700;
+        color: #ffffff;
+        flex-shrink: 0; // Prevent flexbox from squishing them below explicit width
+        transition: all 0.3s ease;
+
+        @media (min-width: 1400px) {
+            width: 450px;
+            height: 450px;
+            font-size: 44px; // Upscaled font for massive displays!
         }
 
-        .rise-circle {
-            background-color: $rise-color;
-            left: 12%; // Starting point relative to container width
-            z-index: 2;
+        @media (max-width: 991px) {
+            width: 350px;
+            height: 350px;
+            font-size: 34px;
         }
 
-        .esg-circle {
-            background-color: $esg-color;
-            right: 8%; // Starting point relative to container width
-            z-index: 1;
-        }
+        // // Mirrors the tablet dimensions explicitly on radically short widescreen laptops preserving intersection boundaries without overlapping the Section div!
+        // @media (max-width: 1399px) and (min-width: 992px) {
+        //     width: 350px;
+        //     height: 350px;
+        //     font-size: 34px;
+        // }
 
-        .merged-content {
-            position: absolute;
-            z-index: 3;
-            text-align: center;
-            color: white;
-            opacity: 0;
-            transform: scale(0.8);
-            pointer-events: none;
-            padding: 20px;
-
-            h3,
-            p {
-
-                margin: 0;
-            }
-
-            p {
-                max-width: 353px;
-            }
-
-
+        @media (max-width: 575px) {
+            width: 160px;
+            height: 160px;
+            font-size: 15px; // Squashed to wrap into the 160px bounded radius perfectly
         }
     }
 
-    // Mobile Adjustments
-    @media (max-width: 576px) {
-        .circles-container {
-            height: $circle-size-mobile;
-
-            .circle {
-                width: $circle-size-mobile;
-                height: $circle-size-mobile;
-            }
-
-            .rise-circle {
-                left: -9%;
-            }
-
-            .esg-circle {
-                right: -4%;
-            }
-        }
+    .circle-blue {
+        background-color: #4a6a8c;
+        z-index: 1;
     }
 
-    @media screen and (min-width: 577px) and (max-width: 768px) {
-        .circles-container {
-            height: $circle-size-mobile;
-
-            .circle {
-                width: $circle-size-mobile;
-                height: $circle-size-mobile;
-            }
-
-            .rise-circle {
-                left: -12%;
-            }
-
-            .esg-circle {
-                right: -10%;
-            }
-        }
+    .circle-green {
+        background-color: #8fa158;
+        z-index: 2;
     }
 
-    @media screen and (min-width: 767px) and (max-width: 1024px) {
-        .circles-container {
-            height: $circle-size-tablet;
+    .circle-orange {
+        background-color: #d88358;
+        z-index: 5;
+    }
 
-            .circle {
-                width: $circle-size-tablet;
-                height: $circle-size-tablet;
-            }
+    .circle-text {
+        letter-spacing: 0.5px;
+    }
 
-            .rise-circle {
-                left: 1%;
-            }
+    .circle-subtext {
+        text-align: center;
 
-            .esg-circle {
-                right: -8%;
-            }
+
+
+        @media (max-width: 575px) {
+            margin-top: 4px !important; // Nudge upwards slightly to center gravity with heading
         }
     }
 }

@@ -37,6 +37,7 @@ const CustomAccordions = dynamic(() => import("@/utils/CustomAccordions"), { ssr
 const TimelineSlider = dynamic(() => import("@/utils/TimelineSlider"), { ssr: false });
 const CustomCircleAnimation = dynamic(() => import("@/utils/CustomCircleAnimation"), { ssr: false });
 const BentoSyncReveal = dynamic(() => import("@/utils/BentoSyncReveal"), { ssr: false });
+const HighlightCarousel = dynamic(() => import("@/utils/HighlightCarousel"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -65,6 +66,9 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "customcircleanimation") {
                     return <CustomCircleAnimation />
+                }
+                if (domNode.name === "highlightcarousel") {
+                    return <HighlightCarousel />
                 }
 
                 if (domNode.name === "bluranimation") {
