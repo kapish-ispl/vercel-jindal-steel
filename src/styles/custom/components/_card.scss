@@ -1974,7 +1974,15 @@
             z-index: 1;
         }
 
-        @include mq(tablet-max) {
+        @include mq(desktop) {
+            height: 450px;
+        }
+
+        @include mq(desktop-wide) {
+            height: 480px;
+        }
+
+        @include mq(desktop-wide-max) {
             height: 520px;
         }
 
