@@ -2,10 +2,10 @@
 @use "../core/variables" as *;
 
 .c-accordionBase {
-    margin-bottom: 40px;
+    margin-top: 40px;
 
-    @include mq(tablet-max) {
-        margin-bottom: 60px;
+    @include mq(desktop-min) {
+        margin-top: 0px;
     }
 
     &__item {
@@ -101,6 +101,7 @@
 
         img {
             @include border-radius(8px);
+            width: 100%;
         }
     }
 }

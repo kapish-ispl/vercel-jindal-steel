@@ -3476,13 +3476,43 @@ ul.arrowbulletList {
                         object-position: center center;
                     }
                 }
+
+                &_header,
+                &_content {
+                    padding: 20px;
+
+                    @include mq(tablet-max) {
+                        padding: 32px;
+                    }
+                }
             }
         }
     }
 
     .c-embla {
         &.buttons_absolute {
-            @include mq(desktop) {
+
+
+            .c-embla__buttons {
+                width: 60px;
+                position: relative;
+                padding: 35px 0px 35px 0px;
+            }
+
+            .c-embla__arrow {
+                width: 35px;
+                height: 35px;
+                border: 1px solid #636466 !important;
+                @include border-radius(50%);
+                min-width: 35px;
+                @include flexbox;
+                @include align-items(center);
+                @include justify-content(center);
+
+
+            }
+
+            @include mq(tablet-max) {
 
                 .c-embla__buttons {
                     top: -135px !important;
@@ -3490,16 +3520,13 @@ ul.arrowbulletList {
                     right: 40px;
                     margin-left: inherit;
                     width: 6% !important;
+                    position: absolute;
+                    padding: 0px;
 
                     .c-embla__arrow {
                         width: 44px;
                         height: 44px;
-                        border: 1px solid #636466 !important;
-                        @include border-radius(50%);
                         min-width: 44px;
-                        @include flexbox;
-                        @include align-items(center);
-                        @include justify-content(center);
 
                         &--prev {
                             left: 0 !important;
@@ -3508,6 +3535,13 @@ ul.arrowbulletList {
                     }
                 }
             }
+
+            @include mq(desktop) {
+                .c-embla__buttons {
+                    width: 80px !important;
+                }
+            }
+
         }
     }
 }
@@ -3525,7 +3559,16 @@ ul.arrowbulletList {
 }
 
 .width-1050 {
-    max-width: 1050px;
+    max-width: 700px;
+
+    @include mq(tablet-max) {
+        max-width: 900px;
+    }
+
+    @include mq(desktop-wide) {
+        max-width: 1050px;
+    }
+
     width: 100%;
 }
 

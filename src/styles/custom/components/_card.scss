@@ -1373,8 +1373,12 @@
             position: absolute;
             bottom: 0px;
             left: 0px;
-            padding: 46px 33px;
+            padding: 20px;
             z-index: 9;
+
+            @include mq(tablet-max) {
+                padding: 32px;
+            }
 
             .c-divider {
                 height: 1px;
@@ -1385,11 +1389,15 @@
         }
 
         &_header {
-            padding: 24px 33px;
+            padding: 20px;
             position: absolute;
             top: 0;
             z-index: 9;
             left: 0;
+
+            @include mq(tablet-max) {
+                padding: 32px;
+            }
         }
 
         &_media {
