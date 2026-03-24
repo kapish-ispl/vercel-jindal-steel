@@ -68,7 +68,9 @@ const PageTemplate = ({ data }: any) => {
                     return <CustomCircleAnimation />
                 }
                 if (domNode.name === "highlightcarousel") {
-                    return <HighlightCarousel />
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <HighlightCarousel props={props} data={Array.isArray(children) ? children : [children]} />
                 }
 
                 if (domNode.name === "bluranimation") {
@@ -111,8 +113,9 @@ const PageTemplate = ({ data }: any) => {
                     return <CustomZoomScrollEffectV2 {...props} videourl={String(props.videourl)} />;
                 }
                 if (domNode.name === "bentosyncreveal") {
+                    const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
-                    return <BentoSyncReveal data={Array.isArray(children) ? children : [children]} />;
+                    return <BentoSyncReveal props={props} data={Array.isArray(children) ? children : [children]} />;
                 }
 
 
