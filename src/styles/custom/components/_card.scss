@@ -2022,8 +2022,8 @@
     background-color: var(--color-white);
     padding: 16px;
     @include border-radius(8px);
-    margin-bottom: 10px;
-    height: calc(100% - 10px);
+    margin-bottom: 20px;
+    height: calc(100% - 20px);
 
     @include mq(tablet) {
         padding: 22px;
@@ -2032,6 +2032,7 @@
     @include mq(tablet-max) {
         padding: 26px;
         margin-bottom: 0px;
+        height: auto;
     }
 
     @include mq(desktop-wide) {

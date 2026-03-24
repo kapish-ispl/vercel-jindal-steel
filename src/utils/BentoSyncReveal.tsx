@@ -20,38 +20,38 @@ const BentoSyncReveal = ({ data }: { data: any }) => {
         },
         {
             id: 2,
-            mainImg: "https://picsum.photos/1920/1080?random=4",
-            title: "Structured Safety Monitoring",
+            mainImg: "https://docs.jindalsteel.in/document/124/1774327500_7a5705833885b84ed8dc3a979835ebc98bc97aaa.png",
+            title: "Responsible Governance",
             desc: "Defined reporting and review systems across sites.",
-            stat: "11 Million",
-            statDesc: "Safe Man-hours Achieved",
-            gallery: ["https://picsum.photos/1920/1080?random=5", "https://picsum.photos/1920/1080?random=6", "https://picsum.photos/1920/1080?random=7"]
+            stat: "Focus",
+            statDesc: "Board oversight, enterprise risk integration, regulatory compliance and policy governance.",
+            gallery: ["https://docs.jindalsteel.in/document/124/1774327500_7a5705833885b84ed8dc3a979835ebc98bc97aaa.png", "https://docs.jindalsteel.in/document/124/1774037370_cfbeedf25f9d7338384a57424c529f3814dffa93.png", "https://docs.jindalsteel.in/document/124/1774037370_772796c4f1c4bb6e7a2fdd302c2f5811cd65ccd7.png"]
         },
         {
             id: 3,
-            mainImg: "https://picsum.photos/1920/1080?random=8",
-            title: "Structured Safety Monitoring",
-            desc: "Defined reporting and review systems across sites.",
-            stat: "11 Million",
-            statDesc: "Safe Man-hours Achieved",
+            mainImg: "https://docs.jindalsteel.in/document/124/1774328191_3c6b374bd4d2b8e4fb03a7d94d694f247a84b52e.png",
+            title: "Inclusive Growth",
+            desc: "Oversight and accountability embedded across operations.",
+            stat: "Focus",
+            statDesc: "Workplace safety, skills development, workforce engagement and community investment.",
             gallery: ["https://picsum.photos/1920/1080?random=9", "https://picsum.photos/1920/1080?random=10", "https://picsum.photos/1920/1080?random=11"]
         },
         {
             id: 4,
-            mainImg: "https://picsum.photos/1920/1080?random=12",
-            title: "Structured Safety Monitoring",
-            desc: "Defined reporting and review systems across sites.",
-            stat: "11 Million",
-            statDesc: "Safe Man-hours Achieved",
+            mainImg: "https://docs.jindalsteel.in/document/124/1774328191_aaa2faf02eb6b2ca7682b337b09a86fc69b71a2c.png",
+            title: "Sustainable Environment",
+            desc: "Oversight and accountability embedded across operations.",
+            stat: "Focus",
+            statDesc: "Emission reduction, renewable energy transition, water stewardship and circular resource efficiency.",
             gallery: ["https://picsum.photos/1920/1080?random=13", "https://picsum.photos/1920/1080?random=14", "https://picsum.photos/1920/1080?random=15"]
         },
         {
             id: 5,
             mainImg: "https://picsum.photos/1920/1080?random=16",
-            title: "Structured Safety Monitoring",
+            title: "Ethical Patnership",
             desc: "Defined reporting and review systems across sites.",
-            stat: "11 Million",
-            statDesc: "Safe Man-hours Achieved",
+            stat: "Focus",
+            statDesc: "Responsible supply chain standards, anti-corruption systems, human rights alignment and transparent conduct.",
             gallery: ["https://picsum.photos/1920/1080?random=17", "https://picsum.photos/1920/1080?random=18", "https://picsum.photos/1920/1080?random=19"]
         },
     ];
