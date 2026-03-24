@@ -25,7 +25,7 @@ export default function CustomWheelSection({ children }: any) {
       scrollTrigger: {
         trigger: heroRef.current,
         start: "top top",
-        end: "+=250%",
+        end: "+=150%",
         scrub: true,
         pin: true,
         anticipatePin: 1

@@ -1,0 +1,244 @@
+.c-sustainability-highlights {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+
+  .bg-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    // We make it taller than 100vh to allow it to translate up
+    height: 130vh;
+    z-index: 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+      display: block;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.7) 100%);
+      z-index: 2;
+    }
+  }
+
+  .content-overlay {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+
+    .header-section {
+      margin-bottom: 50px;
+
+      h2 {
+        font-size: 3rem;
+        color: #fff;
+        margin-bottom: 10px;
+        font-weight: 500;
+
+        span {
+          background-color: #f7ca18;
+          color: #111;
+          padding: 0 10px;
+          border-radius: 4px;
+        }
+      }
+
+      p {
+        font-size: 1.25rem;
+        color: #e2e8f0;
+      }
+    }
+
+    .rise-container {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .rise-item {
+        display: flex;
+        align-items: center;
+        opacity: 0.3;
+        transition: opacity 0.5s ease;
+        margin-bottom: 30px;
+
+        &.active {
+          opacity: 1;
+
+          .letter-col {
+            &::after {
+              width: 100px;
+              opacity: 1;
+            }
+          }
+        }
+
+        .letter-col {
+          display: flex;
+          align-items: center;
+          width: 250px;
+
+          .letter {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #fff;
+            margin-right: 20px;
+          }
+
+          .title-wrap {
+            .title {
+              font-size: 1.1rem;
+              color: #fff;
+              line-height: 1.2;
+              white-space: pre-wrap;
+              font-weight: 500;
+            }
+          }
+
+          &::after {
+            content: "";
+            display: block;
+            height: 2px;
+            background-color: #2fb573;
+            width: 0px;
+            opacity: 0;
+            margin-left: 20px;
+            transition: width 0.8s ease, opacity 0.8s ease;
+          }
+        }
+
+        .data-wrap {
+          display: flex;
+          flex: 1;
+          gap: 50px;
+          padding-left: 30px;
+
+          .data-item {
+            flex: 1;
+
+            .value {
+              font-size: 3rem;
+              font-weight: 700;
+              color: #fff;
+              margin-bottom: 5px;
+              line-height: 1.1;
+            }
+
+            .desc {
+              font-size: 1.1rem;
+              color: #cbd5e1;
+              line-height: 1.4;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 991px) {
+    .content-overlay {
+      padding-top: 80px;
+
+      .header-section {
+        h2 {
+          font-size: 2.2rem;
+        }
+
+        p {
+          font-size: 1.1rem;
+        }
+      }
+
+      .rise-container {
+        .rise-item {
+          flex-direction: column;
+          align-items: flex-start;
+
+          .letter-col {
+            width: 100%;
+            margin-bottom: 15px;
+
+            &::after {
+              display: none;
+            }
+          }
+
+          .data-wrap {
+            padding-left: 0;
+            flex-direction: column;
+            gap: 20px;
+
+            .data-item {
+              .value {
+                font-size: 2.2rem;
+              }
+
+              .desc {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .content-overlay {
+      padding-top: 60px;
+
+      .header-section {
+        margin-bottom: 30px;
+
+        h2 {
+          font-size: 1.8rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+      }
+
+      .rise-container {
+        .rise-item {
+          .letter-col {
+            .letter {
+              font-size: 2.5rem;
+            }
+
+            .title-wrap .title {
+              font-size: 1rem;
+            }
+          }
+
+          .data-wrap .data-item .value {
+            font-size: 1.8rem;
+          }
+        }
+      }
+    }
+  }
+}
