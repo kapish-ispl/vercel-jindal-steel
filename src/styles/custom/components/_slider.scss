@@ -1167,13 +1167,9 @@ $transition-speed: 0.7s;
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        // display: flex;
-        // align-items: center;
-        // justify-content: center;
         cursor: pointer;
         color: #666;
         font-size: 12px;
-        display: none;
 
         &:hover {
             background: var(--color-tertiary);

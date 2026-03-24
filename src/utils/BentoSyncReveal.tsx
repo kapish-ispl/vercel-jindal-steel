@@ -2,12 +2,14 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { useDeviceType } from '@/hooks/useDeviceType';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
-const BentoSyncReveal = ({ data }: { data: any }) => {
+const BentoSyncReveal = ({ data, props }: { data: any, props: any }) => {
+    console.log(props)
     const SLIDE_DATA = [
         {
             id: 1,
@@ -100,45 +102,66 @@ const BentoSyncReveal = ({ data }: { data: any }) => {
 
     }, { scope: container });
 
+    const device = useDeviceType();
+
     return (
         <>
-            <div className="bento-comparator" ref={container}>
-                {SLIDE_DATA.map((slide, index) => (
-                    <div
-                        key={slide.id}
-                        className={`slide-wrapper slide-${index}`}
-                        style={{ zIndex: SLIDE_DATA.length - index }}
-                    >
-                        <div className="bento-grid">
-                            {/* LARGE FEATURE */}
-                            <div className="grid-item feature" style={{ backgroundImage: `url(${slide.mainImg})` }}>
-                                <div className="overlay">
-                                    <h3 className="reveal-text">{slide.title}</h3>
-                                    <p className="reveal-text">{slide.desc}</p>
-                                </div>
+            <div className="commonSection-md v2" ref={container}>
+                <div className="container cus-container">
+                    <div className="row">
+                        <div className="col-12 col-lg-9">
+                            <div className="hw mb-40">
+                                <div className="c-heading-60 ft_regular clr-gray lh_1-1 mb-40">{props.sectitle}</div>
+                                <p className="c-content-24 ft_light lh_1-6 clr-gray">{props.secdesc}</p>
                             </div>
+                        </div>
+                        <div className="col-12">
+                            <div className="bento-comparator" >
+                                {SLIDE_DATA.map((slide, index) => (
+                                    <div
+                                        key={slide.id}
+                                        className={`slide-wrapper slide-${index}`}
+                                        style={{ zIndex: SLIDE_DATA.length - index }}
+                                    >
+                                        <div className="bento-grid">
+                                            {/* LARGE FEATURE */}
+                                            <div className="grid-item feature" style={{ backgroundImage: `url(${slide.mainImg})` }}>
+                                                <div className="overlay">
+                                                    <h3 className="reveal-text">{slide.title}</h3>
+                                                    <p className="reveal-text">{slide.desc}</p>
+                                                </div>
+                                            </div>
 
-                            {/* STAT BOX */}
-                            <div className="grid-item stat-box">
-                                <div className="stat-content">
-                                    <h4 className="reveal-text">{slide.stat}</h4>
-                                    <p className="reveal-text">{slide.statDesc}</p>
-                                </div>
+                                            {/* STAT BOX */}
+                                            <div className="grid-item stat-box">
+                                                <div className="stat-content">
+                                                    <h4 className="reveal-text">{slide.stat}</h4>
+                                                    <p className="reveal-text">{slide.statDesc}</p>
+                                                </div>
+                                            </div>
+
+                                            {
+                                                device === "desktop" && (
+                                                    <>
+                                                        {/* GALLERY ITEMS */}
+                                                        {slide.gallery.map((img, i) => (
+                                                            <div
+                                                                key={i}
+                                                                className={`grid-item thumb thumb-${i}`}
+                                                                style={{ backgroundImage: `url(${img})` }}
+                                                            />
+                                                        ))}
+                                                    </>
+                                                )
+                                            }
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-
-                            {/* GALLERY ITEMS */}
-                            {slide.gallery.map((img, i) => (
-                                <div
-                                    key={i}
-                                    className={`grid-item thumb thumb-${i}`}
-                                    style={{ backgroundImage: `url(${img})` }}
-                                />
-                            ))}
                         </div>
                     </div>
-                ))}
+                </div>
             </div>
-
         </>
     );
 };

@@ -6,7 +6,8 @@
 .bento-comparator {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 60vh;
+
     overflow: hidden;
 
     .slide-wrapper {
@@ -14,16 +15,16 @@
         inset: 0;
         width: 100%;
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
         background: transparent;
+        max-height: 600px;
     }
 }
 
 .bento-grid {
     display: grid;
-    width: 95%; // Padding for mobile
     max-width: 1600px;
     margin: 0 auto;
     grid-template-columns: 1fr; // Single column
