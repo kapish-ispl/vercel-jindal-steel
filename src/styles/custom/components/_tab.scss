@@ -75,10 +75,10 @@
         }
 
         .twoColumn__content {
-          padding: 20px 10px 0px;
+          padding: 40px 10px 0px;
 
           @include mq(tablet) {
-            padding: 25px 15px 0px;
+            padding: 40px 15px 0px;
           }
 
           @include mq(tablet-max) {

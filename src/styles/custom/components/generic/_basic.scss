@@ -3236,12 +3236,19 @@ ul.arrowbulletList {
 
     &__image {
         position: relative;
-        width: 300px;
+        width: 100%;
 
         & .u-img {
             width: 100%;
             height: auto;
+            max-width: 300px;
 
+        }
+
+        @media screen and (max-width: 991px) {
+            @include flexbox;
+            @include justify-content(center);
+            @include align-items(center);
         }
 
         @include mq(tablet-max) {
@@ -3250,6 +3257,10 @@ ul.arrowbulletList {
             position: absolute;
             bottom: 0;
             right: 0;
+
+            .u-img {
+                max-width: 100%;
+            }
         }
 
         @include mq(desktop) {
@@ -3281,6 +3292,30 @@ ul.arrowbulletList {
     width: 100%;
     height: 100vh;
     min-height: 600px;
+
+    &.fixHeight-1250 {
+        @include mq(desktop) {
+            min-height: 900px;
+        }
+
+        @include mq(desktop-wide-max) {
+            min-height: 1250px;
+        }
+    }
+
+    &.fixHeight-910 {
+        @include mq(desktop-wide) {
+            min-height: 910px;
+        }
+
+    }
+
+    &.fixHeight-800 {
+        @include mq(desktop-wide) {
+            min-height: 800px;
+        }
+
+    }
 
     &.with-gradient {
         position: relative;

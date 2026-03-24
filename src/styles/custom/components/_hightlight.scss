@@ -160,7 +160,7 @@
     }
 
     &:before {
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.24) 25%, rgba(0, 0, 0, 0.24) 75%, rgba(0, 0, 0, 0.4) 100%);
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 25%, rgba(0, 0, 0, 0.5) 75%, rgba(0, 0, 0, 0.6) 100%);
         content: "";
         position: absolute;
         width: 100%;
@@ -190,12 +190,15 @@
 
     &__item {
         min-height: 103px;
-        padding-top: 30px;
-
+        padding-top: 40px;
         position: relative;
         display: flex;
         flex-direction: column;
         padding-left: 30px;
+
+        @include mq(tablet-max) {
+            padding-top: 30px;
+        }
 
         &:after {
             content: "";
