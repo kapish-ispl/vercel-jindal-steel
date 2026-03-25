@@ -228,9 +228,7 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "circleslider") {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
-                    return <CircleSlider {...props}>
-                        {children}
-                    </CircleSlider>;
+                    return <CircleSlider props={props} data={Array.isArray(children) ? children : [children]} />;
                 }
 
                 if (domNode.name === "categoryslider") {
@@ -240,7 +238,6 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "customstickycard") {
                     const props = attributesToProps(domNode.attribs);
-                    console.log('aaya');
                     return <CustomStickyCard
                         {...props}
                         data={domToReact(domNode.children as DOMNode[], {

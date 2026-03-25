@@ -11,7 +11,9 @@ const textFade = {
   transition: { duration: 0.3 }
 };
 
-export default function CircularManagement() {
+export default function CircularManagement({ data, props }: any) {
+
+  console.log(props)
   const [active, setActive] = useState(0);
 
   const circularData = [
@@ -98,11 +100,11 @@ export default function CircularManagement() {
         <div className="row">
           <div className="col-12 col-md-10">
             <div className="hw mb-30">
-              <div className="c-heading-60 clr-gray ft_regular lh_1-4">Risk Management &amp; ESG Integration</div>
+              <div className="c-heading-60 clr-gray ft_regular lh_1-4">{props?.sectitle}</div>
             </div>
             <div className="genric__content">
               <p className="c-content-24 clr-gray ft_light lh_1-6 mb-0">
-                Environmental, social and governance risks are identified, assessed and monitored within the company’s enterprise risk management framework to support informed decision-making and long-term resilience.
+                {props?.secdesc}
               </p>
             </div>
           </div>
@@ -170,7 +172,7 @@ export default function CircularManagement() {
             </div>
 
             {/* Bottom Footer Content */}
-            <div className="row mt-3 mt-lg-5">
+            {/* <div className="row mt-3 mt-lg-5">
               <div className="col-12 col-md-6 col-lg-5">
                 <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">Our Approach</h4>
                 <AnimatePresence mode="wait">
@@ -187,7 +189,7 @@ export default function CircularManagement() {
                   </motion.p>
                 </AnimatePresence>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
