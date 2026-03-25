@@ -220,39 +220,43 @@
 
 
 .c-circle-btn {
-     width: 100%;
-     @include flexbox;
-     @include justify-content(center);
-     @include align-items(center);
-     gap:11px;
-      & .c-btn {
-          width: 44px;
-          height: 44px;
-           background-repeat: no-repeat !important;
-           background-position: center center;
-           font-size: 0px;
-      }
-      & #circleprevBtn {
+    width: 100%;
+    @include flexbox;
+    @include justify-content(center);
+    @include align-items(center);
+    gap: 11px;
+
+    & .c-btn {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        background-repeat: no-repeat !important;
+        background-position: center center;
+        font-size: 0px;
+    }
+
+    & #circleprevBtn {
         background: url('https://docs.jindalsteel.in/document/124/1773837816_pre-circle.png');
-       
+
         &:hover {
             background: url('https://docs.jindalsteel.in/document/124/1773837816_pre-circle-hover.png');
         }
-      } 
+    }
 
-      & #circlenextBtn {
+    & #circlenextBtn {
         background: url('https://docs.jindalsteel.in/document/124/1773837816_next-circle.png');
-       
+
         &:hover {
             background: url('https://docs.jindalsteel.in/document/124/1773837816_next-circle-hover.png');
         }
-      } 
-      &.circle-control {
+    }
+
+    &.circle-control {
         @include mq(tablet) {
             position: absolute;
-            right:0;
-            bottom:0px;
+            right: 0;
+            bottom: 0px;
         }
-      }
+    }
 
 }

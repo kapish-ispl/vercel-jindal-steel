@@ -136,23 +136,25 @@ export default function CircularManagement() {
                 <div className="circle-border"></div>
 
                 {circularData.map((item, index) => {
+                  // Logic: Calculate position on a 100% scale
+                  // 35 is the radius (as a percentage of the container)
                   const angle = (index * (360 / circularData.length)) - 90;
-                  const radius = 180;
-                  const x = Math.cos((angle * Math.PI) / 180) * radius;
-                  const y = Math.sin((angle * Math.PI) / 180) * radius;
+                  const radius = 35;
+                  const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
+                  const y = 50 + radius * Math.sin((angle * Math.PI) / 180);
 
                   return (
                     <div
                       key={item.id}
                       className={`item ${index === active ? "active" : ""}`}
                       style={{
-                        left: `calc(50% + ${x}px)`,
-                        top: `calc(50% + ${y}px)`,
+                        left: `${x}%`,
+                        top: `${y}%`,
                       }}
                       onMouseEnter={() => setActive(index)}
                     >
                       <div className="icon-box">{item.icon}</div>
-                      <span className="label c-content-20 ft_medium">{item.label}</span>
+                      <span className="label">{item.label}</span>
                     </div>
                   );
                 })}
@@ -168,19 +170,19 @@ export default function CircularManagement() {
             </div>
 
             {/* Bottom Footer Content */}
-            <div className="row mt-5 pt-4 border-top">
-              <div className="col-md-6">
-                <h4 className="fw-bold">Our Approach</h4>
+            <div className="row mt-3 mt-lg-5">
+              <div className="col-12 col-md-6 col-lg-5">
+                <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">Our Approach</h4>
                 <AnimatePresence mode="wait">
-                  <motion.p key={active} {...textFade} className="text-muted">
+                  <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
                     {activeData.approach}
                   </motion.p>
                 </AnimatePresence>
               </div>
-              <div className="col-md-6">
-                <h4 className="fw-bold">Performance Focus</h4>
+              <div className="col-12 col-md-6 col-lg-5 offset-lg-2">
+                <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">Performance Focus</h4>
                 <AnimatePresence mode="wait">
-                  <motion.p key={active} {...textFade} className="text-muted">
+                  <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
                     {activeData.performance}
                   </motion.p>
                 </AnimatePresence>

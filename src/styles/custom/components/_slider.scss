@@ -1043,6 +1043,44 @@ $transition-speed: 0.7s;
             }
         }
 
+        &.is-active {
+
+            .adjustable__card-items-floatText {
+                opacity: 1;
+                transform: translateX(0);
+                transition-delay: 0.3s;
+
+            }
+
+            .text-float {
+                transform: translateX(-200%);
+            }
+        }
+
+        .adjustable__card-items-floatText,
+        .text-float {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            padding: 20px;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+
+            @include mq(tablet-max) {
+                padding: 32px;
+            }
+        }
+
+        .adjustable__card-items-floatText {
+            transform: translateX(-200%);
+        }
+
+        .text-float {
+            bottom: 0;
+            top: unset;
+            transform: translateX(0%);
+        }
+
         // // --- TABLET LOGIC (2 Items) ---
         // @media (min-width: 601px) and (max-width: 1024px) {
         //     flex: 0 0 calc(50% - 8px); // Force 2 items in the row
@@ -1095,7 +1133,8 @@ $transition-speed: 0.7s;
             left: 0;
             top: 0;
             z-index: 1;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.4) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 35%, rgba(0, 0, 0, 0.6) 100%);
+
 
         }
 
@@ -1127,6 +1166,14 @@ $transition-speed: 0.7s;
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
+
+            .adjustable__card-items-floatText,
+            .text-float {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0.3s;
+
+            }
         }
     }
 
