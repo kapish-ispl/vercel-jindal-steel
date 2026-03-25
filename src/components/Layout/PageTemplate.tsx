@@ -38,6 +38,7 @@ const TimelineSlider = dynamic(() => import("@/utils/TimelineSlider"), { ssr: fa
 const CustomCircleAnimation = dynamic(() => import("@/utils/CustomCircleAnimation"), { ssr: false });
 const BentoSyncReveal = dynamic(() => import("@/utils/BentoSyncReveal"), { ssr: false });
 const HighlightCarousel = dynamic(() => import("@/utils/HighlightCarousel"), { ssr: false });
+const ScrollProgress = dynamic(() => import("@/utils/ScrollProgress"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -66,6 +67,9 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "customcircleanimation") {
                     return <CustomCircleAnimation />
+                }
+                if (domNode.name === "scrollprogress") {
+                    return <ScrollProgress />
                 }
                 if (domNode.name === "highlightcarousel") {
                     const props = attributesToProps(domNode.attribs);
