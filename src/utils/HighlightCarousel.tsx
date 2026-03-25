@@ -66,9 +66,6 @@ const HighlightCarousel = (props: any) => {
     return () => clearInterval(timer);
   }, [activeIndex, isPaused, slides.length]);
 
-  // ✅ Debug (remove later)
-  console.log("Slides:", slides);
-  console.log("Title:", sectitle);
 
   return (
     <>
