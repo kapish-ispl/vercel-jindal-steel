@@ -82,6 +82,12 @@
           @include font-size(16);
         }
 
+        >button {
+          @include flexbox;
+          @include justify-content(space-between);
+          @include align-items(center);
+        }
+
         >span {
           position: absolute;
           right: 25px;
@@ -355,7 +361,7 @@
         //     }
         //   }
         // }
-            .mega-menu {
+        .mega-menu {
 
           &-title,
           &-itemMenu {
@@ -411,38 +417,39 @@
               }
             }
           }
-          &__inner{
-              ul {
-            li {
-              @include flexbox;
-              //padding: 0px 15px;
-              width: 100%;
 
-              .left_icon {
-                padding-top: 7px;
-              }
-
-              a {
-                font-weight: var(--fontRegular);
-                text-decoration: none;
-                color: var(--color-secondary);
+          &__inner {
+            ul {
+              li {
                 @include flexbox;
-                @include justify-content(space-between);
-                padding: 8px 15px;
-                @include font-size(16);
-                position: relative;
+                //padding: 0px 15px;
                 width: 100%;
-                // .right_icon{
-                //   padding-left: 20px;
-                // }
 
-                &:hover {
-                  font-weight: var(--fontMedium);
-                  color: var(--color-primary);
+                .left_icon {
+                  padding-top: 7px;
+                }
+
+                a {
+                  font-weight: var(--fontRegular);
+                  text-decoration: none;
+                  color: var(--color-secondary);
+                  @include flexbox;
+                  @include justify-content(space-between);
+                  padding: 8px 15px;
+                  @include font-size(16);
+                  position: relative;
+                  width: 100%;
+                  // .right_icon{
+                  //   padding-left: 20px;
+                  // }
+
+                  &:hover {
+                    font-weight: var(--fontMedium);
+                    color: var(--color-primary);
+                  }
                 }
               }
             }
-          }
           }
         }
 

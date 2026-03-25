@@ -5,6 +5,7 @@ import { AppContext } from "@/context/AppContext";
 import { useEffect, useState, useContext, useRef } from "react";
 import { IMAGE_PATH } from "@/config/constant";
 import RecursiveMenu from "./RecursiveMenu";
+import MobileMenu from "./MobileMenu";
 
 const Header = () => {
   const contextInfo = useContext(AppContext);
@@ -24,6 +25,12 @@ const Header = () => {
 
   // desktop menu active item for hover/focus
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
+
+  const menuTrigger = () => {
+    setMobileMenuOpen(false);
+    document.querySelector(".app-mainWrapper")?.classList.remove("overflow-hidden");
+    document.querySelector(".app-container")?.classList.remove("overflow-hidden");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -132,6 +139,7 @@ const Header = () => {
                   >
                     <div className="icon-menu"></div>
                   </button>
+
 
                   {/* Desktop Menu */}
                   {/* <div className="c-header__nav desktop-menu">
@@ -359,6 +367,9 @@ const Header = () => {
                     </>
                   )} */}
                 </div>
+                {mobileMenuOpen && (
+                  <MobileMenu menuState={mobileMenuOpen} menuTrigger={menuTrigger} />
+                )}
               </div>
             </div>
           </div>
@@ -366,6 +377,7 @@ const Header = () => {
       )}
     </>
   );
+
 };
 
 export default Header;
