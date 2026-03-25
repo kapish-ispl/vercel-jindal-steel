@@ -1190,11 +1190,16 @@ $transition-speed: 0.7s;
 
 .button__control {
     position: absolute;
-    right: 0;
-    top: 50%;
+    right: 10px;
+    top: 80%;
     transform: translateY(-50%);
     @include flexbox;
     gap: 10px;
+
+    @include mq(tablet-max) {
+        right: 0;
+        top: 50%;
+    }
 
     .nu-carousel__arrow {
         width: 44px;

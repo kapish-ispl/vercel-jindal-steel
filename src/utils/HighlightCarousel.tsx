@@ -84,7 +84,7 @@ const HighlightCarousel = ({ data, props }: any) => {
   return (
     <>
       <div className="row position-relative">
-        <div className="col-12 col-lg-9">
+        <div className="col-10 col-lg-9">
           <div className="hw mb-40">
             <div>
               <div className="c-heading-60 ft_regular clr-gray lh_1-1 mb-40">Governance Structure</div>
