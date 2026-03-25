@@ -56,8 +56,8 @@ const ScrollProgress = () => {
     ];
 
     return (
-        <section className="commonSection-md" ref={sectionRef}>
-            <div className="container cus-container">
+        <section ref={sectionRef}>
+            <div>
                 {rowData.map((item) => (
                     <div className="row water-row mb-40" key={item.id}>
                         <div className="col-12 col-md-6">
@@ -94,7 +94,9 @@ const ScrollProgress = () => {
                         </div>
                     </div>
                 ))}
+
             </div>
+
         </section>
     );
 };
