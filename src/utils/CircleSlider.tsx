@@ -1,216 +1,192 @@
 "use client";
 
-import { useEffect, useRef, useState, ReactNode } from "react";
-import gsap from "gsap";
+import React, { useState } from "react";
+import { motion, AnimatePresence, type Transition } from "framer-motion";
 
-interface CircleSliderProps {
-  children?: ReactNode;
-}
+// Animation Variants for consistency
+const textFade = {
+  initial: { opacity: 0, y: 5 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -5 },
+  transition: { duration: 0.3 }
+};
 
-export default function CircleSlider({ children }: CircleSliderProps) {
-  const circleRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const descRef = useRef<HTMLDivElement>(null);
-
+export default function CircularManagement() {
   const [active, setActive] = useState(0);
-  const [data, setData] = useState<string[]>([]);
 
-  // ✅ persistent rotation (IMPORTANT)
-  const rotationRef = useRef(0);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    const circle = circleRef.current;
-
-    if (!container || !circle) return;
-
-    const items = container.querySelectorAll(".item");
-    const total = items.length;
-
-    if (!items.length) return;
-
-    let resizeObserver: ResizeObserver;
-
-    /* ✅ Extract CMS data */
-    const extractedData: string[] = [];
-    items.forEach((item) => {
-      const desc = item.getAttribute("data-desc") || "";
-      extractedData.push(desc);
-    });
-    setData(extractedData);
-
-    /* 🔵 Position items in circle */
-    const positionItems = () => {
-      const size = container.offsetWidth;
-      if (!size) return;
-
-      const center = size / 2;
-      const radius = center - 3;
-
-      items.forEach((item, i) => {
-        const angle = (360 / total) * i - 90;
-
-        const x = center + radius * Math.cos((angle * Math.PI) / 180);
-        const y = center + radius * Math.sin((angle * Math.PI) / 180);
-
-        gsap.set(item, { left: x, top: y });
-      });
-    };
-
-    /* 🔄 Rotation logic (FIXED) */
-    const rotateTo = (
-      index: number,
-      direction: "next" | "prev" | "direct" = "direct"
-    ) => {
-      setActive(index);
-
-      items.forEach((item) => item.classList.remove("active"));
-
-      const step = 360 / total;
-
-      if (direction === "next") {
-        rotationRef.current -= step; // clockwise
-      } else if (direction === "prev") {
-        rotationRef.current += step; // anticlockwise
-      } else {
-        rotationRef.current = -(step * index); // initial/direct
-      }
-
-      gsap.to(circle, {
-        rotation: rotationRef.current,
-        duration: 0.6,
-        ease: "power3.inOut",
-
-        onUpdate: () => {
-          const rot = gsap.getProperty(circle, "rotation");
-
-          items.forEach((item) => {
-            gsap.set(item, { rotation: -Number(rot) });
-          });
-        },
-
-        onComplete: () => {
-          items[index]?.classList.add("active");
-
-          gsap.fromTo(
-            descRef.current,
-            { opacity: 0, y: 10 },
-            { opacity: 1, y: 0, duration: 0.5 }
-          );
-        }
-      });
-    };
-
-    /* ✅ Init */
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        positionItems();
-        rotateTo(0, "direct");
-      }, 100);
-    });
-
-    /* ✅ Resize */
-    resizeObserver = new ResizeObserver(() => {
-      positionItems();
-    });
-    resizeObserver.observe(container);
-
-    /* 🖱 Click */
-    items.forEach((item, index) => {
-      item.addEventListener("click", () => rotateTo(index, "direct"));
-    });
-
-    /* 🔥 Autoplay (always clockwise) */
-    let autoPlay = setInterval(() => {
-      setActive((prev) => {
-        const next = (prev + 1) % total;
-        rotateTo(next, "next");
-        return next;
-      });
-    }, 8000);
-
-    const stop = () => clearInterval(autoPlay);
-
-    const start = () => {
-      autoPlay = setInterval(() => {
-        setActive((prev) => {
-          const next = (prev + 1) % total;
-          rotateTo(next, "next");
-          return next;
-        });
-      }, 8000);
-    };
-
-    container.addEventListener("mouseenter", stop);
-    container.addEventListener("mouseleave", start);
-
-    /* 🔘 Buttons */
-    let prevBtn: HTMLElement | null = null;
-    let nextBtn: HTMLElement | null = null;
-
-    const handleNext = () => {
-      setActive((prev) => {
-        const next = (prev + 1) % total;
-        rotateTo(next, "next");
-        return next;
-      });
-    };
-
-    const handlePrev = () => {
-      setActive((prev) => {
-        const next = (prev - 1 + total) % total;
-        rotateTo(next, "prev");
-        return next;
-      });
-    };
-
-    const attachButtons = () => {
-      prevBtn = document.getElementById("circleprevBtn");
-      nextBtn = document.getElementById("circlenextBtn");
-
-      if (prevBtn && nextBtn) {
-        prevBtn.addEventListener("click", handlePrev);
-        nextBtn.addEventListener("click", handleNext);
-        return true;
-      }
-      return false;
-    };
-
-    if (!attachButtons()) {
-      const interval = setInterval(() => {
-        if (attachButtons()) clearInterval(interval);
-      }, 500);
-
-      setTimeout(() => clearInterval(interval), 5000);
+  const circularData = [
+    {
+      id: "source",
+      label: "Source",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M7 7l3-3 3 3m0 10l-3 3-3-3m10-5h3m-17 0h3" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M12 4v16m-8-8h16" opacity="0.2" />
+          <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      description: "Responsible sourcing of raw materials aligned with operational efficiency and compliance standards.",
+      approach: "Circularity is embedded into operational processes through structured material management, by-product utilisation, and responsible resource optimisation across facilities.",
+      performance: "Efforts are directed towards reducing landfill dependence, improving recovery rates, and enhancing water stewardship across plants."
+    },
+    {
+      id: "produce",
+      label: "Produce",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M3 21h18M3 7v14m18-14v14M3 7l6-4 6 4 6-4v14" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+      description: "Optimizing production cycles to minimize waste and maximize the lifecycle of industrial components.",
+      approach: "Our production philosophy focuses on 'Lean Manufacturing' principles, ensuring that every kilowatt of energy and liter of water is accounted for.",
+      performance: "We have achieved a 12% reduction in greenhouse gas emissions intensity per unit produced over the last 24 months."
+    },
+    {
+      id: "recover",
+      label: "Recover",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M7 11l5-5m0 0l5 5m-5-5v12" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+        </svg>
+      ),
+      description: "Implementing advanced recovery systems to capture and repurpose industrial by-products efficiently.",
+      approach: "Recovery systems are integrated directly into our exhaust and filtration units to capture heat and particulate matter for reuse.",
+      performance: "Currently recovering 85% of process heat, which is diverted back into our facility heating systems, saving significant energy costs."
+    },
+    {
+      id: "reuse",
+      label: "Reuse",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+      description: "Closing the loop by reinjecting recovered materials back into the primary production stream.",
+      approach: "We utilize a 'Closed-Loop' logistics model where packaging and scrap materials are returned to the start of the manufacturing line.",
+      performance: "Our 'Zero Waste to Landfill' initiative has successfully diverted 4,000 tons of material back into production this year alone."
+    },
+    {
+      id: "monitor",
+      label: "Monitor",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ),
+      description: "Continuous real-time tracking of resource flows to ensure transparency and compliance with global standards.",
+      approach: "Digital twins and IoT sensors provide 24/7 visibility into resource consumption patterns across all global manufacturing sites.",
+      performance: "Real-time monitoring has allowed us to identify and fix leaks in our pressurized systems within minutes, reducing fluid loss by 30%."
     }
+  ];
 
-    /* 🧹 Cleanup */
-    return () => {
-      resizeObserver.disconnect();
-      clearInterval(autoPlay);
+  const activeData = circularData[active];
 
-      container.removeEventListener("mouseenter", stop);
-      container.removeEventListener("mouseleave", start);
+  // --- Navigation Logic ---
+  const handleNext = () => {
+    setActive((prev) => (prev + 1) % circularData.length);
+  };
 
-      prevBtn?.removeEventListener("click", handlePrev);
-      nextBtn?.removeEventListener("click", handleNext);
-    };
-  }, [children]);
+  const handlePrev = () => {
+    setActive((prev) => (prev - 1 + circularData.length) % circularData.length);
+  };
 
   return (
-    <div className="circle-wrapper">
-      <div className="circle-container" ref={containerRef}>
-        <div className="circle-border"></div>
-
-        <div className="circle" ref={circleRef}>
-          {children}
+    <div className="commonSection-md v2 bg-gray">
+      <div className="container custom-container">
+        <div className="row">
+          <div className="col-12 col-md-10">
+            <div className="hw mb-30">
+              <div className="c-heading-60 clr-gray ft_regular lh_1-4">Risk Management &amp; ESG Integration</div>
+            </div>
+            <div className="genric__content">
+              <p className="c-content-24 clr-gray ft_light lh_1-6 mb-0">
+                Environmental, social and governance risks are identified, assessed and monitored within the company’s enterprise risk management framework to support informed decision-making and long-term resilience.
+              </p>
+            </div>
+          </div>
+          <div className="col-12 col-md-2 mt-5 mt-md-0 ">
+            <div className="w-100 h-100 position-relative">
+              <div className="controls circle-control c-circle-btn">
+                <button
+                  className="c-btn"
+                  id="circleprevBtn"
+                  onClick={handlePrev}
+                >
+                  Prev
+                </button>
+                <button
+                  className="c-btn"
+                  id="circlenextBtn"
+                  onClick={handleNext}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+        <div className="row overflow-hidden">
+          <div className="col-12">
+            <div className="circle-wrapper">
+              {/* Header Section */}
 
-        <div
-          className="center-content c-content-24 clr-gray ft_light lh_1-6"
-          ref={descRef}
-        >
-          {data[active] || ""}
+              <div className="circle-container">
+                <div className="circle-border"></div>
+
+                {circularData.map((item, index) => {
+                  const angle = (index * (360 / circularData.length)) - 90;
+                  const radius = 180;
+                  const x = Math.cos((angle * Math.PI) / 180) * radius;
+                  const y = Math.sin((angle * Math.PI) / 180) * radius;
+
+                  return (
+                    <div
+                      key={item.id}
+                      className={`item ${index === active ? "active" : ""}`}
+                      style={{
+                        left: `calc(50% + ${x}px)`,
+                        top: `calc(50% + ${y}px)`,
+                      }}
+                      onMouseEnter={() => setActive(index)}
+                    >
+                      <div className="icon-box">{item.icon}</div>
+                      <span className="label c-content-20 ft_medium">{item.label}</span>
+                    </div>
+                  );
+                })}
+
+                <div className="center-content c-content-24 clr-gray ft_light lh_1-6">
+                  <AnimatePresence mode="wait">
+                    <motion.p key={active} {...textFade}>
+                      {activeData.description}
+                    </motion.p>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Footer Content */}
+            <div className="row mt-5 pt-4 border-top">
+              <div className="col-md-6">
+                <h4 className="fw-bold">Our Approach</h4>
+                <AnimatePresence mode="wait">
+                  <motion.p key={active} {...textFade} className="text-muted">
+                    {activeData.approach}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
+              <div className="col-md-6">
+                <h4 className="fw-bold">Performance Focus</h4>
+                <AnimatePresence mode="wait">
+                  <motion.p key={active} {...textFade} className="text-muted">
+                    {activeData.performance}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

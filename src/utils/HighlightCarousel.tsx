@@ -120,13 +120,12 @@ const HighlightCarousel = ({ data, props }: any) => {
                 <img src={slide.image} alt={`img-${slide.id}`} />
                 <div className="nu-carousel__overlay" />
               </div>
-
-              {/* <div className="nu-carousel__content">
-                <div className="nu-carousel__pill c-content-32 clr-white ft_medium mb-3">
-                  {slide.title}
-                </div>
-                <p className="nu-carousel__desc c-content-20 clr-white ft_light lh_1-6 mb-0">{slide.description}</p>
-              </div> */}
+              <div className="adjustable__card-items-floatText">
+                <h1 className="c-heading-80 ft_regular lh_1-1 clr-white">{slide.title}</h1>
+              </div>
+              <div className="text-float">
+                <h1 className="c-heading-80 ft_regular lh_1-1 clr-white">{slide.title + "."}</h1>
+              </div>
               {slide.child}
             </div>
           ))}
