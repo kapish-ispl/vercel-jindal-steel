@@ -3267,7 +3267,8 @@ ul.arrowbulletList {
         }
 
         @include mq(desktop) {
-            width: 500px;
+            width: 450px;
+
         }
 
         @include mq(desktop-wide-max) {
@@ -3623,8 +3624,12 @@ ul.arrowbulletList {
 }
 
 .contentBorder {
-    border-bottom: 1px solid var(--color-white);
+    border-top: 1px solid var(--color-white);
     padding: 10px 0px;
+}
+
+.h-80 {
+    height: 80%;
 }
 
 .bentoLayout {
