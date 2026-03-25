@@ -26,12 +26,6 @@ const Header = () => {
   // desktop menu active item for hover/focus
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
 
-  const menuTrigger = () => {
-    setMobileMenuOpen(false);
-    document.querySelector(".app-mainWrapper")?.classList.remove("overflow-hidden");
-    document.querySelector(".app-container")?.classList.remove("overflow-hidden");
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
