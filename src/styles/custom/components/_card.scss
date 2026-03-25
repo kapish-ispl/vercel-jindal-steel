@@ -2024,15 +2024,18 @@
     @include border-radius(8px);
     margin-bottom: 20px;
     height: calc(100% - 20px);
+    position: relative;
 
     @include mq(tablet) {
         padding: 22px;
+        margin-bottom: 30px;
+        height: calc(100% - 30px);
     }
 
     @include mq(tablet-max) {
         padding: 26px;
         margin-bottom: 0px;
-        height: auto;
+        height: 100%;
     }
 
     @include mq(desktop-wide) {
@@ -2040,6 +2043,8 @@
     }
 
     &__btn {
+
+
         &-link {
             background-color: var(--color-accent-green);
             max-width: 196px;

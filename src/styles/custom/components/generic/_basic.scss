@@ -3294,13 +3294,20 @@ ul.arrowbulletList {
     min-height: 600px;
 
     &.fixHeight-1250 {
-        @include mq(desktop) {
-            min-height: 900px;
+        min-height: 1400px;
+
+        @include mq(tablet) {
+            min-height: 850px;
         }
 
-        @include mq(desktop-wide-max) {
+        @include mq(tablet-max) {
+            min-height: 1150px;
+        }
+
+        @include mq(desktop) {
             min-height: 1250px;
         }
+
     }
 
     &.fixHeight-910 {
@@ -3615,4 +3622,23 @@ ul.arrowbulletList {
 .contentBorder {
     border-bottom: 1px solid var(--color-white);
     padding: 10px 0px;
+}
+
+.bentoLayout {
+    .c-bento__card {
+        &__wrapper {
+            &_content {
+                @media screen and (min-width: 768px) and (max-width: 992px) {
+                    min-height: 112px;
+                    @include flexbox;
+                    @include flex-direction(column, vertical);
+                    @include justify-content(flex-start);
+
+                    .c-content-32 {
+                        @include font-size(20);
+                    }
+                }
+            }
+        }
+    }
 }

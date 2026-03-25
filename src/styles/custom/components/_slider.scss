@@ -1187,3 +1187,28 @@ $transition-speed: 0.7s;
         opacity: 1;
     }
 }
+
+.button__control {
+    position: absolute;
+    right: 10px;
+    top: 80%;
+    transform: translateY(-50%);
+    @include flexbox;
+    gap: 10px;
+
+    @include mq(tablet-max) {
+        right: 0;
+        top: 50%;
+    }
+
+    .nu-carousel__arrow {
+        width: 44px;
+        height: 44px;
+        border: 1px solid #636466 !important;
+        @include border-radius(50%);
+        min-width: 44px;
+        @include flexbox;
+        @include align-items(center);
+        @include justify-content(center);
+    }
+}

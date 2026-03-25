@@ -83,8 +83,8 @@ const HighlightCarousel = ({ data, props }: any) => {
 
   return (
     <>
-      <div className="row">
-        <div className="col-12 col-lg-9">
+      <div className="row position-relative">
+        <div className="col-10 col-lg-9">
           <div className="hw mb-40">
             <div>
               <div className="c-heading-60 ft_regular clr-gray lh_1-1 mb-40">Governance Structure</div>
@@ -93,18 +93,21 @@ const HighlightCarousel = ({ data, props }: any) => {
                 company&rsquo;s governance framework, with defined roles to ensure accountability and
                 performance monitoring.</p>
             </div>
-            <div>
-              <button className="nu-carousel__arrow nu-carousel__arrow--prev" onClick={handlePrev} aria-label="Previous slide">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m15 18-6-6 6-6" />
-                </svg>
-              </button>
-              <button className="nu-carousel__arrow nu-carousel__arrow--next" onClick={handleNext} aria-label="Next slide">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </button>
-            </div>
+
+          </div>
+        </div>
+        <div className="col-12">
+          <div className='button__control'>
+            <button className="nu-carousel__arrow nu-carousel__arrow--prev" onClick={handlePrev} aria-label="Previous slide">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+            </button>
+            <button className="nu-carousel__arrow nu-carousel__arrow--next" onClick={handleNext} aria-label="Next slide">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
