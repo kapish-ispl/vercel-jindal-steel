@@ -5,6 +5,7 @@ import { AppContext } from "@/context/AppContext";
 import { useEffect, useState, useContext, useRef } from "react";
 import { IMAGE_PATH } from "@/config/constant";
 import RecursiveMenu from "./RecursiveMenu";
+import MobileMenu from "./MobileMenu";
 
 const Header = () => {
   const contextInfo = useContext(AppContext);
@@ -76,6 +77,12 @@ const Header = () => {
 
   const toggleAccordion = (id: number) => {
     setOpenAccordion(openAccordion === id ? null : id);
+  };
+
+  const menuTrigger = () => {
+    setMobileMenuOpen(false);
+    document.querySelector(".app-mainWrapper")?.classList.remove("overflow-hidden");
+    document.querySelector(".app-container")?.classList.remove("overflow-hidden");
   };
 
   return (
@@ -314,50 +321,9 @@ const Header = () => {
                     </nav>
                   </div>
 
-                  {/* Mobile Menu Accordion */}
-                  {/* {mobileMenuOpen && (
-                    <>
-                      <div
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="mobile-overlay"
-                      ></div>
-                      <div className="mobile-menu">
-                        <ul className="accordion-menu">
-                          {HEADER_MAIN_MENU.map((menuItem: any, idx: number) => (
-                            <li key={menuItem.id} className="accordion-item">
-                              <Link
-                                className="accordion-header"
-                                href={menuItem.link}
-                                prefetch={false}
-                                target={menuItem.type === "external" ? "_blank" : "_self"}
-                                onClick={() => setMobileMenuOpen(false)}
-                              >
-                                {menuItem.name}
-                              </Link>
-                              {menuItem.children.length > 0 && (
-                                <span onClick={() => toggleAccordion(idx)}>{openAccordion === idx ? "−" : "+"}</span>
-                              )}
-                              {openAccordion === idx &&
-                                menuItem.children.length > 0 && (
-                                  <ul className="accordion-content">
-                                    {menuItem.children.map((subMenu: any) => (
-                                      <li key={subMenu.id}>
-                                        <Link
-                                          prefetch={false}
-                                          href={subMenu.link}
-                                          onClick={() => setMobileMenuOpen(false)}>
-                                          {subMenu.name}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                )}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </>
-                  )} */}
+                  {mobileMenuOpen && (
+                    <MobileMenu menuState={mobileMenuOpen} menuTrigger={menuTrigger} />
+                  )}
                 </div>
               </div>
             </div>

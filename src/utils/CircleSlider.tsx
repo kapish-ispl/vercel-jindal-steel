@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence, type Transition } from "framer-motion";
 
 // Animation Variants for consistency
@@ -79,21 +79,66 @@ export default function CircularManagement({ data, props }: any) {
       ),
       description: "Continuous real-time tracking of resource flows to ensure transparency and compliance with global standards.",
       approach: "Digital twins and IoT sensors provide 24/7 visibility into resource consumption patterns across all global manufacturing sites.",
-      performance: "Real-time monitoring has allowed us to identify and fix leaks in our pressurized systems within minutes, reducing fluid loss by 30%."
+      performance: "Real-time monitoring has allowed us to identify and fix leaks in our pressurized systems within minutes, reducing fluid loss by 30%",
+      details: [
+        { label: "Our Approach", desc: "Digital twins and IoT sensors provide 24/7 visibility into resource consumption patterns across all global manufacturing sites." },
+        { label: "Performance Focus", desc: "Real-time monitoring has allowed us to identify and fix leaks in our pressurized systems within minutes, reducing fluid loss by 30%." }
+      ]
     }
   ];
 
-  const activeData = circularData[active];
+  const circularData1 = useMemo(() => {
+    const childrenArray = React.Children.toArray(data);
+    if (childrenArray.length === 0) return circularData;
+
+    return childrenArray
+      .filter((child) => React.isValidElement(child) && (child.type as any) === "item")
+      .map((item) => {
+        if (!React.isValidElement(item)) return null;
+        const itemProps = (item.props as any) || {};
+        const childElements = React.Children.toArray(itemProps.children);
+
+        const iconNode = childElements.find(
+          (c) => React.isValidElement(c) && (c.type as any) === "icon"
+        );
+
+        const sections = childElements
+          .filter((c) => React.isValidElement(c) && (c.type as any) === "section")
+          .map((section) => {
+            if (!React.isValidElement(section)) return null;
+            const sProps = section.props as any;
+            return {
+              label: sProps["data-type"],
+              desc: React.Children.toArray(sProps.children).join(""),
+            };
+          })
+          .filter(Boolean);
+
+        return {
+          id: itemProps["data-id"],
+          label: itemProps["data-label"],
+          description: itemProps["data-description"],
+          icon: React.isValidElement(iconNode)
+            ? (iconNode.props as any).children
+            : null,
+          details: sections,
+        } as any;
+      })
+      .filter(Boolean);
+  }, [data]);
+
+  const activeData = circularData1[active] || circularData[active];
 
   // --- Navigation Logic ---
   const handleNext = () => {
-    setActive((prev) => (prev + 1) % circularData.length);
+    setActive((prev) => (prev + 1) % circularData1.length);
   };
 
   const handlePrev = () => {
-    setActive((prev) => (prev - 1 + circularData.length) % circularData.length);
+    setActive((prev) => (prev - 1 + circularData1.length) % circularData1.length);
   };
 
+  console.log(circularData1)
   return (
     <div className="commonSection-md v2 bg-gray">
       <div className="container custom-container">
@@ -137,7 +182,7 @@ export default function CircularManagement({ data, props }: any) {
               <div className="circle-container">
                 <div className="circle-border"></div>
 
-                {circularData.map((item, index) => {
+                {circularData1.map((item, index) => {
                   // Logic: Calculate position on a 100% scale
                   // 35 is the radius (as a percentage of the container)
                   const angle = (index * (360 / circularData.length)) - 90;
@@ -164,7 +209,7 @@ export default function CircularManagement({ data, props }: any) {
                 <div className="center-content c-content-24 clr-gray ft_light lh_1-6">
                   <AnimatePresence mode="wait">
                     <motion.p key={active} {...textFade}>
-                      {activeData.description}
+                      {activeData?.description}
                     </motion.p>
                   </AnimatePresence>
                 </div>
@@ -172,24 +217,27 @@ export default function CircularManagement({ data, props }: any) {
             </div>
 
             {/* Bottom Footer Content */}
-            {/* <div className="row mt-3 mt-lg-5">
-              <div className="col-12 col-md-6 col-lg-5">
-                <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">Our Approach</h4>
-                <AnimatePresence mode="wait">
-                  <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
-                    {activeData.approach}
-                  </motion.p>
-                </AnimatePresence>
-              </div>
-              <div className="col-12 col-md-6 col-lg-5 offset-lg-2">
-                <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">Performance Focus</h4>
-                <AnimatePresence mode="wait">
-                  <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
-                    {activeData.performance}
-                  </motion.p>
-                </AnimatePresence>
-              </div>
-            </div> */}
+            {
+              activeData?.details?.length > 0 && (
+                <div className="row mt-3 mt-lg-5">
+                  <div className="col-12 col-md-6 col-lg-5">
+                    <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">{activeData?.details?.[0]?.label}</h4>
+                    <AnimatePresence mode="wait">
+                      <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
+                        {activeData?.details?.[0]?.desc}
+                      </motion.p>
+                    </AnimatePresence>
+                  </div>
+                  <div className="col-12 col-md-6 col-lg-5 offset-lg-2">
+                    <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">{activeData?.details?.[1]?.label}</h4>
+                    <AnimatePresence mode="wait">
+                      <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
+                        {activeData?.details?.[1]?.desc}
+                      </motion.p>
+                    </AnimatePresence>
+                  </div>
+                </div>
+              )}
           </div>
         </div>
       </div>
