@@ -60,7 +60,7 @@ const ScrollProgress = () => {
             <div>
                 {rowData.map((item) => (
                     <div className="row water-row mb-40" key={item.id}>
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                             {/* Removed withborder and border-orange classes */}
                             <div className="hw mb-30 position-relative">
                                 {/* Progress wrapper is now ABOVE the title */}
@@ -77,7 +77,7 @@ const ScrollProgress = () => {
                         </div>
 
                         <div className="col-12 col-md-6">
-                            <div className="c-bento__card__wrapper with-gradient mb-2">
+                            <div className="c-bento__card__wrapper with-gradient mb-2" data-aos="fade-left" data-aos-duration="1000">
                                 <div className="c-bento__card__wrapper_media">
                                     <img
                                         alt="card media"
@@ -86,7 +86,7 @@ const ScrollProgress = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="genric__content">
+                            <div className="genric__content" data-aos="fade-left" data-aos-duration="2000">
                                 <p className="c-content-24 clr-gray ft_light lh_1-6 mb-40">
                                     {item.disc}
                                 </p>

@@ -59,9 +59,17 @@ const CustomCircleAnimation = () => {
     }, { scope: sectionRef });
 
     return (
-        <section ref={sectionRef} className="rise-esg-section commonSection-lg">
-            <div className="container cus-container">
+        <section ref={sectionRef} className="rise-esg-section">
+            <div>
+                <div className="row">
+                    <div className="col-12 col-lg-9">
+                        <div className="hw">
+                            <div className="c-heading-60 ft_regular clr-gray lh_1-1 mb-40">RISE &times; ESG Integration</div>
 
+                            <p className="c-content-24 ft_light lh_1-6 clr-gray">RISE defines direction. ESG measures performance. The RISE framework guides strategic intent across operations, while ESG provides the structure for measurement, reporting and accountability.</p>
+                        </div>
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col-12">
                         <div className="rise-esg-circles-wrapper">
