@@ -1266,3 +1266,20 @@ $transition-speed: 0.7s;
         }
     }
 }
+
+.slider__warpper {
+    .overlay__text {
+        position: absolute;
+        top: 50px;
+        left: 10px;
+        z-index: 2;
+
+        @include mq(phone-wide) {
+            left: 15px;
+        }
+
+        @media screen and (min-width: 576px) {
+            left: 0;
+        }
+    }
+}

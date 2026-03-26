@@ -317,7 +317,7 @@ export default function GenericSlideWrapper({ data, hidecategory = "false", hide
                                     <div className="row">
                                         <div className="col-12 position-relative">
 
-                                            <div className="overlay__text" style={{ position: "absolute", top: "100px", left: 0, width: "100%", height: "100%", zIndex: 1 }}>
+                                            <div className="overlay__text" >
                                                 <div className="hw">
                                                     <div className="c-heading-60 clr-white ft_regular lh_1-1 mb-40">Creating Impact in Communities</div>
 
