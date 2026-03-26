@@ -2170,3 +2170,29 @@
         }
     }
 }
+
+.fixCard-height {
+    .c-bento__card {
+        &__wrapper {
+            height: 400px;
+
+            &_media {
+                height: 100%;
+
+                img {
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center center;
+                }
+            }
+
+            @include mq(tablet) {
+                height: 450px;
+            }
+
+            @include mq(tablet-max) {
+                height: auto;
+            }
+        }
+    }
+}
