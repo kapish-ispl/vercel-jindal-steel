@@ -26,6 +26,12 @@ const Header = () => {
   // desktop menu active item for hover/focus
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
 
+  const menuTrigger = () => {
+    setMobileMenuOpen(false);
+    document.querySelector(".app-mainWrapper")?.classList.remove("overflow-hidden");
+    document.querySelector(".app-container")?.classList.remove("overflow-hidden");
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -77,12 +83,6 @@ const Header = () => {
 
   const toggleAccordion = (id: number) => {
     setOpenAccordion(openAccordion === id ? null : id);
-  };
-
-  const menuTrigger = () => {
-    setMobileMenuOpen(false);
-    document.querySelector(".app-mainWrapper")?.classList.remove("overflow-hidden");
-    document.querySelector(".app-container")?.classList.remove("overflow-hidden");
   };
 
   return (
@@ -322,9 +322,50 @@ const Header = () => {
                     </nav>
                   </div>
 
-                  {mobileMenuOpen && (
-                    <MobileMenu menuState={mobileMenuOpen} menuTrigger={menuTrigger} />
-                  )}
+                  {/* Mobile Menu Accordion */}
+                  {/* {mobileMenuOpen && (
+                    <>
+                      <div
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="mobile-overlay"
+                      ></div>
+                      <div className="mobile-menu">
+                        <ul className="accordion-menu">
+                          {HEADER_MAIN_MENU.map((menuItem: any, idx: number) => (
+                            <li key={menuItem.id} className="accordion-item">
+                              <Link
+                                className="accordion-header"
+                                href={menuItem.link}
+                                prefetch={false}
+                                target={menuItem.type === "external" ? "_blank" : "_self"}
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                {menuItem.name}
+                              </Link>
+                              {menuItem.children.length > 0 && (
+                                <span onClick={() => toggleAccordion(idx)}>{openAccordion === idx ? "−" : "+"}</span>
+                              )}
+                              {openAccordion === idx &&
+                                menuItem.children.length > 0 && (
+                                  <ul className="accordion-content">
+                                    {menuItem.children.map((subMenu: any) => (
+                                      <li key={subMenu.id}>
+                                        <Link
+                                          prefetch={false}
+                                          href={subMenu.link}
+                                          onClick={() => setMobileMenuOpen(false)}>
+                                          {subMenu.name}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </>
+                  )} */}
                 </div>
                 {mobileMenuOpen && (
                   <MobileMenu menuState={mobileMenuOpen} menuTrigger={menuTrigger} />

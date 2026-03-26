@@ -17,7 +17,7 @@
   }
 
   &.show {
-    transform: translateY(0);
+    // transform: translateY(0);
     /* slide header down */
   }
 
@@ -65,7 +65,8 @@
         position: relative;
 
         >button,
-        >.accordion-header {
+        >.accordion-header,
+        .mobMenu {
           display: block;
           padding: 15px 20px;
           color: var(--color-black);
@@ -82,10 +83,12 @@
           @include font-size(16);
         }
 
-        >button {
+        >button,
+        .mobMenu {
           @include flexbox;
           @include justify-content(space-between);
           @include align-items(center);
+          font-weight: var(--fontRegular);
         }
 
         >span {
@@ -482,5 +485,12 @@
     .mobile-toggle {
       color: rgba(0, 0, 0, .8)
     }
+  }
+}
+
+.accordion-menu {
+  @media screen and (max-width: 992px) {
+    height: 70vh;
+    overflow-y: auto;
   }
 }
