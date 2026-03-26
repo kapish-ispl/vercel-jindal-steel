@@ -3297,6 +3297,8 @@ ul.arrowbulletList {
     height: 100vh;
     min-height: 600px;
 
+
+
     &.fixHeight-1250 {
         min-height: 1400px;
 
@@ -3444,6 +3446,12 @@ ul.arrowbulletList {
 
         }
 
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .c-vertical-slider {
+        height: 70vh;
     }
 }
 
