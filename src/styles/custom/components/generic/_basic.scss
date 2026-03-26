@@ -3540,9 +3540,9 @@ ul.arrowbulletList {
 
 
             .c-embla__buttons {
-                width: 60px;
+                width: 90px;
                 position: relative;
-                padding: 35px 0px 35px 0px;
+                padding: 0px 0px 35px 0px;
             }
 
             .c-embla__arrow {
@@ -3582,6 +3582,13 @@ ul.arrowbulletList {
                 }
             }
 
+            @media screen and (min-width: 993px) and (max-width: 1247px) {
+                .c-embla__buttons {
+                    top: -100px !important;
+                    width: 100px !important;
+                }
+            }
+
             @include mq(desktop) {
                 .c-embla__buttons {
                     width: 80px !important;
@@ -3606,6 +3613,7 @@ ul.arrowbulletList {
 
 .width-1050 {
     max-width: 700px;
+    width: 100%;
 
     @include mq(tablet-max) {
         max-width: 900px;
@@ -3615,7 +3623,7 @@ ul.arrowbulletList {
         max-width: 1050px;
     }
 
-    width: 100%;
+
 }
 
 .width-700 {

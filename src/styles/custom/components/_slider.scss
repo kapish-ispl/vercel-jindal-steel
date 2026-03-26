@@ -1257,5 +1257,11 @@ $transition-speed: 0.7s;
         @include flexbox;
         @include align-items(center);
         @include justify-content(center);
+
+        &.nu-carousel__arrow--next {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
     }
 }

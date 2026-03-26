@@ -29,7 +29,7 @@
     max-width: 1600px;
     margin: 0 auto;
     grid-template-columns: 1fr; // Single column
-    // grid-template-rows: 1.2fr 0.6fr 0.4fr 0.4fr 0.4fr;
+    grid-template-rows: 1.2fr 0.6fr 0.4fr 0.4fr 0.4fr;
     height: 95vh;
     gap: 10px;
 
@@ -47,6 +47,11 @@
         grid-template-rows: repeat(2, 1fr);
         height: 520px;
         gap: 15px;
+    }
+
+    @include mq(desktop) {
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
     }
 
     .grid-item {
@@ -378,6 +383,7 @@
     padding-top: 20px;
     height: 480px;
     width: 100%;
+    margin-top: 50px;
 
     // Ultrawide scale-up padding bounds!
     @media (min-width: 1800px) {

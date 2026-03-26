@@ -140,7 +140,7 @@ export default function CircularManagement({ data, props }: any) {
 
   console.log(circularData1)
   return (
-    <div className="commonSection-md v2 bg-gray">
+    <div className="commonSection-md v2">
       <div className="container custom-container">
         <div className="row">
           <div className="col-12 col-md-10">

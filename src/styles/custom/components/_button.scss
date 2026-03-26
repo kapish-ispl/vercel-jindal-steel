@@ -222,9 +222,13 @@
 .c-circle-btn {
     width: 100%;
     @include flexbox;
-    @include justify-content(center);
+    @include justify-content(flex-end);
     @include align-items(center);
     gap: 11px;
+
+    @include mq(tablet-max) {
+        @include justify-content(center);
+    }
 
     & .c-btn {
         width: 44px;

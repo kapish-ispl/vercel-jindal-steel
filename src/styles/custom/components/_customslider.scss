@@ -524,7 +524,7 @@
     .circle-border {
         position: absolute;
         inset: 15%; // Pulls the border inward so icons sit "on" it
-        border: 1px solid rgba(0, 0, 0, 0.1);
+        border: 2px solid rgb(99, 100, 102, 0.5);
         border-radius: 50%;
         z-index: 1;
     }
@@ -543,7 +543,7 @@
             width: 70px;
             height: 70px;
             background: #fff;
-            border: 1.5px solid #e0e0e0;
+            border: 2px solid #e0e0e0;
             border-radius: 50%;
             display: flex;
             align-items: center;
