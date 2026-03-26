@@ -67,8 +67,8 @@
 
 .overlaytext {
     position: absolute;
-    left: 32px;
-    bottom: 32px;
+    left: 12px;
+    bottom: 20px;
     color: var(--color-white);
     font-weight: var(--fontMedium);
     @include font-size(20);
@@ -76,6 +76,11 @@
 
     @include mq('tablet') {
         @include font-size(24);
+    }
+
+    @include mq('tablet-max') {
+        left: 32px;
+        bottom: 32px;
     }
 
     @include mq('desktop-min') {
