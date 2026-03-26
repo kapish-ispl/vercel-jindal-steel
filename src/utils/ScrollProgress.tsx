@@ -70,7 +70,7 @@ const ScrollProgress = () => {
                                         style={{ backgroundColor: item.color }}
                                     ></div>
                                 </div>
-                                <div className="c-heading-48 clr-gray ft_medium lh_1-4 mt-20">
+                                <div className="c-heading-48 clr-gray ft_medium lh_1-2 mt-3">
                                     {item.title}
                                 </div>
                             </div>

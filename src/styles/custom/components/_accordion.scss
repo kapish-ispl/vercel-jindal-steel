@@ -14,7 +14,7 @@
         padding-left: 10px;
 
         @include mq(tablet-max) {
-            padding-left: 24px;
+            padding-left: 16px;
         }
 
         &-head {
@@ -26,18 +26,26 @@
             border: none;
             outline: none;
             background-color: var(--white);
-            padding-bottom: 20px;
+            padding-bottom: 15px;
             font-weight: var(--fontMedium);
             color: var(--color-secondary);
             margin: 0;
-            @include font-size(18);
+            @include font-size(20);
 
             @include mq('desktop-min') {
-                @include font-size(20);
+                @include font-size(24);
             }
 
             @include mq('desktop-wide') {
-                @include font-size(24);
+                @include font-size(28);
+            }
+
+            @include mq('desktop-wide-max') {
+                @include font-size(32);
+            }
+
+            &-title {
+                padding-left: 24px;
             }
 
             &.active {
@@ -59,7 +67,15 @@
             //     display: block;
             // }
             >div {
-                padding-bottom: 24px;
+                padding: 24px;
+                @include font-size(18);
+                font-weight: var(--fontLight);
+                color: var(--color-secondary);
+                line-height: 1.6;
+
+                @include mq(tablet-max) {
+                    @include font-size(20);
+                }
             }
         }
     }

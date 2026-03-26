@@ -3408,7 +3408,7 @@ ul.arrowbulletList {
         }
 
         @include mq(desktop-wide-max) {
-            top: 340px;
+            top: 330px;
         }
     }
 
@@ -3696,5 +3696,25 @@ ul.arrowbulletList {
 
     .mt-20 {
         margin-top: 20px; // Padding between the top bar and the title text
+    }
+}
+
+.mb-24 {
+    margin-bottom: 15px;
+
+    @include mq(tablet-max) {
+        margin-bottom: 24px;
+    }
+}
+
+.mb-60 {
+    margin-bottom: 30px;
+
+    @include mq(tablet-max) {
+        margin-bottom: 45px;
+    }
+
+    @include mq(desktop-wide) {
+        margin-bottom: 60px;
     }
 }

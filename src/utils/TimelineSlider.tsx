@@ -127,15 +127,15 @@ const TimelineSlider = ({ children, data }: TimelineSliderProps) => {
 
         <div className="chain-control">
           <button className='prev' onClick={handlePrev} disabled={index === 0}>
-            <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.5105 19.3984L12.3992 14.2871L17.5105 9.17573L15.827 7.49219L9.0321 14.2871L15.827 21.082L17.5105 19.3984Z" fill="#636466" />
+            <svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.5 20.5L0.93997 11.4999C0.353346 10.9476 0.353346 10.0524 0.93997 9.50014L10.5 0.5" stroke="#A1A1A1" stroke-linecap="round" />
             </svg>
 
           </button>
 
           <button className='next' onClick={handleNext} disabled={index === timelineData.length - 1}>
-            <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.5105 19.3984L12.3992 14.2871L17.5105 9.17573L15.827 7.49219L9.0321 14.2871L15.827 21.082L17.5105 19.3984Z" fill="#636466" />
+            <svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.5 20.5L0.93997 11.4999C0.353346 10.9476 0.353346 10.0524 0.93997 9.50014L10.5 0.5" stroke="#A1A1A1" stroke-linecap="round" />
             </svg>
 
           </button>

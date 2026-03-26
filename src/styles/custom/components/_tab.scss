@@ -31,6 +31,19 @@
           button {
             .c-sector__item_label {
               padding: 0px 15px;
+              font-weight: var(--fontLight);
+              line-height: 1.3;
+
+              @include mq(desktop) {
+                @include font-size(24);
+              }
+            }
+
+            &.active {
+              .c-sector__item_label {
+                font-weight: var(--fontSemiBold);
+                color: var(--color-secondary) !important;
+              }
             }
           }
 

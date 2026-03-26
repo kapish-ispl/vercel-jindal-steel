@@ -237,22 +237,27 @@
         background-repeat: no-repeat !important;
         background-position: center center;
         font-size: 0px;
+        border: 1px solid var(--color-secondary);
+        @include border-radius(50%);
+        background-color: var(--color-white);
+        @include flexbox;
+        @include align-items(center);
+        @include justify-content(center);
     }
 
-    & #circleprevBtn {
-        background: url('https://docs.jindalsteel.in/document/124/1773837816_pre-circle.png');
+    // & #circleprevBtn {
+    //     background: url('https://docs.jindalsteel.in/document/124/1774524590_Group1171281804.png');
 
-        &:hover {
-            background: url('https://docs.jindalsteel.in/document/124/1773837816_pre-circle-hover.png');
-        }
-    }
+    //     &:hover {
+    //         background: url('https://docs.jindalsteel.in/document/124/1774525012_Group1171281805.png');
+    //     }
+    // }
 
     & #circlenextBtn {
-        background: url('https://docs.jindalsteel.in/document/124/1773837816_next-circle.png');
+        @include transform(rotate(180deg));
+        @include transition(all 0.3s ease-in-out);
 
-        &:hover {
-            background: url('https://docs.jindalsteel.in/document/124/1773837816_next-circle-hover.png');
-        }
+
     }
 
     &.circle-control {

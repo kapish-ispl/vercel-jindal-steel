@@ -1257,6 +1257,7 @@ $transition-speed: 0.7s;
         @include flexbox;
         @include align-items(center);
         @include justify-content(center);
+        background-color: var(--color-white);
 
         &.nu-carousel__arrow--next {
             svg {

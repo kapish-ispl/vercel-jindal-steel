@@ -143,17 +143,17 @@ export default function CircularManagement({ data, props }: any) {
     <div className="commonSection-md v2">
       <div className="container custom-container">
         <div className="row">
-          <div className="col-12 col-md-10">
-            <div className="hw mb-30">
-              <div className="c-heading-60 clr-gray ft_regular lh_1-4">{props?.sectitle}</div>
+          <div className="col-12 col-md-11">
+            <div className="hw mb-40">
+              <div className="c-heading-60 clr-gray ft_regular lh_1-1">{props?.sectitle}</div>
             </div>
             <div className="genric__content">
-              <p className="c-content-24 clr-gray ft_light lh_1-6 mb-0">
+              <p className="c-content-24 clr-gray ft_light lh_1-6 mb-0 width-1050">
                 {props?.secdesc}
               </p>
             </div>
           </div>
-          <div className="col-12 col-md-2 mt-5 mt-md-0 ">
+          <div className="col-12 col-md-1 mt-5 mt-md-0 ">
             <div className="w-100 h-100 position-relative">
               <div className="controls circle-control c-circle-btn">
                 <button
@@ -161,14 +161,20 @@ export default function CircularManagement({ data, props }: any) {
                   id="circleprevBtn"
                   onClick={handlePrev}
                 >
-                  Prev
+                  <span className="icon"><svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 20.5L0.93997 11.4999C0.353346 10.9476 0.353346 10.0524 0.93997 9.50014L10.5 0.5" stroke="#A1A1A1" stroke-linecap="round" />
+                  </svg>
+                  </span>
                 </button>
                 <button
                   className="c-btn"
                   id="circlenextBtn"
                   onClick={handleNext}
                 >
-                  Next
+                  <span className="icon"><svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 20.5L0.93997 11.4999C0.353346 10.9476 0.353346 10.0524 0.93997 9.50014L10.5 0.5" stroke="#A1A1A1" stroke-linecap="round" />
+                  </svg>
+                  </span>
                 </button>
               </div>
             </div>
@@ -206,7 +212,7 @@ export default function CircularManagement({ data, props }: any) {
                   );
                 })}
 
-                <div className="center-content c-content-24 clr-gray ft_light lh_1-6">
+                <div className="center-content c-content-32 clr-gray ft_light lh_1-6">
                   <AnimatePresence mode="wait">
                     <motion.p key={active} {...textFade}>
                       {activeData?.description}
