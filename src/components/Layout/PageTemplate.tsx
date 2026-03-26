@@ -39,6 +39,7 @@ const CustomCircleAnimation = dynamic(() => import("@/utils/CustomCircleAnimatio
 const BentoSyncReveal = dynamic(() => import("@/utils/BentoSyncReveal"), { ssr: false });
 const HighlightCarousel = dynamic(() => import("@/utils/HighlightCarousel"), { ssr: false });
 const ScrollProgress = dynamic(() => import("@/utils/ScrollProgress"), { ssr: false });
+const GenericSlideWrapper = dynamic(() => import("@/utils/GenericSlideWrapper"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -271,6 +272,21 @@ const PageTemplate = ({ data }: any) => {
                         },
                     });
                     return <CustomSliderCategory {...props} data={Array.isArray(children) ? children : [children]} />;
+                }
+                if (domNode.name === "genericslidewrapper") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[], {
+                        replace: (childNode) => {
+                            if (childNode instanceof Element) {
+                                if (childNode.name === "animatedcountup") {
+                                    const childProps = attributesToProps(childNode.attribs);
+                                    const toValue = childProps.to ? Number(childProps.to) : 0;
+                                    return <Counter to={toValue} />;
+                                }
+                            }
+                        },
+                    });
+                    return <GenericSlideWrapper {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
                 if (domNode.name === "customtabs") {
                     const props = attributesToProps(domNode.attribs);

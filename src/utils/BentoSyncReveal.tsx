@@ -106,7 +106,7 @@ const BentoSyncReveal = ({ data, props }: { data: any, props: any }) => {
 
     return (
         <>
-            <div className="commonSection-md v2" ref={container}>
+            <div className="commonSection-md v2 d-none d-lg-block" ref={container}>
                 <div className="container cus-container">
                     <div className="row">
                         <div className="col-12 col-lg-9">

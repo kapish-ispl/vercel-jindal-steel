@@ -59,10 +59,10 @@ const ScrollProgress = () => {
         <section ref={sectionRef}>
             <div>
                 {rowData.map((item) => (
-                    <div className="row water-row mb-40" key={item.id}>
+                    <div className="row water-row" key={item.id}>
                         <div className="col-12 col-md-6" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                             {/* Removed withborder and border-orange classes */}
-                            <div className="hw mb-30 position-relative">
+                            <div className="hw mb-40 position-relative">
                                 {/* Progress wrapper is now ABOVE the title */}
                                 <div className="custom-progress-wrapper top-bar">
                                     <div
