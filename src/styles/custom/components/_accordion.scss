@@ -45,7 +45,10 @@
             }
 
             &-title {
-                padding-left: 24px;
+                @include mq(tablet-max) {
+                    padding-left: 24px;
+                }
+
             }
 
             &.active {
@@ -67,7 +70,7 @@
             //     display: block;
             // }
             >div {
-                padding: 24px;
+                padding: 4px 10px 19px;
                 @include font-size(18);
                 font-weight: var(--fontLight);
                 color: var(--color-secondary);
@@ -75,6 +78,7 @@
 
                 @include mq(tablet-max) {
                     @include font-size(20);
+                    padding: 24px;
                 }
             }
         }
