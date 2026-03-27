@@ -269,10 +269,11 @@
   }
 
   &__title {
-    @include font-size(32);
+    //@include font-size(32);
     font-weight: 500;
     color: #636466;
     margin: 0;
+    
   }
 
   &__close {

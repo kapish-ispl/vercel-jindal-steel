@@ -11,22 +11,22 @@ const RecruitmentDisclaimerModal: FC<RecruitmentDisclaimerModalProps> = ({ isOpe
         <Modal
             isOpen={isOpen}
             onClose={onClose}
-            title="Recruitment Disclaimer"
+            title="Disclaimer Notice to Whomsoever it May Concern"
         >
             <div className="c-modal-v2__body-content">
-                <h4>Public Notice – Fake Job Offers</h4>
+                
                 <p>
-                    We, Jindal Steel and its group companies, have observed fraudulent individuals issuing fake job offers in our name and asking applicants to pay processing fees or deposit money via email or phone calls.
+                    Job scams are becoming increasingly common, with fraudsters using company names to send fake offers, interview invites, and requests for payment. These often involve unofficial email IDs, incorrect logos, or suspicious links.
                 </p>
                 <p>
-                    We strongly advise the public <strong>not to respond or make any payment</strong> to such communications. While legal action is underway against these entities, Jindal Steel and its group companies will not be responsible for any loss arising from such fraudulent dealings.
+                    <strong>Please remember:</strong><br/>Jindal Steel does not charge any fees or request sensitive personal information during the hiring process. If you receive a suspicious offer or communication:<br/>- Do not engage<br/>
+                    - Report it immediately via our official website or social media channels<br/>
+                    - Verify any offer through our official careers portal<br/>
                 </p>
                 <p>
-                    Please note, our recruitment process is <strong>professional, merit-based and completely free. We do not charge any fee</strong> at any stage of hiring.
+                    Your safety matters to us. Thank you for helping us stop misinformation and protect our community.
                 </p>
-                <p>
-                    If you receive any interview call or job offer claiming to be from us, <strong>verify it only through our official website (<a href="https://www.jindalsteel.com" target="_blank" rel="noopener noreferrer" className="modal_disclaimer_link">www.jindalsteel.com</a>)</strong> or directly with our HR department.
-                </p>
+               
                 <div className="c-modal-v2__footer">
                     <button className="btn-primary-green" onClick={onClose} type="button">Okay</button>
                 </div>
