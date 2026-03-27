@@ -1249,15 +1249,21 @@ $transition-speed: 0.7s;
     }
 
     .nu-carousel__arrow {
-        width: 44px;
-        height: 44px;
+        width: 35px;
+        height: 35px;
         border: 1px solid #636466 !important;
         @include border-radius(50%);
-        min-width: 44px;
+        min-width: 35px;
         @include flexbox;
         @include align-items(center);
         @include justify-content(center);
         background-color: var(--color-white);
+
+        @include mq(tablet-max) {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+        }
 
         &.nu-carousel__arrow--next {
             svg {

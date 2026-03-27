@@ -231,9 +231,9 @@
     }
 
     & .c-btn {
-        width: 44px;
-        height: 44px;
-        min-width: 44px;
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
         background-repeat: no-repeat !important;
         background-position: center center;
         font-size: 0px;
@@ -243,6 +243,12 @@
         @include flexbox;
         @include align-items(center);
         @include justify-content(center);
+
+        @include mq(tablet-max) {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+        }
     }
 
     // & #circleprevBtn {

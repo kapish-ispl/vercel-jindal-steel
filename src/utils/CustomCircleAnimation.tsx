@@ -74,13 +74,13 @@ const CustomCircleAnimation = () => {
                     <div className="col-12">
                         <div className="rise-esg-circles-wrapper">
                             <div ref={blueRef} className="rise-esg-circle circle-blue">
-                                <span className="circle-text">R.I.S.E</span>
+                                <span className="circle-text ft_semiBold">R.I.S.E</span>
                             </div>
                             <div ref={greenRef} className="rise-esg-circle circle-green">
-                                <span className="circle-text">E.S.G.</span>
+                                <span className="circle-text ft_semiBold">E.S.G.</span>
                             </div>
                             <div ref={orangeRef} className="rise-esg-circle circle-orange">
-                                <span className="circle-text mb-40">R.I.S.E</span>
+                                <span className="circle-text mb-0 mb-sm-2 ft_semiBold">R.I.S.E</span>
                                 <span className="circle-subtext c-content-24 clr-white lh_1-6 ft_medium">Integrated Sustainable<br />Performance</span>
                             </div>
                         </div>
