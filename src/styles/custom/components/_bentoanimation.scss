@@ -9,6 +9,17 @@
     height: 60vh;
     overflow: hidden;
 
+    @include mq(desktop) {
+        height: 85vh;
+    }
+
+    @include mq(desktop-wide) {
+        height: 70vh;
+    }
+
+    @include mq(desktop-wide-max) {
+        height: 60vh;
+    }
 
 
     .slide-wrapper {
