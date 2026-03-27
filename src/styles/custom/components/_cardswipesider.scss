@@ -101,6 +101,8 @@
   object-fit: cover;
 //   filter: grayscale(100%);
   display: block;
+  position: relative;
+
 }
 .swiper-slide-active {
   .demo-material-image {
@@ -117,14 +119,15 @@
   padding: 24px;
   box-sizing: border-box;
   color: #fff;
+  z-index: 22;
   font-family: sans-serif;
-  @include font-size(24);
+  @include font-size(20);
   font-weight: var(--fontLight);
   @include mq(tablet-max){
     @include font-size(28);
   }
   @include mq(desktop){
-    @include font-size(32);
+    @include font-size(30);
     padding: 32px;
   }
   
