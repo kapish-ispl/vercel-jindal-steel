@@ -3306,12 +3306,13 @@ ul.arrowbulletList {
             min-height: 850px;
         }
 
-        @include mq(tablet-max) {
-            min-height: 1150px;
-        }
 
         @include mq(desktop) {
-            min-height: 1250px;
+            min-height: 950px;
+        }
+
+        @include mq(desktop-wide) {
+            min-height: 1100px;
         }
 
     }
@@ -3341,7 +3342,7 @@ ul.arrowbulletList {
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0.24) 25%, rgba(0, 0, 0, 0.24) 75%, rgba(0, 0, 0, 0.4) 100%);
+            background: linear-gradient(0deg, rgba(0, 0, 0, .4) 25%, rgba(0, 0, 0, .4) 75%, rgba(0, 0, 0, .4) 100%);
             z-index: 1;
         }
 

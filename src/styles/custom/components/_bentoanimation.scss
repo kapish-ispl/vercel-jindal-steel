@@ -56,13 +56,18 @@
     @include mq(tablet-max) {
         grid-template-columns: 1.5fr 0.75fr 0.75fr;
         grid-template-rows: repeat(2, 1fr);
-        height: 520px;
+        height: 335px;
         gap: 15px;
     }
 
     @include mq(desktop) {
         grid-template-columns: 2fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
+        height: 400px;
+    }
+
+    @include mq(desktop-wide-max) {
+        height: 520px;
     }
 
     .grid-item {

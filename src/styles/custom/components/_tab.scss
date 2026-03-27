@@ -22,6 +22,46 @@
 }
 
 .c-bento__card {
+  .c-bento__card__wrapper {
+    &.v3 {
+      height: unset;
+
+      .c-bento__card__wrapper_item {
+        min-height: 300px;
+        max-height: 300px;
+        height: 300px;
+
+        .c-bento__card__wrapper_media {
+          height: 300px;
+          @include border-radius(8px);
+
+          img {
+            object-fit: cover;
+            object-position: center center;
+          }
+        }
+
+        .c-bento__card__wrapper_content {
+          transform: translateX(0px);
+        }
+
+      }
+    }
+  }
+
+  .twoColumn__content {
+    padding: 40px 10px 0px;
+
+    @include mq(tablet) {
+      padding: 40px 15px 0px;
+    }
+
+    @include mq(tablet-max) {
+      padding: 0px 32px;
+    }
+
+  }
+
   .tabbing_wrap {
     &.v1 {
       ul {

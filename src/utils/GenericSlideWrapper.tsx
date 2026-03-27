@@ -313,7 +313,7 @@ export default function GenericSlideWrapper({ data, hidecategory = "false", hide
                             style={{ flex: "0 0 100%" }}
                         >
                             <div className="slider__warpper">
-                                <div className="container cus-container">
+                                {/* <div className="container cus-container">
                                     <div className="row">
                                         <div className="col-12 position-relative">
 
@@ -326,7 +326,7 @@ export default function GenericSlideWrapper({ data, hidecategory = "false", hide
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {slide.children}
                             </div>
