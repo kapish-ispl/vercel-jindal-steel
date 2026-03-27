@@ -3718,3 +3718,17 @@ ul.arrowbulletList {
         margin-bottom: 60px;
     }
 }
+
+.fix-width-813 {
+    @include mq(tablet-max) {
+        max-width: 813px;
+        width: 100%;
+    }
+}
+
+.fix-width-932 {
+    @include mq(tablet-max) {
+        max-width: 932px;
+        width: 100%;
+    }
+}

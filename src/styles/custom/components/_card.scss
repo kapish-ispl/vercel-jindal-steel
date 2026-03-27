@@ -1396,7 +1396,7 @@
             left: 0;
 
             @include mq(tablet-max) {
-                padding: 32px;
+                padding: 24px 32px;
             }
         }
 
@@ -2022,14 +2022,15 @@
     background-color: var(--color-white);
     padding: 16px;
     @include border-radius(8px);
-    margin-bottom: 20px;
-    height: calc(100% - 20px);
+    margin-bottom: 25px;
+    height: calc(100% - 25px);
     position: relative;
+    @include flexbox;
+    @include flex-direction(column, vertical);
+    @include justify-content(space-between);
 
     @include mq(tablet) {
         padding: 22px;
-        margin-bottom: 30px;
-        height: calc(100% - 30px);
     }
 
     @include mq(tablet-max) {
