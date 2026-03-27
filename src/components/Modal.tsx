@@ -29,7 +29,7 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
         <div className="c-modal-v2" onClick={onClose}>
             <div className="c-modal-v2__container" onClick={(e) => e.stopPropagation()} data-lenis-ignore>
                 <div className="c-modal-v2__header">
-                    <h2 className="c-modal-v2__title">{title}</h2>
+                    <h2 className="c-modal-v2__title c-content-30">{title}</h2>
                     <button onClick={onClose} className="c-modal-v2__close">
                         <span aria-hidden="true">&times;</span>
                     </button>
