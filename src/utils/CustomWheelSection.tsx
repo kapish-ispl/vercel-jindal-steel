@@ -42,10 +42,10 @@ export default function CustomWheelSection({ children }: any) {
       ease: "none",
       duration: 1
     })
-    .to(wheelRef.current, {
-      opacity: 0,
-      duration: 0.3
-    }, "-=0.3")
+      .to(wheelRef.current, {
+        opacity: 0,
+        duration: 0.3
+      }, "-=0.3")
 
     /* 2️⃣ Logo scale + pulse fade (fades to 0 at limit) */
     tl.to(logoRef.current, {
@@ -53,14 +53,14 @@ export default function CustomWheelSection({ children }: any) {
       ease: "power2.out",
       duration: 1
     }, "-=0.3")
-    .to(logoRef.current, {
-      opacity: 1,
-      duration: 0.5
-    }, "-=1.0")
-    .to(logoRef.current, {
-      opacity: 0,
-      duration: 0.5
-    }, "-=0.5")
+      .to(logoRef.current, {
+        opacity: 1,
+        duration: 0.5
+      }, "-=1.0")
+      .to(logoRef.current, {
+        opacity: 0,
+        duration: 0.5
+      }, "-=0.5")
 
     /* 3️⃣ Show ESG content */
     tl.to(esgRef.current, {
@@ -76,7 +76,7 @@ export default function CustomWheelSection({ children }: any) {
 
       <img
         ref={wheelRef}
-        src="/images/logo/wheel.svg"
+        src="/images/logo/wheel-logo.png"
         className="c-whellsection__wheel"
         alt="Wheel"
       />
