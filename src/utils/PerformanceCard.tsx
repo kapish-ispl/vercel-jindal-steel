@@ -1,131 +1,180 @@
+'use client';
+
 import CustomSelect from '@/components/CustomSelect';
 import { invDocOptions, yearOptions } from '@/constants/GenericFilter';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import React, { useRef } from 'react'
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import React, { useRef } from 'react';
 import ReactPaginate from 'react-paginate';
 
-const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug }: any) => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const pathname = window.location.pathname;
-    const currentPage = Number(searchParams.get(`${compSlug}-page` || "page") || 1);
-    const pageCount = Math.ceil(totalPost / itemsPerPage);
+const PerformanceCard = ({
+    postData = [],
+    itemsPerPage = 9,
+    totalPost = 0,
+    loading,
+    compSlug
+}: any) => {
+
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
     const router = useRouter();
 
+    const currentPage =
+        Number(searchParams.get(`${compSlug}-page`) || searchParams.get("page") || 1);
+
+    const pageCount = Math.ceil(totalPost / itemsPerPage);
+
     const handlePageClick = ({ selected }: { selected: number }) => {
-        const newParams = new URLSearchParams(window.location.search);
+        const newParams = new URLSearchParams(searchParams.toString());
         newParams.set(`${compSlug}-page`, `${selected + 1}`);
-        const newUrl = `${pathname}?${newParams.toString()}`;
-        router.push(newUrl, { scroll: false });
+        router.push(`${pathname}?${newParams.toString()}`, { scroll: false });
     };
 
-    const selectRef = useRef<{ clearValue: () => void }>(null);
+    // separate refs
+    const typeRef = useRef<any>(null);
+    const yearRef = useRef<any>(null);
+
     const handleClear = () => {
-        selectRef.current?.clearValue();
-        router.push(window.location.pathname, { scroll: false });
+        typeRef.current?.clearValue?.();
+        yearRef.current?.clearValue?.();
+        router.push(pathname, { scroll: false });
     };
 
     return (
         <>
-            {compSlug !== 'subsidiary-financials' && (
-                            <div className="c-filterView mb-5">
-                                <div className="row gy-2">
-            
-                                    {compSlug === 'conference-call' && (
-                                        <>
-                                            <div className="col-md-10 col-sm-12">
-                                                <CustomSelect
-                                                    options={yearOptions}
-                                                    placeholder="2025-26"
-                                                    paramKey="conference-call-year"
-                                                    selectRef={selectRef}
-                                                />
-                                            </div>
-                                            <div className="col-12 col-md-2">
-                                                <button
-                                                    type="button"
-                                                    className="u-btn bg-blue action_btn"
-                                                    onClick={handleClear}
-                                                >
-                                                    CLEAR
-                                                </button>
-                                            </div>
-                                        </>
-                                    )}
-            
-                                    {compSlug === 'investor-documents' && (
-                                        <>
-                                            <div className="col-md-5 col-sm-12">
-                                                <CustomSelect
-                                                    options={invDocOptions}
-                                                    placeholder="Select Earning Presentation"
-                                                    paramKey="investor-documents-type"
-                                                    searchable
-                                                    selectRef={selectRef}
-                                                />
-                                            </div>
-                                            <div className="col-md-5 col-sm-12">
-                                                <CustomSelect
-                                                    options={yearOptions}
-                                                    placeholder="Select Year"
-                                                    paramKey="investor-documents-year"
-                                                    selectRef={selectRef}
-                                                />
-                                            </div>
-                                            <div className="col-12 col-md-2">
-                                                <button
-                                                    type="button"
-                                                    className="u-btn bg-blue action_btn"
-                                                    onClick={handleClear}
-                                                >
-                                                    CLEAR
-                                                </button>
-                                            </div>
-                                        </>
-                                    )}
-            
+            {/* ✅ FILTER SECTION */}
+            {['conference-call', 'investor-documents', 'environmental-compliance'].includes(compSlug) && (
+                <div className="c-filterView mb-5">
+                    <div className="row gy-2">
+
+                        {/* Conference Call */}
+                        {compSlug === 'conference-call' && (
+                            <>
+                                <div className="col-md-10 col-sm-12">
+                                    <CustomSelect
+                                        options={yearOptions}
+                                        placeholder="2025-26"
+                                        paramKey="conference-call-year"
+                                        selectRef={yearRef}
+                                    />
                                 </div>
-                            </div>
+
+                                <div className="col-12 col-md-2">
+                                    <button
+                                        type="button"
+                                        className="u-btn bg-blue action_btn"
+                                        onClick={handleClear}
+                                    >
+                                        CLEAR
+                                    </button>
+                                </div>
+                            </>
                         )}
 
+                        {/* Investor Documents */}
+                        {compSlug === 'investor-documents' && (
+                            <>
+                                <div className="col-md-5 col-sm-12">
+                                    <CustomSelect
+                                        options={invDocOptions}
+                                        placeholder="Select Earning Presentation"
+                                        paramKey="investor-documents-type"
+                                        searchable
+                                        selectRef={typeRef}
+                                    />
+                                </div>
+
+                                <div className="col-md-5 col-sm-12">
+                                    <CustomSelect
+                                        options={yearOptions}
+                                        placeholder="Select Year"
+                                        paramKey="investor-documents-year"
+                                        selectRef={yearRef}
+                                    />
+                                </div>
+
+                                <div className="col-12 col-md-2">
+                                    <button
+                                        type="button"
+                                        className="u-btn bg-blue action_btn"
+                                        onClick={handleClear}
+                                    >
+                                        CLEAR
+                                    </button>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {/* ✅ CARD SECTION */}
             <div className="c-cardView v7 fixSpace">
                 <div className="row">
-                    {
-                        postData.length > 0 ? postData.map((post: any, index: number) => {
-                            return (
-                                <div className="col-12 col-md-6 col-lg-4" key={index}>
 
-                                    {
-                                        compSlug === 'conference-call' && <>
-                                            <div className='c-audio__container mb-4'>
-                                                <div className='hw mb-40'>
-                                                    <div className="c-heading-30 clr-blue ft_semiBold">{post.title}</div>
-                                                </div>
-                                                <div className='c-audio__wrap'>
-                                                    <audio src={post.media[0].cdnPath} controls></audio>
+                    {postData?.length > 0 ? (
+                        postData.map((post: any, index: number) => (
+                            <div
+                                className="col-12 col-md-6 col-lg-4"
+                                key={post?.id || index}
+                            >
 
-                                                </div>
+                                {/* Conference Call */}
+                                {compSlug === 'conference-call' && (
+                                    <div className='c-audio__container mb-4'>
+                                        <div className='hw mb-40'>
+                                            <div className="c-heading-30 clr-blue ft_semiBold">
+                                                {post?.title}
                                             </div>
-                                        </>
-                                    }
-                                    {
-                                        (compSlug === 'investor-documents' || compSlug === 'subsidiary-financials') && <>
-                                            <Link target='_blank' href={compSlug === 'investor-documents' ? post.media[0].cdnPath : post.metaInfo.external_link} className='performance-link radiusShape-5'>
-                                                <div className="title c-content-19 ft_regular">{post.title}</div>
-                                                <span className="icon-move-down icon arrowremove">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="52" viewBox="0 0 70 52" fill="none"><path d="M8.5 43H4C2.34315 43 1 41.6569 1 40V4C1 2.34315 2.34315 1 4 1H56C57.6569 1 59 2.34315 59 4V7.5" stroke="#636466" stroke-width="2"></path><rect x="11" y="10" width="58" height="41" rx="3" stroke="#636466" stroke-width="2"></rect><path d="M21.5 21.5H59" stroke="#636466" stroke-width="2"></path><path d="M21.5 30H59" stroke="#636466" stroke-width="2"></path><path d="M21.5 38.5H59" stroke="#636466" stroke-width="2"></path></svg>
-                                                </span>
-                                            </Link>
-                                        </>
-                                    }
-                                </div>
-                            )
-                        }) :
-                            <>
-                                No Data found
-                            </>
-                        // {return <>No Data found</>}
-                    }
+                                        </div>
+
+                                        <div className='c-audio__wrap'>
+                                            <audio
+                                                src={post?.media?.[0]?.cdnPath}
+                                                controls
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Documents / Links */}
+                                {[
+                                    'investor-documents',
+                                    'subsidiary-financials',
+                                    'environmental-compliance'
+                                ].includes(compSlug) && (
+                                        <Link
+                                            target="_blank"
+                                            href={
+                                                compSlug === 'investor-documents'
+                                                    ? post?.media?.[0]?.cdnPath || '#'
+                                                    : post?.metaInfo?.external_link || '#'
+                                            }
+                                            className="performance-link radiusShape-5"
+                                        >
+                                            <div className="title c-content-19 ft_regular">
+                                                {post?.title}
+                                            </div>
+
+                                            <span className="icon-move-down icon arrowremove">
+                                                {/* SVG same as yours */}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="52" viewBox="0 0 70 52" fill="none">
+                                                    <path d="M8.5 43H4C2.34315 43 1 41.6569 1 40V4C1 2.34315 2.34315 1 4 1H56C57.6569 1 59 2.34315 59 4V7.5" stroke="#636466" strokeWidth="2"></path>
+                                                    <rect x="11" y="10" width="58" height="41" rx="3" stroke="#636466" strokeWidth="2"></rect>
+                                                    <path d="M21.5 21.5H59" stroke="#636466" strokeWidth="2"></path>
+                                                    <path d="M21.5 30H59" stroke="#636466" strokeWidth="2"></path>
+                                                    <path d="M21.5 38.5H59" stroke="#636466" strokeWidth="2"></path>
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    )}
+                            </div>
+                        ))
+                    ) : (
+                        <div className="text-center">No Data found</div>
+                    )}
+
+                    {/* ✅ PAGINATION */}
                     {pageCount > 1 && (
                         <div className="pagination-container mt-80 d-flex justify-content-center">
                             <ReactPaginate
@@ -171,7 +220,7 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default PerformanceCard
+export default PerformanceCard;

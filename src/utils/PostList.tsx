@@ -37,7 +37,7 @@ export default function PostList(props: any) {
     const [loading, setLoading] = useState(false);
     const type = searchParams.get('type');
     const [filteredTag, setFilteredTag] = useState<string | null>(null);
-
+    
     const metaKeys: any = {
         "investor-documents": {
             year: { key: "year_1599486125" },
@@ -97,6 +97,12 @@ export default function PostList(props: any) {
             }
         }
 
+         if (props.slug === 'environmental-compliance') {
+            if (type) {
+                slugInfo += `&metaInfo[type_1699180101]=${type}`;
+            }
+        }
+
         if (metaKeys[props.slug]) {
             const map = metaKeys[props.slug];
 
@@ -123,6 +129,8 @@ export default function PostList(props: any) {
                     slugInfo += `&metaInfo[${map.department.key}]=${selectedDept}`;
                 }
             }
+
+           
 
             // Handle Location
             if (map.location) {
