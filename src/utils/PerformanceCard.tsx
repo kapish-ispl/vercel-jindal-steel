@@ -19,6 +19,7 @@ const DownloadIcon = () => (
     </span>
 );
 
+
 const AudioCard = ({ post }: any) => (
     <div className='c-audio__container mb-4'>
         <div className='hw mb-40'>
@@ -96,7 +97,7 @@ const PerformanceCard = ({ postData, itemsPerPage = 9, totalPost, loading, compS
 
     return (
         <>
-            {compSlug !== 'subsidiary-financials' && (
+            {['conference-call', 'investor-documents'].includes(compSlug) && (
                 <div className="c-filterView mb-5">
                     <div className="row gy-2">
                         {compSlug === 'conference-call' && (
