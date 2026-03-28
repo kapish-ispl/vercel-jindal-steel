@@ -78,13 +78,19 @@ export default function PostList(props: any) {
         const pageParam = searchParams.get(`${props.slug}-page`);
 
         const activePage = pageParam ?? page ?? 1;
-
+        const category = props.cat ? decodeURIComponent(props.category) : null;
 
         let limit = props.limit !== undefined ? props.limit : 9;
 
         if (pathname === '/') {
             slugInfo += `&metaInfo[type_1599485711]=${props.type}`;
             limit = 3;
+        }
+
+        if (props.slug === 'environmental-compliance') {
+            if (category) {
+                slugInfo += `&metaInfo[type_1699180101]=${category}`;
+            }
         }
 
         if (props.slug === 'career' || props.slug === 'career-v2') {
@@ -176,7 +182,6 @@ export default function PostList(props: any) {
 
     }, [props.slug, page, pathname, type, searchParams]);
     const PostComponentRender = componentMap[props.components];
-
     return PostComponentRender ? (
         <PostComponentRender postData={postData} title={props.title != "" ? props.title : ''} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={props.limit || 9} itemstoshow={props.itemstoshow} isproduct={props.isproduct} loading={loading} />
     ) : <div>Loading...</div>;
