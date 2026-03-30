@@ -70,6 +70,17 @@
             @include mq(tablet-max) {
                 @include font-size(32);
             }
+
+            &.c-content-24 {
+                @include font-size(20);
+
+                @include mq(tablet) {
+                    @include font-size(24);
+                }
+                 @include mq(tablet-max) {
+                    @include font-size(24);
+                }
+            }
         }
     }
 
