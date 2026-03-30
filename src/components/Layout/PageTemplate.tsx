@@ -41,6 +41,7 @@ const HighlightCarousel = dynamic(() => import("@/utils/HighlightCarousel"), { s
 const ScrollProgress = dynamic(() => import("@/utils/ScrollProgress"), { ssr: false });
 const GenericSlideWrapper = dynamic(() => import("@/utils/GenericSlideWrapper"), { ssr: false });
 const TimeLineSection = dynamic(() => import("@/utils/TimeLineSection"), { ssr: false });
+const RotatingSlider = dynamic(() => import("@/utils/RotatingSlider"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -113,6 +114,10 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "customcarouselslider") {
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomCarouselSlider data={Array.isArray(children) ? children : [children]} />
+                }
+                if (domNode.name === "rotatingslider") {
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <RotatingSlider data={Array.isArray(children) ? children : [children]} />
                 }
 
                 if (domNode.name === "customreadmore") {

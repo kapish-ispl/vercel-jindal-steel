@@ -275,3 +275,32 @@
     }
 
 }
+
+.c-sliderBtn {
+    @include flexbox;
+    gap: 10px;
+
+    button {
+        @include size(43px);
+        background-color: var(--color-white);
+        @include border-radius(50%);
+        @include flexbox;
+        @include align-items(center);
+        @include justify-content(center);
+        border: none;
+        margin: 5px;
+
+    }
+
+    &.withSpacer {
+        margin: 20px 0px;
+
+        @include mq(tablet-max) {
+            margin: 30px 0px;
+        }
+
+        @include mq(desktop) {
+            margin: 40px 0px;
+        }
+    }
+}
