@@ -111,3 +111,124 @@
         }
     }
 }
+
+.c-timeline {
+    @include flexbox;
+    gap: 50px;
+    padding: 100px 0px;
+
+    &__item {
+        @include flexbox;
+        flex-direction: column;
+        gap: 40px;
+        padding-bottom: 60px;
+
+        &-text {
+            max-width: 424px;
+        }
+
+        &-img {
+            position: relative;
+
+            img {
+                filter: grayscale(1);
+            }
+
+        }
+
+        &:nth-child(odd) {
+            padding-top: 60px;
+        }
+    }
+}
+
+.timeline-scrollbar-wrapper {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+}
+
+.timeline-track-bg {
+    position: relative;
+    height: 2px;
+    width: 100%;
+    background-color: rgba(99, 100, 102, 1);
+}
+
+.timeline-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--color-primary);
+    width: 0%;
+}
+
+.timeline-nodes-container {
+    // position: absolute;
+    // top: 50%;
+    // left: 0;
+    // width: 100%;
+    transform: translateY(-50%);
+}
+
+.dot-wrapper {
+    position: relative;
+    --threshold: 0;
+
+    &:nth-child(1) {
+        --threshold: 0;
+    }
+
+    &:nth-child(2) {
+        --threshold: 0.25;
+    }
+
+    &:nth-child(3) {
+        --threshold: 0.50;
+    }
+
+    &:nth-child(4) {
+        --threshold: 0.75;
+    }
+
+    &:nth-child(5) {
+        --threshold: 1.00;
+    }
+
+    &:nth-child(6) {
+        --threshold: 1.0;
+    }
+
+    &:nth-child(7) {
+        --threshold: 1.0;
+    }
+}
+
+.timeline-dot-inner {
+    width: 24px;
+    height: 24px;
+    background-color: rgba(99, 100, 102, 1);
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: var(--color-primary);
+        opacity: clamp(0, (var(--scroll-progress, 0) - var(--threshold)) * 10000, 1);
+        transition: opacity 0.3s ease;
+    }
+}
+
+/* Active class applied by GSAP */
+.timeline-dot-inner.active {
+    background-color: var(--color-primary);
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+}

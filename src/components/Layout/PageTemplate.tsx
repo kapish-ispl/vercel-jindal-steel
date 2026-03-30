@@ -34,12 +34,13 @@ const VerticalCarousel = dynamic(() => import("@/utils/VerticalCarousel"), { ssr
 const CustomWheelSection = dynamic(() => import("@/utils/CustomWheelSection"), { ssr: false });
 const CircleSlider = dynamic(() => import("@/utils/CircleSlider"), { ssr: false });
 const CustomAccordions = dynamic(() => import("@/utils/CustomAccordions"), { ssr: false });
-const TimelineSlider = dynamic(() => import("@/utils/TimelineSlider"), { ssr: false });
+const TimelineSlider = dynamic(() => import("@/utils/TimeLineSection"), { ssr: false });
 const CustomCircleAnimation = dynamic(() => import("@/utils/CustomCircleAnimation"), { ssr: false });
 const BentoSyncReveal = dynamic(() => import("@/utils/BentoSyncReveal"), { ssr: false });
 const HighlightCarousel = dynamic(() => import("@/utils/HighlightCarousel"), { ssr: false });
 const ScrollProgress = dynamic(() => import("@/utils/ScrollProgress"), { ssr: false });
 const GenericSlideWrapper = dynamic(() => import("@/utils/GenericSlideWrapper"), { ssr: false });
+const TimeLineSection = dynamic(() => import("@/utils/TimeLineSection"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -85,6 +86,11 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "galleryslider") {
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <GallerySlider data={Array.isArray(children) ? children : [children]} />;
+                }
+                if (domNode.name === "timelinesection") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <TimeLineSection {...props} data={Array.isArray(children) ? children : [children]} />
                 }
                 if (domNode.name === "cardstackslider") {
                     const props = attributesToProps(domNode.attribs);

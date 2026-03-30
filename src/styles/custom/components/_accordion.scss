@@ -141,4 +141,124 @@
             }
         }
     }
+
+
+}
+
+.c-tabContainer {
+    .tabbing_wrap {
+        &.v1 {
+
+            ul {
+                @include justify-content(space-between);
+                margin-top: 30px;
+
+
+                @include mq(desktop) {
+                    margin-bottom: 40px;
+
+                }
+
+                @include mq(desktop-wide) {
+                    margin-bottom: 60px;
+                    margin-top: 50px;
+                }
+
+                @include mq(desktop-wide-max) {
+                    margin-bottom: 80px;
+                }
+
+                li {
+                    flex: 1;
+                    @include flexbox;
+                    @include align-items(center);
+                    @include justify-content(center);
+
+                    button {
+                        width: 100%;
+                        margin: 0px;
+
+                        &.c-sector__item {
+                            text-align: center;
+
+                            .c-sector__item_label {
+                                color: #A1A1A1;
+                            }
+
+                            .c-sector__item_border {
+                                background-color: #A1A1A1;
+                            }
+                        }
+
+
+                    }
+                }
+            }
+
+            .tabbing_wrap_content {
+
+
+                &_item {
+                    .c-tabWrapper__info {
+                        margin-top: 20px;
+
+                        @include mq(tablet-max) {
+                            padding-left: 40px;
+                            margin-top: 0px;
+                        }
+
+                        .listView {
+                            &__item {
+                                @include align-items(center);
+                                gap: 16px;
+
+                                +.listView__item {
+                                    margin-top: 20px;
+
+                                    @include mq(tablet-max) {
+                                        margin-top: 25xpx;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    &.v2 {
+        .tabbing_wrap {
+            &.v1 {
+                ul {
+                    @include justify-content(flex-start);
+                    margin-top: 0px;
+
+                    li {
+                        flex: unset;
+
+                        button {
+                            width: unset;
+
+
+                        }
+                    }
+                }
+
+                .tabbing_wrap_content {
+                    .c-twoColumnContainer__image {
+                        @include mq(tablet-max) {
+
+                            height: 100%;
+
+                            >img {
+                                object-fit: cover;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
