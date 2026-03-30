@@ -66,7 +66,6 @@ const TimeLineSection = ({ data }: any) => {
         scrub: 1,
         pin: true,
         anticipatePin: 1,
-        markers: true,
         invalidateOnRefresh: true, // recalculate on resize
         onUpdate: (self) => {
           // Update a css variable on the section for how much we have scrolled
