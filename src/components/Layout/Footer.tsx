@@ -82,7 +82,7 @@ const Footer = () => {
                                     </div>
                                     <div><span className="c-content-16 mt-1 ft_light">Have questions or need assistance? Our team is here to help.</span></div>
                                     <div className="c-footer__info-content  mt-2">
-                                        <div className="head">Contact us</div>
+                                        <div className="head"><a href="/contact-us-v2" className="u-link">Contact us</a></div>
                                         
 
                                     </div>
