@@ -33,7 +33,7 @@ const Footer = () => {
                                         
                                         <div className="socialMenu">
                                             <ul className="social__wrapper">
-                                                <li className="social__wrapper--item active"><a href='#' className='social__wrapper--item-link'>
+                                                <li className="social__wrapper--item active"><a href='https://www.linkedin.com/company/jindalsteel-ltd./' className='social__wrapper--item-link'>
                                                     <img
                                                         src='/images/icons/linkdin-icon.svg'
                                                         alt="jindal steel logo"
@@ -43,7 +43,7 @@ const Footer = () => {
                                                 </a>
 
                                                 </li>
-                                                <li className="social__wrapper--item"><a href='#' className='social__wrapper--item-link'>
+                                                <li className="social__wrapper--item"><a href='https://www.facebook.com/share/16qokH8ACe/?mibextid=wwXIfr' className='social__wrapper--item-link'>
                                                     <img
                                                         src='/images/icons/fb-icon.svg'
                                                         alt="jindal steel logo"
@@ -51,7 +51,7 @@ const Footer = () => {
                                                         height={41}
                                                         className="img-fluid u-img" />
                                                 </a></li>
-                                                <li className="social__wrapper--item"><a href='#' className='social__wrapper--item-link'>
+                                                <li className="social__wrapper--item"><a href='https://x.com/JindalSteel_In' className='social__wrapper--item-link'>
                                                     <img
                                                         src='/images/icons/twitter-icon.svg'
                                                         alt="jindal steel logo"
@@ -59,7 +59,7 @@ const Footer = () => {
                                                         height={41}
                                                         className="img-fluid u-img" />
                                                 </a></li>
-                                                <li className="social__wrapper--item"><a href='#' className='social__wrapper--item-link'>
+                                                <li className="social__wrapper--item"><a href='https://www.youtube.com/@JindalSteel_In' className='social__wrapper--item-link'>
                                                     <img
                                                         src='/images/icons/youtube.svg'
                                                         alt="jindal steel logo"
@@ -68,7 +68,7 @@ const Footer = () => {
                                                         className="img-fluid u-img" />
                                                 </a></li>
                                                 <li className="social__wrapper--item">
-                                                    <a href='#' className='social__wrapper--item-link'>
+                                                    <a href='https://www.instagram.com/jindalsteel_in' className='social__wrapper--item-link'>
                                                         <img
                                                             src='/images/icons/insta-icon.svg'
                                                             alt="jindal steel logo"
@@ -80,12 +80,7 @@ const Footer = () => {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div><span className="c-content-16 mt-1 ft_light">Have questions or need assistance? Our team is here to help.</span></div>
-                                    <div className="c-footer__info-content  mt-2">
-                                        <div className="head"><a href="/contact-us-v2" className="u-link">Contact us</a></div>
-                                        
-
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <div className="col-lg-2 col-md-4 col-sm-12">
@@ -102,8 +97,18 @@ const Footer = () => {
                             <div className="col-lg-3 col-md-4 col-sm-12">
                                 <div className="c-footer__info pad_left40">
                                     {FOOTER_MAIN_MENU?.length > 0 && <FooterList data={FOOTER_MAIN_MENU.slice(4, 5)} />}
-                                   
+                                    <div><span className="c-content-16 mt-1 ft_light">Have questions or need assistance? Our team is here to help.</span></div>
+                                    <div className="c-footer__info-content  mt-2">
+                                        <div className="head"><a href="/contact-us-v2" className="u-link">Contact us</a></div>
+                                        
+
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="c-footer__bottom"><p>Copyright ©2026&nbsp;Jindal Steel. All rights reserved.</p></div>
                             </div>
                         </div>
                     </div>
