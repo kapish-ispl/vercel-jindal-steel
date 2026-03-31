@@ -2225,3 +2225,112 @@
     }
 
 }
+
+.riseWrapper {
+    padding: 20px;
+    margin-bottom: 20px;
+    height: calc(100% - 20px);
+    background-color: var(--color-white);
+    transition: all 0.3s ease-in-out;
+
+    @include mq(tablet-max) {
+        padding: 32px;
+    }
+
+    &__title {
+        @include font-size(70);
+
+        @include mq(tablet) {
+            @include font-size(90);
+        }
+
+        @include mq(tablet-max) {
+            @include font-size(110);
+        }
+
+        @include mq(desktop) {
+            @include font-size(130);
+        }
+
+        @include mq(desktop-wide) {
+            @include font-size(150);
+        }
+
+        @include mq(desktop-wide-max) {
+            @include font-size(180);
+        }
+    }
+
+    p {
+        max-width: 522px;
+        width: 100%;
+    }
+
+    &.withBorder {
+        border: 2px solid var(--color-secondary);
+    }
+
+    &.border-gray {
+        border-color: var(--color-secondary);
+
+        &:hover {
+            background-color: var(--color-secondary);
+            color: var(--color-white);
+
+            p,
+            h5,
+            h1 {
+                color: var(--color-white) !important;
+            }
+        }
+    }
+
+    &.border-orange {
+        border-color: var(--color-primary);
+
+        &:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+
+            p,
+            h5,
+            h1 {
+                color: var(--color-white) !important;
+            }
+        }
+    }
+
+    &.border-green {
+        border-color: var(--color-accent-green);
+
+        &:hover {
+            background-color: var(--color-accent-green);
+            color: var(--color-white);
+
+            p,
+            h5,
+            h1 {
+                color: var(--color-white) !important;
+            }
+        }
+    }
+
+    &.border-blue {
+        border-color: var(--color-accent-blue);
+
+        &:hover {
+            background-color: var(--color-accent-blue);
+            color: var(--color-white);
+
+            p,
+            h5,
+            h1 {
+                color: var(--color-white) !important;
+            }
+        }
+    }
+
+    &.radius {
+        @include border-radius(8px);
+    }
+}
