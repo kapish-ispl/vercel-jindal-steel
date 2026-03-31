@@ -204,7 +204,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                         touched={touched.subject}
                                     />
                                 </div>
-                                <div className="col-lg-6 col-md-12">
+                                <div className="col-12">
                                     <FormDatePicker
                                         name="preferred_date"
                                         label="Secondary Preferred Date"
@@ -213,7 +213,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                         touched={touched.preferred_date}
                                     />
                                 </div>
-                                <div className="col-lg-6 col-md-12">
+                                <div className="col-12">
                                     <FormField
                                         name="message"
                                         label="Message*"
