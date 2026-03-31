@@ -34,7 +34,7 @@ const VerticalCarousel = dynamic(() => import("@/utils/VerticalCarousel"), { ssr
 const CustomWheelSection = dynamic(() => import("@/utils/CustomWheelSection"), { ssr: false });
 const CircleSlider = dynamic(() => import("@/utils/CircleSlider"), { ssr: false });
 const CustomAccordions = dynamic(() => import("@/utils/CustomAccordions"), { ssr: false });
-const TimelineSlider = dynamic(() => import("@/utils/TimeLineSection"), { ssr: false });
+const TimelineSlider = dynamic(() => import("@/utils/TimeLineSlider"), { ssr: false });
 const CustomCircleAnimation = dynamic(() => import("@/utils/CustomCircleAnimation"), { ssr: false });
 const BentoSyncReveal = dynamic(() => import("@/utils/BentoSyncReveal"), { ssr: false });
 const HighlightCarousel = dynamic(() => import("@/utils/HighlightCarousel"), { ssr: false });
