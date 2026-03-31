@@ -2197,3 +2197,31 @@
         }
     }
 }
+
+.card__wrapper {
+    background-color: var(--color-white);
+    padding: 20px;
+    border: 1px solid rgba(99, 100, 102, 0.2);
+    @include border-radius(8px);
+    margin: 0px 10px;
+
+    &-img {
+        height: 230px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+    }
+
+    &-info {
+        margin-top: 24px;
+
+        p {
+            min-height: 120px;
+        }
+    }
+
+}
