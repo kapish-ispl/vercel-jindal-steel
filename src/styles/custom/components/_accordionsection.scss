@@ -1,0 +1,259 @@
+@use '../core/variables' as *;
+@use '../core/mixins' as *;
+@use '../components/generic/sizes' as *;
+
+
+/* ================= VARIABLES ================= */
+:root {
+    --overlay-dark: rgba(0, 0, 0, 0.4);
+    --transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.c-accordion-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 600px;
+
+    /* collapse others */
+    &:hover {
+        .accordion-panel {
+            flex: 0;
+        }
+    }
+
+    .accordion-panel:hover {
+        flex: 1 1 100%;
+
+        .panel-label {
+            opacity: 0;
+        }
+    }
+}
+
+/* PANEL */
+.accordion-panel {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: flex 0.6s ease;
+
+    /* overlay */
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--overlay-dark);
+        transition: var(--transition);
+        z-index: 1;
+    }
+
+    &:hover {
+        &::after {
+            opacity: 0;
+        }
+
+        .expanded-view {
+            opacity: 1;
+            pointer-events: auto;
+            padding: 15px;
+
+            @include mq(tablet-max) {
+                padding: 20px;
+            }
+        }
+
+        .initial-view::before {
+            filter: grayscale(0%);
+        }
+    }
+}
+
+/* INITIAL */
+.initial-view {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+
+    /* 👉 image layer */
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background-size: cover;
+        background-position: center;
+        background-image: inherit;
+
+        filter: grayscale(100%);
+        transition: var(--transition);
+
+        z-index: 0;
+    }
+}
+
+/* LABEL (NOT affected by grayscale) */
+.panel-label {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+
+    z-index: 2; // 🔥 above grayscale layer
+}
+
+/* EXPANDED */
+.expanded-view {
+    position: absolute;
+    inset: 0;
+    background: var(--color-tertiary);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+
+    .expanded-content {
+        display: flex;
+        height: 100%;
+        flex-direction: row-reverse;
+    }
+}
+
+.content-col {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.expanded-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.panel-green {
+    .expanded-title {
+        color: var(--color-lime-green);
+    }
+}
+
+.panel-orange {
+    .expanded-title {
+        color: var(--color-primary);
+    }
+}
+
+.expanded-list {
+    color: var(--color-secondary);
+    line-height: 1.6;
+    list-style: disc;
+    padding-left: 25px;
+}
+
+.image-col {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+}
+
+.reverse-layout {
+    .expanded-content {
+        flex-direction: row-reverse;
+    }
+}
+
+/* ================= MOBILE / TABLET ================= */
+@media (max-width: 992px) {
+
+    .c-accordion-wrapper {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 16px;
+        padding: 10px;
+        min-height: 400px;
+
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &:hover {
+            .accordion-panel {
+                flex: unset;
+            }
+        }
+    }
+
+    .accordion-panel {
+        flex: 0 0 auto;
+        min-width: 300px;
+        max-width: 320px;
+        border-radius: 12px;
+        background: #fff;
+        overflow: hidden;
+
+        &:hover {
+            flex: unset;
+        }
+
+        &::after {
+            display: none;
+        }
+    }
+
+    .initial-view {
+        position: relative;
+        height: 180px;
+
+        &::before {
+            filter: grayscale(0%); // ✅ no grayscale on mobile
+        }
+    }
+
+    .panel-label {
+        bottom: 15px;
+        font-size: 16px;
+    }
+
+    .expanded-view {
+        position: relative;
+        opacity: 1;
+        pointer-events: auto;
+
+        .expanded-content {
+            flex-direction: column;
+        }
+    }
+
+    .content-col {
+        padding: 15px;
+    }
+
+    .image-col {
+        display: none;
+    }
+
+    .expanded-title {
+        font-size: 20px;
+    }
+
+    .expanded-list {
+        font-size: 14px;
+    }
+
+    .reverse-layout {
+        .expanded-content {
+            flex-direction: column;
+        }
+    }
+}

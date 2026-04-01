@@ -42,6 +42,7 @@ const ScrollProgress = dynamic(() => import("@/utils/ScrollProgress"), { ssr: fa
 const GenericSlideWrapper = dynamic(() => import("@/utils/GenericSlideWrapper"), { ssr: false });
 const TimeLineSection = dynamic(() => import("@/utils/TimeLineSection"), { ssr: false });
 const RotatingSlider = dynamic(() => import("@/utils/RotatingSlider"), { ssr: false });
+const SportsGallerySlider = dynamic(() => import("@/utils/SportsGallerySlider"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -74,10 +75,15 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "scrollprogress") {
                     return <ScrollProgress />
                 }
+
                 if (domNode.name === "highlightcarousel") {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <HighlightCarousel props={props} data={Array.isArray(children) ? children : [children]} />
+                }
+                if (domNode.name === "sportsgalleryslider") {
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <SportsGallerySlider data={Array.isArray(children) ? children : [children]} />
                 }
 
                 if (domNode.name === "bluranimation") {

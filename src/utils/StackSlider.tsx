@@ -13,7 +13,6 @@ interface SlideProps {
 }
 
 const StackSlider: React.FC<StackSliderProps> = ({ data, direction = "left", }) => {
-    console.log(direction)
     const slides = useMemo(() => {
         if (!data) return [];
 
