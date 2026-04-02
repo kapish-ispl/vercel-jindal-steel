@@ -2,21 +2,7 @@
 import React from "react";
 import { useState, useEffect, useMemo } from "react";
 
-const images = [
-  "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=2071&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2070&auto=format&fit=crop"
-];
-
-// const menuItems = [
-//   "Lifestyle & Well-being",
-//   "Health & Wellness",
-//   "Community & Belonging",
-//   "Financial Security (Retirement)",
-//   "Financial Flexibility (Active Employees)",
-// ];
-
-export default function HeroSection({ data, props }: any) {
+export default function HeroSection({ data, title }: any) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const menuItems = useMemo(() => {
     if (!data) return [];
@@ -29,28 +15,32 @@ export default function HeroSection({ data, props }: any) {
       )
       .map((child, index) => ({
         id: index + 1,
+        title: child.props.title,
         list: child.props.list,
         img: child.props.imgsrc,
 
       }));
   }, [data]);
+  console.log(menuItems);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      if (menuItems.length > 0) {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % menuItems.length);
+      }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [menuItems.length]);
 
   return (
     <section className="hero-container">
       {/* Background Images */}
-      {images.map((src, index) => (
+      {menuItems.map((item: any, index: number) => (
         <div
-          key={src}
+          key={index}
           className={`hero-slide ${index === currentIndex ? "active" : ""}`}
-          style={{ backgroundImage: `url(${src})` }}
+          style={{ backgroundImage: `url(${item.img})` }}
         />
       ))}
 
@@ -61,12 +51,17 @@ export default function HeroSection({ data, props }: any) {
             <div className="hero-overlay-wrapper">
               <div className="hero-card">
                 <h2 className="hero-title c-heading-40 ft_SemiBold lh_1-4 clr-white mb-40">
-                  {props.title}
+                  {title}
                 </h2>
 
                 <div className="hero-nav">
                   {menuItems.map((item, index) => (
-                    <div key={index} className="hero-nav-item">
+                    <div
+                      key={index}
+                      className={`hero-nav-item ${index === currentIndex ? "active" : ""}`}
+                      onMouseEnter={() => setCurrentIndex(index)}
+                      onClick={() => setCurrentIndex(index)}
+                    >
                       <span className="item-text c-content-20 ft_regular clr-white lh_1-6">{item.list}</span>
                     </div>
                   ))}

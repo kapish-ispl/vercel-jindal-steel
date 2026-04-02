@@ -475,7 +475,13 @@
 }
 
 .horizontalScroll-item {
-  padding-bottom: 100px;
+  @include justify-content(center !important);
+
+  @include mq(tablet-max) {
+    padding-bottom: 100px;
+    @include justify-content(flex-end !important);
+  }
+
 }
 
 .environmental_section {

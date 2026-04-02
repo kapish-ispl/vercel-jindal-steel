@@ -115,13 +115,18 @@
 .c-timeline {
     @include flexbox;
     gap: 50px;
-    padding: 100px 0px;
+    padding-top: 130px;
+
 
     &__item {
         @include flexbox;
         flex-direction: column;
-        gap: 40px;
+        gap: 15px;
         padding-bottom: 60px;
+
+        @include mq(desktop-wide-max) {
+            gap: 50px;
+        }
 
         &-text {
             max-width: 424px;
@@ -144,9 +149,17 @@
 
 .timeline-scrollbar-wrapper {
     position: absolute;
-    bottom: 50px;
+    bottom: 250px;
     left: 0;
     width: 100%;
+
+    @media screen and (min-width: 1536px) and (max-width: 1750px) {
+        bottom: 200px;
+    }
+
+    @media screen and (min-width: 1751px) {
+        bottom: 90px;
+    }
 }
 
 .timeline-track-bg {

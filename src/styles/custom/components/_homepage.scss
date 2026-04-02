@@ -659,7 +659,16 @@
                 padding-bottom: 0.75rem;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                 cursor: pointer;
-                transition: border-color 0.3s ease;
+
+
+                &.active {
+                    border-color: var(--color-primary) !important;
+                    opacity: 1;
+
+                    .item-text {
+                        color: var(--color-primary) !important;
+                    }
+                }
 
                 .item-text {
                     opacity: 0.8;

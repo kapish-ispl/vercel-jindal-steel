@@ -43,6 +43,7 @@ const GenericSlideWrapper = dynamic(() => import("@/utils/GenericSlideWrapper"),
 const TimeLineSection = dynamic(() => import("@/utils/TimeLineSection"), { ssr: false });
 const RotatingSlider = dynamic(() => import("@/utils/RotatingSlider"), { ssr: false });
 const SportsGallerySlider = dynamic(() => import("@/utils/SportsGallerySlider"), { ssr: false });
+const HeroSection = dynamic(() => import("@/utils/HeroSection"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -98,6 +99,11 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <TimeLineSection {...props} data={Array.isArray(children) ? children : [children]} />
+                }
+                if (domNode.name === "herosection") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <HeroSection {...props} data={Array.isArray(children) ? children : [children]} />
                 }
                 if (domNode.name === "cardstackslider") {
                     const props = attributesToProps(domNode.attribs);
