@@ -1295,6 +1295,7 @@ $transition-speed: 0.7s;
     position: static;
     width: 100%;
     overflow: hidden;
+
     &.buttons_absolute.v2 {
         .c-embla__buttons {
             position: absolute;
@@ -1303,30 +1304,110 @@ $transition-speed: 0.7s;
         }
 
         & .c-embla__buttons>button.c-embla__arrow--prev {
-                left: -20px !important;
-                top: 33%;
-                transform: translateX(-50%) rotate(180deg);
-                display: none;
-                 @include mq(tablet-max) {
-                    display: block;
-                 }
+            left: -20px !important;
+            top: 33%;
+            transform: translateX(-50%) rotate(180deg);
+            display: none;
+
+            @include mq(tablet-max) {
+                display: block;
+            }
         }
 
         & .c-embla__buttons>button.c-embla__arrow--next {
             right: -40px !important;
             top: 33%;
-            
+
             display: none;
-             @include mq(tablet-max) {
+
+            @include mq(tablet-max) {
                 display: block;
-             }
             }
-        
+        }
+
     }
 
     &.embla-items-padding {
         .c-verticalSlider__item {
-            padding: 0 20px; 
+            padding: 0 20px;
+        }
+    }
+}
+
+.sports-scroll-outer {
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    padding: 100px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 100vh;
+
+    @include mq(tablet-max) {
+        justify-content: center;
+    }
+
+
+}
+
+.sports-gallery-wrapper {
+    display: flex;
+    gap: 20px;
+    padding: 0 15px;
+    width: max-content; // Important: Allows the row to be wider than the screen
+    will-change: transform;
+
+    .sport-card {
+        flex-shrink: 0;
+        width: 300px; // Adjust width to show ~5 on large screens
+        height: 320px;
+        @include border-radius(16px);
+        overflow: hidden;
+        position: relative;
+
+        @include mq(tablet-max) {
+            height: 350px;
+        }
+
+        @include mq(desktop-wide) {
+            height: 420px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+
+            &::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(360deg, rgba(16, 17, 21, 0.8) 39.82%, rgba(16, 17, 21, 0) 100%);
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+
+            .event-label {
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            h3 {
+                margin-bottom: 10px;
+            }
+
+
         }
     }
 }

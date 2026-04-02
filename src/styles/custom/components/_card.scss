@@ -1377,13 +1377,13 @@
         flex-wrap: nowrap;
 
         .c-card__wrapper {
-            height: 350px;
+            height: 320px;
             position: relative;
             flex: 1;
             min-width: 300px;
 
-            @include mq(tablet-max) {
-                height: 414px;
+            @include mq(desktop-wide) {
+                height: 420px;
             }
 
 

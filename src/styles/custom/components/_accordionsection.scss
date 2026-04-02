@@ -196,7 +196,7 @@
 
     .accordion-panel {
         flex: 0 0 auto;
-        min-width: 300px;
+        min-width: 320px;
         max-width: 320px;
         border-radius: 12px;
         background: #fff;
@@ -213,7 +213,7 @@
 
     .initial-view {
         position: relative;
-        height: 180px;
+        height: 250px;
 
         &::before {
             filter: grayscale(0%); // ✅ no grayscale on mobile
@@ -229,6 +229,10 @@
         position: relative;
         opacity: 1;
         pointer-events: auto;
+
+        &:hover {
+            padding: 0px !important;
+        }
 
         .expanded-content {
             flex-direction: column;
