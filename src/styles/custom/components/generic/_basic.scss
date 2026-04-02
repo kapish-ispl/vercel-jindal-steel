@@ -162,10 +162,10 @@ main {
     }
 
     @include mq(desktop) {
-        margin-top: 70px;
+        margin-top: 60px;
     }
 
-    @include mq(desktop-wide) {
+    @include mq(desktop-wide-max) {
         margin-top: 80px;
     }
 

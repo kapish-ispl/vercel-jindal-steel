@@ -138,7 +138,6 @@ export default function CircularManagement({ data, props }: any) {
     setActive((prev) => (prev - 1 + circularData1.length) % circularData1.length);
   };
 
-  console.log(circularData1)
   return (
     <div className="commonSection-md v2 pb-0">
       <div className="container custom-container">
@@ -203,6 +202,7 @@ export default function CircularManagement({ data, props }: any) {
                       style={{
                         left: `${x}%`,
                         top: `${y}%`,
+
                       }}
                       onMouseEnter={() => setActive(index)}
                     >
