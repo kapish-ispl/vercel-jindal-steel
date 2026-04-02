@@ -39,7 +39,7 @@ const CustomAccordions = ({ data }: CustomAccordionProps) => {
         <>
             {/* Image Fade Animation */}
             <div className="col-12  col-xl-6">
-                <div className="accordion__media position-relative">
+                <div className="accordion__media position-relative v2">
                     <AnimatePresence mode="wait">
                         {activeIndex !== null && (
                             <>
