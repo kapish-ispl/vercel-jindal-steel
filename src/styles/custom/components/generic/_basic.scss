@@ -60,11 +60,11 @@ main {
     @include mq(desktop-wide-max) {
         padding: 90px 0px !important;
     }
-    &.pt-0 {
-        padding-top: 0px !important;
+    &.c-pt-0 {
+        padding-top: 30px !important;
 
         @include mq(tablet-max) {
-            padding-top: 0px !important;
+            padding-top: 50px !important;
         }
 
         @include mq(desktop-wide) {
@@ -75,11 +75,11 @@ main {
             padding-top: 0px !important;
         }
     }
-    &.pb-0 {
-        padding-bottom: 0px !important;
+    &.c-pb-0 {
+        padding-bottom: 30px !important;
 
         @include mq(tablet-max) {
-            padding-bottom: 0px !important;
+            padding-bottom: 50px !important;
         }
 
         @include mq(desktop-wide) {
