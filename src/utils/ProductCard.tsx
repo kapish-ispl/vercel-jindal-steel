@@ -48,16 +48,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
             </div>
             {postData && postData.length > 0 && postData.map((post, index) => (
                 <div className="col-lg-4 col-md-6 col-12" key={index}>
-                    <div className="c-cardView__wrapper">
-                        <Link className="cursor-pointer" href="#">
-                            <span className="c-cardView__wrapper-media">
-                                <img alt={post?.title} className="img-fluid u-img" src={post?.media?.[0]?.cdnPath} />
-                            </span>
-                            <span className="c-cardView__wrapper-content pall-20">
-                                <span className="title ft_regular">{post?.title}</span>
-                            </span> <span className="c-cardView__wrapper-shape"></span>
-                        </Link>
-                    </div>
+                   
+
+                    <Link className="c-cardBox__wrapper v1" href="/jindal-steel-limited">
+                    <span className="c-cardBox__wrapper-top"> 
+                        <span className="media ratio ratio-4x3"> 
+                             <img alt={post?.title} className="img-fluid u-img" src={post?.media?.[0]?.cdnPath} />
+                        </span> 
+                    </span> 
+                    <span className="c-cardBox__wrapper-bottom"> 
+                            <span className="content">
+                                <span className="title c-content-24 ft_semiBold mb-2 ">{post?.title}</span> 
+                                <span className="c-content-20 ft_light c-line-clamp-2">Jindal Steel Limited is one of India’s foremost integrated steel producers, renowned for its scale, efficiency, and commitment to excellence.</span> 
+                            </span> 
+                    </span> 
+                    </Link>
+
                 </div>
             ))}
             {pageCount > 1 && (
