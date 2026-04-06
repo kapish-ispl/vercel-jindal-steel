@@ -60,6 +60,15 @@ main {
     @include mq(desktop-wide-max) {
         padding: 90px 0px !important;
     }
+    
+}
+
+.c-pt0 {
+    padding-top: 0px !important;
+}
+
+.c-pb0 {
+    padding-bottom: 0px !important;
 }
 
 .c-pt75 {
