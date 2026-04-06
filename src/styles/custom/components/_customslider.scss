@@ -339,6 +339,17 @@
     }
 }
 
+.carousel-wrapper-height-822 {
+    .carousel-wrapper {
+        height: 842px;
+
+         @include mq(desktop) {
+            height: 650px;
+         }
+    }
+}
+
+
 .c-swiperSlider {
     .swiper-wrapper {
         .swiper-slide {
