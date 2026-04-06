@@ -25,7 +25,7 @@ export default function VerticalCarousel({ data }: { data: any }) {
                 direction={deviceType === 'desktop' ? 'vertical' : 'horizontal'}
                 slidesPerView={1}
                 spaceBetween={0}
-                loop={totalSlides > 1}
+                loop={totalSlides > 0}
                 allowTouchMove={true}
                 onSlideChange={handleSlideChange}
                 navigation={{
@@ -45,7 +45,7 @@ export default function VerticalCarousel({ data }: { data: any }) {
             </Swiper>
 
             {/* Custom Pagination Container - Moved back to React for smooth transition */}
-            {totalSlides > 1 && (
+            {totalSlides > 0 && (
                 <div className="custom-pagination">
                     <div className="fraction">{activeIndex} / {totalSlides}</div>
                     <div className="progress-container">

@@ -1960,6 +1960,22 @@ ul {
             @include mq('desktop-wide') {
                 @include font-size(19, 1.4);
             }
+
+            &.c-content-18 {
+                @include font-size(14);
+
+                @include mq('tablet') {
+                    @include font-size(17, 1.6);
+                }
+
+                @include mq('desktop-min') {
+                    @include font-size(18, 1.6);
+                }
+
+                @include mq('desktop-wide') {
+                    @include font-size(18, 1.6);
+                }
+            }
         }
     }
 }
@@ -3766,4 +3782,24 @@ ul.arrowbulletList {
         max-width: 932px;
         width: 100%;
     }
+}
+
+
+.c-line-clamp-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.c-line-clamp-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
