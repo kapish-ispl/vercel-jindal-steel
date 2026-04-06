@@ -11,6 +11,7 @@ const TimeLineSection = ({ data }: any) => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const timelineRef = useRef<HTMLDivElement>(null)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const trackBgRef = useRef<HTMLDivElement>(null)
   const [tWidth, setTWidth] = useState<number>(0)
   const progressBarRef = useRef<HTMLDivElement>(null)
   const [totalItems, setTotalItems] = useState([0]) // This will be dynamically updated
@@ -33,6 +34,7 @@ const TimeLineSection = ({ data }: any) => {
     const section = sectionRef.current
     const timeline = timelineRef.current
     const progressBar = progressBarRef.current
+    const trackBg = trackBgRef.current
     if (!section || !timeline) return
 
     const items = gsap.utils.toArray<HTMLElement>('.c-timeline__item', timeline)
@@ -112,6 +114,20 @@ const TimeLineSection = ({ data }: any) => {
     // Using CSS variables via onUpdate is much more accurate than a linear staggered animation 
     // to sync the dots directly with the progress bar's exact location.
 
+    // 7. Track background scroll
+    if (trackBg) {
+      const getTrackScrollAmount = () => {
+        const trackWidth = trackBg.scrollWidth
+        const windowWidth = window.innerWidth
+        const offset = trackWidth - windowWidth + 100 // Extra 100px so it scrolls slightly past the edge
+        return offset > 0 ? -offset : 0
+      }
+      tl.to(trackBg, {
+        x: getTrackScrollAmount,
+        ease: "none"
+      }, 0)
+    }
+
   }, { scope: sectionRef })
 
 
@@ -132,12 +148,12 @@ const TimeLineSection = ({ data }: any) => {
           </div>
         </div>
         <div className="timeline-scrollbar-wrapper">
-          <div className="timeline-track-bg">
+          <div className="timeline-track-bg" ref={trackBgRef} style={{ width: 'max-content', minWidth: '100%', paddingRight: '50px' }}>
             <div ref={progressBarRef} className="timeline-progress-fill"></div>
 
-            <div className="timeline-nodes-container d-flex justify-content-between">
+            <div className="timeline-nodes-container d-flex" style={{ justifyContent: 'space-between' }}>
               {totalItems.map((_, i) => (
-                <div key={i} className="dot-wrapper" style={{ zIndex: 2, '--threshold': (i / (totalItems.length - 1)) } as React.CSSProperties}>
+                <div key={i} className="dot-wrapper" style={{ zIndex: 2, minWidth: '200px', '--threshold': (totalItems.length > 1 ? Math.min(0.99, i / (totalItems.length - 1)) : 0) } as React.CSSProperties}>
                   <div className="timeline-dot-inner"></div>
                 </div>
               ))}
