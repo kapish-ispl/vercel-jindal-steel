@@ -115,7 +115,7 @@
 .c-timeline {
     @include flexbox;
     gap: 50px;
-    padding-top: 130px;
+    padding-top: 120px;
 
 
     &__item {
@@ -138,7 +138,12 @@
             img {
                 filter: grayscale(1);
             }
-
+            &.height-200 {
+                height: 300px;
+                img {
+                    width: 100% !important;
+                }
+            }
         }
 
         &:nth-child(odd) {
