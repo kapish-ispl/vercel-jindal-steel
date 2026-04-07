@@ -3835,3 +3835,11 @@ ul.arrowbulletList {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
+.fullboxswiper .swiper-slide {
+    height: auto;
+    display: flex;
+    padding-bottom: 30px;
+
+}

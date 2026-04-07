@@ -133,8 +133,18 @@ const TimeLineSection = ({ data }: any) => {
 
   return (
     <>
+      <div className='container cus-container'>
+        <div className="row">
+            <div className="col-12">
+              <div className="hw" data-aos="fade-up" data-aos-duration="1000">
+                  <div className="clr-peach c-heading-50 mt-5 text-center text-uppercase ft_regular">Key Milestones</div>
+                </div>
+              </div>
+            </div>
+      </div>
       <div className="commonSection-lg overflow-hidden p-0" ref={sectionRef}>
         <div className="container cus-container me-0">
+          
           <div className="row">
             <div className="col-12">
               <div className="c-timeline" ref={timelineRef} style={{ flexWrap: 'nowrap', width: 'max-content', paddingRight: '20vw' }}>
