@@ -149,9 +149,13 @@
 
 .timeline-scrollbar-wrapper {
     position: absolute;
-    bottom: 250px;
+    bottom: 280px;
     left: 0;
     width: 100%;
+
+    @media screen and (min-width: 1460px) and (max-width: 1535px) {
+        bottom: 250px;
+    }
 
     @media screen and (min-width: 1536px) and (max-width: 1750px) {
         bottom: 200px;
