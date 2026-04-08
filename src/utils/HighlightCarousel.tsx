@@ -71,7 +71,7 @@ const HighlightCarousel = (props: any) => {
     <>
       {/* ✅ Dynamic Header */}
       <div className="row position-relative">
-        <div className="col-10 col-lg-9">
+        <div className="col-10 col-lg-12">
           <div className="hw mb-40">
             <div>
               {sectitle && (
@@ -79,16 +79,17 @@ const HighlightCarousel = (props: any) => {
                   {sectitle}
                 </div>
               )}
-
+              
+            </div>
+          </div>
+        </div>
+        <div className="col-10 col-lg-9">
               {secdesc && (
                 <p className="c-content-24 lh_1-6 ft_light clr-gray">
                   {secdesc}
                 </p>
               )}
-            </div>
-          </div>
         </div>
-
         <div className="col-12">
           <div className="button__control">
             <button

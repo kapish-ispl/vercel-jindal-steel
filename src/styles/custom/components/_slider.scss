@@ -1411,3 +1411,15 @@ $transition-speed: 0.7s;
         }
     }
 }
+
+
+.strongGovernance .nu-carousel__container {
+    height: 250px;
+    @include mq(tablet-max) {
+        height: 300px;
+    }
+
+    @include mq(desktop) {
+        height: 320px;
+    }
+}
