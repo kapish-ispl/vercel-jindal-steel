@@ -38,6 +38,7 @@ export default function CustomHorizontalScroll({ data }: { data: (ReactNode | st
   }, []);
 
   return (
+   
     <section
       ref={sectionRef}
       className="horizontal-section"
@@ -47,6 +48,15 @@ export default function CustomHorizontalScroll({ data }: { data: (ReactNode | st
         overflow: "hidden",
       }}
     >
+       <div className="container cus-container">
+          <div className="row">
+            <div className="col-12">
+              <div className="hw mt-3">
+                <div className="clr-gray c-heading-50 text-center text-center ft_semiBold">A Legacy of Strength</div>
+              </div>
+            </div>
+          </div>
+      </div>
       <div
         ref={containerRef}
         className="horizontal-container"
