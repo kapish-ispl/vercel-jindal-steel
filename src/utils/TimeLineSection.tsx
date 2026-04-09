@@ -61,19 +61,20 @@ const TimeLineSection = ({ data }: any) => {
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: section,
-        start: 'top top',
+        trigger: sectionRef.current,
+        start: 'center center',
         // scroll duration tied to how long the horizontal content is
         end: () => `+=${timeline.scrollWidth}`,
         scrub: 1,
         pin: true,
         anticipatePin: 1,
+        pinSpacing: true,
         invalidateOnRefresh: true, // recalculate on resize
         onUpdate: (self) => {
           // Update a css variable on the section for how much we have scrolled
           section.style.setProperty('--scroll-progress', self.progress.toString())
-          section.style.setProperty('height', '900px')
-          section.style.setProperty('max-height', '900px')
+          section.style.setProperty
+          section.style.setProperty
         }
       }
     })
@@ -133,20 +134,14 @@ const TimeLineSection = ({ data }: any) => {
 
   return (
     <>
-      <div className='container cus-container'>
-        <div className="row">
-            <div className="col-12">
-              <div className="hw" data-aos="fade-up" data-aos-duration="1000">
-                  <div className="clr-peach c-heading-50 mt-5 text-center text-uppercase ft_regular">Key Milestones</div>
-                </div>
-              </div>
-            </div>
-      </div>
-      <div className="commonSection-lg overflow-hidden p-0" ref={sectionRef}>
-        <div className="container cus-container me-0">
-          
+
+      <div className="commonSection-lg timeLine__wrapper overflow-hidden" ref={sectionRef}>
+        <div className="container cus-container">
           <div className="row">
             <div className="col-12">
+              <div className="hw" data-aos="fade-up" data-aos-duration="1000">
+                <div className="clr-peach c-heading-50 mt-5 text-center text-uppercase ft_regular">Key Milestones</div>
+              </div>
               <div className="c-timeline" ref={timelineRef} style={{ flexWrap: 'nowrap', width: 'max-content', paddingRight: '20vw' }}>
                 {slides.map((slide) => (
                   <div key={slide.id} className={slide.className} >

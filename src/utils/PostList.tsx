@@ -47,6 +47,9 @@ export default function PostList(props: any) {
         "environmental-compliance": {
             type: { key: "type_1699180101" }
         },
+        "awards": {
+            type: { key: "award_year_1699533468" }
+        },
 
         "conference-call": {
             year: {
@@ -100,6 +103,11 @@ export default function PostList(props: any) {
         if (props.slug === 'policies-reports') {
             if (type) {
                 slugInfo += `&metaInfo[type_1599634707]=${type}`;
+            }
+        }
+        if (props.slug === 'awards') {
+            if (type) {
+                slugInfo += `&metaInfo[award_year_1699533468]=${type}`;
             }
         }
 
