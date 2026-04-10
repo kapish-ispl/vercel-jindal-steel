@@ -76,6 +76,10 @@ const Header = () => {
       desc: "At Jindal Steel, the company's sustainability initiatives are rooted in a deep commitment to forging a greener future through responsible practices and eco-conscious innovation.",
     },
     {
+      name: "Media",
+      desc: "Jindal Steel upholds a steadfast commitment to delivering sustainable value for all stakeholders. Its remarkable track record of financial discipline attests to its continuous pursuit of excellence as a world-class organisation."
+    },
+    {
       name: "Community",
       desc: "Our Commitment lies in giving back to society...",
     },
