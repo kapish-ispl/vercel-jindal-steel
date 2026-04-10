@@ -173,11 +173,11 @@
 
           @include mq('desktop-wide') {
             padding: 25px 14px 35px;
-            @include font-size(15);
+            @include font-size(16);
           }
 
           @include mq('desktop-wide-max') {
-            @include font-size(17);
+            @include font-size(18);
           }
 
 
