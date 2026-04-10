@@ -166,8 +166,8 @@
 
           @include font-size(16);
 
-          @include mq('tablet') {
-            padding: 20px 4px 25px;
+          @include mq('tablet-max') {
+            padding: 20px 10px 25px;
             @include font-size(15);
           }
 
@@ -203,7 +203,13 @@
           color: var(--color-primary);
 
           &:before {
-            width: calc(100% - 20px);
+            width: calc(100% - 10px);
+            @include mq('tablet-max') {
+             width: calc(100% - 20px);
+            }
+            @include mq('desktop-wide') {
+             width: calc(100% - 28px);
+            }
           }
         }
 
