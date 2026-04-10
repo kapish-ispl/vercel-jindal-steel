@@ -260,7 +260,7 @@ const LeadershipCardV2 = ({ postData, totalPost, itemsPerPage }: any) => {
                         </div>
                     ))
                 ) : (
-                    <div className="c-heading-60 clr-peach ft_semibold lh_1-2 mb-50">No Data Found</div> 
+                    <div className="c-heading-50 clr-peach ft_medium text-center lh_1-2 mb-50">No Data Found</div> 
                 )}
 
             </div>
