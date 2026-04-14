@@ -3858,3 +3858,11 @@ ul.arrowbulletList {
         }
     }
 }
+
+.inner-section {
+    .action-btn {
+        a {
+            background-color: var(--color-primary);
+        }
+    }
+}
