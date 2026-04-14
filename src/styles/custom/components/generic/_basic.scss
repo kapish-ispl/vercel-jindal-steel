@@ -60,6 +60,7 @@ main {
     @include mq(desktop-wide-max) {
         padding: 90px 0px !important;
     }
+
     &.c-pt-0 {
         padding-top: 30px !important;
 
@@ -75,6 +76,7 @@ main {
             padding-top: 0px !important;
         }
     }
+
     &.c-pb-0 {
         padding-bottom: 30px !important;
 
@@ -3842,4 +3844,17 @@ ul.arrowbulletList {
     display: flex;
     padding-bottom: 30px;
 
+}
+
+.img__wrapper {
+    img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        object-position: top;
+
+        @include mq(tablet-max) {
+            height: 500px;
+        }
+    }
 }

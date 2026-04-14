@@ -2394,3 +2394,56 @@
         @include border-radius(8px);
     }
 }
+
+.c-newsCard {
+    &__wrapper {
+        text-decoration: none;
+
+        &-media {
+            @include border-radius(8px);
+            position: relative;
+            overflow: hidden;
+
+            .u-img {
+                width: 100%;
+                height: 100%;
+            }
+
+            @include mq(desktop-wide) {
+                height: 200px;
+            }
+
+            .float__elem {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                background-color: var(--color-accent-blue);
+                padding: 5px;
+                width: fit-content;
+                height: fit-content;
+                display: none;
+
+                &-text {
+                    @include font-size(12);
+                    font-weight: var(--fontMedium);
+                }
+            }
+        }
+
+        &-content {
+            padding: 10px 0px;
+
+            .title {
+                text-transform: uppercase;
+                @include font-size(14);
+                font-weight: var(--fontRegular);
+                padding-bottom: 5px;
+            }
+        }
+
+        span {
+            display: block;
+
+        }
+    }
+}
