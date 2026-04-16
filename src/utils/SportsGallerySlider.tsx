@@ -31,22 +31,58 @@ const SportsGallerySlider = ({ data }: { data: any }) => {
     }, [data]);
 
 
+    // useGSAP(() => {
+    //     const section = sectionRef.current;
+    //     const totalWidth = section?.scrollWidth;
+    //     const windowWidth = window.innerWidth;
+
+    //     const pin = gsap.fromTo(section,
+    //         { x: 0 },
+    //         {
+    //             // x: -(totalWidth! - windowWidth + 250), // Scroll until the last card is visible
+    //             x: () => -(section!.scrollWidth - window.innerWidth)
+    //             ease: "none",
+    //             scrollTrigger: {
+    //                 trigger: triggerRef.current,
+    //                 pin: true,
+    //                 scrub: 1,
+    //                 start: "top top",
+    //                 end: () => `+=${(totalWidth || 0) * 0.5}`,
+    //                 invalidateOnRefresh: true,
+    //             }
+    //         }
+    //     );
+
+    //     return () => pin.kill();
+    // }, { scope: triggerRef });
     useGSAP(() => {
         const section = sectionRef.current;
-        const totalWidth = section?.scrollWidth;
-        const windowWidth = window.innerWidth;
 
         const pin = gsap.fromTo(section,
             { x: 0 },
             {
-                x: -(totalWidth! - windowWidth + 100), // Scroll until the last card is visible
+                x: () => {
+                    const base = section!.scrollWidth - window.innerWidth;
+                    const isDesktop = window.innerWidth > 1024;
+
+                    return isDesktop
+                        ? -(base + 250) // 👈 extra scroll only on desktop
+                        : -base;        // normal on mobile
+                },
                 ease: "none",
                 scrollTrigger: {
                     trigger: triggerRef.current,
                     pin: true,
                     scrub: 1,
-                    start: "top top",
-                    end: () => `+=${(totalWidth || 0) * 0.5}`,
+                    start: "center center",
+                    end: () => {
+                        const base = section!.scrollWidth - window.innerWidth;
+                        const isDesktop = window.innerWidth > 1024;
+
+                        return isDesktop
+                            ? `+=${base + 250}` // 👈 match the extra movement
+                            : `+=${base}`;
+                    },
                     invalidateOnRefresh: true,
                 }
             }
@@ -54,7 +90,6 @@ const SportsGallerySlider = ({ data }: { data: any }) => {
 
         return () => pin.kill();
     }, { scope: triggerRef });
-
     return (
         <section className="sports-scroll-outer" ref={triggerRef}>
             <div className="container cus-container">

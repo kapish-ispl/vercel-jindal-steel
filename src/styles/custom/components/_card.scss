@@ -1382,8 +1382,13 @@
             flex: 1;
             min-width: 300px;
 
+            @include mq(desktop) {
+                min-width: unset;
+            }
+
             @include mq(desktop-wide) {
                 height: 420px;
+
             }
 
 
