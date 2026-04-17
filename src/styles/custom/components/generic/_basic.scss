@@ -3866,3 +3866,23 @@ ul.arrowbulletList {
         }
     }
 }
+
+.soundToggleBtn {
+    position: absolute;
+    bottom: 25px;
+    right: 20px;
+    z-index: 10;
+    padding: 10px 16px;
+    @include font-size(14);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.soundToggleBtn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
