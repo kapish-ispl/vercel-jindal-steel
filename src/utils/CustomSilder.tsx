@@ -127,14 +127,14 @@ export default function CustomSlider({
         if (!emblaApi || !canScroll) return;
 
         const play = () => emblaApi.scrollNext();
-        autoplayInterval.current = setInterval(play, 3000);
+        autoplayInterval.current = setInterval(play, 5000);
 
         const root = emblaApi.rootNode();
         const handleMouseEnter = () =>
             autoplayInterval.current && clearInterval(autoplayInterval.current);
 
         const handleMouseLeave = () => {
-            autoplayInterval.current = setInterval(play, 3000);
+            autoplayInterval.current = setInterval(play, 5000);
         };
 
         root.addEventListener("mouseenter", handleMouseEnter);
