@@ -7,22 +7,22 @@ interface InnerBannerItem {
 }
 
 interface Props {
-    label: string;
+    label?: string;
     slug: string;
-    tagline:string;
+    tagline?: string;
     currentPage: string[];
-    innerBanner: InnerBannerItem[];
+    innerBanner?: InnerBannerItem[];
 }
 
 const InnerBanner = ({ label, tagline, slug, currentPage, innerBanner }: Props) => {
     return (
         <div
-            className={`c-inner-banner ${innerBanner.length > 0 ? "" : "without-banner"
+            className={`c-inner-banner ${(innerBanner?.length ?? 0) > 0 ? "" : "without-banner"
                 }`}
         >
-            {innerBanner.length > 0 && (
+            {(innerBanner?.length ?? 0) > 0 && (
                 <div className="c-inner-banner__media">
-                    {innerBanner[0].type === "video" ? (
+                    {innerBanner?.[0]?.type === "video" ? (
                         <video
                             loop
                             muted
@@ -30,15 +30,15 @@ const InnerBanner = ({ label, tagline, slug, currentPage, innerBanner }: Props) 
                             playsInline
                             className="c-inner-banner__video"
                         >
-                            <source src={innerBanner[0].cdnPath} type="video/mp4" />
+                            <source src={innerBanner?.[0]?.cdnPath} type="video/mp4" />
                         </video>
                     ) : (
                         <img
-                            src={innerBanner[0].cdnPath}
+                            src={innerBanner?.[0]?.cdnPath}
                             alt={
-                                innerBanner[0].caption === null
+                                innerBanner?.[0]?.caption === null
                                     ? "JSP Banner"
-                                    : innerBanner[0].caption || "JSP Banner"
+                                    : innerBanner?.[0]?.caption || "JSP Banner"
                             }
                             className="c-inner-banner__image"
                         />

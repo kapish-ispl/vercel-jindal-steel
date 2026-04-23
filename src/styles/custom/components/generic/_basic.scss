@@ -3886,3 +3886,53 @@ ul.arrowbulletList {
 .soundToggleBtn:hover {
     background: rgba(0, 0, 0, 0.8);
 }
+
+.press_highlight_banner {
+    .c-inner-banner {
+        height: 50vh;
+        min-height: 350px;
+        background-color: var(--color-secondary);
+
+        &::before,
+        &::after {
+            background-color: var(--color-secondary);
+        }
+
+        &__content {
+            padding-bottom: 1rem;
+            bottom: 0;
+
+            &_box {
+                .banner__title {
+                    @include font-size(20);
+                    margin-bottom: 0px;
+
+                    @include mq(tablet-max) {
+                        @include font-size(26);
+                        line-height: 1.5 !important;
+                    }
+
+                    @include mq(desktop) {
+                        @include font-size(30);
+                    }
+                }
+            }
+        }
+    }
+
+    .c-image_with_overlapping {
+        height: 400px;
+        min-height: 400px;
+
+        @include mq(tablet-max) {
+            height: 500px;
+            min-height: 500px;
+        }
+
+        @include mq(desktop) {
+            height: 600px;
+            min-height: 600px;
+        }
+
+    }
+}
