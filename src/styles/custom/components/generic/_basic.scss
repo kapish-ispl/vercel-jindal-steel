@@ -3951,8 +3951,6 @@ ul.arrowbulletList {
     }
 
     .featured__media {
-        height: 400px;
-
         @include mq(tablet-max) {
             height: 600px;
         }
