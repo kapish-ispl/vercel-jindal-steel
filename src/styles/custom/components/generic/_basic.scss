@@ -1181,7 +1181,7 @@ ul {
             // min-width: 50px;
             width: 40px;
             height: 40px;
-            min-width: 40px; 
+            min-width: 40px;
             @include border-radius(50%);
             border: 1px solid #CC9167;
             @include flexbox;
@@ -3892,23 +3892,28 @@ ul.arrowbulletList {
 
 .press_highlight_banner {
     .c-inner-banner {
-        height: 50vh;
-        min-height: 350px;
-        background-color: var(--color-secondary);
+        height: inherit;
+        min-height: inherit;
+        background-color: var(--color-white);
 
         &::before,
         &::after {
-            background-color: var(--color-secondary);
+            display: none;
         }
 
         &__content {
-            padding-bottom: 1rem;
+            padding-bottom: 0.4rem;
             bottom: 0;
+            position: relative;
+            z-index: 1;
 
             &_box {
                 .banner__title {
                     @include font-size(20);
+                    color: var(--color-secondary);
                     margin-bottom: 0px;
+                    text-align: left;
+                    font-weight: var(--fontRegular) !important;
 
                     @include mq(tablet-max) {
                         @include font-size(26);
@@ -3919,7 +3924,42 @@ ul.arrowbulletList {
                         @include font-size(30);
                     }
                 }
+
+                .breadcumbs {
+                    ul>li>a {
+                        color: var(--color-secondary);
+                    }
+
+                    li {
+                        &::before {
+                            background-image: url(/images/icons/right-arrow.svg);
+                            top: 2px;
+                            left: 8px;
+                            width: 14px;
+                        }
+                    }
+                }
             }
+        }
+    }
+
+    .divider {
+        width: 100%;
+        height: 1px;
+        background-color: var(--color-secondary);
+        margin-bottom: 1.5rem;
+    }
+
+    .featured__media {
+        height: 400px;
+
+        @include mq(tablet-max) {
+            height: 600px;
+        }
+
+        .u-img {
+            height: 100%;
+            width: 100%;
         }
     }
 
@@ -3938,4 +3978,9 @@ ul.arrowbulletList {
         }
 
     }
+}
+
+.top-header {
+    height: 120px;
+    background-color: var(--color-secondary);
 }

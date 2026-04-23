@@ -27,7 +27,6 @@ const PressReleaseCard = ({ postData, itemsPerPage = 9, totalPost, loading, comp
         selectRef.current?.clearValue();
         router.push(window.location.pathname, { scroll: false });
     };
-    console.log("postData", postData);
     return (
         <>
 
@@ -59,6 +58,10 @@ const PressReleaseCard = ({ postData, itemsPerPage = 9, totalPost, loading, comp
                                     dataLink = post.featuredMedia.cdnPath;
                                 }
                             }
+                            const defaultImage = "https://docs.jindalsteel.in/document/124/1776418947_CGP3jpg1.jpeg";
+                            const imageList = post?.media.filter((item: any) => item.type === "image");
+                            const imageSrc =
+                                imageList.length > 0 ? imageList[0].cdnPath : defaultImage;
 
                             const finalDate = post.postingDate;
                             let newDate = "";
@@ -89,14 +92,8 @@ const PressReleaseCard = ({ postData, itemsPerPage = 9, totalPost, loading, comp
                                                     <img
                                                         alt="press release image"
                                                         className="img-fluid u-img"
-                                                        src={
-                                                            post.featuredMedia?.cdnPath ||
-                                                            "https://docs.jindalsteel.in/document/124/1776418947_CGP3jpg1.jpeg"
-                                                        }
-                                                        onError={(e) => {
-                                                            (e.currentTarget as HTMLImageElement).src =
-                                                                "https://docs.jindalsteel.in/document/124/1776418947_CGP3jpg1.jpeg";
-                                                        }}
+                                                        src={imageSrc}
+
                                                     />
                                                 </span>
                                             </span>
