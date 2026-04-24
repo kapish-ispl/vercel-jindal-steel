@@ -91,12 +91,12 @@ export default async function Page({
 
           </div>
           <div className="col-12 col-lg-10">
-            <div className="c-content-20 ft_light lh_1-4">
+            <div className="c-content-24 ft_light lh_1-4">
               {pageData?.metaInfo?.description}
             </div>
           </div>
           <div className="col-12 col-lg-10">
-            <div className="featured__media">
+            <div className="featured__media mt-3 mt-lg-4">
               <img src={imageSrc} alt="featured media" className="img-fluid u-img" />
 
             </div>
