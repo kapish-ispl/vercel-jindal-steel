@@ -9,7 +9,6 @@ if (typeof window !== 'undefined') {
 }
 
 const BentoSyncReveal = ({ data, props }: { data: any, props: any }) => {
-    console.log(props)
     const SLIDE_DATA = [
         {
             id: 1,
