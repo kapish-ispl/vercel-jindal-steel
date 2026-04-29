@@ -15,6 +15,7 @@ const componentMap: any = {
     AwardsCardV2: dynamic(() => import("./AwardsCardV2")),
     OurOfficesCard: dynamic(() => import("./OurOfficesCard")),
     ProductCard: dynamic(() => import("./ProductCard")),
+    NewProductCard: dynamic(() => import("./NewProductCard")),
     CenterModeSlider: dynamic(() => import("./CenterModeSlider")),
     ProductSlider: dynamic(() => import("./ProductSlider")),
     ResourceSection: dynamic(() => import("./ResourceSection")),
@@ -37,6 +38,8 @@ export default function PostList(props: any) {
     const [totalPost, setTotalPost] = useState<any>(0);
     const [loading, setLoading] = useState(false);
     const type = searchParams.get('type');
+    const desc = searchParams.get('desc');
+    const productCategory = searchParams.get('product-category');
     const [filteredTag, setFilteredTag] = useState<string | null>(null);
 
     const metaKeys: any = {
@@ -50,6 +53,11 @@ export default function PostList(props: any) {
         },
         "awards": {
             type: { key: "award_year_1699533468" }
+        },
+
+        "product": {
+            type: { key: "category_1777488790" },
+
         },
 
         "conference-call": {
@@ -111,6 +119,14 @@ export default function PostList(props: any) {
                 slugInfo += `&metaInfo[award_year_1699533468]=${type}`;
             }
         }
+        if (props.slug === 'product') {
+            if (productCategory) {
+                slugInfo += `&metaInfo[category_1777488790]=${productCategory}`;
+            }
+        }
+
+
+
 
         if (metaKeys[props.slug]) {
             const map = metaKeys[props.slug];
@@ -146,7 +162,14 @@ export default function PostList(props: any) {
                     slugInfo += `&metaInfo[${map.location.key}]=${selectedLoc}`;
                 }
             }
+            if (map.category) {
+                const selectedCategory = category || map.category.default;
+                if (selectedCategory) {
+                    slugInfo += `&metaInfo[${map.category.key}]=${selectedCategory}`;
+                }
+            }
         }
+
 
         const getPostData = async () => {
             setLoading(true);
@@ -189,8 +212,9 @@ export default function PostList(props: any) {
 
         getPostData();
 
-    }, [props.slug, page, pathname, type, searchParams]);
+    }, [props.slug, page, pathname, type, productCategory, searchParams]);
     const PostComponentRender = componentMap[props.components];
+
     return PostComponentRender ? (
         <PostComponentRender postData={postData} title={props.title != "" ? props.title : ''} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={props.limit || 9} itemstoshow={props.itemstoshow} isproduct={props.isproduct} loading={loading} />
     ) : <div>Loading...</div>;

@@ -11,6 +11,9 @@ interface Post {
     title: string;
     content: string;
     media?: MediaItem[];
+    metaInfo?: {
+        description?: string;
+    };
 }
 
 interface ProductCardProps {
@@ -59,7 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
                         <span className="c-cardBox__wrapper-bottom">
                             <span className="content">
                                 <span className="title c-content-24 ft_semiBold mb-2 ">{post?.title}</span>
-                                <span className="c-content-20 ft_light c-line-clamp-2">{post?.content}</span>
+                                <span className="c-content-20 ft_light c-line-clamp-2">{post?.metaInfo?.description || post?.content}</span>
                             </span>
                         </span>
                     </Link>

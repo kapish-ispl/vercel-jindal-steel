@@ -1,0 +1,143 @@
+import CustomSelect from "@/components/CustomSelect";
+import Link from "next/link";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import React from "react";
+import ReactPaginate from "react-paginate";
+
+interface MediaItem {
+    cdnPath: string;
+}
+interface Post {
+    title: string;
+    content: string;
+    metaInfo?: {
+        description?: string;
+    };
+    media?: MediaItem[];
+    slug: string;
+}
+
+interface ProductCardProps {
+    postData: Post[];
+    totalPost: number;
+    itemsPerPage?: number;
+    slug: string;
+}
+
+const NewProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, totalPost, slug }) => {
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const currentPage = Number(searchParams.get("page") || 1);
+    const pageCount = Math.ceil(totalPost / itemsPerPage);
+    const router = useRouter();
+
+    const currentCategory = searchParams.get("product-category") || "";
+
+    const handlePageClick = ({ selected }: { selected: number }) => {
+        const newParams = new URLSearchParams(searchParams.toString());
+        newParams.set('page', `${selected + 1}`);
+        const newUrl = `${pathname}?${newParams.toString()}`;
+        router.push(newUrl, { scroll: false });
+    };
+
+    const handleCategoryClick = (category: string) => {
+        const newParams = new URLSearchParams(searchParams.toString());
+        if (category) {
+            newParams.set('product-category', category);
+        } else {
+            newParams.delete('product-category');
+        }
+        newParams.delete('page');
+        const newUrl = `${pathname}?${newParams.toString()}`;
+        router.push(newUrl, { scroll: false });
+    };
+
+    const categories = [
+        { label: "All", value: "" },
+        { label: "Semis", value: "semis" },
+        { label: "Steel Solutions", value: "steel-solutions" },
+    ];
+    console.log(postData);
+
+    return (
+        <>
+            <div className="tabbing_wrap v1 mb-5">
+                <ul className="d-flex flex-wrap list-unstyled gap-3">
+                    {categories.map((cat) => (
+                        <li key={cat.label} onClick={() => handleCategoryClick(cat.value)}>
+                            <button className={`tabbing_wrap_item c-sector__item ${currentCategory === cat.value ? "active" : ""}`}>
+                                <span className="c-sector__item_label">{cat.label}</span>
+                                <span className="c-sector__item_border"></span>
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
+            {postData && postData.length > 0 && postData.map((post, index) => (
+                <div className="col-lg-4 col-md-6 col-12" key={index}>
+
+
+                    <Link className="c-cardBox__wrapper v1" href={`/products/${post.slug}`}>
+                        <span className="c-cardBox__wrapper-top">
+                            <span className="media ratio ratio-4x3">
+                                <img alt={post?.title} className="img-fluid u-img" src={post?.media?.[0]?.cdnPath} />
+                            </span>
+                        </span>
+                        <span className="c-cardBox__wrapper-bottom">
+                            <span className="content">
+                                <span className="title c-content-24 ft_semiBold mb-2 ">{post?.title}</span>
+                                <span className="c-content-20 ft_light c-line-clamp-2">{post?.metaInfo?.description || post?.content}</span>
+                            </span>
+                        </span>
+                    </Link>
+
+                </div>
+            ))}
+            {pageCount > 1 && (
+                <div className="pagination-container mt-80 d-flex justify-content-center">
+                    <ReactPaginate
+                        previousLabel={
+                            <svg width="20" height="27" viewBox="0 0 44 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clipPath="url(#clip0_94_93)">
+                                    <path d="M4.31047 11.3801L42.2305 11.3801C43.2005 11.3801 43.9805 12.1601 43.9805 13.1301C43.9805 14.1001 43.2005 14.8801 42.2305 14.8801L4.31047 14.8801C3.34047 14.8801 2.56047 14.1001 2.56047 13.1301C2.56047 12.1601 3.34047 11.3801 4.31047 11.3801Z" fill="#626466" />
+                                    <path d="M13.8506 -1.5299e-07C14.3006 -1.1365e-07 14.7506 0.17 15.0906 0.51C15.7706 1.19 15.7706 2.3 15.0906 2.98L4.95059 13.12L15.0906 23.27C15.7706 23.95 15.7706 25.06 15.0906 25.74C14.4106 26.42 13.3006 26.42 12.6206 25.74L0.000586704 13.12L12.6206 0.5C12.9606 0.16 13.4106 -0.0100004 13.8606 -0.0100004L13.8506 -1.5299e-07Z" fill="#626466" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_94_93">
+                                        <rect width="43.98" height="26.26" fill="white" transform="translate(43.9805 26.26) rotate(-180)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        }
+                        nextLabel={
+                            <svg width="20" height="27" viewBox="0 0 44 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clipPath="url(#clip0_94_89)">
+                                    <path d="M39.67 14.8799H1.75C0.78 14.8799 0 14.0999 0 13.1299C0 12.1599 0.78 11.3799 1.75 11.3799H39.67C40.64 11.3799 41.42 12.1599 41.42 13.1299C41.42 14.0999 40.64 14.8799 39.67 14.8799Z" fill="#626466" />
+                                    <path d="M30.1299 26.26C29.6799 26.26 29.2299 26.09 28.8899 25.75C28.2099 25.07 28.2099 23.96 28.8899 23.28L39.0299 13.14L28.8899 2.99001C28.2099 2.31001 28.2099 1.20001 28.8899 0.52001C29.5699 -0.15999 30.6799 -0.15999 31.3599 0.52001L43.9799 13.14L31.3599 25.76C31.0199 26.1 30.5699 26.27 30.1199 26.27L30.1299 26.26Z" fill="#626466" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_94_89">
+                                        <rect width="43.98" height="26.26" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        }
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={1}
+                        pageRangeDisplayed={2}
+                        onPageChange={handlePageClick}
+                        containerClassName={'pagination'}
+                        pageClassName={'pages'}
+                        activeClassName={'active'}
+                        forcePage={currentPage - 1}
+                    />
+                </div>
+            )}
+        </>
+    );
+};
+
+export default NewProductCard;
