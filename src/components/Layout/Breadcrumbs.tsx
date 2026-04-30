@@ -89,6 +89,14 @@ const Breadcrumbs = ({ slug, currentPage }: any) => {
             ? setBreadcumbMenu(newBreadcrumbs)
             : setBreadcumbMenu([
                 ...initialState,
+                ...(currentPage.slug && currentPage.slug.includes('/')
+                    ? currentPage.slug.split('/').filter(Boolean).slice(0, -1).map((part: string) => ({
+                        id: `path-${part}`,
+                        label: part.charAt(0).toUpperCase() + part.slice(1),
+                        url: `/${part}.html`,
+                    }))
+                    : []
+                ),
                 {
                     id: currentPage.id,
                     label: currentPage.title,

@@ -53,7 +53,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9
     };
 
     const categories = [
-        { label: "All", value: "" },
+        { label: "Steel Products", value: "" },
         { label: "Semis", value: "semis" },
         { label: "Steel Solutions", value: "steel solutions" },
     ];

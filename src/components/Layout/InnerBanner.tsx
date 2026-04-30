@@ -113,19 +113,19 @@ const renderMedia = (item: InnerBannerItem | undefined) => {
     );
 };
 
-const InnerBanner = ({ label, tagline, slug, currentPage, innerBanner }: Props) => {
+const InnerBanner = ({ label, tagline, slug, currentPage, innerBanner = [] }: Props) => {
 
     const desktopMedia =
         innerBanner.find((m) => m.deviceType === "desktop") || innerBanner[0];
 
-        
-        const mobileMedia =
+
+    const mobileMedia =
         innerBanner.find((m) => m.deviceType === "mobile") ||
         desktopMedia;
-        
-        const tabletMedia =
-            innerBanner.find((m) => m.deviceType === "tablet") ||
-            mobileMedia;
+
+    const tabletMedia =
+        innerBanner.find((m) => m.deviceType === "tablet") ||
+        mobileMedia;
     return (
         <div className={`c-inner-banner ${innerBanner.length > 0 ? "" : "without-banner"}`}>
             {innerBanner.length > 0 && (

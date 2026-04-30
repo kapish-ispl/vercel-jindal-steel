@@ -84,6 +84,7 @@ export default async function Page({
               tagline={pageData?.customField?.tagline}
               slug={pageData.slug}
               currentPage={pageData}
+              innerBanner={pageData.media}
             />
           </div>
           <div className="col-12 col-lg-10">
