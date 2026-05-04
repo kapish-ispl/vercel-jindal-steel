@@ -58,7 +58,7 @@ const PressReleaseCard = ({ postData, itemsPerPage = 9, totalPost, loading, comp
                                     dataLink = post.featuredMedia.cdnPath;
                                 }
                             }
-                            const defaultImage = "https://docs.jindalsteel.in/document/124/1776418947_CGP3jpg1.jpeg";
+                            const defaultImage = "https://docs.jindalsteel.in/document/124/1777902764_press-release-icon.jpg";
                             const imageList = post?.media.filter((item: any) => item.type === "image");
                             const imageSrc =
                                 imageList.length > 0 ? imageList[0].cdnPath : defaultImage;
