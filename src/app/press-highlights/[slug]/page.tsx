@@ -250,7 +250,7 @@ export default async function Page({
           </div>
 
           <div className="col-12 col-lg-10">
-            <div className="c-content-24 ft_light lh_1-4">
+            <div className="c-content-20 ft_light lh_1-4">
               {pageData?.metaInfo?.description}
             </div>
           </div>
