@@ -6,7 +6,7 @@ import CustomSliderCategory from '@/utils/CustomSliderCategory';
 const CustomSilder = dynamic(() => import('@/utils/CustomSilder'), { ssr: false });
 const Counter = dynamic(() => import('@/components/AnimatedCountUp'), { ssr: false });
 const CustomContentSlider = dynamic(() => import('@/components/CustomContentSlider'), { ssr: false });
-const CustomProductForm = dynamic(() => import("@/utils/CustomProductForm"));
+const CustomProductForm = dynamic(() => import("@/utils/CustomProductForm"), { ssr: false });
 
 const PageTemplate = ({ pageData }: any) => {
     const options: HTMLReactParserOptions = {

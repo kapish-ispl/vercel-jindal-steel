@@ -7,7 +7,6 @@ import { CONSTANTS } from "@/config/constant";
 import { GET_POST_ENDPOINT } from "@/config/apiConfig";
 import dynamic from "next/dynamic";
 import { yearOptions } from "@/constants/GenericFilter";
-import TalentForm from "./TalentForm";
 
 
 const componentMap: any = {
