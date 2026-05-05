@@ -7,6 +7,7 @@ import { CONSTANTS } from "@/config/constant";
 import { GET_POST_ENDPOINT } from "@/config/apiConfig";
 import dynamic from "next/dynamic";
 import { yearOptions } from "@/constants/GenericFilter";
+import TalentForm from "./TalentForm";
 
 
 const componentMap: any = {
@@ -26,7 +27,9 @@ const componentMap: any = {
     LeadershipCard: dynamic(() => import("./LeadershipCard")),
     LeadershipCardV2: dynamic(() => import("./LeadershipCardV2")),
     PodcastSlider: dynamic(() => import("./PodcastSlider")),
-    JobListing: dynamic(() => import("./JobListing"))
+    JobListing: dynamic(() => import("./JobListing")),
+    TalentForm: dynamic(() => import("./TalentForm")),
+    MsmeForm: dynamic(() => import("./MsmeForm"))
 }
 
 export default function PostList(props: any) {

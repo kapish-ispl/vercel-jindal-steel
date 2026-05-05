@@ -14,23 +14,19 @@ import { useRouter } from 'next/router';
 import { CONSTANTS } from '@/config/constant';
 
 interface FormValues {
-    Product: string;
-    full_Name: string;
-    company: string;
+    fullname: string;
     email: string;
-    mobile: string;
     country: string;
+    company: string;
+    mobile: string;
     city: string;
-    message: string;
-    inquiry_Type: 'sales' | 'billing' | 'support' | '';
-    preferred_date: string | null;
-    alternate_email?: string;
-    subject: string;
-    privacy_Policy: boolean;
-    captcha: string;
+    description: string;
+    product: string;
+    user_captcha_input: string;
 }
 
 const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
+    console.log(pageTitle);
     const mobileRef = useRef<HTMLInputElement | null>(null);
     const [actualCaptcha, setActualCaptcha] = useState<string>('');
     const [reloadCaptcha, setReloadCaptcha] = useState<boolean>(false);
@@ -45,39 +41,36 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
     }, [reloadCaptcha])
 
     const initialValues: FormValues = {
-        full_Name: '',
-        company: '',
-        email: '',
-        alternate_email: '',
-        mobile: '',
-        country: '',
-        city: '',
-        message: '',
-        inquiry_Type: '',
-        preferred_date: null,
-        subject: '',
-        privacy_Policy: false,
-        Product: pageTitle,
-        captcha: '',
+        fullname: "",
+        email: "",
+        country: "",
+        company: "",
+        mobile: "",
+        city: "",
+        description: "",
+        product: pageTitle,
+        user_captcha_input: "",
     };
-    const ExtendedSchema = QueryFormSchema.shape({
-        subject: Yup.string().required('Subject is required'),
-        preferred_date: Yup.date().nullable().required('Preferred date is required'),
-        inquiry_Type: Yup.string().required('Please select an option'),
-        captcha: Yup.string()
-            .required('Captcha is required')
-            .test(
-                'match-captcha',
-                'Captcha does not match',
-                (value) => value === actualCaptcha
-            ),
+    const phoneRegExp = /^[6-9]\d{9}$/gi;
+
+    const FormSchema = Yup.object({
+        fullname: Yup.string().required("Enter your Full Name"),
+        email: Yup.string().email().required("Enter your Email Id"),
+        mobile: Yup.string()
+            .matches(phoneRegExp, "Enter valid Mobile Number")
+            .required("Enter valid Mobile Number"),
+        company: Yup.string().required("Enter Company Name"),
+        description: Yup.string().required("Enter your Description"),
+        country: Yup.string().required("Enter Country Name"),
+        city: Yup.string().required("Enter City Name"),
+        user_captcha_input: Yup.string().required("Captcha is required"),
     });
 
 
     const handleSubmit = async (values: FormValues, { setSubmitting, resetForm }: FormikHelpers<FormValues>) => {
         setSubmitMessage(null);
 
-        const { captcha, ...submissionData } = values;
+        const { ...submissionData } = values;
 
         const filteredSubmissionData = Object.fromEntries(
             Object.entries(submissionData).filter(([, value]) => value !== '')
@@ -86,6 +79,8 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
         const widgetData = {
             WidgetForm: { fields: filteredSubmissionData, widget_id: 308 },
         };
+
+        console.log(widgetData, 'widgetData');
 
         try {
             const response = await serverRequest(widgetData, POST_FORM_ENDPOINT, CONSTANTS.REQUEST_POST);
@@ -111,7 +106,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
         <div className="form_container c-form">
             <Formik
                 initialValues={initialValues}
-                validationSchema={ExtendedSchema}
+                validationSchema={FormSchema}
                 onSubmit={handleSubmit}
             >
                 {({ errors, touched, isSubmitting, values }) => (
@@ -121,22 +116,23 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
 
                                 <div className="col-xl-4 col-lg-6 col-md-12">
                                     <FormField
-                                        name="full_Name"
+                                        name="fullname"
                                         label="Full Name*"
-                                        error={errors.full_Name}
-                                        touched={touched.full_Name}
+                                        error={errors.fullname}
+                                        touched={touched.fullname}
                                         onKeyDown={restrictSpecialChar}
                                     />
                                 </div>
+
                                 <div className="col-xl-4 col-lg-6 col-md-12">
-                                    <FormDatePicker
-                                        name="preferred_date"
-                                        label="Preferred Date*"
-                                        placeholder="DOB"
-                                        error={errors.preferred_date}
-                                        touched={touched.preferred_date}
+                                    <FormField
+                                        name="city"
+                                        label="City*"
+                                        error={errors.city}
+                                        touched={touched.city}
                                     />
                                 </div>
+
                                 <div className="col-xl-4 col-lg-6 col-md-12">
                                     <FormField
                                         name="email"
@@ -146,20 +142,18 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                         touched={touched.email}
                                         onKeyDown={restrictEmailChars}
                                     />
-
                                 </div>
+
                                 <div className="col-xl-4 col-lg-6 col-md-12">
                                     <FormField
-                                        name="alternate_email"
-                                        label="Alternate Email*"
-                                        type="email"
-                                        error={errors.alternate_email}
-                                        touched={touched.alternate_email}
-                                        onKeyDown={restrictEmailChars}
+                                        name="company"
+                                        label="Company*"
+                                        error={errors.company}
+                                        touched={touched.company}
                                     />
                                 </div>
-                                {/* <div className="col-lg-6 col-md-12">
 
+                                <div className="col-xl-4 col-lg-6 col-md-12">
                                     <FormField
                                         name="mobile"
                                         label="Mobile*"
@@ -174,52 +168,24 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                         onPaste={handleCopyPaste}
                                         ref={mobileRef}
                                     />
-                                </div> */}
-
+                                </div>
 
                                 <div className="col-xl-4 col-lg-6 col-md-12">
-                                    <FormSelect
-                                        name="inquiry_Type"
-                                        label="What can we help you with?*"
-                                        placeholder="Select Gender"
-                                        options={inquiryOptions.map(type => ({
-                                            label: type.charAt(0).toUpperCase() + type.slice(1),
-                                            value: type
-                                        }))}
-                                        error={errors.inquiry_Type}
-                                        touched={touched.inquiry_Type}
+                                    <FormField
+                                        name="country"
+                                        label="Country*"
+                                        error={errors.country}
+                                        touched={touched.country}
                                     />
                                 </div>
-                                <div className="col-xl-4 col-lg-6 col-md-12">
-                                    <FormSelect
-                                        name="subject"
-                                        label="Subject*"
-                                        placeholder="Select Subject"
-                                        options={[
-                                            { label: 'General Inquiry', value: 'general' },
-                                            { label: 'Technical Support', value: 'tech' },
-                                            { label: 'Sales Question', value: 'sales' },
-                                        ]}
-                                        error={errors.subject}
-                                        touched={touched.subject}
-                                    />
-                                </div>
-                                <div className="col-12">
-                                    <FormDatePicker
-                                        name="preferred_date"
-                                        label="Secondary Preferred Date"
-                                        placeholder="Select Secondary Date"
-                                        error={errors.preferred_date}
-                                        touched={touched.preferred_date}
-                                    />
-                                </div>
+
                                 <div className="col-12">
                                     <FormField
-                                        name="message"
+                                        name="description"
                                         label="Message*"
                                         type="textarea"
-                                        error={errors.message}
-                                        touched={touched.message}
+                                        error={errors.description}
+                                        touched={touched.description}
                                         rows={4}
                                     />
                                 </div>
@@ -235,11 +201,10 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                             setReloadCaptcha={setReloadCaptcha}
                                         />
                                         <FormField
-                                            name="captcha"
+                                            name="user_captcha_input"
                                             label="Enter CAPTCHA"
-
-                                            error={errors.captcha}
-                                            touched={touched.captcha}
+                                            error={errors.user_captcha_input}
+                                            touched={touched.user_captcha_input}
                                             autoComplete="off"
                                         />
                                     </div>
@@ -250,6 +215,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                         {isSubmitting ? 'Submitting...' : 'Submit'}
                                     </button>
                                 </div>
+
                             </div>
 
                         </div>

@@ -1,9 +1,14 @@
+
 import { notFound, redirect } from "next/navigation";
 
 import { GET_SPECIFIC_POST_ENDPOINT } from "@/config/apiConfig";
 import { CONSTANTS } from "@/config/constant";
 import { serverRequest } from "@/services/getServerSideRender";
 import InnerBanner from "@/components/Layout/InnerBanner";
+import PageTemplate from "./_partials/PageTemplate";
+
+
+
 
 
 export default async function Page({
@@ -12,11 +17,6 @@ export default async function Page({
   params: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { slug } = await params;
-
-  // Fix: wrong backtick
-  if (slug === "home-v2") {
-    redirect("/");
-  }
 
   const fetchedInfo = await serverRequest(
     {},
@@ -31,11 +31,14 @@ export default async function Page({
 
   const pageData = fetchedInfo.data;
 
+
+
   const defaultImage = "https://docs.jindalsteel.in/document/124/1776418947_CGP3jpg1.jpeg";
   const imageList = pageData?.media.filter((item: any) => item.type === "image");
   const imageSrc =
     imageList.length > 0 ? imageList[0].cdnPath : defaultImage;
-  console.log(slug);
+
+
   return (
     <>
 
@@ -56,7 +59,7 @@ export default async function Page({
 
 
           {/* ✅ Content */}
-          <div dangerouslySetInnerHTML={{ __html: pageData.content }} />
+          <PageTemplate pageData={pageData} />
         </div>
 
 

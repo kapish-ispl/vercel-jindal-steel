@@ -12,3 +12,4 @@ export const FOOTER_CONTENT_BLOCK_ENDPOINT = `footerv2`;
 export const POST_FORM_ENDPOINT = `${API_URL}/v1/form/save`;
 export const POST_JOB_ENDPOINT = `${API_URL}/v1/job/post`;
 export const GET_FILE_UPLOAD_ENDPOINT = `${API_URL}/v1/upload-file/upload`;
+export const POST_MSME_ENDPOINT = '/v1/form/save';
