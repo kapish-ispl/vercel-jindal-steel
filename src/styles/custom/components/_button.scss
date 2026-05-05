@@ -304,3 +304,17 @@
         }
     }
 }
+
+.button_wrap {
+    button {
+        &.cus_btn2 {
+            margin-top: 1rem;
+            padding: 10px 15px;
+            @include border-radius(4px);
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+            appearance: none;
+        }
+    }
+}

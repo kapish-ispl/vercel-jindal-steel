@@ -163,7 +163,7 @@ const JobForm = () => {
 
     return (
 
-        <div className="commonSection-md">
+        <div className="commonSection-md clr-gray2">
 
             <div className="container cus-conatiner">
                 <div className="row">
