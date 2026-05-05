@@ -12,18 +12,21 @@ import { AppContext } from "@/context/AppContext";
 import FormField from "./FormField";
 import FormSelect from "./FormSelect";
 import FormDatePicker from "./FormDatePicker";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { postUploadFileResponse, postAPIResponse } from "@/services/apiRequests";
 import FormMultiSelect from "./FormMultiSelect";
 
 
 const JobForm = () => {
     const contextInfo = useContext(AppContext);
+    const { departmentOptions } = useContext(AppContext);
     const router = useRouter();
+    const pathname = usePathname();
     const [showInputBox, setShowInputBox] = useState(false);
     const [showExpericeFields, setShowExpericeFields] = useState(true);
     const [selectedCountryIndia, setSelectedCountryIndia] = useState(false);
     const [selectedStateOther, setSelectedStateOther] = useState(false);
+    const [selectDepartmentOther, setSelectDepartmentOther] = useState(false);
     const [maxDateState, setMaxDateState] = useState("01-29-2024");
     const [alertMsg, setAlertMsg] = useState("");
     const [submitMsg, setSubmitMsg] = useState(false);
@@ -101,6 +104,10 @@ const JobForm = () => {
                 : "",
         name: "",
         dob: null,
+        isTalentForm: pathname == "/join-our-talent-community-v2" ? true : false,
+        skills: "",
+        department: "",
+        other_department: "",
         email: "",
         alternate_email: "",
         gender: "",
@@ -146,7 +153,7 @@ const JobForm = () => {
     const handleSubmitData = async (data: any) => {
         const response = await postAPIResponse(POST_JOB_ENDPOINT, data);
         if (response?.code == "SUC200") {
-            // router.push("/thanks");
+            router.push("/thanks");
         } else {
             setSubmitSuccess(false);
             setSubmitMsg(true);
@@ -277,41 +284,86 @@ const JobForm = () => {
                                     return (
                                         <Form onSubmit={handleSubmit}>
                                             {/* ------ Job Details ------ */}
-                                            <div className="row form_grider v1">
-                                                <div className="col-12 col-md-4">
-                                                    <FormField
-                                                        label="Job Position*"
-                                                        name="current_openings"
-                                                        error={errors.current_openings}
-                                                        touched={touched.current_openings}
-                                                        autoComplete="off"
-                                                        readOnly={true}
-                                                        showLabel={true}
-                                                    />
+                                            {pathname != "/join-our-talent-community-v2" ? (
+                                                <div className="row form_grider v1">
+                                                    <div className="col-12 col-md-4">
+                                                        <FormField
+                                                            label="Job Position*"
+                                                            name="current_openings"
+                                                            error={errors.current_openings}
+                                                            touched={touched.current_openings}
+                                                            autoComplete="off"
+                                                            readOnly={true}
+                                                            showLabel={true}
+                                                        />
+                                                    </div>
+                                                    <div className="col-12 col-md-4">
+                                                        <FormField
+                                                            label="Job Code*"
+                                                            name="job_code"
+                                                            error={errors.job_code}
+                                                            touched={touched.job_code}
+                                                            autoComplete="off"
+                                                            readOnly={true}
+                                                            showLabel={true}
+                                                        />
+                                                    </div>
+                                                    <div className="col-12 col-md-4">
+                                                        <FormField
+                                                            label="Job Location*"
+                                                            name="location"
+                                                            error={errors.location}
+                                                            touched={touched.location}
+                                                            autoComplete="off"
+                                                            readOnly={true}
+                                                            showLabel={true}
+                                                        />
+                                                    </div>
                                                 </div>
-                                                <div className="col-12 col-md-4">
-                                                    <FormField
-                                                        label="Job Code*"
-                                                        name="job_code"
-                                                        error={errors.job_code}
-                                                        touched={touched.job_code}
-                                                        autoComplete="off"
-                                                        readOnly={true}
-                                                        showLabel={true}
-                                                    />
+                                            ) :
+                                                <div className="row form_grider v1">
+                                                    <div className={`col-12 ${selectDepartmentOther ? "col-md-4" : "col-md-6"}`}>
+                                                        <FormMultiSelect
+                                                            label="Select Department*"
+                                                            name="department"
+                                                            options={departmentOptions}
+                                                            placeholder="Select Department"
+                                                            showLabel={true}
+                                                            onChange={(selectedOption) => {
+                                                                if (selectedOption?.value === "Others") {
+                                                                    setSelectDepartmentOther(true);
+                                                                } else {
+                                                                    setSelectDepartmentOther(false);
+                                                                }
+                                                            }}
+                                                        />
+                                                    </div>
+                                                    {selectDepartmentOther && (
+                                                        <div className="col-12 col-md-4">
+                                                            <FormField
+                                                                label="Sub function or Specialty*"
+                                                                name="other_department"
+                                                                error={errors.other_department}
+                                                                touched={touched.other_department}
+                                                                autoComplete="off"
+                                                                showLabel={true}
+                                                            />
+                                                        </div>
+                                                    )}
+
+                                                    <div className={`col-12 ${selectDepartmentOther ? "col-md-4" : "col-md-6"}`}>
+                                                        <FormField
+                                                            label="Sub function or Specialty*"
+                                                            name="skills"
+                                                            error={errors.skills}
+                                                            touched={touched.skills}
+                                                            autoComplete="off"
+                                                            showLabel={true}
+                                                        />
+                                                    </div>
                                                 </div>
-                                                <div className="col-12 col-md-4">
-                                                    <FormField
-                                                        label="Job Location*"
-                                                        name="location"
-                                                        error={errors.location}
-                                                        touched={touched.location}
-                                                        autoComplete="off"
-                                                        readOnly={true}
-                                                        showLabel={true}
-                                                    />
-                                                </div>
-                                            </div>
+                                            }
+
                                             <div className="c-divider">&nbsp;</div>
                                             {/* ------ Personal Details ------ */}
                                             <div className="row">

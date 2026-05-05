@@ -95,6 +95,18 @@ export const FormSchema: Yup.ObjectSchema<IFormSchema> = Yup.object({
 // Schema for the detailed job application
 export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup.object({
   current_openings: Yup.string().required("Enter Job Position").trim(),
+   skills: Yup.string().when("isTalentForm", {
+    is: (isTalentForm: any) => isTalentForm == true,
+    then: () => Yup.string().required("Enter Sub function or Specialty").trim(),
+  }),
+  department: Yup.string().when("isTalentForm", {
+    is: (isTalentForm: any) => isTalentForm == true,
+    then: () => Yup.string().required("Select Department"),
+  }),
+  other_department: Yup.string().when("department", {
+    is: (department: any) => department == "Others",
+    then: () => Yup.string().required("Enter Other Department").trim(),
+  }),
   job_code: Yup.string().required("Enter Job Code").trim(),
   location: Yup.string().required("Enter Job Location").trim(),
   name: Yup.string().required("Enter your Name").trim(),
