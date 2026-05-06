@@ -15,8 +15,8 @@ const CookieBanner = ({
     onAccept,
     onReject,
     companyName = "Jindal Steel",
-    policyLink = "/cookie-policy.html",
-    privacyLink = "/privacy-policy.html",
+    policyLink = "/cookie-policy",
+    privacyLink = "/privacy-notice",
     currentPathname = "",
     excludedPaths = [],
 }: CookieBannerProps) => {
