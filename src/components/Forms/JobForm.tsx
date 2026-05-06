@@ -40,7 +40,7 @@ const JobForm = () => {
     // useEffect(() => {
     //     if (!contextInfo.jobPostId || !contextInfo.jobCode || !contextInfo.jobTitle) {
     //         setIsRedirecting(true);
-    //         router.push("/career-v2");
+    //         router.push("/career");
     //     }
     // }, [contextInfo.jobPostId, contextInfo.jobCode, contextInfo.jobTitle, router]);
 
@@ -104,7 +104,7 @@ const JobForm = () => {
                 : "",
         name: "",
         dob: null,
-        isTalentForm: pathname == "/join-our-talent-community-v2" ? true : false,
+        isTalentForm: pathname == "/join-our-talent-community" ? true : false,
         skills: "",
         department: "",
         other_department: "",
@@ -284,7 +284,7 @@ const JobForm = () => {
                                     return (
                                         <Form onSubmit={handleSubmit}>
                                             {/* ------ Job Details ------ */}
-                                            {pathname != "/join-our-talent-community-v2" ? (
+                                            {pathname != "/join-our-talent-community" ? (
                                                 <div className="row form_grider v1">
                                                     <div className="col-12 col-md-4">
                                                         <FormField

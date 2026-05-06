@@ -14,7 +14,7 @@
 //   const { slug } = await params;
 
 //   // Fix: wrong backtick
-//   if (slug === "home-v2") {
+//   if (slug === "home") {
 //     redirect("/");
 //   }
 
@@ -161,7 +161,7 @@ export default async function Page({
   const { slug } = await params;
 
   // Redirect condition
-  if (slug === "home-v2") {
+  if (slug === "home") {
     redirect("/");
   }
 

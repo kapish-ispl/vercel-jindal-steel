@@ -182,7 +182,7 @@ const JobListing = ({ postData, totalPost, itemsPerPage }: any) => {
                                                 <div className="c-content-20 clr-gray lh_1-4 mb-3">{item.metaInfo.description !== "" ? item.metaInfo.description : ""}</div>
 
                                                 <div className="action-btn">
-                                                    <Link className="u-btn clr-white" href={`/job-application-v2`} onClick={() => redirectToJobPage(item)}>Apply Now</Link>
+                                                    <Link className="u-btn clr-white" href={`/job-application`} onClick={() => redirectToJobPage(item)}>Apply Now</Link>
                                                     <button className="u-btn withBorder" onClick={() => handleReadMore(item)} type="button">
                                                         <span className="clr-olive">Know More</span>
                                                     </button>

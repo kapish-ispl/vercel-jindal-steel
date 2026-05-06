@@ -73,7 +73,7 @@ export default function PostList(props: any) {
             type: { key: "type_1599634707" }
         },
 
-        "career-v2": {
+        "career": {
             department: { key: "department" },
             location: { key: "location" }
         },
@@ -107,7 +107,7 @@ export default function PostList(props: any) {
             }
         }
 
-        if (props.slug === 'career' || props.slug === 'career-v2') {
+        if (props.slug === 'career' || props.slug === 'career') {
             limit = 1000;
         }
 

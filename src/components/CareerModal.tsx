@@ -137,7 +137,7 @@ const CareerModal: FC<{ open: any; closeModal?: any; data: any }> = ({ data, ope
                 </div>
 
                 <div className="c-modal-v2__footer">
-                    <Link className="btn-primary-green" href={`/job-application-v2`} onClick={() => redirectToJobPage(data)}>Apply Now</Link>
+                    <Link className="btn-primary-green" href={`/job-application`} onClick={() => redirectToJobPage(data)}>Apply Now</Link>
                 </div>
             </div>
         </Modal>

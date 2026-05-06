@@ -22,7 +22,7 @@ interface PageData {
 export async function generateMetadata(): Promise<Metadata> {
   const fetchedInfo = await serverRequest(
     {},
-    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=home-v2`,
+    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=home`,
     CONSTANTS.REQUEST_GET
   );
 
@@ -70,7 +70,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const fetchedInfo = await serverRequest(
     {},
-    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=home-v2`,
+    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=home`,
     CONSTANTS.REQUEST_GET
   );
 

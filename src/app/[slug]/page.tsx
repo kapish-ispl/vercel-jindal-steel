@@ -73,7 +73,7 @@ export default async function Page({
 }) {
   const { slug } = await params;
 
-  if (slug === 'home-v2`') {
+  if (slug === 'home`') {
     redirect('/');
   }
 
