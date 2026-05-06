@@ -171,6 +171,10 @@
             @include font-size(15);
           }
 
+          @include mq(tablet-wide) {
+            @include font-size(12);
+          }
+
           @include mq('desktop-wide') {
             padding: 25px 14px 35px;
             @include font-size(16);
@@ -204,11 +208,13 @@
 
           &:before {
             width: calc(100% - 10px);
+
             @include mq('tablet-max') {
-             width: calc(100% - 20px);
+              width: calc(100% - 20px);
             }
+
             @include mq('desktop-wide') {
-             width: calc(100% - 28px);
+              width: calc(100% - 28px);
             }
           }
         }
