@@ -95,6 +95,11 @@ const Header = () => {
         <header ref={menuRef}
           className={`c-header ${isMegaActive ? "mega-menu--active" : ""} ${stickyHeader ? "header-sticky" : ""
             } ${scrollDirection === "down" ? "hide" : "show"}`}
+            onMouseEnter={() => setIsMegaActive(true)}
+            onMouseLeave={() => {
+                setActiveMenu(null);
+                setIsMegaActive(false);
+            }}
         >
           <div className="container cus-container">
             <div className="row">
@@ -232,10 +237,11 @@ const Header = () => {
                       <ul className="flex menu_wrap" role="menubar">
                         {HEADER_MAIN_MENU.map((menuItem: any) => {
                           const aa = descriptionLoop.filter((i) => i.name.toLowerCase() === menuItem.name.toLowerCase());
+                          const dataItem = menuItem.name.split(" ").join("_");
                           return (
                             <li
                               key={menuItem.id}
-                              className={`c-header__menu-list ${activeMenu === menuItem.id ? "active" : ""
+                              className={`c-header__menu-list ${(activeMenu === menuItem.id && isMegaActive) ? "active" : ""
                                 }`}
                               role="none"
                               onMouseEnter={() => {
@@ -243,12 +249,12 @@ const Header = () => {
                                 setThirdLevelMenu(null);
                                 setIsMegaActive(true)
                               }}
-                              onMouseLeave={() => {
-                                setIsMegaActive(false);
-                                setActiveMenu(null);
-                              }}
+                              // onMouseLeave={() => {
+                              //   setIsMegaActive(false);
+                              //   setActiveMenu(null);
+                              // }}
                             >
-                              <a
+                              {/* <a
                                 href={menuItem.link}
                                 target={menuItem.is_new_tab === 1 ? "_blank" : "_self"}
                                 className="c-header__menu-item"
@@ -273,7 +279,30 @@ const Header = () => {
                                 }}
                               >
                                 {menuItem.name}
-                              </a>
+                              </a> */}
+
+                              <Link
+                                href={menuItem.link}
+                                target={menuItem.is_new_tab === 1 ? "_blank" : "_self"}
+                                className="c-header__menu-item"
+                                data-item={menuItem.children.length > 0 ? dataItem : ""}
+                                role="menuitem"
+                                aria-haspopup={menuItem.children.length > 0 ? "true" : undefined}
+                                aria-expanded={
+                                  menuItem.children.length > 0 && activeMenu === menuItem.id
+                                    ? "true"
+                                    : "false"
+                                }
+                                aria-controls={
+                                  menuItem.children.length > 0 ? `submenu-${menuItem.id}` : undefined
+                                }
+                                tabIndex={0}
+                                onFocus={() => setActiveMenu(menuItem.id)}
+                                onBlur={() => setActiveMenu(null)}
+                                onClick={() => setIsMegaActive(false)}
+                              >
+                                {menuItem.name}
+                              </Link>
 
                               {menuItem.children.length > 0 && (
                                 <ul
@@ -303,12 +332,12 @@ const Header = () => {
                                         </div>
                                         <div className="col-4">
                                           <div className={`mega-menu ${menuItem.name.split(" ").join("_").toLowerCase()}`}>
-                                            <RecursiveMenu items={menuItem.children} isThirdMenu={false} setThirdLevelMenu={setThirdLevelMenu} />
+                                            <RecursiveMenu items={menuItem.children} isThirdMenu={false} setIsMegaActive={setIsMegaActive} setThirdLevelMenu={setThirdLevelMenu} />
                                           </div>
                                         </div>
                                         <div className="col-4 p-0">
                                           <div className={`mega-menu__inner`}>
-                                            {thirdLevelMenu != null && <RecursiveMenu items={thirdLevelMenu} isThirdMenu={true} />
+                                            {thirdLevelMenu != null && <RecursiveMenu items={thirdLevelMenu} setIsMegaActive={setIsMegaActive} isThirdMenu={true} />
                                             }
                                           </div>
 

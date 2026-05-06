@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-function RecursiveMenu({ items, isThirdMenu, setThirdLevelMenu }: any) {
+function RecursiveMenu({ items, isThirdMenu, setThirdLevelMenu, setIsMegaActive }: any) {
     return (
         <ul role="menu">
             {items.map((item: any) => {
@@ -24,7 +24,14 @@ function RecursiveMenu({ items, isThirdMenu, setThirdLevelMenu }: any) {
                         <Link
                             href={item.link}
                             role="menuitem"
-                            onMouseEnter={() => setThirdLevelMenu(item.children && item.children.length > 0 ? item.children : null)}
+                            onClick={() => setIsMegaActive(false)}
+                            onMouseEnter={() =>
+                                setThirdLevelMenu?.(
+                                    item.children && item.children.length > 0
+                                        ? item.children
+                                        : null
+                                )
+                            }
                             target={item.type === "external" ? "_blank" : "_self"}
                         >
                             {item.name}

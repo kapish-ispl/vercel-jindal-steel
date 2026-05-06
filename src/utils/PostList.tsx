@@ -37,13 +37,14 @@ export default function PostList(props: any) {
     const pathname = usePathname();
     const page = searchParams.get("page");
     const [postData, setPostData] = useState<any>([]);
+    const [finalLimit, setFinalLimit] = useState<any>(props.limit || 9);
     const [totalPost, setTotalPost] = useState<any>(0);
     const [loading, setLoading] = useState(false);
     const type = searchParams.get('type');
     const desc = searchParams.get('desc');
     const productCategory = searchParams.get('product-category');
     const [filteredTag, setFilteredTag] = useState<string | null>(null);
-
+    //console.log(props);
     const metaKeys: any = {
         "investor-documents": {
             year: { key: "year_1599486125" },
@@ -92,9 +93,10 @@ export default function PostList(props: any) {
         const pageParam = searchParams.get(`${props.slug}-page`);
 
         const activePage = pageParam ?? page ?? 1;
-        const category = props.cat ? decodeURIComponent(props.category) : null;
+        //const category = props.cat ? decodeURIComponent(props.category) : null;
+        const category =decodeURIComponent(props.category);
 
-        let limit = props.limit !== undefined ? props.limit : 9;
+        var limit = props.limit !== undefined ? props.limit : 9;
 
         if (pathname === '/') {
             slugInfo += `&metaInfo[type_1599485711]=${props.type}`;
@@ -102,6 +104,8 @@ export default function PostList(props: any) {
         }
 
         if (props.slug === 'environmental-compliance') {
+             limit = 50;
+             setFinalLimit(50);
             if (category) {
                 slugInfo += `&metaInfo[type_1699180101]=${category}`;
             }
@@ -218,6 +222,6 @@ export default function PostList(props: any) {
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (
-        <PostComponentRender postData={postData} title={props.title != "" ? props.title : ''} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={props.limit || 9} itemstoshow={props.itemstoshow} isproduct={props.isproduct} loading={loading} />
+        <PostComponentRender postData={postData} title={props.title != "" ? props.title : ''} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={finalLimit} itemstoshow={props.itemstoshow} isproduct={props.isproduct} loading={loading} />
     ) : <div>Loading...</div>;
 }

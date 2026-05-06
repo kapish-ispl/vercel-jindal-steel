@@ -115,7 +115,7 @@ const MediaItem: FC<{ data: BannerMedia }> = ({ data }) => {
 
     if (data.type === "video") {
         return (
-            <video loop muted autoPlay playsInline className="c-banner__item_desktop"> 
+            <video loop muted autoPlay playsInline className="c-banner__item_desktop" style={{minHeight: '600px'}}>
                 <source src={data.cdnPath} type="video/mp4" />
             </video>
         );
@@ -156,6 +156,7 @@ const BannerSliderSection: FC<{
     );
 };
 
+
 const HomeBanner: FC<Props> = ({ bannerMedia, tagline, pageTitle }) => {
     const sliderSettings = {
         dots: false,
@@ -170,26 +171,45 @@ const HomeBanner: FC<Props> = ({ bannerMedia, tagline, pageTitle }) => {
     };
 
     if (!bannerMedia?.length) return null;
-    console.log(bannerMedia)
+
+
+    const desktopMedia =
+        bannerMedia.filter((m) => m.deviceType === "desktop");
+
+    const mobileMedia =
+        bannerMedia.filter((m) => m.deviceType === "mobile");
+
+    const tabletMedia =
+        bannerMedia.filter((m) => m.deviceType === "tablet");
+
+    // Fallback Logic
+    const finalDesktopMedia =
+        desktopMedia.length > 0 ? desktopMedia : bannerMedia;
+
+    const finalMobileMedia =
+        mobileMedia.length > 0 ? mobileMedia : finalDesktopMedia;
+
+    const finalTabletMedia =
+        tabletMedia.length > 0 ? tabletMedia : finalMobileMedia;
 
     return (
         <div className="c-banner">
             <div className="c-banner__media">
                 {/* Desktop Version: Only shows media with 'desktop' caption */}
                 <BannerSliderSection
-                    media={bannerMedia.filter((m) => m.deviceType === "desktop")}
-                    visibilityClass="d-none d-lg-block"
+                    media={finalDesktopMedia}
+                    visibilityClass="d-none d-lg-block "
                     settings={sliderSettings}
                 />
+
                 <BannerSliderSection
-                    media={bannerMedia.filter((m) => m.deviceType === "tablet")}
+                    media={finalTabletMedia}
                     visibilityClass="d-none d-lg-none d-md-block"
                     settings={sliderSettings}
                 />
 
-                {/* Mobile/Tablet Version: Only shows media with 'mobile' caption */}
                 <BannerSliderSection
-                    media={bannerMedia.filter((m) => m.deviceType === "mobile")}
+                    media={finalMobileMedia}
                     visibilityClass="d-lg-none"
                     settings={sliderSettings}
                 />
