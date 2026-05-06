@@ -39,7 +39,7 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
     ];
     return (
         <>
-            <div className="c-filterView">
+            {/* <div className="c-filterView">
                 <div className="row gy-2">
                     <div className="col-md-10 col-12">
                         <div className="input-group">
@@ -47,16 +47,10 @@ const OurOfficesCard: React.FC<OurOfficesCardProps> = ({ postData, itemsPerPage 
                             <span className="input-group-text" id="awards_search"><div className="icon-search"></div></span>
                         </div>
                     </div>
-                    {/* <div className="col-md-5 col-sm-12">
-                        const myOptions = [
-        { label: "Apple", value: "apple" },
-        { label: "Banana", value: "banana" },
-        { label: "Cherry", value: "cherry" },
-    ];
-                    </div> */}
+                   
                     <div className="col-12 col-md-2"><button type='button' className='btn u-btn action_btn'>Reset</button></div>
                 </div>
-            </div>
+            </div> */}
             {postData && postData.length > 0 && postData.map((post, index) => (
                 <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
                     <div className="c-cardView__wrapper">

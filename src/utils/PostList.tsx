@@ -76,11 +76,11 @@ export default function PostList(props: any) {
         "career": {
             department: { key: "department" },
             location: { key: "location" }
-        },
-        "career": {
-            department: { key: "department" },
-            location: { key: "location" }
         }
+        // "career": {
+        //     department: { key: "department" },
+        //     location: { key: "location" }
+        // }
     };
 
     useEffect(() => {

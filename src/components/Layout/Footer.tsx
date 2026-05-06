@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import FooterList from './FooterList';
 import { AppContext } from '@/context/AppContext';
+import CookieBanner from '@/utils/CookieBanner';
+import { usePathname } from "next/navigation";
+
 
 const Footer = () => {
     const contextInfo = useContext(AppContext);
     const FOOTER_MAIN_MENU = contextInfo.footerMenu;
+    const pathname = usePathname();
+
+    const [bannerState, setBannerState] = useState(true);
     return (
         <>
             <footer>
@@ -29,8 +35,8 @@ const Footer = () => {
                                         <div className="head c-content-16">Corporate Office</div>
                                         <div className="desc c-content-16 mt-3">Jindal Centre 12, Bhikaiji Cama Place, New Delhi - 110 066, INDIA <span className='d-md-block d-lg-inline'>(Formerly Jindal Steel & Power Limited)</span></div>
                                     </div>
-                                     <div className="c-footer__info-content  mt-2">
-                                        
+                                    <div className="c-footer__info-content  mt-2">
+
                                         <div className="socialMenu">
                                             <ul className="social__wrapper">
                                                 <li className="social__wrapper--item active"><a href='https://www.linkedin.com/company/jindalsteel-ltd./' className='social__wrapper--item-link'>
@@ -80,7 +86,7 @@ const Footer = () => {
                                             </ul>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div className="col-lg-2 col-md-4 col-sm-12">
@@ -91,7 +97,7 @@ const Footer = () => {
                             <div className="col-lg-3 col-md-4 col-sm-12">
                                 <div className="c-footer__info pad_left40">
                                     {FOOTER_MAIN_MENU?.length > 0 && <FooterList data={FOOTER_MAIN_MENU.slice(2, 4)} />}
-                                   
+
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-4 col-sm-12">
@@ -114,6 +120,15 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
+            {bannerState && (
+                <CookieBanner
+                    companyName="Jindal Steel"
+                    currentPathname={pathname}
+                    excludedPaths={["/privacy-policy.html", "/cookie-policy.html"]}
+                    onAccept={() => setBannerState(false)}
+                    onReject={() => setBannerState(false)}
+                />
+            )}
         </>
     )
 }
