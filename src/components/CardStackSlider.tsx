@@ -228,16 +228,7 @@ export default function CardStackSlider({ data }: any) {
 
       <div className="card-controls margin-auto">
         <button onClick={handlePrev} className="card-controls__button left">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fillRule="evenodd"
-              d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
-            />
-          </svg>
+          <img src="https://docs.jindalsteel.in/document/124/1778089662_arrow.png" className="img-fluid u-img" alt="prev arrow" />
         </button>
 
         <div className="card-controls__content-text">
@@ -247,16 +238,7 @@ export default function CardStackSlider({ data }: any) {
         </div>
 
         <button onClick={handleNext} className="card-controls__button right">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fillRule="evenodd"
-              d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
-            />
-          </svg>
+          <img src="https://docs.jindalsteel.in/document/124/1778089662_arrow1.png" className="img-fluid u-img" alt="next arrow" />
         </button>
       </div>
     </div>
