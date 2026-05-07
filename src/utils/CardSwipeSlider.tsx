@@ -48,35 +48,58 @@ const CardSwipeSlider = () => {
         <div className="swiper-material-wrapper border-radius-20">
             <Link href="https://www.jindalsteel.in/products/angles-channels" className="swiper-material-content">
                 <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://docs.jindalsteel.in/document/124/1778071767_1698411338angles-channels1.jpg" />
-                <span className="demo-material-label swiper-material-animate-opacity">Angles & Channels</span>
+                <span className="demo-material-label swiper-material-animate-opacity">Angles & Channels</span> 
+            </Link>
+        </div>,
+
+        <div className="swiper-material-wrapper border-radius-20">
+            <Link href="https://www.jindalsteel.in/products/wire-rods" className="swiper-material-content">
+                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767876575_Wire-Rods.jpg" />
+                <span className="demo-material-label swiper-material-animate-opacity">Wire Rods</span>
             </Link>
         </div>,
         
         <div className="swiper-material-wrapper border-radius-20">
-             <Link href="#" className="swiper-material-content">
-                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767876031_Billets.jpg" />
-                <span className="demo-material-label swiper-material-animate-opacity">Billets</span>
+             <Link href="https://www.jindalsteel.in/products/round-bars" className="swiper-material-content"> 
+                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://docs.jindalsteel.in/document/124/1778131307_1698475929round-bar-banner1.jpg" />
+                <span className="demo-material-label swiper-material-animate-opacity">Round Bars</span>
             </Link>
         </div>,
       
         
         <div className="swiper-material-wrapper border-radius-20">
-            <Link href="#" className="swiper-material-content">
-                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767344014_3261ce4db771a61be224e2fab69e3d3f76a06d67.jpg" />
-                <span className="demo-material-label swiper-material-animate-opacity"></span>
+             <Link href="https://www.jindalsteel.in/products/fabricated-sections" className="swiper-material-content"> 
+                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://docs.jindalsteel.in/document/124/1774261479_1698479600fabricated-sectionbanner1.jpg" />
+                <span className="demo-material-label swiper-material-animate-opacity">Fabricated Sections</span>
             </Link>
         </div>,
         
+        
         <div className="swiper-material-wrapper border-radius-20">
-            <Link href="#" className="swiper-material-content">
-                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767876575_Wire-Rods.jpg" />
-                <span className="demo-material-label swiper-material-animate-opacity">Wire Rods</span>
-            </Link>
-        </div>,
-        <div className="swiper-material-wrapper border-radius-20">
-            <Link  href="#" className="swiper-material-content">
+            <Link  href="https://www.jindalsteel.in/products/speedfloor" className="swiper-material-content">
                 <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767876671_Speedfloor.jpg" />
                 <span className="demo-material-label swiper-material-animate-opacity">Speedfloor</span>
+            </Link>
+        </div>,
+
+        <div className="swiper-material-wrapper border-radius-20">
+            <Link  href="https://www.jindalsteel.in/products/semi-finished" className="swiper-material-content">
+                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://docs.jindalsteel.in/document/124/1774343517_1698491709semifinished-banner1.jpg" />
+                <span className="demo-material-label swiper-material-animate-opacity">Semi-Finished</span> 
+            </Link>
+        </div>,
+
+        <div className="swiper-material-wrapper border-radius-20">
+            <Link  href="https://www.jindalsteel.in/products/jindal-panther-tmt-rebars" className="swiper-material-content">
+                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://docs.jindalsteel.in/document/124/1778072708_1763381495_1761223450_Company-Camina.jpg" />
+                <span className="demo-material-label swiper-material-animate-opacity">Jindal Panther TMT Rebars</span> 
+            </Link>
+        </div>,
+
+        <div className="swiper-material-wrapper border-radius-20">
+            <Link  href="https://www.jindalsteel.in/products/jindal-panther-cement" className="swiper-material-content">
+                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://docs.jindalsteel.in/document/124/1774420252_1698496086jindal-panther-cement-banner1.jpg" />
+                <span className="demo-material-label swiper-material-animate-opacity">Jindal Panther Cement</span> 
             </Link>
         </div>
     ];
