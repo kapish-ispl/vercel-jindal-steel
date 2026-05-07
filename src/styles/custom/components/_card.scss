@@ -1212,7 +1212,19 @@
         box-shadow: unset;
 
         .c-card__wrapper {
-            padding: 30px 45px 37px 45px;
+            padding: 25px;
+
+            @include mq(tablet-max) {
+                padding: 30px 45px 37px 45px;
+            }
+
+            .u-link {
+                word-break: break-word;
+
+                @include mq(tablet-max) {
+                    word-break: unset;
+                }
+            }
 
             .icon {
                 padding-right: 5px;
