@@ -7,8 +7,9 @@ export const corporateGovOptions = [
   { value: 'Shareholding Information', label: 'Shareholding Information' },
   { value: 'Secretarial Compliance Report', label: 'Secretarial Compliance Report' },
   { value: 'Independent Directors', label: 'Independent Directors' },
-  { value: 'Management System Policies', label: 'Management System Policies' },
+  { value: 'Management System Policies', label: 'Management System Policies' }, 
   { value: 'Disclosures under Regulation 46 of the SEBI (LODR) Regulations, 2015', label: 'Disclosures under Regulation 46 of the SEBI (LODR) Regulations, 2015' },
+  { value: 'Forms', label: 'Forms' },
 ];
 
 export const invDocOptions = [
