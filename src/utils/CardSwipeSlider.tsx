@@ -19,9 +19,36 @@ const CardSwipeSlider = () => {
 
     const slides = [
         <div className="swiper-material-wrapper border-radius-20">
-             <Link href="#" className="swiper-material-content">
+             <Link href="https://www.jindalsteel.in/products/hollow-sections" className="swiper-material-content">
+                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://docs.jindalsteel.in/document/124/1778136524_Hollow-Sections-img2.jpg" />
+                <span className="demo-material-label swiper-material-animate-opacity">Hollow Sections</span>
+            </Link>
+        </div>, 
+        <div className="swiper-material-wrapper border-radius-20">
+             <Link href="https://www.jindalsteel.in/products/rails" className="swiper-material-content"> 
                 <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767876149_Rails.jpg" />
                 <span className="demo-material-label swiper-material-animate-opacity">Rails</span>
+            </Link>
+        </div>,
+
+        <div className="swiper-material-wrapper border-radius-20">  
+            <Link href="https://www.jindalsteel.in/products/parallel-flange-beams-columns" className="swiper-material-content">
+                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767875547_Beams.jpg" />
+                <span className="demo-material-label swiper-material-animate-opacity">Parallel Flange Beams & Columns</span>
+            </Link>
+        </div>,
+
+        <div className="swiper-material-wrapper border-radius-20">
+            <Link href="https://www.jindalsteel.in/products/plates-coils" className="swiper-material-content">
+                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767876467_Plates.jpg" />
+                <span className="demo-material-label swiper-material-animate-opacity">Plates & Coils</span>
+            </Link>
+        </div>,
+
+        <div className="swiper-material-wrapper border-radius-20">
+            <Link href="https://www.jindalsteel.in/products/angles-channels" className="swiper-material-content">
+                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://docs.jindalsteel.in/document/124/1778071767_1698411338angles-channels1.jpg" />
+                <span className="demo-material-label swiper-material-animate-opacity">Angles & Channels</span>
             </Link>
         </div>,
         
@@ -31,30 +58,15 @@ const CardSwipeSlider = () => {
                 <span className="demo-material-label swiper-material-animate-opacity">Billets</span>
             </Link>
         </div>,
-        <div className="swiper-material-wrapper border-radius-20">
-            <Link href="#" className="swiper-material-content">
-                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767875547_Beams.jpg" />
-                <span className="demo-material-label swiper-material-animate-opacity">Parallel Flange Beams & Columns</span>
-            </Link>
-        </div>,
-        <div className="swiper-material-wrapper border-radius-20">
-            <Link href="#" className="swiper-material-content">
-                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767876315_Channels.jpg" />
-                <span className="demo-material-label swiper-material-animate-opacity">Channels</span>
-            </Link>
-        </div>,
+      
+        
         <div className="swiper-material-wrapper border-radius-20">
             <Link href="#" className="swiper-material-content">
                 <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767344014_3261ce4db771a61be224e2fab69e3d3f76a06d67.jpg" />
                 <span className="demo-material-label swiper-material-animate-opacity"></span>
             </Link>
         </div>,
-        <div className="swiper-material-wrapper border-radius-20">
-            <Link href="#" className="swiper-material-content">
-                <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767876467_Plates.jpg" />
-                <span className="demo-material-label swiper-material-animate-opacity">Plates</span>
-            </Link>
-        </div>,
+        
         <div className="swiper-material-wrapper border-radius-20">
             <Link href="#" className="swiper-material-content">
                 <img className="demo-material-image" data-swiper-material-scale="1.25" src="https://d2lptvt2jijg6f.cloudfront.net/document/126/1767876575_Wire-Rods.jpg" />
