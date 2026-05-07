@@ -3642,11 +3642,11 @@ ul.arrowbulletList {
             }
 
             .c-embla__arrow {
-                width: 35px;
-                height: 35px;
+                width: 40px;
+                height: 40px;
                 border: 1px solid #636466 !important;
                 @include border-radius(50%);
-                min-width: 35px;
+                min-width: 40px;
                 @include flexbox;
                 @include align-items(center);
                 @include justify-content(center);

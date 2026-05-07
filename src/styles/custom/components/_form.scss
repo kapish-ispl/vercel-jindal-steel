@@ -393,9 +393,11 @@
     .form_captcha_wrap {
         @include flexbox;
         @include flex-direction(column, vertical);
+        gap: 20px;
 
         @include mq(tablet) {
             @include flex-direction(row, horizontal);
+            gap: inherit;
         }
     }
 }
