@@ -789,6 +789,11 @@ Common styles for navigation elements.
             visibility: hidden;
             opacity: 0;
             transition: all 0.3s ease;
+            display: none;
+
+            @include mq(tablet-max) {
+                display: block;
+            }
 
             img {
                 height: 100%;
@@ -885,9 +890,13 @@ Common styles for navigation elements.
 }
 
 .gap-50 {
-    gap: 25px;
+    gap: 15px;
 
     @include mq(tablet-max) {
+        gap: 25px;
+    }
+
+    @include mq(desktop-wide) {
         gap: 50px;
     }
 
@@ -1415,6 +1424,7 @@ $transition-speed: 0.7s;
 
 .strongGovernance .nu-carousel__container {
     height: 250px;
+
     @include mq(tablet-max) {
         height: 300px;
     }

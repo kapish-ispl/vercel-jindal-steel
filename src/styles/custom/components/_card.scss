@@ -1851,7 +1851,7 @@
         padding: 20px;
         @include flexbox;
         @include flex-direction(column, vertical);
-        @include justify-content(center);
+        @include justify-content(space-between);
         @include align-items(center);
         width: 100%;
 
@@ -1860,10 +1860,14 @@
         }
 
         @include mq(tablet-max) {
-            height: 278px;
+            height: 250px;
             flex: 1;
             width: unset;
         }
+
+        // @include mq(desktop) {
+        //     height: 265px;
+        // }
 
         &.bg-blue {
             background: var(--color-accent-blue);
@@ -1882,7 +1886,7 @@
         }
 
         &-content {
-            margin-top: 30px;
+
 
             >div {
                 @include flexbox;

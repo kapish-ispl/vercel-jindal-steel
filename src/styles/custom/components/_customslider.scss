@@ -217,7 +217,7 @@
 
 .carousel-wrapper {
     position: relative;
-    height: 700px;
+    height: 100%;
     display: flex;
 
     // @include mq(desktop) {
@@ -226,6 +226,10 @@
     // @include mq(desktop-wide) {
     //   height: 70vh;
     // }
+    @include mq(tablet-max) {
+        height: 600px;
+    }
+
     @include mq(desktop) {
         height: 650px;
     }
@@ -343,9 +347,9 @@
     .carousel-wrapper {
         height: 842px;
 
-         @include mq(desktop) {
+        @include mq(desktop) {
             height: 650px;
-         }
+        }
     }
 }
 
@@ -363,7 +367,7 @@
 
             @include mq(desktop-wide) {
                 // padding: 0px 90px;
-                 padding: 0px 70px;
+                padding: 0px 70px;
 
             }
         }
@@ -372,6 +376,7 @@
     .twoColumnContainer__image {
         .u-img {
             max-width: 400px;
+            width: 100%;
 
             @include mq(desktop) {
                 max-width: 500px;
@@ -710,6 +715,7 @@
 
 
 .bg-gray {
+
     .circle-container .icon-box,
     .circle-container .item .label {
         background: #f7f6f6 !important;

@@ -23,7 +23,7 @@ export const poppins = Poppins({
 
 
 export const metadata: Metadata = {
-  title: "JSP",
+  title: "Jindal Steel",
   description: "",
 };
 

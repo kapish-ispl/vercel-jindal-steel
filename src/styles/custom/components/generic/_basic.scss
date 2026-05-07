@@ -3985,14 +3985,22 @@ ul.arrowbulletList {
 
 
 .white-space-normal {
-  white-space: normal !important;
+    white-space: normal !important;
 }
 
 .mw-none {
-  max-width: none !important;
+    max-width: none !important;
 }
 
 
 .press_highlight_banner .c-inner-banner .c-inner-banner__media {
-    display:none !important;
+    display: none !important;
+}
+
+.order-1 {
+    order: 1;
+
+    @include mq(tablet-max) {
+        order: inherit;
+    }
 }

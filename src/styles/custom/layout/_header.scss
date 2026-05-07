@@ -168,7 +168,7 @@
 
           @include mq('tablet-max') {
             padding: 20px 10px 25px;
-            @include font-size(15);
+            @include font-size(13);
           }
 
           @include mq(tablet-wide) {
