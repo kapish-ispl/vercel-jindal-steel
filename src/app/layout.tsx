@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
 import SmoothScrollProvider from "@/components/Layout/SmoothScrollProvider";
+import { Toaster } from "react-hot-toast";
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${poppins.variable}`}
       >
+        <Toaster position="top-center" reverseOrder={false} />
         <Suspense fallback={null}>
           <AppContextProvider>
             <SmoothScrollProvider>

@@ -89,3 +89,26 @@ export const postAPIResponse = async (endPoint: string, data: any, signal?: any)
         };
     }
 };
+
+export const postFormDataResponse = async (endPoint: string, formData: FormData, signal?: AbortSignal) => {
+    try {
+        const res = await fetch(`${endPoint}`, {
+            method: "POST",
+            headers: {
+                ...headers
+            },
+            body: formData,
+            signal,
+        });
+
+        const json = await res.json();
+        return json;
+    } catch (err) {
+        console.error("Multipart POST error:", err);
+        return {
+            error: true,
+            code: 'ERR_MULTIPART',
+            message: err instanceof Error ? err.message : String(err)
+        };
+    }
+};
