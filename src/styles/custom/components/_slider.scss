@@ -890,7 +890,7 @@ Common styles for navigation elements.
 }
 
 .gap-50 {
-    gap: 15px;
+    gap: 10px;
 
     @include mq(tablet-max) {
         gap: 25px;

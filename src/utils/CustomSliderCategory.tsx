@@ -373,7 +373,7 @@ export default function CategorySlider({ data, hidecategory = "false", hidelabel
           <div className="progress-wrapper-conatiner">
             <div className="container cus-container">
               <div className="row">
-                <div className="col-12 d-flex flex-column flex-lg-row gap-50">
+                <div className="col-12 d-flex flex-wrap gap-50">
                   {categories.map((cat, index) => (
                     <div
                       key={index}
