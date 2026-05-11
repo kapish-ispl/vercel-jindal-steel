@@ -52,6 +52,7 @@ const FormMultiSelect: React.FC<FormMultiSelectProps> = ({
             {showLabel && <label className="form_grider_wrap_label">{label}</label>}
             <div className="dropdown d-inline-block w-100 cus-select">
                 <Select
+                    data-lenis-ignore
                     isMulti={isMulti}
                     name={name}
                     className="form_grider_wrap_field select_field"

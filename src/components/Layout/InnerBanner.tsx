@@ -86,7 +86,7 @@ interface InnerBannerItem {
 }
 
 interface Props {
-    label: string;
+    label: any;
     slug: string;
     tagline: any;
     currentPage: string[];
@@ -160,8 +160,13 @@ const InnerBanner = ({ label, tagline, slug, currentPage, innerBanner = [] }: Pr
                                             dangerouslySetInnerHTML={{ __html: tagline }}
                                         />
                                     ) : (
-                                        label
-                                    )}
+                                       label !== undefined ? (
+                                        <div
+                                            dangerouslySetInnerHTML={{ __html: label }}
+                                        />
+                                    ) : (
+                                        <div>Default Title</div>  
+                                    ))}
                                 </h1>
 
                                 <div className="breadcumbs">

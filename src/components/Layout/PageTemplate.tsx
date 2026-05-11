@@ -254,6 +254,11 @@ const PageTemplate = ({ data }: any) => {
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CircleSlider props={props} data={Array.isArray(children) ? children : [children]} />;
                 }
+                if (domNode.name === "jobform") {
+                    // const props = attributesToProps(domNode.attribs);
+                    // const children = domToReact(domNode.children as DOMNode[]);
+                    return <JobForm />;
+                }
 
                 if (domNode.name === "categoryslider") {
                     const props = attributesToProps(domNode.attribs);

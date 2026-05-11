@@ -12,28 +12,32 @@ import { AppContext } from "@/context/AppContext";
 import FormField from "./FormField";
 import FormSelect from "./FormSelect";
 import FormDatePicker from "./FormDatePicker";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, useParams, usePathname } from "next/navigation";
 import { postUploadFileResponse, postAPIResponse } from "@/services/apiRequests";
 import FormMultiSelect from "./FormMultiSelect";
+import { toast } from "react-hot-toast";
 
 
 const JobForm = () => {
     const contextInfo = useContext(AppContext);
     const { departmentOptions } = useContext(AppContext);
     const router = useRouter();
+    const params = useParams();
     const pathname = usePathname();
     const [showInputBox, setShowInputBox] = useState(false);
     const [showExpericeFields, setShowExpericeFields] = useState(true);
     const [selectedCountryIndia, setSelectedCountryIndia] = useState(false);
     const [selectedStateOther, setSelectedStateOther] = useState(false);
     const [selectDepartmentOther, setSelectDepartmentOther] = useState(false);
-    const [maxDateState, setMaxDateState] = useState("01-29-2024");
+    const currentYear = new Date().getFullYear();
+    const endOfCurrentYear = new Date(currentYear, 11, 31);
     const [alertMsg, setAlertMsg] = useState("");
     const [submitMsg, setSubmitMsg] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [actualCaptcha, setActualCaptcha] = useState<string>('');
     const [reloadCaptcha, setReloadCaptcha] = useState<boolean>(false);
     const [captchaKey, setCaptchaKey] = useState<number>(0);
+    const [paramsExist, setParamsExist] = useState(false);
 
     const [isRedirecting, setIsRedirecting] = useState(false);
 
@@ -153,12 +157,13 @@ const JobForm = () => {
     const handleSubmitData = async (data: any) => {
         const response = await postAPIResponse(POST_JOB_ENDPOINT, data);
         if (response?.code == "SUC200") {
-            router.push("/thanks");
+            return true;
         } else {
             setSubmitSuccess(false);
             setSubmitMsg(true);
             setAlertMsg(response?.message || "Something went wrong while submitting the form.");
             contextInfo.setIsLoading(false);
+            return false;
         }
     };
 
@@ -167,6 +172,19 @@ const JobForm = () => {
             setCaptchaKey((prev) => prev + 1);
         }
     }, [reloadCaptcha]);
+
+    useEffect(() => {
+        let jobId = contextInfo.jobPostId;
+
+        if (params?.slug === "join-our-talent-community") {
+            jobId = "3645";
+            contextInfo.setJobPostId(jobId);
+        }
+
+        if (Number(jobId) === 0) {
+            router.push("/career-opportunity");
+        }
+    }, [params?.slug, contextInfo.jobPostId]);
 
     return (
 
@@ -180,7 +198,7 @@ const JobForm = () => {
                                 initialValues={initialValues}
                                 validationSchema={JobApplicationSchema}
                                 enableReinitialize={true}
-                                onSubmit={(values, action) => {
+                                onSubmit={async (values, action) => {
                                     const formValues = { ...values };
 
                                     if (formValues.total_experience == "15") {
@@ -190,17 +208,15 @@ const JobForm = () => {
                                     }
 
                                     const {
-                                        current_openings,
-                                        location,
-                                        other_experience,
                                         user_captcha_input,
-                                        job_code,
+                                        other_experience,
                                         ...submittedValue
                                     } = formValues;
 
-                                    const submittedData = formValues.total_experience === "0"
-                                        ? { ...submittedValue, experience_details: [] }
-                                        : submittedValue;
+                                    const submittedData = {
+                                        ...submittedValue,
+                                        experience_details: formValues.total_experience === "0" ? [] : formValues.experience_details
+                                    };
 
                                     console.log("Form Submitted. Values processed:", formValues);
                                     console.log("Final data to be sent:", submittedData);
@@ -209,14 +225,17 @@ const JobForm = () => {
                                         console.log("Captcha validated successfully.");
                                         setReloadCaptcha(prev => !prev);
                                         contextInfo.setIsLoading(true);
-                                        handleSubmitData(submittedData);
-                                        if (submitSuccess) {
-                                            setTimeout(() => {
-                                                action.resetForm();
-                                                contextInfo.setIsLoading(false);
-                                            }, 3000);
+                                        const success = await handleSubmitData(submittedData);
+
+                                        if (success) {
+                                            toast.success("Application submitted successfully!");
+                                            action.resetForm();
+                                            contextInfo.setIsLoading(false);
+                                        } else {
+                                            toast.error("Failed to submit application.");
                                         }
                                     } else {
+                                        toast.error("Captcha Does Not Match");
                                         setSubmitSuccess(false);
                                         setSubmitMsg(true);
                                         setAlertMsg("Captcha Does Not Match");
@@ -235,13 +254,8 @@ const JobForm = () => {
                                 }) => {
                                     const noticePeriodHandler = (e: any) => {
                                         setFieldValue("notice_period", e.target.value);
-                                        let maxDate = new Date(
-                                            Date.now() +
-                                            Number(e.target.value) * 24 * 60 * 60 * 1000
-                                        );
-                                        setMaxDateState(
-                                            `${maxDate.getMonth() + 1}-${maxDate.getDate()}-${maxDate.getFullYear()}`
-                                        );
+
+
                                     };
 
                                     const handleExperienceChange = (selectedValue: any) => {
@@ -468,6 +482,16 @@ const JobForm = () => {
                                                         />
                                                     </div>
                                                 )}
+
+                                                <div className="col-12 col-md-4">
+                                                    <FormMultiSelect
+                                                        label="Key Skills*"
+                                                        name="key_skills"
+                                                        options={keySkillsOptions}
+                                                        isMulti={true}
+                                                        placeholder="Select Key Skills"
+                                                    />
+                                                </div>
                                             </div>
                                             <div className="c-divider">&nbsp;</div>
                                             {/* ------ Educational Details ------ */}
@@ -685,7 +709,7 @@ const JobForm = () => {
                                                                                             error={getIn(errors, `experience_details.${index}.relieving_date`)}
                                                                                             touched={getIn(touched, `experience_details.${index}.relieving_date`)}
                                                                                             placeholderText="Relieving Date"
-                                                                                            maxDate={new Date(maxDateState)}
+                                                                                            maxDate={endOfCurrentYear}
                                                                                             showMonthDropdown
                                                                                             showYearDropdown
                                                                                             dropdownMode="select"
@@ -902,7 +926,7 @@ const JobForm = () => {
                                             </div>
 
                                             {/* ------ Alert & Submit ------ */}
-                                            {submitMsg && (
+                                            {/* {submitMsg && (
                                                 <div className="row">
                                                     <div className="col-12">
                                                         <div
@@ -917,7 +941,7 @@ const JobForm = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            )}
+                                            )} */}
 
                                             <div className="row">
                                                 <div className="col-12">
