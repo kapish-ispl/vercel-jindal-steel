@@ -25,6 +25,9 @@ export const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Jindal Steel",
   description: "",
+  verification: {
+    google: "hxhEUPw_d8ReQZZdxoh0GAITxHwayUb6BggozmZGM7U",
+  },
 };
 
 export default function RootLayout({

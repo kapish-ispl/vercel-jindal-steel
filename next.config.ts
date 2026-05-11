@@ -41,6 +41,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  htmlLimitedBots: /.*/,
 };
 
 export default nextConfig;
