@@ -77,7 +77,7 @@ const CustomCircleAnimation = () => {
                                 <span className="circle-text ft_semiBold">R.I.S.E</span>
                             </div>
                             <div ref={greenRef} className="rise-esg-circle circle-green">
-                                <span className="circle-text ft_semiBold">E.S.G.</span>
+                                <span className="circle-text ft_semiBold">ESG</span>
                             </div>
                             <div ref={orangeRef} className="rise-esg-circle circle-orange">
                                 <span className="circle-text mb-0 mb-sm-2 ft_semiBold">R.I.S.E</span>
