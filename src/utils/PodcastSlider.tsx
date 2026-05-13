@@ -13,6 +13,7 @@ interface PodcastSliderProps {
     postData?: any[];
     data?: React.ReactNode;
     autoplay?: boolean | string;
+    seasontype?: string;
 }
 
 const getYouTubeId = (url: string) => {
@@ -125,15 +126,18 @@ const PodcastSlider = (props: PodcastSliderProps) => {
         <div className="row mb-100" ref={containerRef}>
             <div className="col-lg-6">
                 <div className="c-podcast__wrapper-content pr-77">
+                    <div className="hw mb-2">
+                        <h1 className="c-heading-40  clr-peach ft_semiBold">{props.seasontype}</h1>
+                    </div>
                     <div className="hw">
-                        <h3 className="c-heading-40 clr-blue ft_semiBold mb-55 js-sync-content">
+                        <h3 className="c-heading-40 clr-blue ft_semiBold mb-30 js-sync-content">
                             {displayItem?.title}
                         </h3>
 
                         <div className="genric__content js-sync-content">
-                          <p className="c-content-19  ft_light" data-aos="fade-up" data-aos-duration="1200">
-                                {displayItem?.content && parse(displayItem?.content)}  
-                           </p>
+                            <p className="c-content-19  ft_light" data-aos="fade-up" data-aos-duration="1200">
+                                {displayItem?.content && parse(displayItem?.content)}
+                            </p>
                         </div>
                     </div>
                 </div>

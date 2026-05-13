@@ -4004,3 +4004,13 @@ ul.arrowbulletList {
         order: inherit;
     }
 }
+
+.podcast-row {
+    .c-flex-row-reverse {
+        &:nth-child(even) {
+            .row {
+                flex-direction: row-reverse;
+            }
+        }
+    }
+}

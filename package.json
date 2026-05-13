@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@next/third-parties": "^16.2.6",
     "@types/react-datepicker": "^6.2.0",
     "aos": "^2.3.4",
     "embla-carousel": "^8.6.0",
