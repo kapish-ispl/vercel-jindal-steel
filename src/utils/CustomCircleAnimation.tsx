@@ -64,9 +64,9 @@ const CustomCircleAnimation = () => {
                 <div className="row">
                     <div className="col-12 col-lg-9">
                         <div className="hw">
-                            <div className="c-heading-60 ft_regular clr-gray lh_1-1 mb-40">R.I.S.E &times; E.S.G Integration</div>
+                            <div className="c-heading-60 ft_regular clr-gray lh_1-1 mb-40">R.I.S.E &times; ESG Integration</div>
 
-                            <p className="c-content-24 ft_light lh_1-6 clr-gray">R.I.S.E defines direction. E.S.G. measures performance. The R.I.S.E. framework guides strategic intent across operations, while E.S.G. provides the structure for measurement, reporting and accountability.</p>
+                            <p className="c-content-24 ft_light lh_1-6 clr-gray">R.I.S.E defines direction. ESG measures performance. The R.I.S.E. framework guides strategic intent across operations, while ESG provides the structure for measurement, reporting and accountability.</p>
                         </div>
                     </div>
                 </div>

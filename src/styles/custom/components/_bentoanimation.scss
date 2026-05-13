@@ -163,7 +163,7 @@
             text-align: left;
             padding: 20px;
 
-            @include mq(desktop-wide) {
+            @include mq(desktop-wide-max) {
                 padding: 32px
             }
 
