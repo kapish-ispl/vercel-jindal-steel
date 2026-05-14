@@ -40,10 +40,10 @@ const BentoSyncReveal = ({ data, props }: { data: any, props: any }) => {
         {
             id: 4,
             mainImg: "https://docs.jindalsteel.in/document/124/1774328191_aaa2faf02eb6b2ca7682b337b09a86fc69b71a2c.png",
-            title: "Ethical Patnership",
+            title: "Ethical Partnership",
             desc: "Oversight and accountability embedded across operations.",
             stat: "Focus",
-            statDesc: "Responsible supply chain standards, anti-corruption systems, human rights alignment and transparent conduct.",
+            statDesc: "Responsible supply chain standards, anti-corruption systems, human rights alignment, and transparent conduct.",
             gallery: ["https://picsum.photos/1920/1080?random=13", "https://picsum.photos/1920/1080?random=14", "https://picsum.photos/1920/1080?random=15"]
         },
         // {
