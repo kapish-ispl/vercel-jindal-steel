@@ -53,8 +53,8 @@ const NewProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9
     };
 
     const categories = [
-        { label: "Steel Products", value: "" },
-        { label: "Semis", value: "semis" },
+        { label: "All", value: "" },
+        { label: "Steel Products", value: "Steel Products" }, 
         { label: "Steel Solutions", value: "steel solutions" },
     ];
 
@@ -77,7 +77,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9
                 <div className="col-lg-4 col-md-6 col-12" key={index}>
 
 
-                    <Link className="c-cardBox__wrapper v1" href={`/products/${post.slug}`}>
+                    <Link className="c-cardBox__wrapper v1" href={`/our-portfolio/${post.slug}`}>
                         <span className="c-cardBox__wrapper-top">
                             <span className="media ratio ratio-4x3">
                                 <img alt={post?.title} className="img-fluid u-img" src={post?.media?.[0]?.cdnPath} />
