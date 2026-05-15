@@ -618,6 +618,68 @@
             border-color: var(--color-accent-green) !important;
         }
     }
+
+    &.v2 {
+        .c-lead-overview {
+            .hw {
+                .c-heading-60 {
+                    @include font-size(20);
+                    max-width: 800px;
+
+                    @include mq('tablet') {
+                        @include font-size(24);
+                    }
+
+                    @include mq('desktop-min') {
+                        @include font-size(30);
+                    }
+
+                    @include mq('desktop-wide') {
+                        @include font-size(40);
+
+                    }
+
+                    @include mq('desktop-wide-max') {
+                        @include font-size(60);
+                        max-width: 1100px;
+                    }
+
+                }
+            }
+
+            &__content {
+                @include mq(tablet-max) {
+                    width: 66%;
+                }
+
+                .c-content-24 {
+                    @include font-size(16);
+
+                    @include mq('tablet') {
+                        @include font-size(20);
+                    }
+
+                    @include mq('desktop-wide-max') {
+                        @include font-size(24);
+                    }
+
+                }
+            }
+
+            &__image {
+                z-index: 99;
+
+                @include mq(desktop) {
+                    @include flexbox;
+                    @include justify-content(center);
+                }
+
+                img {
+                    max-width: 60%;
+                }
+            }
+        }
+    }
 }
 
 .hero-container {

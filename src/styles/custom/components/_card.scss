@@ -2476,3 +2476,90 @@
         }
     }
 }
+
+.card__box {
+    &-media {
+        height: 319px;
+        overflow: hidden;
+        @include border-radius(8px);
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.4) 100%);
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            left: 0;
+            top: 0;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &-content {
+        padding: 10px 0px;
+
+        @include mq(tablet-max) {
+            padding: 16px 0px;
+        }
+    }
+
+    &.v2 {
+        .card__box-media {
+            height: 391px;
+        }
+    }
+}
+
+.building__card {
+    @include flexbox;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    @include mq(phablet) {
+        flex-direction: row;
+    }
+
+    &_item {
+        padding: 12px;
+        width: 100%;
+        @include border-radius(4px);
+        box-shadow:
+            1px 1px 2px 0px #44618366,
+            -1px -1px 2px 0px #44618366;
+
+        @include mq(phablet) {
+            padding: 24px;
+            width: calc(50% - 10px);
+
+        }
+
+        @include mq(desktop) {
+            margin-bottom: 20px;
+            height: calc(100% - 20px);
+        }
+
+        &-icon {
+            margin-bottom: 25px;
+
+            @include mq(tablet-max) {
+                margin-bottom: 48px;
+            }
+        }
+
+        p {
+            margin-bottom: 0px;
+        }
+
+        &.bg-light-gray {
+            background: #44618333;
+        }
+    }
+}

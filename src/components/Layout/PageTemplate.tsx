@@ -16,6 +16,7 @@ const CustomWorldMap = dynamic(() => import('@/utils/CustomWorldMap'), { ssr: fa
 const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: false });
 const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ssr: false });
 const CustomHorizontalScroll = dynamic(() => import('@/utils/CustomHorizontalScroll'), { ssr: false });
+const HorizontalScrollSecton = dynamic(() => import('@/utils/HorizontalScrollSecton'), { ssr: false });
 const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr: false });
 const CustomSilder = dynamic(() => import('@/utils/CustomSilder'), { ssr: false });
 const CardSwipeSlider = dynamic(() => import("@/utils/CardSwipeSlider"), { ssr: false });
@@ -239,6 +240,11 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomHorizontalScroll {...props} data={Array.isArray(children) ? children : [children]} />;
+                }
+                if (domNode.name === "horizontalscrollsecton") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <HorizontalScrollSecton {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
 
                 if (domNode.name === "customwheelsection") {
