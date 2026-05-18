@@ -47,6 +47,7 @@ const SportsGallerySlider = dynamic(() => import("@/utils/SportsGallerySlider"),
 const HeroSection = dynamic(() => import("@/utils/HeroSection"), { ssr: false });
 const CustomTabs = dynamic(() => import("@/utils/CustomTabs"), { ssr: false });
 const CustomRiseCircular = dynamic(() => import("@/utils/CustomRiseCircular"), { ssr: false });
+const Timeline = dynamic(() => import("@/utils/Timeline"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -88,6 +89,11 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomTabs props={props} data={Array.isArray(children) ? children : [children]} />
+                }
+                if (domNode.name === "timeline") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <Timeline props={props} data={Array.isArray(children) ? children : [children]} />
                 }
                 if (domNode.name === "sportsgalleryslider") {
                     const children = domToReact(domNode.children as DOMNode[]);
