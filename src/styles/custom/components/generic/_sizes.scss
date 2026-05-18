@@ -307,6 +307,24 @@
     }
 }
 
+.c-content-22 {
+    font-weight: var(--fontRegular);
+
+    @include font-size(16);
+
+    @include mq('tablet') {
+        @include font-size(18);
+    }
+
+    @include mq('desktop-min') {
+        @include font-size(18);
+    }
+
+    @include mq('desktop-wide') {
+        @include font-size(22);
+    }
+}
+
 .c-content-24 {
     font-weight: var(--fontRegular);
 
