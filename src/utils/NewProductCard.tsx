@@ -85,7 +85,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9
                         </span>
                         <span className="c-cardBox__wrapper-bottom">
                             <span className="content">
-                                <span className="title c-content-24 ft_semiBold mb-2 ">{post?.title}</span>
+                                <span className="title c-content-22 ft_semiBold mb-2 ">{post?.title}</span>
                                 <span className="c-content-20 ft_light c-line-clamp-2">{post?.metaInfo?.description || post?.content}</span>
                             </span>
                         </span>
