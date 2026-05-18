@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface CustomAccordionsWithoutimgProps {
     data: React.ReactNode[];
+    leftImage?: string;
 }
 
 interface AccordionItemProps {
@@ -16,6 +17,7 @@ interface AccordionItemProps {
 
 const CustomAccordionsWithoutimg = ({
     data,
+    leftImage = "https://docs.jindalsteel.in/document/124/1774434538_7e50438454d680740631efc9608cc810412def11.png",
 }: CustomAccordionsWithoutimgProps) => {
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -40,19 +42,14 @@ const CustomAccordionsWithoutimg = ({
 
     return (
         <div className="row align-items-center">
-            {/* Left Side Static Image */}
+            {/* Left Side Image */}
             <div className="col-12 col-xl-6 mb-4 mb-xl-0">
                 <div className="accordion__media position-relative v2">
-
-                    {/* Static Image */}
                     <img
-                        src="https://docs.jindalsteel.in/document/124/1774434538_7e50438454d680740631efc9608cc810412def11.png"
+                        src={leftImage}
                         alt="Accordion"
                         className="img-fluid u-img w-100"
                     />
-
-                   
-                   
                 </div>
             </div>
 
@@ -60,7 +57,6 @@ const CustomAccordionsWithoutimg = ({
             <div className="col-12 col-xl-6">
                 <div className="c-accordionBase">
                     <div className="c-accordionBase__body">
-
                         {accordionData.map((post, index) => {
                             const isOpen = activeIndex === index;
 
