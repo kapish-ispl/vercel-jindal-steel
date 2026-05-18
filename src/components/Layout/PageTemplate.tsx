@@ -48,6 +48,7 @@ const HeroSection = dynamic(() => import("@/utils/HeroSection"), { ssr: false })
 const CustomTabs = dynamic(() => import("@/utils/CustomTabs"), { ssr: false });
 const CustomRiseCircular = dynamic(() => import("@/utils/CustomRiseCircular"), { ssr: false });
 const Timeline = dynamic(() => import("@/utils/Timeline"), { ssr: false });
+const CustomAccordionsWithoutimg = dynamic(() => import("@/utils/CustomAccordionsWithoutimg"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -130,6 +131,11 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomAccordions {...props} data={Array.isArray(children) ? children : [children]} />;
+                }
+                if (domNode.name === "customaccordionswithoutimg") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CustomAccordionsWithoutimg {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
                 if (domNode.name == "customcontentsliders") {
                     const props = attributesToProps(domNode.attribs);
