@@ -168,6 +168,12 @@
             @include border-radius(8px);
 
         }
+        &.fixheight {
+             @include mq(desktop) {
+                height: 188px;
+                margin-top: 8px;
+             }
+        }
 
         &_info {
             @include flexbox;
