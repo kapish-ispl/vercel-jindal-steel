@@ -46,6 +46,7 @@ const RotatingSlider = dynamic(() => import("@/utils/RotatingSlider"), { ssr: fa
 const SportsGallerySlider = dynamic(() => import("@/utils/SportsGallerySlider"), { ssr: false });
 const HeroSection = dynamic(() => import("@/utils/HeroSection"), { ssr: false });
 const CustomTabs = dynamic(() => import("@/utils/CustomTabs"), { ssr: false });
+const CustomRiseCircular = dynamic(() => import("@/utils/CustomRiseCircular"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -70,6 +71,9 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "customcircleanimation") {
                     return <CustomCircleAnimation />
+                }
+                if (domNode.name === "customrisecircular") {
+                    return <CustomRiseCircular />
                 }
                 if (domNode.name === "scrollprogress") {
                     return <ScrollProgress />

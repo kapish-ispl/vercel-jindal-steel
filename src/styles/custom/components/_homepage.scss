@@ -168,11 +168,12 @@
             @include border-radius(8px);
 
         }
+
         &.fixheight {
-             @include mq(desktop) {
+            @include mq(desktop) {
                 height: 188px;
                 margin-top: 8px;
-             }
+            }
         }
 
         &_info {
@@ -654,14 +655,22 @@
             }
 
             &__content {
+                padding-bottom: 0px;
+
+
                 @include mq(tablet-max) {
                     width: 66%;
+                    padding-bottom: 30px;
                 }
 
                 .c-content-24 {
-                    @include font-size(16);
+                    @include font-size(12);
 
                     @include mq('tablet') {
+                        @include font-size(16);
+                    }
+
+                    @include mq(desktop) {
                         @include font-size(20);
                     }
 
@@ -681,7 +690,12 @@
                 }
 
                 img {
-                    max-width: 60%;
+                    max-width: 45%;
+
+                    @include mq(tablet-max) {
+
+                        max-width: 60%;
+                    }
                 }
             }
         }

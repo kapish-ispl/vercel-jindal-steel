@@ -60,7 +60,7 @@ export default function HorizontalScrollSecton({ data }: { data: (ReactNode | st
         }}
       >
         {filteredItems?.map((item: ReactNode, index: number) => (
-          <div className="panel horizontalScroll-item commonSection-md v2 pb-0" style={{
+          <div className="panel horizontalScroll-item commonSection-md v2 pb-3 pb-lg-0" style={{
             flex: "0 0 100vw",
             height: "100%",
             display: "flex",
