@@ -17,7 +17,7 @@ interface AccordionItemProps {
 
 const CustomAccordionsWithoutimg = ({
     data,
-    leftImage = "https://docs.jindalsteel.in/document/124/1774434538_7e50438454d680740631efc9608cc810412def11.png",
+    leftImage = "https://docs.jindalsteel.in/document/124/1779108212_Jindal-Leadership-Acceleration-Programme.jpg",
 }: CustomAccordionsWithoutimgProps) => {
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
