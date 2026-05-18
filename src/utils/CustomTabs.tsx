@@ -24,8 +24,7 @@ const CustomTabs = ({ props, data = [] }: any) => {
         children: child.props?.children,
       }));
   }, [data]);
-  console.log(data)
-  console.log(tabs)
+
 
   useEffect(() => {
     if (tabs && tabs.length > 0) {
