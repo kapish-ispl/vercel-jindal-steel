@@ -94,10 +94,9 @@ const SportsGallerySlider = ({ data }: { data: any }) => {
         <section className="sports-scroll-outer" ref={triggerRef}>
             <div className="container cus-container">
                 <div className="sports-header mb-60">
-                    <h2 className="c-heading-60 ft_bold clr-gray lh_1-6">Sports That Build Us</h2>
-                    <p className="c-content-32 ft_extraLight clr-gray lh_1-5 width-1050">
-                        Beyond the desk, we foster physical fitness, resilience, and camaraderie
-                        through our vibrant sports culture. Scroll down to explore.
+                    <h2 className="c-heading-50 ft_regular clr-gray lh_1-6">Sports That Build Us</h2>
+                    <p className="c-content-24 ft_light clr-gray lh_1-5">
+                        Beyond the workplace, sport brings our people together through discipline, teamwork, and shared energy. Across Jindal Steel locations, tournaments, fitness initiatives, and recreational activities create spaces to compete, connect, and build camaraderie. 
                     </p>
                 </div>
 
