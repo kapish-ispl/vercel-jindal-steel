@@ -2432,6 +2432,26 @@ ul.arrowbulletList {
 
         }
     }
+
+    &.v3 {
+        padding: 70px 0px;
+        height: 700px;
+        min-height: 700px;
+
+        @include mq(tablet) {
+            padding: 60px 0px;
+            height: 800px;
+            min-height: 800px;
+        }
+
+        @include mq(desktop-wide) {
+            min-height: 800px;
+            height: 800px;
+            padding: 60px 0px;
+
+        }
+    }
+
 }
 
 .overflow-hidden {
