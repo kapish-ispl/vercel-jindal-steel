@@ -75,7 +75,7 @@ const CustomAccordionsWithoutimg = ({
                                             toggleAccordion(index)
                                         }
                                     >
-                                        <span className="c-accordionBase__item-head-title">
+                                        <span className="c-accordionBase__item-head-title c-content-25 ft_medium">
                                             {post.title}
                                         </span>
 
@@ -129,7 +129,7 @@ const CustomAccordionsWithoutimg = ({
                                                     overflow: "hidden",
                                                 }}
                                             >
-                                                <div className="pt-2">
+                                                <div className="pt-1">
                                                     {typeof post.content ===
                                                     "string"
                                                         ? parse(
