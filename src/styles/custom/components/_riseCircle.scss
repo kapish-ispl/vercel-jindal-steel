@@ -13,11 +13,10 @@ $color-muted: #666;
         align-items: center;
     }
 
-    .container {
+    .c-container {
         position: relative;
-        height: 600px;
+        height: 460px;
         width: 100%;
-        max-width: 1200px;
 
         @media (max-width: 1024px) {
             height: auto;
@@ -25,6 +24,9 @@ $color-muted: #666;
             flex-direction: column;
             align-items: center;
             gap: 40px;
+        }
+        @include mq(desktop-wide-max) {
+            height: 600px;
         }
     }
 
@@ -74,7 +76,7 @@ $color-muted: #666;
         width: 340px;
         z-index: 1;
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1247px) {
             position: relative;
             width: 90%;
             max-width: 500px;
@@ -104,8 +106,8 @@ $color-muted: #666;
 
         }
 
-        @include mq(tablet, max) {
-            &.inactive-box {
+       @media (max-width: 1247px) {
+           &.inactive-box {
                 display: none !important;
             }
         }

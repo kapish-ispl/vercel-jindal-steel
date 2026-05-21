@@ -49,6 +49,7 @@ const CustomTabs = dynamic(() => import("@/utils/CustomTabs"), { ssr: false });
 const CustomRiseCircular = dynamic(() => import("@/utils/CustomRiseCircular"), { ssr: false });
 const Timeline = dynamic(() => import("@/utils/Timeline"), { ssr: false });
 const CustomAccordionsWithoutimg = dynamic(() => import("@/utils/CustomAccordionsWithoutimg"), { ssr: false });
+const CustomValueChart = dynamic(() => import("@/utils/CustomValueChart"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -73,6 +74,9 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "customcircleanimation") {
                     return <CustomCircleAnimation />
+                }
+                if (domNode.name === "customvaluechart") {
+                    return <CustomValueChart />
                 }
                 if (domNode.name === "customrisecircular") {
                     return <CustomRiseCircular />

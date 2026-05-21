@@ -28,15 +28,20 @@
   .custom-tabs-button {
     text-align: left;
     padding: 12px 16px;
-    @include font-size(20);
+    @include font-size(16);
     font-weight: 500;
     color: var(--color-secondary);
     transition: all 0.3s ease;
     border: none;
     background: transparent;
-    border-left: 3px solid transparent;
+    border-left: 2px solid #63646666;
     cursor: pointer;
-    border-left-color: #d1d5db;
+    @include mq('desktop') {
+      @include font-size(18);
+    }
+    @include mq('desktop-wide') {
+      @include font-size(20);
+    }
 
     &.active {
       color: #486b8c;
@@ -170,6 +175,10 @@
   margin-bottom: 24px;
   border-bottom: 1px solid #afbbc8;
   padding-bottom: 16px;
+  flex-direction: column;
+  @include mq('tablet-max') {
+    flex-direction: row;
+  }
 
   .header-icon {
     margin-top: 4px;
@@ -248,7 +257,7 @@
 
   .values-list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 16px;
 
     .value-item {

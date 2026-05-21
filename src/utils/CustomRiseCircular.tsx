@@ -65,7 +65,7 @@ export default function CustomRiseCircular() {
 
   return (
     <section className="wrapper c-riseContainer ">
-      <div className="container">
+      <div className="c-container">
         <div className="circleContainer">
           <svg viewBox="0 0 200 200" className="svgLayout">
             {/* Quadrant Segments */}

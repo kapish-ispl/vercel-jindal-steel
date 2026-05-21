@@ -12,98 +12,101 @@ $bg-white: #f9f9f9;
 $line-width: 4px;
 $line-left: 50px;
 
-.spacer {
-    height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #bbb;
-    font-weight: 300;
-}
-
-.timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    padding-top: 65px;
-    padding-bottom: 1px;
-
-    &__track {
-        position: absolute;
-        left: $line-left;
-        top: 0;
-        width: $line-width;
-        height: 100%;
-        background-color: $line-gray;
-        z-index: 1;
-        transform: translateX(-50%);
-    }
-
-    &__progress-line {
-        position: absolute;
-        left: $line-left;
-        top: 0;
-        width: $line-width;
-        height: 0; // Controlled by GSAP
-        background-color: $primary-green;
-        z-index: 2;
-        transform: translateX(-50%);
-    }
-
-    &__step {
-        position: relative;
+.c-sustainability-timeline {
+    .spacer {
+        height: 60vh;
         display: flex;
-        align-items: flex-start;
-        margin-bottom: 80px;
-        padding-left: 100px;
-        z-index: 3;
-
-        // Active Modifier
-        &--is-active {
-            .timeline__marker {
-                background-color: $primary-orange;
-                transform: translateX(-50%) scale(1.2);
-            }
-
-            .timeline__content {
-                opacity: 1;
-                transform: translateX(0);
+        align-items: center;
+        justify-content: center;
+        color: #bbb;
+        font-weight: 300;
+    }
+    
+    .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding-top: 65px;
+        padding-bottom: 1px;
+    
+        &__track {
+            position: absolute;
+            left: $line-left;
+            top: 0;
+            width: $line-width;
+            height: 100%;
+            background-color: $line-gray;
+            z-index: 1;
+            transform: translateX(-50%);
+        }
+    
+        &__progress-line {
+            position: absolute;
+            left: $line-left;
+            top: 0;
+            width: $line-width;
+            height: 0; // Controlled by GSAP
+            background-color: $primary-green;
+            z-index: 2;
+            transform: translateX(-50%);
+        }
+    
+        &__step {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 80px;
+            padding-left: 100px;
+            z-index: 3;
+    
+            // Active Modifier
+            &--is-active {
+                .timeline__marker {
+                    background-color: $primary-orange;
+                    transform: translateX(-50%) scale(1.2);
+                }
+    
+                .timeline__content {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
             }
         }
+    
+        &__marker {
+            position: absolute;
+            left: $line-left;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background-color: $line-gray;
+            border: 4px solid $bg-white;
+            border-radius: 50%;
+            z-index: 4;
+            transform: translateX(-50%);
+            transition: background-color 0.4s ease, transform 0.4s ease;
+        }
+    
+        &__content {
+            opacity: 0.2;
+            transform: translateX(20px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    
+        &__title {
+            margin: 0 0 10px 0;
+            color: $primary-orange;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+    
+        &__description {
+            margin: 0;
+            color: $text-gray;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            max-width: 500px;
+        }
     }
-
-    &__marker {
-        position: absolute;
-        left: $line-left;
-        top: 5px;
-        width: 20px;
-        height: 20px;
-        background-color: $line-gray;
-        border: 4px solid $bg-white;
-        border-radius: 50%;
-        z-index: 4;
-        transform: translateX(-50%);
-        transition: background-color 0.4s ease, transform 0.4s ease;
-    }
-
-    &__content {
-        opacity: 0.2;
-        transform: translateX(20px);
-        transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    &__title {
-        margin: 0 0 10px 0;
-        color: $primary-orange;
-        font-size: 1.5rem;
-        font-weight: 700;
-    }
-
-    &__description {
-        margin: 0;
-        color: $text-gray;
-        font-size: 1.1rem;
-        line-height: 1.4;
-        max-width: 500px;
-    }
+    
 }
