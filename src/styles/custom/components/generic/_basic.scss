@@ -4177,6 +4177,12 @@ ul.arrowbulletList {
   display: flex;
   justify-content: space-between;
   position: relative;
+  flex-direction: column;
+    gap: 40px;
+    @include mq(desktop-wide) {
+        flex-direction: row;
+        gap: unset;
+    }
 
   // Left Values Box
   .values-container {
@@ -4187,10 +4193,11 @@ ul.arrowbulletList {
 
     @include mq(tablet-max) {
         padding: 0px 20px;
-        max-width: 456px;
+        
     }
-    @include mq(desktop) {
+    @include mq(desktop-wide) {
         padding: 0px 24px;
+        max-width: 456px;
     }
     .value-item {
       display: flex;
@@ -4198,7 +4205,7 @@ ul.arrowbulletList {
       gap: 10px;
       padding: 12px 0;
       border-bottom: 1px solid #D78E5E66;
-       @include mq(tablet-max) {
+       @include mq(desktop) {
         padding: 20px 0px;
         gap: 16px;
     }
@@ -4212,7 +4219,7 @@ ul.arrowbulletList {
         font-weight: var(--fontMedium);
         color: var(--color-accent-peach);
         line-height: 1.6;
-        @include mq(tablet-max) {
+        @include mq(desktop) {
             @include font-size(20);
         }
       }
@@ -4223,7 +4230,7 @@ ul.arrowbulletList {
         color: var(--color-secondary);
         line-height: 1.6;
         letter-spacing: 2px;
-        @include mq(tablet-max) {
+        @include mq(desktop) {
             @include font-size(20);
         }
        }
@@ -4233,7 +4240,7 @@ ul.arrowbulletList {
 
   // Center Connector
   .center-node {
-    padding: 20px 30px;
+    padding: 10px;
     border: 2px solid #44618366;
     border-radius: 50px;
     background: var(--color-white);
@@ -4244,23 +4251,46 @@ ul.arrowbulletList {
     font-weight: var(--fontRegular);
     line-height: 1.6;
     color: var(--color-accent-blue);
-    @include mq(tablet-max) {
+    @include mq(desktop-wide) {
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-41%, -50%);
+        padding: 20px 30px;
     }
     &::before, &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 60px;
-      height: 2px;
-      background: #C4C7C7;
+         content: '';
+        position: absolute;
+        background: #C4C7C7;
+        width: 2px;
+        height: 28px;
+        
+        @include mq(desktop-wide){
+            width: 60px;
+            height: 2px;
+
+        }
      
     }
-    &::before { left: -60px; }
-    &::after { right: -60px; }
+    &::before { 
+        left: 50%;
+        top: -28px;
+        @include mq(desktop-wide) {
+            top: 50%;
+            left: -60px; 
+        }
+    }
+    &::after { 
+        left: 50%;
+        bottom: -28px;
+        @include mq(desktop-wide) {
+            top: 50%;
+            right: -60px;
+            left: unset;
+            bottom: unset;
+        }
+    }
+    
   }
 
   // Right Policies List
@@ -4268,9 +4298,10 @@ ul.arrowbulletList {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    max-width: 456px;
-    @include mq(tablet-max) {
+    
+    @include mq(desktop-wide) {
         gap: 24px;
+        max-width: 456px;
     }
     .policy-btn {
       background: var(--color-accent-olive);
