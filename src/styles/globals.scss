@@ -484,7 +484,14 @@
     padding-bottom: 100px;
     @include justify-content(flex-end !important);
   }
+  @media screen and (min-width: 1700px) {
+    @include justify-content(center !important);
+    padding-top: 0px !important;
+    .c-leaderView, .generic_spacer_container{
+      padding-top: 0px !important;
+    }
 
+}
 }
 
 .environmental_section {
