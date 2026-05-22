@@ -50,6 +50,7 @@ const CustomRiseCircular = dynamic(() => import("@/utils/CustomRiseCircular"), {
 const Timeline = dynamic(() => import("@/utils/Timeline"), { ssr: false });
 const CustomAccordionsWithoutimg = dynamic(() => import("@/utils/CustomAccordionsWithoutimg"), { ssr: false });
 const CustomValueChart = dynamic(() => import("@/utils/CustomValueChart"), { ssr: false });
+const HexagonSection = dynamic(() => import("@/utils/HexagonSection"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -89,6 +90,11 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <HighlightCarousel props={props} data={Array.isArray(children) ? children : [children]} />
+                }
+                if (domNode.name === "hexagonsection") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <HexagonSection props={props} data={Array.isArray(children) ? children : [children]} />
                 }
                 if (domNode.name === "customtabs") {
                     const props = attributesToProps(domNode.attribs);
