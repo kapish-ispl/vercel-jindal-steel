@@ -1,52 +1,52 @@
 @charset "utf-8";
-@use 'vendors/lucide';
-@use 'vendors/bootstrap.min';
-@use 'vendors/effect-material';
+@use "vendors/lucide";
+@use "vendors/bootstrap.min";
+@use "vendors/effect-material";
 /* Begin core files */
-@use 'custom/core/typography' as *;
-@use 'custom/core/variables' as *;
-@use 'custom/core/mixins' as *;
+@use "custom/core/typography" as *;
+@use "custom/core/variables" as *;
+@use "custom/core/mixins" as *;
 /* End core files */
 
 /* Begin component files */
-@use 'custom/components/generic/colors';
-@use 'custom/components/generic/sizes';
-@use 'custom/components/generic/basic';
-@use 'custom/components/cardstackslider';
-@use 'custom/components/homepage';
-@use 'custom/components/animation';
-@use 'custom/components/slider';
-@use 'custom/layout/footer';
-@use 'custom/layout/header';
-@use 'custom/components/card';
-@use 'custom/components/button';
-@use 'custom/components/banner';
-@use 'custom/components/form';
-@use 'custom/components/scroableSlider';
-@use 'custom/components/map';
-@use 'custom/components/stikyCard.scss';
-@use 'custom/components/buildingbox';
-@use 'custom/components/hightlight';
-@use 'custom/components/sector';
+@use "custom/components/generic/colors";
+@use "custom/components/generic/sizes";
+@use "custom/components/generic/basic";
+@use "custom/components/cardstackslider";
+@use "custom/components/homepage";
+@use "custom/components/animation";
+@use "custom/components/slider";
+@use "custom/layout/footer";
+@use "custom/layout/header";
+@use "custom/components/card";
+@use "custom/components/button";
+@use "custom/components/banner";
+@use "custom/components/form";
+@use "custom/components/scroableSlider";
+@use "custom/components/map";
+@use "custom/components/stikyCard.scss";
+@use "custom/components/buildingbox";
+@use "custom/components/hightlight";
+@use "custom/components/sector";
 @use "custom/components/list";
 @use "custom/components/table";
 @use "custom/components/tab";
 @use "custom/components/modal";
-@use 'custom/components/cardswipesider';
-@use 'custom/components/effectslider';
+@use "custom/components/cardswipesider";
+@use "custom/components/effectslider";
 @use "custom/components/podcast-slider";
-@use 'custom/components/stackSlider';
-@use 'custom/components/categorySlider';
-@use 'custom/components/customslider';
-@use 'custom/components/accordion';
-@use 'custom/components/bentoanimation';
-@use 'custom/components/timelinesection';
-@use 'custom/components/sustainabilityHighlights';
-@use 'custom/components/accordionsection';
-@use 'custom/components/customTabs';
-@use 'custom/components/riseCircle';
-@use 'custom/components/timeline';
-@use 'custom/components/hexagonsection';
+@use "custom/components/stackSlider";
+@use "custom/components/categorySlider";
+@use "custom/components/customslider";
+@use "custom/components/accordion";
+@use "custom/components/bentoanimation";
+@use "custom/components/timelinesection";
+@use "custom/components/sustainabilityHighlights";
+@use "custom/components/accordionsection";
+@use "custom/components/customTabs";
+@use "custom/components/riseCircle";
+@use "custom/components/timeline";
+@use "custom/components/hexagonsection";
 
 /* End component files */
 
@@ -103,7 +103,6 @@
   @include mq(desktop) {
     height: 700px;
   }
-
 }
 
 /* IMAGE: absolute on the left, starts at 50% width */
@@ -137,7 +136,6 @@
 
 /* CONTENT: absolute on the right, covers right 50% */
 .zoomContent {
-
   top: 0;
   left: 0;
   position: relative;
@@ -266,7 +264,6 @@
     &.withIcon {
       @include justify-content(flex-end);
       padding-right: 30px;
-
     }
   }
 
@@ -313,7 +310,7 @@
         }
       }
 
-      +.c-twoColumnContainer__rs-item {
+      + .c-twoColumnContainer__rs-item {
         margin-top: 60px;
 
         @include mq(tablet-max) {
@@ -336,7 +333,6 @@
   .c-twoColumnContainer {
     &__image {
       top: 110px;
-
     }
 
     &__wrapper {
@@ -346,7 +342,6 @@
         top: unset !important;
       }
     }
-
   }
 
   .sticky {
@@ -379,7 +374,9 @@
   overflow: hidden;
   z-index: -1;
   //transform: scale(1.5); /* start zoomed-in */
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .text-mask {
@@ -404,9 +401,6 @@
   letter-spacing: 8px;
 }
 
-
-
-
 .scrollingIcons {
   overflow: hidden;
   width: 100%;
@@ -418,7 +412,6 @@
   display: flex;
   white-space: nowrap;
   will-change: transform;
-
 }
 
 .scrollingIcons__content,
@@ -485,14 +478,14 @@
     padding-bottom: 100px;
     @include justify-content(flex-end !important);
   }
-  @media screen and (min-width: 1700px) {
+  @include mq(tablet-wide) {
     @include justify-content(center !important);
     padding-top: 0px !important;
-    .c-leaderView, .generic_spacer_container{
+    .c-leaderView,
+    .generic_spacer_container {
       padding-top: 0px !important;
     }
-
-}
+  }
 }
 
 .environmental_section {
@@ -609,7 +602,6 @@
     z-index: 10;
     transition: background 0.3s ease;
 
-
     &--prev {
       left: 0px;
     }
@@ -648,7 +640,9 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
 
     &.active {
       background-color: var(--color-primary, #000);
@@ -688,7 +682,6 @@
     }
   }
 }
-
 
 .c-pagelink {
   & .c-embla__container {

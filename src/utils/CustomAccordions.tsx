@@ -35,6 +35,9 @@ const CustomAccordions = ({ data }: CustomAccordionProps) => {
             }));
     }, [data]);
 
+    // Simple fallback React component for icon placeholders used in parsed HTML
+    const MyReactIconComponent: React.FC = () => <span className="icon-health" />;
+
     return (
         <>
             {/* Image Fade Animation */}
@@ -111,9 +114,17 @@ const CustomAccordions = ({ data }: CustomAccordionProps) => {
                                                 style={{ overflow: "hidden" }}
                                             >
                                                 <div>
-                                                    {typeof post.content === "string"
-                                                        ? parse(post.content)
-                                                        : post.content}
+                                                    {typeof post.content === "string" ? (
+                                                        parse(post.content, {
+                                                            replace: (domNode) => {
+                                                                if (domNode instanceof Element && (domNode as any).attribs?.class === 'icon-health') {
+                                                                    return <MyReactIconComponent />;
+                                                                }
+                                                            }
+                                                        })
+                                                    ) : (
+                                                        post.content
+                                                    )}
                                                 </div>
                                             </motion.div>
                                         )}
