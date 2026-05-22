@@ -1,102 +1,110 @@
-@use '../core/variables' as *;
-@use '../core/mixins' as *;
+@use "../core/variables" as *;
+@use "../core/mixins" as *;
 
 .process {
-    // width: 100%;
-    // height: 100vh;
-    // background: var(--color-white);
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // overflow: hidden;
+  // width: 100%;
+  // height: 100vh;
+  // background: var(--color-white);
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // overflow: hidden;
 
-    // &__container {
-    //     display: flex;
-    //     width: 90%;
-    //     max-width: 1200px;
-    //     height: 80vh;
-    //     gap: 60px;
-    // }
+  // &__container {
+  //     display: flex;
+  //     width: 90%;
+  //     max-width: 1200px;
+  //     height: 80vh;
+  //     gap: 60px;
+  // }
 
-    // &__image-box {
-    //     flex: 1;
-    //     height: 100%;
-    // }
+  // &__image-box {
+  //     flex: 1;
+  //     height: 100%;
+  // }
 
-    // &__image {
-    //     width: 100%;
-    //     height: 100%;
-    //     object-fit: cover;
-    //     border-radius: 12px;
-    // }
+  // &__image {
+  //     width: 100%;
+  //     height: 100%;
+  //     object-fit: cover;
+  //     border-radius: 12px;
+  // }
 
-    // &__content {
-    //     flex: 1.2;
-    //     height: 100%;
-    //     position: relative;
-    // }
+  // &__content {
+  //     flex: 1.2;
+  //     height: 100%;
+  //     position: relative;
+  // }
 
-    &__steps-wrapper {
-        display: flex;
-        flex-direction: column;
-        padding-top: 10vh;
-        will-change: transform;
+  &__steps-wrapper {
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+    @media (max-width: 991px) {
+      transform: none !important; // Resets any GSAP transforms
+      padding-top: 6vh;
     }
-
-    &__row {
-        display: flex;
-        align-items: center;
-        margin-top: -5px;
-        position: relative;
-        opacity: 0;
-        transform: translateY(30px);
+    @include mq(tablet-max) {
+      padding-top: 10vh;
     }
+  }
 
-    &__hex-box {
-        width: 140px;
-        height: 160px;
-        position: relative;
-        flex-shrink: 0;
+  &__row {
+    display: flex;
+    align-items: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    @media screen and (max-width: 992px) {
+      margin-bottom: 30px;
     }
+  }
 
-    &__svg {
-        width: 100%;
-        height: 100%;
-        overflow: visible;
+  &__hex-box {
+    width: 140px;
+    height: 160px;
+    position: relative;
+    flex-shrink: 0;
+    @media screen and (max-width: 992px) {
+      width: 100px;
+      height: 110px;
     }
+  }
 
-    &__path {
-        fill: none;
-        stroke: var(--color-primary);
-        stroke-width: 3;
-        stroke-linecap: round;
-        visibility: hidden; // Controlled by autoAlpha
-    }
+  &__svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
 
-    &__number {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--color-primary);
-        opacity: 0;
-    }
+  &__path {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 3;
+    stroke-linecap: round;
+    visibility: hidden; // Controlled by autoAlpha
+  }
 
-    &__description {
-        padding-left: 30px;
-    }
+  &__number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    opacity: 0;
+  }
 
-    &__title {
-        color: var(--color-primary);
-        margin: 0 0 5px 0;
-        font-size: 1.5rem;
-    }
+  &__description {
+    padding-left: 30px;
+  }
 
-    &__text {
-        color: var(--color-secondary);
-        margin: 0;
-        line-height: 1.5;
-    }
+  &__title {
+    margin: 0 0 5px 0;
+  }
+
+  &__text {
+    margin: 0;
+  }
 }

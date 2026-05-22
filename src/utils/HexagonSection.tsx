@@ -25,6 +25,16 @@ const STEPS_DATA = [
         id: 4,
         title: "Investigation",
         desc: "Impartial review conducted by the designated Grievance Officer."
+    },
+    {
+        id: 5,
+        title: "Resolution and communication",
+        desc: "A resolution plan is finalised and formally communicated to the complainant."
+    },
+    {
+        id: 6,
+        title: "Appeal and closure",
+        desc: "The case is closed upon acceptance  of the resolution by the complainant;  unresolved cases may be escalated through an appeal. All records are  maintained for audits."
     }
 ];
 
@@ -34,16 +44,20 @@ const HexagonSection = ({ data, props }: any) => {
     const stepsWrapperRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
+        const mm = gsap.matchMedia();
         const rows = gsap.utils.toArray('.process__row');
         const masterTl = gsap.timeline({
             scrollTrigger: {
                 trigger: hexagonSection.current,
                 start: "top top",
-                end: () => `+=${rows.length * 700}`,
+                end: () => `+=${rows.length * 500}`,
                 pin: true,
                 scrub: 1,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
             }
         });
+
 
         rows.forEach((row: any, index: number) => {
             const leftP = row.querySelector('.process__path--left');
@@ -95,6 +109,7 @@ const HexagonSection = ({ data, props }: any) => {
 
         <>
             <div className="row" ref={hexagonSection}>
+
                 <div className="col-12 col-lg-5"><img alt="img" className="img-fluid u-img ratio ratio-1x1"
                     src="https://docs.jindalsteel.in/document/124/1779342539_redressal.webp" /></div>
 
@@ -111,8 +126,8 @@ const HexagonSection = ({ data, props }: any) => {
                                         <div className="process__number">{step.id}</div>
                                     </div>
                                     <div className="process__description">
-                                        <h3 className="process__title">{step.title}</h3>
-                                        <p className="process__text">{step.desc}</p>
+                                        <h3 className="process__title c-content-24 lh_1-6 ft_semiBold clr-primary">{step.title}</h3>
+                                        <p className="process__text c-content-20 ft_light lh_1-6 clr-secondary">{step.desc}</p>
                                     </div>
                                 </div>
                             ))}

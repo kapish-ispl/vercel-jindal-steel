@@ -67,8 +67,8 @@ const Timeline = ({ props, data }: any) => {
                     <div className="timeline__step" key={index}>
                         <div className="timeline__marker" />
                         <div className="timeline__content">
-                            <h2 className="timeline__title">{item.title}</h2>
-                            <p className="timeline__description">{item.description}</p>
+                            <h2 className="timeline__title c-content-24 ft_semiBold lh_1-6 clr-primary">{item.title}</h2>
+                            <p className="timeline__description c-content-20 ft_light clr-gray lh_1-6">{item.description}</p>
                         </div>
                     </div>
                 ))}
