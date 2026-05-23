@@ -5,6 +5,7 @@ export const corporateGovOptions = [
   { value: 'Other Disclosures', label: 'Other Disclosures' },
   { value: 'Policies', label: 'Policies' },
   { value: 'Shareholding Information', label: 'Shareholding Information' },
+  { value: 'Shareholders Meeting', label: 'Shareholders Meeting' },
   { value: 'Secretarial Compliance Report', label: 'Secretarial Compliance Report' },
   { value: 'Independent Directors', label: 'Independent Directors' },
   { value: 'Management System Policies', label: 'Management System Policies' }, 
