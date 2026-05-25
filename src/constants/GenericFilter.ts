@@ -1,7 +1,6 @@
 export const corporateGovOptions = [
   { value: 'Announcements', label: 'Announcements' },
   { value: 'Quarterly Compliance Report', label: 'Quarterly Compliance Report' },
-  { value: 'Meeting', label: 'Meeting' },
   { value: 'Board Meeting', label: 'Board Meeting' },
   { value: 'Other Disclosures', label: 'Other Disclosures' },
   { value: 'Policies', label: 'Policies' },
