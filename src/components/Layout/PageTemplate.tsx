@@ -51,6 +51,7 @@ const Timeline = dynamic(() => import("@/utils/Timeline"), { ssr: false });
 const CustomAccordionsWithoutimg = dynamic(() => import("@/utils/CustomAccordionsWithoutimg"), { ssr: false });
 const CustomValueChart = dynamic(() => import("@/utils/CustomValueChart"), { ssr: false });
 const HexagonSection = dynamic(() => import("@/utils/HexagonSection"), { ssr: false });
+const CustomAccordion = dynamic(() => import("@/utils/CustomAccordian"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -141,6 +142,11 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomAccordions {...props} data={Array.isArray(children) ? children : [children]} />;
+                }
+                if (domNode.name === "customaccordion") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CustomAccordion {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
                 if (domNode.name === "customaccordionswithoutimg") {
                     const props = attributesToProps(domNode.attribs);

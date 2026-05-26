@@ -335,7 +335,7 @@
       &-media {
         height: unset;
 
-        > img {
+        >img {
           aspect-ratio: 14/9;
           object-fit: cover;
           object-position: center center;
@@ -409,7 +409,7 @@
           @include flexbox;
           @include align-items(center);
 
-          + .info__wrapper {
+          +.info__wrapper {
             padding-top: 15px;
           }
 
@@ -423,7 +423,7 @@
             @include align-items(center);
             @include justify-content(center);
 
-            > i {
+            >i {
               @include font-size(25);
               color: #cc9167;
             }
@@ -660,7 +660,7 @@
           @include flexbox;
           @include align-items(center);
 
-          + .info__wrapper {
+          +.info__wrapper {
             padding-top: 5px;
           }
 
@@ -672,7 +672,7 @@
             @include align-items(center);
             @include justify-content(center);
 
-            > i {
+            >i {
               @include font-size(25);
               color: #cc9167;
             }
@@ -876,6 +876,7 @@
 }
 
 .c-cardBox__wrapper {
+
   &.v1,
   &.v2,
   &.v3 {
@@ -1168,6 +1169,7 @@
     &:hover {
       .c-card {
         &__content {
+
           .title,
           .label {
             color: var(--color-primary);
@@ -1310,6 +1312,7 @@
         background: var(--color-accent-blue);
 
         .c-card__wrapper-content {
+
           .title,
           .desc {
             color: var(--color-white);
@@ -1385,11 +1388,9 @@
         &::before {
           content: "";
           position: absolute;
-          background: linear-gradient(
-            360deg,
-            rgba(16, 17, 21, 0.8) 39.82%,
-            rgba(16, 17, 21, 0) 100%
-          );
+          background: linear-gradient(360deg,
+              rgba(16, 17, 21, 0.8) 39.82%,
+              rgba(16, 17, 21, 0) 100%);
           width: 100%;
           height: 100%;
           left: 0;
@@ -1469,11 +1470,9 @@
         width: 100%;
         height: 100%;
         // background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgb(0 0 0 / 31%) 100%);
-        background: linear-gradient(
-          181deg,
-          rgba(0, 0, 0, 0) 0%,
-          rgba(0, 0, 0, 0.6) 100%
-        );
+        background: linear-gradient(181deg,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.6) 100%);
         border-radius: 8px;
         z-index: 1;
       }
@@ -1489,12 +1488,10 @@
         bottom: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.24) 25%,
-          rgba(0, 0, 0, 0.24) 75%,
-          rgba(0, 0, 0, 0.4) 100%
-        );
+        background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.24) 25%,
+            rgba(0, 0, 0, 0.24) 75%,
+            rgba(0, 0, 0, 0.4) 100%);
 
         border-radius: 8px;
         z-index: 1;
@@ -1512,7 +1509,7 @@
       }
 
       .c-bento__card__wrapper_media {
-        > img {
+        >img {
           width: 100%;
         }
       }
@@ -1599,11 +1596,9 @@
           width: 100%;
           height: 100%;
           // background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0 0 0 / 31%) 100%);
-          background: linear-gradient(
-            181deg,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 0.6) 100%
-          );
+          background: linear-gradient(181deg,
+              rgba(0, 0, 0, 0) 0%,
+              rgba(0, 0, 0, 0.6) 100%);
           z-index: 1;
         }
 
@@ -1700,7 +1695,7 @@
       &_media {
         height: 100%;
 
-        > img {
+        >img {
           height: 100%;
           object-fit: cover;
         }
@@ -1723,7 +1718,7 @@
     }
 
     &_item {
-      + .c-bento__card__wrapper_item {
+      +.c-bento__card__wrapper_item {
         margin-top: 0px;
       }
     }
@@ -1857,7 +1852,7 @@
     }
 
     &-content {
-      > div {
+      >div {
         @include flexbox;
         @include flex-direction(column, vertical);
         @include justify-content(center);
@@ -2017,11 +2012,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) 35%,
-        rgba(0, 0, 0, 0.4) 100%
-      );
+      background: linear-gradient(180deg,
+          rgba(0, 0, 0, 0) 35%,
+          rgba(0, 0, 0, 0.4) 100%);
       z-index: 1;
     }
 
@@ -2106,6 +2099,7 @@
       }
     }
   }
+
   &:hover {
     box-shadow:
       rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -2145,11 +2139,9 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0) 35%,
-          rgba(0, 0, 0, 0.4) 100%
-        );
+        background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0) 35%,
+            rgba(0, 0, 0, 0.4) 100%);
         z-index: 1;
       }
 
@@ -2171,7 +2163,7 @@
           padding: 32px;
         }
 
-        > h3 {
+        >h3 {
           @include font-size(24);
 
           @include mq(phablet) {
@@ -2448,11 +2440,9 @@
     &::before {
       content: "";
       position: absolute;
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) 35%,
-        rgba(0, 0, 0, 0.4) 100%
-      );
+      background: linear-gradient(180deg,
+          rgba(0, 0, 0, 0) 35%,
+          rgba(0, 0, 0, 0.4) 100%);
       width: 100%;
       height: 100%;
       z-index: 1;
@@ -2475,6 +2465,7 @@
       padding: 16px 0px;
     }
   }
+
   &:hover {
     .card__box-media {
       img {
@@ -2521,6 +2512,7 @@
       margin-bottom: 20px;
       height: calc(100% - 20px);
     }
+
     &::before {
       content: "";
       position: absolute;
@@ -2533,10 +2525,12 @@
       filter: blur(12px);
       transition: left 0.8s ease;
     }
+
     &:hover {
       &::before {
         left: 130%;
       }
+
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       transform: translateY(-4px);
     }
@@ -2568,18 +2562,56 @@
   cursor: pointer;
   margin-bottom: 12px;
   height: calc(100% - 12px);
+
   &:hover {
     box-shadow: 0px 0.95px 1.9px 0px #0000000d;
   }
+
   @include mq(tablet) {
     padding: 15px;
   }
+
   @include mq(desktop) {
     padding: 24px;
     height: 100%;
     margin-bottom: 0px;
   }
+
   &-icon {
     margin-bottom: 8px;
+  }
+}
+
+.c-reportCard {
+  &__wrap {
+    margin-bottom: 20px;
+    height: calc(100% - 25px);
+    @include transition(all 0.3s ease-in-out);
+    // cursor: pointer;
+
+    @include mq(tablet-max) {
+      margin-bottom: 40px;
+      height: calc(100% - 40px);
+    }
+
+    &-icon {
+      margin-bottom: 20px;
+
+      @include mq(tablet-max) {
+        margin-bottom: 30px;
+      }
+
+    }
+
+    &-content {
+      p {
+        padding: 20px 0px;
+      }
+    }
+
+    // &:hover {
+    //   box-shadow: 0px 4px 4px 0px #4242423b !important;
+    //   transform: translateY(-5px);
+    // }
   }
 }

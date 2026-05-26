@@ -308,3 +308,101 @@
     }
   }
 }
+
+/* ================= CUSTOM ACCORDION (Interactive Reports) ================= */
+.custom-accordion-container {
+  width: 100%;
+
+  .custom-accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+
+    @include mq(desktop) {
+      padding: 28px 0px;
+    }
+
+    &:hover,
+    &.active {
+      .custom-accordion-title {
+        color: var(--color-primary, #f07c22);
+      }
+    }
+  }
+
+  .custom-accordion-title {
+    @include font-size(18);
+    font-weight: 500;
+    color: var(--color-secondary, #636466);
+    transition: color 0.3s ease;
+
+    @include mq(tablet-max) {
+      @include font-size(20);
+    }
+
+    @include mq(desktop) {
+      @include font-size(22);
+    }
+
+    @include mq(desktop-wide) {
+      @include font-size(24);
+    }
+  }
+
+  .custom-accordion-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-accordion-body {
+    padding: 20px;
+    background-color: var(--color-tertiary, #f8f9fa);
+    border-radius: 8px;
+    margin-bottom: 24px;
+
+    @include mq(desktop) {
+      padding: 32px;
+    }
+  }
+}
+
+.c-accordion__wrap {
+  .hw {
+    margin-bottom: 20px;
+
+    @include mq(tablet-max) {
+      margin-bottom: 35px;
+    }
+  }
+
+  .custom-accordion-container {
+    .custom-accordion-item {
+      border-top: 1px solid #636466;
+
+      .accordion-body {
+        .c-viewBox {
+          background-color: var(--color-white);
+          padding: 15px;
+          margin-bottom: 12px;
+          @include border-radius(6px);
+          height: calc(100% - 12px);
+
+          &__info {
+            p {
+              margin-bottom: 12px;
+              @include font-size(14);
+            }
+          }
+        }
+      }
+    }
+  }
+}
