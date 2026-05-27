@@ -62,6 +62,10 @@ export default function PostList(props: any) {
             type: { key: "category_1777488790" },
 
         },
+        "podcast": {
+            type: { key: "label_1778157653" },
+
+        },
 
         "conference-call": {
             year: {
@@ -84,6 +88,7 @@ export default function PostList(props: any) {
         // }
     };
 
+
     useEffect(() => {
         let slugInfo = props.slug;
         const yearParam = searchParams.get(`${props.slug}-year`);
@@ -94,7 +99,7 @@ export default function PostList(props: any) {
 
         const activePage = pageParam ?? page ?? 1;
         //const category = props.cat ? decodeURIComponent(props.category) : null;
-        const category =decodeURIComponent(props.category);
+        const category = decodeURIComponent(props.category);
 
         var limit = props.limit !== undefined ? props.limit : 9;
 
@@ -104,8 +109,8 @@ export default function PostList(props: any) {
         }
 
         if (props.slug === 'environmental-compliance') {
-             limit = 50;
-             setFinalLimit(50);
+            limit = 50;
+            setFinalLimit(50);
             if (category) {
                 slugInfo += `&metaInfo[type_1699180101]=${category}`;
             }
@@ -123,6 +128,12 @@ export default function PostList(props: any) {
         if (props.slug === 'awards') {
             if (type) {
                 slugInfo += `&metaInfo[award_year_1699533468]=${type}`;
+            }
+        }
+        if (props.slug === 'podcast') {
+            console.log("type", props.seasontype);
+            if (props.seasontype) {
+                slugInfo += `&metaInfo[label_1778157653]=${props.seasontype}`;
             }
         }
         if (props.slug === 'product') {
@@ -222,6 +233,6 @@ export default function PostList(props: any) {
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (
-        <PostComponentRender postData={postData} title={props.title != "" ? props.title : ''} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={finalLimit} itemstoshow={props.itemstoshow} isproduct={props.isproduct} loading={loading} />
+        <PostComponentRender postData={postData} title={props.title != "" ? props.title : ''} compSlug={props.slug ? props.slug : ""} totalPost={totalPost} itemsPerPage={finalLimit} itemstoshow={props.itemstoshow} isproduct={props.isproduct} loading={loading} seasontype={props.seasontype} />
     ) : <div>Loading...</div>;
 }

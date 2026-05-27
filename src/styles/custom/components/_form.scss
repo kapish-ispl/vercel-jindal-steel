@@ -393,9 +393,11 @@
     .form_captcha_wrap {
         @include flexbox;
         @include flex-direction(column, vertical);
+        gap: 20px;
 
         @include mq(tablet) {
             @include flex-direction(row, horizontal);
+            gap: inherit;
         }
     }
 }
@@ -509,6 +511,21 @@
         -ms-box-orient: vertical;
         box-orient: vertical;
         margin-bottom: 15px;
+
+        &.hasError {
+            .form_grider_wrap_helper {
+                color: rgb(237, 67, 55);
+                margin: 8px 0px;
+            }
+
+            .form_grider_wrap_field {
+                border: 1px solid rgb(237, 67, 55);
+
+                // &::placeholder {
+                //     color: rgb(237, 67, 55);
+                // }
+            }
+        }
     }
 
     @media only screen and (min-width: 992px) {
@@ -553,9 +570,8 @@
         font-size: 12px;
         margin-top: 4px;
         margin-bottom: 0;
-        font-weight: 700;
-        color: red;
-        display: none;
+        // font-weight: 700;
+        color: #dc3545;
         line-height: 1.6;
     }
 
@@ -570,7 +586,7 @@
     }
 
     .form_grider.d1 .form_grider_wrap_label .required {
-        color: red;
+        color: #dc3545;
     }
 
     .form_grider .full-width {

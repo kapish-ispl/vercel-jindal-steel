@@ -38,7 +38,6 @@ export default async function Page({
   const imageSrc =
     imageList.length > 0 ? imageList[0].cdnPath : defaultImage;
 
-
   return (
     <>
 
@@ -48,10 +47,10 @@ export default async function Page({
           <div className="col-12 p-0">
 
             <InnerBanner
-              label={pageData.title}
+              label={pageData?.metaInfo?.title || pageData.title}
               tagline={pageData?.customField?.tagline}
               slug={pageData.slug}
-              currentPage={{ ...pageData, slug: `/products/${pageData.slug}` }}
+              currentPage={{ ...pageData, slug: `/our-portfolio/${pageData.slug}` }}
               innerBanner={pageData.media}
             />
           </div>

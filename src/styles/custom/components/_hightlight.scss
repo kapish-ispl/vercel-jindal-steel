@@ -77,7 +77,8 @@
                 @include mq(tablet) {
                     @include font-size(24);
                 }
-                 @include mq(tablet-max) {
+
+                @include mq(tablet-max) {
                     @include font-size(24);
                 }
             }
@@ -312,6 +313,16 @@
             position: absolute;
             z-index: 2;
             background: rgb(247, 246, 246);
+        }
+    }
+}
+
+.highlight__wrapper {
+    .c-highlighting {
+        @media screen and (max-width: 768px) {
+            padding-left: 0px !important;
+            margin-bottom: 0px !important;
+            height: 100% !important;
         }
     }
 }

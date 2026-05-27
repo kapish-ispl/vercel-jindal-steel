@@ -143,3 +143,49 @@
     }
   }
 }
+
+.c-tabs--v1 {
+  .custom-accordion-item {
+    .custom-accordion-body {
+      padding: 0;
+
+      .c-table__view {
+        &.v2 {
+          table>thead>tr>th {
+            @include font-size(16);
+
+            @include mq(tablet) {
+              @include font-size(17);
+            }
+
+            @include mq(tablet-max) {
+              @include font-size(18);
+            }
+
+            @include mq(desktop-wide) {
+              @include font-size(19);
+            }
+
+
+          }
+
+          table>tbody>tr>td {
+            @include font-size(16);
+
+            @include mq(tablet) {
+              @include font-size(17);
+            }
+
+            @include mq(tablet-max) {
+              @include font-size(18);
+            }
+
+            @include mq(desktop-wide) {
+              @include font-size(19);
+            }
+          }
+        }
+      }
+    }
+  }
+}

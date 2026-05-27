@@ -1,61 +1,64 @@
-@use '../../core/variables' as *;
-@use '../../core/mixins' as *;
+@use "../../core/variables" as *;
+@use "../../core/mixins" as *;
 
 .clr-primary {
   color: var(--color-primary) !important;
 }
-.clr-secondry{
-    color: var(--color-secondary) !important;
+.clr-secondry {
+  color: var(--color-secondary) !important;
 }
 .clr-black {
-    color: var(--color-black) !important;
+  color: var(--color-black) !important;
 }
-.clr-tertiary{
-    color: var(--color-tertiary) !important;
+.clr-tertiary {
+  color: var(--color-tertiary) !important;
 }
 .clr-blue {
-    color: var(--color-accent-blue) !important;
+  color: var(--color-accent-blue) !important;
 }
 .clr-green {
-    color: var(--color-accent-green) !important;
+  color: var(--color-accent-green) !important;
 }
 .clr-burgundy {
-    color: var(--color-accent-red) !important;
+  color: var(--color-accent-red) !important;
 }
 .clr-oyster {
-    color: var(--color-accent-oyster) !important;
+  color: var(--color-accent-oyster) !important;
 }
-.clr-peach{
-    color: var(--color-accent-peach) !important;
+.clr-peach {
+  color: var(--color-accent-peach) !important;
 }
-.clr-white{
-    color: var(--color-white) !important;
+.clr-white {
+  color: var(--color-white) !important;
 }
-.clr-olive{
-    color: var(--color-accent-olive) !important;
+.clr-olive {
+  color: var(--color-accent-olive) !important;
 }
 .bg-gray {
-    background: var(--color-tertiary);
+  background: var(--color-tertiary);
 }
-.clr-lime-green{
-    color: var(--color-lime-green);
+.clr-lime-green {
+  color: var(--color-lime-green);
 }
-.clr-offwhite{
-    background: var(--color-smoke-white);
+.clr-offwhite {
+  background: var(--color-smoke-white);
 }
-.bg-gray2{
-    background-color: var(--color-grey5);
+.bg-gray2 {
+  background-color: var(--color-grey5);
 }
 
-.bg-light-gray{
-    background-color: var(--color-light-grey);
+.bg-light-gray {
+  background-color: var(--color-light-grey);
 }
-.clr-offwhite2{
-    background: #EBEBEB;
+.clr-offwhite2 {
+  background: #ebebeb;
 }
-.bg-off-gray{
-    background: #ececec;
+.bg-off-gray {
+  background: #ececec;
 }
-.clr-gray2{
-    background: var(--color-grey2);
+.clr-gray2 {
+  background: var(--color-grey2);
+}
+.bg-peach {
+  background: var(--color-accent-peach);
 }

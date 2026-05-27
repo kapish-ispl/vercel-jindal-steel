@@ -265,6 +265,31 @@
             }
         }
     }
+
+    &.d1 {
+        .listView__item {
+            gap: 25px;
+            @include align-items(center);
+            margin-bottom: 30px;
+
+            &-icon {
+                img {
+                    width: 70px;
+                    height: 70px;
+                    min-width: 70px;
+                }
+            }
+
+            &-content {
+                .c-heading-45 {
+                    @include mq(tablet-max) {
+                        max-width: 600px;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .c-listCard {
@@ -317,4 +342,13 @@
 .c-listWrapper {
     list-style: disc;
     padding-left: 26px;
+}
+
+.bulletPoints {
+    &__item {
+        padding-left: 8px;
+        list-style: outside;
+        margin-left: 26px;
+        margin-bottom: 5px;
+    }
 }

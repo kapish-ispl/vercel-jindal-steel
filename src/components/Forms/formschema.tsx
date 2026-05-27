@@ -40,6 +40,7 @@ export interface IExperienceDetail {
 
 // Interface for the main job application form
 export interface IJobApplicationSchema {
+  post_id?: string | number;
   current_openings: string;
   job_code: string;
   location: string;
@@ -49,21 +50,27 @@ export interface IJobApplicationSchema {
   alternate_email?: string;
   gender: string;
   total_experience: string;
+  other_experience?: string;
   notice_period?: string;
   nationality: string;
   country_name: string;
   state_name: string;
+  other_state_name?: string;
   pincode: string;
   std_code: string;
   mobile_number: string;
   alternate_mobile_number?: string;
   address: string;
   city_name: string;
-  key_skills: string | string[];
+  key_skills?: string | string[];
   resume_id: string;
   user_captcha_input: string;
   education_details: IEducationDetail[];
   experience_details: IExperienceDetail[];
+  isTalentForm?: boolean;
+  skills?: string;
+  department?: string;
+  other_department?: string;
 }
 
 export interface IQueryFormSchema {
@@ -94,21 +101,35 @@ export const FormSchema: Yup.ObjectSchema<IFormSchema> = Yup.object({
 
 // Schema for the detailed job application
 export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup.object({
-  current_openings: Yup.string().required("Enter Job Position").trim(),
-   skills: Yup.string().when("isTalentForm", {
+  current_openings: Yup.string().when("isTalentForm", {
+    is: (isTalentForm: any) => isTalentForm == true,
+    then: () => Yup.string().notRequired(),
+    otherwise: () => Yup.string().required("Enter Job Position").trim(),
+  }),
+  skills: Yup.string().when("isTalentForm", {
     is: (isTalentForm: any) => isTalentForm == true,
     then: () => Yup.string().required("Enter Sub function or Specialty").trim(),
+    otherwise: () => Yup.string().notRequired(),
   }),
   department: Yup.string().when("isTalentForm", {
     is: (isTalentForm: any) => isTalentForm == true,
     then: () => Yup.string().required("Select Department"),
+    otherwise: () => Yup.string().notRequired(),
   }),
   other_department: Yup.string().when("department", {
     is: (department: any) => department == "Others",
     then: () => Yup.string().required("Enter Other Department").trim(),
   }),
-  job_code: Yup.string().required("Enter Job Code").trim(),
-  location: Yup.string().required("Enter Job Location").trim(),
+  job_code: Yup.string().when("isTalentForm", {
+    is: (isTalentForm: any) => isTalentForm == true,
+    then: () => Yup.string().notRequired(),
+    otherwise: () => Yup.string().required("Enter Job Code").trim(),
+  }),
+  location: Yup.string().when("isTalentForm", {
+    is: (isTalentForm: any) => isTalentForm == true,
+    then: () => Yup.string().notRequired(),
+    otherwise: () => Yup.string().required("Enter Job Location").trim(),
+  }),
   name: Yup.string().required("Enter your Name").trim(),
   dob: Yup.date()
     .nullable()
@@ -118,6 +139,11 @@ export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup
   alternate_email: Yup.string().email("Invalid email format").trim(),
   gender: Yup.string().required("Select your Gender").trim(),
   total_experience: Yup.string().required("Select your Experience").trim(),
+  other_experience: Yup.string().when("total_experience", {
+    is: (total_experience: any) => total_experience == "15",
+    then: () => Yup.string().required("Enter Other Experience").trim(),
+    otherwise: () => Yup.string().notRequired(),
+  }),
   notice_period: Yup.string().trim(),
   nationality: Yup.string().required("Select your Nationality").trim(),
   country_name: Yup.string().required("Select your Country Name").trim(),

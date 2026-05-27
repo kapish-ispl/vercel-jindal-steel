@@ -64,9 +64,9 @@ const CustomCircleAnimation = () => {
                 <div className="row">
                     <div className="col-12 col-lg-9">
                         <div className="hw">
-                            <div className="c-heading-60 ft_regular clr-gray lh_1-1 mb-40">RISE &times; ESG Integration</div>
+                            <div className="c-heading-60 ft_regular clr-gray lh_1-1 mb-40">R.I.S.E &times; ESG Integration</div>
 
-                            <p className="c-content-24 ft_light lh_1-6 clr-gray">RISE defines direction. ESG measures performance. The RISE framework guides strategic intent across operations, while ESG provides the structure for measurement, reporting and accountability.</p>
+                            <p className="c-content-24 ft_light lh_1-6 clr-gray">R.I.S.E defines direction. ESG measures performance. The R.I.S.E framework guides strategic intent across operations, while ESG provides the structure for measurement, reporting, and accountability.</p>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@ const CustomCircleAnimation = () => {
                                 <span className="circle-text ft_semiBold">R.I.S.E</span>
                             </div>
                             <div ref={greenRef} className="rise-esg-circle circle-green">
-                                <span className="circle-text ft_semiBold">E.S.G.</span>
+                                <span className="circle-text ft_semiBold">ESG</span>
                             </div>
                             <div ref={orangeRef} className="rise-esg-circle circle-orange">
                                 <span className="circle-text mb-0 mb-sm-2 ft_semiBold">R.I.S.E</span>

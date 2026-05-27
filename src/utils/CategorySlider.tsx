@@ -13,21 +13,21 @@ const STATIC_SLIDES = [
         category: "Jindal Learning",
         title: "Jindal Learning Academy",
         desc: "Designed to shape future-ready professionals, the Jindal Learning Academy is our enterprise-wide learning framework across all levels. It offers structured, role-specific programs focused on managerial excellence, functional skills, leadership development, digital proficiency, compliance, and cultural alignment. ",
-        image: "https://docs.jindalsteel.in/document/124/1765949919_Rectangle92.png",
+        image: "https://docs.jindalsteel.in/document/124/1778577565_Learning-Academy.jpg",
     },
     {
         id: 1,
         category: "Dakshata",
         title: "Dakshata",
         desc: "Dakshata is our enterprise-wide skilling movement focused on enabling excellence at every level, from entry gate to leadership. It’s our way of turning competency into a shared responsibility.",
-        image: "https://docs.jindalsteel.in/document/124/1765949919_Rectangle96.png",
+        image: "https://docs.jindalsteel.in/document/124/1778581124_Dakshata-img1.jpg",
     },
     {
         id: 2,
         category: "Higher Education",
         title: "Higher Education Support",
         desc: "We believe steel is forged stronger through knowledge. That’s why we actively invest in higher education and professional advancement, not just for our Jindalites but for their families too. Because when one learns, many rise.",
-        image: "https://docs.jindalsteel.in/document/124/1765949919_Rectangle98.png",
+        image: "https://docs.jindalsteel.in/document/124/1778577868_Higher-Education.jpg",
     }
 ];
 

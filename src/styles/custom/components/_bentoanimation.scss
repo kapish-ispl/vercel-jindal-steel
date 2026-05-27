@@ -163,7 +163,7 @@
             text-align: left;
             padding: 20px;
 
-            @include mq(desktop-wide) {
+            @include mq(desktop-wide-max) {
                 padding: 32px
             }
 
@@ -185,11 +185,11 @@
                 font-weight: var(--fontLight);
 
                 @include mq(desktop) {
-                    @include font-size(18);
+                    @include font-size(16);
                 }
 
                 @include mq(desktop-wide) {
-                    @include font-size(20);
+                    @include font-size(16);
                 }
             }
         }

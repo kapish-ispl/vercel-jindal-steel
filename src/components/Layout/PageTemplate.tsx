@@ -16,6 +16,7 @@ const CustomWorldMap = dynamic(() => import('@/utils/CustomWorldMap'), { ssr: fa
 const CustomMapIndia = dynamic(() => import('@/utils/CustomMapIndia'), { ssr: false });
 const CustomContentSlider = dynamic(() => import('../CustomContentSlider'), { ssr: false });
 const CustomHorizontalScroll = dynamic(() => import('@/utils/CustomHorizontalScroll'), { ssr: false });
+const HorizontalScrollSecton = dynamic(() => import('@/utils/HorizontalScrollSecton'), { ssr: false });
 const CustomStickyCard = dynamic(() => import('@/utils/CustomStickyCard'), { ssr: false });
 const CustomSilder = dynamic(() => import('@/utils/CustomSilder'), { ssr: false });
 const CardSwipeSlider = dynamic(() => import("@/utils/CardSwipeSlider"), { ssr: false });
@@ -44,6 +45,13 @@ const TimeLineSection = dynamic(() => import("@/utils/TimeLineSection"), { ssr: 
 const RotatingSlider = dynamic(() => import("@/utils/RotatingSlider"), { ssr: false });
 const SportsGallerySlider = dynamic(() => import("@/utils/SportsGallerySlider"), { ssr: false });
 const HeroSection = dynamic(() => import("@/utils/HeroSection"), { ssr: false });
+const CustomTabs = dynamic(() => import("@/utils/CustomTabs"), { ssr: false });
+const CustomRiseCircular = dynamic(() => import("@/utils/CustomRiseCircular"), { ssr: false });
+const Timeline = dynamic(() => import("@/utils/Timeline"), { ssr: false });
+const CustomAccordionsWithoutimg = dynamic(() => import("@/utils/CustomAccordionsWithoutimg"), { ssr: false });
+const CustomValueChart = dynamic(() => import("@/utils/CustomValueChart"), { ssr: false });
+const HexagonSection = dynamic(() => import("@/utils/HexagonSection"), { ssr: false });
+const CustomAccordion = dynamic(() => import("@/utils/CustomAccordian"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -69,6 +77,12 @@ const PageTemplate = ({ data }: any) => {
                 if (domNode.name === "customcircleanimation") {
                     return <CustomCircleAnimation />
                 }
+                if (domNode.name === "customvaluechart") {
+                    return <CustomValueChart />
+                }
+                if (domNode.name === "customrisecircular") {
+                    return <CustomRiseCircular />
+                }
                 if (domNode.name === "scrollprogress") {
                     return <ScrollProgress />
                 }
@@ -77,6 +91,21 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <HighlightCarousel props={props} data={Array.isArray(children) ? children : [children]} />
+                }
+                if (domNode.name === "hexagonsection") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <HexagonSection props={props} data={Array.isArray(children) ? children : [children]} />
+                }
+                if (domNode.name === "customtabs") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CustomTabs props={props} data={Array.isArray(children) ? children : [children]} />
+                }
+                if (domNode.name === "timeline") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <Timeline props={props} data={Array.isArray(children) ? children : [children]} />
                 }
                 if (domNode.name === "sportsgalleryslider") {
                     const children = domToReact(domNode.children as DOMNode[]);
@@ -113,6 +142,16 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomAccordions {...props} data={Array.isArray(children) ? children : [children]} />;
+                }
+                if (domNode.name === "customaccordion") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CustomAccordion {...props} data={Array.isArray(children) ? children : [children]} />;
+                }
+                if (domNode.name === "customaccordionswithoutimg") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <CustomAccordionsWithoutimg {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
                 if (domNode.name == "customcontentsliders") {
                     const props = attributesToProps(domNode.attribs);
@@ -240,6 +279,11 @@ const PageTemplate = ({ data }: any) => {
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomHorizontalScroll {...props} data={Array.isArray(children) ? children : [children]} />;
                 }
+                if (domNode.name === "horizontalscrollsecton") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <HorizontalScrollSecton {...props} data={Array.isArray(children) ? children : [children]} />;
+                }
 
                 if (domNode.name === "customwheelsection") {
                     const props = attributesToProps(domNode.attribs);
@@ -253,6 +297,11 @@ const PageTemplate = ({ data }: any) => {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CircleSlider props={props} data={Array.isArray(children) ? children : [children]} />;
+                }
+                if (domNode.name === "jobform") {
+                    // const props = attributesToProps(domNode.attribs);
+                    // const children = domToReact(domNode.children as DOMNode[]);
+                    return <JobForm />;
                 }
 
                 if (domNode.name === "categoryslider") {

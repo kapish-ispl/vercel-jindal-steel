@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useRef, useContext, useState, useEffect } from "react";
 import { POST_MSME_ENDPOINT } from "@/config/apiConfig";
-// import { postAPIMsmeResponse } from "@/services/apiRequests";
+import { postFormDataResponse } from "@/services/apiRequests";
 import { useRouter } from "next/navigation";
 import { AppContext } from "@/context/AppContext";
 // import Loading from "@/components/Loading";
@@ -12,6 +12,7 @@ import {
     validateMobile,
     validateNumberLength,
 } from "@/config/globalFunc";
+import { toast } from "react-hot-toast";
 
 const MsmeForm = ({ data }: any) => {
     const contextInfo = useContext(AppContext);
@@ -51,7 +52,7 @@ const MsmeForm = ({ data }: any) => {
             TMT_quantity: "",
             wire_rods_quantity: "",
             HRPO_coils_quantity: "",
-            HRSPO_quantity: "",
+            HRSPO_coils_quantity: "",
             rails_quantity: "",
             structures_quantity: "",
             hollow_section_quantity: "",
@@ -132,6 +133,7 @@ const MsmeForm = ({ data }: any) => {
 
     const handleSubmitData = async (data: any) => {
         contextInfo.setIsLoading(true);
+        const loadingToast = toast.loading("Submitting form...");
 
         // Extract quantity fields from the products object
         const quantities = Object.entries(data.products)
@@ -189,7 +191,7 @@ const MsmeForm = ({ data }: any) => {
             "TMT_quantity",
             "wire_rods_quantity",
             "HRPO_coils_quantity",
-            "HRSPO_quantity",
+            "HRSPO_coils_quantity",
             "rails_quantity",
             "structures_quantity",
             "hollow_section_quantity",
@@ -203,22 +205,30 @@ const MsmeForm = ({ data }: any) => {
         });
 
 
-        // try {
-        //     const response = await postAPIMsmeResponse(`${POST_MSME_ENDPOINT}`, formData);
-        //     if (response.code === "SUC200") {
-        //         router.replace("/thanks.html");
-        //     } else {
-        //         setSubmitSuccess(false);
-        //         setSubmitMsg(true);
-        //         setAlertMsg(response.message || "Something went wrong, please try again later.");
-        //     }
-        // } catch (error) {
-        //     setSubmitSuccess(false);
-        //     setSubmitMsg(true);
-        //     setAlertMsg("Submission failed. Please try again.");
-        // } finally {
-        //     contextInfo.setIsLoading(false);
-        // }
+        try {
+            const response = await postFormDataResponse(`${POST_MSME_ENDPOINT}`, formData);
+            if (response.code === "SUC200") {
+                toast.success("Form submitted successfully!", { id: loadingToast });
+                setSubmitSuccess(true);
+                setSubmitMsg(true);
+                setAlertMsg("Form submitted successfully!");
+                return true;
+            } else {
+                toast.error(response.message || "Something went wrong, please try again later.", { id: loadingToast });
+                setSubmitSuccess(false);
+                setSubmitMsg(true);
+                setAlertMsg(response.message || "Something went wrong, please try again later.");
+                return false;
+            }
+        } catch (error) {
+            toast.error("Submission failed. Please try again.", { id: loadingToast });
+            setSubmitSuccess(false);
+            setSubmitMsg(true);
+            setAlertMsg("Submission failed. Please try again.");
+            return false;
+        } finally {
+            contextInfo.setIsLoading(false);
+        }
     };
 
 
@@ -234,9 +244,12 @@ const MsmeForm = ({ data }: any) => {
                                     initialValues={initialValues}
                                     enableReinitialize={true}
                                     validationSchema={MsmeFormSchema}
-                                    onSubmit={(values, { resetForm }) => {
-                                        handleSubmitData(values);
-                                        // resetForm();
+                                    onSubmit={async (values, { setSubmitting, resetForm }) => {
+                                        const success = await handleSubmitData(values);
+                                        if (success) {
+                                            resetForm();
+                                        }
+                                        setSubmitting(false);
                                     }}
                                 >
                                     {({
@@ -279,7 +292,7 @@ const MsmeForm = ({ data }: any) => {
                                                                         }`}
                                                                 >
                                                                     <label className="form_grider_wrap_label">
-                                                                        GST Number*
+                                                                        GST Number <span className="required">*</span>
                                                                     </label>
                                                                     <input
                                                                         type="text"
@@ -308,7 +321,7 @@ const MsmeForm = ({ data }: any) => {
                                                                         }`}
                                                                 >
                                                                     <label className="form_grider_wrap_label">
-                                                                        Email*
+                                                                        Email <span className="required">*</span>
                                                                     </label>
                                                                     <input
                                                                         type="text"
@@ -341,7 +354,7 @@ const MsmeForm = ({ data }: any) => {
                                                                         }`}
                                                                 >
                                                                     <label className="form_grider_wrap_label">
-                                                                        Mobile Number*
+                                                                        Mobile Number <span className="required">*</span>
                                                                     </label>
                                                                     <input
                                                                         type="text"
@@ -377,7 +390,7 @@ const MsmeForm = ({ data }: any) => {
                                                                         }`}
                                                                 >
                                                                     <label className="form_grider_wrap_label">
-                                                                        Name of the Firm*
+                                                                        Name of the Firm <span className="required">*</span>
                                                                     </label>
                                                                     <input
                                                                         type="text"
@@ -410,7 +423,7 @@ const MsmeForm = ({ data }: any) => {
                                                                         }`}
                                                                 >
                                                                     <label className="form_grider_wrap_label">
-                                                                        Address of the Firm*
+                                                                        Address of the Firm <span className="required">*</span>
                                                                     </label>
                                                                     <input
                                                                         type="text"
@@ -440,7 +453,7 @@ const MsmeForm = ({ data }: any) => {
                                                                         }`}
                                                                 >
                                                                     <label className="form_grider_wrap_label">
-                                                                        Pin Code*
+                                                                        Pin Code <span className="required">*</span>
                                                                     </label>
                                                                     <input
                                                                         type="number"
@@ -473,7 +486,7 @@ const MsmeForm = ({ data }: any) => {
                                                                         }`}
                                                                 >
                                                                     <label className="form_grider_wrap_label">
-                                                                        Contact Person Name*
+                                                                        Contact Person Name <span className="required">*</span>
                                                                     </label>
                                                                     <input
                                                                         type="text"
@@ -745,20 +758,20 @@ const MsmeForm = ({ data }: any) => {
                                                                                 </div>
                                                                             </td>
                                                                             <td valign="middle">
-                                                                                <div className={`form_grider_wrap ${errors.products?.HRSPO_quantity ? "hasError" : ""}`}>
+                                                                                <div className={`form_grider_wrap ${errors.products?.HRSPO_coils_quantity ? "hasError" : ""}`}>
                                                                                     <input
                                                                                         type="number"
                                                                                         min="0"
                                                                                         step="any"
                                                                                         className="form_grider_wrap_field"
-                                                                                        name="products.HRSPO_quantity"
+                                                                                        name="products.HRSPO_coils_quantity"
                                                                                         autoComplete="off"
                                                                                         placeholder="HRSPO coils Qty"
                                                                                         onChange={handleChange}
-                                                                                        value={values.products.HRSPO_quantity}
+                                                                                        value={values.products.HRSPO_coils_quantity}
                                                                                     />
-                                                                                    {errors.products?.HRSPO_quantity ? (
-                                                                                        <p className="form_grider_wrap_helper">{errors.products.HRSPO_quantity}</p>
+                                                                                    {errors.products?.HRSPO_coils_quantity ? (
+                                                                                        <p className="form_grider_wrap_helper">{errors.products.HRSPO_coils_quantity}</p>
                                                                                     ) : null}
                                                                                 </div>
                                                                             </td>
@@ -911,11 +924,10 @@ const MsmeForm = ({ data }: any) => {
 
                                                                     </thead>
                                                                 </table>
-                                                                <div className="form-error text-[#ef4444]">
+                                                                <div className="form_grider_wrap_helper">
                                                                     {
-                                                                        errors.products &&
-                                                                            (typeof errors.products !== 'object' || errors.products === null)
-                                                                            ? JSON.stringify(errors.products)
+                                                                        errors.products && typeof errors.products === 'string'
+                                                                            ? errors.products
                                                                             : null
                                                                     }
                                                                 </div>
@@ -947,7 +959,7 @@ const MsmeForm = ({ data }: any) => {
                                                                         className="cus_btn2"
                                                                         disabled={isSubmitting}
                                                                     >
-                                                                        <span>SAVE AND SUBMIT</span>
+                                                                        <span>{isSubmitting ? "SUBMITTING..." : "SAVE AND SUBMIT"}</span>
                                                                     </button>
                                                                 </div>
                                                             </div>

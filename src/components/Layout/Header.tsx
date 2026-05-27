@@ -65,7 +65,7 @@ const Header = () => {
     },
     {
       name: "People",
-      desc: "At Jindal Steel, the people are the heart and soul of the institution, leading its success and shaping its mission.",
+      desc: "At Jindal Steel, our people drive our success and shape our mission. They are at the core of everything we do.",
     },
     {
       name: "Investor",

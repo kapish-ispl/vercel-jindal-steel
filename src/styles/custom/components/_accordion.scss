@@ -2,271 +2,407 @@
 @use "../core/variables" as *;
 
 .c-accordionBase {
-    margin-top: 40px;
+  margin-top: 40px;
 
-    @include mq(desktop-min) {
-        margin-top: 0px;
+  @include mq(desktop-min) {
+    margin-top: 0px;
+  }
+
+  &__item {
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--color-grey2);
+    padding-left: 10px;
+
+    @include mq(tablet-max) {
+      padding-left: 16px;
     }
 
-    &__item {
-        margin-bottom: 20px;
-        border-bottom: 2px solid var(--color-grey2);
-        padding-left: 10px;
+    &-head {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border: none;
+      outline: none;
+      background-color: var(--white);
+      padding-bottom: 15px;
+      font-weight: var(--fontMedium);
+      color: var(--color-secondary);
+      margin: 0;
+      @include font-size(20);
+
+      @include mq("desktop-min") {
+        @include font-size(24);
+      }
+
+      @include mq("desktop-wide") {
+        @include font-size(28);
+      }
+
+      @include mq("desktop-wide-max") {
+        @include font-size(32);
+      }
+
+      &-title {
+        @include mq(tablet-max) {
+          padding-left: 24px;
+        }
+      }
+
+      &.active {
+        // .c-accordionBase__item-head-title {
+        //     font-weight: var(--fontMedium);
+        //     // color: var(--color-accent-olive);
+        // }
+
+        .rotate {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    &-body {
+      // display: none;
+
+      // &.open {
+      //     display: block;
+      // }
+      >div {
+        padding: 4px 10px 19px;
+        @include font-size(18);
+        font-weight: var(--fontLight);
+        color: var(--color-secondary);
+        line-height: 1.6;
 
         @include mq(tablet-max) {
-            padding-left: 16px;
+          @include font-size(20);
+          padding: 24px;
         }
-
-        &-head {
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            border: none;
-            outline: none;
-            background-color: var(--white);
-            padding-bottom: 15px;
-            font-weight: var(--fontMedium);
-            color: var(--color-secondary);
-            margin: 0;
-            @include font-size(20);
-
-            @include mq('desktop-min') {
-                @include font-size(24);
-            }
-
-            @include mq('desktop-wide') {
-                @include font-size(28);
-            }
-
-            @include mq('desktop-wide-max') {
-                @include font-size(32);
-            }
-
-            &-title {
-                @include mq(tablet-max) {
-                    padding-left: 24px;
-                }
-
-            }
-
-            &.active {
-                // .c-accordionBase__item-head-title {
-                //     font-weight: var(--fontMedium);
-                //     // color: var(--color-accent-olive);
-                // }
-
-                .rotate {
-                    transform: rotate(180deg);
-                }
-            }
-        }
-
-        &-body {
-            // display: none;
-
-            // &.open {
-            //     display: block;
-            // }
-            >div {
-                padding: 4px 10px 19px;
-                @include font-size(18);
-                font-weight: var(--fontLight);
-                color: var(--color-secondary);
-                line-height: 1.6;
-
-                @include mq(tablet-max) {
-                    @include font-size(20);
-                    padding: 24px;
-                }
-            }
-        }
+      }
     }
+  }
 }
 
 .overlaytext {
-    position: absolute;
-    left: 12px;
-    bottom: 20px;
-    color: var(--color-white);
-    font-weight: var(--fontMedium);
-    @include font-size(20);
-    z-index: 9;
+  position: absolute;
+  left: 12px;
+  bottom: 20px;
+  color: var(--color-white);
+  font-weight: var(--fontMedium);
+  @include font-size(20);
+  z-index: 9;
 
-    @include mq('tablet') {
-        @include font-size(24);
-    }
+  @include mq("tablet") {
+    @include font-size(24);
+  }
 
-    @include mq('tablet-max') {
-        left: 32px;
-        bottom: 32px;
-    }
+  @include mq("tablet-max") {
+    left: 32px;
+    bottom: 32px;
+  }
 
-    @include mq('desktop-min') {
-        @include font-size(28);
-    }
+  @include mq("desktop-min") {
+    @include font-size(28);
+  }
 
-    @include mq('desktop-wide') {
-        @include font-size(32);
-    }
+  @include mq("desktop-wide") {
+    @include font-size(32);
+  }
 }
 
 .c-tabWrapper {
-    .accordion__media {
-        @include border-radius(8px);
-        overflow: hidden;
-        position: relative;
+  .accordion__media {
+    @include border-radius(8px);
+    overflow: hidden;
+    position: relative;
 
-        &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.6) 100%);
-            z-index: 1;
-
-        }
-
-        img {
-            @include border-radius(8px);
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-
-            @include mq(tablet-max) {
-                max-height: 432px;
-            }
-        }
-        &.v2 {
-            height: 100%;
-             img {
-                height: 100%;
-                max-height: 100%;
-                object-position: center center
-            }
-        }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg,
+          rgba(0, 0, 0, 0) 35%,
+          rgba(0, 0, 0, 0.6) 100%);
+      z-index: 1;
     }
 
+    img {
+      @include border-radius(8px);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
 
-}
-
-.c-tabContainer {
-    .tabbing_wrap {
-        &.v1 {
-
-            ul {
-                @include justify-content(space-between);
-                margin-top: 30px;
-
-
-                @include mq(desktop) {
-                    margin-bottom: 40px;
-
-                }
-
-                @include mq(desktop-wide) {
-                    margin-bottom: 60px;
-                    margin-top: 50px;
-                }
-
-                @include mq(desktop-wide-max) {
-                    margin-bottom: 80px;
-                }
-
-                li {
-                    flex: 1;
-                    @include flexbox;
-                    @include align-items(center);
-                    @include justify-content(center);
-
-                    button {
-                        width: 100%;
-                        margin: 0px;
-
-                        &.c-sector__item {
-                            text-align: center;
-
-                            .c-sector__item_label {
-                                color: #A1A1A1;
-                            }
-
-                            .c-sector__item_border {
-                                background-color: #A1A1A1;
-                            }
-                        }
-
-
-                    }
-                }
-            }
-
-            .tabbing_wrap_content {
-
-
-                &_item {
-                    .c-tabWrapper__info {
-                        margin-top: 20px;
-
-                        @include mq(tablet-max) {
-                            padding-left: 40px;
-                            margin-top: 0px;
-                        }
-
-                        .listView {
-                            &__item {
-                                @include align-items(center);
-                                gap: 16px;
-
-                                +.listView__item {
-                                    margin-top: 20px;
-
-                                    @include mq(tablet-max) {
-                                        margin-top: 25xpx;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
+      @include mq(tablet-max) {
+        max-height: 432px;
+      }
     }
 
     &.v2 {
-        .tabbing_wrap {
-            &.v1 {
-                ul {
-                    @include justify-content(flex-start);
-                    margin-top: 0px;
+      height: 100%;
 
-                    li {
-                        flex: unset;
-
-                        button {
-                            width: unset;
-
-
-                        }
-                    }
-                }
-
-                .tabbing_wrap_content {
-                    .c-twoColumnContainer__image {
-                        @include mq(tablet-max) {
-
-                            height: 100%;
-
-                            >img {
-                                object-fit: cover;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+      img {
+        height: 100%;
+        max-height: 100%;
+        object-position: center center;
+      }
     }
+  }
+}
+
+.c-tabContainer {
+  .tabbing_wrap {
+    &.v1 {
+      ul {
+        @include justify-content(space-between);
+        margin-top: 30px;
+
+        @include mq(desktop) {
+          margin-bottom: 40px;
+        }
+
+        @include mq(desktop-wide) {
+          margin-bottom: 60px;
+          margin-top: 50px;
+        }
+
+        @include mq(desktop-wide-max) {
+          margin-bottom: 80px;
+        }
+
+        li {
+          flex: 1;
+          @include flexbox;
+          @include align-items(center);
+          @include justify-content(center);
+
+          button {
+            width: 100%;
+            margin: 0px;
+
+            &.c-sector__item {
+              text-align: center;
+
+              .c-sector__item_label {
+                color: #a1a1a1;
+              }
+
+              .c-sector__item_border {
+                background-color: #a1a1a1;
+              }
+            }
+          }
+        }
+      }
+
+      .tabbing_wrap_content {
+        &_item {
+          .c-tabWrapper__info {
+            margin-top: 20px;
+
+            @include mq(tablet-max) {
+              padding-left: 40px;
+              margin-top: 0px;
+            }
+
+            .listView {
+              &__item {
+                @include align-items(center);
+                gap: 16px;
+
+                +.listView__item {
+                  margin-top: 20px;
+
+                  @include mq(tablet-max) {
+                    margin-top: 25xpx;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.v2 {
+    .tabbing_wrap {
+      &.v1 {
+        ul {
+          @include justify-content(flex-start);
+          margin-top: 0px;
+
+          li {
+            flex: unset;
+
+            button {
+              width: unset;
+            }
+          }
+        }
+
+        .tabbing_wrap_content {
+          .c-twoColumnContainer__image {
+            @include mq(tablet-max) {
+              height: 100%;
+
+              >img {
+                object-fit: cover;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.c-tabAccordion {
+  .c-accordionBase {
+    &__item {
+      &-body {
+        >div {
+          @include mq(desktop) {
+            padding: 0px 24px;
+
+          }
+
+          .accordion-content {
+            p {
+              margin: 0px;
+            }
+          }
+
+          .content-row {
+            @include flexbox;
+            @include align-items(center);
+            gap: 16px;
+            padding: 16px 0px;
+
+            +.content-row {
+              border-top: 1px solid #63646633;
+            }
+
+            img {
+              min-width: 30px;
+              height: 44px;
+              width: 48px;
+              object-fit: contain;
+            }
+
+            .content-text {
+              h4 {
+                margin: 0;
+              }
+
+              p {
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ================= CUSTOM ACCORDION (Interactive Reports) ================= */
+.custom-accordion-container {
+  width: 100%;
+
+  .custom-accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+
+    @include mq(desktop) {
+      padding: 28px 0px;
+    }
+
+    &:hover,
+    &.active {
+      .custom-accordion-title {
+        color: var(--color-primary, #f07c22);
+      }
+    }
+  }
+
+  .custom-accordion-title {
+    @include font-size(18);
+    font-weight: 500;
+    color: var(--color-secondary, #636466);
+    transition: color 0.3s ease;
+
+    @include mq(tablet-max) {
+      @include font-size(20);
+    }
+
+    @include mq(desktop) {
+      @include font-size(22);
+    }
+
+    @include mq(desktop-wide) {
+      @include font-size(24);
+    }
+  }
+
+  .custom-accordion-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-accordion-body {
+    padding: 20px;
+    background-color: var(--color-tertiary, #f8f9fa);
+    border-radius: 8px;
+    margin-bottom: 24px;
+
+    @include mq(desktop) {
+      padding: 32px;
+    }
+  }
+}
+
+.c-accordion__wrap {
+  .hw {
+    margin-bottom: 20px;
+
+    @include mq(tablet-max) {
+      margin-bottom: 35px;
+    }
+  }
+
+  .custom-accordion-container {
+    .custom-accordion-item {
+      border-top: 1px solid #636466;
+
+      .accordion-body {
+        .c-viewBox {
+          background-color: var(--color-white);
+          padding: 15px;
+          margin-bottom: 12px;
+          @include border-radius(6px);
+          height: calc(100% - 12px);
+
+          &__info {
+            p {
+              margin-bottom: 12px;
+              @include font-size(14);
+            }
+          }
+        }
+      }
+    }
+  }
 }

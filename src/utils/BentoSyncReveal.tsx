@@ -16,7 +16,7 @@ const BentoSyncReveal = ({ data, props }: { data: any, props: any }) => {
             title: "Responsible Governance",
             desc: "Oversight and accountability embedded across operations.",
             stat: "Focus",
-            statDesc: "Board oversight, enterprise risk integration, regulatory compliance and policy governance.",
+            statDesc: "Board oversight, enterprise risk integration, regulatory compliance, and policy governance.",
             gallery: ["https://docs.jindalsteel.in/document/124/1774037370_01e1f9c1f7b0fa3c12c31340d07844a003a4abd5.png", "https://docs.jindalsteel.in/document/124/1774037370_cfbeedf25f9d7338384a57424c529f3814dffa93.png", "https://docs.jindalsteel.in/document/124/1774037370_772796c4f1c4bb6e7a2fdd302c2f5811cd65ccd7.png"]
         },
         {
@@ -34,16 +34,16 @@ const BentoSyncReveal = ({ data, props }: { data: any, props: any }) => {
             title: "Sustainable Environment",
             desc: "Oversight and accountability embedded across operations.",
             stat: "Focus",
-            statDesc: "Emission reduction, renewable energy transition, water stewardship and circular resource efficiency.",
+            statDesc: "Emission reduction, renewable energy transition, water stewardship, and circular resource efficiency.",
             gallery: ["https://picsum.photos/1920/1080?random=9", "https://picsum.photos/1920/1080?random=10", "https://picsum.photos/1920/1080?random=11"]
         },
         {
             id: 4,
             mainImg: "https://docs.jindalsteel.in/document/124/1774328191_aaa2faf02eb6b2ca7682b337b09a86fc69b71a2c.png",
-            title: "Ethical Patnership",
+            title: "Ethical Partnership",
             desc: "Oversight and accountability embedded across operations.",
             stat: "Focus",
-            statDesc: "Responsible supply chain standards, anti-corruption systems, human rights alignment and transparent conduct.",
+            statDesc: "Responsible supply chain standards, anti-corruption systems, human rights alignment, and transparent conduct.",
             gallery: ["https://picsum.photos/1920/1080?random=13", "https://picsum.photos/1920/1080?random=14", "https://picsum.photos/1920/1080?random=15"]
         },
         // {
