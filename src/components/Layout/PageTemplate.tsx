@@ -52,6 +52,7 @@ const CustomAccordionsWithoutimg = dynamic(() => import("@/utils/CustomAccordion
 const CustomValueChart = dynamic(() => import("@/utils/CustomValueChart"), { ssr: false });
 const HexagonSection = dynamic(() => import("@/utils/HexagonSection"), { ssr: false });
 const CustomAccordion = dynamic(() => import("@/utils/CustomAccordian"), { ssr: false });
+const AirEmissionsChart = dynamic(() => import("@/utils/AirEmissionsChart"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -79,6 +80,9 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "customvaluechart") {
                     return <CustomValueChart />
+                }
+                if (domNode.name === "airemissionschart") {
+                    return <AirEmissionsChart />
                 }
                 if (domNode.name === "customrisecircular") {
                     return <CustomRiseCircular />
