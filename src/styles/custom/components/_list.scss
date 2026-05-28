@@ -269,7 +269,7 @@
     &.d1 {
         .listView__item {
             gap: 25px;
-            @include align-items(center);
+            @include align-items(flex-start);
             margin-bottom: 30px;
 
             &-icon {
