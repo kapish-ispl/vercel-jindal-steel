@@ -11,6 +11,7 @@ export const corporateGovOptions = [
   { value: 'Management System Policies', label: 'Management System Policies' }, 
   { value: 'Disclosures under Regulation 46 of the SEBI (LODR) Regulations, 2015', label: 'Disclosures under Regulation 46 of the SEBI (LODR) Regulations, 2015' },
   { value: 'Forms', label: 'Forms' },
+  { value: 'Familiarisation Programme for Independent Directors', label: 'Familiarisation Programme for Independent Directors' },
 ];
 
 export const invDocOptions = [
