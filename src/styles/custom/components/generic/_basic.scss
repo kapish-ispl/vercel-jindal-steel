@@ -4016,10 +4016,11 @@ ul.arrowbulletList {
         @include font-size(24);
       }
 
-      .dropdown-menu {
-        max-width: 200px;
-      }
 
+    }
+
+    .dropdown-menu {
+      max-width: 200px;
     }
   }
 }
