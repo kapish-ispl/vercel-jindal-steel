@@ -3993,25 +3993,29 @@ ul.arrowbulletList {
     }
   }
 
-  select {
-    border: 1px solid #63646666;
-    background: #63646633;
-    padding: 8px 16px;
-    color: var(--color-secondary);
-    @include font-size(18);
-    font-weight: var(--fontMedium);
-    @include border-radius(4px);
+  .cus-select {
+    >button {
+      border: 1px solid #63646666;
+      background: #63646633;
+      padding: 8px 16px;
+      color: var(--color-secondary);
+      @include font-size(18);
+      font-weight: var(--fontMedium);
+      @include border-radius(4px);
+      max-width: 200px;
 
-    @include mq(tablet-max) {
-      @include font-size(20);
-    }
+      @include mq(tablet-max) {
+        @include font-size(20);
+      }
 
-    @include mq(desktop) {
-      @include font-size(22);
-    }
+      @include mq(desktop) {
+        @include font-size(22);
+      }
 
-    @include mq(desktop-wide-max) {
-      @include font-size(24);
+      @include mq(desktop-wide-max) {
+        @include font-size(24);
+      }
+
     }
   }
 }
