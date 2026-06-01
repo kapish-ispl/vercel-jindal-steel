@@ -95,10 +95,10 @@ export default function CustomValueChart() {
             },
             datalabels: {
                 anchor: 'center' as const,
-                align: 'top' as const,
+                align: 'center' as const,
                 color: '#ffffff',
                 rotation: 270,
-                offset: -15,
+                // offset: -15,
                 font: {
                     weight: 'bold' as const,
                     size: 26,
