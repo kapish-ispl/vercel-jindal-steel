@@ -77,7 +77,7 @@ const Header = () => {
     },
     {
       name: "Media",
-      desc: "Jindal Steel upholds a steadfast commitment to delivering sustainable value for all stakeholders. Its remarkable track record of financial discipline attests to its continuous pursuit of excellence as a world-class organisation."
+      desc: "Access the latest press releases, corporate updates, and media resources from Jindal Steel."
     },
     {
       name: "Community",
