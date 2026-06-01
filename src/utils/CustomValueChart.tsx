@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip } from 'chart.js';
 import CustomSelect from '@/components/CustomSelect';
 import { ChevronDown } from 'lucide-react';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 const dataSets: Record<string, { data: number[]; label: string }> = {
     "2024-25": { data: [48932, 43097, 6161], label: "43,097 Cr" },
@@ -26,7 +27,7 @@ export default function CustomValueChart() {
             } else if (width < 992) {
                 setBarThickness(80);
             } else {
-                setBarThickness(140);
+                setBarThickness(120);
             }
         };
         handleResize();
@@ -39,7 +40,7 @@ export default function CustomValueChart() {
         labels: ['Total Income', 'Total Expenses', 'Profit Retained'],
         datasets: [{
             data: currentData.data,
-            backgroundColor: ['#f58220', '#4caf50', '#37474f'],
+            backgroundColor: ['#f58220', '#4caf50', '#446183'],
             borderRadius: 4,
             barThickness: barThickness,      // Controls width of bars
             minBarLength: barThickness,      // Force the height of shorter bars (like Profit Retained)
@@ -49,15 +50,76 @@ export default function CustomValueChart() {
     const options = {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { tooltip: { enabled: true } },
+        plugins: {
+            tooltip: { enabled: true },
+            legend: {
+                position: 'bottom' as const,
+                display: true,
+                labels: {
+                    boxWidth: 24,
+                    boxHeight: 24,
+                    useBorderRadius: true,
+                    borderRadius: 4,
+                    paddingInline: 20,
+                    color: '#636466',
+                    padding: 20,
+                    font: {
+                        size: 14,
+                        weight: 300,
+                        family: 'Poppins',
+                    },
+                    generateLabels: (chart: any) => {
+                        const data = chart.data;
+                        if (data.labels.length && data.datasets.length) {
+                            return data.labels.map((label: string, i: number) => {
+                                const dataset = data.datasets[0];
+                                return {
+                                    text: label,
+                                    fillStyle: (dataset.backgroundColor as string[])[i],
+                                    strokeStyle: (dataset.backgroundColor as string[])[i],
+                                    lineWidth: 0,
+                                    hidden: !chart.getDataVisibility(i),
+                                    index: i
+                                };
+                            });
+                        }
+                        return [];
+                    }
+                },
+                onClick: (e: any, legendItem: any, legend: any) => {
+                    const index = legendItem.index;
+                    const chart = legend.chart;
+                    chart.toggleDataVisibility(index);
+                    chart.update();
+                }
+            },
+            datalabels: {
+                anchor: 'center' as const,
+                align: 'top' as const,
+                color: '#ffffff',
+                rotation: 270,
+                offset: -15,
+                font: {
+                    weight: 'bold' as const,
+                    size: 26,
+                    family: 'Poppins'
+                },
+                formatter: (value: number) => {
+                    return `${value.toLocaleString('en-IN')}`;
+                }
+            }
+        },
         scales: {
             y: {
                 display: false,
                 beginAtZero: true,
-                max: 55000           // Ensures consistent visual scale
+                // max: 55000
             },
             x: {
-                grid: { display: false }
+                grid: { display: false },
+                ticks: {
+                    display: false
+                },
             }
         }
     };
@@ -78,14 +140,14 @@ export default function CustomValueChart() {
                             onChange={(val) => val && setSelectedYear(val)}
                         />
 
-                        <div style={{ height: '400px', marginTop: '20px' }}>
-                            <Bar data={data} options={options} />
+                        <div style={{ height: '300px', marginTop: '20px' }}>
+                            <Bar data={data} options={options} plugins={[ChartDataLabels]} />
                         </div>
 
 
                     </div>
 
-                </div>
+                </div >
                 <div className="col-12 col-lg-5 offset-lg-2">
                     <div className="data__wrapper responsive-space-30">
                         <h2 className='clr-primary ft_medium lh_1-2'>₹{currentData.label}</h2>
@@ -93,7 +155,7 @@ export default function CustomValueChart() {
 
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 }
