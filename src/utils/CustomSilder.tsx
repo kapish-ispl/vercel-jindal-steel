@@ -173,7 +173,7 @@ export default function CustomSlider({
                         onClick={scrollPrev}
                         aria-label="Previous Slide"
                     >
-                       <img className="u-img" src={bluearrow == true ? 'url' : "https://docs.jindalsteel.in/document/124/1771396856_pre-arrow-gray.png"} alt="Previous" />
+                        <img className="u-img" src={bluearrow == true ? 'url' : "https://docs.jindalsteel.in/document/124/1771396856_pre-arrow-gray.png"} alt="Previous" />
                     </button>
 
                     <button

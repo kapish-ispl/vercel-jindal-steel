@@ -19,9 +19,9 @@ const sections: RiseSection[] = [
     id: "governance",
     title: "Responsible Governance",
     color: "#636466",
-    icon: "https://docs.jindalsteel.in/document/124/1779262118_Responsible-governance.png",
-    iconX: 59,
-    iconY: 49,
+    icon: "/images/icons/responsible-governance.svg",
+    iconX: 55,
+    iconY: 60,
     position: "top-left",
     items: ["Economic Value Creation", "Business Ethics & Integrity", "Risk Management", "Corporate Governance"],
   },
@@ -29,9 +29,9 @@ const sections: RiseSection[] = [
     id: "growth",
     title: "Inclusive Growth",
     color: "#F47920",
-    icon: "https://docs.jindalsteel.in/document/124/1779262118_Inclusive-growth.png",
+    icon: "/images/icons/Inclusive-growth.svg",
     iconX: 149,
-    iconY: 50,
+    iconY: 58,
     position: "top-right",
     items: ["Occupational Health & Safety", "Employee Development & Talent Retention", "Local Communities", "Human Rights & Labour Practices"],
   },
@@ -39,9 +39,9 @@ const sections: RiseSection[] = [
     id: "environment",
     title: "Sustainable Environment",
     color: "#4FB848",
-    icon: "https://docs.jindalsteel.in/document/124/1779262118_Sustainable-environment.png",
-    iconX: 153,
-    iconY: 150.5,
+    icon: "/images/icons/Sustainable-environment.svg",
+    iconX: 145,
+    iconY: 150,
     position: "bottom-right",
     items: ["Sustainable Environment", "Climate Change & GHG Emissions", "Waste & Circular Economy", "Air Emissions", "Biodiversity & Water Conservation"],
   },
@@ -49,8 +49,8 @@ const sections: RiseSection[] = [
     id: "partnerships",
     title: "Ethical Partnerships",
     color: "#446183",
-    icon: "https://docs.jindalsteel.in/document/124/1779262118_Ethical-partnerships.png",
-    iconX: 47.5,
+    icon: "/images/icons/Ethical-partnerships.svg",
+    iconX: 55,
     iconY: 145,
     position: "bottom-left",
     items: ["Product Stewardship", "Supply Chain Management", "Technology and Innovation"],
@@ -102,7 +102,7 @@ export default function CustomRiseCircular() {
               isHovered={hoveredTab === sections[3].id}
             />
 
-            <circle cx="100" cy="100" r="60" fill="white" />
+            <circle cx="100" cy="100" r="50" fill="white" />
             <text x="100" y="105" textAnchor="middle" className="centerRiseText">
               <tspan fill="#636466">R.</tspan>
               <tspan fill="#F47920">I.</tspan>
@@ -141,7 +141,7 @@ export default function CustomRiseCircular() {
 
 const Segment = ({ path, section, onHover, onClick, isActive, isHovered }: any) => {
   const isHighlighted = isActive || isHovered;
-  const isUrl = section.icon.startsWith("http");
+  const isImage = section.icon.startsWith("http") || section.icon.startsWith("/") || section.icon.includes("images/");
 
   return (
     <g
@@ -157,7 +157,7 @@ const Segment = ({ path, section, onHover, onClick, isActive, isHovered }: any) 
         style={{ transformOrigin: "center" }}
       />
 
-      {isUrl ? (
+      {isImage ? (
         <motion.image
           href={section.icon}
           x={section.iconX - 12} // Adjusted slightly for visual balance

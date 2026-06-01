@@ -25,6 +25,7 @@ $color-muted: #666;
             align-items: center;
             gap: 40px;
         }
+
         @include mq(desktop-wide-max) {
             height: 600px;
         }
@@ -57,10 +58,11 @@ $color-muted: #666;
             width: 550px;
             height: 550px;
         }
-        image{
+
+        image {
             width: 17px;
             height: 17px;
-           
+
         }
 
         .centerRiseText {
@@ -76,10 +78,16 @@ $color-muted: #666;
         width: 340px;
         z-index: 1;
 
+
+
         @media (max-width: 1247px) {
             position: relative;
             width: 90%;
             max-width: 500px;
+        }
+
+        @media screen and (max-width: 991px) {
+            width: 100%;
         }
 
         &.top-left {
@@ -104,10 +112,14 @@ $color-muted: #666;
             bottom: 0;
             right: 0;
 
+            @include mq(desktop-wide) {
+                bottom: -80px;
+            }
+
         }
 
-       @media (max-width: 1247px) {
-           &.inactive-box {
+        @media (max-width: 1247px) {
+            &.inactive-box {
                 display: none !important;
             }
         }
@@ -119,7 +131,11 @@ $color-muted: #666;
         border-radius: 8px;
         // box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         border: 1px solid #63646666;
-        max-width: 290px;
+        max-width: 100%;
+
+        @media screen and (min-width: 992px) {
+            max-width: 290px;
+        }
 
         .header {
             margin-bottom: 12px;

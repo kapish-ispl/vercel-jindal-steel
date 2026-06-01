@@ -1,7 +1,9 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip } from 'chart.js';
+import CustomSelect from '@/components/CustomSelect';
+import { ChevronDown } from 'lucide-react';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
@@ -12,6 +14,25 @@ const dataSets: Record<string, { data: number[]; label: string }> = {
 
 export default function CustomValueChart() {
     const [selectedYear, setSelectedYear] = useState("2024-25");
+    const [barThickness, setBarThickness] = useState(140);
+    const [width, setWidth] = useState(0);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            setWidth(width);
+            if (width < 576) {
+                setBarThickness(100);
+            } else if (width < 992) {
+                setBarThickness(80);
+            } else {
+                setBarThickness(140);
+            }
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
     const currentData = dataSets[selectedYear];
 
     const data = {
@@ -20,8 +41,8 @@ export default function CustomValueChart() {
             data: currentData.data,
             backgroundColor: ['#f58220', '#4caf50', '#37474f'],
             borderRadius: 4,
-            barThickness: 100,      // Controls width of bars
-            minBarLength: 120,      // Force the height of shorter bars (like Profit Retained)
+            barThickness: barThickness,      // Controls width of bars
+            minBarLength: barThickness,      // Force the height of shorter bars (like Profit Retained)
         }]
     };
 
@@ -44,14 +65,20 @@ export default function CustomValueChart() {
     return (
         <>
             <div className="row">
-                <div className="col-12 col-lg-4">
+                <div className="col-12 col-lg-5">
                     <div style={{ maxWidth: '575px', width: '100%' }}>
-                        <select onChange={(e) => setSelectedYear(e.target.value)} value={selectedYear}>
-                            <option value="2024-25">FY 2024-25</option>
-                            <option value="2023-24">FY 2023-24</option>
-                        </select>
+                        <CustomSelect
+                            icon={<ChevronDown />}
+                            options={[
+                                { label: 'FY 2024-25', value: '2024-25' },
+                                { label: 'FY 2023-24', value: '2023-24' },
+                            ]}
+                            placeholder="FY 2024-25"
+                            paramKey="chart_year"
+                            onChange={(val) => val && setSelectedYear(val)}
+                        />
 
-                        <div style={{ height: '300px', marginTop: '20px' }}>
+                        <div style={{ height: '400px', marginTop: '20px' }}>
                             <Bar data={data} options={options} />
                         </div>
 
@@ -59,8 +86,8 @@ export default function CustomValueChart() {
                     </div>
 
                 </div>
-                <div className="col-12 col-lg-7 offset-lg-1">
-                    <div className="data__wrapper">
+                <div className="col-12 col-lg-5 offset-lg-2">
+                    <div className="data__wrapper responsive-space-30">
                         <h2 className='clr-primary ft_medium lh_1-2'>₹{currentData.label}</h2>
                         <p>Value distributed across operations & stakeholders</p>
 

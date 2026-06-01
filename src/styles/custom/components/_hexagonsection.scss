@@ -46,9 +46,9 @@
       padding-top: 6vh;
     }
 
-    @include mq(tablet-max) {
-      padding-top: 10vh;
-    }
+    // @include mq(tablet-max) {
+    //   padding-top: 10vh;
+    // }
   }
 
   &__row {

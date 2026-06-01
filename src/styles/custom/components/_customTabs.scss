@@ -15,14 +15,22 @@
   width: 100%;
   flex-shrink: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  overflow-x: scroll;
   margin-bottom: 32px;
+  scrollbar-width: none;
+  -webkit-scrollbar: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media (min-width: 768px) {
     width: 340px;
     border-right: 1px solid #bababb;
     padding-right: 16px;
     margin-bottom: 0;
+    flex-direction: column;
   }
 
   .custom-tabs-button {
@@ -36,9 +44,17 @@
     background: transparent;
     border-left: 2px solid #63646666;
     cursor: pointer;
+    min-width: 150px;
+
+
+    @include mq(tablet) {
+      min-width: inherit;
+    }
+
     @include mq('desktop') {
       @include font-size(18);
     }
+
     @include mq('desktop-wide') {
       @include font-size(20);
     }
@@ -47,27 +63,30 @@
       color: #486b8c;
       border-left-color: #486b8c;
     }
-    &.tab-clr-green{
-      &.active{
+
+    &.tab-clr-green {
+      &.active {
         color: var(--color-accent-green);
         border-left-color: var(--color-accent-green);
       }
-      
+
     }
-    &.tab-clr-red{
-      &.active{
+
+    &.tab-clr-red {
+      &.active {
         color: var(--color-accent-red);
         border-left-color: var(--color-accent-red);
       }
-     
+
     }
-    &.tab-clr-blue{
-      &.active{
+
+    &.tab-clr-blue {
+      &.active {
         color: var(--color-accent-blue);
         border-left-color: var(--color-accent-blue);
 
       }
-     
+
     }
 
 
@@ -99,31 +118,36 @@
   &.active {
     display: flex;
   }
-  &.tab-clr-green{
-    &.active{
-      .custom-tabs-header{
-        .header-icon{
+
+  &.tab-clr-green {
+    &.active {
+      .custom-tabs-header {
+        .header-icon {
           color: #4fb848;
         }
-        .header-text{
-          h2{
+
+        .header-text {
+          h2 {
             color: #4fb848;
           }
         }
       }
-      .custom-tabs-section{
-        .topics-list{
-        .topic-indicator{
-              background-color: #4fb848;
-            }
+
+      .custom-tabs-section {
+        .topics-list {
+          .topic-indicator {
+            background-color: #4fb848;
+          }
         }
-        &.value-created{
-          .values-list{
-            .value-indicator{
+
+        &.value-created {
+          .values-list {
+            .value-indicator {
               background-color: #4fb848;
             }
-            .value-content{
-              .value-number{
+
+            .value-content {
+              .value-number {
                 color: #4fb848;
               }
             }
@@ -132,31 +156,36 @@
       }
     }
   }
-  &.tab-clr-red{
-    &.active{
-      .custom-tabs-header{
-        .header-icon{
+
+  &.tab-clr-red {
+    &.active {
+      .custom-tabs-header {
+        .header-icon {
           color: var(--color-accent-red);
         }
-        .header-text{
-          h2{
+
+        .header-text {
+          h2 {
             color: var(--color-accent-red);
           }
         }
       }
-      .custom-tabs-section{
-        .topics-list{
-        .topic-indicator{
-              background-color: var(--color-accent-red);
-            }
+
+      .custom-tabs-section {
+        .topics-list {
+          .topic-indicator {
+            background-color: var(--color-accent-red);
+          }
         }
-        &.value-created{
-          .values-list{
-            .value-indicator{
+
+        &.value-created {
+          .values-list {
+            .value-indicator {
               background-color: var(--color-accent-red);
             }
-            .value-content{
-              .value-number{
+
+            .value-content {
+              .value-number {
                 color: var(--color-accent-red);
               }
             }
@@ -176,6 +205,7 @@
   border-bottom: 1px solid #afbbc8;
   padding-bottom: 16px;
   flex-direction: column;
+
   @include mq('tablet-max') {
     flex-direction: row;
   }
@@ -184,6 +214,14 @@
     margin-top: 4px;
     flex-shrink: 0;
     color: #486b8c;
+
+    img {
+      min-width: 40px;
+
+      @include mq(tablet) {
+        min-width: 50px;
+      }
+    }
   }
 
   .header-text {
@@ -219,15 +257,17 @@
 
 .custom-tabs-section {
   width: 100%;
+
   @include mq(tablet-max) {
     width: 40%;
   }
 
   &.value-created {
-   width: 100%;
-   @include mq(tablet-max) {
-     width: 60%;
-   }
+    width: 100%;
+
+    @include mq(tablet-max) {
+      width: 60%;
+    }
   }
 
   .section-title {
@@ -239,6 +279,14 @@
     flex-direction: column;
     gap: 16px;
 
+    @include mq(desktop-wide) {
+      gap: 20px;
+    }
+
+    @include mq(desktop-wide-max) {
+      gap: 24px;
+    }
+
     .topic-item {
       display: flex;
       align-items: center;
@@ -248,6 +296,7 @@
         height: 18px;
         background-color: #486b8c;
         margin-right: 8px;
+
         @include mq(desktop-wide) {
           height: 32px;
         }
@@ -260,6 +309,14 @@
     flex-direction: column;
     gap: 16px;
 
+    @include mq(desktop-wide) {
+      gap: 20px;
+    }
+
+    @include mq(desktop-wide-max) {
+      gap: 24px;
+    }
+
     .value-item {
       display: flex;
       align-items: center;
@@ -269,12 +326,15 @@
         height: 55px;
         background-color: #486b8c;
         margin-right: 16px;
+
         @include mq(desktop) {
           height: 80px;
         }
+
         @include mq(desktop-wide) {
           height: 90px;
         }
+
         @include mq(desktop-wide-max) {
           height: 110px;
         }
@@ -284,6 +344,7 @@
         display: flex;
         flex-direction: column;
         padding: 4px 0px;
+
         @include mq(desktop) {
           padding: 8px 0px;
         }
@@ -295,34 +356,36 @@
           margin-bottom: 4px;
           @include font-size(22);
 
-    @include mq('tablet') {
-        @include font-size(24);
-    }
+          @include mq('tablet') {
+            @include font-size(24);
+          }
 
-    @include mq('tablet-wide') {
-        @include font-size(28);
-    }
+          @include mq('tablet-wide') {
+            @include font-size(28);
+          }
 
-    @include mq('desktop-min') {
-        @include font-size(32);
-    }
+          @include mq('desktop-min') {
+            @include font-size(32);
+          }
 
-    @include mq('desktop-wide') {
-        @include font-size(38);
-    }
+          @include mq('desktop-wide') {
+            @include font-size(38);
+          }
 
-    @include mq('desktop-wide-max') {
-        @include font-size(48);
-    }
+          @include mq('desktop-wide-max') {
+            @include font-size(48);
+          }
         }
 
         .value-desc {
           color: #6b7280;
           font-weight: 400;
           @include font-size(16);
-           @include mq('desktop') {
+
+          @include mq('desktop') {
             @include font-size(18);
           }
+
           @include mq('desktop-wide') {
             @include font-size(20);
           }

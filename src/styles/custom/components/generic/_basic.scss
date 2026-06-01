@@ -3393,6 +3393,14 @@ ul.arrowbulletList {
     @include mq(desktop-wide-max) {
       top: 330px;
     }
+
+    .items-row {
+      @media screen and (max-width: 991px) {
+        border-top: 1px solid var(--color-primary);
+        border-bottom: 1px solid var(--color-accent-green);
+        margin-bottom: 2rem;
+      }
+    }
   }
 
   & .itemhead {
@@ -3405,13 +3413,14 @@ ul.arrowbulletList {
 
     &.first-head {
       width: 200px;
-      border-top: 1px solid var(--color-primary);
-      border-bottom: 1px solid var(--color-accent-green);
+
       @include flex-direction(row, horizontal);
       @include align-items(center);
 
       @include mq(tablet-max) {
         width: 100%;
+        border-top: 1px solid var(--color-primary);
+        border-bottom: 1px solid var(--color-accent-green);
       }
     }
 
@@ -3914,6 +3923,9 @@ ul.arrowbulletList {
     position: relative;
     z-index: 2;
     padding: 50px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     @include mq(tablet-max) {
       padding: 80px 0px;
@@ -3988,6 +4000,7 @@ ul.arrowbulletList {
     color: var(--color-secondary);
     @include font-size(18);
     font-weight: var(--fontMedium);
+    @include border-radius(4px);
 
     @include mq(tablet-max) {
       @include font-size(20);
@@ -4053,6 +4066,7 @@ ul.arrowbulletList {
     border-radius: 8px;
     padding: 0px 12px;
     box-shadow: 0px 0.95px 1.9px 0px #0000000d;
+    background: #fff;
 
     @include mq(tablet-max) {
       padding: 0px 20px;
@@ -4197,6 +4211,12 @@ ul.arrowbulletList {
     text-align: left;
     text-decoration: none;
 
+    .icon {
+      img {
+        min-width: 18px;
+      }
+    }
+
     &:hover {
       background: #7b8e5c;
     }
@@ -4326,5 +4346,17 @@ ul.arrowbulletList {
   @include mq(tablet-max) {
     max-width: 675px;
     width: 100%;
+  }
+}
+
+.twoColumnContainer {
+  &__item {
+    padding: 40px 0px;
+
+    +.twoColumnContainer__item {
+      border-top: 1px solid #44618466;
+      margin: 40px 0px;
+      padding-top: 80px;
+    }
   }
 }

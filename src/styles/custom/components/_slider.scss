@@ -235,7 +235,7 @@ Common styles for navigation elements.
         }
 
         .embla__slide--category {
-          > div {
+          >div {
             color: rgba(99, 100, 102, 0.8);
           }
         }
@@ -308,7 +308,7 @@ Common styles for navigation elements.
   margin-top: 10px;
   position: relative;
 
-  > button {
+  >button {
     border: 1px solid #ccc !important;
     width: 40px;
     height: 40px;
@@ -785,7 +785,7 @@ Common styles for navigation elements.
       }
     }
 
-    > div > div > span {
+    >div>div>span {
       margin-top: 0.25rem;
       @include font-size(18);
       padding: 0.25rem 0.5rem;
@@ -819,7 +819,7 @@ Common styles for navigation elements.
     gap: 10px;
     @include align-items(center);
 
-    > span {
+    >span {
       color: var(--color-white);
       @include font-size(16);
       font-weight: var(--fontLight);
@@ -838,7 +838,7 @@ Common styles for navigation elements.
       }
     }
 
-    + .dots-container-wrapper {
+    +.dots-container-wrapper {
       margin-top: 15px;
     }
   }
@@ -871,7 +871,7 @@ Common styles for navigation elements.
 
 .cus-embla-arrow {
   .c-embla__buttons {
-    > button {
+    >button {
       border: none !important;
       border-radius: unset;
       width: 30px;
@@ -998,10 +998,9 @@ $transition-speed: 0.7s;
     overflow: hidden;
     cursor: pointer;
     opacity: 0.6;
-    transition:
-      flex #{$transition-speed} cubic-bezier(0.25, 1, 0.5, 1),
-      opacity 0.4s ease,
-      transform 0.5s ease;
+    transition: flex #{$transition-speed} cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.4s ease,
+    transform 0.5s ease;
 
     // --- MOBILE LOGIC (1 Item) ---
     @media (max-width: 1024px) {
@@ -1103,11 +1102,9 @@ $transition-speed: 0.7s;
       left: 0;
       top: 0;
       z-index: 1;
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.4) 35%,
-        rgba(0, 0, 0, 0.6) 100%
-      );
+      background: linear-gradient(180deg,
+          rgba(0, 0, 0, 0.4) 35%,
+          rgba(0, 0, 0, 0.6) 100%);
     }
 
     img {
@@ -1274,7 +1271,7 @@ $transition-speed: 0.7s;
       width: 100%;
     }
 
-    & .c-embla__buttons > button.c-embla__arrow--prev {
+    & .c-embla__buttons>button.c-embla__arrow--prev {
       left: -20px !important;
       top: 33%;
       transform: translateX(-50%) rotate(180deg);
@@ -1285,7 +1282,7 @@ $transition-speed: 0.7s;
       }
     }
 
-    & .c-embla__buttons > button.c-embla__arrow--next {
+    & .c-embla__buttons>button.c-embla__arrow--next {
       right: -40px !important;
       top: 33%;
 
@@ -1355,11 +1352,9 @@ $transition-speed: 0.7s;
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          360deg,
-          rgba(16, 17, 21, 0.8) 39.82%,
-          rgba(16, 17, 21, 0) 100%
-        );
+        background: linear-gradient(360deg,
+            rgba(16, 17, 21, 0.8) 39.82%,
+            rgba(16, 17, 21, 0) 100%);
         width: 100%;
         height: 100%;
       }
@@ -1393,6 +1388,7 @@ $transition-speed: 0.7s;
     height: 320px;
   }
 }
+
 .c-verticalSlider {
   &.d1 {
     .c-verticalSlider__item {
@@ -1400,15 +1396,19 @@ $transition-speed: 0.7s;
       padding-bottom: 20px;
       margin: 40px 0px;
       transition: all 0.3s ease-in-out;
+
       @include mq(tablet-max) {
         padding-bottom: 40px;
       }
+
       &.border-green {
         border-color: var(--color-accent-green);
       }
+
       &:hover {
         border-bottom: 3px solid var(--color-secondary);
         transition: all 0.3s ease-in-out;
+
         .c-verticalSlider__item-ls {
           .c-heading-48 {
             font-weight: var(--fontMedium) !important;
@@ -1416,15 +1416,18 @@ $transition-speed: 0.7s;
           }
         }
       }
+
       &-ls {
         .icon {
           margin-bottom: 20px;
+
           img {
             width: 90px;
             height: 90px;
             object-fit: contain;
           }
         }
+
         .c-heading-48 {
           transition: all 0.3s ease-in-out;
         }
@@ -1432,6 +1435,7 @@ $transition-speed: 0.7s;
     }
   }
 }
+
 .c-rolateSlider {
   &__card {
     height: 350px;
@@ -1442,16 +1446,21 @@ $transition-speed: 0.7s;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
+    margin: 0px 10px;
+
     @include mq(tablet-max) {
       padding: 20px;
     }
+
     @include mq(desktop) {
       padding: 24px;
     }
+
     @include mq(desktop-wide-max) {
       padding: 32px 20px 32px 32px;
       height: 456px;
     }
+
     &-content {
       position: relative;
       z-index: 9;
@@ -1459,27 +1468,33 @@ $transition-speed: 0.7s;
       flex-direction: column;
       @include justify-content(space-between);
       height: 100%;
+
       &-top {
         @include flexbox;
         gap: 10px;
+
         .icon {
           width: 40px;
           height: 40px;
           min-width: 30px;
+
           img {
             width: 100%;
             height: 100%;
             object-fit: contain;
           }
         }
+
         .c-content-24 {
           @include font-size(18);
+
           @include mq(desktop-wide-max) {
             @include font-size(22);
           }
         }
       }
     }
+
     &::before {
       content: "";
       position: absolute;
@@ -1487,26 +1502,30 @@ $transition-speed: 0.7s;
       height: 100%;
       left: 0;
       top: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.36) 25%,
-        rgba(0, 0, 0, 0.36) 75%,
-        rgba(0, 0, 0, 0.6) 100%
-      );
+      background: linear-gradient(180deg,
+          rgba(0, 0, 0, 0.36) 25%,
+          rgba(0, 0, 0, 0.36) 75%,
+          rgba(0, 0, 0, 0.6) 100%);
     }
   }
+
   .c-sliderBtn {
     gap: unset;
+
     button {
       border: 1px solid #636466;
     }
   }
 
-  .swiper-slide {
-    + .swiper-slide {
-      @include mq(tablet-max) {
-        margin-left: 20px;
-      }
-    }
-  }
+  // .swiper-slide {
+  //   // margin: 0px 10px;
+  //   // @include mq(tablet) {
+
+
+  //   // }
+
+  //   &.swiper-slide-active {
+  //     margin: 0px !important;
+  //   }
+  // }
 }

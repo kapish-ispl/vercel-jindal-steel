@@ -2562,9 +2562,28 @@
   cursor: pointer;
   margin-bottom: 12px;
   height: calc(100% - 12px);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -120%;
+    width: 80px;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(25deg);
+    filter: blur(12px);
+    transition: left 0.8s ease;
+  }
 
   &:hover {
     box-shadow: 0px 0.95px 1.9px 0px #0000000d;
+
+    &::before {
+      left: 130%;
+    }
   }
 
   @include mq(tablet) {

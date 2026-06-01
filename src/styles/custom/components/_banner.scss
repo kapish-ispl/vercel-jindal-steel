@@ -15,7 +15,9 @@
 
     .slick-slide {
         &:first-child {
-            .c-banner__item_desktop + .container, .c-banner__item_mobile + .banner__title {
+
+            .c-banner__item_desktop+.container,
+            .c-banner__item_mobile+.banner__title {
                 display: none;
             }
         }
@@ -28,15 +30,17 @@
     &__media {
         @include size(100%);
         position: relative;
-        img, video{
-           box-shadow: 0px 4px 4px 0px #00000040 !important;
+
+        img,
+        video {
+            box-shadow: 0px 4px 4px 0px #00000040 !important;
         }
 
     }
 
     &__content {
         position: absolute;
-        bottom: 10%;
+        bottom: 5%;
         width: 100%;
         z-index: 30;
 
@@ -55,12 +59,15 @@
             font-weight: var(--fontLight);
             line-height: 1.1 !important;
             text-align: center;
+
             @include mq('tablet-wide') {
                 @include font-size(55);
             }
-              @include mq('desktop-min') {
+
+            @include mq('desktop-min') {
                 @include font-size(60);
             }
+
             //  @include mq('desktop-wide') {
             //     @include font-size(70);
             // }
@@ -70,17 +77,18 @@
         }
     }
 
-    &__image, &__video {
+    &__image,
+    &__video {
         object-fit: cover;
         object-position: center center;
         width: 100%;
         height: 100%;
     }
-   
+
 
     &:before {
         content: "";
-        background: linear-gradient(180deg, rgba(0, 0, 0, .2) 21.88%, transparent 69.16%);
+        background: linear-gradient(180deg, #000000 0%, rgba(102, 102, 102, 0) 100%);
         position: absolute;
         top: 0;
         left: 0;
@@ -91,7 +99,7 @@
 
     &:after {
         content: "";
-        background: linear-gradient(0deg, rgba(0, 0, 0, .2) 21.88%, transparent 69.16%);
+        background: linear-gradient(360deg, rgba(0, 0, 0, 0.78) 21.88%, rgba(0, 0, 0, 0) 69.16%);
         position: absolute;
         bottom: 0;
         left: 0;
@@ -103,6 +111,7 @@
 
 .c-inner-banner {
     height: 100dvh;
+
     &__item_desktop {
         display: none;
 
@@ -160,56 +169,65 @@
 
 .c-banner {
     min-height: 600px;
+
     video {
         height: 100%;
         width: 100%;
         object-fit: cover;
         object-position: center center;
+
         @include mq('tablet') {
             height: 100dvh;
             width: 100%;
         }
     }
-     .banner__title {
-            color: var(--color-white);
-            text-transform: uppercase;
-            // font-weight: 700;
-            position: absolute;
-            bottom: 114px;
-            z-index: 999;
-            left: 50%;
-            font-weight: var(--fontLight);
-            line-height: 1.1 !important;
-            transform: translateX(-50%);
-            @include font-size(35);
-            @include mq('tablet-wide') {
-                @include font-size(55);
-            }
-              @include mq('desktop-min') {
-                @include font-size(60);
-            }
-            //  @include mq('desktop-wide') {
-            //     @include font-size(70);
-            // }
-            //   @include mq('desktop-wide-max') {
-            //     @include font-size(80);
-            // }
 
+    .banner__title {
+        color: var(--color-white);
+        text-transform: uppercase;
+        // font-weight: 700;
+        position: absolute;
+        bottom: 114px;
+        z-index: 999;
+        left: 50%;
+        font-weight: var(--fontLight);
+        line-height: 1.1 !important;
+        transform: translateX(-50%);
+        @include font-size(35);
+
+        @include mq('tablet-wide') {
+            @include font-size(55);
         }
+
+        @include mq('desktop-min') {
+            @include font-size(60);
+        }
+
+        //  @include mq('desktop-wide') {
+        //     @include font-size(70);
+        // }
+        //   @include mq('desktop-wide-max') {
+        //     @include font-size(80);
+        // }
+
+    }
+
     @include mq('tablet') {
         min-height: 100dvh !important;
     }
-    &__wrapper{
+
+    &__wrapper {
         @include mq('tablet') {
-        height: 100dvh !important;
-        min-height: 900px;
-        video{
-            object-fit: cover;
-            height: 100dvh;
-            object-position: center center;
+            height: 100dvh !important;
+            min-height: 900px;
+
+            video {
+                object-fit: cover;
+                height: 100dvh;
+                object-position: center center;
+            }
+
         }
-        
-    }
     }
 
     // .c-banner__wrapper,
