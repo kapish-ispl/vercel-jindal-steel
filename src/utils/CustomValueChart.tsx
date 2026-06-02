@@ -26,9 +26,12 @@ export default function CustomValueChart() {
                 setBarThickness(100);
             } else if (width < 992) {
                 setBarThickness(80);
-            } else {
+            } else if (width < 1400) {
                 setBarThickness(120);
+            } else {
+                setBarThickness(140);
             }
+
         };
         handleResize();
         window.addEventListener("resize", handleResize);
@@ -140,7 +143,7 @@ export default function CustomValueChart() {
                             onChange={(val) => val && setSelectedYear(val)}
                         />
 
-                        <div style={{ height: '300px', marginTop: '20px' }}>
+                        <div style={{ height: '350px', marginTop: '20px' }}>
                             <Bar data={data} options={options} plugins={[ChartDataLabels]} />
                         </div>
 
