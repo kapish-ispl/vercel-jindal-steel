@@ -1432,6 +1432,17 @@ $transition-speed: 0.7s;
           transition: all 0.3s ease-in-out;
         }
       }
+
+      &-rs {
+        height: 100%;
+
+        >div {
+          height: 100%;
+          @include flexbox;
+          @include justify-content(flex-start);
+          @include align-items(flex-end);
+        }
+      }
     }
   }
 }

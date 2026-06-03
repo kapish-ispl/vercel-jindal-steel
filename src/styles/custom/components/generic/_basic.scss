@@ -4444,6 +4444,12 @@ ul.arrowbulletList {
         .c-bento__card__wrapper_media {
           height: 100% !important;
         }
+
+        .c-bento__card__wrapper_content {
+          @include mq(desktop-wide-max) {
+            padding: 32px;
+          }
+        }
       }
 
     }

@@ -152,7 +152,7 @@ export default function CustomValueChart() {
 
                 </div >
                 <div className="col-12 col-lg-5 offset-lg-2">
-                    <div className="data__wrapper responsive-space-30">
+                    <div className="data__wrapper responsive-space-30 sticky">
                         <h2 className='clr-primary ft_medium lh_1-2'>₹{currentData.label}</h2>
                         <p>Value distributed across operations & stakeholders</p>
 
