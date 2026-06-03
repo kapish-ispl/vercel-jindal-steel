@@ -9,7 +9,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 const dataSets: Record<string, { data: number[]; label: string }> = {
-    "2024-25": { data: [48932, 43097, 6161], label: "43,097 Cr" },
+    "2024-25": { data: [48932, 43097, 6161], label: "48,932 Cr" },
     "2023-24": { data: [45000, 40000, 5000], label: "40,000 Cr" }
 };
 
@@ -132,7 +132,7 @@ export default function CustomValueChart() {
             <div className="row">
                 <div className="col-12 col-lg-5">
                     <div style={{ maxWidth: '575px', width: '100%' }}>
-                        <CustomSelect
+                        {/* <CustomSelect
                             icon={<ChevronDown />}
                             options={[
                                 { label: 'FY 2024-25', value: '2024-25' },
@@ -141,7 +141,7 @@ export default function CustomValueChart() {
                             placeholder="FY 2024-25"
                             paramKey="chart_year"
                             onChange={(val) => val && setSelectedYear(val)}
-                        />
+                        /> */}
 
                         <div style={{ height: '350px', marginTop: '20px' }}>
                             <Bar data={data} options={options} plugins={[ChartDataLabels]} />

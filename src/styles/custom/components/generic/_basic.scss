@@ -4385,3 +4385,67 @@ ul.arrowbulletList {
     }
   }
 }
+
+.hexogon__wrapper {
+  &-item {
+    @include flexbox;
+    @include align-items(flex-start);
+    gap: 20px;
+
+    @include mq(tablet-max) {
+      @include align-items(center);
+    }
+
+    .icon {
+      img {
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
+
+        @include mq(tablet-max) {
+          width: 140px;
+          height: 140px;
+          min-width: 140px;
+
+        }
+
+        @include mq(desktop) {
+          width: 167px;
+          height: 167px;
+          min-width: 167px;
+        }
+
+        @include mq(desktop-wide) {
+          width: 190px;
+          height: 190px;
+          min-width: 190px;
+        }
+
+        @include mq(desktop-wide-max) {
+          width: 216px;
+          height: 216px;
+          min-width: 216px;
+        }
+      }
+    }
+  }
+}
+
+.fixed_cardHeight {
+  .c-bento__card__wrapper {
+    &.v3 {
+      height: 100% !important;
+
+      .c-bento__card__wrapper_item {
+        height: 100% !important;
+        min-height: unset !important;
+        max-height: unset !important;
+
+        .c-bento__card__wrapper_media {
+          height: 100% !important;
+        }
+      }
+
+    }
+  }
+}

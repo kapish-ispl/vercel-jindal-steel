@@ -123,12 +123,12 @@
     &.active {
       .custom-tabs-header {
         .header-icon {
-          color: #4fb848;
+          color: var(--color-accent-olive);
         }
 
         .header-text {
           h2 {
-            color: #4fb848;
+            color: var(--color-accent-olive);
           }
         }
       }
@@ -136,19 +136,19 @@
       .custom-tabs-section {
         .topics-list {
           .topic-indicator {
-            background-color: #4fb848;
+            background-color: var(--color-accent-olive);
           }
         }
 
         &.value-created {
           .values-list {
             .value-indicator {
-              background-color: #4fb848;
+              background-color: var(--color-accent-olive);
             }
 
             .value-content {
               .value-number {
-                color: #4fb848;
+                color: var(--color-accent-olive);
               }
             }
           }

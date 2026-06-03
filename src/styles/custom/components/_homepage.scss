@@ -704,7 +704,7 @@
         &.v2 {
           img {
             @include mq(desktop) {
-              height: 700px;
+              height: 650px;
               object-fit: cover;
             }
 

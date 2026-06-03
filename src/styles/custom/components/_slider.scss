@@ -1466,7 +1466,7 @@ $transition-speed: 0.7s;
       z-index: 9;
       @include flexbox;
       flex-direction: column;
-      @include justify-content(space-between);
+      @include justify-content(flex-end);
       height: 100%;
 
       &-top {
