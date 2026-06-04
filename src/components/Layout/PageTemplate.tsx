@@ -53,6 +53,7 @@ const CustomValueChart = dynamic(() => import("@/utils/CustomValueChart"), { ssr
 const HexagonSection = dynamic(() => import("@/utils/HexagonSection"), { ssr: false });
 const CustomAccordion = dynamic(() => import("@/utils/CustomAccordian"), { ssr: false });
 const AirEmissionsChart = dynamic(() => import("@/utils/AirEmissionsChart"), { ssr: false });
+const ProgressBar = dynamic(() => import("@/utils/ProgressBar"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -86,6 +87,9 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "customrisecircular") {
                     return <CustomRiseCircular />
+                }
+                if (domNode.name === "progressbar") {
+                    return <ProgressBar />
                 }
                 if (domNode.name === "scrollprogress") {
                     return <ScrollProgress />
