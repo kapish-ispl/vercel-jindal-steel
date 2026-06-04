@@ -88,7 +88,8 @@
 
     &:before {
         content: "";
-        background: linear-gradient(180deg, #000000 0%, rgba(102, 102, 102, 0) 100%);
+        // background: linear-gradient(180deg, #000000 0%, rgba(102, 102, 102, 0) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, .5), rgba(102, 102, 102, 0));
         position: absolute;
         top: 0;
         left: 0;
@@ -99,7 +100,8 @@
 
     &:after {
         content: "";
-        background: linear-gradient(360deg, rgba(0, 0, 0, 0.78) 21.88%, rgba(0, 0, 0, 0) 69.16%);
+        // background: linear-gradient(360deg, rgba(0, 0, 0, 0.78) 21.88%, rgba(0, 0, 0, 0) 69.16%);
+        background: linear-gradient(0deg, rgba(0, 0, 0, .5) 16%, rgba(0, 0, 0, 0) 71%);
         position: absolute;
         bottom: 0;
         left: 0;
