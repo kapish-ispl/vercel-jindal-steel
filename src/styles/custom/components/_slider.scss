@@ -1540,3 +1540,27 @@ $transition-speed: 0.7s;
   //   }
   // }
 }
+
+.u-slider-vertical {
+  .c-verticalSlider__item {
+    height: calc(100% - 150px);
+
+    @include mq(tablet-max) {
+      height: calc(100% - 200px);
+    }
+
+    @include mq(desktop-wide) {
+      height: calc(100% - 280px)
+    }
+
+    &-ls {
+      .hw {
+        &.withBoder {
+          @include mq(desktop) {
+            padding-bottom: 40px;
+          }
+        }
+      }
+    }
+  }
+}

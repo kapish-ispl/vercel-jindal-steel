@@ -154,19 +154,19 @@ const InnerBanner = ({ label, tagline, slug, currentPage, innerBanner = [] }: Pr
                         <div className="col-12">
                             <div className="c-inner-banner__content_box">
 
-                                <h1 className="banner__title">
+                                <h1 className="banner__title mb-100">
                                     {tagline !== undefined ? (
                                         <div
                                             dangerouslySetInnerHTML={{ __html: tagline }}
                                         />
                                     ) : (
-                                       label !== undefined ? (
-                                        <div
-                                            dangerouslySetInnerHTML={{ __html: label }}
-                                        />
-                                    ) : (
-                                        <div>Default Title</div>  
-                                    ))}
+                                        label !== undefined ? (
+                                            <div
+                                                dangerouslySetInnerHTML={{ __html: label }}
+                                            />
+                                        ) : (
+                                            <div>Default Title</div>
+                                        ))}
                                 </h1>
 
                                 <div className="breadcumbs">

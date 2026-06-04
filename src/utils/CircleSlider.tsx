@@ -12,8 +12,6 @@ const textFade = {
 };
 
 export default function CircularManagement({ data, props }: any) {
-
-  console.log(props)
   const [active, setActive] = useState(0);
 
   const circularData = [
@@ -91,44 +89,53 @@ export default function CircularManagement({ data, props }: any) {
     const childrenArray = React.Children.toArray(data);
     if (childrenArray.length === 0) return circularData;
 
+    const result: any[] = [];
+
+    childrenArray.forEach((child) => {
+      if (!React.isValidElement(child) || (child.type as any) !== "item") return;
+
+      const itemProps = (child.props as any) || {};
+      const childElements = React.Children.toArray(itemProps.children);
+
+      const iconNode = childElements.find(
+        (c) => React.isValidElement(c) && (c.type as any) === "icon"
+      );
+
+      const sections = childElements
+        .filter((c) => React.isValidElement(c) && (c.type as any) === "section")
+        .map((section) => {
+          if (!React.isValidElement(section)) return null;
+          const sProps = section.props as any;
+          return {
+            label: sProps["data-type"],
+            desc: React.Children.toArray(sProps.children).join(""),
+          };
+        })
+        .filter(Boolean);
+
+      result.push({
+        id: itemProps["data-id"],
+        label: itemProps["data-label"],
+        description: itemProps["data-description"],
+        icon: React.isValidElement(iconNode)
+          ? (iconNode.props as any).children
+          : null,
+        details: sections,
+      } as any);
+    });
+
+    return result;
+  }, [data]);
+
+  // Static content — all childdescription siblings collected independently of active state
+  const childDescriptions = useMemo(() => {
+    const childrenArray = React.Children.toArray(data);
     return childrenArray
-      .filter((child) => React.isValidElement(child) && (child.type as any) === "item")
-      .map((item) => {
-        if (!React.isValidElement(item)) return null;
-        const itemProps = (item.props as any) || {};
-        const childElements = React.Children.toArray(itemProps.children);
-
-        const iconNode = childElements.find(
-          (c) => React.isValidElement(c) && (c.type as any) === "icon"
-        );
-
-        const sections = childElements
-          .filter((c) => React.isValidElement(c) && (c.type as any) === "section")
-          .map((section) => {
-            if (!React.isValidElement(section)) return null;
-            const sProps = section.props as any;
-            return {
-              label: sProps["data-type"],
-              desc: React.Children.toArray(sProps.children).join(""),
-            };
-          })
-          .filter(Boolean);
-
-        return {
-          id: itemProps["data-id"],
-          label: itemProps["data-label"],
-          description: itemProps["data-description"],
-          icon: React.isValidElement(iconNode)
-            ? (iconNode.props as any).children
-            : null,
-          details: sections,
-        } as any;
-      })
-      .filter(Boolean);
+      .filter((child) => React.isValidElement(child) && (child.type as any) === "childdescription")
+      .map((child) => React.isValidElement(child) ? (child.props as any).children : null);
   }, [data]);
 
   const activeData = circularData1[active] || circularData[active];
-
   // --- Navigation Logic ---
   const handleNext = () => {
     setActive((prev) => (prev + 1) % circularData1.length);
@@ -179,72 +186,161 @@ export default function CircularManagement({ data, props }: any) {
             </div>
           </div>
         </div>
-        <div className="row overflow-hidden">
-          <div className="col-12">
-            <div className="circle-wrapper">
-              {/* Header Section */}
+        <div className="row mt-80 overflow-hidden commonSection-md v2 pt-0">
+          {props?.twocol == "true" ? (<>
 
-              <div className="circle-container">
-                <div className="circle-border"></div>
-
-                {circularData1.map((item, index) => {
-                  // Logic: Calculate position on a 100% scale
-                  // 35 is the radius (as a percentage of the container)
-                  const angle = (index * (360 / circularData.length)) - 90;
-                  const radius = 35;
-                  const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
-                  const y = 50 + radius * Math.sin((angle * Math.PI) / 180);
-
-                  return (
-                    <div
-                      key={item.id}
-                      className={`item ${index === active ? "active" : ""}`}
-                      style={{
-                        left: `${x}%`,
-                        top: `${y}%`,
-
-                      }}
-                      onMouseEnter={() => setActive(index)}
-                    >
-                      <div className="icon-box">{item.icon}</div>
-                      <span className="label">{item.label}</span>
-                    </div>
-                  );
-                })}
-
-                <div className="center-content c-content-32 clr-gray ft_light lh_1-6">
-                  <AnimatePresence mode="wait">
-                    <motion.p key={active} {...textFade}>
-                      {activeData?.description}
-                    </motion.p>
-                  </AnimatePresence>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Footer Content */}
-            {
-              activeData?.details?.length > 0 && (
+            <div className="col-12 col-lg-6 cus-order-2">
+              {/* Static Child Descriptions */}
+              {childDescriptions.length > 0 && (
                 <div className="row mt-3 mt-lg-5">
-                  <div className="col-12 col-md-6 col-lg-5">
-                    <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">{activeData?.details?.[0]?.label}</h4>
-                    <AnimatePresence mode="wait">
-                      <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
-                        {activeData?.details?.[0]?.desc}
-                      </motion.p>
-                    </AnimatePresence>
-                  </div>
-                  <div className="col-12 col-md-6 col-lg-5 offset-lg-2">
-                    <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">{activeData?.details?.[1]?.label}</h4>
-                    <AnimatePresence mode="wait">
-                      <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
-                        {activeData?.details?.[1]?.desc}
-                      </motion.p>
-                    </AnimatePresence>
-                  </div>
+                  {childDescriptions.map((desc, i) => (
+                    <div key={i} className="col-12">
+                      {desc}
+                    </div>
+                  ))}
                 </div>
               )}
-          </div>
+            </div>
+            <div className="col-12 col-lg-6 cus-order-1">
+              <div className="circle-wrapper newCircleWrapper">
+                {/* Header Section */}
+
+                <div className="circle-container">
+                  <div className="circle-border"></div>
+
+                  {circularData1.map((item, index) => {
+                    // Divide 360° evenly by the actual number of items
+                    // radius=40 matches the 10% inset border in .newCircleWrapper
+                    const angle = (index * (360 / circularData1.length)) - 90;
+                    const radius = 40;
+                    const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
+                    const y = 50 + radius * Math.sin((angle * Math.PI) / 180);
+
+                    // Quadrant class so CSS can flip label position per side
+                    const posClass =
+                      y < 30 ? "pos-top"
+                        : y > 70 ? "pos-bottom"
+                          : x > 50 ? "pos-right"
+                            : "pos-left";
+
+                    return (
+                      <div
+                        key={item.id}
+                        className={`item ${posClass} ${index === active ? "active" : ""}`}
+                        style={{
+                          left: `${x}%`,
+                          top: `${y}%`,
+
+                        }}
+                        onMouseEnter={() => setActive(index)}
+                      >
+                        <div className="icon-box">{item.icon}</div>
+                        <span className="label">{item.label}</span>
+                      </div>
+                    );
+                  })}
+
+                  <div className="center-content c-content-18 clr-gray ft_medium lh_1-6">
+                    <AnimatePresence mode="wait">
+                      <motion.p key={active} {...textFade}>
+                        {activeData?.description}
+                      </motion.p>
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Footer Content */}
+              {
+                activeData?.details?.length > 0 && (
+                  <div className="row mt-3 mt-lg-5">
+                    <div className="col-12 col-md-6 col-lg-5">
+                      <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">{activeData?.details?.[0]?.label}</h4>
+                      <AnimatePresence mode="wait">
+                        <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
+                          {activeData?.details?.[0]?.desc}
+                        </motion.p>
+                      </AnimatePresence>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-5 offset-lg-2">
+                      <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">{activeData?.details?.[1]?.label}</h4>
+                      <AnimatePresence mode="wait">
+                        <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
+                          {activeData?.details?.[1]?.desc}
+                        </motion.p>
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                )}
+            </div>
+
+          </>) : (<>
+            <div className="col-12">
+              <div className="circle-wrapper">
+                {/* Header Section */}
+
+                <div className="circle-container">
+                  <div className="circle-border"></div>
+
+                  {circularData1.map((item, index) => {
+                    // Logic: Calculate position on a 100% scale
+                    // 35 is the radius (as a percentage of the container)
+                    const angle = (index * (360 / circularData.length)) - 90;
+                    const radius = 35;
+                    const x = 50 + radius * Math.cos((angle * Math.PI) / 180);
+                    const y = 50 + radius * Math.sin((angle * Math.PI) / 180);
+
+                    return (
+                      <div
+                        key={item.id}
+                        className={`item ${index === active ? "active" : ""}`}
+                        style={{
+                          left: `${x}%`,
+                          top: `${y}%`,
+
+                        }}
+                        onMouseEnter={() => setActive(index)}
+                      >
+                        <div className="icon-box">{item.icon}</div>
+                        <span className="label">{item.label}</span>
+                      </div>
+                    );
+                  })}
+
+                  <div className="center-content c-content-32 clr-gray ft_light lh_1-6">
+                    <AnimatePresence mode="wait">
+                      <motion.p key={active} {...textFade}>
+                        {activeData?.description}
+                      </motion.p>
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Footer Content */}
+              {
+                activeData?.details?.length > 0 && (
+                  <div className="row mt-3 mt-lg-5">
+                    <div className="col-12 col-md-6 col-lg-5">
+                      <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">{activeData?.details?.[0]?.label}</h4>
+                      <AnimatePresence mode="wait">
+                        <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
+                          {activeData?.details?.[0]?.desc}
+                        </motion.p>
+                      </AnimatePresence>
+                    </div>
+                    <div className="col-12 col-md-6 col-lg-5 offset-lg-2">
+                      <h4 className="c-content-32 clr-gray ft_medium mb-3 mb-lg-4">{activeData?.details?.[1]?.label}</h4>
+                      <AnimatePresence mode="wait">
+                        <motion.p key={active} {...textFade} className="text-muted c-content-20 clr-gray ft_light lh_1-6">
+                          {activeData?.details?.[1]?.desc}
+                        </motion.p>
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                )}
+            </div>
+          </>)}
         </div>
       </div>
     </div>

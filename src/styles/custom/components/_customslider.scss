@@ -721,3 +721,49 @@
         background: #f7f6f6 !important;
     }
 }
+
+.newCircleWrapper {
+    .circle-border {
+        top: 10%;
+        bottom: 10%;
+        left: 10%;
+        right: 10%;
+    }
+
+    .label {
+        @include font-size(20);
+
+        @include mq('tablet') {
+            @include font-size(24);
+        }
+
+        // @include mq('desktop-wide') {
+        //     @include font-size(32);
+        // }
+    }
+
+    // Top item: flip label above the icon so it doesn't overlap center text
+    .item.pos-top {
+        flex-direction: column-reverse;
+
+        .label {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+    }
+
+    // Right item: label below, left-align so it doesn't bleed off screen
+    .item.pos-right {
+        align-items: flex-start;
+    }
+
+    // Left item: label below, right-align so it doesn't bleed off screen
+    .item.pos-left {
+        align-items: flex-end;
+    }
+
+    // Bottom item: default (label below icon) is correct, no override needed
+    .item.pos-bottom {
+        flex-direction: column;
+    }
+}
