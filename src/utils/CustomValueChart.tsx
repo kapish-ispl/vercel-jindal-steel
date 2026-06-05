@@ -9,7 +9,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
 
 const dataSets: Record<string, { data: number[]; label: string }> = {
-    "2024-25": { data: [48932, 43097, 6161], label: "48,932 Cr" },
+    "2024-25": { data: [50183, 42943, 7151], label: "48,932 Cr" },
     "2023-24": { data: [45000, 40000, 5000], label: "40,000 Cr" }
 };
 
@@ -153,7 +153,7 @@ export default function CustomValueChart() {
                 </div >
                 <div className="col-12 col-lg-5 offset-lg-2">
                     <div className="data__wrapper responsive-space-30 sticky">
-                        <h2 className='clr-primary ft_medium lh_1-2'>₹{currentData.label}</h2>
+                        <h2 className='clr-primary ft_medium lh_1-2'>Rs.{currentData.label}</h2>
                         <p>Value distributed across operations & stakeholders</p>
 
                     </div>
