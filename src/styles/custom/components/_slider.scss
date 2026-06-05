@@ -1543,7 +1543,30 @@ $transition-speed: 0.7s;
 
 .u-slider-vertical {
   .c-verticalSlider__item {
-    height: calc(100% - 150px);
+    @include mq(desktop) {
+      height: calc(100% - 150px);
+
+    }
+
+    &.border-green {
+      border-bottom: 5px solid var(--color-accent-green);
+      padding-bottom: 30px;
+
+      @include mq(tablet-max) {
+        border-bottom: none !important;
+        padding-bottom: 0px !important;
+      }
+    }
+
+    &.withBoder {
+      border-bottom: 5px solid #f47920;
+      padding-bottom: 30px;
+
+      @include mq(tablet-max) {
+        border-bottom: none !important;
+        padding-bottom: 0px !important;
+      }
+    }
 
     @include mq(tablet-max) {
       height: calc(100% - 200px);
@@ -1556,8 +1579,29 @@ $transition-speed: 0.7s;
     &-ls {
       .hw {
         &.withBoder {
+          @media screen and (max-width: 768px) {
+            border-bottom: none !important;
+            padding-bottom: 0px !important;
+          }
+
           @include mq(desktop) {
             padding-bottom: 40px;
+          }
+        }
+
+        .c-heading-48 {
+          @include font-size(30);
+
+          @include mq(tablet-max) {
+            @include font-size(36);
+          }
+
+          @include mq(desktop) {
+            @include font-size(42);
+          }
+
+          @include mq(desktop-wide) {
+            @include font-size(48);
           }
         }
       }

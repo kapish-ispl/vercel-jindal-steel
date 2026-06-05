@@ -194,7 +194,7 @@
 
     &.d1 {
         padding: 40px 0px;
-        height: 650px;
+        height: 100dvh;
         min-height: 400px;
 
         @include mq(tablet-max) {
@@ -221,13 +221,32 @@
                     flex-direction: row !important;
                     flex-wrap: nowrap;
                     overflow-x: scroll;
-                    scrollbar-width: none;
-                    -webkit-scrollbar: none;
+                    // scrollbar-width: none;
+                    // -webkit-scrollbar: none;
 
-                    &::-webkit-scrollbar {
-                        display: none;
+                    // &::-webkit-scrollbar {
+                    //     display: none;
+                    // }
+                }
+            }
+
+            &-list {
+                .c-heading-48 {
+                    @include font-size(30);
+
+                    @include mq(tablet-max) {
+                        @include font-size(36);
+                    }
+
+                    @include mq(desktop) {
+                        @include font-size(42);
+                    }
+
+                    @include mq(desktop-wide) {
+                        @include font-size(48);
                     }
                 }
+
             }
         }
 
