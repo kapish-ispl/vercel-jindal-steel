@@ -107,7 +107,7 @@ export default function CustomRiseCircular() {
               <tspan fill="#636466">R.</tspan>
               <tspan fill="#F47920">I.</tspan>
               <tspan fill="#4FB848">S.</tspan>
-              <tspan fill="#446183">E.</tspan>
+              <tspan fill="#446183">E</tspan>
             </text>
           </svg>
         </div>
