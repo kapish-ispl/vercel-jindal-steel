@@ -189,3 +189,147 @@
     }
   }
 }
+
+.c-tab__elem {
+  .custom-tabs-container {
+    .custom-tabs-content-area {
+      .custom-tabs-panel {
+        .custom-tabs-header {
+          @include mq(desktop-wide) {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+          }
+
+          @include mq(desktop-wide-max) {
+            margin-bottom: 40px;
+            margin-bottom: 40px;
+          }
+
+          .header-icon {
+            img {
+              height: 70px;
+              width: 70px;
+              min-width: 60px;
+            }
+          }
+        }
+
+        .custom-tabs-details {
+          flex-wrap: wrap;
+
+          @include mq(desktop-wide) {
+            column-gap: 32px;
+            row-gap: 40px;
+
+          }
+
+          .custom-tabs-section {
+            width: 100%;
+
+            @include mq(tablet) {
+              width: calc(100% / 2 - 20px);
+            }
+
+            @include mq(desktop-wide) {
+              width: calc(100% / 2 - 32px);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.custom-tab__v1 {
+  .tabbing_wrap {
+    &.v1 {
+      margin-top: 40px;
+
+      @include mq(tablet-max) {
+        margin-top: 60px;
+      }
+
+      @include mq(desktop-wide) {
+        margin-top: 80px;
+      }
+
+      ul {
+        gap: 8px;
+        margin-bottom: 40px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+
+        @include mq(tablet-max) {
+          margin-bottom: 60px;
+        }
+
+        @include mq(desktop-wide) {
+          margin-bottom: 80px;
+        }
+
+        li {
+          flex: 1;
+          min-width: 280px;
+
+          button {
+            width: 100%;
+            align-items: flex-start;
+            padding: 0;
+            margin: 0;
+
+            .c-sector__item_label {
+              padding: 0;
+            }
+          }
+        }
+      }
+
+      .tabbing_wrap_content {
+        &_item {
+          .c-twoColumnContainer__image {
+            @include mq(tablet-max) {
+              height: 100%;
+
+              img {
+                object-fit: cover;
+                object-position: center;
+                height: 100%;
+              }
+
+            }
+          }
+
+          .c-tabWrapper__info {
+            margin-top: 30px;
+
+            @include mq(tablet-max) {
+              padding-left: 10px;
+              margin-top: 0px;
+            }
+
+            .bulletPoints {
+              flex-direction: column;
+              padding-left: 15px;
+
+              &__head {
+                margin-bottom: 8px;
+              }
+
+              &__item {
+                @media screen and (max-width: 992px) {
+                  margin-left: 12px;
+
+                }
+              }
+            }
+
+            .bullePoints__head {
+              margin-bottom: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -105,7 +105,7 @@ const PageTemplate = ({ data }: any) => {
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <HexagonSection props={props} data={Array.isArray(children) ? children : [children]} />
                 }
-                if (domNode.name === "customtabs") {
+                if (domNode.name === "customtabsv2") {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <CustomTabs props={props} data={Array.isArray(children) ? children : [children]} />
