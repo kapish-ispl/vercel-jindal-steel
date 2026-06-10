@@ -20,6 +20,7 @@
   margin-bottom: 32px;
   scrollbar-width: none;
   -webkit-scrollbar: none;
+  gap: 15px;
 
   &::-webkit-scrollbar {
     display: none;
@@ -30,6 +31,7 @@
     border-right: 1px solid #bababb;
     padding-right: 16px;
     margin-bottom: 0;
+    gap: unset;
     flex-direction: column;
   }
 
@@ -42,13 +44,15 @@
     transition: all 0.3s ease;
     border: none;
     background: transparent;
-    border-left: 2px solid #63646666;
+    border-bottom: 2px solid #63646666;
     cursor: pointer;
     min-width: 150px;
 
 
     @include mq(tablet) {
       min-width: inherit;
+      border-left: 2px solid #63646666;
+      border-bottom: none;
     }
 
     @include mq('desktop') {
@@ -61,13 +65,24 @@
 
     &.active {
       color: #486b8c;
-      border-left-color: #486b8c;
+      border-bottom-color: #486b8c;
+
+      @include mq(tablet) {
+        border-left-color: #486b8c;
+        border-bottom-color: none;
+      }
     }
 
     &.tab-clr-green {
       &.active {
         color: var(--color-accent-olive);
-        border-left-color: var(--color-accent-olive);
+        border-bottom-color: var(--color-accent-olive);
+
+        @include mq(tablet) {
+          border-left-color: var(--color-accent-olive);
+          border-bottom-color: none;
+
+        }
       }
 
     }
@@ -75,7 +90,12 @@
     &.tab-clr-red {
       &.active {
         color: var(--color-accent-red);
-        border-left-color: var(--color-accent-red);
+        border-bottom-color: var(--color-accent-red);
+
+        @include mq(tablet) {
+          border-left-color: var(--color-accent-red);
+          border-bottom-color: none;
+        }
       }
 
     }
@@ -83,7 +103,12 @@
     &.tab-clr-blue {
       &.active {
         color: var(--color-accent-blue);
-        border-left-color: var(--color-accent-blue);
+        border-bottom-color: var(--color-accent-blue);
+
+        @include mq(tablet) {
+          border-left-color: var(--color-accent-blue);
+          border-bottom-color: none;
+        }
 
       }
 
