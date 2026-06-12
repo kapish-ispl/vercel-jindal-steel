@@ -3,22 +3,10 @@ import HomePage from "@/components/Layout/HomePageTemplate";
 import { GET_SPECIFIC_PAGE_ENDPOINT } from "@/config/apiConfig";
 import { CONSTANTS } from "@/config/constant";
 import { serverRequest } from "@/services/getServerSideRender";
-import CardSwipeSlider from "@/utils/CardSwipeSlider";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 
-
-interface PageData {
-  title?: string;
-  description?: string;
-  meta?: {
-    [key: string]: any;
-  };
-  [key: string]: any;
-}
-
-// 1️⃣ Generate dynamic metadata for the page
 export async function generateMetadata(): Promise<Metadata> {
   const fetchedInfo = await serverRequest(
     {},
@@ -26,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     CONSTANTS.REQUEST_GET
   );
 
-  const pageData: PageData = fetchedInfo?.data;
+  const pageData = fetchedInfo?.data;
 
   if (!pageData) return {};
 
@@ -37,33 +25,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const metaKeywords =
     pageData.meta_keyword ||
     "Jindal Steel, JSPL, Steel Manufacturing, Energy Solutions, Sustainable Steel, Indian Steel Industry, Steel Products, Power Generation, Infrastructure Development";
-  const metaImage = "https://www.jindalsteel.com/images/logo/meta.jpg";
-  const siteUrl = "https://www.jindalsteel.com/";
 
   return {
     title: metaTitle,
     description: metaDescription,
     keywords: metaKeywords,
-    openGraph: {
-      title: metaTitle,
-      description: metaDescription,
-      url: siteUrl,
-      type: "website",
-      images: [
-        {
-          url: metaImage,
-          width: 800,
-          height: 600,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      site: "@InsphereSoln",
-      title: metaTitle,
-      description: metaDescription,
-      images: [metaImage],
-    },
   };
 }
 

@@ -13,6 +13,8 @@ interface CookieBannerProps {
     excludedPaths?: string[];
 }
 
+const GA_IDS = ["G-MF2JPYQ6CN", "G-RCBN2HFSL7"];
+
 // Injects the GTM <script> and <noscript> tags into the document
 function loadGTM() {
     // Avoid injecting twice
@@ -44,6 +46,50 @@ function loadGTM() {
     }
 }
 
+// Injects Google Analytics scripts for all GA measurement IDs
+function loadGA() {
+    GA_IDS.forEach((gaId) => {
+        const scriptId = `ga-script-${gaId}`;
+
+        // Avoid injecting twice
+        if (document.getElementById(scriptId)) return;
+
+        // External gtag.js loader
+        const loaderScript = document.createElement("script");
+        loaderScript.id = scriptId;
+        loaderScript.async = true;
+        loaderScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+        document.head.appendChild(loaderScript);
+
+        // Inline gtag init
+        const initScript = document.createElement("script");
+        initScript.id = `${scriptId}-init`;
+        initScript.innerHTML = `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', '${gaId}');
+        `;
+        document.head.appendChild(initScript);
+    });
+}
+
+function getCookie(name: string): string | null {
+    if (typeof document === "undefined") return null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(";").shift() || null;
+    return null;
+}
+
+function setCookie(name: string, value: string, days: number = 365) {
+    if (typeof document === "undefined") return;
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/; SameSite=Lax`;
+}
+
 const CookieBanner = ({
     onAccept,
     onReject,
@@ -56,12 +102,13 @@ const CookieBanner = ({
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        const consent = localStorage.getItem("cookie_consent");
+        const consent = localStorage.getItem("cookie_consent") || getCookie("cookie_consent");
         const isExcluded = excludedPaths.includes(currentPathname);
 
         if (consent === "accepted") {
-            // User already accepted — load GTM immediately and update consent
+            // User already accepted — load GTM & GA immediately and update consent
             loadGTM();
+            loadGA();
             window.gtag?.("consent", "update", {
                 analytics_storage: "granted",
                 ad_storage: "granted",
@@ -80,7 +127,9 @@ const CookieBanner = ({
 
     const handleAccept = () => {
         localStorage.setItem("cookie_consent", "accepted");
+        setCookie("cookie_consent", "accepted", 365);
         loadGTM();
+        loadGA();
         window.gtag?.("consent", "update", {
             analytics_storage: "granted",
             ad_storage: "granted",
@@ -96,6 +145,7 @@ const CookieBanner = ({
 
     const handleReject = () => {
         localStorage.setItem("cookie_consent", "rejected");
+        setCookie("cookie_consent", "rejected", 365);
         // GTM never loads — nothing to update
         setIsVisible(false);
         onReject?.();

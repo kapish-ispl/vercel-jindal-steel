@@ -36,33 +36,11 @@ export async function generateMetadata({
   const metaKeywords =
     pageData.meta_keyword ||
     "Jindal Steel, JSPL, Steel Manufacturing, Energy Solutions, Sustainable Steel, Indian Steel Industry, Steel Products, Power Generation, Infrastructure Development";
-  const metaImage = "https://www.jindalsteel.com/images/logo/meta.jpg";
-  const siteUrl = "https://www.jindalsteel.com/";
 
   return {
     title: metaTitle,
     description: metaDescription,
     keywords: metaKeywords,
-    openGraph: {
-      title: metaTitle,
-      description: metaDescription,
-      url: siteUrl,
-      type: "website",
-      images: [
-        {
-          url: metaImage,
-          width: 800,
-          height: 600,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      site: "@InsphereSoln",
-      title: metaTitle,
-      description: metaDescription,
-      images: [metaImage],
-    },
   };
 }
 

@@ -85,21 +85,12 @@ const Header = () => {
     },
   ];
 
-  const toggleAccordion = (id: number) => {
-    setOpenAccordion(openAccordion === id ? null : id);
-  };
-
   return (
     <>
       {HEADER_MAIN_MENU && HEADER_MAIN_MENU.length > 0 && (
         <header ref={menuRef}
           className={`c-header ${isMegaActive ? "mega-menu--active" : ""} ${stickyHeader ? "header-sticky" : ""
             } ${scrollDirection === "down" ? "hide" : "show"}`}
-            onMouseEnter={() => setIsMegaActive(true)}
-            onMouseLeave={() => {
-                setActiveMenu(null);
-                setIsMegaActive(false);
-            }}
         >
           <div className="container cus-container">
             <div className="row">
@@ -249,10 +240,10 @@ const Header = () => {
                                 setThirdLevelMenu(null);
                                 setIsMegaActive(true)
                               }}
-                              // onMouseLeave={() => {
-                              //   setIsMegaActive(false);
-                              //   setActiveMenu(null);
-                              // }}
+                              onMouseLeave={() => {
+                                setIsMegaActive(false);
+                                setActiveMenu(null);
+                              }}
                             >
                               {/* <a
                                 href={menuItem.link}

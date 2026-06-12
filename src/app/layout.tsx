@@ -17,7 +17,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
 import SmoothScrollProvider from "@/components/Layout/SmoothScrollProvider";
-import GTMProvider from "@/components/Layout/GTMProvider";
+import Script from "next/script";
 
 import { Toaster } from "react-hot-toast";
 
@@ -27,11 +27,45 @@ export const poppins = Poppins({
   variable: "--font-poppins",
 });
 
+const metaImage = "https://www.jindalsteel.com/images/logo/meta.jpg";
+const siteUrl = "https://www.jindalsteel.com/";
+
 export const metadata: Metadata = {
-  title: "Jindal Steel",
-  description: "",
+  title: {
+    default: "Jindal Steel",
+    template: "%s | Jindal Steel",
+  },
+  description:
+    "Jindal Steel and Power Limited (JSPL) is a leading Indian steel and energy company, known for its innovative solutions and commitment to sustainability.",
+  keywords:
+    "Jindal Steel, JSPL, Steel Manufacturing, Energy Solutions, Sustainable Steel, Indian Steel Industry, Steel Products, Power Generation, Infrastructure Development",
+  metadataBase: new URL(siteUrl),
   verification: {
     google: "hxhEUPw_d8ReQZZdxoh0GAITxHwayUb6BggozmZGM7U",
+  },
+  openGraph: {
+    title: "Jindal Steel",
+    description:
+      "Jindal Steel and Power Limited (JSPL) is a leading Indian steel and energy company, known for its innovative solutions and commitment to sustainability.",
+    url: siteUrl,
+    siteName: "Jindal Steel",
+    type: "website",
+    images: [
+      {
+        url: metaImage,
+        width: 800,
+        height: 600,
+        alt: "Jindal Steel",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@JindalSteel_In",
+    title: "Jindal Steel",
+    description:
+      "Jindal Steel and Power Limited (JSPL) is a leading Indian steel and energy company, known for its innovative solutions and commitment to sustainability.",
+    images: [metaImage],
   },
 };
 
@@ -43,7 +77,59 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <GTMProvider />
+        <Script id="google-consent-defaults" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            window.gtag = gtag;
+
+            var consentState = 'denied';
+            if (typeof document !== 'undefined' && document.cookie.indexOf('cookie_consent=accepted') > -1) {
+                consentState = 'granted';
+            }
+
+            gtag('consent', 'default', {
+                analytics_storage: consentState,
+                ad_storage: consentState,
+                ad_user_data: consentState,
+                ad_personalization: consentState,
+                functionality_storage: consentState,
+                personalization_storage: consentState,
+                security_storage: 'granted'
+            });
+
+            if (consentState === 'granted') {
+                // Load GTM
+                (function(w,d,s,l,i){
+                    w[l]=w[l]||[];
+                    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+                    var f=d.getElementsByTagName(s)[0],
+                        j=d.createElement(s),
+                        dl=l!='dataLayer'?'&l='+l:'';
+                    j.async=true;
+                    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                    j.id='gtm-script';
+                    f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-NN298K4N');
+
+                // Load GA
+                var gaIds = ["G-MF2JPYQ6CN", "G-RCBN2HFSL7"];
+                gaIds.forEach(function(gaId) {
+                    var scriptId = 'ga-script-' + gaId;
+                    var loaderScript = document.createElement("script");
+                    loaderScript.id = scriptId;
+                    loaderScript.async = true;
+                    loaderScript.src = "https://www.googletagmanager.com/gtag/js?id=" + gaId;
+                    document.head.appendChild(loaderScript);
+
+                    var initScript = document.createElement("script");
+                    initScript.id = scriptId + "-init";
+                    initScript.innerHTML = "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} window.gtag = gtag; gtag('js', new Date()); gtag('config', '" + gaId + "');";
+                    document.head.appendChild(initScript);
+                });
+            }
+          `}
+        </Script>
       </head>
 
       <body className={`${poppins.variable}`}>
