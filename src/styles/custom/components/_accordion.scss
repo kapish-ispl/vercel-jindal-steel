@@ -333,7 +333,7 @@
     &:hover,
     &.active {
       .custom-accordion-title {
-        color: var(--color-primary, #f07c22);
+        color: var(--color-accent-peach, #d78e5e);
       }
     }
   }
@@ -373,14 +373,7 @@
       padding: 32px;
     }
   }
-  &.item-p-20 {
-     .custom-accordion-header {
-      padding: 15px 0;
-       @include mq(desktop) {
-        padding: 20px 0px;
-      }
-     }
-  }
+  
 }
 
 .c-accordion__wrap {
@@ -413,5 +406,15 @@
         }
       }
     }
+  }
+  &.item-p-20 {
+     .custom-accordion-container {
+     .custom-accordion-header {
+        padding: 15px 0px;
+         @include mq(desktop) {
+            padding: 20px 0px;
+      }
+      }
+     }
   }
 }
