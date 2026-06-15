@@ -373,6 +373,14 @@
       padding: 32px;
     }
   }
+  &.item-p-20 {
+     .custom-accordion-header {
+      padding: 15px 0;
+       @include mq(desktop) {
+        padding: 20px 0px;
+      }
+     }
+  }
 }
 
 .c-accordion__wrap {
