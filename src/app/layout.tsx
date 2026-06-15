@@ -33,7 +33,7 @@ const siteUrl = "https://www.jindalsteel.com/";
 export const metadata: Metadata = {
   title: {
     default: "Jindal Steel",
-    template: "%s | Jindal Steel",
+    template: "%s",
   },
   description:
     "Jindal Steel and Power Limited (JSPL) is a leading Indian steel and energy company, known for its innovative solutions and commitment to sustainability.",
