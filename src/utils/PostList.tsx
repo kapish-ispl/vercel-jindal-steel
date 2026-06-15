@@ -22,6 +22,7 @@ const componentMap: any = {
     ImageTextSlider: dynamic(() => import("./ImageTextSlider")),
     FilterCards: dynamic(() => import("./FilterCards")),
     PressReleaseCard: dynamic(() => import("./PressReleaseCard")),
+    BlogCard: dynamic(() => import("./BlogCard")),
     PerformanceCard: dynamic(() => import("./PerformanceCard")),
     LeadershipCard: dynamic(() => import("./LeadershipCard")),
     LeadershipCardV2: dynamic(() => import("./LeadershipCardV2")),
