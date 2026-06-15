@@ -2619,7 +2619,13 @@
       @include mq(tablet-max) {
         margin-bottom: 30px;
       }
-
+      &.size-70 {
+         img {
+              width: 70px;
+              height: auto;
+              min-width: 70px;
+          }
+      }
     }
 
     &-content {
