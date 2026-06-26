@@ -82,7 +82,7 @@
 
  .financial-tables .section-header {
       background-color: #eaeaea;
-      color: #3333;
+      color: #333333;  
       text-align: center;
       font-weight: 700;
       font-size: 14px;
@@ -118,7 +118,7 @@
     }
     .financial-tables .table-note {
       font-size: 11px;
-      color: #6b7280;
+      color: var(--color-secondary) !important;
       font-style: italic;
       margin-top: 4px;
       margin-bottom: 0;
