@@ -168,7 +168,7 @@ export default function CircularManagement({ data, props }: any) {
                   onClick={handlePrev}
                 >
                   <span className="icon"><svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.5 20.5L0.93997 11.4999C0.353346 10.9476 0.353346 10.0524 0.93997 9.50014L10.5 0.5" stroke="#A1A1A1" stroke-linecap="round" />
+                    <path d="M10.5 20.5L0.93997 11.4999C0.353346 10.9476 0.353346 10.0524 0.93997 9.50014L10.5 0.5" stroke="#A1A1A1" strokeLinecap="round" />
                   </svg>
                   </span>
                 </button>
@@ -178,7 +178,7 @@ export default function CircularManagement({ data, props }: any) {
                   onClick={handleNext}
                 >
                   <span className="icon"><svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.5 20.5L0.93997 11.4999C0.353346 10.9476 0.353346 10.0524 0.93997 9.50014L10.5 0.5" stroke="#A1A1A1" stroke-linecap="round" />
+                    <path d="M10.5 20.5L0.93997 11.4999C0.353346 10.9476 0.353346 10.0524 0.93997 9.50014L10.5 0.5" stroke="#A1A1A1" strokeLinecap="round" />
                   </svg>
                   </span>
                 </button>

@@ -38,7 +38,7 @@ function RecursiveMenu({ items, isThirdMenu, setThirdLevelMenu, setIsMegaActive 
                             {!isThirdMenu &&
                                 item.children && item.children.length > 0 &&
                                 <span className="right_icon">
-                                    <svg width="14" height="24" viewBox="0 0 7 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 0.500031L5.34236 4.10009C5.6395 4.32099 5.6395 4.67907 5.34236 4.89998L0.500001 8.50003" stroke="#A1A1A1" stroke-linecap="round" /></svg>
+                                    <svg width="14" height="24" viewBox="0 0 7 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 0.500031L5.34236 4.10009C5.6395 4.32099 5.6395 4.67907 5.34236 4.89998L0.500001 8.50003" stroke="#A1A1A1" strokeLinecap="round" /></svg>
                                 </span>
                             }
                         </Link>
