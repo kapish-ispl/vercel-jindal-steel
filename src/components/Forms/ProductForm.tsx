@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
+import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
 import FormField from './FormField';
@@ -7,11 +7,11 @@ import FormSelect from './FormSelect';
 import FormDatePicker from './FormDatePicker';
 import { restrictDigits, restrictEmailChars, restrictSpecialChar, validateMobile, handleCopyPaste } from './FormFunc';
 import { Captcha } from '../Captcha';
-import { QueryFormSchema } from './formschema';
+import { ProductFormSchema } from './formschema';
 import { POST_FORM_ENDPOINT } from '@/config/apiConfig';
 import { serverRequest } from '@/services/getServerSideRender';
-import { useRouter } from 'next/router';
 import { CONSTANTS } from '@/config/constant';
+import { useFormSubmit } from '@/hooks/useFormSubmit';
 
 interface FormValues {
     fullname: string;
@@ -31,7 +31,6 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
     const [actualCaptcha, setActualCaptcha] = useState<string>('');
     const [reloadCaptcha, setReloadCaptcha] = useState<boolean>(false);
     const [captchaKey, setCaptchaKey] = useState<number>(0);
-    const [submitMessage, setSubmitMessage] = useState<string | null>(null);
     // const router = useRouter();
 
     useEffect(() => {
@@ -51,53 +50,28 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
         product: pageTitle,
         user_captcha_input: "",
     };
-    const phoneRegExp = /^[6-9]\d{9}$/gi;
-
-    const FormSchema = Yup.object({
-        fullname: Yup.string().required("Enter your Full Name"),
-        email: Yup.string().email().required("Enter your Email Id"),
-        mobile: Yup.string()
-            .matches(phoneRegExp, "Enter valid Mobile Number")
-            .required("Enter valid Mobile Number"),
-        company: Yup.string().required("Enter Company Name"),
-        description: Yup.string().required("Enter your Description"),
-        country: Yup.string().required("Enter Country Name"),
-        city: Yup.string().required("Enter City Name"),
-        user_captcha_input: Yup.string().required("Captcha is required"),
-    });
 
 
-    const handleSubmit = async (values: FormValues, { setSubmitting, resetForm }: FormikHelpers<FormValues>) => {
-        setSubmitMessage(null);
 
-        const { ...submissionData } = values;
-
-        const filteredSubmissionData = Object.fromEntries(
-            Object.entries(submissionData).filter(([, value]) => value !== '')
-        );
-
-        const widgetData = {
-            WidgetForm: { fields: filteredSubmissionData, widget_id: 308 },
-        };
-
-        console.log(widgetData, 'widgetData');
-
-        try {
-            const response = await serverRequest(widgetData, POST_FORM_ENDPOINT, CONSTANTS.REQUEST_POST);
-
-            if (response.code === "SUC200") {
-                console.log('form saved successfully')
-                resetForm();
-            } else {
-                setSubmitMessage(response.message || 'An unexpected error occurred. Please try again.');
-            }
-        } catch (error) {
-            console.error("API submission failed:", error);
-            setSubmitMessage('An unexpected error occurred. Please try again.');
-        } finally {
-            setSubmitting(false);
-            setReloadCaptcha(prevState => !prevState);
+    const { handleSubmit: submitForm } = useFormSubmit(
+        (values: FormValues) => {
+            const filteredData = Object.fromEntries(
+                Object.entries(values).filter(([, v]) => v !== '')
+            );
+            const widgetData = {
+                WidgetForm: { fields: filteredData, widget_id: 308 },
+            };
+            return serverRequest(widgetData, POST_FORM_ENDPOINT, CONSTANTS.REQUEST_POST);
+        },
+        {
+            successMsg: 'Your enquiry has been submitted successfully!',
+            onError: () => setReloadCaptcha(prev => !prev),
         }
+    );
+
+    const handleSubmit = async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
+        await submitForm(values, helpers);
+        setReloadCaptcha(prev => !prev);
     };
 
     const inquiryOptions = ['Male', 'Female', 'Not Disclosed'];
@@ -106,7 +80,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
         <div className="form_container c-form">
             <Formik
                 initialValues={initialValues}
-                validationSchema={FormSchema}
+                validationSchema={ProductFormSchema}
                 onSubmit={handleSubmit}
             >
                 {({ errors, touched, isSubmitting, values }) => (

@@ -15,7 +15,7 @@ import FormDatePicker from "./FormDatePicker";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import { postUploadFileResponse, postAPIResponse } from "@/services/apiRequests";
 import FormMultiSelect from "./FormMultiSelect";
-import { toast } from "react-hot-toast";
+import { useFormSubmit, validateAndNotifyCaptcha } from "@/hooks/useFormSubmit";
 
 
 const JobForm = () => {
@@ -31,15 +31,22 @@ const JobForm = () => {
     const [selectDepartmentOther, setSelectDepartmentOther] = useState(false);
     const currentYear = new Date().getFullYear();
     const endOfCurrentYear = new Date(currentYear, 11, 31);
-    const [alertMsg, setAlertMsg] = useState("");
-    const [submitMsg, setSubmitMsg] = useState(false);
-    const [submitSuccess, setSubmitSuccess] = useState(false);
     const [actualCaptcha, setActualCaptcha] = useState<string>('');
     const [reloadCaptcha, setReloadCaptcha] = useState<boolean>(false);
     const [captchaKey, setCaptchaKey] = useState<number>(0);
     const [paramsExist, setParamsExist] = useState(false);
-
     const [isRedirecting, setIsRedirecting] = useState(false);
+
+    const { handleSubmit: submitJobForm } = useFormSubmit(
+        (data: any) => postAPIResponse(POST_JOB_ENDPOINT, data),
+        {
+            successMsg: "Application submitted successfully!",
+            onError: (_err, msg) => {
+                contextInfo.setIsLoading(false);
+                setReloadCaptcha(prev => !prev);
+            },
+        }
+    );
 
     // useEffect(() => {
     //     if (!contextInfo.jobPostId || !contextInfo.jobCode || !contextInfo.jobTitle) {
@@ -154,18 +161,6 @@ const JobForm = () => {
         ],
     };
 
-    const handleSubmitData = async (data: any) => {
-        const response = await postAPIResponse(POST_JOB_ENDPOINT, data);
-        if (response?.code == "SUC200") {
-            return true;
-        } else {
-            setSubmitSuccess(false);
-            setSubmitMsg(true);
-            setAlertMsg(response?.message || "Something went wrong while submitting the form.");
-            contextInfo.setIsLoading(false);
-            return false;
-        }
-    };
 
     useEffect(() => {
         if (reloadCaptcha) {
@@ -221,27 +216,19 @@ const JobForm = () => {
                                     console.log("Form Submitted. Values processed:", formValues);
                                     console.log("Final data to be sent:", submittedData);
 
-                                    if (validateCaptcha(user_captcha_input, actualCaptcha)) {
-                                        console.log("Captcha validated successfully.");
+                                    if (validateAndNotifyCaptcha(user_captcha_input, actualCaptcha)) {
                                         setReloadCaptcha(prev => !prev);
                                         contextInfo.setIsLoading(true);
-                                        const success = await handleSubmitData(submittedData);
 
-                                        if (success) {
-                                            toast.success("Application submitted successfully!");
-                                            action.resetForm();
-                                            contextInfo.setIsLoading(false);
-                                        } else {
-                                            toast.error("Failed to submit application.");
-                                        }
-                                    } else {
-                                        toast.error("Captcha Does Not Match");
-                                        setSubmitSuccess(false);
-                                        setSubmitMsg(true);
-                                        setAlertMsg("Captcha Does Not Match");
-                                        setTimeout(() => {
-                                            setSubmitMsg(false);
-                                        }, 3000);
+                                        await submitJobForm(
+                                            submittedData,
+                                            {
+                                                setSubmitting: action.setSubmitting,
+                                                resetForm: action.resetForm,
+                                            }
+                                        );
+
+                                        contextInfo.setIsLoading(false);
                                     }
                                 }}
                             >
@@ -286,6 +273,7 @@ const JobForm = () => {
                                                 `${GET_FILE_UPLOAD_ENDPOINT}`,
                                                 fileData
                                             );
+                                            console.log(response)
                                             if (response && response.code === 'SUC200' && response.data?.media?.orig) {
                                                 setFieldValue("resume_id", response.data.media.orig);
                                             } else {

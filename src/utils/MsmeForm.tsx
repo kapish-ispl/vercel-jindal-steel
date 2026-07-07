@@ -1,5 +1,5 @@
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { getMsmeFormSchema, MSME_PRODUCT_LIST } from "@/components/Forms/formschema";
 import { useRef, useContext, useState, useEffect } from "react";
 import { POST_MSME_ENDPOINT } from "@/config/apiConfig";
 import { postFormDataResponse } from "@/services/apiRequests";
@@ -59,76 +59,7 @@ const MsmeForm = ({ data }: any) => {
             cement_quantity: "",
         },
     };
-    const productsShape: Record<string, any> = {}
-
-    const productList = [
-        { key: 'HR_coil', label: 'HR coil' },
-        { key: 'Plates', label: 'Plates' },
-        { key: 'CRFH_coil', label: 'CRFH coil' },
-        { key: 'TMT', label: 'TMT' },
-        { key: 'wire_rods', label: 'Wire rods' },
-        { key: 'HRPO_coils', label: 'HRPO coils' },
-        { key: 'HRSPO_coils', label: 'HRSPO coils' },
-        { key: 'rails', label: 'Rails' },
-        { key: 'structures', label: 'Structures' },
-        { key: 'hollow_section', label: 'Hollow section' },
-        { key: 'cement', label: 'Cement' },
-    ];
-
-    productList.forEach(({ key, label }) => {
-        productsShape[key] = Yup.boolean();
-
-        productsShape[`${key}_quantity`] = Yup.number()
-            .typeError('Quantity must be a number')
-            .min(0, 'Quantity cannot be negative')
-            .nullable()
-            .when(key, {
-                is: true,
-                then: (schema) => schema.required(`Quantity is required when ${label} is selected`),
-                otherwise: (schema) => schema.notRequired().nullable(),
-            })
-            .test(
-                `require-checkbox-if-${key}-quantity-present`,
-                `Please check the product (${label})`,
-                function (value) {
-                    const checkbox = this.parent[key];
-                    return !value || checkbox === true;
-                }
-            );
-    });
-
-    const MsmeFormSchema = Yup.object({
-        gst_number: Yup.string()
-            .trim()
-            .required("GST Number is required")
-            .length(15, "GST Number must be exactly 15 characters")
-            .matches(
-                /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
-                "Invalid GST Number format"
-            ),
-        email: Yup.string().email("Invalid email").required("Email is required"),
-        mobile: Yup.string()
-            .matches(/^\d{10}$/, "Mobile number must be 10 digits")
-            .required("Mobile number is required"),
-        name_of_the_firm: Yup.string().trim().required("Name of the Firm is required"),
-        address_of_the_firm: Yup.string().trim().required("Address of the Firm is required"),
-        pincode: Yup.string().trim()
-            .length(6, "Pincode must be exactly 6 digits")
-            .matches(/^\d{6}$/, "Pincode must contain only digits")
-            .required("Pincode is required"),
-        contact_person_name: Yup.string()
-            .trim()
-            .required("Contact person name is required")
-            .matches(/^[^0-9]+$/, "Contact Person Name cannot contain numbers"),
-
-        products: Yup.object()
-            .shape(productsShape)
-            .test(
-                'at-least-one-selected',
-                'Please select at least one product',
-                (obj) => productList.some(({ key }) => obj?.[key])
-            ),
-    });
+    const MsmeFormSchema = getMsmeFormSchema(MSME_PRODUCT_LIST);
 
 
     const handleSubmitData = async (data: any) => {

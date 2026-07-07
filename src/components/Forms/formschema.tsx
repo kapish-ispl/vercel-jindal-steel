@@ -1,24 +1,113 @@
 import * as Yup from "yup";
 
-// --- Regular Expressions ---
-const phoneRegExp = /^[6-9]\d{9}$/;
-const yearRegExp = /^(194[5-9]|19[5-9]\d|20\d{2})$/;
-const percentageRegExp = /^(100(\.0{1,2})?|[1-9]?\d(\.\d{1,2})?)$/;
-const pincodeRegExp = /^[1-9][0-9]{5}$/;
+// ─── HTML/Script Injection Guard ──────────────────────────────────────────────
+export const hasHtmlOrScript = (value: string): boolean => {
+  const htmlTagPattern = /<[a-z/][\s\S]*>/i;
+  const eventHandlerPattern = /\bon\w+\s*=/i;
+  const scriptSchemePattern = /\b(javascript|vbscript):/i;
+  const cdataPattern = /<!\[CDATA\[/i;
+  const cssExpressionPattern = /\bexpression\s*\(/i;
+  
+  return (
+    htmlTagPattern.test(value) ||
+    eventHandlerPattern.test(value) ||
+    scriptSchemePattern.test(value) ||
+    cdataPattern.test(value) ||
+    cssExpressionPattern.test(value)
+  );
+};
 
-// --- TypeScript Interfaces for Type Safety ---
+/**
+ * Custom safe string validator that prevents any HTML tags or script injection.
+ */
+export const safeString = (message?: string) => {
+  return Yup.string().test(
+    "no-html-script",
+    message || "HTML tags, script injections, or event handlers are not allowed",
+    (value) => {
+      if (!value) return true;
+      return !hasHtmlOrScript(value);
+    }
+  );
+};
 
-// Interface for the simple contact form
-export interface IFormSchema {
+// ─── Shared Regular Expressions ──────────────────────────────────────────────
+export const REGEX = {
+  phone: /^[6-9]\d{9}$/,
+  year: /^(194[5-9]|19[5-9]\d|20\d{2})$/,
+  percentage: /^(100(\.0{1,2})?|[1-9]?\d(\.\d{1,2})?)$/,
+  pincode: /^[1-9][0-9]{5}$/,
+  gst: /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+  stdCode: /(?=.*?\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|\d+)?(\.\d{1,2})?$/,
+};
+
+// ─── Centralised Validation Error Messages ──────────────────────────────────
+export const VALIDATION_ERRORS = {
+  required: {
+    fullName: "Enter your Full Name",
+    name: "Enter your Name",
+    email: "Enter your Email Id",
+    mobile: "Enter valid Mobile Number",
+    company: "Enter Company Name",
+    description: "Enter your Description",
+    country: "Enter Country Name",
+    city: "Enter City Name",
+    captcha: "Captcha is required",
+    gst: "GST Number is required",
+    firmName: "Name of the Firm is required",
+    firmAddress: "Address of the Firm is required",
+    pincode: "Pincode is required",
+    contactPerson: "Contact person name is required",
+    dob: "Enter your Date of Birth",
+    gender: "Select your Gender",
+    experience: "Select your Experience",
+    address: "Enter your Address",
+    resume: "Please upload your resume",
+    joiningDate: "Enter your Joining Date",
+    relievingDate: "Relieving Date is required",
+    jobProfile: "Enter your Job Profile",
+    currentEmployment: "Select your current Employment",
+    department: "Select Department",
+    otherDepartment: "Enter Other Department",
+    jobPosition: "Enter Job Position",
+    jobCode: "Enter Job Code",
+    jobLocation: "Enter Job Location",
+    nationality: "Select your Nationality",
+    stateName: "Enter your State Name",
+    otherStateName: "Enter your Other State Name",
+    stdCode: "Enter your Country Code",
+  },
+  invalid: {
+    email: "Invalid email format",
+    mobile: "Enter valid Mobile Number",
+    gst: "Invalid GST Number format",
+    pincode: "Pincode must be exactly 6 digits",
+    pincodeDigits: "Pincode must contain only digits",
+    contactPersonNumbers: "Contact Person Name cannot contain numbers",
+    passingYear: "Enter a valid Passing Year",
+    percentage: "Enter a valid Percentage (e.g., 85.5)",
+    dobAge: "You must be at least 18 years old",
+    relievingAfterJoining: "Relieving Date must be after Joining Date",
+    stdCode: "Enter valid Country Code",
+    gstLength: "GST Number must be exactly 15 characters",
+    quantityNumber: "Quantity must be a number",
+    quantityNegative: "Quantity cannot be negative",
+  }
+};
+
+// ─── Interfaces ─────────────────────────────────────────────────────────────
+export interface IProductFormValues {
   fullname: string;
   email: string;
-  mobile: string;
   country: string;
+  company: string;
+  mobile: string;
   city: string;
+  description: string;
+  product: string;
   user_captcha_input: string;
 }
 
-// Interface for the education details array
 export interface IEducationDetail {
   degree_name: string;
   course_name?: string;
@@ -28,7 +117,6 @@ export interface IEducationDetail {
   percentage: string;
 }
 
-// Interface for the experience details array
 export interface IExperienceDetail {
   organization_name: string;
   designation: string;
@@ -38,8 +126,7 @@ export interface IExperienceDetail {
   is_current_employment: string;
 }
 
-// Interface for the main job application form
-export interface IJobApplicationSchema {
+export interface IJobApplicationValues {
   post_id?: string | number;
   current_openings: string;
   job_code: string;
@@ -73,119 +160,113 @@ export interface IJobApplicationSchema {
   other_department?: string;
 }
 
-export interface IQueryFormSchema {
-  full_Name: string;
-  email: string;
-  mobile: string;
-  country: string;
-  city: string;
-  message: string;
-  privacy_Policy: boolean;
-}
+// ─── Validation Schemas ─────────────────────────────────────────────────────
 
-
-// --- Type-Safe Schemas ---
-
-// Schema for the simple form
-export const FormSchema: Yup.ObjectSchema<IFormSchema> = Yup.object({
-  fullname: Yup.string().required("Enter your Full Name"),
-  email: Yup.string().email("Invalid email format").required("Enter your Email Id"),
-  mobile: Yup.string()
-    .matches(phoneRegExp, "Enter a valid 10-digit Mobile Number")
-    .required("Mobile Number is required"),
-  country: Yup.string().required("Enter Country Name"),
-  city: Yup.string().required("Enter City Name"),
-  user_captcha_input: Yup.string().required("Captcha is required"),
+/**
+ * ProductForm Schema (Contact / Query / Product Enquiry Form)
+ */
+export const ProductFormSchema: Yup.ObjectSchema<any> = Yup.object({
+  fullname: safeString().required(VALIDATION_ERRORS.required.fullName),
+  email: safeString().email(VALIDATION_ERRORS.invalid.email).required(VALIDATION_ERRORS.required.email),
+  mobile: safeString()
+    .matches(REGEX.phone, VALIDATION_ERRORS.invalid.mobile)
+    .required(VALIDATION_ERRORS.required.mobile),
+  company: safeString().required(VALIDATION_ERRORS.required.company),
+  description: safeString().required(VALIDATION_ERRORS.required.description),
+  country: safeString().required(VALIDATION_ERRORS.required.country),
+  city: safeString().required(VALIDATION_ERRORS.required.city),
+  user_captcha_input: safeString().required(VALIDATION_ERRORS.required.captcha),
 });
 
-
-// Schema for the detailed job application
-export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup.object({
-  current_openings: Yup.string().when("isTalentForm", {
+/**
+ * JobApplication Schema (Career / Talent Form)
+ */
+export const JobApplicationSchema: Yup.ObjectSchema<any> = Yup.object({
+  current_openings: safeString().when("isTalentForm", {
     is: (isTalentForm: any) => isTalentForm == true,
-    then: () => Yup.string().notRequired(),
-    otherwise: () => Yup.string().required("Enter Job Position").trim(),
+    then: () => safeString().notRequired(),
+    otherwise: () => safeString().required(VALIDATION_ERRORS.required.jobPosition).trim(),
   }),
-  skills: Yup.string().when("isTalentForm", {
+  skills: safeString().when("isTalentForm", {
     is: (isTalentForm: any) => isTalentForm == true,
-    then: () => Yup.string().required("Enter Sub function or Specialty").trim(),
-    otherwise: () => Yup.string().notRequired(),
+    then: () => safeString().required(VALIDATION_ERRORS.required.jobPosition).trim(),
+    otherwise: () => safeString().notRequired(),
   }),
-  department: Yup.string().when("isTalentForm", {
+  department: safeString().when("isTalentForm", {
     is: (isTalentForm: any) => isTalentForm == true,
-    then: () => Yup.string().required("Select Department"),
-    otherwise: () => Yup.string().notRequired(),
+    then: () => safeString().required(VALIDATION_ERRORS.required.department),
+    otherwise: () => safeString().notRequired(),
   }),
-  other_department: Yup.string().when("department", {
+  other_department: safeString().when("department", {
     is: (department: any) => department == "Others",
-    then: () => Yup.string().required("Enter Other Department").trim(),
+    then: () => safeString().required(VALIDATION_ERRORS.required.otherDepartment).trim(),
   }),
-  job_code: Yup.string().when("isTalentForm", {
+  job_code: safeString().when("isTalentForm", {
     is: (isTalentForm: any) => isTalentForm == true,
-    then: () => Yup.string().notRequired(),
-    otherwise: () => Yup.string().required("Enter Job Code").trim(),
+    then: () => safeString().notRequired(),
+    otherwise: () => safeString().required(VALIDATION_ERRORS.required.jobCode).trim(),
   }),
-  location: Yup.string().when("isTalentForm", {
+  location: safeString().when("isTalentForm", {
     is: (isTalentForm: any) => isTalentForm == true,
-    then: () => Yup.string().notRequired(),
-    otherwise: () => Yup.string().required("Enter Job Location").trim(),
+    then: () => safeString().notRequired(),
+    otherwise: () => safeString().required(VALIDATION_ERRORS.required.jobLocation).trim(),
   }),
-  name: Yup.string().required("Enter your Name").trim(),
+  name: safeString().required(VALIDATION_ERRORS.required.name).trim(),
   dob: Yup.date()
     .nullable()
-    .max(new Date(new Date().setFullYear(new Date().getFullYear() - 18)), "You must be at least 18 years old")
-    .required("Enter your Date of Birth"),
-  email: Yup.string().email("Invalid email format").required("Enter your Email Id").trim(),
-  alternate_email: Yup.string().email("Invalid email format").trim(),
-  gender: Yup.string().required("Select your Gender").trim(),
-  total_experience: Yup.string().required("Select your Experience").trim(),
-  other_experience: Yup.string().when("total_experience", {
+    .max(new Date(new Date().setFullYear(new Date().getFullYear() - 18)), VALIDATION_ERRORS.invalid.dobAge)
+    .required(VALIDATION_ERRORS.required.dob),
+  email: safeString().email(VALIDATION_ERRORS.invalid.email).required(VALIDATION_ERRORS.required.email).trim(),
+  alternate_email: safeString().email(VALIDATION_ERRORS.invalid.email).trim(),
+  gender: safeString().required(VALIDATION_ERRORS.required.gender).trim(),
+  total_experience: safeString().required(VALIDATION_ERRORS.required.experience).trim(),
+  other_experience: safeString().when("total_experience", {
     is: (total_experience: any) => total_experience == "15",
-    then: () => Yup.string().required("Enter Other Experience").trim(),
-    otherwise: () => Yup.string().notRequired(),
+    then: () => safeString().required(VALIDATION_ERRORS.required.experience).trim(),
+    otherwise: () => safeString().notRequired(),
   }),
-  notice_period: Yup.string().trim(),
-  nationality: Yup.string().required("Select your Nationality").trim(),
-  country_name: Yup.string().required("Select your Country Name").trim(),
-  state_name: Yup.string().required("Enter your State Name").trim(),
-  pincode: Yup.string()
-    .matches(pincodeRegExp, "Enter a valid Pincode")
-    .required("Enter your Pincode")
+  notice_period: safeString().trim(),
+  nationality: safeString().required(VALIDATION_ERRORS.required.nationality).trim(),
+  country_name: safeString().required(VALIDATION_ERRORS.required.country).trim(),
+  state_name: safeString().required(VALIDATION_ERRORS.required.stateName).trim(),
+  pincode: safeString()
+    .matches(REGEX.pincode, VALIDATION_ERRORS.invalid.pincode)
+    .required(VALIDATION_ERRORS.required.pincode)
     .trim(),
-  std_code: Yup.string()
-    .required("Enter your Country Code")
+  std_code: safeString()
+    .required(VALIDATION_ERRORS.required.stdCode)
     .trim(),
-  mobile_number: Yup.string()
-    .matches(phoneRegExp, "Enter a valid 10-digit Mobile Number")
-    .required("Mobile Number is required")
+  mobile_number: safeString()
+    .matches(REGEX.phone, VALIDATION_ERRORS.invalid.mobile)
+    .required(VALIDATION_ERRORS.required.mobile)
     .trim(),
-  alternate_mobile_number: Yup.string()
-    .matches(phoneRegExp, "Enter a valid 10-digit Mobile Number")
+  alternate_mobile_number: safeString()
+    .matches(REGEX.phone, VALIDATION_ERRORS.invalid.mobile)
     .trim(),
-  address: Yup.string().required("Enter your Address").trim(),
-  city_name: Yup.string().required("Enter your City Name").trim(),
+  address: safeString().required(VALIDATION_ERRORS.required.address).trim(),
+  city_name: safeString().required(VALIDATION_ERRORS.required.city).trim(),
   key_skills: Yup.lazy((value) => {
     if (Array.isArray(value)) {
-      return Yup.array().of(Yup.string()).min(1, "Select at least one skill").required("Select key skills");
+      return Yup.array().of(safeString()).min(1, "Select at least one skill").required("Select key skills");
     }
-    return Yup.string().required("Select key skills").trim();
+    return safeString().required("Select key skills").trim();
   }) as any,
-  resume_id: Yup.string().required("Please upload your resume").trim(),
-  user_captcha_input: Yup.string().required("Captcha is required").trim(),
+  resume_id: safeString().required(VALIDATION_ERRORS.required.resume).trim(),
+  user_captcha_input: safeString().required(VALIDATION_ERRORS.required.captcha).trim(),
   education_details: Yup.array()
     .of(
       Yup.object({
-        degree_name: Yup.string().required("Enter your Board/Degree Name").trim(),
-        course_name: Yup.string().trim(),
-        institute_name: Yup.string().trim(),
-        university_name: Yup.string().trim(),
-        passing_year: Yup.string()
-          .matches(yearRegExp, "Enter a valid Passing Year")
-          .required("Enter your Passing Year")
+        degree_name: safeString().required(VALIDATION_ERRORS.required.name).trim(),
+        course_name: safeString().trim(),
+        institute_name: safeString().trim(),
+        university_name: safeString().trim(),
+        passing_year: safeString()
+          .matches(REGEX.year, VALIDATION_ERRORS.invalid.passingYear)
+          .required(VALIDATION_ERRORS.required.passingYear)
           .trim(),
-        percentage: Yup.string()
-          .matches(percentageRegExp, "Enter a valid Percentage (e.g., 85.5)")
-          .required("Enter your Percentage")
+        percentage: safeString()
+          .matches(REGEX.percentage, VALIDATION_ERRORS.invalid.percentage)
+          .required(VALIDATION_ERRORS.required.percentage)
           .trim(),
       })
     )
@@ -197,58 +278,103 @@ export const JobApplicationSchema: Yup.ObjectSchema<IJobApplicationSchema> = Yup
     }
     return Yup.array().of(
       Yup.object({
-        organization_name: Yup.string().required("Enter your Organization Name").trim(),
-        designation: Yup.string().required("Enter your Designation").trim(),
+        organization_name: safeString().required(VALIDATION_ERRORS.required.firmName).trim(),
+        designation: safeString().required(VALIDATION_ERRORS.required.jobProfile).trim(),
         joining_date: Yup.date()
           .nullable()
           .max(new Date(), "Joining date cannot be in the future")
-          .required("Enter your Joining Date"),
+          .required(VALIDATION_ERRORS.required.joiningDate),
         relieving_date: Yup.date()
           .nullable()
-          .required("Relieving Date is required")
+          .required(VALIDATION_ERRORS.required.relievingDate)
           .test(
             "is-greater",
-            "Relieving Date must be after Joining Date",
-            function (value) {
+            VALIDATION_ERRORS.invalid.relievingAfterJoining,
+            function (val) {
               const { joining_date } = this.parent as any;
-              if (!value || !joining_date) return true;
-              return value > joining_date;
+              if (!val || !joining_date) return true;
+              return val > joining_date;
             }
           ),
-        job_profile: Yup.string().required("Enter your Job Profile").trim(),
-        is_current_employment: Yup.string().required("Select your current Employment").trim(),
+        job_profile: safeString().required(VALIDATION_ERRORS.required.jobProfile).trim(),
+        is_current_employment: safeString().required(VALIDATION_ERRORS.required.currentEmployment).trim(),
       })
     ).required("Experience details are required");
   }),
 }) as any;
 
-export const QueryFormSchema: Yup.ObjectSchema<IQueryFormSchema> = Yup.object({
-  full_Name: Yup.string()
-    .trim()
-    .min(2, 'Name is too short')
-    .required('Full Name is required'),
-  company: Yup.string().trim(),
-  email: Yup.string()
-    .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required'),
-  mobile: Yup.string()
-    .trim()
-    .matches(phoneRegExp, 'Please enter a valid 10-digit mobile number')
-    .required('Mobile number is required'),
-  country: Yup.string()
-    .trim()
-    .required('Country is required'),
-  city: Yup.string()
-    .trim()
-    .required('City is required'),
-  message: Yup.string()
-    .trim()
-    .required('Message is required'),
-  // inquiry_Type: Yup.string()
-  //   .oneOf(['sales', 'billing', 'support', ''], 'Please select a valid inquiry type'),
-  inquiry_Type: Yup.string(),
-  privacy_Policy: Yup.boolean()
-    .oneOf([true], 'You must accept the privacy policy to continue')
-    .required(),
-})
+/**
+ * Generates dynamic MSME Form Schema based on a product list.
+ */
+export const getMsmeFormSchema = (productList: Array<{ key: string; label: string }>) => {
+  const productsShape: Record<string, any> = {};
+
+  productList.forEach(({ key, label }) => {
+    productsShape[key] = Yup.boolean();
+
+    productsShape[`${key}_quantity`] = Yup.number()
+      .typeError(VALIDATION_ERRORS.invalid.quantityNumber)
+      .min(0, VALIDATION_ERRORS.invalid.quantityNegative)
+      .nullable()
+      .when(key, {
+        is: true,
+        then: (schema) => schema.required(`Quantity is required when ${label} is selected`),
+        otherwise: (schema) => schema.notRequired().nullable(),
+      })
+      .test(
+        `require-checkbox-if-${key}-quantity-present`,
+        `Please check the product (${label})`,
+        function (value) {
+          const checkbox = this.parent[key];
+          return !value || checkbox === true;
+        }
+      );
+  });
+
+  return Yup.object({
+    gst_number: safeString()
+      .trim()
+      .required(VALIDATION_ERRORS.required.gst)
+      .length(15, VALIDATION_ERRORS.invalid.gstLength)
+      .matches(
+        /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+        VALIDATION_ERRORS.invalid.gst
+      ),
+    email: safeString().email(VALIDATION_ERRORS.invalid.email).required(VALIDATION_ERRORS.required.email),
+    mobile: safeString()
+      .matches(/^\d{10}$/, VALIDATION_ERRORS.invalid.mobile)
+      .required(VALIDATION_ERRORS.required.mobile),
+    name_of_the_firm: safeString().trim().required(VALIDATION_ERRORS.required.firmName),
+    address_of_the_firm: safeString().trim().required(VALIDATION_ERRORS.required.firmAddress),
+    pincode: safeString().trim()
+      .length(6, VALIDATION_ERRORS.invalid.pincode)
+      .matches(/^\d{6}$/, VALIDATION_ERRORS.invalid.pincodeDigits)
+      .required(VALIDATION_ERRORS.required.pincode),
+    contact_person_name: safeString()
+      .trim()
+      .required(VALIDATION_ERRORS.required.contactPerson)
+      .matches(/^[^0-9]+$/, VALIDATION_ERRORS.invalid.contactPersonNumbers),
+
+    products: Yup.object()
+      .shape(productsShape)
+      .test(
+        'at-least-one-selected',
+        'Please select at least one product',
+        (obj) => productList.some(({ key }) => obj?.[key])
+      ),
+  });
+};
+
+export const MSME_PRODUCT_LIST = [
+  { key: 'HR_coil', label: 'HR coil' },
+  { key: 'Plates', label: 'Plates' },
+  { key: 'CRFH_coil', label: 'CRFH coil' },
+  { key: 'TMT', label: 'TMT' },
+  { key: 'wire_rods', label: 'Wire rods' },
+  { key: 'HRPO_coils', label: 'HRPO coils' },
+  { key: 'HRSPO_coils', label: 'HRSPO coils' },
+  { key: 'rails', label: 'Rails' },
+  { key: 'structures', label: 'Structures' },
+  { key: 'hollow_section', label: 'Hollow section' },
+  { key: 'cement', label: 'Cement' },
+];
