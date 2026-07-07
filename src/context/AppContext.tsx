@@ -2,7 +2,7 @@
 
 import { serverRequest } from "@/services/getServerSideRender";
 import { useSearchParams, useParams } from "next/navigation";
-import { GET_JOB_ENDPOINT, GET_MENU_ENDPOINT, GET_POST_ENDPOINT } from "@/config/apiConfig";
+import { GET_JOB_ENDPOINT } from "@/config/apiConfig";
 import { ReactNode, createContext, useState, useEffect, Dispatch, SetStateAction } from "react";
 import { CONSTANTS } from "@/config/constant";
 import AOS from "aos";
@@ -77,7 +77,19 @@ export const AppContext = createContext<contextType>({
     locationOptions: [],
 });
 
-const AppContextProvider = ({ children }: { children: ReactNode }) => {
+type AppContextProviderProps = {
+    children: ReactNode;
+    initialHeaderMenu?: any[];
+    initialFooterMenu?: any[];
+    initialProductData?: any[];
+};
+
+const AppContextProvider = ({
+    children,
+    initialHeaderMenu = [],
+    initialFooterMenu = [],
+    initialProductData = [],
+}: AppContextProviderProps) => {
     const searchParams = useSearchParams();
     const params = useParams();
 
@@ -87,11 +99,11 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const routerFilter = searchParams.get("filter") ?? undefined;
     const routerMedia = searchParams.get("media") ?? undefined;
 
-    const [headerMenu, setHeaderMenu] = useState([]);
-    const [footerMenu, setFooterMenu] = useState([]);
+    const [headerMenu, setHeaderMenu] = useState<any[]>(initialHeaderMenu);
+    const [footerMenu, setFooterMenu] = useState<any[]>(initialFooterMenu);
     const [mastersData, setMastersData] = useState<any>([]);
     const [footerBottomMenu, setFooterBottomMenu] = useState([]);
-    const [productData, setProductData] = useState([]);
+    const [productData, setProductData] = useState<any[]>(initialProductData);
     const [isLoading, setIsLoading] = useState(false);
     const [audioState, setAudioState] = useState(false);
     const [jobPostId, setJobPostId] = useState("");
@@ -121,29 +133,7 @@ const AppContextProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     useEffect(() => {
-        const perRequiredRequest = async () => {
-            const getHeaderMenu = await serverRequest(
-                {},
-                `${GET_MENU_ENDPOINT}?slug=header-menu-v2`,
-                CONSTANTS.REQUEST_GET
-            );
-            if (getHeaderMenu && getHeaderMenu.code == CONSTANTS.STATUS_SUCCESS) {
-                setHeaderMenu(getHeaderMenu.data);
-            } else {
-                setHeaderMenu([]);
-            }
-
-            const getFooterMenu = await serverRequest({}, `${GET_MENU_ENDPOINT}?slug=footer-menu-v2`, CONSTANTS.REQUEST_GET);
-            if (getFooterMenu && getFooterMenu.code == CONSTANTS.STATUS_SUCCESS) {
-                setFooterMenu(getFooterMenu.data);
-            } else {
-                setFooterMenu([]);
-            }
-            const getProducts = await serverRequest({}, `${GET_POST_ENDPOINT}?slug=product`, CONSTANTS.REQUEST_GET);
-            setProductData(getProducts);
-        };
-        perRequiredRequest();
-
+        // Job/masters data is only needed for the careers section — fetched client-side
         const getPostData = async () => {
             const taxonomyInfo = await serverRequest({}, `${GET_JOB_ENDPOINT}`, CONSTANTS.REQUEST_GET);
             if (taxonomyInfo !== undefined) {

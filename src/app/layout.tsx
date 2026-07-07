@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 
 import { ThemeProvider } from "@/components/Layout/ThemeProvider";
 import AppContextProvider from "@/context/AppContext";
+import { getMenuData } from "@/lib/getMenuData";
 
 import "@/styles/globals.scss";
 
@@ -69,11 +70,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { headerMenu, footerMenu, productData } = await getMenuData();
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -136,7 +138,11 @@ export default function RootLayout({
         <Toaster position="top-center" reverseOrder={false} />
 
         <Suspense fallback={null}>
-          <AppContextProvider>
+          <AppContextProvider
+            initialHeaderMenu={headerMenu}
+            initialFooterMenu={footerMenu}
+            initialProductData={productData}
+          >
             <SmoothScrollProvider>
               <Header />
 
