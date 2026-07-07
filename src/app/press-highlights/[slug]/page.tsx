@@ -152,6 +152,7 @@ import { CONSTANTS } from "@/config/constant";
 import { serverRequest } from "@/services/getServerSideRender";
 import InnerBanner from "@/components/Layout/InnerBanner";
 import { MONTH_NAMES } from "@/config/config";
+import parse from "html-react-parser";
 
 export default async function Page({
   params,
@@ -251,7 +252,7 @@ export default async function Page({
 
           <div className="col-12 col-lg-10">
             <div className="c-content-20 ft_light lh_1-4">
-              {pageData?.metaInfo?.description}
+              {parse(pageData?.metaInfo?.description || "")}
             </div>
           </div>
 
