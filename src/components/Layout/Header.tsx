@@ -22,7 +22,6 @@ const Header = () => {
 
   // mobile state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openAccordion, setOpenAccordion] = useState<number | null>(null);
 
   // desktop menu active item for hover/focus
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
@@ -90,6 +89,7 @@ const Header = () => {
     },
   ];
 
+  console.log(HEADER_MAIN_MENU)
   return (
     <>
       {HEADER_MAIN_MENU && HEADER_MAIN_MENU.length > 0 && (
@@ -104,35 +104,22 @@ const Header = () => {
                   {/* Logo */}
                   <div className="c-header__logo">
                     <Link href="/">
-                      {stickyHeader ? (
-                        <Image
-                          src={IMAGE_PATH.LOGO}
-                          alt="Jindal Steel"
-                          className="img-fluid"
-                          priority
-                          width={170}
-                          height={80}
-                        />
-                      ) : (
-                        isMegaActive ?
-                          <Image
-                            src={IMAGE_PATH.LOGO}
-                            alt="Jindal Steel"
-                            className="img-fluid"
-                            priority
-                            width={190}
-                            height={86}
-                          />
-                          :
-                          <Image
-                            src={IMAGE_PATH.LOGO_LIGHT}
-                            alt="Jindal Steel"
-                            className="img-fluid"
-                            width={190}
-                            height={86}
-                            priority
-                          />
-                      )}
+                      <Image
+                        src={IMAGE_PATH.LOGO}
+                        alt="Jindal Steel"
+                        className="img-fluid logo-dark"
+                        priority
+                        width={stickyHeader ? 170 : 190}
+                        height={stickyHeader ? 80 : 86}
+                      />
+                      <Image
+                        src={IMAGE_PATH.LOGO_LIGHT}
+                        alt="Jindal Steel"
+                        className="img-fluid logo-light"
+                        priority
+                        width={190}
+                        height={86}
+                      />
                     </Link>
                   </div>
 
@@ -145,89 +132,6 @@ const Header = () => {
                     <div className="icon-menu"></div>
                   </button>
 
-
-                  {/* Desktop Menu */}
-                  {/* <div className="c-header__nav desktop-menu">
-                    <nav className="c-header__menu" role="navigation" aria-label="Main menu">
-                      <ul className="flex menu_wrap" role="menubar">
-                        {HEADER_MAIN_MENU.map((menuItem: any) => {
-                          const aa = descriptionLoop.filter(
-                            (i: any) => i.name === menuItem.name
-                          );
-                          const dataItem = menuItem.name.split(" ").join("_");
-
-                          return (
-                            <li
-                              key={menuItem.id}
-                              className={`c-header__menu-list ${activeMenu === menuItem.id ? "active" : ""
-                                }`}
-                              role="none"
-                              onMouseEnter={() => setActiveMenu(menuItem.id)}
-                              onMouseLeave={() => setActiveMenu(null)}
-                            >
-                              <a
-                                href={menuItem.link}
-                                target={menuItem.is_new_tab === 1 ? "_blank" : "_self"}
-                                className="c-header__menu-item"
-                                data-item={menuItem.children.length > 0 ? dataItem : ""}
-                                role="menuitem"
-                                aria-haspopup={menuItem.children.length > 0 ? "true" : undefined}
-                                aria-expanded={
-                                  menuItem.children.length > 0 && activeMenu === menuItem.id
-                                    ? "true"
-                                    : "false"
-                                }
-                                aria-controls={
-                                  menuItem.children.length > 0 ? `submenu-${menuItem.id}` : undefined
-                                }
-                                tabIndex={0}
-                                onFocus={() => setActiveMenu(menuItem.id)}
-                                onBlur={() => setActiveMenu(null)}
-                              >
-                                {menuItem.name}
-                              </a>
-
-                              {menuItem.children.length > 0 && (
-                                <ul
-                                  id={`submenu-${menuItem.id}`}
-                                  role="menu"
-                                  className="mega-panel"
-                                  aria-hidden={activeMenu !== menuItem.id}
-                                >
-                                  <li className="row">
-                                    <li className="col-4">
-                                      {aa.length > 0 && aa.map((item: any, index: number) => (
-                                        <p className="c-content-16 clr-black mt-2 pe-5 me-3" key={index}>
-                                          {item.desc}
-                                        </p>
-                                      ))}
-                                    </li>
-                                    <li className="col-6">
-                                      <ul className="mega-menu">
-                                        {menuItem.children.map((subMenu: any) => (
-                                          <li key={subMenu.id} role="none">
-                                            <Link
-                                              href={subMenu.link}
-                                              role="menuitem"
-                                              target={subMenu.type === "external" ? "_blank" : "_self"}
-                                              className="mega-menu__link"
-                                            >
-                                              {subMenu.name}
-                                            </Link>
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    </li>
-                                  </li>
-                                </ul>
-                              )}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </nav>
-                  </div> */}
-
                   <div className="c-header__nav desktop-menu">
                     <nav className="c-header__menu" role="navigation" aria-label="Main menu">
                       <ul className="flex menu_wrap" role="menubar">
@@ -237,46 +141,10 @@ const Header = () => {
                           return (
                             <li
                               key={menuItem.id}
-                              className={`c-header__menu-list ${(activeMenu === menuItem.id && isMegaActive) ? "active" : ""
-                                }`}
+                              className="c-header__menu-list"
                               role="none"
-                              onMouseEnter={() => {
-                                setActiveMenu(menuItem.id);
-                                setThirdLevelMenu(null);
-                                setIsMegaActive(true)
-                              }}
-                              onMouseLeave={() => {
-                                setIsMegaActive(false);
-                                setActiveMenu(null);
-                              }}
+                              onMouseEnter={() => setThirdLevelMenu(null)}
                             >
-                              {/* <a
-                                href={menuItem.link}
-                                target={menuItem.is_new_tab === 1 ? "_blank" : "_self"}
-                                className="c-header__menu-item"
-                                role="menuitem"
-                                aria-haspopup={menuItem.children.length > 0 ? "true" : undefined}
-                                aria-expanded={
-                                  menuItem.children.length > 0 && activeMenu === menuItem.id
-                                    ? "true"
-                                    : "false"
-                                }
-                                aria-controls={
-                                  menuItem.children.length > 0 ? `submenu-${menuItem.id}` : undefined
-                                }
-                                tabIndex={0}
-                                onFocus={() => {
-                                  setActiveMenu(menuItem.id);
-                                  setIsMegaActive(true);
-                                }}
-                                onBlur={() => {
-                                  setActiveMenu(null);
-                                  setIsMegaActive(false);
-                                }}
-                              >
-                                {menuItem.name}
-                              </a> */}
-
                               <Link
                                 href={menuItem.link}
                                 target={menuItem.is_new_tab === 1 ? "_blank" : "_self"}
@@ -350,51 +218,6 @@ const Header = () => {
 
                     </nav>
                   </div>
-
-                  {/* Mobile Menu Accordion */}
-                  {/* {mobileMenuOpen && (
-                    <>
-                      <div
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="mobile-overlay"
-                      ></div>
-                      <div className="mobile-menu">
-                        <ul className="accordion-menu">
-                          {HEADER_MAIN_MENU.map((menuItem: any, idx: number) => (
-                            <li key={menuItem.id} className="accordion-item">
-                              <Link
-                                className="accordion-header"
-                                href={menuItem.link}
-                                prefetch={false}
-                                target={menuItem.type === "external" ? "_blank" : "_self"}
-                                onClick={() => setMobileMenuOpen(false)}
-                              >
-                                {menuItem.name}
-                              </Link>
-                              {menuItem.children.length > 0 && (
-                                <span onClick={() => toggleAccordion(idx)}>{openAccordion === idx ? "−" : "+"}</span>
-                              )}
-                              {openAccordion === idx &&
-                                menuItem.children.length > 0 && (
-                                  <ul className="accordion-content">
-                                    {menuItem.children.map((subMenu: any) => (
-                                      <li key={subMenu.id}>
-                                        <Link
-                                          prefetch={false}
-                                          href={subMenu.link}
-                                          onClick={() => setMobileMenuOpen(false)}>
-                                          {subMenu.name}
-                                        </Link>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                )}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </>
-                  )} */}
                 </div>
                 {mobileMenuOpen && (
                   <MobileMenu menuState={mobileMenuOpen} menuTrigger={menuTrigger} />

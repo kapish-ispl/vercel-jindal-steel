@@ -27,6 +27,15 @@
     @include align-items(center);
   }
 
+  &__logo {
+    .logo-dark {
+      display: none;
+    }
+    .logo-light {
+      display: block;
+    }
+  }
+
   .mobile-toggle {
     display: block;
     outline: none;
@@ -150,6 +159,8 @@
       //position: relative;
 
       >li {
+        &:hover .mega-panel,
+        &:focus-within .mega-panel,
         &.active .mega-panel {
           display: block;
         }
@@ -477,9 +488,17 @@
 
 
   &.header-sticky,
-  &.mega-menu--active {
+  &.mega-menu--active,
+  &:has(.c-header__menu-list:hover) {
     background-color: var(--color-white);
     box-shadow: 0 13px 12.3px rgba(0, 0, 0, 0.05);
+
+    .logo-dark {
+      display: block;
+    }
+    .logo-light {
+      display: none;
+    }
 
     .c-header__menu>ul>li>a {
       color: var(--color-secondary);

@@ -77,6 +77,8 @@ const CardItem = React.memo(function CardItem({
     "--bg-image": card.imageurl ? `url(${card.imageurl})` : "none",
   } as React.CSSProperties;
 
+  const isActive = index === activeIndex;
+
   return (
     <div className="card-item" style={dynamicStyles} onClick={onClick}>
       {card.videourl ? (
@@ -84,16 +86,18 @@ const CardItem = React.memo(function CardItem({
           ref={videoRef}
           muted
           playsInline
-          autoPlay // ✅ Always true (Safari ignores state changes)
+          autoPlay={isActive}
+          preload={isActive ? "auto" : "none"}
           loop
           className="card-item__background"
         >
+          {/* Only render the source if it is active, or if it has already been loaded, to prevent unnecessary network requests */}
           <source src={card.videourl} type="video/mp4" />
         </video>
       ) : (
         <div className="card-item__background" />
       )}
-      {index !== activeIndex && <div className="card-item__overlay" />}
+      {!isActive && <div className="card-item__overlay" />}
     </div>
   );
 });
