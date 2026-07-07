@@ -46,3 +46,8 @@ export const formatDateToReadable = (
 
     return `${date.getDate()} ${MONTH_NAMES[date.getMonth()]} ${date.getFullYear()}`;
 };
+
+export const APPIMAGES = {
+    BG1: "/images/bg/bg_1.jpg",
+    BG1_MOB: "/images/bg/bg_1_mob.jpg",
+};

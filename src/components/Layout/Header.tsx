@@ -13,11 +13,12 @@ const Header = () => {
   const HEADER_MAIN_MENU = contextInfo.headerMenu;
   const [isMegaActive, setIsMegaActive] = useState<boolean>(false);
   const [stickyHeader, setStickyHeader] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState<"up" | "down" | null>(
-    null
-  );
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down" | null>(null);
   const [thirdLevelMenu, setThirdLevelMenu] = useState<number | null>(null);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  // Stored in a ref so scroll tracking never triggers a re-render
+  const lastScrollYRef = useRef(0);
+  const scrollDirectionRef = useRef<"up" | "down" | null>(null);
+  const stickyRef = useRef(false);
 
   // mobile state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,24 +36,28 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const prev = lastScrollYRef.current;
 
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        setScrollDirection("down");
-      } else {
-        setScrollDirection("up");
+      // --- sticky ---
+      const isNowSticky = currentScrollY > 50;
+      if (isNowSticky !== stickyRef.current) {
+        stickyRef.current = isNowSticky;
+        setStickyHeader(isNowSticky);
       }
-      setLastScrollY(currentScrollY);
+
+      // --- direction (only update state when direction actually changes) ---
+      const newDirection: "up" | "down" = currentScrollY > prev && currentScrollY > 50 ? "down" : "up";
+      if (newDirection !== scrollDirectionRef.current) {
+        scrollDirectionRef.current = newDirection;
+        setScrollDirection(newDirection);
+      }
+
+      lastScrollYRef.current = currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
-
-  useEffect(() => {
-    const handleSticky = () => setStickyHeader(window.scrollY > 50);
-    window.addEventListener("scroll", handleSticky);
-    return () => window.removeEventListener("scroll", handleSticky);
-  }, []);
+  }, []); // stable — no deps because all mutable tracking lives in refs
 
   const descriptionLoop = [
     {
