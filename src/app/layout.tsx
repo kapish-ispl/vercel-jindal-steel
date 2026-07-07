@@ -21,6 +21,7 @@ import SmoothScrollProvider from "@/components/Layout/SmoothScrollProvider";
 import Script from "next/script";
 
 import { Toaster } from "react-hot-toast";
+import { AccessibilityProvider, AccessibilityWidget } from "@/modules/accessibility";
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -138,26 +139,30 @@ export default async function RootLayout({
         <Toaster position="top-center" reverseOrder={false} />
 
         <Suspense fallback={null}>
-          <AppContextProvider
-            initialHeaderMenu={headerMenu}
-            initialFooterMenu={footerMenu}
-            initialProductData={productData}
-          >
-            <SmoothScrollProvider>
-              <Header />
+          <AccessibilityProvider>
+            <AppContextProvider
+              initialHeaderMenu={headerMenu}
+              initialFooterMenu={footerMenu}
+              initialProductData={productData}
+            >
+              <SmoothScrollProvider>
+                <Header />
 
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-                disableTransitionOnChange
-              >
-                <main>{children}</main>
+                <ThemeProvider
+                  attribute="class"
+                  defaultTheme="system"
+                  enableSystem
+                  disableTransitionOnChange
+                >
+                  <main>{children}</main>
 
-                <Footer />
-              </ThemeProvider>
-            </SmoothScrollProvider>
-          </AppContextProvider>
+                  <Footer />
+                </ThemeProvider>
+
+                <AccessibilityWidget />
+              </SmoothScrollProvider>
+            </AppContextProvider>
+          </AccessibilityProvider>
         </Suspense>
       </body>
     </html>

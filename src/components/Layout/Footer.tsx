@@ -5,6 +5,7 @@ import FooterList from './FooterList';
 import { AppContext } from '@/context/AppContext';
 import CookieBanner from '@/utils/CookieBanner';
 import { usePathname } from "next/navigation";
+import Link from 'next/link';
 
 
 const Footer = () => {
@@ -105,9 +106,7 @@ const Footer = () => {
                                     {FOOTER_MAIN_MENU?.length > 0 && <FooterList data={FOOTER_MAIN_MENU.slice(4, 5)} />}
                                     <div><span className="c-content-16 mt-1 ft_light">Have questions or need assistance? Our team is here to help.</span></div>
                                     <div className="c-footer__info-content  mt-2">
-                                        <div className="head"><a href="/contact-us" className="u-link">Contact us</a></div>
-                                        
-
+                                        <div className="head"><Link href="/contact-us" className="u-link">Contact us</Link></div>
                                     </div>
                                 </div>
                             </div>

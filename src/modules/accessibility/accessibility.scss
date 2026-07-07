@@ -1,0 +1,430 @@
+/**
+ * accessibility.scss
+ * Self-contained — no @use dependencies on project-specific SCSS core.
+ * Copy this file alongside the /modules/accessibility/ folder to any project.
+ * In globals.scss add: @use '../modules/accessibility/accessibility';
+ */
+
+// ─── Dark Mode Variable Overrides ───────────────────────────────────────────
+.dark-mode {
+  --border1: #fa6d0440;
+  --grey3: #bbb6b6;
+  --white: #111;
+  --black: #bbb6b6;
+  --greyishBlue: #bbb6b6;
+}
+
+// ─── Floating Toggle Button ──────────────────────────────────────────────────
+.accessbilitytoggler {
+  border: none;
+  border-radius: 70px;
+  bottom: 24px;
+  cursor: pointer;
+  height: 50px;
+  padding: 9px;
+  position: fixed;
+  right: 20px;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  width: auto;
+  max-width: 50px;
+  transition: all 400ms;
+  color: #fff;
+  background-color: #f58634;
+  text-align: left;
+  z-index: 99999;
+
+  .txt {
+    white-space: nowrap;
+    padding-left: 5px;
+    font-size: 16px;
+    opacity: 0;
+    color: #fff;
+  }
+
+  &:hover {
+    max-width: 300px;
+
+    .txt {
+      opacity: 1;
+    }
+  }
+}
+
+// ─── Body-level Adjustments ──────────────────────────────────────────────────
+body.lineheight_increase_1 * { line-height: 1.5 !important; }
+body.lineheight_increase_2 * { line-height: 1.8 !important; }
+body.lineheight_increase_3 * { line-height: 2.1 !important; }
+
+body.letterspacing_increase_1 * {
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+}
+body.letterspacing_increase_2 * {
+  letter-spacing: 0.24em !important;
+  word-spacing: 0.32em !important;
+}
+body.letterspacing_increase_3 * {
+  letter-spacing: 0.36em !important;
+  word-spacing: 0.48em !important;
+}
+
+body.dyslexia_font * {
+  font-family: var(--font-lexend), sans-serif !important;
+  font-optical-sizing: auto;
+}
+
+body.highlight-links a {
+  background-color: black !important;
+  color: yellow !important;
+}
+
+html.invert-colors {
+  filter: invert(1);
+  -webkit-filter: invert(100%);
+  background: #fff !important;
+}
+
+.hide-images {
+  * { background-image: none !important; }
+  img { visibility: hidden !important; }
+}
+
+.large-cursor *,
+body.large-cursor {
+  cursor: url('data:image/svg+xml,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="29.188px" height="43.625px" viewBox="0 0 29.188 43.625" enable-background="new 0 0 29.188 43.625" xml:space="preserve"><g><polygon fill="%23FFFFFF" stroke="%23D9DAD9" stroke-width="1.1406" stroke-miterlimit="10" points="2.8,4.549 26.847,19.902 16.964,22.701 24.239,37.749 18.278,42.017 9.741,30.724 1.138,35.809 "/><g><g><g><path fill="%23212627" d="M29.175,21.155c0.071-0.613-0.165-1.253-0.635-1.573L2.165,0.258c-0.424-0.32-0.988-0.346-1.435-0.053C0.282,0.497,0,1.03,0,1.617v34.171c0,0.613,0.306,1.146,0.776,1.439c0.471,0.267,1.059,0.213,1.482-0.16l7.482-6.344l6.847,12.155c0.259,0.48,0.729,0.746,1.2,0.746c0.235,0,0.494-0.08,0.706-0.213l6.988-4.585c0.329-0.213,0.565-0.586,0.659-1.013c0.094-0.426,0.024-0.88-0.188-1.226l-6.376-11.382l8.611-2.745C28.705,22.274,29.105,21.768,29.175,21.155z M16.964,22.701c-0.424,0.133-0.776,0.506-0.941,0.96c-0.165,0.48-0.118,1.013,0.118,1.439l6.588,11.781l-4.541,2.985l-6.894-12.315c-0.212-0.373-0.541-0.64-0.941-0.72c-0.094-0.027-0.165-0.027-0.259-0.027c-0.306,0-0.588,0.107-0.847,0.32L2.8,32.59V4.549l21.599,15.806L16.964,22.701z"/></g></g></g></g></svg>'),
+    auto !important;
+}
+
+// ─── Dark Mode Theme Overrides ───────────────────────────────────────────────
+.dark-mode {
+  background-color: var(--darkmode) !important;
+  color: #bbb6b6 !important;
+
+  .c-navMain__item { color: #bbb6b6 !important; }
+  .banner_container__content_title { color: #bbb6b6 !important; }
+  .banner_container__content_desc { color: #bbb6b6 !important; }
+
+  .elem18_content-head {
+    .title { color: #bbb6b6 !important; }
+    .desc { color: #bbb6b6 !important; }
+  }
+
+  .elem8__slidertext {
+    background: black !important;
+    .elem8__slidertext-text { background: black !important; }
+  }
+
+  .c-cta_content {
+    .c-cta_content_head { color: #bbb6b6 !important; }
+    .c-cta_content_desc { color: #bbb6b6 !important; }
+  }
+
+  .elem1__container {
+    &:hover .elem1__container_overlay { color: #bbb6b6 !important; }
+  }
+
+  .main_logo {
+    .u-image { display: none; }
+    .imgdark { display: block !important; }
+  }
+
+  .accessibility-drawer { background: #333333 !important; }
+  .elem11__header { color: #bbb6b6 !important; }
+  .c-header__contact_item { color: #bbb6b6 !important; }
+
+  .hero__banner-content {
+    .heading { color: #bbb6b6 !important; }
+    .desc { color: #bbb6b6 !important; }
+    .button { color: #bbb6b6 !important; border: 1px solid #bbb6b6 !important; }
+  }
+
+  .home-slider__dot {
+    .hero_banner_dots_numb { color: #bbb6b6 !important; }
+    .hero_banner_dots_text { color: #bbb6b6 !important; }
+  }
+
+  .elem7__contentwrap-head { color: #bbb6b6 !important; }
+  .elem17__container_content_wrap { background-color: rgba(255, 255, 255, 0.2) !important; }
+
+  .c-navigation__contentBox {
+    h3, p { color: #bbb6b6 !important; }
+  }
+
+  .navBox_links-title { color: #bbb6b6 !important; }
+
+  .elem15__contentwrap {
+    .elem15__contentwrap-head { color: #bbb6b6 !important; }
+    .elem15__contentwrap-disc { color: #bbb6b6 !important; }
+  }
+
+  .logoloop--fade:before { background: linear-gradient(to right, #2e2e2e 0%, rgba(0, 0, 0, 0) 100%); }
+  .logoloop--fade:after { background: linear-gradient(to left, #2e2e2e 0%, rgba(0, 0, 0, 0) 100%); }
+
+  .elem7__contentwrap-text { color: #bbb6b6 !important; }
+  .elem7__contentwrap-subhead { color: #bbb6b6 !important; }
+
+  .button_group .button { background: black; }
+
+  .c-navigation__responsive .menubar__item a { color: #bbb6b6; }
+
+  .mainToggle,
+  .mainToggle__btn {
+    .withIcon {
+      img, svg { filter: invert(1); }
+    }
+  }
+
+  .accessibility-panel .accessibility__main-wrapper .mainToggle__btn.active,
+  .accessibility-panel .mainToggle .mainToggle__btn.active {
+    background-color: #111;
+  }
+}
+
+// ─── Step Indicator ──────────────────────────────────────────────────────────
+.step-tracker-wrapper { margin-bottom: 10px; }
+.step-dot {
+  font-size: 20px;
+  color: #ccc;
+  transition: color 0.3s ease;
+  &.active { color: #0070f3; }
+}
+
+// ─── Drawer ──────────────────────────────────────────────────────────────────
+.accessibility-drawer {
+  position: fixed;
+  top: 0;
+  right: -470px;
+  max-width: 450px;
+  width: 100%;
+  height: 100%;
+  background: #eceef5;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 99999;
+  border-radius: 10px 0px 0px 10px;
+  overflow: scroll;
+  scrollbar-width: none;
+
+  &.open { right: 0; }
+}
+
+.drawer-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+// ─── Panel ───────────────────────────────────────────────────────────────────
+.accessibility-panel {
+  padding-top: 75px;
+
+  .accessibility__main-wrapper,
+  .mainToggle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 40px;
+
+    @media (max-width: 991px) {
+      flex-direction: row;
+    }
+
+    .mainToggle__btn {
+      width: calc(100% / 2 - 15px);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white, #fff);
+      height: 124px;
+      border-radius: 12px;
+      border: 2px solid var(--white, #fff);
+      gap: 15px;
+      position: relative;
+      padding: 10px;
+      flex-direction: column;
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      label { text-align: center; }
+
+      input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+
+        &:checked + .controlBtn .controlBtn__icon {
+          background: #3557a0;
+        }
+      }
+
+      @media (max-width: 991px) {
+        width: calc(100% / 3 - 10px);
+        margin: 0px 10px 10px 0px;
+      }
+
+      &:hover {
+        background: #fa6d0440;
+        border-color: #f58634;
+      }
+
+      > button {
+        border: none;
+        background: transparent;
+      }
+
+      .step-indicator {
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+
+        .step-dot {
+          width: 10px;
+          height: 3px;
+          background: #d3d3d3;
+          margin: 0px 3px;
+          display: inline-block;
+          font-size: unset;
+          color: unset;
+
+          &.active { background: #18336a; }
+        }
+      }
+
+      .controlBtn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: none;
+
+        &__icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: grey;
+          padding: 5px;
+          border-radius: 50%;
+          min-width: 20px;
+          min-height: 20px;
+          width: 20px;
+        }
+      }
+
+      .withIcon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .step-button {
+          background: none;
+          border: none;
+          color: var(--black, #111);
+        }
+      }
+    }
+
+    .mainToggle__btn.active {
+      background: #fa6d0440;
+      border-color: var(--border1, #fa6d0440);
+
+      .controlBtn {
+        display: block;
+        .controlBtn__icon { background: #3557a0; }
+      }
+    }
+  }
+}
+
+// ─── Accessibility Head Bar ───────────────────────────────────────────────────
+.accessibilityHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #3557a0;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  position: fixed;
+  max-width: 360px;
+  width: 100%;
+  z-index: 99 !important;
+  font-weight: 500;
+  font-size: 18px;
+
+  @media (min-width: 480px) { max-width: 410px; }
+  @media (min-width: 768px) { max-width: 410px; }
+  @media (min-width: 991px) {
+    font-size: 20px;
+    max-width: 400px;
+  }
+
+  .closeBtn {
+    background: white;
+    border: none;
+    border-radius: 6px;
+    color: #111;
+    min-width: 30px;
+    min-height: 30px;
+    width: 30px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    @media (min-width: 991px) { min-width: 33px; }
+
+    &:hover { background: #ededed; }
+  }
+}
+
+// ─── Access Footer (Reset button bar) ────────────────────────────────────────
+.accessFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  background: none;
+  padding: 15px 10px;
+  border-radius: 10px;
+  position: fixed;
+  bottom: 10px;
+  z-index: 99 !important;
+
+  .resetBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    border: none;
+    background: #f58634;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    .resetBtn__title { font-size: 12px; }
+
+    &:hover { background: #e47828; }
+
+    &__media {
+      margin-right: 7px;
+      .u-image { filter: invert(1); }
+    }
+  }
+}
