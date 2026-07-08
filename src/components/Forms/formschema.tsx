@@ -7,7 +7,7 @@ export const hasHtmlOrScript = (value: string): boolean => {
   const scriptSchemePattern = /\b(javascript|vbscript):/i;
   const cdataPattern = /<!\[CDATA\[/i;
   const cssExpressionPattern = /\bexpression\s*\(/i;
-  
+
   return (
     htmlTagPattern.test(value) ||
     eventHandlerPattern.test(value) ||
@@ -76,6 +76,8 @@ export const VALIDATION_ERRORS = {
     stateName: "Enter your State Name",
     otherStateName: "Enter your Other State Name",
     stdCode: "Enter your Country Code",
+    passingYear: "Enter your Passing Year",
+    percentage: "Enter your Percentage",
   },
   invalid: {
     email: "Invalid email format",
@@ -151,6 +153,7 @@ export interface IJobApplicationValues {
   city_name: string;
   key_skills?: string | string[];
   resume_id: string;
+  resume_file?: any;
   user_captcha_input: string;
   education_details: IEducationDetail[];
   experience_details: IExperienceDetail[];
@@ -252,6 +255,12 @@ export const JobApplicationSchema: Yup.ObjectSchema<any> = Yup.object({
     return safeString().required("Select key skills").trim();
   }) as any,
   resume_id: safeString().required(VALIDATION_ERRORS.required.resume).trim(),
+  resume_file: Yup.mixed()
+    .nullable()
+    .test("fileSize", "File size must be less than 5MB", (value: any) => {
+      if (!value) return true;
+      return value.size <= 5 * 1024 * 1024;
+    }),
   user_captcha_input: safeString().required(VALIDATION_ERRORS.required.captcha).trim(),
   education_details: Yup.array()
     .of(
@@ -285,7 +294,7 @@ export const JobApplicationSchema: Yup.ObjectSchema<any> = Yup.object({
           .max(new Date(), "Joining date cannot be in the future")
           .required(VALIDATION_ERRORS.required.joiningDate),
         relieving_date: Yup.date()
-          .nullable()
+          // .nullable()
           .required(VALIDATION_ERRORS.required.relievingDate)
           .test(
             "is-greater",

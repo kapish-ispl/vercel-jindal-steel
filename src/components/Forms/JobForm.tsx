@@ -1,6 +1,8 @@
 import { FieldArray, Form, getIn, Formik } from "formik";
 import { JobApplicationSchema } from "./formschema";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
+import { UploadCloud, FileText, Trash2 } from "lucide-react";
+import { toast } from "react-hot-toast";
 import {
     POST_JOB_ENDPOINT,
     GET_FILE_UPLOAD_ENDPOINT,
@@ -36,6 +38,9 @@ const JobForm = () => {
     const [captchaKey, setCaptchaKey] = useState<number>(0);
     const [paramsExist, setParamsExist] = useState(false);
     const [isRedirecting, setIsRedirecting] = useState(false);
+    const [fileName, setFileName] = useState<string>('');
+    const [isUploading, setIsUploading] = useState<boolean>(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const { handleSubmit: submitJobForm } = useFormSubmit(
         (data: any) => postAPIResponse(POST_JOB_ENDPOINT, data),
@@ -138,6 +143,7 @@ const JobForm = () => {
         city_name: "",
         key_skills: [],
         resume_id: "",
+        resume_file: null,
         user_captcha_input: "",
         education_details: [
             {
@@ -205,6 +211,7 @@ const JobForm = () => {
                                     const {
                                         user_captcha_input,
                                         other_experience,
+                                        resume_file,
                                         ...submittedValue
                                     } = formValues;
 
@@ -212,9 +219,6 @@ const JobForm = () => {
                                         ...submittedValue,
                                         experience_details: formValues.total_experience === "0" ? [] : formValues.experience_details
                                     };
-
-                                    console.log("Form Submitted. Values processed:", formValues);
-                                    console.log("Final data to be sent:", submittedData);
 
                                     if (validateAndNotifyCaptcha(user_captcha_input, actualCaptcha)) {
                                         setReloadCaptcha(prev => !prev);
@@ -237,6 +241,8 @@ const JobForm = () => {
                                     touched,
                                     errors,
                                     setFieldValue,
+                                    setFieldError,
+                                    setFieldTouched,
                                     handleSubmit,
                                 }) => {
                                     const noticePeriodHandler = (e: any) => {
@@ -267,20 +273,59 @@ const JobForm = () => {
                                     };
 
                                     const handleFileChange = (selectedFile: any) => {
-                                        let fileData = selectedFile.currentTarget.files[0];
+                                        const fileData = selectedFile.currentTarget.files[0];
+                                        if (!fileData) return;
+
+                                        setFieldValue("resume_file", fileData);
+                                        setFieldTouched("resume_file", true);
+
+                                        const maxFileSize = 5 * 1024 * 1024;
+                                        if (fileData.size > maxFileSize) {
+                                            setFieldValue("resume_id", "");
+                                            setFileName("");
+                                            toast.error("File size must be less than 5MB");
+                                            if (fileInputRef.current) {
+                                                fileInputRef.current.value = "";
+                                            }
+                                            return;
+                                        }
+
+                                        setFieldValue("resume_file", fileData);
+                                        setFieldTouched("resume_file", true);
+
+                                        setFileName(fileData.name);
+                                        setIsUploading(true);
                                         const getFileUploadInfo = async () => {
-                                            const response = await postUploadFileResponse(
-                                                `${GET_FILE_UPLOAD_ENDPOINT}`,
-                                                fileData
-                                            );
-                                            console.log(response)
-                                            if (response && response.code === 'SUC200' && response.data?.media?.orig) {
-                                                setFieldValue("resume_id", response.data.media.orig);
-                                            } else {
-                                                console.error("File upload failed:", response);
+                                            try {
+                                                const response = await postUploadFileResponse(
+                                                    `${GET_FILE_UPLOAD_ENDPOINT}`,
+                                                    fileData
+                                                );
+                                                if (response && response.code === 'SUC200' && response.data?.media?.orig) {
+                                                    setFieldValue("resume_id", response.data.media.orig);
+                                                } else {
+                                                    console.error("File upload failed:", response);
+                                                    setFileName("");
+                                                    setFieldValue("resume_id", "");
+                                                }
+                                            } catch (err) {
+                                                console.error("File upload failed:", err);
+                                                setFileName("");
+                                                setFieldValue("resume_id", "");
+                                            } finally {
+                                                setIsUploading(false);
                                             }
                                         };
                                         getFileUploadInfo();
+                                    };
+
+                                    const handleRemoveFile = () => {
+                                        setFieldValue("resume_id", "");
+                                        setFieldValue("resume_file", null);
+                                        setFileName("");
+                                        if (fileInputRef.current) {
+                                            fileInputRef.current.value = "";
+                                        }
                                     };
 
                                     return (
@@ -868,19 +913,67 @@ const JobForm = () => {
                                             {/* ------ Resume Upload ------ */}
                                             <div className="row form_grider v1">
                                                 <div className="col-12">
-                                                    <p className="cus_text20 mb-2">
+                                                    {/* <p className="cus_text20 mb-2">
                                                         Upload Your Resume (Type: .doc, .docx, .pdf)
-                                                    </p>
-                                                    <div
-                                                        className={`form_grider_wrap ${touched.resume_id && errors.resume_id ? "hasError" : ""}`}
-                                                    >
-                                                        <input
-                                                            name="resume_id"
-                                                            type="file"
-                                                            accept=".pdf,.doc,.docx,.rtf"
-                                                            onChange={(value) => handleFileChange(value)}
-                                                        />
-                                                        {touched.resume_id && errors.resume_id ? (
+                                                    </p> */}
+                                                    <div className="custom_file_upload_container">
+                                                        {!values.resume_id && !isUploading ? (
+                                                            <div
+                                                                className={`custom_upload_area ${(touched.resume_id && errors.resume_id) || (touched.resume_file && errors.resume_file) ? "hasError" : ""}`}
+                                                                onClick={() => fileInputRef.current?.click()}
+                                                            >
+                                                                <div className="upload_icon_box">
+                                                                    <UploadCloud className="upload_icon" size={32} />
+                                                                </div>
+                                                                <div className="upload_text_content">
+                                                                    <span className="upload_title">Click to upload your resume</span>
+                                                                    <span className="upload_subtitle">Formats: PDF, DOC, DOCX, RTF (Max 5MB)</span>
+                                                                </div>
+                                                                <input
+                                                                    ref={fileInputRef}
+                                                                    name="resume_id"
+                                                                    type="file"
+                                                                    accept=".pdf,.doc,.docx,.rtf"
+                                                                    style={{ display: "none" }}
+                                                                    onChange={(e) => handleFileChange(e)}
+                                                                />
+                                                            </div>
+                                                        ) : (
+                                                            <div className="uploaded_file_card">
+                                                                <div className="file_info">
+                                                                    <div className="file_icon_box">
+                                                                        {isUploading ? (
+                                                                            <div className="upload_spinner"></div>
+                                                                        ) : (
+                                                                            <FileText className="file_icon" size={24} />
+                                                                        )}
+                                                                    </div>
+                                                                    <div className="file_details">
+                                                                        <span className="file_name">
+                                                                            {isUploading ? "Uploading file..." : (fileName || values.resume_id.split('/').pop() || "Resume File")}
+                                                                        </span>
+                                                                        <span className={`file_status ${isUploading ? "uploading" : "success"}`}>
+                                                                            {isUploading ? "Please wait..." : "Upload successful"}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                {!isUploading && (
+                                                                    <button
+                                                                        type="button"
+                                                                        className="remove_file_btn"
+                                                                        onClick={handleRemoveFile}
+                                                                        aria-label="Remove uploaded file"
+                                                                    >
+                                                                        <Trash2 className="remove_icon" size={20} />
+                                                                    </button>
+                                                                )}
+                                                            </div>
+                                                        )}
+                                                        {touched.resume_file && errors.resume_file ? (
+                                                            <p className="form_grider_wrap_helper">
+                                                                {errors.resume_file}
+                                                            </p>
+                                                        ) : touched.resume_id && errors.resume_id ? (
                                                             <p className="form_grider_wrap_helper">
                                                                 {errors.resume_id}
                                                             </p>
