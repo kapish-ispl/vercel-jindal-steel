@@ -1,9 +1,6 @@
-/**
- * accessibility.scss
- * Self-contained — no @use dependencies on project-specific SCSS core.
- * Copy this file alongside the /modules/accessibility/ folder to any project.
- * In globals.scss add: @use '../modules/accessibility/accessibility';
- */
+@use "../../styles/custom/core/mixins" as *;
+@use "../../styles/custom/core/variables" as *;
+@use "../../styles/custom/components/generic/sizes" as *;
 
 // ─── Dark Mode Variable Overrides ───────────────────────────────────────────
 .dark-mode {
@@ -53,18 +50,28 @@
 }
 
 // ─── Body-level Adjustments ──────────────────────────────────────────────────
-body.lineheight_increase_1 * { line-height: 1.5 !important; }
-body.lineheight_increase_2 * { line-height: 1.8 !important; }
-body.lineheight_increase_3 * { line-height: 2.1 !important; }
+body.lineheight_increase_1 * {
+  line-height: 1.5 !important;
+}
+
+body.lineheight_increase_2 * {
+  line-height: 1.8 !important;
+}
+
+body.lineheight_increase_3 * {
+  line-height: 2.1 !important;
+}
 
 body.letterspacing_increase_1 * {
   letter-spacing: 0.12em !important;
   word-spacing: 0.16em !important;
 }
+
 body.letterspacing_increase_2 * {
   letter-spacing: 0.24em !important;
   word-spacing: 0.32em !important;
 }
+
 body.letterspacing_increase_3 * {
   letter-spacing: 0.36em !important;
   word-spacing: 0.48em !important;
@@ -87,8 +94,13 @@ html.invert-colors {
 }
 
 .hide-images {
-  * { background-image: none !important; }
-  img { visibility: hidden !important; }
+  * {
+    background-image: none !important;
+  }
+
+  img {
+    visibility: hidden !important;
+  }
 }
 
 .large-cursor *,
@@ -102,77 +114,161 @@ body.large-cursor {
   background-color: var(--darkmode) !important;
   color: #bbb6b6 !important;
 
-  .c-navMain__item { color: #bbb6b6 !important; }
-  .banner_container__content_title { color: #bbb6b6 !important; }
-  .banner_container__content_desc { color: #bbb6b6 !important; }
+  .c-navMain__item {
+    color: #bbb6b6 !important;
+  }
+
+  .banner_container__content_title {
+    color: #bbb6b6 !important;
+  }
+
+  .banner_container__content_desc {
+    color: #bbb6b6 !important;
+  }
 
   .elem18_content-head {
-    .title { color: #bbb6b6 !important; }
-    .desc { color: #bbb6b6 !important; }
+    .title {
+      color: #bbb6b6 !important;
+    }
+
+    .desc {
+      color: #bbb6b6 !important;
+    }
   }
 
   .elem8__slidertext {
     background: black !important;
-    .elem8__slidertext-text { background: black !important; }
+
+    .elem8__slidertext-text {
+      background: black !important;
+    }
   }
 
   .c-cta_content {
-    .c-cta_content_head { color: #bbb6b6 !important; }
-    .c-cta_content_desc { color: #bbb6b6 !important; }
+    .c-cta_content_head {
+      color: #bbb6b6 !important;
+    }
+
+    .c-cta_content_desc {
+      color: #bbb6b6 !important;
+    }
   }
 
   .elem1__container {
-    &:hover .elem1__container_overlay { color: #bbb6b6 !important; }
+    &:hover .elem1__container_overlay {
+      color: #bbb6b6 !important;
+    }
   }
 
   .main_logo {
-    .u-image { display: none; }
-    .imgdark { display: block !important; }
+    .u-image {
+      display: none;
+    }
+
+    .imgdark {
+      display: block !important;
+    }
   }
 
-  .accessibility-drawer { background: #333333 !important; }
-  .elem11__header { color: #bbb6b6 !important; }
-  .c-header__contact_item { color: #bbb6b6 !important; }
+  .accessibility-drawer {
+    background: #333333 !important;
+  }
+
+  .elem11__header {
+    color: #bbb6b6 !important;
+  }
+
+  .c-header__contact_item {
+    color: #bbb6b6 !important;
+  }
 
   .hero__banner-content {
-    .heading { color: #bbb6b6 !important; }
-    .desc { color: #bbb6b6 !important; }
-    .button { color: #bbb6b6 !important; border: 1px solid #bbb6b6 !important; }
+    .heading {
+      color: #bbb6b6 !important;
+    }
+
+    .desc {
+      color: #bbb6b6 !important;
+    }
+
+    .button {
+      color: #bbb6b6 !important;
+      border: 1px solid #bbb6b6 !important;
+    }
   }
 
   .home-slider__dot {
-    .hero_banner_dots_numb { color: #bbb6b6 !important; }
-    .hero_banner_dots_text { color: #bbb6b6 !important; }
+    .hero_banner_dots_numb {
+      color: #bbb6b6 !important;
+    }
+
+    .hero_banner_dots_text {
+      color: #bbb6b6 !important;
+    }
   }
 
-  .elem7__contentwrap-head { color: #bbb6b6 !important; }
-  .elem17__container_content_wrap { background-color: rgba(255, 255, 255, 0.2) !important; }
+  .elem7__contentwrap-head {
+    color: #bbb6b6 !important;
+  }
+
+  .elem17__container_content_wrap {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
 
   .c-navigation__contentBox {
-    h3, p { color: #bbb6b6 !important; }
+
+    h3,
+    p {
+      color: #bbb6b6 !important;
+    }
   }
 
-  .navBox_links-title { color: #bbb6b6 !important; }
+  .navBox_links-title {
+    color: #bbb6b6 !important;
+  }
 
   .elem15__contentwrap {
-    .elem15__contentwrap-head { color: #bbb6b6 !important; }
-    .elem15__contentwrap-disc { color: #bbb6b6 !important; }
+    .elem15__contentwrap-head {
+      color: #bbb6b6 !important;
+    }
+
+    .elem15__contentwrap-disc {
+      color: #bbb6b6 !important;
+    }
   }
 
-  .logoloop--fade:before { background: linear-gradient(to right, #2e2e2e 0%, rgba(0, 0, 0, 0) 100%); }
-  .logoloop--fade:after { background: linear-gradient(to left, #2e2e2e 0%, rgba(0, 0, 0, 0) 100%); }
+  .logoloop--fade:before {
+    background: linear-gradient(to right, #2e2e2e 0%, rgba(0, 0, 0, 0) 100%);
+  }
 
-  .elem7__contentwrap-text { color: #bbb6b6 !important; }
-  .elem7__contentwrap-subhead { color: #bbb6b6 !important; }
+  .logoloop--fade:after {
+    background: linear-gradient(to left, #2e2e2e 0%, rgba(0, 0, 0, 0) 100%);
+  }
 
-  .button_group .button { background: black; }
+  .elem7__contentwrap-text {
+    color: #bbb6b6 !important;
+  }
 
-  .c-navigation__responsive .menubar__item a { color: #bbb6b6; }
+  .elem7__contentwrap-subhead {
+    color: #bbb6b6 !important;
+  }
+
+  .button_group .button {
+    background: black;
+  }
+
+  .c-navigation__responsive .menubar__item a {
+    color: #bbb6b6;
+  }
 
   .mainToggle,
   .mainToggle__btn {
     .withIcon {
-      img, svg { filter: invert(1); }
+
+      img,
+      svg {
+        filter: invert(1);
+      }
     }
   }
 
@@ -183,12 +279,18 @@ body.large-cursor {
 }
 
 // ─── Step Indicator ──────────────────────────────────────────────────────────
-.step-tracker-wrapper { margin-bottom: 10px; }
+.step-tracker-wrapper {
+  margin-bottom: 10px;
+}
+
 .step-dot {
   font-size: 20px;
   color: #ccc;
   transition: color 0.3s ease;
-  &.active { color: #0070f3; }
+
+  &.active {
+    color: #0070f3;
+  }
 }
 
 // ─── Drawer ──────────────────────────────────────────────────────────────────
@@ -208,7 +310,9 @@ body.large-cursor {
   overflow: scroll;
   scrollbar-width: none;
 
-  &.open { right: 0; }
+  &.open {
+    right: 0;
+  }
 }
 
 .drawer-overlay.open {
@@ -227,21 +331,33 @@ body.large-cursor {
     justify-content: space-between;
     margin-bottom: 40px;
 
+    .step-button {
+      @include font-size(10);
+
+      @include mq(desktop-wide) {
+        @include font-size(14);
+      }
+
+      @include mq(desktop-wide-max) {
+        @include font-size(16);
+      }
+    }
+
     @media (max-width: 991px) {
       flex-direction: row;
     }
 
     .mainToggle__btn {
-      width: calc(100% / 2 - 15px);
+      width: calc(100% / 4 - 10px);
       margin-bottom: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: var(--white, #fff);
-      height: 124px;
+      min-height: 85px;
       border-radius: 12px;
       border: 2px solid var(--white, #fff);
-      gap: 15px;
+      gap: 10px;
       position: relative;
       padding: 10px;
       flex-direction: column;
@@ -249,12 +365,28 @@ body.large-cursor {
       transition: all 0.3s ease-in-out;
       cursor: pointer;
 
+      @include mq(desktop-wide) {
+        width: calc(100% / 3 - 10px);
+        height: 124px;
+      }
+
       &.disabled {
         opacity: 0.5;
         cursor: not-allowed;
       }
 
-      label { text-align: center; }
+      label {
+        text-align: center;
+        @include font-size(10);
+
+        @include mq(desktop-wide) {
+          @include font-size(14);
+        }
+
+        @include mq(desktop-wide-max) {
+          @include font-size(16);
+        }
+      }
 
       input {
         position: absolute;
@@ -265,7 +397,7 @@ body.large-cursor {
         opacity: 0;
         cursor: pointer;
 
-        &:checked + .controlBtn .controlBtn__icon {
+        &:checked+.controlBtn .controlBtn__icon {
           background: #3557a0;
         }
       }
@@ -280,7 +412,7 @@ body.large-cursor {
         border-color: #f58634;
       }
 
-      > button {
+      >button {
         border: none;
         background: transparent;
       }
@@ -302,7 +434,9 @@ body.large-cursor {
           font-size: unset;
           color: unset;
 
-          &.active { background: #18336a; }
+          &.active {
+            background: #18336a;
+          }
         }
       }
 
@@ -331,6 +465,14 @@ body.large-cursor {
         justify-content: center;
         flex-direction: column;
 
+        svg {
+          @include size(30);
+
+          @include mq(desktop-wide) {
+            @include size(40);
+          }
+        }
+
         .step-button {
           background: none;
           border: none;
@@ -345,7 +487,10 @@ body.large-cursor {
 
       .controlBtn {
         display: block;
-        .controlBtn__icon { background: #3557a0; }
+
+        .controlBtn__icon {
+          background: #3557a0;
+        }
       }
     }
   }
@@ -368,8 +513,14 @@ body.large-cursor {
   font-weight: 500;
   font-size: 18px;
 
-  @media (min-width: 480px) { max-width: 410px; }
-  @media (min-width: 768px) { max-width: 410px; }
+  @media (min-width: 480px) {
+    max-width: 410px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 410px;
+  }
+
   @media (min-width: 991px) {
     font-size: 20px;
     max-width: 400px;
@@ -386,9 +537,13 @@ body.large-cursor {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 
-    @media (min-width: 991px) { min-width: 33px; }
+    @media (min-width: 991px) {
+      min-width: 33px;
+    }
 
-    &:hover { background: #ededed; }
+    &:hover {
+      background: #ededed;
+    }
   }
 }
 
@@ -418,13 +573,20 @@ body.large-cursor {
     cursor: pointer;
     transition: background-color 0.3s ease;
 
-    .resetBtn__title { font-size: 12px; }
+    .resetBtn__title {
+      font-size: 12px;
+    }
 
-    &:hover { background: #e47828; }
+    &:hover {
+      background: #e47828;
+    }
 
     &__media {
       margin-right: 7px;
-      .u-image { filter: invert(1); }
+
+      .u-image {
+        filter: invert(1);
+      }
     }
   }
 }

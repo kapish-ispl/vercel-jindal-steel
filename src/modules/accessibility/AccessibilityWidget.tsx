@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import AccessibilityDrawer from './AccessibilityDrawer';
 import AccessibilityPanel from './AccessibilityPanel';
-import "./accessibility.scss";
 
 const AccessibilityWidget: React.FC = () => {
     const [open, setOpen] = useState<boolean>(false);
