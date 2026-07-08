@@ -54,6 +54,7 @@ const HexagonSection = dynamic(() => import("@/utils/HexagonSection"), { ssr: fa
 const CustomAccordion = dynamic(() => import("@/utils/CustomAccordian"), { ssr: false });
 const AirEmissionsChart = dynamic(() => import("@/utils/AirEmissionsChart"), { ssr: false });
 const ProgressBar = dynamic(() => import("@/utils/ProgressBar"), { ssr: false });
+const UnpaidDividendForm = dynamic(() => import("@/components/Forms/UnpaidDividendForm"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -100,6 +101,11 @@ const PageTemplate = ({ data }: any) => {
                     const children = domToReact(domNode.children as DOMNode[]);
                     return <HighlightCarousel props={props} data={Array.isArray(children) ? children : [children]} />
                 }
+
+                if (domNode.name === "unpaiddividend") {
+                    return <UnpaidDividendForm />
+                }
+
                 if (domNode.name === "hexagonsection") {
                     const props = attributesToProps(domNode.attribs);
                     const children = domToReact(domNode.children as DOMNode[]);

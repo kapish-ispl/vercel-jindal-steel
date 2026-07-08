@@ -842,7 +842,7 @@
                 color: #ed4337;
                 transform: scale(1.1) rotate(5deg);
             }
-            
+
             &:active {
                 transform: scale(0.95);
             }
@@ -861,6 +861,7 @@
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -870,5 +871,103 @@
 @keyframes uploadSpin {
     to {
         transform: rotate(360deg);
+    }
+}
+
+.unpaid_dividend_form_wrapper {
+    .dividend_form_card {
+        @media (max-width: 576px) {
+            padding: 1.5rem;
+        }
+
+        .form_grider_wrap {
+            .form_grider_wrap_label {
+                font-family: var(--font-primary);
+                font-size: 1rem;
+                font-weight: 600;
+                color: #2b3d51;
+                margin-bottom: 0.5rem;
+                display: block; // Show labels
+            }
+        }
+
+        /* DPID Input prefix group styling to match standard inputs */
+        .form_field_input_group {
+            display: flex;
+            align-items: stretch;
+            width: 100%;
+            border: 1px solid transparent;
+            border-radius: .375rem;
+            overflow: hidden;
+            background-color: #ffffff;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .15);
+            height: 55px;
+
+            &:focus-within {
+                border-color: var(--color-primary, #f47920);
+            }
+
+            .form_field_prefix {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #f1f5f9;
+                color: #333;
+                font-weight: 600;
+                font-size: 1.125rem;
+                padding: 0 20px;
+                border-right: 1px solid #cbd5e1;
+                user-select: none;
+            }
+
+            .form_grider_wrap_field {
+                flex-grow: 1;
+                border: none !important;
+                border-radius: 0 !important;
+                height: 100% !important;
+                box-shadow: none !important;
+                padding: 0.5rem 1.75rem !important;
+
+                &:focus {
+                    border-color: transparent !important;
+                    box-shadow: none !important;
+                }
+            }
+        }
+
+        /* OR Divider styles */
+        .or_divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+
+            .or_divider_line {
+                flex-grow: 1;
+                height: 1px;
+                background-color: #cbd5e1;
+            }
+
+            .or_divider_text {
+                font-family: var(--font-primary);
+                font-size: 0.9rem;
+                font-weight: 700;
+                color: #64748b;
+                letter-spacing: 0.05em;
+            }
+        }
+
+        /* Button resets and standard style matching */
+        .form_submit_button {
+            // Inherits form_submit_button styles.
+
+            &.reset_btn {
+                background: var(--color-secondary, #636466);
+
+                &:hover {
+                    background: #4a4b4c;
+                }
+            }
+        }
     }
 }

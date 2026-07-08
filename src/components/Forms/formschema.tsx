@@ -387,3 +387,64 @@ export const MSME_PRODUCT_LIST = [
   { key: 'hollow_section', label: 'Hollow section' },
   { key: 'cement', label: 'Cement' },
 ];
+
+/**
+ * Unpaid Dividend Form Schema
+ */
+export const UnpaidDividendFormSchema = Yup.object().shape({
+  dpid: Yup.string().test(
+    "dpid-required",
+    "DP ID is required when Folio Number is not provided",
+    function (value) {
+      const { folioNo } = this.parent;
+      if (!folioNo) {
+        return !!value && value.trim().length > 0;
+      }
+      return true;
+    }
+  ).test(
+    "dpid-format",
+    "DP ID must be 6 digits",
+    function (value) {
+      if (value) {
+        return /^\d{6}$/.test(value);
+      }
+      return true;
+    }
+  ),
+  clientId: Yup.string().test(
+    "clientId-required",
+    "Client ID is required when Folio Number is not provided",
+    function (value) {
+      const { folioNo } = this.parent;
+      if (!folioNo) {
+        return !!value && value.trim().length > 0;
+      }
+      return true;
+    }
+  ).test(
+    "clientId-format",
+    "Client ID must be 8 digits",
+    function (value) {
+      if (value) {
+        return /^\d{8}$/.test(value);
+      }
+      return true;
+    }
+  ),
+  folioNo: Yup.string().test(
+    "folioNo-required",
+    "Folio Number is required when DP ID & Client ID are not provided",
+    function (value) {
+      const { dpid, clientId } = this.parent;
+      if (!dpid && !clientId) {
+        return !!value && value.trim().length > 0;
+      }
+      return true;
+    }
+  ),
+  pan: safeString()
+    .required("PAN is required")
+    .matches(/^[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}$/, "Invalid PAN format"),
+  user_captcha_input: safeString().required("Captcha is required"),
+});

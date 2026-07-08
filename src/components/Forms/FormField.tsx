@@ -11,10 +11,11 @@ interface FormFieldProps extends React.InputHTMLAttributes<HTMLInputElement | HT
     maxLength?: number;
     autoComplete?: string;
     showLabel?: boolean;
+    prefixText?: string;
 }
 
 const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldProps>(
-    ({ type = 'text', label, name, error, touched, maxLength, autoComplete, showLabel = false, ...rest }, ref) => {
+    ({ type = 'text', label, name, error, touched, maxLength, autoComplete, showLabel = false, prefixText, ...rest }, ref) => {
 
         const [field, meta] = useField({ name, type: type === 'textarea' ? 'text' : type });
         const hasError = (touched || meta.touched) && (error || meta.error);
@@ -58,17 +59,20 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
                         ref={ref as React.Ref<HTMLTextAreaElement>}
                     />
                 ) : (
-                    <input
-                        id={name}
-                        {...field}
-                        {...rest}
-                        placeholder={label}
-                        type={type}
-                        className="form_grider_wrap_field"
-                        maxLength={maxLength}
-                        autoComplete={autoComplete}
-                        ref={ref as React.Ref<HTMLInputElement>}
-                    />
+                    <div className={prefixText ? "form_field_input_group" : ""}>
+                        {prefixText && <span className="form_field_prefix">{prefixText}</span>}
+                        <input
+                            id={name}
+                            {...field}
+                            {...rest}
+                            placeholder={label}
+                            type={type}
+                            className="form_grider_wrap_field"
+                            maxLength={maxLength}
+                            autoComplete={autoComplete}
+                            ref={ref as React.Ref<HTMLInputElement>}
+                        />
+                    </div>
                 )}
                 {hasError && <p className="form_grider_wrap_helper">{displayError}</p>}
             </div>
