@@ -89,7 +89,6 @@ const Header = () => {
     },
   ];
 
-  console.log(HEADER_MAIN_MENU)
   return (
     <>
       {HEADER_MAIN_MENU && HEADER_MAIN_MENU.length > 0 && (
