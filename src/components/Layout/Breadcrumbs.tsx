@@ -60,7 +60,7 @@ const Breadcrumbs = <T extends BreadcrumbItem>({
             if (menuItem.link === `/${slug}`) {
                 return newTrail;
             }
-            if (!currentPage.taxonomy_id && currentPage.parentPageDetails) {
+            if (currentPage.parentPageDetails) {
                 if (menuItem.link === `/${currentPage.parentPageDetails.slug}`) {
                     return [
                         ...trail,

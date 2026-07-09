@@ -93,7 +93,15 @@ export default async function Page({
               label={pageData.title}
               tagline={pageData?.customField?.tagline}
               slug={pageData.slug}
-              currentPage={pageData}
+              currentPage={{
+                ...pageData,
+                slug: `/blogs/${pageData.slug}`,
+                parentPageDetails: {
+                  id: pageData.taxonomy_id || 22222,
+                  title: "Blogs",
+                  slug: "blogs"
+                }
+              }}
               innerBanner={pageData.media}
             />
           </div>

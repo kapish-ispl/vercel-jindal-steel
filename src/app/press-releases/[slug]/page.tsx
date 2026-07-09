@@ -28,11 +28,11 @@ export async function generateMetadata({
   const metaTitle = decodeHtmlEntities(pageData?.meta?.title || "Jindal Steel");
   const metaDescription = decodeHtmlEntities(
     pageData?.meta?.description ||
-      "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to quality."
+    "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to quality."
   );
   const metaKeywords = decodeHtmlEntities(
     pageData?.meta?.keywords ||
-      "Jindal Steel Steel Manufacturing, Energy Solutions, Indian Steel Industry, Steel Products, Infrastructure Development"
+    "Jindal Steel Steel Manufacturing, Energy Solutions, Indian Steel Industry, Steel Products, Infrastructure Development"
   );
 
   return {
@@ -105,6 +105,13 @@ export default async function Page({
 
   return (
     <>
+      {pageData?.metaInfo?.schema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: pageData.metaInfo.schema }}
+        />
+      )}
+
       <div className="top-header"></div>
 
       <div className="container generic_bottom_spacer press_highlight_banner">
@@ -129,7 +136,15 @@ export default async function Page({
               label={pageData.title}
               tagline={pageData?.customField?.tagline}
               slug={pageData.slug}
-              currentPage={pageData}
+              currentPage={{
+                ...pageData,
+                slug: `/press-releases/${pageData.slug}`,
+                parentPageDetails: {
+                  id: pageData.taxonomy_id || 11111,
+                  title: "Press Releases",
+                  slug: "press-releases"
+                }
+              }}
               innerBanner={pageData.media}
             />
           </div>

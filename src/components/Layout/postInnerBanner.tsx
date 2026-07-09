@@ -1,4 +1,4 @@
-import Breadcrumbs from "./Breadcrumbs";
+import Breadcrumbs, { CurrentPage } from "./Breadcrumbs";
 
 interface InnerBannerItem {
     type: "video" | "image";
@@ -10,7 +10,7 @@ interface Props {
     label?: string;
     slug: string;
     tagline?: string;
-    currentPage: string[];
+    currentPage: CurrentPage;
     innerBanner?: InnerBannerItem[];
 }
 
