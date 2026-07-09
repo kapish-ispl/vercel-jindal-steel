@@ -5,6 +5,8 @@ import { CONSTANTS } from "@/config/constant";
 import { serverRequest } from "@/services/getServerSideRender";
 import PageTemplate from "@/components/Layout/PageTemplate";
 import InnerBanner from "@/components/Layout/InnerBanner";
+import parse from 'html-react-parser';
+import { decodeHtmlEntities } from "@/lib/htmlUtils";
 
 
 export async function generateMetadata({
@@ -29,13 +31,15 @@ export async function generateMetadata({
     };
   }
 
-  const metaTitle = pageData.meta_title != "" ? `${pageData.meta_title} | Jindal Steel` : `${pageData.title} | Jindal Steel`;
-  const metaDescription =
-    pageData.meta_description || pageData.description ||
-    "Jindal Steel and Power Limited (JSPL) is a leading Indian steel and energy company, known for its innovative solutions and commitment to sustainability.";
-  const metaKeywords =
-    pageData.meta_keyword ||
-    "Jindal Steel, JSPL, Steel Manufacturing, Energy Solutions, Sustainable Steel, Indian Steel Industry, Steel Products, Power Generation, Infrastructure Development";
+  const metaTitle = decodeHtmlEntities(pageData?.meta?.title || "Jindal Steel");
+  const metaDescription = decodeHtmlEntities(
+    pageData?.meta?.description ||
+      "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to quality."
+  );
+  const metaKeywords = decodeHtmlEntities(
+    pageData?.meta?.keywords ||
+      "Jindal Steel Steel Manufacturing, Energy Solutions, Indian Steel Industry, Steel Products, Infrastructure Development"
+  );
 
   return {
     title: metaTitle,

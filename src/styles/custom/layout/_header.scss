@@ -16,24 +16,10 @@
     /* move header up */
   }
 
-  &.show {
-    // transform: translateY(0);
-    /* slide header down */
-  }
-
   &__main {
     @include flexbox();
     @include justify-content(space-between);
     @include align-items(center);
-  }
-
-  &__logo {
-    .logo-dark {
-      display: none;
-    }
-    .logo-light {
-      display: block;
-    }
   }
 
   .mobile-toggle {
@@ -159,6 +145,7 @@
       //position: relative;
 
       >li {
+
         &:hover .mega-panel,
         &:focus-within .mega-panel,
         &.active .mega-panel {
@@ -488,17 +475,9 @@
 
 
   &.header-sticky,
-  &.mega-menu--active,
-  &:has(.c-header__menu-list:hover) {
+  &.mega-menu--active {
     background-color: var(--color-white);
     box-shadow: 0 13px 12.3px rgba(0, 0, 0, 0.05);
-
-    .logo-dark {
-      display: block;
-    }
-    .logo-light {
-      display: none;
-    }
 
     .c-header__menu>ul>li>a {
       color: var(--color-secondary);

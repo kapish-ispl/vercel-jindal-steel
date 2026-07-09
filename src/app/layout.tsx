@@ -33,22 +33,24 @@ const metaImage = "https://www.jindalsteel.com/images/logo/meta.jpg";
 const siteUrl = "https://www.jindalsteel.com/";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Jindal Steel",
-    template: "%s",
-  },
-  description:
-    "Jindal Steel and Power Limited (JSPL) is a leading Indian steel and energy company, known for its innovative solutions and commitment to sustainability.",
-  keywords:
-    "Jindal Steel, JSPL, Steel Manufacturing, Energy Solutions, Sustainable Steel, Indian Steel Industry, Steel Products, Power Generation, Infrastructure Development",
+  // title: {
+  //   default: "Jindal Steel",
+  //   template: "%s",
+  // },
+  // description:
+  //   "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to sustainability.",
+  // keywords:
+  //   "Jindal Steel, Steel Manufacturing, Sustainable Steel, Indian Steel Industry, Steel Products, Power Generation, Infrastructure Development",
   metadataBase: new URL(siteUrl),
+
+
   verification: {
     google: "hxhEUPw_d8ReQZZdxoh0GAITxHwayUb6BggozmZGM7U",
   },
   openGraph: {
     title: "Jindal Steel",
     description:
-      "Jindal Steel and Power Limited (JSPL) is a leading Indian steel and energy company, known for its innovative solutions and commitment to sustainability.",
+      "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to sustainability.",
     url: siteUrl,
     siteName: "Jindal Steel",
     type: "website",
@@ -61,12 +63,13 @@ export const metadata: Metadata = {
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     site: "@JindalSteel_In",
     title: "Jindal Steel",
     description:
-      "Jindal Steel and Power Limited (JSPL) is a leading Indian steel and energy company, known for its innovative solutions and commitment to sustainability.",
+      "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to sustainability.",
     images: [metaImage],
   },
 };

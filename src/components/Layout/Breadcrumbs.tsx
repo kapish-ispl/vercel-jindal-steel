@@ -3,122 +3,142 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "@/context/AppContext";
 import Link from "next/link";
 
-const initialState = [
-    {
-        id: 1,
-        label: "Home",
-        url: "/",
-    },
-];
-const Breadcrumbs = ({ slug, currentPage }: any) => {
-    const { headerMenu } = useContext(AppContext);
-    const [menuExist, setMenuExist] = useState(false);
+export interface ParentPageDetails {
+    id: number;
+    title: string;
+    slug: string;
+}
 
-    const [breadcumbMenu, setBreadcumbMenu] = useState(initialState);
+export interface TaxonomyDetails {
+    id: number;
+    alias: string;
+}
+
+export interface CurrentPage {
+    id: number;
+    title: string;
+    slug: string;
+    taxonomy_id?: string | number;
+    taxonomy?: TaxonomyDetails;
+    parentPageDetails?: ParentPageDetails;
+}
+
+export interface MenuItem {
+    id: number;
+    link: string;
+    name: string;
+    children: MenuItem[];
+}
+
+export interface BreadcrumbItem {
+    id: number;
+    label: string;
+    url: string;
+}
+
+interface BreadcrumbsProps<T extends BreadcrumbItem> {
+    slug: string;
+    currentPage: CurrentPage;
+}
+
+
+const initialState: BreadcrumbItem[] = [
+    { id: 1, label: "Home", url: "/" }
+];
+
+const Breadcrumbs = <T extends BreadcrumbItem>({
+    slug,
+    currentPage
+}: BreadcrumbsProps<T>) => {
+    const { headerMenu } = useContext(AppContext);
+    const [breadcrumbMenu, setBreadcrumbMenu] = useState<BreadcrumbItem[]>(initialState);
 
     useEffect(() => {
-        const buildBreadcrumbs = (
-            menuItem: any,
-            slug: string,
-            currentBreadcrumbs: { id: number; label: string; url: string }[]
-        ): { id: number; label: string; url: string }[] | null => {
-            const breadcrumbs = [
-                ...currentBreadcrumbs,
-                { id: menuItem.id, label: menuItem.name, url: menuItem.link },
-            ];
+        const buildBreadcrumbs = (menuItem: MenuItem, slug: string, trail: BreadcrumbItem[]): BreadcrumbItem[] | null => {
+            const newTrail: BreadcrumbItem[] = [...trail, { id: menuItem.id, label: menuItem.name, url: menuItem.link }];
 
-            if (menuItem.link === `/${slug}.html`) {
-                return breadcrumbs;
-            } else {
-                if (currentPage.taxonomy_id == undefined) {
-                    if (
-                        menuItem.link !== slug &&
-                        menuItem.link === `/${currentPage?.parentPageDetails?.slug}.html`
-                    ) {
-                        const breadcrumbsParent = [
-                            ...currentBreadcrumbs,
-                            {
-                                id: currentPage.parentPageDetails.id,
-                                label: currentPage.parentPageDetails.title,
-                                url: `/${currentPage.parentPageDetails.slug}.html`,
-                            },
-                            { id: currentPage.id, label: currentPage.title, url: slug },
-                        ];
-                        return breadcrumbsParent;
-                    }
-                } else {
-                    if (
-                        menuItem.link !== slug &&
-                        menuItem.link === `/${currentPage?.taxonomy?.alias.replace(" ", "-").toLowerCase()}.html`
-                    ) {
-                        const breadcrumbsParent = [
-                            ...currentBreadcrumbs,
-                            {
-                                id: currentPage?.taxonomy?.id,
-                                label: currentPage?.taxonomy?.alias,
-                                url: `/${currentPage?.taxonomy?.alias.replace(" ", "-").toLowerCase()}`,
-                            },
-                            { id: currentPage.id, label: currentPage.title, url: slug },
-                        ];
-                        return breadcrumbsParent;
-                    }
+            if (menuItem.link === `/${slug}`) {
+                return newTrail;
+            }
+            if (!currentPage.taxonomy_id && currentPage.parentPageDetails) {
+                if (menuItem.link === `/${currentPage.parentPageDetails.slug}`) {
+                    return [
+                        ...trail,
+                        {
+                            id: currentPage.parentPageDetails.id,
+                            label: currentPage.parentPageDetails.title,
+                            url: `/${currentPage.parentPageDetails.slug}`,
+                        },
+                        {
+                            id: currentPage.id,
+                            label: currentPage.title,
+                            url: `${currentPage.slug}`,
+                        },
+                    ];
                 }
             }
 
-            if (menuItem.children && menuItem.children.length > 0) {
-                for (const child of menuItem.children) {
-                    const result = buildBreadcrumbs(child, slug, breadcrumbs);
-                    if (result) {
-                        return result;
-                    }
+            // Match taxonomy parent
+            if (currentPage.taxonomy_id && currentPage.taxonomy) {
+                const taxonomySlug = `/${currentPage.taxonomy.alias.replace(/\s+/g, "-").toLowerCase()}`;
+                if (menuItem.link === taxonomySlug) {
+                    return [
+                        ...trail,
+                        {
+                            id: currentPage.taxonomy.id,
+                            label: currentPage.taxonomy.alias,
+                            url: taxonomySlug.replace(".html", ""),
+                        },
+                        {
+                            id: currentPage.id,
+                            label: currentPage.title,
+                            url: `${currentPage.slug}`,
+                        },
+                    ];
                 }
+            }
+
+            // Search children
+            for (const child of menuItem.children) {
+                const result = buildBreadcrumbs(child, slug, newTrail);
+                if (result) return result;
             }
 
             return null;
         };
 
-        const newBreadcrumbs: { id: number; label: string; url: string }[] = [];
-        headerMenu.forEach((menuItem: any) => {
+        let finalBreadcrumbs: BreadcrumbItem[] | null = null;
+
+        headerMenu.forEach((menuItem: MenuItem) => {
             const result = buildBreadcrumbs(menuItem, slug, initialState);
-            if (result) {
-                newBreadcrumbs.push(...result);
+            if (result && !finalBreadcrumbs) {
+                finalBreadcrumbs = result;
             }
         });
-        newBreadcrumbs.length > 0 ? setMenuExist(true) : setMenuExist(false);
-        menuExist
-            ? setBreadcumbMenu(newBreadcrumbs)
-            : setBreadcumbMenu([
+
+        if (!finalBreadcrumbs) {
+            finalBreadcrumbs = [
                 ...initialState,
-                ...(currentPage.slug && currentPage.slug.includes('/')
-                    ? currentPage.slug.split('/').filter(Boolean).slice(0, -1).map((part: string) => ({
-                        id: `path-${part}`,
-                        label: part.charAt(0).toUpperCase() + part.slice(1),
-                        url: `/${part}.html`,
-                    }))
-                    : []
-                ),
                 {
                     id: currentPage.id,
                     label: currentPage.title,
-                    url: `${currentPage.slug}.html`,
+                    url: `${currentPage.slug}`,
                 },
-            ]);
-    }, [slug, headerMenu, menuExist]);
-    return (
-        <>
-            <ul className="breadcrumb">
-                {breadcumbMenu.map((cumb: any) => (
-                    <li key={cumb.id} className="breadcrumb-item">
-                        {cumb.url === "" ? (
-                            cumb.label
-                        ) : (
-                            <Link href={cumb.url}>{cumb.label}</Link>
-                        )}
-                    </li>
-                ))}
-            </ul>
-        </>
-    )
-}
+            ];
+        }
 
-export default Breadcrumbs
+        setBreadcrumbMenu(finalBreadcrumbs);
+    }, [slug, headerMenu, currentPage]);
+
+    return (
+        <ul className="breadcrumb">
+            {breadcrumbMenu.map((item) => (
+                <li key={item.id} className="breadcrumb-item">
+                    {item.url ? <Link href={item.url}>{item.label}</Link> : item.label}
+                </li>
+            ))}
+        </ul>
+    );
+};
+
+export default Breadcrumbs;

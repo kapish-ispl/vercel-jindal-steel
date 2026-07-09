@@ -104,20 +104,13 @@ const Header = () => {
                   <div className="c-header__logo">
                     <Link href="/">
                       <Image
-                        src={IMAGE_PATH.LOGO}
+                        src={stickyHeader || isMegaActive ? IMAGE_PATH.LOGO : IMAGE_PATH.LOGO_LIGHT}
                         alt="Jindal Steel"
-                        className="img-fluid logo-dark"
+                        className={`img-fluid ${stickyHeader || isMegaActive ? "logo-dark" : "logo-light"
+                          }`}
                         priority
                         width={stickyHeader ? 170 : 190}
                         height={stickyHeader ? 80 : 86}
-                      />
-                      <Image
-                        src={IMAGE_PATH.LOGO_LIGHT}
-                        alt="Jindal Steel"
-                        className="img-fluid logo-light"
-                        priority
-                        width={190}
-                        height={86}
                       />
                     </Link>
                   </div>
@@ -140,9 +133,18 @@ const Header = () => {
                           return (
                             <li
                               key={menuItem.id}
-                              className="c-header__menu-list"
+                              className={`c-header__menu-list ${(activeMenu === menuItem.id && isMegaActive) ? "active" : ""
+                                }`}
                               role="none"
-                              onMouseEnter={() => setThirdLevelMenu(null)}
+                              onMouseEnter={() => {
+                                setActiveMenu(menuItem.id);
+                                setThirdLevelMenu(null);
+                                setIsMegaActive(menuItem.children.length > 0)
+                              }}
+                              onMouseLeave={() => {
+                                setIsMegaActive(false);
+                                setActiveMenu(null);
+                              }}
                             >
                               <Link
                                 href={menuItem.link}
@@ -167,7 +169,7 @@ const Header = () => {
                                 {menuItem.name}
                               </Link>
 
-                              {menuItem.children.length > 0 && (
+                              {menuItem.children.length > 0 && isMegaActive && (
                                 <ul
                                   id={`submenu-${menuItem.id}`}
                                   role="menu"
