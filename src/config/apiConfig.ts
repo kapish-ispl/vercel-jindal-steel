@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_PROXY_URL;
 
 export const GET_MENU_ENDPOINT = `${API_URL}/v1/menu/get`;
 export const GET_SPECIFIC_PAGE_ENDPOINT = `${API_URL}/v1/page/get`;
@@ -13,3 +13,4 @@ export const POST_FORM_ENDPOINT = `${API_URL}/v1/form/save`;
 export const POST_JOB_ENDPOINT = `${API_URL}/v1/job/post`;
 export const GET_FILE_UPLOAD_ENDPOINT = `${API_URL}/v1/upload-file/upload`;
 export const POST_MSME_ENDPOINT = `${API_URL}/v1/form/save`;
+export const UNPAID_DIVIDEND_ENDPOINT = `${API_URL}/v1/unpaid-dividend/search`;

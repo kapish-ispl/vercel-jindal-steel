@@ -5,6 +5,10 @@ import FormField from './FormField';
 import { restrictDigits, restrictSpecialChar, handleCopyPaste } from './FormFunc';
 import { Captcha } from '../Captcha';
 import { UnpaidDividendFormSchema } from './formschema';
+import { serverRequest } from '@/services/getServerSideRender';
+import { CONSTANTS } from '@/config/constant';
+import { UNPAID_DIVIDEND_ENDPOINT } from '@/config/apiConfig';
+import { toast } from 'react-hot-toast';
 
 interface FormValues {
     dpid: string;
@@ -14,11 +18,23 @@ interface FormValues {
     user_captcha_input: string;
 }
 
+const formatAmount = (val: string | number) => {
+    const num = typeof val === 'string' ? parseFloat(val) : val;
+    if (isNaN(num)) return String(val);
+    return new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        minimumFractionDigits: 2
+    }).format(num);
+};
+
 const UnpaidDividendForm: FC = () => {
     const [actualCaptcha, setActualCaptcha] = useState<string>('');
     const [reloadCaptcha, setReloadCaptcha] = useState<boolean>(false);
     const [captchaKey, setCaptchaKey] = useState<number>(0);
     const [submissionMessage, setSubmissionMessage] = useState<string | null>(null);
+    const [results, setResults] = useState<any[] | null>(null);
+    const [submissionError, setSubmissionError] = useState<boolean>(false);
 
     useEffect(() => {
         if (reloadCaptcha) {
@@ -35,6 +51,10 @@ const UnpaidDividendForm: FC = () => {
     };
 
     const handleSubmit = async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
+        // Reset previous state
+        setResults(null);
+        setSubmissionError(false);
+
         // Validate captcha manually
         if (values.user_captcha_input !== actualCaptcha) {
             helpers.setFieldError("user_captcha_input", "Security Code does not match");
@@ -42,18 +62,40 @@ const UnpaidDividendForm: FC = () => {
             return;
         }
 
-        const finalValues = {
-            ...values,
-            dpid: values.dpid ? `IN${values.dpid}` : "",
-        };
+        // Construct query parameters
+        const params = new URLSearchParams();
+        params.append("pan_no", values.pan);
+
+        if (values.folioNo) {
+            params.append("folio_no", values.folioNo);
+        } else {
+            params.append("dp_id", `IN${values.dpid}`);
+            params.append("client_id", values.clientId);
+        }
+
+        const url = `${UNPAID_DIVIDEND_ENDPOINT}?${params.toString()}`;
 
         try {
-            // Mocking successful lookup
-            // setSubmissionMessage("Data fetched successfully! (Simulation)");
-            console.log("Submitting values: ", finalValues);
+            console.log("Submitting values to: ", url);
+            const response = await serverRequest(null, url, CONSTANTS.REQUEST_GET);
+
+            if (response && response.code === "SUC200") {
+                const data = response.data;
+                const records = Array.isArray(data) ? data : data ? [data] : [];
+
+                if (records.length > 0) {
+                    setResults(records);
+                    toast.success("Unpaid dividend details retrieved successfully.");
+                } else {
+                    toast.error("No unpaid dividend records found for the entered details.");
+                }
+            } else {
+                setSubmissionError(true);
+                toast.error(response?.message || "Failed to fetch dividend data. Please try again.");
+            }
         } catch (error) {
-            console.error(error);
-            // setSubmissionMessage("Failed to fetch dividend data. Please try again.");
+            setSubmissionError(true);
+            toast.error(`${error}, Failed to fetch dividend data. Please try again.`);
         } finally {
             helpers.setSubmitting(false);
             setReloadCaptcha(prev => !prev);
@@ -63,6 +105,7 @@ const UnpaidDividendForm: FC = () => {
     return (
         <div className="unpaid_dividend_form_wrapper form_container c-form">
             <div className="dividend_form_card">
+
                 <Formik
                     initialValues={initialValues}
                     validationSchema={UnpaidDividendFormSchema}
@@ -71,6 +114,8 @@ const UnpaidDividendForm: FC = () => {
                     {({ errors, touched, isSubmitting, resetForm, setFieldValue, values }) => {
                         const handleResetClick = () => {
                             resetForm();
+                            setResults(null);
+                            setSubmissionError(false);
                             setReloadCaptcha(prev => !prev);
                         };
 
@@ -188,6 +233,39 @@ const UnpaidDividendForm: FC = () => {
                         );
                     }}
                 </Formik>
+
+                {results && results.length > 0 && (
+                    <div className="table-responsive mt-4 unpaid-dividend-results">
+                        <table className="table table-bordered table-striped align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Sr No.</th>
+                                    <th>Name</th>
+                                    <th>PAN No.</th>
+                                    <th>Folio No.</th>
+                                    <th>DP ID - Client ID</th>
+                                    <th>Unpaid Dividend Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {results && results.length > 0 ? results.map((row, idx) => (
+                                    <tr key={idx}>
+                                        <td>{idx + 1}</td>
+                                        <td>{row.name || '-'}</td>
+                                        <td>{row.pan_no || '-'}</td>
+                                        <td>{row.folio_no || '-'}</td>
+                                        <td>{row.dp_id ? row.dp_id + '-' + row.client_id : '-'}</td>
+                                        <td className="text-end font-monospace fw-semibold">
+                                            {row.amount ? formatAmount(row.amount) : '-'}
+                                        </td>
+                                    </tr>
+                                )) : <tr>
+                                    <td colSpan={6} className="text-center">No results found</td>
+                                </tr>}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
         </div>
     );
