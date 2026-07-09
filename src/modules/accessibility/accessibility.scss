@@ -298,7 +298,10 @@ body.large-cursor {
   position: fixed;
   top: 0;
   right: -470px;
-  max-width: 450px;
+
+
+
+  max-width: 360px;
   width: 100%;
   height: 100%;
   background: #eceef5;
@@ -309,6 +312,15 @@ body.large-cursor {
   border-radius: 10px 0px 0px 10px;
   overflow: scroll;
   scrollbar-width: none;
+
+  @include mq(desktop-wide) {
+    max-width: 450px;
+  }
+
+  @include mq(tablet, max) {
+    max-width: 100%;
+    border-radius: 0px;
+  }
 
   &.open {
     right: 0;
@@ -328,8 +340,9 @@ body.large-cursor {
   .mainToggle {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: start;
     margin-bottom: 40px;
+    gap: 15px;
 
     .step-button {
       @include font-size(10);
@@ -348,7 +361,6 @@ body.large-cursor {
     }
 
     .mainToggle__btn {
-      width: calc(100% / 4 - 10px);
       margin-bottom: 10px;
       display: flex;
       align-items: center;
@@ -364,9 +376,9 @@ body.large-cursor {
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease-in-out;
       cursor: pointer;
+      width: calc(100% / 3 - 10px);
 
       @include mq(desktop-wide) {
-        width: calc(100% / 3 - 10px);
         height: 124px;
       }
 
@@ -402,10 +414,9 @@ body.large-cursor {
         }
       }
 
-      @media (max-width: 991px) {
-        width: calc(100% / 3 - 10px);
-        margin: 0px 10px 10px 0px;
-      }
+      // @media (max-width: 991px) {
+      //   margin: 0px 10px 10px 0px;
+      // }
 
       &:hover {
         background: #fa6d0440;
@@ -507,24 +518,51 @@ body.large-cursor {
   border-radius: 10px;
   margin-bottom: 20px;
   position: fixed;
-  max-width: 360px;
-  width: 100%;
+  max-width: calc(100% - 40px);
+  width: calc(450px - 40px);
   z-index: 99 !important;
-  font-weight: 500;
-  font-size: 18px;
 
-  @media (min-width: 480px) {
-    max-width: 410px;
+
+  @include mq(desktop-wide, max) {
+    width: calc(360px - 40px);
   }
 
-  @media (min-width: 768px) {
-    max-width: 410px;
+  @include mq(tablet, max) {
+    max-width: calc(100% - 40px);
+    width: 100%;
   }
 
-  @media (min-width: 991px) {
-    font-size: 20px;
-    max-width: 400px;
+  // font-size: 18px;
+
+  .panel-title {
+    font-weight: 500;
+
+    @include mq(tablet, max) {
+      @include font-size(15);
+    }
+
+    @include mq(desktop-wide) {
+      @include font-size(14);
+    }
+
+    @include mq(desktop-wide-max) {
+      @include font-size(16);
+    }
+
   }
+
+  // @media (min-width: 480px) {
+  //   max-width: 410px;
+  // }
+
+  // @media (min-width: 768px) {
+  //   max-width: 410px;
+  // }
+
+  // @media (min-width: 991px) {
+  //   font-size: 20px;
+  //   max-width: 400px;
+  // }
 
   .closeBtn {
     background: white;
@@ -574,7 +612,17 @@ body.large-cursor {
     transition: background-color 0.3s ease;
 
     .resetBtn__title {
-      font-size: 12px;
+      @include mq(tablet, max) {
+        @include font-size(15);
+      }
+
+      @include mq(desktop-wide) {
+        @include font-size(14);
+      }
+
+      @include mq(desktop-wide-max) {
+        @include font-size(16);
+      }
     }
 
     &:hover {
