@@ -105,7 +105,6 @@ const UnpaidDividendForm: FC = () => {
     return (
         <div className="unpaid_dividend_form_wrapper form_container c-form">
             <div className="dividend_form_card">
-
                 <Formik
                     initialValues={initialValues}
                     validationSchema={UnpaidDividendFormSchema}
