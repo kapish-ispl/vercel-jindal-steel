@@ -6,41 +6,21 @@ import InnerBanner from "@/components/Layout/InnerBanner";
 import { MONTH_NAMES } from "@/config/config";
 import parse from "html-react-parser";
 import { Metadata } from "next";
-import { decodeHtmlEntities } from "@/lib/htmlUtils";
+import { getPageMetadata } from "@/lib/metadata";
 
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
-  const fetchedInfo = await serverRequest(
-    {},
-    `${GET_SPECIFIC_POST_ENDPOINT}?slug=${slug}`,
-    CONSTANTS.REQUEST_GET
-  );
-
-  const pageData = fetchedInfo?.data;
-
-  if (!pageData) return {};
-
-  const metaTitle = decodeHtmlEntities(pageData?.meta?.title || "Jindal Steel");
-  const metaDescription = decodeHtmlEntities(
-    pageData?.meta?.description ||
-    "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to quality."
-  );
-  const metaKeywords = decodeHtmlEntities(
-    pageData?.meta?.keywords ||
-    "Jindal Steel Steel Manufacturing, Energy Solutions, Indian Steel Industry, Steel Products, Infrastructure Development"
-  );
-
-  return {
-    title: metaTitle,
-    description: metaDescription,
-    keywords: metaKeywords,
-  };
+  return getPageMetadata({
+    slug: typeof slug === 'string' ? slug : '',
+    endpoint: GET_SPECIFIC_POST_ENDPOINT,
+  });
 }
+
 
 export default async function Page({
   params,

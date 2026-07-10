@@ -49,7 +49,6 @@ const InnerBanner = ({ label, tagline, slug, currentPage, innerBanner = [] }: Pr
         innerBanner.find((m) => m.deviceType === "tablet") ||
         mobileMedia;
 
-    console.log(currentPage)
     return (
         <div className={`c-inner-banner ${innerBanner.length > 0 ? "" : "without-banner"}`}>
             {innerBanner.length > 0 && (

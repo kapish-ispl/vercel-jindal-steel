@@ -48,9 +48,6 @@ export const metadata: Metadata = {
     google: "hxhEUPw_d8ReQZZdxoh0GAITxHwayUb6BggozmZGM7U",
   },
   openGraph: {
-    title: "Jindal Steel",
-    description:
-      "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to sustainability.",
     url: siteUrl,
     siteName: "Jindal Steel",
     type: "website",
@@ -67,9 +64,6 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@JindalSteel_In",
-    title: "Jindal Steel",
-    description:
-      "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to sustainability.",
     images: [metaImage],
   },
 };
