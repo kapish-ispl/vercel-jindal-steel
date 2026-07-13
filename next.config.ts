@@ -41,14 +41,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: "/.well-known/com.apple.remotemanagement",
-  //       destination: "/.well-known/com.apple.remotemanagement.json",
-  //     },
-  //   ];
-  // },
+  async rewrites() {
+    return [
+      {
+        source: "/.well-known/com.apple.remotemanagement",
+        destination: "/.well-known/com.apple.remotemanagement.json",
+      },
+    ];
+  },
   htmlLimitedBots: /.*/,
 };
 
