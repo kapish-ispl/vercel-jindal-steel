@@ -1,16 +1,31 @@
-const API_URL = process.env.NEXT_PUBLIC_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_PROXY_URL;
 
-export const GET_MENU_ENDPOINT = `${API_URL}/v1/menu/get`;
-export const GET_SPECIFIC_PAGE_ENDPOINT = `${API_URL}/v1/page/get`;
-export const GET_SPECIFIC_POST_ENDPOINT = `${API_URL}/v1/post/get`;
-export const GET_CONTENT_BLOCK_ENDPOINT = `${API_URL}/v1/content-block/get`; //?keyword=footerv2
-export const GET_POST_ENDPOINT = `${API_URL}/v1/post/get-all`;
-export const GET_JOB_ENDPOINT = `${API_URL}/v1/job/get-data`;
+// export const GET_MENU_ENDPOINT = `${API_URL}/v1/menu/get`;
+// export const GET_SPECIFIC_PAGE_ENDPOINT = `${API_URL}/v1/page/get`;
+// export const GET_SPECIFIC_POST_ENDPOINT = `${API_URL}/v1/post/get`;
+// export const GET_CONTENT_BLOCK_ENDPOINT = `${API_URL}/v1/content-block/get`;
+// export const GET_POST_ENDPOINT = `${API_URL}/v1/post/get-all`;
+// export const GET_JOB_ENDPOINT = `${API_URL}/v1/job/get-data`;
+// export const HEADER_MENU_ENDPOINT = `header-main-menu`;
+// export const FOOTER_MENU_ENDPOINT = `footer-bottom-menu`;
+// export const FOOTER_CONTENT_BLOCK_ENDPOINT = `footerv2`;
+// export const POST_FORM_ENDPOINT = `${API_URL}/v1/form/save`;
+// export const POST_JOB_ENDPOINT = `${API_URL}/v1/job/post`;
+// export const GET_FILE_UPLOAD_ENDPOINT = `${API_URL}/v1/upload-file/upload`;
+// export const POST_MSME_ENDPOINT = `${API_URL}/v1/form/save`;
+// export const UNPAID_DIVIDEND_ENDPOINT = `${API_URL}/v1/unpaid-dividend/search`;
+
+export const GET_MENU_ENDPOINT = `/v1/menu/get`;
+export const GET_SPECIFIC_PAGE_ENDPOINT = `/v1/page/get`;
+export const GET_SPECIFIC_POST_ENDPOINT = `/v1/post/get`;
+export const GET_CONTENT_BLOCK_ENDPOINT = `/v1/content-block/get`;
+export const GET_POST_ENDPOINT = `/v1/post/get-all`;
+export const GET_JOB_ENDPOINT = `/v1/job/get-data`;
 export const HEADER_MENU_ENDPOINT = `header-main-menu`;
 export const FOOTER_MENU_ENDPOINT = `footer-bottom-menu`;
 export const FOOTER_CONTENT_BLOCK_ENDPOINT = `footerv2`;
-export const POST_FORM_ENDPOINT = `${API_URL}/v1/form/save`;
-export const POST_JOB_ENDPOINT = `${API_URL}/v1/job/post`;
-export const GET_FILE_UPLOAD_ENDPOINT = `${API_URL}/v1/upload-file/upload`;
-export const POST_MSME_ENDPOINT = `${API_URL}/v1/form/save`;
-export const UNPAID_DIVIDEND_ENDPOINT = `${API_URL}/v1/unpaid-dividend/search`;
+export const POST_FORM_ENDPOINT = `/v1/form/save`;
+export const POST_JOB_ENDPOINT = `/v1/job/post`;
+export const GET_FILE_UPLOAD_ENDPOINT = `/v1/upload-file/upload`;
+export const POST_MSME_ENDPOINT = `/v1/form/save`;
+export const UNPAID_DIVIDEND_ENDPOINT = `/v1/unpaid-dividend/search`;

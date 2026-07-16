@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
+export const dynamic = 'force-static';
 import { APPIMAGES } from "@/config/config";
 
 export default function NotFound() {

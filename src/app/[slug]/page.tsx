@@ -37,7 +37,7 @@ export default async function Page({
   const fetchedInfo = await serverRequest(
     {},
     `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${slug}`,
-    CONSTANTS.REQUEST_GET
+    CONSTANTS.REQUEST_GET, 'server'
   );
 
   if (!fetchedInfo?.data || fetchedInfo.data.length === 0) {

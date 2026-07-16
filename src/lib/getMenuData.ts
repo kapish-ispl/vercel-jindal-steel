@@ -4,9 +4,9 @@ import { CONSTANTS } from "@/config/constant";
 
 export async function getMenuData() {
     const [headerRes, footerRes, productRes] = await Promise.all([
-        serverRequest({}, `${GET_MENU_ENDPOINT}?slug=header-menu-v2`, CONSTANTS.REQUEST_GET),
-        serverRequest({}, `${GET_MENU_ENDPOINT}?slug=footer-menu-v2`, CONSTANTS.REQUEST_GET),
-        serverRequest({}, `${GET_POST_ENDPOINT}?slug=product`, CONSTANTS.REQUEST_GET),
+        serverRequest({}, `${GET_MENU_ENDPOINT}?slug=header-menu-v2`, CONSTANTS.REQUEST_GET, 'server'),
+        serverRequest({}, `${GET_MENU_ENDPOINT}?slug=footer-menu-v2`, CONSTANTS.REQUEST_GET, 'server'),
+        serverRequest({}, `${GET_POST_ENDPOINT}?slug=product`, CONSTANTS.REQUEST_GET, 'server'),
     ]);
 
     return {

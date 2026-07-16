@@ -19,8 +19,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const fetchedInfo = await serverRequest(
     {},
-    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=home`,
-    CONSTANTS.REQUEST_GET
+    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${CONSTANTS.LANDING_SLUG}`,
+    CONSTANTS.REQUEST_GET,
+    'server'
   );
 
   const pageData = fetchedInfo?.data;

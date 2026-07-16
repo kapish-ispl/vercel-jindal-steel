@@ -9,6 +9,7 @@ export const CONSTANTS = {
   FOOTER_MENU_SLUG: 'footer-menu',
   FOOTER_BOTTOM_MENU_SLUG: 'footer-bottom-menu',
   FOOTER_CONTENT_BLOCK_ENDPOINT: 'footerv2',
+  LANDING_SLUG: 'home',
   STATUS_SUCCESS: 'SUC200',
   STATUS_FAILED: 'ERR004',
   X_AUTHORIZATION_TOKEN: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,

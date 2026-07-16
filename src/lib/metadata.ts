@@ -17,10 +17,18 @@ export async function getPageMetadata({
   const fetchedInfo = await serverRequest(
     {},
     `${endpoint}?slug=${slug}`,
-    CONSTANTS.REQUEST_GET
+    CONSTANTS.REQUEST_GET,
+    'server'
   );
 
-  const pageData = fetchedInfo?.data;
+  if ('error' in fetchedInfo) {
+    return {
+      title: fallbackTitle,
+      description: 'The requested page could not be found.',
+    };
+  }
+
+  const pageData = fetchedInfo.data;
 
   if (!pageData || (Array.isArray(pageData) && pageData.length === 0)) {
     return {
