@@ -17,7 +17,19 @@ interface FormValues {
     pan: string;
     user_captcha_input: string;
 }
-
+interface UnpaidDividendResponse {
+    id: number,
+    network_id: number,
+    guid: string,
+    name: string,
+    pan_no: string,
+    folio_no: string,
+    dp_id: string | null,
+    client_id: string,
+    amount: string,
+    created_on: number,
+    modified_on: number
+}
 const formatAmount = (val: string | number) => {
     const num = typeof val === 'string' ? parseFloat(val) : val;
     if (isNaN(num)) return String(val);
@@ -32,9 +44,7 @@ const UnpaidDividendForm: FC = () => {
     const [actualCaptcha, setActualCaptcha] = useState<string>('');
     const [reloadCaptcha, setReloadCaptcha] = useState<boolean>(false);
     const [captchaKey, setCaptchaKey] = useState<number>(0);
-    const [submissionMessage, setSubmissionMessage] = useState<string | null>(null);
-    const [results, setResults] = useState<any[] | null>(null);
-    const [submissionError, setSubmissionError] = useState<boolean>(false);
+    const [results, setResults] = useState<UnpaidDividendResponse[] | null>(null);
 
     useEffect(() => {
         if (reloadCaptcha) {
@@ -53,7 +63,6 @@ const UnpaidDividendForm: FC = () => {
     const handleSubmit = async (values: FormValues, helpers: FormikHelpers<FormValues>) => {
         // Reset previous state
         setResults(null);
-        setSubmissionError(false);
 
         // Validate captcha manually
         if (values.user_captcha_input !== actualCaptcha) {
@@ -76,7 +85,6 @@ const UnpaidDividendForm: FC = () => {
         const url = `${UNPAID_DIVIDEND_ENDPOINT}?${params.toString()}`;
 
         try {
-            console.log("Submitting values to: ", url);
             const response = await serverRequest(null, url, CONSTANTS.REQUEST_GET);
 
             if (response && response.code === "SUC200") {
@@ -85,16 +93,15 @@ const UnpaidDividendForm: FC = () => {
 
                 if (records.length > 0) {
                     setResults(records);
+                    helpers.resetForm();
                     toast.success("Unpaid dividend details retrieved successfully.");
                 } else {
                     toast.error("No unpaid dividend records found for the entered details.");
                 }
             } else {
-                setSubmissionError(true);
                 toast.error(response?.message || "Failed to fetch dividend data. Please try again.");
             }
         } catch (error) {
-            setSubmissionError(true);
             toast.error(`${error}, Failed to fetch dividend data. Please try again.`);
         } finally {
             helpers.setSubmitting(false);
@@ -114,7 +121,6 @@ const UnpaidDividendForm: FC = () => {
                         const handleResetClick = () => {
                             resetForm();
                             setResults(null);
-                            setSubmissionError(false);
                             setReloadCaptcha(prev => !prev);
                         };
 
