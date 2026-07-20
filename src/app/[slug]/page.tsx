@@ -30,6 +30,11 @@ export default async function Page({
 }) {
   const { slug } = await params;
 
+  if (typeof slug === 'string' && slug.endsWith('.html')) {
+    const cleanSlug = slug.slice(0, -5);
+    redirect(`/${cleanSlug}`);
+  }
+
   if (slug === 'home`') {
     redirect('/');
   }
