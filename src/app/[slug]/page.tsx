@@ -35,7 +35,7 @@ export default async function Page({
     redirect(`/${cleanSlug}`);
   }
 
-  if (slug === 'home`') {
+  if (slug === 'home') {
     redirect('/');
   }
 
