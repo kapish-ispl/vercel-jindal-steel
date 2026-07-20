@@ -56,7 +56,7 @@ const nextConfig: NextConfig = {
 
               "font-src 'self' https://fonts.gstatic.com data:",
               "connect-src 'self' https://api.jindalsteelpower.com https://www.googletagmanager.com https://www.google-analytics.com",
-              "frame-src 'self' https://www.googletagmanager.com https://cmapis.cmots.com https://*.cmots.com https://www.youtube.com https://youtube.com",
+              "frame-src 'self' https://www.googletagmanager.com https://cmapis.cmots.com https://*.cmots.com https://www.youtube.com https://youtube.com https://esg.churchgatepartners.com",
               "frame-ancestors 'self'",
               // ── Hardening directives ──────────────────────────────────────
               "object-src 'none'",           // Block Flash, Java applets & all plugins
