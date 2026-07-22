@@ -51,11 +51,11 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "img-src 'self' data: blob: https://d2lptvt2jijg6f.cloudfront.net https://i3.ytimg.com https://www.youtube.com https://d3vvmt2ub6odwk.cloudfront.net https://docs.jindalsteel.in",
+              "img-src 'self' data: blob: https://d2lptvt2jijg6f.cloudfront.net https://i3.ytimg.com https://www.youtube.com https://d3vvmt2ub6odwk.cloudfront.net https://docs.jindalsteel.in https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net",
               "media-src 'self' blob: https://docs.jindalsteel.in https://d2lptvt2jijg6f.cloudfront.net https://d3vvmt2ub6odwk.cloudfront.net https://www.youtube.com",
 
               "font-src 'self' https://fonts.gstatic.com data:",
-              "connect-src 'self' https://api.jindalsteelpower.com https://www.googletagmanager.com https://www.google-analytics.com",
+              "connect-src 'self' https://api.jindalsteelpower.com https://www.googletagmanager.com https://www.google-analytics.com https://stats.g.doubleclick.net",
               "frame-src 'self' https://www.googletagmanager.com https://cmapis.cmots.com https://*.cmots.com https://www.youtube.com https://youtube.com https://esg.churchgatepartners.com",
               "frame-ancestors 'self'",
               // ── Hardening directives ──────────────────────────────────────
