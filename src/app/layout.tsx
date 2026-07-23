@@ -133,7 +133,7 @@ export default async function RootLayout({
       </head>
 
       <body className={`${poppins.variable}`}>
-        <Toaster position="top-center" reverseOrder={false} />
+        <Toaster position="top-center" reverseOrder={false} containerStyle={{ zIndex: 99999 }} />
 
         <Suspense fallback={null}>
           <AccessibilityProvider>

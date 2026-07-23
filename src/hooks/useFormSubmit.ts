@@ -52,13 +52,14 @@ export function useFormSubmit<TValues>(
       formikHelpers: { setSubmitting: (b: boolean) => void; resetForm?: () => void }
     ): Promise<FormSubmitResult> => {
       const { setSubmitting, resetForm } = formikHelpers;
+      let shouldReset = false;
 
       try {
         const response = await apiFn(values);
 
         if (response.code === "SUC200") {
           toast.success(successMsg);
-          resetForm?.();
+          shouldReset = true;
           await onSuccess?.(values);
           return { status: "success" };
         }
@@ -80,6 +81,9 @@ export function useFormSubmit<TValues>(
         return { status: "error", message: fallback };
       } finally {
         setSubmitting(false);
+        if (shouldReset) {
+          resetForm?.();
+        }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
