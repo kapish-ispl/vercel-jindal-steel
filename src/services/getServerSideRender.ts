@@ -2,6 +2,50 @@ import { decryptResponse } from '@/components/decryption';
 import { CONSTANTS } from '@/config/constant';
 import { KEYS } from '@/config/key';
 
+const FETCH_TIMEOUT_MS = 15_000;
+const MAX_RETRIES = 1;
+
+async function fetchWithTimeout(
+  url: string,
+  options: RequestInit,
+  timeoutMs: number = FETCH_TIMEOUT_MS
+): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    return response;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function fetchWithRetry(
+  url: string,
+  options: RequestInit,
+  retries: number = MAX_RETRIES,
+  timeoutMs: number = FETCH_TIMEOUT_MS
+): Promise<Response> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      return await fetchWithTimeout(url, options, timeoutMs);
+    } catch (error) {
+      const isTimeout =
+        error instanceof DOMException && error.name === 'AbortError';
+
+      if (isTimeout && attempt < retries) {
+        console.warn(`[serverRequest] Timeout fetching ${url}, retrying (${attempt + 1}/${retries})...`);
+        await new Promise((resolve) => setTimeout(resolve, 1_000));
+        continue;
+      }
+
+      throw error;
+    }
+  }
+
+  throw new Error('Unreachable');
+}
 
 export async function serverRequest(
   request: any,
@@ -18,13 +62,13 @@ export async function serverRequest(
       const absoluteUrl = url.startsWith('http') ? url : `${apiBase}${url}`;
 
       if (methodName === CONSTANTS.REQUEST_GET) {
-        response = await fetch(absoluteUrl, {
+        response = await fetchWithRetry(absoluteUrl, {
           method: 'GET',
           headers: requestHeaders,
           cache: 'no-store',
         });
       } else {
-        response = await fetch(absoluteUrl, {
+        response = await fetchWithRetry(absoluteUrl, {
           method: methodName,
           headers: requestHeaders,
           body: JSON.stringify(request),
@@ -34,13 +78,13 @@ export async function serverRequest(
       const proxyUrl = `/api/proxy${url}`;
 
       if (methodName === CONSTANTS.REQUEST_GET) {
-        response = await fetch(proxyUrl, {
+        response = await fetchWithRetry(proxyUrl, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
           cache: 'no-store',
         });
       } else {
-        response = await fetch(proxyUrl, {
+        response = await fetchWithRetry(proxyUrl, {
           method: methodName,
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(request),
