@@ -172,7 +172,7 @@ const JobListing = ({ postData, totalPost, itemsPerPage }: any) => {
                                     <div className="col-12 col-md-6" key={item.id}>
                                         <div className="newListCard__item">
                                             <div className="newListCard__item-info">
-                                                <div className="c-content-24 clr-gray ft_semiBold lh_1-4 mb-3">{item.metaInfo.role !== "" ? `${item.metaInfo.role}, ` : ""}
+                                                <div className="c-content-24 clr-gray ft_semiBold lh_1-4 mb-3">{item.metaInfo.role !== "" ? `${item.metaInfo.role} - ` : ""}
                                                     {item.title}</div>
 
                                                 <div className="c-content-20 clr-gray lh_1-4 mb-3"><span className="ft_semiBold u-text">Location:{" "}</span><span className="ft_regular">{item.metaInfo.location !== "" ? item.metaInfo.location : "-"}</span></div>
