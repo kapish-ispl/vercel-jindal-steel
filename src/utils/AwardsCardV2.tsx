@@ -85,20 +85,20 @@ const AwardsCardV2: FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage }
         { label: "2006", value: "2006" },
         { label: "2005", value: "2005" },
         { label: "2004", value: "2004" },
-        
+
     ];
 
     return (
         <>
-           <div className='col-12'>
+            <div className='col-12'>
                 <div className="c-filterView justify-content-end mb-4">
                     <div className="row gy-2">
                         <div className="col-md-10 col-sm-12">
                             <CustomSelect options={myOptions} placeholder="Select Year" />
                         </div>
                         <div className="col-12 col-md-2">
-                            <button 
-                                type='button' 
+                            <button
+                                type='button'
                                 className='u-btn bg-blue action_btn'
                                 onClick={handleReset}
                             >
@@ -136,6 +136,7 @@ const AwardsCardV2: FC<AwardsCardProps> = ({ postData, totalPost, itemsPerPage }
                                             <span className="c-content-20 ft_regular">{post.title}</span>
                                         </span>
                                     </span>
+                                    <p className='d-none'>{parse(post?.content)}</p>
                                 </button>
                             </div>
                         )

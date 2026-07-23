@@ -3,6 +3,7 @@ import { MONTH_NAMES } from "@/config/config";
 import Link from "next/link";
 import CustomSilder from "./CustomSilder";
 import React from "react";
+import parse from 'html-react-parser'
 
 const ResourceSection = ({ postData, compSlug }: any) => {
     console.log(postData, compSlug)
@@ -43,9 +44,9 @@ const ResourceSection = ({ postData, compSlug }: any) => {
                                 {compSlug === 'policies-reports' &&
                                     <div className="c-cardView__box sliderbox">
                                         <Link className="c-cardView__box-item d-block text-decoration-none" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}>
-                                        
+
                                             <div className="card__media mb-4"><img alt="icon" className="img-fluid u-img" height={80} width={80} src="https://docs.jindalsteel.in/document/124/1763976839___2.png" />
-                                            <div className="label c-content-18 clr-gray ft_semiBold">{newDate !== "" ? newDate : ""}</div>
+                                                <div className="label c-content-18 clr-gray ft_semiBold">{newDate !== "" ? newDate : ""}</div>
                                             </div>
 
                                             <div className="card__content mb-3">
@@ -57,10 +58,10 @@ const ResourceSection = ({ postData, compSlug }: any) => {
                                                     <div className="desc c-content-19 ft_light clr-gray line-clamp-2">{post.title}</div>
                                                 </div>
 
-                                                
+
                                             </div>
-                                           <div className="action-btn c-cardView__box-item--action"><span className="leftarrow"><span className="icon-move-right icon"></span></span></div>
-                                            
+                                            <div className="action-btn c-cardView__box-item--action"><span className="leftarrow"><span className="icon-move-right icon"></span></span></div>
+                                            <p className="d-none">{parse(post?.content)}</p>
                                         </Link>
                                     </div>
                                 }
