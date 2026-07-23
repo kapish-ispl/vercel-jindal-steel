@@ -49,7 +49,7 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://tagmanager.google.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://ssl.google-analytics.com https://tagmanager.google.com https://www.google.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://tagmanager.google.com",
               "img-src 'self' data: blob: https://d2lptvt2jijg6f.cloudfront.net https://i3.ytimg.com https://www.youtube.com https://d3vvmt2ub6odwk.cloudfront.net https://docs.jindalsteel.in https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://www.google.com https://www.google.co.in https://stats.g.doubleclick.net https://*.doubleclick.net https://*.g.doubleclick.net",
               "media-src 'self' blob: https://docs.jindalsteel.in https://d2lptvt2jijg6f.cloudfront.net https://d3vvmt2ub6odwk.cloudfront.net https://www.youtube.com",
