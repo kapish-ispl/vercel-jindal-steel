@@ -234,6 +234,7 @@ const LeadershipCardV2 = ({ postData, totalPost, itemsPerPage }: any) => {
                                     {item.metaInfo.company}
                                 </div>
                             )}
+                            <p className='d-none'>{parse(item?.content)}</p>
                         </div>
                     </div>
                 </div>
@@ -260,7 +261,7 @@ const LeadershipCardV2 = ({ postData, totalPost, itemsPerPage }: any) => {
                         </div>
                     ))
                 ) : (
-                    <div className="c-heading-50 clr-peach ft_medium text-center lh_1-2 mb-50">No Data Found</div> 
+                    <div className="c-heading-50 clr-peach ft_medium text-center lh_1-2 mb-50">No Data Found</div>
                 )}
 
             </div>
@@ -322,7 +323,7 @@ const LeadershipCardV2 = ({ postData, totalPost, itemsPerPage }: any) => {
                     {/* CLOSE BUTTON */}
                     <span className="modle-cls-btn" onClick={hanndleModalClose}>
                         <div className="close-btn">
-                           <svg width="30" height="30" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="30" height="30" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 //                                 <path d="M16.8651 0.585741C17.6462 -0.195217 18.9122 -0.195277 19.6932 0.585741C20.4742 1.36677 20.4742 2.63284 19.6932 3.41386L12.9676 10.1394L19.6932 16.865C20.4741 17.6461 20.4742 18.9121 19.6932 19.6931C18.9122 20.4741 17.6462 20.474 16.8651 19.6931L10.1395 12.9676L3.41385 19.6931C2.63281 20.4739 1.36669 20.474 0.585706 19.6931C-0.195272 18.9122 -0.19512 17.6461 0.585706 16.865L7.31133 10.1394L0.585706 3.41386C-0.195179 2.6328 -0.195291 1.36673 0.585706 0.585741C1.3667 -0.195233 2.63279 -0.195132 3.41385 0.585741L10.1395 7.31132L16.8651 0.585741Z" fill="#F5821E" />
 //                             </svg>
                         </div>

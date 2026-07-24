@@ -1,11 +1,12 @@
 'use client'
 import CustomSelect from '@/components/CustomSelect'
 import { MONTH_NAMES } from '@/config/config';
-import { corporateGovOptions, yearOptions } from '@/constants/GenericFilter';
+import { corporateGovOptions } from '@/constants/GenericFilter';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react'
 import ReactPaginate from 'react-paginate';
+import parse from 'html-react-parser'
 
 const PressReleaseCard = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug }: any) => {
 
@@ -99,6 +100,7 @@ const PressReleaseCard = ({ postData, itemsPerPage = 9, totalPost, loading, comp
                                             </span>
 
                                             {/* Bottom Content */}
+                                            <p className='d-none'>{parse(post?.content)}</p>
                                             <span className="c-cardBox__wrapper-bottom">
                                                 <span className="content">
                                                     <span className="content_head">

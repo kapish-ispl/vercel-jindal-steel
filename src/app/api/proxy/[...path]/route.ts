@@ -4,9 +4,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const EXTERNAL_API_BASE = (process.env.NEXT_PUBLIC_API_PROXY_URL || 'https://api.jindalsteelpower.com').replace(/\/$/, '');
 
-function buildSecureHeaders(): Record<string, string> {
+function buildSecureHeaders(req: NextRequest): Record<string, string> {
+    const contentType = req.headers.get('content-type') || CONSTANTS.FORMAT;
     return {
-        [KEYS.CONTENT_TYPE]: CONSTANTS.FORMAT,
+        [KEYS.CONTENT_TYPE]: contentType,
         [KEYS.ACCEPT_TYPE]: CONSTANTS.FORMAT,
         [KEYS.ACCEPT_LANGUAGE]: CONSTANTS.LANGUAGE_ENGLISH,
         [KEYS.X_AUTHORIZATION_TOKEN]: CONSTANTS.X_AUTHORIZATION_TOKEN || '',
@@ -28,7 +29,7 @@ async function handleRequest(
 
         const fetchOptions: RequestInit = {
             method,
-            headers: buildSecureHeaders(),
+            headers: buildSecureHeaders(req),
             cache: 'no-store',
         };
 

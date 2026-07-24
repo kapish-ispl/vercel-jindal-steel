@@ -1,11 +1,12 @@
 'use client'
 import CustomSelect from '@/components/CustomSelect'
 import { MONTH_NAMES } from '@/config/config';
-import { corporateGovOptions, yearOptions } from '@/constants/GenericFilter';
+import { corporateGovOptions } from '@/constants/GenericFilter';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useRef } from 'react'
 import ReactPaginate from 'react-paginate';
+import parse from 'html-react-parser'
 
 const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug }: any) => {
 
@@ -81,7 +82,7 @@ const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug 
                                     <div className="col-12 col-md-6 col-lg-4" key={index}>
                                         <div className="c-cardView__box">
                                             <Link className="c-cardView__box-item d-block text-decoration-none" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}>
-                                            
+
                                                 <div className="card__media mb-4">
                                                     <img alt="icon" className="img-fluid u-img" height={80} width={80}
                                                         src="https://docs.jindalsteel.in/document/124/1763976839___2.png" />
@@ -99,7 +100,8 @@ const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug 
                                                     </div>
                                                 </div>
                                                 <div className="action-btn c-cardView__box-item--action"><span className="leftarrow"><span className="icon-move-right icon"></span></span></div>
-                                             </Link>
+                                                <p className='d-none'>{parse(post?.content)}</p>
+                                            </Link>
                                         </div>
                                     </div>
                                 </>

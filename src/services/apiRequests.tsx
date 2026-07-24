@@ -11,7 +11,8 @@ export const postUploadFileResponse = async (endPoint: string, data: any, signal
         const formdata = new FormData();
         formdata.append("file", data);
 
-        const fetchData = await fetch(`${endPoint}`, {
+        const proxyUrl = `/api/proxy${endPoint}`;
+        const fetchData = await fetch(proxyUrl, {
             method: "POST",
             mode: "cors",
             headers: headers,
@@ -52,7 +53,8 @@ export const postUploadFileResponse = async (endPoint: string, data: any, signal
 
 export const postAPIResponse = async (endPoint: string, data: any, signal?: any) => {
     try {
-        const fetchData = await fetch(`${endPoint}`, {
+        const proxyUrl = `/api/proxy${endPoint}`;
+        const fetchData = await fetch(proxyUrl, {
             method: "POST",
             mode: "cors",
             headers: { ...headers, "content-type": "application/json" },
@@ -92,7 +94,8 @@ export const postAPIResponse = async (endPoint: string, data: any, signal?: any)
 
 export const postFormDataResponse = async (endPoint: string, formData: FormData, signal?: AbortSignal) => {
     try {
-        const res = await fetch(`${endPoint}`, {
+        const proxyUrl = `/api/proxy${endPoint}`;
+        const res = await fetch(proxyUrl, {
             method: "POST",
             headers: {
                 ...headers

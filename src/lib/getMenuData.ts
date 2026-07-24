@@ -3,15 +3,38 @@ import { GET_MENU_ENDPOINT, GET_POST_ENDPOINT } from "@/config/apiConfig";
 import { CONSTANTS } from "@/config/constant";
 
 export async function getMenuData() {
-    const [headerRes, footerRes, productRes] = await Promise.all([
-        serverRequest({}, `${GET_MENU_ENDPOINT}?slug=header-menu-v2`, CONSTANTS.REQUEST_GET, 'server'),
-        serverRequest({}, `${GET_MENU_ENDPOINT}?slug=footer-menu-v2`, CONSTANTS.REQUEST_GET, 'server'),
-        serverRequest({}, `${GET_POST_ENDPOINT}?slug=product`, CONSTANTS.REQUEST_GET, 'server'),
-    ]);
+    const endpoints = [
+        { key: 'headerMenu', url: `${GET_MENU_ENDPOINT}?slug=header-menu-v2` },
+        { key: 'footerMenu', url: `${GET_MENU_ENDPOINT}?slug=footer-menu-v2` },
+        { key: 'productData', url: `${GET_POST_ENDPOINT}?slug=product` },
+    ] as const;
 
-    return {
-        headerMenu: headerRes?.code === CONSTANTS.STATUS_SUCCESS ? headerRes.data : [],
-        footerMenu: footerRes?.code === CONSTANTS.STATUS_SUCCESS ? footerRes.data : [],
-        productData: productRes ?? [],
+    const results = await Promise.allSettled(
+        endpoints.map(({ url }) =>
+            serverRequest({}, url, CONSTANTS.REQUEST_GET, 'server')
+        )
+    );
+
+    const data: Record<string, any> = {
+        headerMenu: [],
+        footerMenu: [],
+        productData: [],
+    };
+
+    results.forEach((result, i) => {
+        const { key } = endpoints[i];
+        if (result.status === 'fulfilled' && result.value?.code === CONSTANTS.STATUS_SUCCESS) {
+            data[key] = result.value.data;
+        } else if (result.status === 'rejected') {
+            console.warn(`[getMenuData] ${key} request rejected:`, result.reason);
+        } else if (result.status === 'fulfilled' && result.value?.error) {
+            console.warn(`[getMenuData] ${key} request failed:`, result.value?.message);
+        }
+    });
+
+    return data as {
+        headerMenu: any[];
+        footerMenu: any[];
+        productData: any;
     };
 }
