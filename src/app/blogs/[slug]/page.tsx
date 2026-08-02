@@ -20,13 +20,11 @@ export default async function Page({
 
   const fetchedInfo = await serverRequest(
     {},
-    `${GET_SPECIFIC_POST_ENDPOINT}?slug=${slug}`,
+    `${GET_SPECIFIC_POST_ENDPOINT}?slug=${slug}&excludeUrl=1`,
     CONSTANTS.REQUEST_GET, 'server'
   );
 
-  if (!fetchedInfo?.data) {
-    return notFound();
-  }
+  if (fetchedInfo.code === CONSTANTS.STATUS_NOT_FOUND || !fetchedInfo?.data) return notFound();
 
   const pageData = fetchedInfo.data;
 

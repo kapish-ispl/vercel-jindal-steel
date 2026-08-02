@@ -12,6 +12,7 @@ export const CONSTANTS = {
   LANDING_SLUG: 'home',
   STATUS_SUCCESS: 'SUC200',
   STATUS_FAILED: 'ERR004',
+  STATUS_NOT_FOUND: 'ERR003',
   X_AUTHORIZATION_TOKEN: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
   X_NETWORK_GUID: process.env.NEXT_PUBLIC_NETWORK_GUID,
 };
@@ -19,4 +20,4 @@ export const CONSTANTS = {
 export const IMAGE_PATH = {
   LOGO: '/images/logo/jindal-steel-logo-black.svg',
   LOGO_LIGHT: '/images/logo/jindal-steel-logo-white.svg',
-}
+};

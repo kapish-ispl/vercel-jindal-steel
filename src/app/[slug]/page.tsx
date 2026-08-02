@@ -41,13 +41,11 @@ export default async function Page({
 
   const fetchedInfo = await serverRequest(
     {},
-    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${slug}`,
+    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${slug}&excludeUrl=1`,
     CONSTANTS.REQUEST_GET, 'server'
   );
 
-  if (!fetchedInfo?.data || fetchedInfo.data.length === 0) {
-    return notFound();
-  }
+  if (fetchedInfo.code === CONSTANTS.STATUS_NOT_FOUND || !fetchedInfo?.data) return notFound();
 
   const pageData = fetchedInfo.data;
 

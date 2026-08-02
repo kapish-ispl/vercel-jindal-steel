@@ -234,7 +234,7 @@ const LeadershipCardV2 = ({ postData, totalPost, itemsPerPage }: any) => {
                                     {item.metaInfo.company}
                                 </div>
                             )}
-                            <p className='d-none'>{parse(item?.content)}</p>
+                            <div className='d-none'>{parse(item?.content)}</div>
                         </div>
                     </div>
                 </div>
