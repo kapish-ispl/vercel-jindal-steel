@@ -2,7 +2,7 @@
 
 import { serverRequest } from "@/services/getServerSideRender";
 import { useSearchParams, useParams } from "next/navigation";
-import { GET_JOB_ENDPOINT } from "@/config/apiConfig";
+import { GET_JOB_ENDPOINT, GET_POST_ENDPOINT } from "@/config/apiConfig";
 import { ReactNode, createContext, useState, useEffect, Dispatch, SetStateAction } from "react";
 import { CONSTANTS } from "@/config/constant";
 import AOS from "aos";
@@ -133,7 +133,11 @@ const AppContextProvider = ({
     }, []);
 
     useEffect(() => {
-        // Job/masters data is only needed for the careers section — fetched client-side
+        const perRequiredRequest = async () => {
+            const getProducts = await serverRequest({}, `${GET_POST_ENDPOINT}?slug=product`, CONSTANTS.REQUEST_GET);
+            setProductData(getProducts);
+        };
+        perRequiredRequest();
         const getPostData = async () => {
             const taxonomyInfo = await serverRequest({}, `${GET_JOB_ENDPOINT}`, CONSTANTS.REQUEST_GET);
             if (taxonomyInfo !== undefined) {
@@ -143,6 +147,9 @@ const AppContextProvider = ({
 
         getPostData();
     }, []);
+
+    console.log("productData", productData);
+
 
     useEffect(() => {
         if (mastersData && mastersData.code == 'SUC200' && mastersData.data) {
