@@ -21,7 +21,6 @@ export const invDocOptions = [
   { value: 'Analyst Presentation', label: 'Analyst Presentation' },
   { value: 'Transcript', label: 'Transcript' },
   { value: 'Annual Return', label: 'Annual Return' },
-  { value: 'Conference Call', label: 'Conference Call' },
 ];
 
 export const yearOptions = [
