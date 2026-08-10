@@ -1,725 +1,400 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.jindalsteel.in/</loc>
-    <lastmod>2024-01-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://www.jindalsteel.in</loc>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/about-us</loc>
-    <lastmod>2024-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/mine-to-metal</loc>
-    <lastmod>2024-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/leadership</loc>
-    <lastmod>2024-01-05</lastmod>
-    <changefreq>quarterly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/awards</loc>
-    <lastmod>2024-01-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/mining</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/power</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/steel</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/rails</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/parallel-flange-beams-columns</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/plates</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/wire-rods</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/round-bars</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/jindal-panther-tmt-rebars</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/hollow-sections</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/sheet-piles</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/angles-channels</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/speedfloor</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/fabricated-sections</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/crane-manufacturing-division</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/pressure-vessel-division</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/our-portfolio/foundry-division</loc>
-    <lastmod>2024-01-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/india-operations</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/chhattisgarh</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/odisha</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/jharkhand</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/africa-operations</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/sustainability-at-jindal-steel</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/sustainability-rise</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/responsible-governance</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/inclusive-growth</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/sustainable-environment</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/ethical-partnerships</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/environmental-compliance</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/esg-profile</loc>
-    <lastmod>2024-01-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/people</loc>
-    <lastmod>2024-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/career-opportunity</loc>
-    <lastmod>2024-01-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/join-our-talent-community</loc>
-    <lastmod>2024-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/jindal-steel-edge</loc>
-    <lastmod>2024-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/learning-and-development</loc>
-    <lastmod>2024-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/benefits</loc>
-    <lastmod>2024-01-11</lastmod>
-    <changefreq>quarterly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/rewards</loc>
-    <lastmod>2024-01-11</lastmod>
-    <changefreq>quarterly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/life-at-jindal-steel</loc>
-    <lastmod>2024-01-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/jindal-foundation</loc>
-    <lastmod>2024-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.jindalsteel.in/investor-media-v4</loc>
-    <lastmod>2024-01-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <loc>https://www.jindalsteel.in/leadership</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/awards</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/mining</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/power</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/steel</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/rails</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/parallel-flange-beams-columns</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/plates</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/wire-rods</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/round-bars</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/jindal-panther-tmt-rebars</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/hollow-sections</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/sheet-piles</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/angles-channels</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/speedfloor</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/fabricated-sections</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/crane-manufacturing-division</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/pressure-vessel-division</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/our-portfolio/foundry-division</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/india-operations</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/chhattisgarh</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/odisha</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/jharkhand</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/africa-operations</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/sustainability-at-jindal-steel</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/sustainability-rise</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/responsible-governance</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/inclusive-growth</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/sustainable-environment</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/ethical-partnerships</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/environmental-compliance</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/esg-profile</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/career-opportunity</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/join-our-talent-community</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/jindal-steel-edge</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/learning-and-development</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/benefits</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/rewards</loc>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/life-at-jindal-steel</loc>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/investor-media</loc>
-    <lastmod>2024-01-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/corporate-governance</loc>
-    <lastmod>2024-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/performance-highlights</loc>
-    <lastmod>2024-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/media-kit</loc>
-    <lastmod>2024-01-10</lastmod>
-    <changefreq>quarterly</changefreq>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/steel-of-india</loc>
-    <lastmod>2024-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/msme-registration</loc>
-    <lastmod>2024-01-10</lastmod>
-    <changefreq>quarterly</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://www.jindalsteel.in/contact-us</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/disclaimer</loc>
-    <lastmod>2024-01-05</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.60</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/privacy-notice</loc>
-    <lastmod>2024-01-05</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.60</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/cookie-policy</loc>
-    <lastmod>2024-01-05</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://www.jindalsteel.in/contact-us</loc>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases</loc>
-    <lastmod>2024-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-earns-care-aa-credit-rating-upgrade-reinforces-financial-strength-and-sustainable-growth</loc>
-    <lastmod>2024-01-14</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-leads-indias-coal-gasification-revolution-for-energy-self-reliance-sustainable-steel</loc>
-    <lastmod>2024-01-13</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-completes-6-mtpa-expansion-at-angul-taking-capacity-to-12-mtpa</loc>
-    <lastmod>2024-01-12</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-declared-preferred-bidder-for-rengalaberha-north-east-extension-and-nuagan-west-iron-ore-block-in-odisha</loc>
-    <lastmod>2024-01-11</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-panther-launches-shaant-city-safe-city-campaign</loc>
-    <lastmod>2024-01-10</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-declared-preferred-bidder-for-thakurani-a1-iron-ore-block-in-odisha</loc>
-    <lastmod>2024-01-09</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-records-42-point-csa-jump-named-2026-sustainability-yearbook-member-2</loc>
-    <lastmod>2024-01-08</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-to-double-structural-steel-capacity-at-raigarh-to-24-mtpa</loc>
-    <lastmod>2024-01-07</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-commissions-new-3-mtpa-basic-oxygen-furnace-at-angul-expands-steelmaking-capacity-to-9-mtpa</loc>
-    <lastmod>2024-01-06</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-becomes-indias-first-diversified-large-enterprise-recognised-as-an-awarding-body-by-ncvet</loc>
-    <lastmod>2024-01-05</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-commissions-one-of-indias-largest-blast-furnaces-at-angul-on-track-to-12-mtpa-capacity</loc>
-    <lastmod>2024-01-04</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-ltd-awarded-supplier-excellence-recognition-ser-certificate-by-caterpillar-inc</loc>
-    <lastmod>2024-01-03</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-power-limited-renamed-as-jindal-steel-limited</loc>
-    <lastmod>2024-01-02</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-receives-letter-of-intent-as-successful-bidder-for-roida-i-iron-ore-and-manganese-block-in-odisha</loc>
-    <lastmod>2024-01-01</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-honoured-as-champion-of-green-business-practices-at-et-edges-4th-global-sustainability-alliance-series</loc>
-    <lastmod>2023-12-31</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/intimation-under-regulation-30-of-the-securities-and-exchange-board-of-india-listing-obligations-and-disclosure-requirements-regulations-2015-sebi-listing-regulations-2</loc>
-    <lastmod>2023-12-30</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-jsp-techcatalyst-2025</loc>
-    <lastmod>2023-12-29</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jsp-press-release-q3-fy25</loc>
-    <lastmod>2023-12-28</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-bets-big-on-green-hydrogen</loc>
-    <lastmod>2023-12-27</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-diversifies-coking-coal-sources-to-mitigate-risks-and-reduce-costs</loc>
-    <lastmod>2023-12-26</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-results-for-fourth-quarter-fy-2022-23</loc>
-    <lastmod>2023-12-25</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-and-power-to-invest-70000-crore-more-in-odisha-to-drive-industrial-and-social-transformation</loc>
-    <lastmod>2023-12-24</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-power-achieves-milestone-state-of-the-art-hot-strip-mill-commissioned-in-record-time-marks-first-rake-dispatch</loc>
-    <lastmod>2023-12-23</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-results-for-third-quarter-fy-2021-22</loc>
-    <lastmod>2023-12-22</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/production-and-sales-sg</loc>
-    <lastmod>2023-12-21</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/q2-fy-22-sales-2</loc>
-    <lastmod>2023-12-20</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-34</loc>
-    <lastmod>2023-12-19</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/earnings-conference-call-details</loc>
-    <lastmod>2023-12-18</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jsp-posts-record-steel-production-and-sales-in-fy22</loc>
-    <lastmod>2023-12-17</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/dedication-of-jsps-14-mtpa-rebar-mill-to-the-nation</loc>
-    <lastmod>2023-12-16</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-power-attains-coveted-great-place-to-work-certification-tm-in-india</loc>
-    <lastmod>2023-12-15</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jsp-foundation-inaugurates-state-of-the-art-sports-hostel-to-foster-rural-sports-talent</loc>
-    <lastmod>2023-12-14</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jsp-to-set-up-a-new-12-mtpa-rail-mill-at-angul-odisha-2</loc>
-    <lastmod>2023-12-13</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jsps-promoter-group-companies-part-of-the-naveen-jindal-group-have-fully-repaid-the-loan-against-shares</loc>
-    <lastmod>2023-12-12</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-results-for-third-quarter-fy-2022-23</loc>
-    <lastmod>2023-12-11</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-results-for-second-quarter-fy-2022-23</loc>
-    <lastmod>2023-12-10</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-result-for-first-quarter-fy-2022-22</loc>
-    <lastmod>2023-12-09</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-results-for-fourth-quarter-fy-2021-22</loc>
-    <lastmod>2023-12-08</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jsp-prepays-357-million-usd-loan-in-its-mauritius-entity-aims-to-net-debt-free-by-fy-23</loc>
-    <lastmod>2023-12-07</lastmod>
-    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-25</loc>
-    <lastmod>2023-12-06</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-21</loc>
-    <lastmod>2023-12-05</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jpl-world-one</loc>
-    <lastmod>2023-12-04</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-july-2021-final-eh</loc>
-    <lastmod>2023-12-03</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-1qfy22</loc>
-    <lastmod>2023-12-02</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/q1fy22-pr</loc>
-    <lastmod>2023-12-01</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-retains-upward-momentum-in-apr-may-21</loc>
-    <lastmod>2023-11-30</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/statement</loc>
-    <lastmod>2023-11-29</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-makes-prepayment-of-rs-2462-crore-to-lenders</loc>
-    <lastmod>2023-11-28</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-4qfy21-fy21</loc>
-    <lastmod>2023-11-27</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-2qfy21</loc>
-    <lastmod>2023-11-26</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-posts-highest-ever-production-sales-in-fy-21</loc>
-    <lastmod>2023-11-25</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspls-steel-production-grows-18-y-o-y-in-february-2021</loc>
-    <lastmod>2023-11-24</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jpl-chairman-press-release</loc>
-    <lastmod>2023-11-23</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-results-for-third-quarter-nine-months-fy-2020-21</loc>
-    <lastmod>2023-11-22</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/q3fy21-media-release</loc>
-    <lastmod>2023-11-21</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-records-highest-ever-production-sales-in-december-2020</loc>
-    <lastmod>2023-11-20</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-marches-ahead-with-highest-ever-quarterly-standalone-sales-of-193-million-tons-in-q2fy21</loc>
-    <lastmod>2023-11-19</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-continues-its-consistent-growth-performance-standalone-sales-up-by-37</loc>
-    <lastmod>2023-11-18</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-results-for-fourth-quarter-full-year-fy-2019-20</loc>
-    <lastmod>2023-11-17</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/intimation-under-regulation-30-of-the-securities-and-exchange-board-of-india-listing</loc>
-    <lastmod>2023-11-16</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-recorded-superb-growth-of-109-in-export-sales-during-the-covid-19-pandemic-3</loc>
-    <lastmod>2023-11-15</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jindal-steel-power-limited-clocks-in-highest-ever-quarterly-production-and-sales-in-q3fy20-2</loc>
-    <lastmod>2023-11-14</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-results-for-third-quarter-fy-2019-20</loc>
-    <lastmod>2023-11-13</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-on-jspl-targets-above-12k-cr-ebidta-and-less-than-30k-cr-debt-naveen-jindal-4</loc>
-    <lastmod>2023-11-12</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-on-jspl-records-16-growth-in-quarterly-steel-related-products-sales-4</loc>
-    <lastmod>2023-11-11</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-wins-rail-contracts-worth-rs-665-crore-from-rvnl-2</loc>
-    <lastmod>2023-11-10</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-complete-delivery-of-its-first-ever-rail-order-to-railways</loc>
-    <lastmod>2023-11-09</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jpl-credit-rating-2</loc>
-    <lastmod>2023-11-08</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-bags-prestigious-order-in-first-ever-global-tender-for-rails-2</loc>
-    <lastmod>2023-11-07</lastmod>
-    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/press-release-dated-july-14-2018-ms-jindal-steel-power-limited-and-ms-zee-media-4</loc>
-    <lastmod>2023-11-06</lastmod>
-    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-records-domestic-steel-production-of-123-million-tonnes-in-q1-fy2019-2</loc>
-    <lastmod>2023-11-05</lastmod>
-    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/ratings-upgraded-to-icrabbb-stable-icraa3-2</loc>
-    <lastmod>2023-11-04</lastmod>
-    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-results-for-third-quarter-nine-months-fy-2018-19-2</loc>
-    <lastmod>2023-11-03</lastmod>
-    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-posts-highest-ever-monthly-crude-steel-production-2</loc>
-    <lastmod>2023-11-02</lastmod>
-    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/jspl-credit-ratings-upgraded-to-investment-grade-with-stable-outlook-2</loc>
-    <lastmod>2023-11-01</lastmod>
-    <priority>0.70</priority>
   </url>
   <url>
     <loc>https://www.jindalsteel.in/press-releases/financial-result-s-for-first-quarter-fy-2018-19-2</loc>
-    <lastmod>2023-10-31</lastmod>
-    <priority>0.70</priority>
   </url>
 </urlset>
