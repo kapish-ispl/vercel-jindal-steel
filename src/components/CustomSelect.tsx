@@ -34,6 +34,17 @@ export default function CustomSelect({
     const wrapperRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
 
+    // Changing a filter re-slices the result set, so any page the user had
+    // paginated to is no longer valid — keeping it would land them on an empty
+    // page (e.g. ?page=3 with a filter that only returns 6 items).
+    // Covers both the shared `page` key and PostList's `<slug>-page` variants.
+    const resetPagination = (params: URLSearchParams) => {
+        params.delete("page");
+        [...params.keys()]
+            .filter((key) => key.endsWith("-page"))
+            .forEach((key) => params.delete(key));
+    };
+
     if (selectRef) {
         selectRef.current = {
             clearValue(push = true) {
@@ -44,7 +55,11 @@ export default function CustomSelect({
                 if (push) {
                     const params = new URLSearchParams(window.location.search);
                     params.delete(paramKey);
-                    const newUrl = `${window.location.pathname}?${params.toString()}`;
+                    resetPagination(params);
+                    const query = params.toString();
+                    const newUrl = query
+                        ? `${window.location.pathname}?${query}`
+                        : window.location.pathname;
                     router.push(newUrl, { scroll: false });
                 }
             },
@@ -89,6 +104,7 @@ export default function CustomSelect({
 
         const params = new URLSearchParams(window.location.search);
         params.set(paramKey, option.value);
+        resetPagination(params);
 
         const newUrl = `${window.location.pathname}?${params.toString()}`;
         router.push(newUrl, { scroll: false });

@@ -4,7 +4,7 @@ import { MONTH_NAMES } from '@/config/config';
 import { corporateGovOptions } from '@/constants/GenericFilter';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import ReactPaginate from 'react-paginate';
 import parse from 'html-react-parser'
 
@@ -23,9 +23,22 @@ const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug 
         router.push(newUrl, { scroll: false });
     };
 
-    const selectRef = useRef<{ clearValue: () => void }>(null);
+    // Safety net for pages reached directly by URL or the back button: if the
+    // requested page is past the end of the (filtered) result set the grid would
+    // render empty, so snap back to the first page instead.
+    useEffect(() => {
+        if (loading || totalPost === 0 || currentPage <= pageCount) return;
+
+        const newParams = new URLSearchParams(window.location.search);
+        newParams.delete('page');
+        const query = newParams.toString();
+        router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    }, [loading, totalPost, currentPage, pageCount, pathname, router]);
+
+    const selectRef = useRef<{ clearValue: (push?: boolean) => void }>(null);
     const handleClear = () => {
-        selectRef.current?.clearValue();
+        // clearValue(false) skips its own navigation — one push below covers both
+        selectRef.current?.clearValue(false);
         router.push(window.location.pathname, { scroll: false });
     };
 
