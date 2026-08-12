@@ -9,7 +9,6 @@ import CzechiaMap from '@/components/maps/CzechiaMap';
 import AustraliaMap from "@/components/maps/AustraliaMap";
 
 const CustomWorldMap = (props: any) => {
-    console.log("CustomWorldMap props:", props);
     const [openTab, setOpenTab] = useState(0);
     const [view, setView] = useState('world');
     const tabData = props.data;

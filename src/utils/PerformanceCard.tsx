@@ -64,7 +64,6 @@ const PaginationArrow = ({ type }: { type: 'prev' | 'next' }) => {
 // --- Main Component ---
 
 const PerformanceCard = ({ postData, itemsPerPage, totalPost, loading, compSlug }: any) => {
-    console.log(itemsPerPage);
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const router = useRouter();

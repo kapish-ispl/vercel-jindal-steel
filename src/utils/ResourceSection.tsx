@@ -6,7 +6,6 @@ import React from "react";
 import parse from 'html-react-parser'
 
 const ResourceSection = ({ postData, compSlug }: any) => {
-    console.log(postData, compSlug)
     return (
         <>
             <div className="col-12 position-relative c-cardView v7 fixSpace  c-verticalSlider cus-embla-arrow">

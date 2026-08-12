@@ -30,7 +30,6 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
     wordAnimationEnd = 'bottom bottom'
 }) => {
     const containerRef = useRef<HTMLHeadingElement>(null);
-    console.log('mayank', children)
     const splitText = useMemo(() => {
         const text = typeof children === 'string' ? children : '';
         return text.split(/(\s+)/).map((word, index) => {

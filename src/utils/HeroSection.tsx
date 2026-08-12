@@ -21,7 +21,6 @@ export default function HeroSection({ data, title }: any) {
 
       }));
   }, [data]);
-  console.log(menuItems);
 
   useEffect(() => {
     const interval = setInterval(() => {

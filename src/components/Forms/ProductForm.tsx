@@ -26,7 +26,6 @@ interface FormValues {
 }
 
 const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
-    console.log(pageTitle);
     const mobileRef = useRef<HTMLInputElement | null>(null);
     const [actualCaptcha, setActualCaptcha] = useState<string>('');
     const [reloadCaptcha, setReloadCaptcha] = useState<boolean>(false);

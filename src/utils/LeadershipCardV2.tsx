@@ -6,7 +6,6 @@
 // import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 // const LeadershipCardV2 = ({ postData, totalPost, itemsPerPage, title }: any) => {
-//     console.log(totalPost, itemsPerPage)
 //     const router = useRouter();
 //     const pathname = usePathname();
 //     const searchParams = useSearchParams();

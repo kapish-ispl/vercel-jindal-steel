@@ -4,7 +4,6 @@ const componentMap: any = {
     ProductForm: dynamic(() => import("@/components/Forms/ProductForm")),
 }
 const CustomProductForm = (props: any) => {
-    console.log(props);
     const PostComponentRender = componentMap[props.components];
 
     return PostComponentRender ? (

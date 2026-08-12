@@ -42,10 +42,9 @@ export default function PostList(props: any) {
     const [totalPost, setTotalPost] = useState<any>(0);
     const [loading, setLoading] = useState(false);
     const type = searchParams.get('type');
-    const desc = searchParams.get('desc');
     const productCategory = searchParams.get('product-category');
-    const [filteredTag, setFilteredTag] = useState<string | null>(null);
-    //console.log(props);
+
+
     const metaKeys: any = {
         "investor-documents": {
             year: { key: "year_1599486125" },
@@ -132,7 +131,6 @@ export default function PostList(props: any) {
             }
         }
         if (props.slug === 'podcast') {
-            console.log("type", props.seasontype);
             if (props.seasontype) {
                 slugInfo += `&metaInfo[label_1778157653]=${props.seasontype}`;
             }
@@ -202,7 +200,7 @@ export default function PostList(props: any) {
 
                         const taxonomyInfo = await serverRequest(
                             {},
-                            `${GET_POST_ENDPOINT}?slug=${slugInfo}&limit=${limit}&offset=${offset}&excludeUrl=1`,
+                            `${GET_POST_ENDPOINT}?slug=${slugInfo}&limit=${2000}&offset=${offset}&excludeUrl=1`,
                             CONSTANTS.REQUEST_GET
                         );
 

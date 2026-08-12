@@ -148,9 +148,6 @@ const AppContextProvider = ({
         getPostData();
     }, []);
 
-    console.log("productData", productData);
-
-
     useEffect(() => {
         if (mastersData && mastersData.code == 'SUC200' && mastersData.data) {
             const data = mastersData.data;
