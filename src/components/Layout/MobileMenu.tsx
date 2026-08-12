@@ -22,10 +22,7 @@ const MobileMenu: FC<Props> = ({ menuState, menuTrigger }) => {
         <>
             <nav className={`c-header__nav-main ${menuState ? 'active' : ''}`}>
                 <div className="c-header__nav-mobile">
-                    <div
-                        className={`mobile-overlay`}
-                        onClick={() => menuTrigger()}
-                    ></div>
+                    <div className={`mobile-overlay`} onClick={() => menuTrigger()}></div>
                     <div className={`mobile-menu`} data-lenis-ignore>
                         <button
                             type="button"
