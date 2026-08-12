@@ -10,43 +10,6 @@ type Card = {
   totalCards?: number
 };
 
-// const cardData: Card[] = [
-//   {
-//     id: 1,
-//     content:
-//       "India's Only SynGas-based Coal Gasification Plant for Steel Making",
-//     videourl:
-//       "https://docs.jindalsteel.in/document/124/1765533013_CoalGasificationPlant.mp4",
-//   },
-//   {
-//     id: 2,
-//     content:
-//       "India's Only Producer of the Widest Plates in Coil Form",
-//     videourl:
-//       "https://docs.jindalsteel.in/document/124/1765176612_WidestPlatesinCoil.mp4",
-//   },
-//   {
-//     id: 3,
-//     content:
-//       "India’s Only Private Player In Rail Manufacturing",
-//     videourl:
-//       "https://docs.jindalsteel.in/document/124/1765532941_RailManufacturing.mp4",
-//   },
-//   {
-//     id: 4,
-//     content:
-//       "India’s First Largest Blast Furnace - 4.25 MTPA",
-//     videourl:
-//       "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
-//   },
-//   {
-//     id: 5,
-//     content:
-//       "India’s Only Private Player Producing Fabricated Steel Structures",
-//     videourl:
-//       "https://d2lptvt2jijg6f.cloudfront.net/jspsteelpower20/custom/1710498881ForWebSite1.mp4",
-//   },
-// ];
 const CardItem = React.memo(function CardItem({
   card,
   index,
@@ -87,11 +50,9 @@ const CardItem = React.memo(function CardItem({
           muted
           playsInline
           autoPlay={isActive}
-          preload={isActive ? "auto" : "none"}
           loop
           className="card-item__background"
         >
-          {/* Only render the source if it is active, or if it has already been loaded, to prevent unnecessary network requests */}
           <source src={card.videourl} type="video/mp4" />
         </video>
       ) : (

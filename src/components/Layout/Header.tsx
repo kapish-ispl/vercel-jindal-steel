@@ -27,9 +27,15 @@ const Header = () => {
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
 
   const menuTrigger = () => {
-    setMobileMenuOpen(false);
-    document.querySelector(".app-mainWrapper")?.classList.remove("overflow-hidden");
-    document.querySelector(".app-container")?.classList.remove("overflow-hidden");
+    if (!mobileMenuOpen) {
+      setMobileMenuOpen(true);
+      document.querySelector("body")?.classList.add("overflow-hidden");
+    } else {
+      setMobileMenuOpen(false);
+      document.querySelector("body")?.classList.remove("overflow-hidden");
+      document.querySelector(".app-mainWrapper")?.classList.remove("overflow-hidden");
+      document.querySelector(".app-container")?.classList.remove("overflow-hidden");
+    }
   };
 
   useEffect(() => {
@@ -118,7 +124,7 @@ const Header = () => {
                   {/* Hamburger toggle */}
                   <button
                     className="mobile-toggle"
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    onClick={menuTrigger}
                     aria-label="Toggle mobile menu"
                   >
                     <div className="icon-menu"></div>
