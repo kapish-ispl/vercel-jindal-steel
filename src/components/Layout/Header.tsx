@@ -6,6 +6,7 @@ import { useEffect, useState, useContext, useRef } from "react";
 import { IMAGE_PATH } from "@/config/constant";
 import RecursiveMenu from "./RecursiveMenu";
 import MobileMenu from "./MobileMenu";
+import { lenisRef } from "./SmoothScrollProvider";
 
 const Header = () => {
   const contextInfo = useContext(AppContext);
@@ -28,9 +29,43 @@ const Header = () => {
 
   const menuTrigger = () => {
     setMobileMenuOpen(false);
-    document.querySelector(".app-mainWrapper")?.classList.remove("overflow-hidden");
-    document.querySelector(".app-container")?.classList.remove("overflow-hidden");
   };
+
+  // Lock the page behind the mobile menu: Lenis drives the scroll, so it has to
+  // be stopped as well as the native overflow. Padding compensates for the
+  // scrollbar width so the layout doesn't shift when it disappears.
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const body = document.body;
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const prevOverflow = body.style.overflow;
+    const prevPaddingRight = body.style.paddingRight;
+
+    lenisRef.current?.stop();
+    body.classList.add("menu-open");
+    body.style.overflow = "hidden";
+    if (scrollBarWidth > 0) body.style.paddingRight = `${scrollBarWidth}px`;
+
+    return () => {
+      lenisRef.current?.start();
+      body.classList.remove("menu-open");
+      body.style.overflow = prevOverflow;
+      body.style.paddingRight = prevPaddingRight;
+    };
+  }, [mobileMenuOpen]);
+
+  // Close the mobile menu with Escape
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -120,6 +155,7 @@ const Header = () => {
                     className="mobile-toggle"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     aria-label="Toggle mobile menu"
+                    aria-expanded={mobileMenuOpen}
                   >
                     <div className="icon-menu"></div>
                   </button>

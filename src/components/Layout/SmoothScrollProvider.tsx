@@ -11,6 +11,10 @@ interface SmoothScrollProviderProps {
   children: React.ReactNode;
 }
 
+// Shared handle to the running Lenis instance so other components (e.g. the
+// mobile menu) can pause/resume smooth scrolling. Null until mounted.
+export const lenisRef: { current: any } = { current: null };
+
 export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   useEffect(() => {
     // Initialize Lenis
@@ -29,6 +33,8 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
       },
     });
 
+    lenisRef.current = lenis;
+
     // RAF loop to update Lenis and GSAP ScrollTrigger.
     // The frame ID is stored so it can be cancelled on unmount — without this
     // the recursive loop would keep running after the component is destroyed.
@@ -46,6 +52,7 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
 

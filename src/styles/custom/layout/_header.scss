@@ -1,5 +1,5 @@
-@use '../core/variables' as *;
-@use '../core/mixins' as *;
+@use "../core/variables" as *;
+@use "../core/mixins" as *;
 
 .c-header {
   position: fixed;
@@ -8,8 +8,6 @@
   z-index: 9999;
   transition: transform 0.6s ease-in-out;
   padding-top: 10px;
-
-
 
   &.hide {
     transform: translateY(-100%);
@@ -29,10 +27,10 @@
     padding: 4px;
     border-radius: 8px;
     font-size: 40px;
-    color: hsla(0, 0%, 100%, .8);
+    color: hsla(0, 0%, 100%, 0.8);
     background: transparent !important;
 
-    @include mq('tablet-max') {
+    @include mq("tablet-max") {
       display: none;
     }
   }
@@ -45,6 +43,7 @@
     height: 100vh;
     background-color: rgba(255, 255, 255, 0.95);
     z-index: 10;
+    touch-action: none;
   }
 
   .mobile-menu {
@@ -55,15 +54,34 @@
     top: 0;
     padding-top: 70px;
 
-    >ul {
-      >li {
+    &__close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      z-index: 1;
+      @include flexbox;
+      @include align-items(center);
+      @include justify-content(center);
+      padding: 4px;
+      border: none;
+      outline: none;
+      border-radius: 50%;
+      font-size: 24px;
+      line-height: 1;
+      color: var(--color-black);
+      background: #f1f1f1;
+      cursor: pointer;
+    }
+
+    > ul {
+      > li {
         position: relative;
 
-        >button,
-        >.accordion-header,
+        > button,
+        > .accordion-header,
         .mobMenu {
           display: block;
-          padding: 15px 20px;
+          padding: 15px 25px;
           color: var(--color-black);
           font-weight: var(--fontSemiBold);
           text-transform: uppercase;
@@ -78,7 +96,7 @@
           @include font-size(16);
         }
 
-        >button,
+        > button,
         .mobMenu {
           @include flexbox;
           @include justify-content(space-between);
@@ -86,7 +104,7 @@
           font-weight: var(--fontRegular);
         }
 
-        >span {
+        > span {
           position: absolute;
           right: 25px;
           top: 17px;
@@ -99,8 +117,8 @@
         ul {
           margin-left: 20px;
 
-          >li {
-            >a {
+          > li {
+            > a {
               display: block;
               padding: 10px 25px;
               color: var(--color-black);
@@ -124,15 +142,14 @@
   &__nav {
     flex: 1;
 
-
-    @include mq('desktop-wide-max') {
+    @include mq("desktop-wide-max") {
       max-width: 78%;
     }
 
     &.desktop-menu {
       display: none;
 
-      @include mq('tablet-max') {
+      @include mq("tablet-max") {
         @include flexbox;
         @include justify-content(flex-end);
       }
@@ -140,19 +157,18 @@
   }
 
   &__menu {
-    >ul {
+    > ul {
       @include flexbox();
       //position: relative;
 
-      >li {
-
+      > li {
         &:hover .mega-panel,
         &:focus-within .mega-panel,
         &.active .mega-panel {
           display: block;
         }
 
-        >a {
+        > a {
           display: block;
           padding: 20px 10px 25px;
           color: var(--color-white);
@@ -161,10 +177,9 @@
           text-decoration: none;
           position: relative;
 
-
           @include font-size(16);
 
-          @include mq('tablet-max') {
+          @include mq("tablet-max") {
             padding: 20px 10px 25px;
             @include font-size(13);
           }
@@ -173,19 +188,17 @@
             @include font-size(12);
           }
 
-          @include mq('desktop-wide') {
+          @include mq("desktop-wide") {
             padding: 25px 14px 35px;
             @include font-size(16);
           }
 
-          @include mq('desktop-wide-max') {
+          @include mq("desktop-wide-max") {
             @include font-size(18);
           }
 
-
-
           &:before {
-            content: '';
+            content: "";
             position: absolute;
             bottom: 22px;
             left: 50%;
@@ -195,23 +208,23 @@
             background-color: var(--color-primary);
             transition: width 0.3s ease;
 
-            @include mq('desktop-wide') {
+            @include mq("desktop-wide") {
               bottom: 32px;
             }
           }
         }
 
-        &:hover>a {
+        &:hover > a {
           color: var(--color-primary);
 
           &:before {
             width: calc(100% - 10px);
 
-            @include mq('tablet-max') {
+            @include mq("tablet-max") {
               width: calc(100% - 20px);
             }
 
-            @include mq('desktop-wide') {
+            @include mq("desktop-wide") {
               width: calc(100% - 28px);
             }
           }
@@ -375,7 +388,6 @@
         //   }
         // }
         .mega-menu {
-
           &-title,
           &-itemMenu {
             @include font-size(20);
@@ -396,7 +408,7 @@
 
           &-itemMenu {
             text-transform: capitalize;
-            border-bottom-color: var(--color-grey2)
+            border-bottom-color: var(--color-grey2);
           }
 
           ul {
@@ -473,13 +485,12 @@
     }
   }
 
-
   &.header-sticky,
   &.mega-menu--active {
     background-color: var(--color-white);
     box-shadow: 0 13px 12.3px rgba(0, 0, 0, 0.05);
 
-    .c-header__menu>ul>li>a {
+    .c-header__menu > ul > li > a {
       color: var(--color-secondary);
 
       &:before {
@@ -489,11 +500,10 @@
       &:hover {
         color: var(--color-primary);
       }
-
     }
 
     .mobile-toggle {
-      color: rgba(0, 0, 0, .8)
+      color: rgba(0, 0, 0, 0.8);
     }
   }
 }
@@ -502,5 +512,11 @@
   @media screen and (max-width: 992px) {
     height: 70vh;
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
+}
+
+// Freezes the page behind the open mobile menu (Header.tsx also stops Lenis)
+body.menu-open {
+  overflow: hidden;
 }

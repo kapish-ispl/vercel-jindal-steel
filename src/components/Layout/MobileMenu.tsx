@@ -27,6 +27,14 @@ const MobileMenu: FC<Props> = ({ menuState, menuTrigger }) => {
                         onClick={() => menuTrigger()}
                     ></div>
                     <div className={`mobile-menu`} data-lenis-ignore>
+                        <button
+                            type="button"
+                            className="mobile-menu__close"
+                            onClick={() => menuTrigger()}
+                            aria-label="Close mobile menu"
+                        >
+                            <span className="icon-x" aria-hidden="true"></span>
+                        </button>
                         <ul className="accordion-menu">
                             {HEADER_MAIN_MENU !== undefined &&
                                 HEADER_MAIN_MENU.map((item: { id: number }, index: number) => (
