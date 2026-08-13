@@ -99,7 +99,7 @@ const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug 
                                                 <div className="card__media mb-4">
                                                     <img alt="icon" className="img-fluid u-img" height={80} width={80}
                                                         src="https://docs.jindalsteel.in/document/124/1763976839___2.png" />
-                                                    <div className="label c-content-18 clr-gray ft_semiBold">{newDate !== "" ? newDate : ""}</div>
+                                                    <div className="label d-none c-content-18 clr-gray ft_semiBold">{newDate !== "" ? newDate : ""}</div>
                                                 </div>
 
 
