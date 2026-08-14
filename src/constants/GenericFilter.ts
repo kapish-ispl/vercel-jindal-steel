@@ -14,6 +14,22 @@ export const corporateGovOptions = [
   { value: 'Familiarisation Programme for Independent Directors', label: 'Familiarisation Programme for Independent Directors' },
 ];
 
+
+export const RdsoOptions = [
+  { value: 'Ownership details', label: 'Ownership details' },
+  { value: 'Manufacturing Unit Address', label: 'Manufacturing Unit Address' },
+  { value: 'RDSO Approval Details', label: 'RDSO Approval Details' },
+  { value: 'Company Registration', label: 'Company Registration' },
+  { value: 'Factory Licence', label: 'Factory Licence' },
+  { value: 'ISO 9001 Certification', label: 'ISO 9001 Certification' },
+  { value: 'Organisation Chart', label: 'Organisation Chart' },
+  { value: 'Testing Facilities', label: 'Testing Facilities' },
+  { value: 'Mandatory Approvals', label: 'Mandatory Approvals' },
+  { value: 'Artisan Details', label: 'Artisan Details' },
+  { value: 'Power Demand & Installed Load', label: 'Power Demand & Installed Load' },
+  { value: 'Major Executed Works (Last 5 Years)', label: 'Major Executed Works (Last 5 Years)' },
+];
+
 export const invDocOptions = [
   { value: 'Annual Report', label: 'Annual Report' },
   { value: 'Financials Result', label: 'Financials Result' },

@@ -29,7 +29,8 @@ const componentMap: any = {
     PodcastSlider: dynamic(() => import("./PodcastSlider")),
     JobListing: dynamic(() => import("./JobListing")),
     TalentForm: dynamic(() => import("./TalentForm")),
-    MsmeForm: dynamic(() => import("./MsmeForm"))
+    MsmeForm: dynamic(() => import("./MsmeForm")),
+    RdsoCard: dynamic(() => import("./RdsoCard"))
 }
 
 export default function PostList(props: any) {
@@ -78,6 +79,10 @@ export default function PostList(props: any) {
             type: { key: "type_1599634707" }
         },
 
+        "rdso": {
+            type: { key: "select_category_1786708008" }
+        },
+
         "career": {
             department: { key: "department" },
             location: { key: "location" }
@@ -123,6 +128,11 @@ export default function PostList(props: any) {
         if (props.slug === 'policies-reports') {
             if (type) {
                 slugInfo += `&metaInfo[type_1599634707]=${type}`;
+            }
+        }
+        if (props.slug === 'rdso') {
+            if (type) {
+                slugInfo += `&metaInfo[select_category_1786708008]=${encodeURIComponent(type)}`;
             }
         }
         if (props.slug === 'awards') {
