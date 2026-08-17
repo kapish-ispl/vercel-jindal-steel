@@ -16,7 +16,7 @@ export const corporateGovOptions = [
 
 
 export const RdsoOptions = [
-  { value: 'Ownership details', label: 'Ownership details' },
+  { value: 'Ownership Details', label: 'Ownership Details' },
   { value: 'Manufacturing Unit Address', label: 'Manufacturing Unit Address' },
   { value: 'RDSO Approval Details', label: 'RDSO Approval Details' },
   { value: 'Company Registration', label: 'Company Registration' },
