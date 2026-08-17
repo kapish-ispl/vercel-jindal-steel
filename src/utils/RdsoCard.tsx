@@ -72,7 +72,7 @@ const RdsoCard: React.FC<RdsoCardProps> = ({ postData, itemsPerPage = 9, totalPo
                                 {post?.content && <div className="desc c-content-16 mb-4">{parse(post?.content)}</div>}
                                 {pdfUrl && (
                                     <div className="mt-3 position-absolute bottom-0 w-100">
-                                        <Link className="c-viewBox__btn-link mw-none w-50 clr-white" href={pdfUrl} target="_blank" rel="noopener noreferrer"><span>View More</span><span className="icon"><Download /></span></Link>
+                                        <Link className="c-viewBox__btn-link mw-none w-50 clr-white" href={pdfUrl} target="_blank" rel="noopener noreferrer"><span>View More</span></Link>
                                     </div>
                                 )}
                                 {/* {post?.metaInfo?.telephone && (
