@@ -53,6 +53,7 @@ const Breadcrumbs = <T extends BreadcrumbItem>({
     const { headerMenu } = useContext(AppContext);
     const [breadcrumbMenu, setBreadcrumbMenu] = useState<BreadcrumbItem[]>(initialState);
 
+
     useEffect(() => {
         const buildBreadcrumbs = (menuItem: MenuItem, slug: string, trail: BreadcrumbItem[]): BreadcrumbItem[] | null => {
             const newTrail: BreadcrumbItem[] = [...trail, { id: menuItem.id, label: menuItem.name, url: menuItem.link }];
