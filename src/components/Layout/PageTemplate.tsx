@@ -55,6 +55,7 @@ const CustomAccordion = dynamic(() => import("@/utils/CustomAccordian"), { ssr: 
 const AirEmissionsChart = dynamic(() => import("@/utils/AirEmissionsChart"), { ssr: false });
 const ProgressBar = dynamic(() => import("@/utils/ProgressBar"), { ssr: false });
 const UnpaidDividendForm = dynamic(() => import("@/components/Forms/UnpaidDividendForm"), { ssr: false });
+const AgmModal = dynamic(() => import("@/components/AgmModal"), { ssr: false });
 
 const PageTemplate = ({ data }: any) => {
     const options: HTMLReactParserOptions = {
@@ -94,6 +95,11 @@ const PageTemplate = ({ data }: any) => {
                 }
                 if (domNode.name === "scrollprogress") {
                     return <ScrollProgress />
+                }
+                if (domNode.name === "agmmodal") {
+                    const props = attributesToProps(domNode.attribs);
+                    const children = domToReact(domNode.children as DOMNode[]);
+                    return <AgmModal props={props} data={Array.isArray(children) ? children : (children ? [children] : undefined)} defaultOpen={true} {...props} />
                 }
 
                 if (domNode.name === "highlightcarousel") {
