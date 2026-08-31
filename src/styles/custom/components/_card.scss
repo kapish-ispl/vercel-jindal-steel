@@ -335,7 +335,7 @@
       &-media {
         height: unset;
 
-        >img {
+        > img {
           aspect-ratio: 14/9;
           object-fit: cover;
           object-position: center center;
@@ -409,7 +409,7 @@
           @include flexbox;
           @include align-items(center);
 
-          +.info__wrapper {
+          + .info__wrapper {
             padding-top: 15px;
           }
 
@@ -423,7 +423,7 @@
             @include align-items(center);
             @include justify-content(center);
 
-            >i {
+            > i {
               @include font-size(25);
               color: #cc9167;
             }
@@ -660,7 +660,7 @@
           @include flexbox;
           @include align-items(center);
 
-          +.info__wrapper {
+          + .info__wrapper {
             padding-top: 5px;
           }
 
@@ -672,7 +672,7 @@
             @include align-items(center);
             @include justify-content(center);
 
-            >i {
+            > i {
               @include font-size(25);
               color: #cc9167;
             }
@@ -876,7 +876,6 @@
 }
 
 .c-cardBox__wrapper {
-
   &.v1,
   &.v2,
   &.v3 {
@@ -1169,7 +1168,6 @@
     &:hover {
       .c-card {
         &__content {
-
           .title,
           .label {
             color: var(--color-primary);
@@ -1312,7 +1310,6 @@
         background: var(--color-accent-blue);
 
         .c-card__wrapper-content {
-
           .title,
           .desc {
             color: var(--color-white);
@@ -1388,9 +1385,11 @@
         &::before {
           content: "";
           position: absolute;
-          background: linear-gradient(360deg,
-              rgba(16, 17, 21, 0.8) 39.82%,
-              rgba(16, 17, 21, 0) 100%);
+          background: linear-gradient(
+            360deg,
+            rgba(16, 17, 21, 0.8) 39.82%,
+            rgba(16, 17, 21, 0) 100%
+          );
           width: 100%;
           height: 100%;
           left: 0;
@@ -1470,9 +1469,11 @@
         width: 100%;
         height: 100%;
         // background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgb(0 0 0 / 31%) 100%);
-        background: linear-gradient(181deg,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 0.6) 100%);
+        background: linear-gradient(
+          181deg,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.6) 100%
+        );
         border-radius: 8px;
         z-index: 1;
       }
@@ -1488,10 +1489,12 @@
         bottom: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(180deg,
-            rgba(0, 0, 0, 0.24) 25%,
-            rgba(0, 0, 0, 0.24) 75%,
-            rgba(0, 0, 0, 0.4) 100%);
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.24) 25%,
+          rgba(0, 0, 0, 0.24) 75%,
+          rgba(0, 0, 0, 0.4) 100%
+        );
 
         border-radius: 8px;
         z-index: 1;
@@ -1509,7 +1512,7 @@
       }
 
       .c-bento__card__wrapper_media {
-        >img {
+        > img {
           width: 100%;
         }
       }
@@ -1596,9 +1599,11 @@
           width: 100%;
           height: 100%;
           // background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0 0 0 / 31%) 100%);
-          background: linear-gradient(181deg,
-              rgba(0, 0, 0, 0) 0%,
-              rgba(0, 0, 0, 0.6) 100%);
+          background: linear-gradient(
+            181deg,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.6) 100%
+          );
           z-index: 1;
         }
 
@@ -1695,7 +1700,7 @@
       &_media {
         height: 100%;
 
-        >img {
+        > img {
           height: 100%;
           object-fit: cover;
         }
@@ -1718,7 +1723,7 @@
     }
 
     &_item {
-      +.c-bento__card__wrapper_item {
+      + .c-bento__card__wrapper_item {
         margin-top: 0px;
       }
     }
@@ -1852,7 +1857,7 @@
     }
 
     &-content {
-      >div {
+      > div {
         @include flexbox;
         @include flex-direction(column, vertical);
         @include justify-content(center);
@@ -2012,9 +2017,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg,
-          rgba(0, 0, 0, 0) 35%,
-          rgba(0, 0, 0, 0.4) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 35%,
+        rgba(0, 0, 0, 0.4) 100%
+      );
       z-index: 1;
     }
 
@@ -2139,9 +2146,11 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(180deg,
-            rgba(0, 0, 0, 0) 35%,
-            rgba(0, 0, 0, 0.4) 100%);
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0) 35%,
+          rgba(0, 0, 0, 0.4) 100%
+        );
         z-index: 1;
       }
 
@@ -2163,7 +2172,7 @@
           padding: 32px;
         }
 
-        >h3 {
+        > h3 {
           @include font-size(24);
 
           @include mq(phablet) {
@@ -2440,9 +2449,11 @@
     &::before {
       content: "";
       position: absolute;
-      background: linear-gradient(180deg,
-          rgba(0, 0, 0, 0) 35%,
-          rgba(0, 0, 0, 0.4) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 35%,
+        rgba(0, 0, 0, 0.4) 100%
+      );
       width: 100%;
       height: 100%;
       z-index: 1;
@@ -2620,11 +2631,11 @@
         margin-bottom: 30px;
       }
       &.size-70 {
-         img {
-              width: 70px;
-              height: auto;
-              min-width: 70px;
-          }
+        img {
+          width: 70px;
+          height: auto;
+          min-width: 70px;
+        }
       }
     }
 
@@ -2638,5 +2649,54 @@
     //   box-shadow: 0px 4px 4px 0px #4242423b !important;
     //   transform: translateY(-5px);
     // }
+  }
+}
+.rdso-card {
+  &__warpper {
+    border: 1px solid #bcbcbc;
+    padding: 12px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+    margin-bottom: 30px;
+    height: calc(100% - 30px);
+    transition: all 0.3s ease-in-out;
+    @include mq(tablet-max) {
+      padding: 22px;
+      height: calc(100% - 40px);
+      margin-bottom: 40px;
+    }
+    &-img {
+      overflow: hidden;
+      &:hover {
+        img {
+          transform: scale(1.1);
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+    &-content {
+      margin-top: 20px;
+      .desc {
+        max-width: 300px;
+        width: 100%;
+      }
+    }
+  }
+  &.v1 {
+    .rdso-card__warpper {
+      &-img {
+        height: 300px;
+        @include mq(tablet-max) {
+          height: 400px;
+        }
+        @include mq(desktop) {
+          height: 485px;
+        }
+        > img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
   }
 }
