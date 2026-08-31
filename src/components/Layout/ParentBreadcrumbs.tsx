@@ -3,39 +3,40 @@ import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { AppContext } from "@/context/AppContext";
 import { serverRequest } from "@/services/getServerSideRender";
-import { GET_SPECIFIC_POST_ENDPOINT } from "@/config/apiConfig";
+import { GET_SPECIFIC_POST_ENDPOINT, GET_SPECIFIC_PAGE_ENDPOINT } from "@/config/apiConfig";
 import { CONSTANTS } from "@/config/constant";
 import Link from "next/link";
 
 export interface ParentPageDetails {
-    id: number;
+    id?: number;
     title: string;
     slug: string;
 }
 
 export interface TaxonomyDetails {
-    id: number;
+    id?: number;
     alias: string;
 }
 
 export interface CurrentPage {
-    id: number;
+    id?: number;
     title: string;
     slug: string;
     taxonomy_id?: string | number;
     taxonomy?: TaxonomyDetails;
     parentPageDetails?: ParentPageDetails;
+    parent_page_details?: ParentPageDetails;
 }
 
 export interface MenuItem {
     id: number;
     link: string;
     name: string;
-    children: MenuItem[];
+    children?: MenuItem[];
 }
 
 export interface BreadcrumbItem {
-    id: number;
+    id: number | string;
     label: string;
     url: string;
 }
@@ -45,10 +46,98 @@ interface BreadcrumbsProps<T extends BreadcrumbItem = BreadcrumbItem> {
     currentPage?: CurrentPage;
 }
 
-
 const initialState: BreadcrumbItem[] = [
     { id: 1, label: "Home", url: "/" }
 ];
+
+const cleanPath = (url: string = "") => {
+    return url.replace(/^\//, "").replace(/\.html$/, "").trim();
+};
+
+const findMenuTrail = (
+    menuItem: MenuItem,
+    targetSlug: string,
+    currentTrail: BreadcrumbItem[]
+): BreadcrumbItem[] | null => {
+    const cleanLink = cleanPath(menuItem.link);
+    const cleanTarget = cleanPath(targetSlug);
+
+    const itemUrl = menuItem.link?.startsWith("http") || menuItem.link?.startsWith("#")
+        ? menuItem.link
+        : `/${cleanLink}`;
+
+    const newTrail: BreadcrumbItem[] = [
+        ...currentTrail,
+        { id: menuItem.id, label: menuItem.name, url: itemUrl }
+    ];
+
+    if (cleanLink && cleanTarget && cleanLink === cleanTarget) {
+        return newTrail;
+    }
+
+    if (menuItem.children && menuItem.children.length > 0) {
+        for (const child of menuItem.children) {
+            const res = findMenuTrail(child, targetSlug, newTrail);
+            if (res) return res;
+        }
+    }
+
+    return null;
+};
+
+const findTrailInMenu = (menu: MenuItem[], targetSlug: string): BreadcrumbItem[] | null => {
+    if (!menu || menu.length === 0 || !targetSlug) return null;
+    for (const item of menu) {
+        const res = findMenuTrail(item, targetSlug, initialState);
+        if (res) return res;
+    }
+    return null;
+};
+
+const fetchParentDetails = async (slug: string): Promise<CurrentPage | null> => {
+    if (!slug) return null;
+    const cleanSlug = cleanPath(slug);
+    try {
+        // Try page endpoint first
+        const pageRes = await serverRequest(
+            {},
+            `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${cleanSlug}&excludeUrl=1`,
+            CONSTANTS.REQUEST_GET
+        );
+        if (pageRes?.data && pageRes.code === CONSTANTS.STATUS_SUCCESS) {
+            const d = pageRes.data;
+            return {
+                id: d.id,
+                title: d.title,
+                slug: d.slug,
+                taxonomy_id: d.taxonomy_id,
+                taxonomy: d.taxonomy,
+                parentPageDetails: d.parentPageDetails || d.parent_page_details,
+            };
+        }
+
+        // Try post endpoint fallback
+        const postRes = await serverRequest(
+            {},
+            `${GET_SPECIFIC_POST_ENDPOINT}?slug=${cleanSlug}&excludeUrl=1`,
+            CONSTANTS.REQUEST_GET
+        );
+        if (postRes?.data && postRes.code === CONSTANTS.STATUS_SUCCESS) {
+            const d = postRes.data;
+            return {
+                id: d.id,
+                title: d.title,
+                slug: d.slug,
+                taxonomy_id: d.taxonomy_id,
+                taxonomy: d.taxonomy,
+                parentPageDetails: d.parentPageDetails || d.parent_page_details,
+            };
+        }
+    } catch (err) {
+        console.error("Failed to fetch parent page info for breadcrumbs:", err);
+    }
+    return null;
+};
 
 const ParentBreadcrumbs = <T extends BreadcrumbItem = BreadcrumbItem>({
     slug: propSlug,
@@ -57,256 +146,219 @@ const ParentBreadcrumbs = <T extends BreadcrumbItem = BreadcrumbItem>({
     const { headerMenu } = useContext(AppContext);
     const searchParams = useSearchParams();
     const [breadcrumbMenu, setBreadcrumbMenu] = useState<BreadcrumbItem[]>(initialState);
-    const [fetchedPage, setFetchedPage] = useState<CurrentPage | null>(null);
-    const [fetchedSlug, setFetchedSlug] = useState<string | null>(null);
 
-    // Get query param 'parent' (with fallback to 'slug')
     const parentParam = searchParams?.get("parent") || searchParams?.get("slug");
 
     useEffect(() => {
-        const fetchPostData = async () => {
-            if (!parentParam) return;
-            try {
-                const response = await serverRequest(
-                    {},
-                    `${GET_SPECIFIC_POST_ENDPOINT}?slug=${parentParam}&excludeUrl=1`,
-                    CONSTANTS.REQUEST_GET
-                );
+        let isMounted = true;
 
-                if (response && response.data) {
-                    const postData = response.data;
-                    const pageInfo: CurrentPage = {
-                        id: postData.id,
-                        title: postData.title,
-                        slug: postData.slug,
-                        taxonomy_id: postData.taxonomy_id,
-                        taxonomy: postData.taxonomy,
-                        parentPageDetails: postData.parentPageDetails || postData.parent_page_details,
-                    };
-                    setFetchedPage(pageInfo);
-                    setFetchedSlug(postData.slug);
+        const buildCompleteBreadcrumbs = async () => {
+            if (!propCurrentPage && !propSlug && !parentParam) {
+                return;
+            }
+
+            // Case 1: Query param 'parent' or 'slug' is provided
+            if (parentParam) {
+                const fetchedParent = await fetchParentDetails(parentParam);
+                if (!isMounted) return;
+
+                if (fetchedParent && propCurrentPage) {
+                    let baseTrail: BreadcrumbItem[] | null = null;
+                    const parentSlugToTry = propCurrentPage.parentPageDetails?.slug || fetchedParent.parentPageDetails?.slug;
+
+                    if (parentSlugToTry) {
+                        baseTrail = findTrailInMenu(headerMenu, parentSlugToTry);
+                    }
+
+                    if (!baseTrail) {
+                        baseTrail = [...initialState];
+                        const parentDetails = propCurrentPage.parentPageDetails || fetchedParent.parentPageDetails;
+                        const taxonomyDetails = propCurrentPage.taxonomy || fetchedParent.taxonomy;
+
+                        if (parentDetails) {
+                            baseTrail.push({
+                                id: parentDetails.id || "parent",
+                                label: parentDetails.title,
+                                url: parentDetails.slug.startsWith('/') ? parentDetails.slug : `/${parentDetails.slug}`,
+                            });
+                        } else if (taxonomyDetails) {
+                            const taxonomySlug = `/${taxonomyDetails.alias.replace(/\s+/g, "-").toLowerCase()}`.replace(".html", "");
+                            baseTrail.push({
+                                id: taxonomyDetails.id || "taxonomy",
+                                label: taxonomyDetails.alias,
+                                url: taxonomySlug,
+                            });
+                        }
+                    }
+
+                    const trail = [...baseTrail];
+
+                    const parentPrefixSlug = propCurrentPage?.parentPageDetails?.slug || fetchedParent?.parentPageDetails?.slug;
+                    let fetchedSlugFormatted = fetchedParent.slug
+                        ? (fetchedParent.slug.startsWith('/') ? fetchedParent.slug : `/${fetchedParent.slug}`)
+                        : "";
+
+                    if (parentPrefixSlug) {
+                        const prefix = parentPrefixSlug.startsWith('/') ? parentPrefixSlug : `/${parentPrefixSlug}`;
+                        const cleanFetchedSlug = fetchedParent.slug ? cleanPath(fetchedParent.slug) : '';
+                        fetchedSlugFormatted = `${prefix.replace(/\/$/, '')}/${cleanFetchedSlug}`;
+                    }
+
+                    if (!trail.some(t => t.label === fetchedParent.title || (fetchedSlugFormatted && t.url === fetchedSlugFormatted))) {
+                        trail.push({
+                            id: fetchedParent.id || "fetched",
+                            label: fetchedParent.title,
+                            url: fetchedSlugFormatted,
+                        });
+                    }
+
+                    const currentSlugFormatted = propCurrentPage.slug
+                        ? (propCurrentPage.slug.startsWith('/') ? propCurrentPage.slug : `/${propCurrentPage.slug}`)
+                        : "";
+
+                    if (!trail.some(t => t.label === propCurrentPage.title || (currentSlugFormatted && t.url === currentSlugFormatted))) {
+                        trail.push({
+                            id: propCurrentPage.id || "current",
+                            label: propCurrentPage.title,
+                            url: currentSlugFormatted,
+                        });
+                    }
+
+                    if (isMounted) setBreadcrumbMenu(trail);
+                    return;
                 }
-            } catch (error) {
-                console.error("Failed to fetch post for breadcrumbs:", error);
-            }
-        };
-
-        if (parentParam) {
-            fetchPostData();
-        } else {
-            setFetchedPage(null);
-            setFetchedSlug(null);
-        }
-    }, [parentParam]);
-
-    useEffect(() => {
-        if (!propCurrentPage && !fetchedPage) {
-            return;
-        }
-
-        const findMenuTrail = (menuItem: MenuItem, slugToMatch: string, currentTrail: BreadcrumbItem[]): BreadcrumbItem[] | null => {
-            const cleanLink = menuItem.link.replace(/^\//, '').replace(/\.html$/, '');
-            const cleanSlug = slugToMatch.replace(/^\//, '').replace(/\.html$/, '');
-            const newTrail: BreadcrumbItem[] = [...currentTrail, { id: menuItem.id, label: menuItem.name, url: menuItem.link }];
-
-            if (cleanLink === cleanSlug || menuItem.link === `/${cleanSlug}`) {
-                return newTrail;
             }
 
-            if (menuItem.children && menuItem.children.length > 0) {
-                for (const child of menuItem.children) {
-                    const res = findMenuTrail(child, slugToMatch, newTrail);
-                    if (res) return res;
-                }
-            }
+            // Case 2: Standard route-based breadcrumbs
+            const targetPage = propCurrentPage;
+            const targetSlug = propSlug || (targetPage?.slug ? cleanPath(targetPage.slug) : "");
 
-            return null;
-        };
+            if (!targetPage && !targetSlug) return;
 
-        // When parentParam is present and fetchedPage is loaded along with propCurrentPage
-        if (parentParam && fetchedPage && propCurrentPage) {
-            let baseTrail: BreadcrumbItem[] | null = null;
+            const parentDetails = targetPage?.parentPageDetails || targetPage?.parent_page_details;
 
-            // 1. Try to find complete parent-to-parent menu trail from headerMenu for parent details
-            const parentSlugToTry = propCurrentPage.parentPageDetails?.slug || fetchedPage.parentPageDetails?.slug;
+            if (parentDetails) {
+                const parentSlug = parentDetails.slug;
+                let parentTrail = findTrailInMenu(headerMenu, parentSlug);
 
-            if (parentSlugToTry && headerMenu && headerMenu.length > 0) {
-                const cleanSlug = parentSlugToTry.replace(/^\//, '').replace(/\.html$/, '');
-                for (const menuItem of headerMenu) {
-                    const res = findMenuTrail(menuItem, cleanSlug, initialState);
-                    if (res) {
-                        baseTrail = res;
-                        break;
+                // If parent is not directly in headerMenu, fetch parent page data to resolve its ancestors
+                if (!parentTrail && parentSlug) {
+                    const fetchedParent = await fetchParentDetails(parentSlug);
+                    if (!isMounted) return;
+
+                    if (fetchedParent) {
+                        const grandParentSlug = fetchedParent.parentPageDetails?.slug || (fetchedParent.taxonomy?.alias ? cleanPath(fetchedParent.taxonomy.alias) : "");
+                        if (grandParentSlug) {
+                            const grandParentTrail = findTrailInMenu(headerMenu, grandParentSlug);
+                            if (grandParentTrail) {
+                                parentTrail = [
+                                    ...grandParentTrail,
+                                    {
+                                        id: fetchedParent.id || parentDetails.id || "parent",
+                                        label: fetchedParent.title || parentDetails.title,
+                                        url: parentDetails.slug.startsWith('/') ? parentDetails.slug : `/${parentDetails.slug}`,
+                                    }
+                                ];
+                            }
+                        }
                     }
                 }
-            }
 
-            // Fallback base trail if not found in headerMenu
-            if (!baseTrail) {
-                baseTrail = [{ id: 1, label: "Home", url: "/" }];
-                const parentDetails = propCurrentPage.parentPageDetails || fetchedPage.parentPageDetails;
-                const taxonomyDetails = propCurrentPage.taxonomy || fetchedPage.taxonomy;
-
-                if (parentDetails) {
-                    baseTrail.push({
-                        id: parentDetails.id,
-                        label: parentDetails.title,
-                        url: parentDetails.slug.startsWith('/') ? parentDetails.slug : `/${parentDetails.slug}`,
-                    });
-                } else if (taxonomyDetails) {
-                    const taxonomySlug = `/${taxonomyDetails.alias.replace(/\s+/g, "-").toLowerCase()}`.replace(".html", "");
-                    baseTrail.push({
-                        id: taxonomyDetails.id,
-                        label: taxonomyDetails.alias,
-                        url: taxonomySlug,
-                    });
-                }
-            }
-
-            const trail = [...baseTrail];
-
-            // 2. Add fetched post details (from query param) with parentPageDetails slug as prefix
-            let fetchedSlugFormatted = fetchedPage.slug
-                ? (fetchedPage.slug.startsWith('/') ? fetchedPage.slug : `/${fetchedPage.slug}`)
-                : "";
-
-            const parentPrefixSlug = propCurrentPage?.parentPageDetails?.slug || fetchedPage?.parentPageDetails?.slug;
-
-            if (parentPrefixSlug) {
-                const prefix = parentPrefixSlug.startsWith('/')
-                    ? parentPrefixSlug
-                    : `/${parentPrefixSlug}`;
-                const cleanFetchedSlug = fetchedPage.slug ? fetchedPage.slug.replace(/^\//, '') : '';
-                fetchedSlugFormatted = `${prefix.replace(/\/$/, '')}/${cleanFetchedSlug}`;
-            }
-
-            if (!trail.some(t => t.label === fetchedPage.title || (fetchedSlugFormatted && t.url === fetchedSlugFormatted))) {
-                trail.push({
-                    id: fetchedPage.id,
-                    label: fetchedPage.title,
-                    url: fetchedSlugFormatted,
-                });
-            }
-
-
-
-            // 3. Add current page details
-            const currentSlugFormatted = propCurrentPage.slug
-                ? (propCurrentPage.slug.startsWith('/') ? propCurrentPage.slug : `/${propCurrentPage.slug}`)
-                : "";
-
-            if (!trail.some(t => t.label === propCurrentPage.title || (currentSlugFormatted && t.url === currentSlugFormatted))) {
-                trail.push({
-                    id: propCurrentPage.id,
-                    label: propCurrentPage.title,
-                    url: currentSlugFormatted,
-                });
-            }
-
-            setBreadcrumbMenu(trail);
-            return;
-        }
-
-
-        // Fallback standard breadcrumbs when no parentParam
-        const targetPage = fetchedPage || propCurrentPage;
-        const targetSlug = parentParam ? (fetchedSlug || parentParam) : (propSlug || "");
-
-        if (!targetPage) return;
-
-        const buildBreadcrumbs = (menuItem: MenuItem, slugVal: string, currentTrail: BreadcrumbItem[]): BreadcrumbItem[] | null => {
-            const newTrail: BreadcrumbItem[] = [...currentTrail, { id: menuItem.id, label: menuItem.name, url: menuItem.link }];
-
-            if (menuItem.link === `/${slugVal}`) {
-                return newTrail;
-            }
-            if (targetPage.parentPageDetails) {
-                if (menuItem.link === `/${targetPage.parentPageDetails.slug}`) {
-                    return [
-                        ...currentTrail,
+                if (!parentTrail) {
+                    parentTrail = [
+                        ...initialState,
                         {
-                            id: targetPage.parentPageDetails.id,
-                            label: targetPage.parentPageDetails.title,
-                            url: `/${targetPage.parentPageDetails.slug}`,
-                        },
-                        {
-                            id: targetPage.id,
-                            label: targetPage.title,
-                            url: targetPage.slug.startsWith('/') ? targetPage.slug : `/${targetPage.slug}`,
-                        },
+                            id: parentDetails.id || "parent",
+                            label: parentDetails.title,
+                            url: parentDetails.slug.startsWith('/') ? parentDetails.slug : `/${parentDetails.slug}`,
+                        }
                     ];
                 }
+
+                const trail = [...parentTrail];
+                const currentSlugFormatted = targetPage?.slug
+                    ? (targetPage.slug.startsWith('/') ? targetPage.slug : `/${targetPage.slug}`)
+                    : "";
+
+                if (targetPage && !trail.some(t => t.label === targetPage.title || (currentSlugFormatted && t.url === currentSlugFormatted))) {
+                    trail.push({
+                        id: targetPage.id || "current",
+                        label: targetPage.title,
+                        url: currentSlugFormatted,
+                    });
+                }
+
+                if (isMounted) setBreadcrumbMenu(trail);
+                return;
             }
 
-            if (targetPage.taxonomy_id && targetPage.taxonomy) {
-                const taxonomySlug = `/${targetPage.taxonomy.alias.replace(/\s+/g, "-").toLowerCase()}`;
-                if (menuItem.link === taxonomySlug) {
-                    return [
-                        ...currentTrail,
+            // Subcase 2B: taxonomy
+            if (targetPage?.taxonomy_id && targetPage?.taxonomy) {
+                const taxSlug = targetPage.taxonomy.alias.replace(/\s+/g, "-").toLowerCase();
+                let taxTrail = findTrailInMenu(headerMenu, taxSlug);
+
+                if (!taxTrail) {
+                    taxTrail = [
+                        ...initialState,
                         {
-                            id: targetPage.taxonomy.id,
+                            id: targetPage.taxonomy.id || "taxonomy",
                             label: targetPage.taxonomy.alias,
-                            url: taxonomySlug.replace(".html", ""),
-                        },
-                        {
-                            id: targetPage.id,
-                            label: targetPage.title,
-                            url: targetPage.slug.startsWith('/') ? targetPage.slug : `/${targetPage.slug}`,
-                        },
+                            url: `/${taxSlug}`.replace(".html", ""),
+                        }
                     ];
                 }
-            }
 
-            if (menuItem.children && menuItem.children.length > 0) {
-                for (const child of menuItem.children) {
-                    const result = buildBreadcrumbs(child, slugVal, newTrail);
-                    if (result) return result;
+                const trail = [...taxTrail];
+                const currentSlugFormatted = targetPage.slug
+                    ? (targetPage.slug.startsWith('/') ? targetPage.slug : `/${targetPage.slug}`)
+                    : "";
+
+                if (!trail.some(t => t.label === targetPage.title || (currentSlugFormatted && t.url === currentSlugFormatted))) {
+                    trail.push({
+                        id: targetPage.id || "current",
+                        label: targetPage.title,
+                        url: currentSlugFormatted,
+                    });
                 }
+
+                if (isMounted) setBreadcrumbMenu(trail);
+                return;
             }
 
-            return null;
+            // Subcase 2C: Direct page in headerMenu
+            let directTrail = findTrailInMenu(headerMenu, targetSlug);
+
+            if (!directTrail) {
+                const currentSlugFormatted = targetPage?.slug
+                    ? (targetPage.slug.startsWith('/') ? targetPage.slug : `/${targetPage.slug}`)
+                    : (targetSlug ? `/${cleanPath(targetSlug)}` : "");
+
+                directTrail = [
+                    ...initialState,
+                    ...(targetPage ? [{
+                        id: targetPage.id || "current",
+                        label: targetPage.title,
+                        url: currentSlugFormatted,
+                    }] : [])
+                ];
+            }
+
+            if (isMounted) setBreadcrumbMenu(directTrail);
         };
 
-        let finalBreadcrumbs: BreadcrumbItem[] | null = null;
+        buildCompleteBreadcrumbs();
 
-        if (headerMenu && headerMenu.length > 0) {
-            headerMenu.forEach((menuItem: MenuItem) => {
-                const result = buildBreadcrumbs(menuItem, targetSlug, initialState);
-                if (result && !finalBreadcrumbs) {
-                    finalBreadcrumbs = result;
-                }
-            });
-        }
-
-        if (!finalBreadcrumbs && targetPage) {
-            finalBreadcrumbs = [...initialState];
-            if (targetPage.parentPageDetails) {
-                finalBreadcrumbs.push({
-                    id: targetPage.parentPageDetails.id,
-                    label: targetPage.parentPageDetails.title,
-                    url: targetPage.parentPageDetails.slug.startsWith('/') ? targetPage.parentPageDetails.slug : `/${targetPage.parentPageDetails.slug}`,
-                });
-            }
-            finalBreadcrumbs.push({
-                id: targetPage.id,
-                label: targetPage.title,
-                url: targetPage.slug ? (targetPage.slug.startsWith('/') ? targetPage.slug : `/${targetPage.slug}`) : "",
-            });
-        }
-
-        if (finalBreadcrumbs) {
-            setBreadcrumbMenu(finalBreadcrumbs);
-        }
-    }, [propSlug, headerMenu, propCurrentPage, parentParam, fetchedPage, fetchedSlug]);
-
-
+        return () => {
+            isMounted = false;
+        };
+    }, [propSlug, headerMenu, propCurrentPage, parentParam]);
 
     return (
         <ul className="breadcrumb">
             {breadcrumbMenu.map((item, index) => {
                 const isLast = index === breadcrumbMenu.length - 1;
                 return (
-                    <li key={item.id} className={`breadcrumb-item ${isLast ? "active" : ""}`}>
+                    <li key={`${item.id}-${index}`} className={`breadcrumb-item ${isLast ? "active" : ""}`}>
                         {!isLast && item.url ? (
                             <Link href={item.url}>{item.label}</Link>
                         ) : (
@@ -317,8 +369,6 @@ const ParentBreadcrumbs = <T extends BreadcrumbItem = BreadcrumbItem>({
             })}
         </ul>
     );
-
 };
 
 export default ParentBreadcrumbs;
-

@@ -15,7 +15,10 @@ interface Post {
         telephone: string;
         email: string;
         fax: string;
+        have_child_page: string;
+        short_description: string
     };
+    slug: string;
 }
 
 interface RdsoCardProps {
@@ -69,10 +72,15 @@ const RdsoCard: React.FC<RdsoCardProps> = ({ postData, itemsPerPage = 9, totalPo
                         <div className="c-cardView__wrapper rounded">
                             <span className="c-cardView__wrapper-content position-relative min-h-100">
                                 <span className="title  c-content-24 ft_semiBold clr-blue">{post?.title}</span>
-                                {post?.content && <div className="desc c-content-16 pb-4 mb-4">{parse(post?.content)}</div>} 
+                                {post?.content && <div className="desc c-content-16 pb-4 mb-4">{parse(post?.metaInfo?.short_description || "")}</div>}
                                 {pdfUrl && (
                                     <div className="mt-3 position-absolute bottom-0 w-100">
-                                        <Link className="c-viewBox__btn-link mw-none w-50 clr-white" href={pdfUrl} target="_blank" rel="noopener noreferrer"><span>View More</span></Link>
+                                        <Link className="c-viewBox__btn-link mw-none w-50 clr-white" href={pdfUrl} target="_blank" rel="noopener noreferrer"><Download></Download></Link>
+                                    </div>
+                                )}
+                                {post?.metaInfo?.have_child_page === 'Yes' && (
+                                    <div className="mt-3 position-absolute bottom-0 w-100">
+                                        <Link className="c-viewBox__btn-link mw-none w-50 clr-white" href={`/vendor-approval-rdso/${post?.slug}`} rel="noopener noreferrer"><span>View More</span></Link>
                                     </div>
                                 )}
                                 {/* {post?.metaInfo?.telephone && (
