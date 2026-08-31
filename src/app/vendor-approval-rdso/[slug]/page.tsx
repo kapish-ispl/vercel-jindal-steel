@@ -43,7 +43,11 @@ export default async function Page({
 
     const pageData = fetchedInfo.data;
 
-    console.log(pageData)
+    // Pick only image/video media and use the first matching item as the banner
+    const bannerMedia = (pageData?.media ?? []).filter(
+        (item: { type?: string }) => item?.type === "image" || item?.type === "video"
+    );
+    const innerBannerMedia = bannerMedia.length > 0 ? [bannerMedia[0]] : [];
 
     return (
         <>
@@ -63,7 +67,7 @@ export default async function Page({
                                     slug: "vendor-approval-rdso",
                                 },
                             }}
-                            innerBanner={pageData.media}
+                            innerBanner={innerBannerMedia}
                         />
                     </div>
 
