@@ -73,16 +73,19 @@ const RdsoCard: React.FC<RdsoCardProps> = ({ postData, itemsPerPage = 9, totalPo
                             <span className="c-cardView__wrapper-content position-relative min-h-100">
                                 <span className="title  c-content-24 ft_semiBold clr-blue">{post?.title}</span>
                                 {post?.content && <div className="desc c-content-16 pb-4 mb-4">{parse(post?.metaInfo?.short_description || "")}</div>}
-                                {pdfUrl && (
-                                    <div className="mt-3 position-absolute bottom-0 w-100">
-                                        <Link className="c-viewBox__btn-link mw-none w-50 clr-white" href={pdfUrl} target="_blank" rel="noopener noreferrer"><Download></Download></Link>
-                                    </div>
-                                )}
-                                {post?.metaInfo?.have_child_page === 'Yes' && (
-                                    <div className="mt-3 position-absolute bottom-0 w-100">
-                                        <Link className="c-viewBox__btn-link mw-none w-50 clr-white" href={`/vendor-approval-rdso/${post?.slug}`} rel="noopener noreferrer"><span>View More</span></Link>
-                                    </div>
-                                )}
+                                <div className="rdso-button d-flex gap-4 ">
+                                    {pdfUrl && (
+                                        <div className="  w-100 mw-170">
+                                            <Link className="c-viewBox__btn-link mw-none clr-white" href={pdfUrl} target="_blank" rel="noopener noreferrer"><Download></Download></Link>
+                                        </div>
+                                    )}
+                                    {post?.metaInfo?.have_child_page === 'Yes' && (
+                                        <div className="  w-100 mw-170">
+                                            <Link className="c-viewBox__btn-link mw-none clr-white" href={`/vendor-approval-rdso/${post?.slug}`} rel="noopener noreferrer"><span>View More</span></Link>
+                                        </div>
+                                    )}
+
+                                </div>
                                 {/* {post?.metaInfo?.telephone && (
                                 <span className="info__wrapper">
                                     <span className="info__wrapper-icon"> <img alt="image" className="img-fluid" height="36px" width="30px" src="https://docs.jindalsteel.in/document/124/1770456407_telephone-icon.png" /> </span>
