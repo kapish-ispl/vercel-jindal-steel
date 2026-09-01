@@ -77,10 +77,10 @@ const RdsoCard: React.FC<RdsoCardProps> = ({ postData, itemsPerPage = 9, totalPo
                                         {post?.content && <div className="desc c-content-16 pb-4">{parse(post?.metaInfo?.short_description || "")}</div>}
                                         {pdfUrl && (
                                             <div className="rdso-button d-flex gap-4">
-                                                <div className="w-100 mw-170">
+                                                <div className="w-auto">
                                                     <button
                                                         type="button"
-                                                        className="c-viewBox__btn-link mw-none clr-white border-0 cursor-pointer"
+                                                        className="c-viewBox__btn-link clr-white border-0 cursor-pointer"
                                                         onClick={(e) => {
                                                             e.preventDefault();
                                                             e.stopPropagation();
@@ -102,8 +102,8 @@ const RdsoCard: React.FC<RdsoCardProps> = ({ postData, itemsPerPage = 9, totalPo
                                     {post?.content && <div className="desc c-content-16 ">{parse(post?.metaInfo?.short_description || "")}</div>}
                                     {pdfUrl && (
                                         <div className="rdso-button d-flex gap-4">
-                                            <div className="w-100 mw-170">
-                                                <Link className="c-viewBox__btn-link mw-none clr-white" href={pdfUrl} target="_blank" rel="noopener noreferrer">Download</Link>
+                                            <div className="w-auto">
+                                                <Link className="c-viewBox__btn-link  clr-white" href={pdfUrl} target="_blank" rel="noopener noreferrer">Download</Link>
                                             </div>
                                         </div>
                                     )}
