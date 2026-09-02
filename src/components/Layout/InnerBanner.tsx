@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import ParentBreadcrumbs, { CurrentPage } from "./ParentBreadcrumbs";
+import Breadcrumbs from "./Breadcrumbs";
 
 interface InnerBannerItem {
     type: "video" | "image";
@@ -98,7 +99,11 @@ const InnerBanner = ({ label, tagline, slug, currentPage, innerBanner = [] }: Pr
 
                                 <div className="breadcumbs">
                                     <nav aria-label="breadcrumb">
-                                        <ParentBreadcrumbs currentPage={currentPage} slug={slug} />
+                                        {parentParam ? (
+                                            <ParentBreadcrumbs currentPage={currentPage} slug={slug} />
+                                        ) : (
+                                            <Breadcrumbs currentPage={currentPage} slug={slug} />
+                                        )}
                                     </nav>
                                 </div>
 
@@ -111,4 +116,4 @@ const InnerBanner = ({ label, tagline, slug, currentPage, innerBanner = [] }: Pr
     );
 };
 
-export default InnerBanner;
+export default InnerBanner;

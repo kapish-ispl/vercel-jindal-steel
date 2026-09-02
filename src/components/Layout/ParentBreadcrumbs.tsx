@@ -159,6 +159,38 @@ const ParentBreadcrumbs = <T extends BreadcrumbItem = BreadcrumbItem>({
 
             // Case 1: Query param 'parent' or 'slug' is provided
             if (parentParam) {
+                // Custom dynamic breadcrumb for vendor-approval-rdso hierarchy
+                if (parentParam.startsWith('vendor-approval-rdso')) {
+                    // Attempt to build the trail from the header menu
+                    let dynamicTrail = findTrailInMenu(headerMenu, 'vendor-approval-rdso');
+                    // Fallback to static definition if menu lookup fails
+                    if (!dynamicTrail) {
+                        dynamicTrail = [
+                            { id: 1, label: 'Home', url: '/' },
+                            { id: 'mine-to-metal', label: 'Mine to Metal', url: '/mine-to-metal' },
+                            { id: 'our-portfolio', label: 'Our Portfolio', url: '/our-portfolio' },
+                            { id: 'vendor-approval-rdso', label: 'Vendor Approval RDSO', url: '/vendor-approval-rdso' },
+                        ];
+                    }
+                    // Ensure Home is first
+                    if (dynamicTrail.length === 0 || dynamicTrail[0].url !== '/') {
+                        dynamicTrail = [{ id: 1, label: 'Home', url: '/' }, ...dynamicTrail];
+                    }
+                    // Append current page if available
+                    if (propCurrentPage?.title) {
+                        const currentSlugFormatted = propCurrentPage.slug
+                            ? (propCurrentPage.slug.startsWith('/') ? propCurrentPage.slug : `/${propCurrentPage.slug}`)
+                            : '';
+                        dynamicTrail.push({
+                            id: propCurrentPage.id || 'current',
+                            label: propCurrentPage.title,
+                            url: currentSlugFormatted,
+                        });
+                    }
+                    if (isMounted) setBreadcrumbMenu(dynamicTrail);
+                    return;
+                }
+
                 const fetchedParent = await fetchParentDetails(parentParam);
                 if (!isMounted) return;
 

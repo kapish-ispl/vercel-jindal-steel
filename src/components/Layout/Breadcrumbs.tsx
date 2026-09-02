@@ -4,23 +4,24 @@ import { AppContext } from "@/context/AppContext";
 import Link from "next/link";
 
 export interface ParentPageDetails {
-    id: number;
+    id?: number;
     title: string;
     slug: string;
 }
 
 export interface TaxonomyDetails {
-    id: number;
+    id?: number;
     alias: string;
 }
 
 export interface CurrentPage {
-    id: number;
+    id?: number;
     title: string;
     slug: string;
     taxonomy_id?: string | number;
     taxonomy?: TaxonomyDetails;
     parentPageDetails?: ParentPageDetails;
+    parent_page_details?: ParentPageDetails;
 }
 
 export interface MenuItem {
@@ -31,7 +32,7 @@ export interface MenuItem {
 }
 
 export interface BreadcrumbItem {
-    id: number;
+    id?: number | string;
     label: string;
     url: string;
 }
@@ -128,7 +129,7 @@ const Breadcrumbs = <T extends BreadcrumbItem>({
             ];
         }
 
-        setBreadcrumbMenu(finalBreadcrumbs);
+        setBreadcrumbMenu(finalBreadcrumbs ?? []);
     }, [slug, headerMenu, currentPage]);
 
     return (
