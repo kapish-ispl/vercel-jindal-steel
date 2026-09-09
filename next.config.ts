@@ -44,6 +44,16 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+    async redirects() {
+    return [
+      {
+        source: '/admin/:path*',
+        destination: process.env.NEXT_PUBLIC_ADMIN_URL || 'https://jsp.jindalsteelpower.com/admin/auth/login',
+        permanent: false,
+        
+      },
+    ];
+  },
   htmlLimitedBots: /.*/,
 };
 
