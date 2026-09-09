@@ -78,8 +78,10 @@ const PerformanceCard = ({ postData, itemsPerPage, totalPost, loading, compSlug 
     };
 
     const selectRef = useRef<{ clearValue: () => void }>(null);
+    const selectRefYear = useRef<{ clearValue: () => void }>(null);
     const handleClear = () => {
         selectRef.current?.clearValue();
+        selectRefYear.current?.clearValue();
         router.push(pathname, { scroll: false });
     };
 
@@ -105,7 +107,7 @@ const PerformanceCard = ({ postData, itemsPerPage, totalPost, loading, compSlug 
                                 <div className="col-md-10 col-sm-12">
                                     <CustomSelect
                                         options={yearOptions}
-                                        placeholder="2025-26"
+                                        placeholder="2026-27"
                                         paramKey="conference-call-year"
                                         selectRef={selectRef}
                                     />
@@ -132,7 +134,7 @@ const PerformanceCard = ({ postData, itemsPerPage, totalPost, loading, compSlug 
                                         options={yearOptions}
                                         placeholder="Select Year"
                                         paramKey="investor-documents-year"
-                                        selectRef={selectRef}
+                                        selectRef={selectRefYear}
                                     />
                                 </div>
                                 <div className="col-12 col-md-2">
