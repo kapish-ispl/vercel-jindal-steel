@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
-    "dev:production": "cross-env NODE_ENV=production next dev --turbopack",
-    "dev:development": "cross-env NODE_ENV=development next dev --turbopack",
-    "build:production": "cross-env NODE_ENV=production next build",
-    "build:development": "cross-env NODE_ENV=development next build",
+    "dev:production": "dotenv -e .env.production -- next dev --turbopack",
+    "dev:development": "dotenv -e .env.development -- next dev --turbopack",
+    "build:production": "dotenv -e .env.production -- next build",
+    "build:development": "dotenv -e .env.development -- next build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
@@ -20,7 +20,7 @@
     "aos": "^2.3.4",
     "chart.js": "^4.5.1",
     "chartjs-plugin-datalabels": "^2.2.0",
-     "dotenv-flow": "^4.1.0",
+    "dotenv-flow": "^4.1.0",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-fade": "^8.6.0",
@@ -36,9 +36,9 @@
     "next": "^15.5.10",
     "next-themes": "^0.4.6",
     "react": "19.1.8",
-    "react-dom": "19.1.8",
     "react-chartjs-2": "^5.3.1",
     "react-datepicker": "^9.1.0",
+    "react-dom": "19.1.8",
     "react-hot-toast": "^2.6.0",
     "react-paginate": "^8.3.0",
     "react-select": "^5.10.2",
@@ -48,7 +48,6 @@
     "split-type": "^0.3.4",
     "swiper": "^12.0.3",
     "yup": "^1.7.1"
-    
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -58,8 +57,9 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-slick": "^0.23.13",
-    "eslint": "^9",
     "cross-env": "^10.1.0",
+    "dotenv-cli": "^11.0.0",
+    "eslint": "^9",
     "eslint-config-next": "15.5.2",
     "tailwindcss": "^4",
     "typescript": "^5"
