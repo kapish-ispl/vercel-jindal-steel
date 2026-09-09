@@ -5,6 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:production": "cross-env NODE_ENV=production next dev --turbopack",
+    "dev:development": "cross-env NODE_ENV=development next dev --turbopack",
+    "build:production": "cross-env NODE_ENV=production next build",
+    "build:development": "cross-env NODE_ENV=development next build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
