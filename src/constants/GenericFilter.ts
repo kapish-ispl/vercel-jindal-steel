@@ -37,6 +37,7 @@ export const invDocOptions = [
   { value: 'Analyst Presentation', label: 'Analyst Presentation' },
   { value: 'Transcript', label: 'Transcript' },
   { value: 'Annual Return', label: 'Annual Return' },
+  { value: 'Other Financial Information', label: 'Other Financial Information' },
 ];
 
 export const yearOptions = [
