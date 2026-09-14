@@ -563,7 +563,7 @@ main {
         gap: 8px;
       }
 
-      >span {
+      > span {
         @include font-size(16);
         position: relative;
         z-index: 1000;
@@ -631,7 +631,7 @@ main {
       height: 600px;
     }
 
-    >div {
+    > div {
       height: 100%;
     }
 
@@ -844,7 +844,7 @@ ul {
         }
       }
 
-      +.c-list__wrapper--grid-item {
+      + .c-list__wrapper--grid-item {
         margin-top: 15px;
       }
     }
@@ -1119,12 +1119,12 @@ ul {
   color: #ffffffd3;
 }
 
-.breadcrumb-item+.breadcrumb-item {
+.breadcrumb-item + .breadcrumb-item {
   padding-left: 30px;
 }
 
 /* separator styling */
-.breadcrumb-item+.breadcrumb-item::before {
+.breadcrumb-item + .breadcrumb-item::before {
   content: "";
   position: absolute;
   background-image: url(/images/icons/arrow.svg);
@@ -1154,7 +1154,7 @@ ul {
       @include align-items(center);
       @include justify-content(center);
 
-      >i {
+      > i {
         @include font-size(20);
         color: #cc9167;
       }
@@ -1169,7 +1169,7 @@ ul {
       }
     }
 
-    +.genric__info {
+    + .genric__info {
       margin-top: 15px;
 
       @include mq(tablet-max) {
@@ -1310,7 +1310,7 @@ ul {
           }
         }
 
-        >.clr-blue {
+        > .clr-blue {
           font-weight: var(--fontBold) !important;
         }
       }
@@ -1978,7 +1978,7 @@ ul {
 }
 
 .action-btn {
-  >.u-btn {
+  > .u-btn {
     @include flexbox;
     @include align-items(center);
 
@@ -2270,7 +2270,6 @@ ul.arrowbulletList {
 }
 
 .zoomEffect {
-
   .c-bento__card__wrapper_media,
   .c-card__media {
     overflow: hidden;
@@ -2284,7 +2283,6 @@ ul.arrowbulletList {
   }
 
   &:hover {
-
     .c-bento__card__wrapper_media,
     .c-card__media {
       img {
@@ -2306,9 +2304,11 @@ ul.arrowbulletList {
   &.blue_gradient {
     &:before {
       content: "";
-      background: linear-gradient(180deg,
-          rgba(17, 75, 142, 0.8) 5.75%,
-          rgba(102, 102, 102, 0) 40.82%);
+      background: linear-gradient(
+        180deg,
+        rgba(17, 75, 142, 0.8) 5.75%,
+        rgba(102, 102, 102, 0) 40.82%
+      );
       position: absolute;
       z-index: 10;
       width: 100%;
@@ -2321,9 +2321,11 @@ ul.arrowbulletList {
   &.black_gradient {
     &:before {
       content: "";
-      background: linear-gradient(180deg,
-          rgba(0, 0, 0, 0.8) 0%,
-          rgba(102, 102, 102, 0) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(102, 102, 102, 0) 100%
+      );
       position: absolute;
       //   z-index: 10;
       width: 100%;
@@ -2461,12 +2463,12 @@ ul.arrowbulletList {
         display: block;
 
         &:hover {
-          >img {
+          > img {
             @include transform(translateX(50%));
           }
         }
 
-        >img {
+        > img {
           @include size(40px);
           @include transition(all 0.3s ease-in-out);
           margin-top: -10px;
@@ -2545,7 +2547,7 @@ ul.arrowbulletList {
       bottom: 20px;
       z-index: 99;
 
-      >li {
+      > li {
         flex: 0 1 auto;
         width: 30px;
         height: 4px;
@@ -2556,7 +2558,7 @@ ul.arrowbulletList {
           opacity: 1;
         }
 
-        >button {
+        > button {
           opacity: 0;
         }
       }
@@ -2678,14 +2680,14 @@ ul.arrowbulletList {
         .c-cardWrapper__item {
           &:hover {
             .c-cardWrapper__item_image {
-              >img {
+              > img {
                 transform: scale(1.1);
               }
             }
 
             .c-cardWrapper__item_content {
               .c-cardWrapper__item_icon {
-                >img {
+                > img {
                   transform: rotateY(180deg);
                 }
               }
@@ -2697,7 +2699,7 @@ ul.arrowbulletList {
 
     .c-embla__viewport {
       .c-embla__slide {
-        >div {
+        > div {
           @include mq(tablet-max) {
             height: 100%;
           }
@@ -2884,12 +2886,12 @@ ul.arrowbulletList {
       $self: &;
 
       &.v1 {
-        >ul {
+        > ul {
           @include flexbox;
           margin-bottom: 0px;
           @include justify-content(flex-start);
 
-          >li {
+          > li {
             width: 50%;
 
             @include mq(tablet-max) {
@@ -2924,7 +2926,7 @@ ul.arrowbulletList {
                 opacity: 1;
               }
 
-              >span {
+              > span {
                 margin: 0px;
 
                 &.c-sector__item_label {
@@ -3106,7 +3108,7 @@ ul.arrowbulletList {
 }
 
 .c-vision__slider {
-  >div {
+  > div {
     height: 100%;
 
     .slick-slider {
@@ -3126,7 +3128,7 @@ ul.arrowbulletList {
 
       @include flexbox;
 
-      >div {
+      > div {
         @include flexbox;
       }
     }
@@ -3144,13 +3146,17 @@ ul.arrowbulletList {
     left: -92%;
     width: 50%;
     height: 100%;
-    background: -webkit-linear-gradient(left,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.3) 100%);
+    background: -webkit-linear-gradient(
+      left,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
 
-    background: linear-gradient(to right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.3) 100%) !important;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 100%
+    ) !important;
 
     -webkit-transform: skewX(-25deg);
 
@@ -3183,9 +3189,11 @@ ul.arrowbulletList {
     width: 50%;
     height: 100%;
 
-    background: linear-gradient(to right,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.2) 100%);
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
 
     transform: skewX(-25deg);
   }
@@ -3327,10 +3335,12 @@ ul.arrowbulletList {
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(0deg,
-          rgba(0, 0, 0, 0.4) 25%,
-          rgba(0, 0, 0, 0.4) 75%,
-          rgba(0, 0, 0, 0.4) 100%);
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.4) 25%,
+        rgba(0, 0, 0, 0.4) 75%,
+        rgba(0, 0, 0, 0.4) 100%
+      );
       z-index: 1;
     }
   }
@@ -3508,10 +3518,12 @@ ul.arrowbulletList {
       &__wrapper {
         &.with-gradient2 {
           &::before {
-            background: linear-gradient(180deg,
-                rgba(0, 0, 0, 0.36) 25%,
-                rgba(0, 0, 0, 0.36) 75%,
-                rgba(0, 0, 0, 0.6) 100%);
+            background: linear-gradient(
+              180deg,
+              rgba(0, 0, 0, 0.36) 25%,
+              rgba(0, 0, 0, 0.36) 75%,
+              rgba(0, 0, 0, 0.6) 100%
+            );
           }
         }
 
@@ -3817,7 +3829,7 @@ ul.arrowbulletList {
         }
 
         .breadcumbs {
-          ul>li>a {
+          ul > li > a {
             color: var(--color-secondary);
           }
 
@@ -3841,16 +3853,16 @@ ul.arrowbulletList {
     margin-bottom: 1.5rem;
   }
 
-  .featured__media {
-    @include mq(tablet-max) {
-      height: 600px;
-    }
+  // .featured__media {
+  //   @include mq(tablet-max) {
+  //     height: 600px;
+  //   }
 
-    .u-img {
-      height: 100%;
-      width: 100%;
-    }
-  }
+  //   .u-img {
+  //     height: auto;
+  //     width: 100%;
+  //   }
+  // }
 
   .c-image_with_overlapping {
     height: 400px;
@@ -3918,9 +3930,11 @@ ul.arrowbulletList {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(270deg,
-        rgba(0, 0, 0, 0.16) 37.18%,
-        rgba(0, 0, 0, 0.4) 100%);
+    background: linear-gradient(
+      270deg,
+      rgba(0, 0, 0, 0.16) 37.18%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
   }
 
   &_content {
@@ -3998,7 +4012,7 @@ ul.arrowbulletList {
   }
 
   .cus-select {
-    >button {
+    > button {
       border: 1px solid #63646666;
       background: #63646633;
       padding: 8px 16px;
@@ -4411,7 +4425,7 @@ ul.arrowbulletList {
       }
     }
 
-    +.twoColumnContainer__item {
+    + .twoColumnContainer__item {
       border-top: 1px solid #44618466;
       margin: 20px 0px;
 
