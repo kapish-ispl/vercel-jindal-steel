@@ -1,18 +1,12 @@
 import { FieldArray, Form, getIn, Formik } from "formik";
 import { JobApplicationSchema } from "./formschema";
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext, useRef, useMemo } from "react";
 import { UploadCloud, FileText, Trash2 } from "lucide-react";
 import { toast } from "react-hot-toast";
-import {
-    POST_JOB_ENDPOINT,
-    GET_FILE_UPLOAD_ENDPOINT,
-} from "@/config/apiConfig";
-import { serverRequest } from "@/services/getServerSideRender";
-import { CONSTANTS } from "@/config/constant";
-import { Captcha, validateCaptcha } from "../Captcha";
+import { POST_JOB_ENDPOINT, GET_FILE_UPLOAD_ENDPOINT } from "@/config/apiConfig";
+import { Captcha } from "../Captcha";
 import { AppContext } from "@/context/AppContext";
 import FormField from "./FormField";
-import FormSelect from "./FormSelect";
 import FormDatePicker from "./FormDatePicker";
 import { useRouter, useParams, usePathname } from "next/navigation";
 import { postUploadFileResponse, postAPIResponse } from "@/services/apiRequests";
@@ -33,11 +27,15 @@ const JobForm = () => {
     const [selectDepartmentOther, setSelectDepartmentOther] = useState(false);
     const currentYear = new Date().getFullYear();
     const endOfCurrentYear = new Date(currentYear, 11, 31);
+    const maxDobDate = useMemo(() => {
+        const date = new Date();
+        date.setFullYear(date.getFullYear() - 18);
+        return date;
+    }, []);
+    const [maxDateState, setMaxDateState] = useState("01-29-2024");
     const [actualCaptcha, setActualCaptcha] = useState<string>('');
     const [reloadCaptcha, setReloadCaptcha] = useState<boolean>(false);
     const [captchaKey, setCaptchaKey] = useState<number>(0);
-    const [paramsExist, setParamsExist] = useState(false);
-    const [isRedirecting, setIsRedirecting] = useState(false);
     const [fileName, setFileName] = useState<string>('');
     const [isUploading, setIsUploading] = useState<boolean>(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -52,13 +50,6 @@ const JobForm = () => {
             },
         }
     );
-
-    // useEffect(() => {
-    //     if (!contextInfo.jobPostId || !contextInfo.jobCode || !contextInfo.jobTitle) {
-    //         setIsRedirecting(true);
-    //         router.push("/career");
-    //     }
-    // }, [contextInfo.jobPostId, contextInfo.jobCode, contextInfo.jobTitle, router]);
 
     const experienceOptions = [
         { value: "0", label: "Fresher" },
@@ -79,16 +70,7 @@ const JobForm = () => {
         { value: "15", label: "15+" },
     ];
 
-    const keySkillsOptions = [
-        { value: "React", label: "React" },
-        { value: "Node.js", label: "Node.js" },
-        { value: "TypeScript", label: "TypeScript" },
-        { value: "Next.js", label: "Next.js" },
-        { value: "SASS", label: "SASS" },
-    ];
-
     const educationLabels = [
-
         "10th",
         "12th",
         "Graduation",
@@ -114,14 +96,14 @@ const JobForm = () => {
             contextInfo.jobTitle !== "" && contextInfo.jobTitle !== undefined
                 ? `${contextInfo.jobRole}${contextInfo.jobRole && ' ,'}${contextInfo.jobTitle}`
                 : "",
-        location:
+        job_location:
             contextInfo.jobLocation !== "" && contextInfo.jobLocation !== undefined
                 ? contextInfo.jobLocation
                 : "",
         name: "",
         dob: null,
         isTalentForm: pathname == "/join-our-talent-community" ? true : false,
-        skills: "",
+        skils: "",
         department: "",
         other_department: "",
         email: "",
@@ -141,7 +123,6 @@ const JobForm = () => {
         address: "",
         country_of_residence: "India",
         city_name: "",
-        key_skills: [],
         resume_id: "",
         resume_file: null,
         user_captcha_input: "",
@@ -210,8 +191,6 @@ const JobForm = () => {
 
                                     const {
                                         user_captcha_input,
-                                        other_experience,
-                                        resume_file,
                                         ...submittedValue
                                     } = formValues;
 
@@ -241,35 +220,32 @@ const JobForm = () => {
                                     touched,
                                     errors,
                                     setFieldValue,
-                                    setFieldError,
                                     setFieldTouched,
                                     handleSubmit,
                                 }) => {
                                     const noticePeriodHandler = (e: any) => {
                                         setFieldValue("notice_period", e.target.value);
-
-
+                                        const maxDate = new Date(
+                                            Date.now() +
+                                            Number(e.target.value) * 24 * 60 * 60 * 1000
+                                        );
+                                        setMaxDateState(
+                                            `${maxDate.getMonth() + 1
+                                            }-${maxDate.getDate()}-${maxDate.getFullYear()}`
+                                        );
                                     };
 
                                     const handleExperienceChange = (selectedValue: any) => {
-                                        selectedValue.value == "0"
-                                            ? setShowExpericeFields(false)
-                                            : setShowExpericeFields(true);
-                                        selectedValue.value == "15"
-                                            ? setShowInputBox(true)
-                                            : setShowInputBox(false);
+                                        setShowExpericeFields(selectedValue?.value !== "0");
+                                        setShowInputBox(selectedValue?.value === "15");
                                     };
 
                                     const handleCountryChange = (selectedValue: any) => {
-                                        selectedValue.value == "India"
-                                            ? setSelectedCountryIndia(true)
-                                            : setSelectedCountryIndia(false);
+                                        setSelectedCountryIndia(selectedValue?.value === "India");
                                     };
 
                                     const handleStateChange = (selectedValue: any) => {
-                                        selectedValue.value == "Others"
-                                            ? setSelectedStateOther(true)
-                                            : setSelectedStateOther(false);
+                                        setSelectedStateOther(selectedValue?.value === "Others");
                                     };
 
                                     const handleFileChange = (selectedFile: any) => {
@@ -327,7 +303,6 @@ const JobForm = () => {
                                             fileInputRef.current.value = "";
                                         }
                                     };
-
                                     return (
                                         <Form onSubmit={handleSubmit}>
                                             {/* ------ Job Details ------ */}
@@ -358,9 +333,9 @@ const JobForm = () => {
                                                     <div className="col-12 col-md-4">
                                                         <FormField
                                                             label="Job Location*"
-                                                            name="location"
-                                                            error={errors.location}
-                                                            touched={touched.location}
+                                                            name="job_location"
+                                                            error={errors.job_location}
+                                                            touched={touched.job_location}
                                                             autoComplete="off"
                                                             readOnly={true}
                                                             showLabel={true}
@@ -388,7 +363,7 @@ const JobForm = () => {
                                                     {selectDepartmentOther && (
                                                         <div className="col-12 col-md-4">
                                                             <FormField
-                                                                label="Sub function or Specialty*"
+                                                                label="Other Department*"
                                                                 name="other_department"
                                                                 error={errors.other_department}
                                                                 touched={touched.other_department}
@@ -401,9 +376,9 @@ const JobForm = () => {
                                                     <div className={`col-12 ${selectDepartmentOther ? "col-md-4" : "col-md-6"}`}>
                                                         <FormField
                                                             label="Sub function or Specialty*"
-                                                            name="skills"
-                                                            error={errors.skills}
-                                                            touched={touched.skills}
+                                                            name="skils"
+                                                            error={errors.skils}
+                                                            touched={touched.skils}
                                                             autoComplete="off"
                                                             showLabel={true}
                                                         />
@@ -438,9 +413,10 @@ const JobForm = () => {
                                                         name="dob"
                                                         error={errors.dob as string}
                                                         touched={touched.dob}
-                                                        placeholderText="DOB"
-                                                        minDate={new Date("1945/08/15")}
-                                                        maxDate={new Date()}
+                                                        placeholderText="DOB* (MM/DD/YYYY)"
+                                                        dateFormat="MM/dd/yyyy"
+                                                        minDate={new Date("1950/08/15")}
+                                                        maxDate={maxDobDate}
                                                         showMonthDropdown
                                                         showYearDropdown
                                                         dropdownMode="select"
@@ -492,7 +468,7 @@ const JobForm = () => {
                                                 {showInputBox && (
                                                     <div className="col-12 col-md-4">
                                                         <FormField
-                                                            label="Other Experience"
+                                                            label="Other Experience*"
                                                             name="other_experience"
                                                             error={errors.other_experience}
                                                             touched={touched.other_experience}
@@ -505,7 +481,7 @@ const JobForm = () => {
                                                 {showExpericeFields && (
                                                     <div className="col-12 col-md-4">
                                                         <FormField
-                                                            label="Notice Period (Days)"
+                                                            label="Notice Period (Days)*"
                                                             name="notice_period"
                                                             error={errors.notice_period}
                                                             touched={touched.notice_period}
@@ -515,16 +491,6 @@ const JobForm = () => {
                                                         />
                                                     </div>
                                                 )}
-
-                                                <div className="col-12 col-md-4">
-                                                    <FormMultiSelect
-                                                        label="Key Skills*"
-                                                        name="key_skills"
-                                                        options={keySkillsOptions}
-                                                        isMulti={true}
-                                                        placeholder="Select Key Skills"
-                                                    />
-                                                </div>
                                             </div>
                                             <div className="c-divider">&nbsp;</div>
                                             {/* ------ Educational Details ------ */}
@@ -717,7 +683,8 @@ const JobForm = () => {
                                                                                             name={`experience_details.${index}.joining_date`}
                                                                                             error={getIn(errors, `experience_details.${index}.joining_date`)}
                                                                                             touched={getIn(touched, `experience_details.${index}.joining_date`)}
-                                                                                            placeholderText="Joining Date"
+                                                                                            placeholderText="Joining Date (MM/DD/YYYY)"
+                                                                                            dateFormat="MM/dd/yyyy"
                                                                                             showMonthDropdown
                                                                                             showYearDropdown
                                                                                             maxDate={new Date()}
@@ -737,12 +704,15 @@ const JobForm = () => {
                                                                                     </div>
                                                                                     <div className="col-12 col-md-4">
                                                                                         <FormDatePicker
-                                                                                            label="Relieving Date"
+                                                                                            label="Relieving Date*"
                                                                                             name={`experience_details.${index}.relieving_date`}
                                                                                             error={getIn(errors, `experience_details.${index}.relieving_date`)}
                                                                                             touched={getIn(touched, `experience_details.${index}.relieving_date`)}
-                                                                                            placeholderText="Relieving Date"
-                                                                                            maxDate={endOfCurrentYear}
+                                                                                            placeholderText="Relieving Date* (MM/DD/YYYY)"
+                                                                                            dateFormat="MM/dd/yyyy"
+                                                                                            maxDate={
+                                                                                                new Date(maxDateState)
+                                                                                            }
                                                                                             showMonthDropdown
                                                                                             showYearDropdown
                                                                                             dropdownMode="select"
@@ -821,7 +791,7 @@ const JobForm = () => {
                                                 ) : (
                                                     <div className="col-12 col-md-6">
                                                         <FormField
-                                                            label="State Name"
+                                                            label="State Name*"
                                                             name="state_name"
                                                             error={errors.state_name}
                                                             touched={touched.state_name}
@@ -833,7 +803,7 @@ const JobForm = () => {
                                                 {selectedStateOther && (
                                                     <div className="col-12 col-md-4">
                                                         <FormField
-                                                            label="Other State Name"
+                                                            label="Other State Name*"
                                                             name="other_state_name"
                                                             error={errors.other_state_name}
                                                             touched={touched.other_state_name}
@@ -844,7 +814,7 @@ const JobForm = () => {
                                                 )}
                                                 <div className="col-12 col-md-4">
                                                     <FormField
-                                                        label="City Name"
+                                                        label="City Name*"
                                                         name="city_name"
                                                         error={errors.city_name}
                                                         touched={touched.city_name}
@@ -862,7 +832,7 @@ const JobForm = () => {
                                                 </div>
                                                 <div className="col-12 col-md-4">
                                                     <FormField
-                                                        label="Pincode"
+                                                        label="Pincode*"
                                                         name="pincode"
                                                         error={errors.pincode}
                                                         touched={touched.pincode}
@@ -900,7 +870,7 @@ const JobForm = () => {
                                                 </div>
                                                 <div className="col-12">
                                                     <FormField
-                                                        label="Address"
+                                                        label="Address*"
                                                         name="address"
                                                         type="textarea"
                                                         error={errors.address}
@@ -926,7 +896,7 @@ const JobForm = () => {
                                                                     <UploadCloud className="upload_icon" size={32} />
                                                                 </div>
                                                                 <div className="upload_text_content">
-                                                                    <span className="upload_title">Click to upload your resume</span>
+                                                                    <span className="upload_title">Click to upload your resume*</span>
                                                                     <span className="upload_subtitle">Formats: PDF, DOC, DOCX, RTF (Max 5MB)</span>
                                                                 </div>
                                                                 <input

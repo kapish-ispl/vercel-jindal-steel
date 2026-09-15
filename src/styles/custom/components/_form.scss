@@ -261,8 +261,19 @@
         }
 
         .datepicker_wrapper {
+            position: relative;
+
             .react-datepicker-wrapper {
                 width: 100%;
+            }
+
+            .datepicker_icon {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                pointer-events: none;
+                color: #878787;
             }
         }
 

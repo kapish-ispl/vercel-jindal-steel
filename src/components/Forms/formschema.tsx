@@ -17,9 +17,6 @@ export const hasHtmlOrScript = (value: string): boolean => {
   );
 };
 
-/**
- * Custom safe string validator that prevents any HTML tags or script injection.
- */
 export const safeString = (message?: string) => {
   return Yup.string().test(
     "no-html-script",
@@ -70,6 +67,7 @@ export const VALIDATION_ERRORS = {
     department: "Select Department",
     otherDepartment: "Enter Other Department",
     jobPosition: "Enter Job Position",
+    specialty: "Enter Specialty",
     jobCode: "Enter Job Code",
     jobLocation: "Enter Job Location",
     nationality: "Select your Nationality",
@@ -78,6 +76,7 @@ export const VALIDATION_ERRORS = {
     stdCode: "Enter your Country Code",
     passingYear: "Enter your Passing Year",
     percentage: "Enter your Percentage",
+    noticePeriod: "Enter Notice Period",
   },
   invalid: {
     email: "Invalid email format",
@@ -132,7 +131,7 @@ export interface IJobApplicationValues {
   post_id?: string | number;
   current_openings: string;
   job_code: string;
-  location: string;
+  job_location: string;
   name: string;
   dob: Date | null;
   email: string;
@@ -158,7 +157,7 @@ export interface IJobApplicationValues {
   education_details: IEducationDetail[];
   experience_details: IExperienceDetail[];
   isTalentForm?: boolean;
-  skills?: string;
+  skils?: string;
   department?: string;
   other_department?: string;
 }
@@ -190,9 +189,9 @@ export const JobApplicationSchema: Yup.ObjectSchema<any> = Yup.object({
     then: () => safeString().notRequired(),
     otherwise: () => safeString().required(VALIDATION_ERRORS.required.jobPosition).trim(),
   }),
-  skills: safeString().when("isTalentForm", {
+  skils: safeString().when("isTalentForm", {
     is: (isTalentForm: any) => isTalentForm == true,
-    then: () => safeString().required(VALIDATION_ERRORS.required.jobPosition).trim(),
+    then: () => safeString().required(VALIDATION_ERRORS.required.specialty).trim(),
     otherwise: () => safeString().notRequired(),
   }),
   department: safeString().when("isTalentForm", {
@@ -209,7 +208,7 @@ export const JobApplicationSchema: Yup.ObjectSchema<any> = Yup.object({
     then: () => safeString().notRequired(),
     otherwise: () => safeString().required(VALIDATION_ERRORS.required.jobCode).trim(),
   }),
-  location: safeString().when("isTalentForm", {
+  job_location: safeString().when("isTalentForm", {
     is: (isTalentForm: any) => isTalentForm == true,
     then: () => safeString().notRequired(),
     otherwise: () => safeString().required(VALIDATION_ERRORS.required.jobLocation).trim(),
@@ -228,10 +227,19 @@ export const JobApplicationSchema: Yup.ObjectSchema<any> = Yup.object({
     then: () => safeString().required(VALIDATION_ERRORS.required.experience).trim(),
     otherwise: () => safeString().notRequired(),
   }),
-  notice_period: safeString().trim(),
+  notice_period: safeString().when("total_experience", {
+    is: (total_experience: any) => total_experience !== "0",
+    then: () => safeString().required(VALIDATION_ERRORS.required.noticePeriod).trim(),
+    otherwise: () => safeString().notRequired(),
+  }),
   nationality: safeString().required(VALIDATION_ERRORS.required.nationality).trim(),
   country_name: safeString().required(VALIDATION_ERRORS.required.country).trim(),
   state_name: safeString().required(VALIDATION_ERRORS.required.stateName).trim(),
+  other_state_name: safeString().when("state_name", {
+    is: (state_name: any) => state_name == "Others",
+    then: () => safeString().required(VALIDATION_ERRORS.required.otherStateName).trim(),
+    otherwise: () => safeString().notRequired(),
+  }),
   pincode: safeString()
     .matches(REGEX.pincode, VALIDATION_ERRORS.invalid.pincode)
     .required(VALIDATION_ERRORS.required.pincode)
@@ -248,12 +256,6 @@ export const JobApplicationSchema: Yup.ObjectSchema<any> = Yup.object({
     .trim(),
   address: safeString().required(VALIDATION_ERRORS.required.address).trim(),
   city_name: safeString().required(VALIDATION_ERRORS.required.city).trim(),
-  key_skills: Yup.lazy((value) => {
-    if (Array.isArray(value)) {
-      return Yup.array().of(safeString()).min(1, "Select at least one skill").required("Select key skills");
-    }
-    return safeString().required("Select key skills").trim();
-  }) as any,
   resume_id: safeString().required(VALIDATION_ERRORS.required.resume).trim(),
   resume_file: Yup.mixed()
     .nullable()

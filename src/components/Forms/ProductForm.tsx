@@ -175,7 +175,7 @@ const ProductForm: FC<{ pageTitle: string }> = ({ pageTitle }) => {
                                         />
                                         <FormField
                                             name="user_captcha_input"
-                                            label="Enter CAPTCHA"
+                                            label="Enter CAPTCHA*"
                                             error={errors.user_captcha_input}
                                             touched={touched.user_captcha_input}
                                             autoComplete="off"
