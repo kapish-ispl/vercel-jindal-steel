@@ -38,7 +38,7 @@ const ImageTextSlider = ({ postData }: any) => {
                     return (
                         <React.Fragment key={index}>
                             <div className="c-cardView__wrapper mr-30">
-                                <Link className="c-cardView__wrapper-media ratio ratio-16x9 cursor-pointer" href="#">
+                                <Link prefetch={false} className="c-cardView__wrapper-media ratio ratio-16x9 cursor-pointer" href="#">
                                     <img alt="card title" className="img-fluid u-img" src={post.media[0].cdnPath} />
                                 </Link>
                                 <span className="c-cardView__wrapper-content v2">

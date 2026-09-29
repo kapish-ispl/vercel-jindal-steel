@@ -22,6 +22,7 @@ function RecursiveMenu({ items, isThirdMenu, setThirdLevelMenu, setIsMegaActive 
                         </span>
 
                         <Link
+                            prefetch={false}
                             href={item.link}
                             role="menuitem"
                             onClick={() => setIsMegaActive(false)}

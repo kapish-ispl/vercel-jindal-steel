@@ -1,32 +1,22 @@
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
+
 import HomePage from "@/components/Layout/HomePageTemplate";
-import { GET_SPECIFIC_PAGE_ENDPOINT } from "@/config/apiConfig";
 import { CONSTANTS } from "@/config/constant";
-import { serverRequest } from "@/services/getServerSideRender";
+import { getPageData } from "@/lib/getPageData";
+import { getPageMetadata } from "@/lib/metadata";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPageMetadata } from "@/lib/metadata";
-
 
 export async function generateMetadata(): Promise<Metadata> {
-  return getPageMetadata({
-    slug: "home",
-    endpoint: GET_SPECIFIC_PAGE_ENDPOINT,
-  });
+  const fetchedInfo = await getPageData(CONSTANTS.LANDING_SLUG);
+  return getPageMetadata(fetchedInfo?.data);
 }
 
-
 export default async function Home() {
-  const fetchedInfo = await serverRequest(
-    {},
-    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${CONSTANTS.LANDING_SLUG}&excludeUrl=1`,
-    CONSTANTS.REQUEST_GET,
-    'server'
-  );
+  const fetchedInfo = await getPageData(CONSTANTS.LANDING_SLUG);
 
   const pageData = fetchedInfo?.data;
-  if (pageData.code === CONSTANTS.STATUS_NOT_FOUND || !pageData) return notFound();
+  if (pageData?.code === CONSTANTS.STATUS_NOT_FOUND || !pageData) return notFound();
 
   return <HomePage data={pageData} />;
 }
-

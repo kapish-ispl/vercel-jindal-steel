@@ -1,10 +1,22 @@
 import { notFound, redirect } from "next/navigation";
+import { Metadata } from "next";
 
-import { GET_SPECIFIC_POST_ENDPOINT } from "@/config/apiConfig";
 import { CONSTANTS } from "@/config/constant";
-import { serverRequest } from "@/services/getServerSideRender";
+import { getPostData } from "@/lib/getPostData";
+import { getPageMetadata } from "@/lib/metadata";
 import InnerBanner from "@/components/Layout/InnerBanner";
 import { MONTH_NAMES } from "@/config/config";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ [key: string]: string | string[] | undefined }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const rawSlug = typeof slug === "string" ? slug : "";
+  const fetchedInfo = await getPostData(rawSlug);
+  return getPageMetadata(fetchedInfo?.data);
+}
 
 export default async function Page({
   params,
@@ -18,15 +30,12 @@ export default async function Page({
     redirect("/");
   }
 
-  const fetchedInfo = await serverRequest(
-    {},
-    `${GET_SPECIFIC_POST_ENDPOINT}?slug=${slug}&excludeUrl=1`,
-    CONSTANTS.REQUEST_GET, 'server'
-  );
+  const rawSlug = typeof slug === "string" ? slug : "";
+  const fetchedInfo = await getPostData(rawSlug);
 
-  if (fetchedInfo.code === CONSTANTS.STATUS_NOT_FOUND || !fetchedInfo?.data) return notFound();
+  if (fetchedInfo?.code === CONSTANTS.STATUS_NOT_FOUND || !fetchedInfo?.data) return notFound();
 
-  const pageData = fetchedInfo.data;
+  const pageData: any = fetchedInfo.data;
 
   // ✅ Date formatting
   let formattedDate = "";

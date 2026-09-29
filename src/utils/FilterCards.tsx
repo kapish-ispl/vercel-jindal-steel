@@ -94,7 +94,7 @@ const FilterCards = ({ postData, itemsPerPage = 9, totalPost, loading, compSlug 
                                 <>
                                     <div className="col-12 col-md-6 col-lg-4" key={index}>
                                         <div className="c-cardView__box">
-                                            <Link className="c-cardView__box-item d-block text-decoration-none" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}>
+                                            <Link prefetch={false} className="c-cardView__box-item d-block text-decoration-none" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}>
 
                                                 <div className="card__media mb-4">
                                                     <img alt="icon" className="img-fluid u-img" height={80} width={80}

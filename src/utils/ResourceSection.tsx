@@ -42,7 +42,7 @@ const ResourceSection = ({ postData, compSlug }: any) => {
                             <React.Fragment key={index}>
                                 {compSlug === 'policies-reports' &&
                                     <div className="c-cardView__box sliderbox">
-                                        <Link className="c-cardView__box-item d-block text-decoration-none" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}>
+                                        <Link prefetch={false} className="c-cardView__box-item d-block text-decoration-none" href={dataLink} target={post.featuredMedia.type === "attachment" ? '_blank' : '_self'}>
 
                                             <div className="card__media mb-4"><img alt="icon" className="img-fluid u-img" height={80} width={80} src="https://docs.jindalsteel.in/document/124/1763976839___2.png" />
                                                 <div className="label c-content-18 clr-gray ft_semiBold">{newDate !== "" ? newDate : ""}</div>

@@ -84,6 +84,7 @@ const PressReleaseCard = ({ postData, itemsPerPage = 9, totalPost, loading, comp
                                 <>
                                     <div className="col-12 col-md-6 col-lg-4" key={index}>
                                         <Link
+                                            prefetch={false}
                                             href={`/press-releases/${post.slug}`}
                                             className="c-cardBox__wrapper v1 text-decoration-none"
                                         >

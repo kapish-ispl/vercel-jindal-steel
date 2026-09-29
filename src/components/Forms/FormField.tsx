@@ -42,6 +42,13 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
             );
         }
 
+        const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            field.onBlur(e);
+            if (rest.onBlur) {
+                rest.onBlur(e as any);
+            }
+        };
+
         return (
             <div className={containerClassName}>
                 {showLabel && <label htmlFor={name} className="form_grider_wrap_label">
@@ -57,6 +64,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
                         maxLength={maxLength}
                         autoComplete={autoComplete}
                         ref={ref as React.Ref<HTMLTextAreaElement>}
+                        onBlur={handleBlur}
                     />
                 ) : (
                     <div className={prefixText ? "form_field_input_group" : ""}>
@@ -71,6 +79,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, FormFieldPr
                             maxLength={maxLength}
                             autoComplete={autoComplete}
                             ref={ref as React.Ref<HTMLInputElement>}
+                            onBlur={handleBlur}
                         />
                     </div>
                 )}

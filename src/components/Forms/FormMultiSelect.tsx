@@ -15,6 +15,8 @@ interface FormMultiSelectProps {
     onChange?: (options: any) => void;
     showLabel?: boolean;
     isMulti?: boolean;
+    error?: string;
+    touched?: boolean;
 }
 
 const FormMultiSelect: React.FC<FormMultiSelectProps> = ({
@@ -25,11 +27,13 @@ const FormMultiSelect: React.FC<FormMultiSelectProps> = ({
     onChange,
     showLabel = false,
     isMulti = false,
+    error,
+    touched,
 }) => {
     const [field, meta, helpers] = useField(name);
 
-    const hasError = meta.touched && meta.error;
-    const displayError = meta.error;
+    const hasError = Boolean((touched || meta.touched) && (error || meta.error));
+    const displayError = error || meta.error;
 
     // Handle initial value or external value updates
     const selectedOptions = isMulti
@@ -39,16 +43,23 @@ const FormMultiSelect: React.FC<FormMultiSelectProps> = ({
     const handleChange = (selected: any) => {
         if (isMulti) {
             const values = selected ? selected.map((opt: any) => opt.value) : [];
-            helpers.setValue(values);
+            helpers.setValue(values, true);
         } else {
-            helpers.setValue(selected ? selected.value : "");
+            helpers.setValue(selected ? selected.value : "", true);
         }
 
         if (onChange) onChange(selected);
     };
 
     return (
-        <div className={`form_grider_wrap ${hasError ? "hasError" : ""}`}>
+        <div
+            className={`form_grider_wrap ${hasError ? "hasError" : ""}`}
+            onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                    helpers.setTouched(true, true);
+                }
+            }}
+        >
             {showLabel && <label className="form_grider_wrap_label">{label}</label>}
             <div className="dropdown d-inline-block w-100 cus-select">
                 <Select
@@ -61,7 +72,7 @@ const FormMultiSelect: React.FC<FormMultiSelectProps> = ({
                     value={selectedOptions}
                     onChange={handleChange}
                     options={options}
-                    onBlur={() => helpers.setTouched(true)}
+                    onBlur={() => helpers.setTouched(true, true)}
                     styles={{
                         control: (base, state) => ({
                             ...base,

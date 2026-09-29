@@ -64,6 +64,13 @@
                     height: 88px;
                 }
 
+                &:disabled,
+                &[disabled] {
+                    opacity: 0.6;
+                    cursor: not-allowed;
+                    background-color: #f3f3f3;
+                }
+
                 &:focus-visible {
                     outline: none;
                     border: none !important;

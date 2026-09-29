@@ -37,7 +37,7 @@ const DocumentCard = ({ post, compSlug }: any) => {
         : post.metaInfo?.external_link || post.media?.[0]?.cdnPath;
 
     return (
-        <Link target='_blank' href={href || "#"} className='performance-link radiusShape-5'>
+        <Link prefetch={false} target='_blank' href={href || "#"} className='performance-link radiusShape-5'>
             <div className="title c-content-19 ft_regular">{post.title}</div>
             <DownloadIcon />
         </Link>

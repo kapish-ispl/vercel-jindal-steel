@@ -1,15 +1,23 @@
 
 import { notFound, redirect } from "next/navigation";
+import { Metadata } from "next";
 
-import { GET_SPECIFIC_POST_ENDPOINT } from "@/config/apiConfig";
 import { CONSTANTS } from "@/config/constant";
-import { serverRequest } from "@/services/getServerSideRender";
+import { getPostData } from "@/lib/getPostData";
+import { getPageMetadata } from "@/lib/metadata";
 import InnerBanner from "@/components/Layout/InnerBanner";
 import PageTemplate from "./_partials/PageTemplate";
 
-
-
-
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ [key: string]: string | string[] | undefined }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const rawSlug = typeof slug === "string" ? slug : "";
+  const fetchedInfo = await getPostData(rawSlug);
+  return getPageMetadata(fetchedInfo?.data);
+}
 
 export default async function Page({
   params,
@@ -17,17 +25,14 @@ export default async function Page({
   params: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { slug } = await params;
+  const rawSlug = typeof slug === "string" ? slug : "";
 
-  const fetchedInfo = await serverRequest(
-    {},
-    `${GET_SPECIFIC_POST_ENDPOINT}?slug=${slug}&excludeUrl=1`,
-    CONSTANTS.REQUEST_GET, 'server'
-  );
+  const fetchedInfo = await getPostData(rawSlug);
 
   // Safer check
-  if (fetchedInfo.code === CONSTANTS.STATUS_NOT_FOUND || !fetchedInfo?.data) return notFound();
+  if (fetchedInfo?.code === CONSTANTS.STATUS_NOT_FOUND || !fetchedInfo?.data) return notFound();
 
-  const pageData = fetchedInfo.data;
+  const pageData: any = fetchedInfo.data;
 
 
 

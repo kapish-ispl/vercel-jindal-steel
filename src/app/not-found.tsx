@@ -35,6 +35,7 @@ export default function NotFound() {
                   </h1>
 
                   <Link
+                    prefetch={false}
                     href="/"
                     className="not-found__button"
                   >

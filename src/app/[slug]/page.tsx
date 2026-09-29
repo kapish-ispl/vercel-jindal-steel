@@ -1,13 +1,11 @@
 import { notFound, redirect } from "next/navigation";
-
-import { GET_SPECIFIC_PAGE_ENDPOINT } from "@/config/apiConfig";
-import { CONSTANTS } from "@/config/constant";
-import { serverRequest } from "@/services/getServerSideRender";
-import PageTemplate from "@/components/Layout/PageTemplate";
-import InnerBanner from "@/components/Layout/InnerBanner";
-import { getPageMetadata } from "@/lib/metadata";
 import { Metadata } from "next";
 
+import { CONSTANTS } from "@/config/constant";
+import { getPageData } from "@/lib/getPageData";
+import { getPageMetadata } from "@/lib/metadata";
+import PageTemplate from "@/components/Layout/PageTemplate";
+import InnerBanner from "@/components/Layout/InnerBanner";
 
 export async function generateMetadata({
   params,
@@ -15,13 +13,12 @@ export async function generateMetadata({
   params: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const rawSlug = typeof slug === "string" ? slug : "";
+  const cleanSlug = rawSlug.endsWith(".html") ? rawSlug.slice(0, -5) : rawSlug;
 
-  return getPageMetadata({
-    slug: typeof slug === 'string' ? slug : '',
-    endpoint: GET_SPECIFIC_PAGE_ENDPOINT,
-  });
+  const fetchedInfo = await getPageData(cleanSlug);
+  return getPageMetadata(fetchedInfo?.data);
 }
-
 
 export default async function Page({
   params,
@@ -30,22 +27,20 @@ export default async function Page({
 }) {
   const { slug } = await params;
 
-  if (typeof slug === 'string' && slug.endsWith('.html')) {
+  if (typeof slug === "string" && slug.endsWith(".html")) {
     const cleanSlug = slug.slice(0, -5);
     redirect(`/${cleanSlug}`);
   }
 
-  if (slug === 'home') {
-    redirect('/');
+  if (slug === "home") {
+    redirect("/");
   }
 
-  const fetchedInfo = await serverRequest(
-    {},
-    `${GET_SPECIFIC_PAGE_ENDPOINT}?slug=${slug}&excludeUrl=1`,
-    CONSTANTS.REQUEST_GET, 'server'
-  );
+  const cleanSlug = typeof slug === "string" ? slug : "";
 
-  if (fetchedInfo.code === CONSTANTS.STATUS_NOT_FOUND || !fetchedInfo?.data) return notFound();
+  const fetchedInfo = await getPageData(cleanSlug);
+
+  if (fetchedInfo?.code === CONSTANTS.STATUS_NOT_FOUND || !fetchedInfo?.data) return notFound();
 
   const pageData = fetchedInfo.data;
 
@@ -57,8 +52,8 @@ export default async function Page({
             <InnerBanner
               label={pageData.title}
               tagline={pageData?.customField?.tagline}
-              slug={pageData.slug}
-              currentPage={pageData}
+              slug={pageData.slug || cleanSlug}
+              currentPage={pageData as any}
               innerBanner={pageData.media}
             />
           </div>

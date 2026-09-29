@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 
 import { ThemeProvider } from "@/components/Layout/ThemeProvider";
 import AppContextProvider from "@/context/AppContext";
+import { Providers } from "@/app/providers";
 import { getMenuData } from "@/lib/getMenuData";
 
 import "@/styles/globals.scss";
@@ -136,30 +137,32 @@ export default async function RootLayout({
         <Toaster position="top-center" reverseOrder={false} containerStyle={{ zIndex: 99999 }} />
 
         <Suspense fallback={null}>
-          <AccessibilityProvider>
-            <AppContextProvider
-              initialHeaderMenu={headerMenu}
-              initialFooterMenu={footerMenu}
-              initialProductData={productData}
-            >
-              <SmoothScrollProvider>
-                <Header />
+          <Providers>
+            <AccessibilityProvider>
+              <AppContextProvider
+                initialHeaderMenu={headerMenu}
+                initialFooterMenu={footerMenu}
+                initialProductData={productData}
+              >
+                <SmoothScrollProvider>
+                  <Header />
 
-                <ThemeProvider
-                  attribute="class"
-                  defaultTheme="system"
-                  enableSystem
-                  disableTransitionOnChange
-                >
-                  <main>{children}</main>
+                  <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                  >
+                    <main>{children}</main>
 
-                  <Footer />
-                </ThemeProvider>
+                    <Footer />
+                  </ThemeProvider>
 
-                <AccessibilityWidget />
-              </SmoothScrollProvider>
-            </AppContextProvider>
-          </AccessibilityProvider>
+                  <AccessibilityWidget />
+                </SmoothScrollProvider>
+              </AppContextProvider>
+            </AccessibilityProvider>
+          </Providers>
         </Suspense>
       </body>
     </html>

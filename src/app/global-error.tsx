@@ -131,6 +131,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
           </button>
 
           <Link
+            prefetch={false}
             href="/"
             style={{
               padding: "12px 28px",

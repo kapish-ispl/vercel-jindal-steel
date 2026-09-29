@@ -1,12 +1,11 @@
 import { notFound, redirect } from "next/navigation";
 import { Metadata } from "next";
 
-import { GET_SPECIFIC_POST_ENDPOINT } from "@/config/apiConfig";
 import { CONSTANTS } from "@/config/constant";
-import { serverRequest } from "@/services/getServerSideRender";
+import { getPostData } from "@/lib/getPostData";
+import { getPageMetadata } from "@/lib/metadata";
 import InnerBanner from "@/components/Layout/InnerBanner";
 import PageTemplate from "@/components/Layout/PageTemplate";
-import { getPageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
     params,
@@ -14,10 +13,9 @@ export async function generateMetadata({
     params: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> {
     const { slug } = await params;
-    return getPageMetadata({
-        slug: typeof slug === "string" ? slug : "",
-        endpoint: GET_SPECIFIC_POST_ENDPOINT,
-    });
+    const rawSlug = typeof slug === "string" ? slug : "";
+    const fetchedInfo = await getPostData(rawSlug);
+    return getPageMetadata(fetchedInfo?.data);
 }
 
 export default async function Page({
@@ -31,17 +29,13 @@ export default async function Page({
         redirect("/");
     }
 
-    const fetchedInfo = await serverRequest(
-        {},
-        `${GET_SPECIFIC_POST_ENDPOINT}?slug=${slug}&excludeUrl=1`,
-        CONSTANTS.REQUEST_GET,
-        "server"
-    );
+    const rawSlug = typeof slug === "string" ? slug : "";
+    const fetchedInfo = await getPostData(rawSlug);
 
     // Safer check
-    if (fetchedInfo.code === CONSTANTS.STATUS_NOT_FOUND || !fetchedInfo?.data) return notFound();
+    if (fetchedInfo?.code === CONSTANTS.STATUS_NOT_FOUND || !fetchedInfo?.data) return notFound();
 
-    const pageData = fetchedInfo.data;
+    const pageData: any = fetchedInfo.data;
 
     // Pick only image/video media and use the first matching item as the banner
     const bannerMedia = (pageData?.media ?? []).filter(

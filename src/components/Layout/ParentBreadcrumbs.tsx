@@ -392,7 +392,7 @@ const ParentBreadcrumbs = <T extends BreadcrumbItem = BreadcrumbItem>({
                 return (
                     <li key={`${item.id}-${index}`} className={`breadcrumb-item ${isLast ? "active" : ""}`}>
                         {!isLast && item.url ? (
-                            <Link href={item.url}>{item.label}</Link>
+                            <Link prefetch={false} href={item.url}>{item.label}</Link>
                         ) : (
                             item.label
                         )}

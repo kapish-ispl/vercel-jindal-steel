@@ -178,6 +178,7 @@ const AgmModal: FC<AgmModalProps> = ({
             </button>
           ) : (
             <Link
+              prefetch={false}
               href={webcastUrl}
               target="_blank"
               rel="noopener noreferrer"

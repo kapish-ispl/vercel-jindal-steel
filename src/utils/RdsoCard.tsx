@@ -70,7 +70,7 @@ const RdsoCard: React.FC<RdsoCardProps> = ({ postData, itemsPerPage = 9, totalPo
                 return (
                     <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
                         {post?.metaInfo?.have_child_page === 'Yes' ? (
-                            <Link href={`/vendor-approval-rdso/${post?.slug}?parent=vendor-approval-rdso`} className="text-decoration-none">
+                            <Link prefetch={false} href={`/vendor-approval-rdso/${post?.slug}?parent=vendor-approval-rdso`} className="text-decoration-none">
                                 <div className="c-cardView__wrapper rounded">
                                     <span className="c-cardView__wrapper-content position-relative min-h-100">
                                         <span className="title c-content-24 ft_semiBold clr-blue">{post?.title}</span>
@@ -103,7 +103,7 @@ const RdsoCard: React.FC<RdsoCardProps> = ({ postData, itemsPerPage = 9, totalPo
                                     {pdfUrl && (
                                         <div className="rdso-button d-flex gap-4">
                                             <div className="w-auto">
-                                                <Link className="c-viewBox__btn-link  clr-white" href={pdfUrl} target="_blank" rel="noopener noreferrer">Download</Link>
+                                                <Link prefetch={false} className="c-viewBox__btn-link  clr-white" href={pdfUrl} target="_blank" rel="noopener noreferrer">Download</Link>
                                             </div>
                                         </div>
                                     )}

@@ -53,7 +53,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ postData, itemsPerPage = 9, t
                 <div className="col-lg-4 col-md-6 col-12" key={index}>
 
 
-                    <Link className="c-cardBox__wrapper v1" href="/jindal-steel-limited">
+                    <Link prefetch={false} className="c-cardBox__wrapper v1" href="/jindal-steel-limited">
                         <span className="c-cardBox__wrapper-top">
                             <span className="media ratio ratio-4x3">
                                 <img alt={post?.title} className="img-fluid u-img" src={post?.media?.[0]?.cdnPath} />

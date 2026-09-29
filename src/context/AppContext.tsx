@@ -153,10 +153,14 @@ const AppContextProvider = ({
             const data = mastersData.data;
 
             if (data.gender) {
-                setGenderOptions(Object.keys(data.gender).map(key => ({
+                const mappedGenders = Object.keys(data.gender).map(key => ({
                     value: key,
                     label: data.gender[key]
-                })));
+                }));
+                if (!mappedGenders.some(g => g.value.toLowerCase() === "other" || g.label.toLowerCase() === "other")) {
+                    mappedGenders.push({ value: "Other", label: "Other" });
+                }
+                setGenderOptions(mappedGenders);
             }
 
             if (data.nationality) {

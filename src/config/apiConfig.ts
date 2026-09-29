@@ -29,3 +29,4 @@ export const POST_JOB_ENDPOINT = `/v1/job/post`;
 export const GET_FILE_UPLOAD_ENDPOINT = `/v1/upload-file/upload`;
 export const POST_MSME_ENDPOINT = `/v1/form/save`;
 export const UNPAID_DIVIDEND_ENDPOINT = `/v1/unpaid-dividend/search`;
+export const CHECK_APPLICANT_ENDPOINT = `/v1/job/check-applicant`;

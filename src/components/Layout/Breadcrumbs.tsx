@@ -136,7 +136,7 @@ const Breadcrumbs = <T extends BreadcrumbItem>({
         <ul className="breadcrumb">
             {breadcrumbMenu.map((item) => (
                 <li key={item.id} className="breadcrumb-item">
-                    {item.url ? <Link href={item.url}>{item.label}</Link> : item.label}
+                    {item.url ? <Link prefetch={false} href={item.url}>{item.label}</Link> : item.label}
                 </li>
             ))}
         </ul>

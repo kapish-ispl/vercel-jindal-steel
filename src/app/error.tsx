@@ -60,6 +60,7 @@ export default function Error({ error, reset }: ErrorProps) {
                     </button>
 
                     <Link
+                      prefetch={false}
                       href="/"
                       className="not-found__button not-found__button--outline"
                     >

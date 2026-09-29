@@ -126,7 +126,7 @@ const Header = () => {
                                 <div className="c-header__main">
                                     {/* Logo */}
                                     <div className="c-header__logo">
-                                        <Link href="/">
+                                        <Link prefetch={false} href="/">
                                             {stickyHeader ? (
                                                 <Image
                                                     src={IMAGE_PATH.LOGO}
@@ -198,6 +198,7 @@ const Header = () => {
                                                         // }}
                                                         >
                                                             <Link
+                                                                prefetch={false}
                                                                 href={menuItem.link}
                                                                 target={menuItem.is_new_tab === 1 ? "_blank" : "_self"}
                                                                 className="c-header__menu-item"

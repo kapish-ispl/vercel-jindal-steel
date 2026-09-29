@@ -1,66 +1,68 @@
-import { serverRequest } from "@/services/getServerSideRender";
-import { CONSTANTS } from "@/config/constant";
 import { decodeHtmlEntities } from "@/lib/htmlUtils";
+import { PageResponse } from "@/types/pageResponse";
 import { Metadata } from "next";
 
-interface GenerateMetadataOptions {
-  slug: string;
-  endpoint: string;
-  fallbackTitle?: string;
-}
+export function getPageMetadata(
+  pageData?: PageResponse | null,
+  fallbackTitle: string = "Jindal Steel"
+): Metadata {
+  const resolvedData =
+    pageData && "data" in pageData && pageData.data && typeof pageData.data === "object" && !("meta" in pageData)
+      ? (pageData.data as PageResponse)
+      : pageData;
 
-export async function getPageMetadata({
-  slug,
-  endpoint,
-  fallbackTitle = "Jindal Steel",
-}: GenerateMetadataOptions): Promise<Metadata> {
-  const fetchedInfo = await serverRequest(
-    {},
-    `${endpoint}?slug=${slug}`,
-    CONSTANTS.REQUEST_GET,
-    'server'
+  if (!resolvedData || Array.isArray(resolvedData)) {
+    return {
+      title: "Page Not Found",
+      description: "The requested page could not be found.",
+    };
+  }
+
+  const metaTitle = decodeHtmlEntities(
+    resolvedData?.meta?.title ||
+      resolvedData?.metaInfo?.title ||
+      resolvedData?.title ||
+      fallbackTitle
   );
-
-  if ('error' in fetchedInfo) {
-    return {
-      title: fallbackTitle,
-      description: 'The requested page could not be found.',
-    };
-  }
-
-  const pageData = fetchedInfo.data;
-
-  if (!pageData || (Array.isArray(pageData) && pageData.length === 0)) {
-    return {
-      title: 'Page Not Found',
-      description: 'The requested page could not be found.',
-    };
-  }
-
-  const metaTitle = decodeHtmlEntities(pageData?.meta?.title || fallbackTitle);
   const metaDescription = decodeHtmlEntities(
-    pageData?.meta?.description ||
-    "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to quality."
+    resolvedData?.meta?.description ||
+      resolvedData?.metaInfo?.description ||
+      resolvedData?.metaInfo?.short_description ||
+      "Jindal Steel is a leading Indian steel company, known for its innovative solutions and commitment to quality."
   );
   const metaKeywords = decodeHtmlEntities(
-    pageData?.meta?.keywords ||
-    "Jindal Steel Steel Manufacturing, Energy Solutions, Indian Steel Industry, Steel Products, Infrastructure Development"
+    resolvedData?.meta?.keywords ||
+      resolvedData?.metaInfo?.keywords ||
+      "Jindal Steel Steel Manufacturing, Energy Solutions, Indian Steel Industry, Steel Products, Infrastructure Development"
   );
+
+  const ogImages = resolvedData?.meta?.ogImage
+    ? [resolvedData.meta.ogImage]
+    : resolvedData?.meta?.image
+    ? [resolvedData.meta.image]
+    : resolvedData?.featuredMedia?.cdnPath
+    ? [resolvedData.featuredMedia.cdnPath]
+    : undefined;
+
+  const canonical = resolvedData?.meta?.canonicalUrl || resolvedData?.meta?.canonical;
 
   return {
     title: metaTitle,
     description: metaDescription,
     keywords: metaKeywords,
+    ...(canonical ? { alternates: { canonical } } : {}),
 
     openGraph: {
       title: metaTitle,
       description: metaDescription,
       siteName: "Jindal Steel",
       type: "website",
+      ...(ogImages ? { images: ogImages } : {}),
     },
     twitter: {
       title: metaTitle,
       description: metaDescription,
-    }
+      ...(ogImages ? { images: ogImages } : {}),
+    },
   };
 }
